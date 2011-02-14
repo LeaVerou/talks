@@ -12,10 +12,6 @@
  *							The default is 0, which means no modifiers needed.
  */
 function Incrementable(textField, modifiers, units) {
-	if(!textField || !/input|textarea/i.test(textField)) {
-		throw Error('Invalid text field provided');
-	}
-	
 	var me = this;
 	
 	this.textField = textField;
