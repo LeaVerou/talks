@@ -13,27 +13,27 @@
  */
 function Incrementable(textField, modifiers, units) {
 	var me = this;
-	
+
 	this.textField = textField;
-	
+
 	modifiers = modifiers || {};
 	this.modifiers = {
 		ctrlKey: modifiers.ctrlKey || 0,
 		altKey: modifiers.altKey || 0,
 		shiftKey: modifiers.shiftKey || 0
 	};
-	
+
 	if(units) {
 		this.units = units;
 	}
-	
+
 	this.textField.addEventListener('keydown', function(evt) {
 		if(me.checkModifiers(evt) && (evt.keyCode == 38 || evt.keyCode == 40)) {
-			// Up or down arrow pressed, check if there's something 
+			// Up or down arrow pressed, check if there's something
 			// increment/decrement-able where the caret is
 			var caret = this.selectionStart, text = this.value,
 				regex = new RegExp('^([\\s\\S]{0,' + caret + '}[^-0-9\\.])(-?[0-9]*(?:\\.?[0-9]+)(?:' + me.units + '))\\b', 'i');
-				
+
 			this.value = this.value.replace(regex, function($0, $1, $2) {
 				if($1.length <= caret && $1.length + $2.length >= caret) {
 					return $1 + Incrementable.step($2, evt.keyCode == 40);
@@ -42,23 +42,28 @@ function Incrementable(textField, modifiers, units) {
 					return $1 + $2;
 				}
 			});
-				
-			this.selectionStart = this.selectionEnd = caret;
-			
+
+			this.selectionEnd = this.selectionStart = caret;
+
 			evt.preventDefault();
 			evt.stopPropagation();
 		}
+	}, false);
+
+	this.textField.addEventListener('keypress', function(evt) {
+		if(me.checkModifiers(evt) && (evt.keyCode == 38 || evt.keyCode == 40))
+			evt.preventDefault();
 	}, false);
 }
 
 Incrementable.prototype = {
 	checkModifiers: function(evt) {
 		var m = this.modifiers;
-		
+
 		return m.ctrlKey * evt.ctrlKey + m.altKey * evt.altKey + m.shiftKey * evt.shiftKey >= 3
 				|| (m.ctrlKey + m.altKey + m.shiftKey == 0);
 	},
-	
+
 	units: '|%|deg|px|r?em|ex|ch|in|cm|mm|pt|pc|vm|vw|vh|gd|m?s'
 };
 
@@ -67,6 +72,6 @@ Incrementable.prototype = {
  */
 Incrementable.step = function(length, decrement) {
 	var val = parseFloat(length) + (decrement? -1 : 1);
-	
+
 	return val + length.replace(/^-|[0-9]+|\./g, '');
 };
