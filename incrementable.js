@@ -26,9 +26,13 @@ function Incrementable(textField, modifiers, units) {
 	if(units) {
 		this.units = units;
 	}
+	
+	this.changed = false;
 
 	this.textField.addEventListener('keydown', function(evt) {
 		if(me.checkModifiers(evt) && (evt.keyCode == 38 || evt.keyCode == 40)) {
+			me.changed = false;
+			
 			// Up or down arrow pressed, check if there's something
 			// increment/decrement-able where the caret is
 			var caret = this.selectionStart, text = this.value,
@@ -36,6 +40,7 @@ function Incrementable(textField, modifiers, units) {
 
 			this.value = this.value.replace(regex, function($0, $1, $2) {
 				if($1.length <= caret && $1.length + $2.length >= caret) {
+					me.changed = true;
 					return $1 + Incrementable.step($2, evt.keyCode == 40);
 				}
 				else {
@@ -43,16 +48,20 @@ function Incrementable(textField, modifiers, units) {
 				}
 			});
 
-			this.selectionEnd = this.selectionStart = caret;
-
-			evt.preventDefault();
-			evt.stopPropagation();
+			if(me.changed) {
+				this.selectionEnd = this.selectionStart = caret;
+				evt.preventDefault();
+				evt.stopPropagation();
+			}
 		}
 	}, false);
 
 	this.textField.addEventListener('keypress', function(evt) {
-		if(me.checkModifiers(evt) && (evt.keyCode == 38 || evt.keyCode == 40))
+		if(me.changed && me.checkModifiers(evt) 
+			&& (evt.keyCode == 38 || evt.keyCode == 40))
 			evt.preventDefault();
+			evt.stopPropagation();
+			me.changed = false;
 	}, false);
 }
 
