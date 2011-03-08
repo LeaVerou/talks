@@ -41,7 +41,7 @@ function Incrementable(textField, modifiers, units) {
 			this.value = this.value.replace(regex, function($0, $1, $2) {
 				if($1.length <= caret && $1.length + $2.length >= caret) {
 					me.changed = true;
-					return $1 + Incrementable.step($2, evt.keyCode == 40);
+					return $1 + Incrementable.step($2, evt.keyCode == 40, evt.shiftKey);
 				}
 				else {
 					return $1 + $2;
@@ -79,8 +79,8 @@ Incrementable.prototype = {
 /**
  * Gets a <length> and increments or decrements it
  */
-Incrementable.step = function(length, decrement) {
-	var val = parseFloat(length) + (decrement? -1 : 1);
+Incrementable.step = function(length, decrement, byChunk) {
+	var val = parseFloat(length) + (decrement? -1 : 1) * (byChunk? 10 : 1);
 
 	return val + length.replace(/^-|[0-9]+|\./g, '');
 };
