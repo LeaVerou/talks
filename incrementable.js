@@ -15,6 +15,9 @@ function Incrementable(textField, modifiers, units) {
 	var me = this;
 
 	this.textField = textField;
+	
+	this.step = +textField.getAttribute('step') || 
+				+textField.getAttribute('data-step') || 1;
 
 	modifiers = modifiers || {};
 	this.modifiers = {
@@ -41,7 +44,7 @@ function Incrementable(textField, modifiers, units) {
 			this.value = this.value.replace(regex, function($0, $1, $2) {
 				if($1.length <= caret && $1.length + $2.length >= caret) {
 					me.changed = true;
-					return $1 + Incrementable.step($2, evt.keyCode == 40, evt.shiftKey);
+					return $1 + me.stepValue($2, evt.keyCode == 40, evt.shiftKey);
 				}
 				else {
 					return $1 + $2;
@@ -72,15 +75,20 @@ Incrementable.prototype = {
 		return m.ctrlKey * evt.ctrlKey + m.altKey * evt.altKey + m.shiftKey * evt.shiftKey >= 3
 				|| (m.ctrlKey + m.altKey + m.shiftKey == 0);
 	},
+	
+	/**
+	 * Gets a <length> and increments or decrements it
+	 */
+	stepValue: function(length, decrement, byChunk) {
+		var val = parseFloat(length) + (decrement? -1 : 1) * (byChunk? 10 : 1) * this.step;
+		
+		// Prevent rounding errors
+		if(this.step % 1) {
+			val = (parseFloat(val.toPrecision(12)));
+		}
+		
+		return val + length.replace(/^-|[0-9]+|\./g, '');
+	},
 
 	units: '|%|deg|px|r?em|ex|ch|in|cm|mm|pt|pc|vm|vw|vh|gd|m?s'
-};
-
-/**
- * Gets a <length> and increments or decrements it
- */
-Incrementable.step = function(length, decrement, byChunk) {
-	var val = parseFloat(length) + (decrement? -1 : 1) * (byChunk? 10 : 1);
-
-	return val + length.replace(/^-|[0-9]+|\./g, '');
 };
