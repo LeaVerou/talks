@@ -42,9 +42,10 @@ var _ = window.Incrementable = function(textField, multiplier, units) {
 			// Up or down arrow pressed, check if there's something
 			// increment/decrement-able where the caret is
 			var caret = this.selectionStart, text = this.value,
-				regex = new RegExp('^([\\s\\S]{0,' + caret + '}[^-0-9\\.])(-?[0-9]*(?:\\.?[0-9]+)(?:' + me.units + '))\\b', 'i');
-
-			this.value = this.value.replace(regex, function($0, $1, $2) {
+				regex = new RegExp('^([\\s\\S]{0,' + caret + '}[^-0-9\\.])(-?[0-9]*(?:\\.?[0-9]+)(?:' + me.units + '))\\b', 'i'),
+				property = 'value' in this? 'value' : 'textContent';
+			
+			this[property] = this[property].replace(regex, function($0, $1, $2) {
 				if($1.length <= caret && $1.length + $2.length >= caret) {
 					me.changed = true;
 					return $1 + me.stepValue($2, evt.keyCode == 40, multiplier);
@@ -56,6 +57,7 @@ var _ = window.Incrementable = function(textField, multiplier, units) {
 
 			if(me.changed) {
 				this.setSelectionRange(caret, caret);
+				
 				evt.preventDefault();
 				evt.stopPropagation();
 			}
@@ -93,9 +95,6 @@ _.prototype = {
 	units: '|%|deg|px|r?em|ex|ch|in|cm|mm|pt|pc|vmin|vw|vh|gd|m?s'
 };
 
-
-})();
-
 function precision(number) {
 	number = (number + '').replace(/^0+/, '');
 	
@@ -113,3 +112,5 @@ function precision(number) {
 		decimals: number.length - 1 - dot
 	};
 }
+
+})();
