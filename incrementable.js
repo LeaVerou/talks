@@ -48,7 +48,9 @@ var _ = window.Incrementable = function(textField, multiplier, units) {
 			this[property] = this[property].replace(regex, function($0, $1, $2) {
 				if($1.length <= caret && $1.length + $2.length >= caret) {
 					me.changed = true;
-					return $1 + me.stepValue($2, evt.keyCode == 40, multiplier);
+					var stepValue = me.stepValue($2, evt.keyCode == 40, multiplier);
+					caret = caret + (stepValue.length - $2.length);
+					return $1 + stepValue;
 				}
 				else {
 					return $1 + $2;
