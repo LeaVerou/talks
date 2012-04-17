@@ -67,8 +67,7 @@ var _ = window.Incrementable = function(textField, multiplier, units) {
 	}, false);
 
 	this.textField.addEventListener('keypress', function(evt) {
-		if(me.changed && me.checkModifiers(evt) 
-			&& (evt.keyCode == 38 || evt.keyCode == 40))
+		if(me.changed && (evt.keyCode == 38 || evt.keyCode == 40))
 			evt.preventDefault();
 			evt.stopPropagation();
 			me.changed = false;
