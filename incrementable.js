@@ -62,6 +62,13 @@ var _ = window.Incrementable = function(textField, multiplier, units) {
 				
 				evt.preventDefault();
 				evt.stopPropagation();
+				
+				// Fire input event
+				var evt = document.createEvent("HTMLEvents");
+				
+				evt.initEvent('input', true, true );
+		
+				this.dispatchEvent(evt);
 			}
 		}
 	}, false);
