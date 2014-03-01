@@ -1,0 +1,164 @@
+body {
+	font: 100 100%/1.5 'Helvetica Neue', sans-serif;
+	background: linear-gradient(45deg, silver 25%, transparent 25%, transparent 75%, silver 75%),
+	            linear-gradient(45deg, silver 25%, transparent 25%, transparent 75%, silver 75%) 20px 20px;
+	background-color: #eee;
+	background-size: 40px 40px;
+}
+
+h1 {
+	font-weight: bold;
+	line-height: 1.2;
+}
+
+a {
+	color: inherit;
+}
+
+strong, b {
+	font-weight: bold; /* FF is weird */
+}
+
+code, textarea, pre {
+	margin: 0;
+	font: 100%/1.4 Consolas, Monaco, 'Andale Mono', monospace;
+	tab-size: 4;
+}
+
+pre + pre {
+	margin-top: 1.5em;
+}
+
+input {
+	font: inherit;
+	color: inherit;
+	border: 0;
+	background: transparent;
+	outline: none;
+}
+
+input[type="range"][orient="vertical"] {
+	-webkit-appearance: slider-vertical;
+	writing-mode: bt-lr;
+}
+
+textarea {
+	background: transparent;
+	color: inherit;
+	border: 0;
+	outline: none;
+}
+
+.slide {
+	padding: 5vmin;
+	background: black;
+	color: white;
+}
+
+	.slide > h1 {
+		margin: 0 0 .6em;
+		font-size: 200%;
+	}
+	
+	.slide h2 {
+		color: yellowgreen;
+		font-size: 120%;
+	}
+
+.image.slide > h1:only-child,
+.image.slide > .caption,
+.iframe.slide > h1 {
+	/*bottom: .5em;
+	margin: 0;*/
+	background: black;
+	text-shadow: none;
+	font-weight: 100;
+}
+
+.delayed.displayed,
+.delayed-children > .displayed {
+	opacity: 1;
+}
+
+section > header.slide {
+	
+}
+
+	section > header.slide > h1 {
+		margin: calc(45vh - .5em) auto;
+		text-align: center;
+		line-height: 1;
+		font-weight: 100;
+	}
+
+#indicator {
+	background: transparent;
+	text-shadow: none;
+	font-weight: 100;
+}
+
+::selection {
+	background: hsl(335, 100%, 40%);
+	color: white;
+}
+
+/* Syntax highlighting */
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #666;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol {
+	color: #0cf;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.builtin {
+	color: yellow;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.toke.variable {
+	color: yellowgreen;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: deeppink;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: orange;
+}
+
+.token.important {
+	font-weight: bold;
+}
+
+.token.entity {
+	cursor: help;
+}

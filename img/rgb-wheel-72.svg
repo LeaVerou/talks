@@ -1,0 +1,1966 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" width="116.56mm" height="116.58mm" viewBox="0 0 11656 11658" preserveAspectRatio="xMidYMid" fill-rule="evenodd" clip-path="url(#presentation_clip_path)" stroke-width="28.222" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+ <defs class="ClipPathGroup">
+  <clipPath id="presentation_clip_path" clipPathUnits="userSpaceOnUse">
+   <rect x="0" y="0" width="11656" height="11658"/>
+  </clipPath>
+ </defs>
+ <defs class="TextShapeIndex">
+  
+ </defs>
+ <defs class="EmbeddedBulletChars">
+  <g id="bullet-char-template57356" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M 580,1141 L 1163,571 580,0 -4,571 580,1141 Z"/>
+  </g>
+  <g id="bullet-char-template57354" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M 8,1128 L 1137,1128 1137,0 8,0 8,1128 Z"/>
+  </g>
+  <g id="bullet-char-template10146" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M 174,0 L 602,739 174,1481 1456,739 174,0 Z M 1358,739 L 309,1346 659,739 1358,739 Z"/>
+  </g>
+  <g id="bullet-char-template10132" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M 2015,739 L 1276,0 717,0 1260,543 174,543 174,936 1260,936 717,1481 1274,1481 2015,739 Z"/>
+  </g>
+  <g id="bullet-char-template10007" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M 0,-2 C -7,14 -16,27 -25,37 L 356,567 C 262,823 215,952 215,954 215,979 228,992 255,992 264,992 276,990 289,987 310,991 331,999 354,1012 L 381,999 492,748 772,1049 836,1024 860,1049 C 881,1039 901,1025 922,1006 886,937 835,863 770,784 769,783 710,716 594,584 L 774,223 C 774,196 753,168 711,139 L 727,119 C 717,90 699,76 672,76 641,76 570,178 457,381 L 164,-76 C 142,-110 111,-127 72,-127 30,-127 9,-110 8,-76 1,-67 -2,-52 -2,-32 -2,-23 -1,-13 0,-2 Z"/>
+  </g>
+  <g id="bullet-char-template10004" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M 285,-33 C 182,-33 111,30 74,156 52,228 41,333 41,471 41,549 55,616 82,672 116,743 169,778 240,778 293,778 328,747 346,684 L 369,508 C 377,444 397,411 428,410 L 1163,1116 C 1174,1127 1196,1133 1229,1133 1271,1133 1292,1118 1292,1087 L 1292,965 C 1292,929 1282,901 1262,881 L 442,47 C 390,-6 338,-33 285,-33 Z"/>
+  </g>
+  <g id="bullet-char-template9679" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M 813,0 C 632,0 489,54 383,161 276,268 223,411 223,592 223,773 276,916 383,1023 489,1130 632,1184 813,1184 992,1184 1136,1130 1245,1023 1353,916 1407,772 1407,592 1407,412 1353,268 1245,161 1136,54 992,0 813,0 Z"/>
+  </g>
+  <g id="bullet-char-template8226" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M 346,457 C 273,457 209,483 155,535 101,586 74,649 74,723 74,796 101,859 155,911 209,963 273,989 346,989 419,989 480,963 531,910 582,859 608,796 608,723 608,648 583,586 532,535 482,483 420,457 346,457 Z"/>
+  </g>
+  <g id="bullet-char-template8211" transform="scale(0.00048828125,-0.00048828125)">
+   <path d="M -4,459 L 1135,459 1135,606 -4,606 -4,459 Z"/>
+  </g>
+ </defs>
+ <defs class="TextEmbeddedBitmaps"/>
+ <g>
+  <g id="id2" class="Master_Slide">
+   <g id="bg-id2" class="Background"/>
+   <g id="bo-id2" class="BackgroundObjects"/>
+  </g>
+ </g>
+ <g class="SlideGroup">
+  <g>
+   <g id="id1" class="Slide" clip-path="url(#presentation_clip_path)">
+    <g class="Page">
+     <g class="Group">
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id3">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 6587,11601 C 5524,11740 4589,11617 3599,11207 2609,10797 1861,10223 1209,9373 557,8523 196,7652 56,6589 -84,5527 39,4592 449,3602 859,2612 1433,1864 2283,1211 3134,559 4005,198 5067,58 6130,-82 7065,41 8055,452 9045,862 9793,1436 10445,2286 11097,3136 11458,4007 11598,5070 11738,6132 11615,7067 11205,8057 10795,9047 10221,9795 9371,10448 8520,11100 7649,11461 6587,11601 L 6587,11601 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id4">
+        <path fill="rgb(255,255,255)" stroke="none" d="M 6518,11076 C 5552,11203 4702,11091 3802,10718 2902,10345 2222,9823 1629,9051 1036,8278 708,7486 581,6520 454,5554 565,4704 938,3804 1311,2904 1833,2224 2606,1631 3379,1037 4171,709 5137,582 6103,455 6953,567 7853,940 8753,1313 9433,1835 10026,2607 10619,3380 10947,4172 11074,5138 11201,6104 11089,6954 10717,7854 10344,8754 9822,9434 9049,10027 8276,10620 7484,10949 6518,11076 L 6518,11076 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id5">
+        <path fill="rgb(255,255,0)" stroke="none" d="M 5827,5829 L 5597,542 C 5759,535 5896,535 6058,542 L 5827,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id6">
+        <path fill="rgb(255,255,0)" stroke="none" d="M 5693,275 L 5693,142 5958,142 5958,407 5693,407 5693,275 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 5693,275 L 5693,142 5958,142 5958,407 5693,407 5693,275 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id7">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 5694,275 L 5694,142 5783,142 5783,407 5694,407 5694,275 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id8">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 5781,275 L 5781,142 5870,142 5870,407 5781,407 5781,275 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id9">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 5870,275 L 5870,142 5959,142 5959,407 5870,407 5870,275 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id10">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 5825,5829 L 6056,11116 C 5894,11123 5757,11123 5595,11116 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id11">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 5694,11388 L 5694,11255 5959,11255 5959,11520 5694,11520 5694,11388 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 5694,11388 L 5694,11255 5959,11255 5959,11520 5694,11520 5694,11388 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id12">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 5694,11388 L 5694,11255 5783,11255 5783,11520 5694,11520 5694,11388 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id13">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 5782,11388 L 5782,11255 5871,11255 5871,11520 5782,11520 5782,11388 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id14">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 5872,11388 L 5872,11255 5961,11255 5961,11520 5872,11520 5872,11388 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id15">
+        <path fill="rgb(255,234,0)" stroke="none" d="M 5825,5831 L 6056,544 C 6219,551 6355,563 6516,584 L 5825,5831 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id16">
+        <path fill="rgb(255,234,0)" stroke="none" d="M 6178,297 L 6178,164 6443,164 6443,429 6178,429 6178,297 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 6178,297 L 6178,164 6443,164 6443,429 6178,429 6178,297 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id17">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 6177,297 L 6177,164 6266,164 6266,429 6177,429 6177,297 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id18">
+        <path fill="rgb(0,234,0)" stroke="none" d="M 6266,297 L 6266,164 6355,164 6355,429 6266,429 6266,297 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id19">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 6354,297 L 6354,164 6443,164 6443,429 6354,429 6354,297 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id20">
+        <path fill="rgb(0,21,255)" stroke="none" d="M 5827,5829 L 5597,11116 C 5434,11109 5298,11097 5137,11076 L 5827,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id21">
+        <path fill="rgb(0,21,255)" stroke="none" d="M 5209,11367 L 5209,11234 5474,11234 5474,11499 5209,11499 5209,11367 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 5209,11367 L 5209,11234 5474,11234 5474,11499 5209,11499 5209,11367 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id22">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 5209,11367 L 5209,11234 5298,11234 5298,11499 5209,11499 5209,11367 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id23">
+        <path fill="rgb(0,21,0)" stroke="none" d="M 5297,11367 L 5297,11234 5386,11234 5386,11499 5297,11499 5297,11367 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id24">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 5387,11367 L 5387,11234 5476,11234 5476,11499 5387,11499 5387,11367 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id25">
+        <path fill="rgb(255,213,0)" stroke="none" d="M 5825,5831 L 6516,584 C 6677,605 6812,629 6971,664 L 5825,5831 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id26">
+        <path fill="rgb(255,213,0)" stroke="none" d="M 6659,362 L 6659,229 6924,229 6924,494 6659,494 6659,362 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 6659,362 L 6659,229 6924,229 6924,494 6659,494 6659,362 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id27">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 6657,360 L 6657,227 6746,227 6746,492 6657,492 6657,360 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id28">
+        <path fill="rgb(0,213,0)" stroke="none" d="M 6747,360 L 6747,227 6836,227 6836,492 6747,492 6747,360 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id29">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 6834,360 L 6834,227 6923,227 6923,492 6834,492 6834,360 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id30">
+        <path fill="rgb(0,42,255)" stroke="none" d="M 5825,5831 L 5135,11078 C 4974,11057 4839,11033 4680,10998 L 5825,5831 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id31">
+        <path fill="rgb(0,42,255)" stroke="none" d="M 4728,11303 L 4728,11170 4993,11170 4993,11435 4728,11435 4728,11303 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 4728,11303 L 4728,11170 4993,11170 4993,11435 4728,11435 4728,11303 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id32">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 4729,11303 L 4729,11170 4818,11170 4818,11435 4729,11435 4729,11303 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id33">
+        <path fill="rgb(0,42,0)" stroke="none" d="M 4816,11303 L 4816,11170 4905,11170 4905,11435 4816,11435 4816,11303 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id34">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 4904,11303 L 4904,11170 4993,11170 4993,11435 4904,11435 4904,11303 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id35">
+        <path fill="rgb(255,192,0)" stroke="none" d="M 5825,5829 L 6971,662 C 7129,698 7262,733 7417,782 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id36">
+        <path fill="rgb(255,192,0)" stroke="none" d="M 7130,464 L 7130,331 7395,331 7395,596 7130,596 7130,464 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 7130,464 L 7130,331 7395,331 7395,596 7130,596 7130,464 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id37">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 7130,464 L 7130,331 7219,331 7219,596 7130,596 7130,464 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id38">
+        <path fill="rgb(0,192,0)" stroke="none" d="M 7218,464 L 7218,331 7307,331 7307,596 7218,596 7218,464 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id39">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 7305,464 L 7305,331 7394,331 7394,596 7305,596 7305,464 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id40">
+        <path fill="rgb(0,63,255)" stroke="none" d="M 5825,5831 L 4680,10998 C 4522,10962 4389,10927 4234,10878 L 5825,5831 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id41">
+        <path fill="rgb(0,63,255)" stroke="none" d="M 4255,11199 L 4255,11066 4520,11066 4520,11331 4255,11331 4255,11199 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 4255,11199 L 4255,11066 4520,11066 4520,11331 4255,11331 4255,11199 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id42">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 4255,11199 L 4255,11066 4344,11066 4344,11331 4255,11331 4255,11199 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id43">
+        <path fill="rgb(0,63,0)" stroke="none" d="M 4343,11199 L 4343,11066 4432,11066 4432,11331 4343,11331 4343,11199 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id44">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 4431,11199 L 4431,11066 4520,11066 4520,11331 4431,11331 4431,11199 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id45">
+        <path fill="rgb(255,170,0)" stroke="none" d="M 5825,5831 L 7417,784 C 7572,833 7701,880 7851,942 L 5825,5831 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id46">
+        <path fill="rgb(255,170,0)" stroke="none" d="M 7592,611 L 7592,478 7857,478 7857,743 7592,743 7592,611 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 7592,611 L 7592,478 7857,478 7857,743 7592,743 7592,611 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id47">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 7592,611 L 7592,478 7681,478 7681,743 7592,743 7592,611 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id48">
+        <path fill="rgb(0,170,0)" stroke="none" d="M 7680,611 L 7680,478 7769,478 7769,743 7680,743 7680,611 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id49">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 7770,611 L 7770,478 7859,478 7859,743 7770,743 7770,611 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id50">
+        <path fill="rgb(0,85,255)" stroke="none" d="M 5825,5831 L 4234,10878 C 4079,10829 3950,10782 3800,10720 L 5825,5831 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id51">
+        <path fill="rgb(0,85,255)" stroke="none" d="M 3793,11053 L 3793,10920 4058,10920 4058,11185 3793,11185 3793,11053 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 3793,11053 L 3793,10920 4058,10920 4058,11185 3793,11185 3793,11053 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id52">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 3793,11053 L 3793,10920 3882,10920 3882,11185 3793,11185 3793,11053 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id53">
+        <path fill="rgb(0,85,0)" stroke="none" d="M 3881,11053 L 3881,10920 3970,10920 3970,11185 3881,11185 3881,11053 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id54">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 3969,11053 L 3969,10920 4058,10920 4058,11185 3969,11185 3969,11053 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id55">
+        <path fill="rgb(255,149,0)" stroke="none" d="M 5825,5831 L 7851,942 C 8001,1004 8125,1062 8269,1137 L 5825,5831 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id56">
+        <path fill="rgb(255,149,0)" stroke="none" d="M 8040,796 L 8040,663 8305,663 8305,928 8040,928 8040,796 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 8040,796 L 8040,663 8305,663 8305,928 8040,928 8040,796 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id57">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 8040,796 L 8040,663 8129,663 8129,928 8040,928 8040,796 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id58">
+        <path fill="rgb(0,149,0)" stroke="none" d="M 8128,796 L 8128,663 8217,663 8217,928 8128,928 8128,796 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id59">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 8216,796 L 8216,663 8305,663 8305,928 8216,928 8216,796 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id60">
+        <path fill="rgb(0,106,255)" stroke="none" d="M 5825,5831 L 3800,10720 C 3650,10658 3526,10600 3382,10525 L 5825,5831 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id61">
+        <path fill="rgb(0,106,255)" stroke="none" d="M 3345,10868 L 3345,10735 3610,10735 3610,11000 3345,11000 3345,10868 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 3345,10868 L 3345,10735 3610,10735 3610,11000 3345,11000 3345,10868 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id62">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 3345,10868 L 3345,10735 3434,10735 3434,11000 3345,11000 3345,10868 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id63">
+        <path fill="rgb(0,106,0)" stroke="none" d="M 3433,10868 L 3433,10735 3522,10735 3522,11000 3433,11000 3433,10868 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id64">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 3521,10868 L 3521,10735 3610,10735 3610,11000 3521,11000 3521,10868 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id65">
+        <path fill="rgb(255,128,0)" stroke="none" d="M 5825,5831 L 8269,1137 C 8413,1212 8532,1281 8669,1368 L 5825,5831 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id66">
+        <path fill="rgb(255,128,0)" stroke="none" d="M 8471,1020 L 8471,887 8736,887 8736,1152 8471,1152 8471,1020 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 8471,1020 L 8471,887 8736,887 8736,1152 8471,1152 8471,1020 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id67">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 8470,1020 L 8470,887 8559,887 8559,1152 8470,1152 8470,1020 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id68">
+        <path fill="rgb(0,128,0)" stroke="none" d="M 8559,1020 L 8559,887 8648,887 8648,1152 8559,1152 8559,1020 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id69">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 8647,1020 L 8647,887 8736,887 8736,1152 8647,1152 8647,1020 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id70">
+        <path fill="rgb(0,127,255)" stroke="none" d="M 5825,5829 L 3382,10523 C 3238,10448 3119,10379 2982,10292 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id71">
+        <path fill="rgb(0,127,255)" stroke="none" d="M 2915,10644 L 2915,10511 3180,10511 3180,10776 2915,10776 2915,10644 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 2915,10644 L 2915,10511 3180,10511 3180,10776 2915,10776 2915,10644 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id72">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 2914,10644 L 2914,10511 3003,10511 3003,10776 2914,10776 2914,10644 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id73">
+        <path fill="rgb(0,127,0)" stroke="none" d="M 3002,10644 L 3002,10511 3091,10511 3091,10776 3002,10776 3002,10644 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id74">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 3091,10644 L 3091,10511 3180,10511 3180,10776 3091,10776 3091,10644 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id75">
+        <path fill="rgb(255,107,0)" stroke="none" d="M 5825,5829 L 8669,1366 C 8806,1453 8918,1532 9047,1631 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id76">
+        <path fill="rgb(255,107,0)" stroke="none" d="M 8880,1281 L 8880,1148 9145,1148 9145,1413 8880,1413 8880,1281 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 8880,1281 L 8880,1148 9145,1148 9145,1413 8880,1413 8880,1281 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id77">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 8880,1281 L 8880,1148 8969,1148 8969,1413 8880,1413 8880,1281 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id78">
+        <path fill="rgb(0,107,0)" stroke="none" d="M 8968,1281 L 8968,1148 9057,1148 9057,1413 8968,1413 8968,1281 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id79">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 9056,1281 L 9056,1148 9145,1148 9145,1413 9056,1413 9056,1281 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id80">
+        <path fill="rgb(0,148,255)" stroke="none" d="M 5825,5829 L 2982,10292 C 2845,10205 2733,10126 2604,10027 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id81">
+        <path fill="rgb(0,148,255)" stroke="none" d="M 2505,10382 L 2505,10249 2770,10249 2770,10514 2505,10514 2505,10382 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 2505,10382 L 2505,10249 2770,10249 2770,10514 2505,10514 2505,10382 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id82">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 2505,10382 L 2505,10249 2594,10249 2594,10514 2505,10514 2505,10382 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id83">
+        <path fill="rgb(0,148,0)" stroke="none" d="M 2593,10382 L 2593,10249 2682,10249 2682,10514 2593,10514 2593,10382 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id84">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 2683,10382 L 2683,10249 2772,10249 2772,10514 2683,10514 2683,10382 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id85">
+        <path fill="rgb(255,85,0)" stroke="none" d="M 5825,5831 L 9047,1633 C 9176,1731 9281,1820 9401,1929 L 5825,5831 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id86">
+        <path fill="rgb(255,85,0)" stroke="none" d="M 9265,1575 L 9265,1442 9530,1442 9530,1707 9265,1707 9265,1575 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 9265,1575 L 9265,1442 9530,1442 9530,1707 9265,1707 9265,1575 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id87">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 9264,1575 L 9264,1442 9353,1442 9353,1707 9264,1707 9264,1575 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id88">
+        <path fill="rgb(0,85,0)" stroke="none" d="M 9352,1575 L 9352,1442 9441,1442 9441,1707 9352,1707 9352,1575 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id89">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 9441,1575 L 9441,1442 9530,1442 9530,1707 9441,1707 9441,1575 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id90">
+        <path fill="rgb(0,170,255)" stroke="none" d="M 5827,5831 L 2606,10029 C 2477,9931 2372,9842 2252,9733 L 5827,5831 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id91">
+        <path fill="rgb(0,170,255)" stroke="none" d="M 2124,10088 L 2124,9955 2389,9955 2389,10220 2124,10220 2124,10088 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 2124,10088 L 2124,9955 2389,9955 2389,10220 2124,10220 2124,10088 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id92">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 2122,10088 L 2122,9955 2211,9955 2211,10220 2122,10220 2122,10088 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id93">
+        <path fill="rgb(0,170,0)" stroke="none" d="M 2212,10088 L 2212,9955 2301,9955 2301,10220 2212,10220 2212,10088 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id94">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 2299,10088 L 2299,9955 2388,9955 2388,10220 2299,10220 2299,10088 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id95">
+        <path fill="rgb(255,64,0)" stroke="none" d="M 5827,5831 L 9403,1929 C 9522,2039 9619,2136 9729,2256 L 5827,5831 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id96">
+        <path fill="rgb(255,64,0)" stroke="none" d="M 9624,1902 L 9624,1769 9889,1769 9889,2034 9624,2034 9624,1902 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 9624,1902 L 9624,1769 9889,1769 9889,2034 9624,2034 9624,1902 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id97">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 9622,1902 L 9622,1769 9711,1769 9711,2034 9622,2034 9622,1902 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id98">
+        <path fill="rgb(0,64,0)" stroke="none" d="M 9712,1902 L 9712,1769 9801,1769 9801,2034 9712,2034 9712,1902 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id99">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 9799,1902 L 9799,1769 9888,1769 9888,2034 9799,2034 9799,1902 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id100">
+        <path fill="rgb(0,191,255)" stroke="none" d="M 5827,5829 L 2252,9731 C 2133,9621 2035,9524 1926,9404 L 5827,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id101">
+        <path fill="rgb(0,191,255)" stroke="none" d="M 1765,9760 L 1765,9627 2030,9627 2030,9892 1765,9892 1765,9760 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 1765,9760 L 1765,9627 2030,9627 2030,9892 1765,9892 1765,9760 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id102">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 1764,9758 L 1764,9625 1853,9625 1853,9890 1764,9890 1764,9758 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id103">
+        <path fill="rgb(0,191,0)" stroke="none" d="M 1852,9758 L 1852,9625 1941,9625 1941,9890 1852,9890 1852,9758 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id104">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 1941,9758 L 1941,9625 2030,9625 2030,9890 1941,9890 1941,9758 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id105">
+        <path fill="rgb(255,43,0)" stroke="none" d="M 5825,5829 L 9727,2254 C 9837,2373 9925,2479 10024,2607 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id106">
+        <path fill="rgb(255,43,0)" stroke="none" d="M 9949,2260 L 9949,2127 10214,2127 10214,2392 9949,2392 9949,2260 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 9949,2260 L 9949,2127 10214,2127 10214,2392 9949,2392 9949,2260 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id107">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 9949,2258 L 9949,2125 10038,2125 10038,2390 9949,2390 9949,2258 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id108">
+        <path fill="rgb(0,43,0)" stroke="none" d="M 10037,2258 L 10037,2125 10126,2125 10126,2390 10037,2390 10037,2258 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id109">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 10125,2258 L 10125,2125 10214,2125 10214,2390 10125,2390 10125,2258 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id110">
+        <path fill="rgb(0,212,255)" stroke="none" d="M 5825,5829 L 1924,9404 C 1814,9284 1726,9179 1627,9051 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id111">
+        <path fill="rgb(0,212,255)" stroke="none" d="M 1436,9402 L 1436,9269 1701,9269 1701,9534 1436,9534 1436,9402 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 1436,9402 L 1436,9269 1701,9269 1701,9534 1436,9534 1436,9402 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id112">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 1436,9400 L 1436,9267 1525,9267 1525,9532 1436,9532 1436,9400 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id113">
+        <path fill="rgb(0,212,0)" stroke="none" d="M 1524,9400 L 1524,9267 1613,9267 1613,9532 1524,9532 1524,9400 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id114">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 1614,9400 L 1614,9267 1703,9267 1703,9532 1614,9532 1614,9400 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id115">
+        <path fill="rgb(255,22,0)" stroke="none" d="M 5825,5829 L 10024,2607 C 10123,2736 10201,2849 10289,2986 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id116">
+        <path fill="rgb(255,22,0)" stroke="none" d="M 10245,2643 L 10245,2510 10510,2510 10510,2775 10245,2775 10245,2643 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 10245,2643 L 10245,2510 10510,2510 10510,2775 10245,2775 10245,2643 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id117">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 10243,2643 L 10243,2510 10332,2510 10332,2775 10243,2775 10243,2643 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id118">
+        <path fill="rgb(0,22,0)" stroke="none" d="M 10333,2643 L 10333,2510 10422,2510 10422,2775 10333,2775 10333,2643 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id119">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 10420,2643 L 10420,2510 10509,2510 10509,2775 10420,2775 10420,2643 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id120">
+        <path fill="rgb(0,233,255)" stroke="none" d="M 5825,5829 L 1627,9051 C 1528,8922 1449,8809 1362,8672 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id121">
+        <path fill="rgb(0,233,255)" stroke="none" d="M 1142,9017 L 1142,8884 1407,8884 1407,9149 1142,9149 1142,9017 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 1142,9017 L 1142,8884 1407,8884 1407,9149 1142,9149 1142,9017 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id122">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 1143,9017 L 1143,8884 1232,8884 1232,9149 1143,9149 1143,9017 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id123">
+        <path fill="rgb(0,233,0)" stroke="none" d="M 1230,9017 L 1230,8884 1319,8884 1319,9149 1230,9149 1230,9017 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id124">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 1318,9017 L 1318,8884 1407,8884 1407,9149 1318,9149 1318,9017 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id125">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 5825,5829 L 10289,2986 C 10376,3123 10445,3241 10520,3385 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id126">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 10506,3052 L 10506,2919 10771,2919 10771,3184 10506,3184 10506,3052 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 10506,3052 L 10506,2919 10771,2919 10771,3184 10506,3184 10506,3052 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id127">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 10504,3052 L 10504,2919 10593,2919 10593,3184 10504,3184 10504,3052 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id128">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 10594,3052 L 10594,2919 10683,2919 10683,3184 10594,3184 10594,3052 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id129">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 10681,3052 L 10681,2919 10770,2919 10770,3184 10681,3184 10681,3052 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id130">
+        <path fill="rgb(0,255,255)" stroke="none" d="M 5825,5829 L 1362,8672 C 1275,8535 1206,8417 1131,8273 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id131">
+        <path fill="rgb(0,255,255)" stroke="none" d="M 881,8610 L 881,8477 1146,8477 1146,8742 881,8742 881,8610 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 881,8610 L 881,8477 1146,8477 1146,8742 881,8742 881,8610 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id132">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 882,8608 L 882,8475 971,8475 971,8740 882,8740 882,8608 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id133">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 969,8608 L 969,8475 1058,8475 1058,8740 969,8740 969,8608 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id134">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 1057,8608 L 1057,8475 1146,8475 1146,8740 1057,8740 1057,8608 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id135">
+        <path fill="rgb(255,0,21)" stroke="none" d="M 5825,5829 L 10520,3385 C 10595,3529 10653,3654 10715,3804 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id136">
+        <path fill="rgb(255,0,21)" stroke="none" d="M 10730,3482 L 10730,3349 10995,3349 10995,3614 10730,3614 10730,3482 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 10730,3482 L 10730,3349 10995,3349 10995,3614 10730,3614 10730,3482 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id137">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 10728,3482 L 10728,3349 10817,3349 10817,3614 10728,3614 10728,3482 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id138">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 10818,3482 L 10818,3349 10907,3349 10907,3614 10818,3614 10818,3482 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id139">
+        <path fill="rgb(0,0,21)" stroke="none" d="M 10905,3482 L 10905,3349 10994,3349 10994,3614 10905,3614 10905,3482 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id140">
+        <path fill="rgb(0,255,234)" stroke="none" d="M 5825,5829 L 1131,8273 C 1056,8129 998,8004 936,7854 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id141">
+        <path fill="rgb(0,255,234)" stroke="none" d="M 657,8178 L 657,8045 922,8045 922,8310 657,8310 657,8178 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 657,8178 L 657,8045 922,8045 922,8310 657,8310 657,8178 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id142">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 658,8178 L 658,8045 747,8045 747,8310 658,8310 658,8178 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id143">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 745,8178 L 745,8045 834,8045 834,8310 745,8310 745,8178 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id144">
+        <path fill="rgb(0,0,234)" stroke="none" d="M 833,8178 L 833,8045 922,8045 922,8310 833,8310 833,8178 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id145">
+        <path fill="rgb(255,0,42)" stroke="none" d="M 5825,5829 L 10715,3804 C 10777,3954 10824,4083 10873,4238 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id146">
+        <path fill="rgb(255,0,42)" stroke="none" d="M 10914,3930 L 10914,3797 11179,3797 11179,4062 10914,4062 10914,3930 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 10914,3930 L 10914,3797 11179,3797 11179,4062 10914,4062 10914,3930 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id147">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 10915,3930 L 10915,3797 11004,3797 11004,4062 10915,4062 10915,3930 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id148">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 11002,3930 L 11002,3797 11091,3797 11091,4062 11002,4062 11002,3930 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id149">
+        <path fill="rgb(0,0,42)" stroke="none" d="M 11090,3930 L 11090,3797 11179,3797 11179,4062 11090,4062 11090,3930 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id150">
+        <path fill="rgb(0,255,213)" stroke="none" d="M 5825,5829 L 936,7854 C 874,7704 827,7575 778,7420 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id151">
+        <path fill="rgb(0,255,213)" stroke="none" d="M 473,7730 L 473,7597 738,7597 738,7862 473,7862 473,7730 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 473,7730 L 473,7597 738,7597 738,7862 473,7862 473,7730 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id152">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 471,7730 L 471,7597 560,7597 560,7862 471,7862 471,7730 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id153">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 561,7730 L 561,7597 650,7597 650,7862 561,7862 561,7730 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id154">
+        <path fill="rgb(0,0,213)" stroke="none" d="M 648,7730 L 648,7597 737,7597 737,7862 648,7862 648,7730 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id155">
+        <path fill="rgb(255,0,63)" stroke="none" d="M 5825,5829 L 10873,4238 C 10921,4393 10957,4525 10992,4684 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id156">
+        <path fill="rgb(255,0,63)" stroke="none" d="M 11060,4392 L 11060,4259 11325,4259 11325,4524 11060,4524 11060,4392 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 11060,4392 L 11060,4259 11325,4259 11325,4524 11060,4524 11060,4392 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id157">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 11060,4392 L 11060,4259 11149,4259 11149,4524 11060,4524 11060,4392 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id158">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 11148,4392 L 11148,4259 11237,4259 11237,4524 11148,4524 11148,4392 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id159">
+        <path fill="rgb(0,0,63)" stroke="none" d="M 11236,4392 L 11236,4259 11325,4259 11325,4524 11236,4524 11236,4392 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id160">
+        <path fill="rgb(0,255,192)" stroke="none" d="M 5825,5827 L 778,7418 C 730,7263 694,7131 659,6972 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id161">
+        <path fill="rgb(0,255,192)" stroke="none" d="M 325,7267 L 325,7134 590,7134 590,7399 325,7399 325,7267 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 325,7267 L 325,7134 590,7134 590,7399 325,7399 325,7267 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id162">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 325,7267 L 325,7134 414,7134 414,7399 325,7399 325,7267 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id163">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 413,7267 L 413,7134 502,7134 502,7399 413,7399 413,7267 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id164">
+        <path fill="rgb(0,0,192)" stroke="none" d="M 501,7267 L 501,7134 590,7134 590,7399 501,7399 501,7267 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id165">
+        <path fill="rgb(255,0,85)" stroke="none" d="M 5825,5829 L 10992,4684 C 11027,4842 11051,4977 11072,5138 L 11072,5138 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id166">
+        <path fill="rgb(255,0,85)" stroke="none" d="M 11164,4867 L 11164,4734 11429,4734 11429,4999 11164,4999 11164,4867 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 11164,4867 L 11164,4734 11429,4734 11429,4999 11164,4999 11164,4867 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id167">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 11164,4865 L 11164,4732 11253,4732 11253,4997 11164,4997 11164,4865 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id168">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 11252,4865 L 11252,4732 11341,4732 11341,4997 11252,4997 11252,4865 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id169">
+        <path fill="rgb(0,0,85)" stroke="none" d="M 11340,4865 L 11340,4732 11429,4732 11429,4997 11340,4997 11340,4865 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id170">
+        <path fill="rgb(0,255,170)" stroke="none" d="M 5825,5829 L 659,6974 C 624,6816 600,6681 579,6520 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id171">
+        <path fill="rgb(0,255,170)" stroke="none" d="M 221,6795 L 221,6662 486,6662 486,6927 221,6927 221,6795 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 221,6795 L 221,6662 486,6662 486,6927 221,6927 221,6795 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id172">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 221,6795 L 221,6662 310,6662 310,6927 221,6927 221,6795 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id173">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 309,6795 L 309,6662 398,6662 398,6927 309,6927 309,6795 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id174">
+        <path fill="rgb(0,0,170)" stroke="none" d="M 397,6795 L 397,6662 486,6662 486,6927 397,6927 397,6795 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id175">
+        <path fill="rgb(255,0,106)" stroke="none" d="M 5825,5827 L 11072,5136 C 11093,5297 11105,5434 11112,5596 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id176">
+        <path fill="rgb(255,0,106)" stroke="none" d="M 11228,5345 L 11228,5212 11493,5212 11493,5477 11228,5477 11228,5345 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 11228,5345 L 11228,5212 11493,5212 11493,5477 11228,5477 11228,5345 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id177">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 11229,5345 L 11229,5212 11318,5212 11318,5477 11229,5477 11229,5345 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id178">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 11316,5345 L 11316,5212 11405,5212 11405,5477 11316,5477 11316,5345 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id179">
+        <path fill="rgb(0,0,106)" stroke="none" d="M 11404,5345 L 11404,5212 11493,5212 11493,5477 11404,5477 11404,5345 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id180">
+        <path fill="rgb(0,255,149)" stroke="none" d="M 5825,5827 L 579,6518 579,6518 C 558,6357 546,6220 539,6058 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id181">
+        <path fill="rgb(0,255,149)" stroke="none" d="M 158,6313 L 158,6180 423,6180 423,6445 158,6445 158,6313 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 158,6313 L 158,6180 423,6180 423,6445 158,6445 158,6313 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id182">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 157,6313 L 157,6180 246,6180 246,6445 157,6445 157,6313 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id183">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 245,6313 L 245,6180 334,6180 334,6445 245,6445 245,6313 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id184">
+        <path fill="rgb(0,0,149)" stroke="none" d="M 334,6313 L 334,6180 423,6180 423,6445 334,6445 334,6313 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id185">
+        <path fill="rgb(255,0,127)" stroke="none" d="M 5825,5829 L 11112,5598 C 11120,5760 11120,5898 11112,6060 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id186">
+        <path fill="rgb(255,0,127)" stroke="none" d="M 11249,5830 L 11249,5697 11514,5697 11514,5962 11249,5962 11249,5830 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 11249,5830 L 11249,5697 11514,5697 11514,5962 11249,5962 11249,5830 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id187">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 11249,5830 L 11249,5697 11338,5697 11338,5962 11249,5962 11249,5830 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id188">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 11337,5830 L 11337,5697 11426,5697 11426,5962 11337,5962 11337,5830 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id189">
+        <path fill="rgb(0,0,127)" stroke="none" d="M 11425,5830 L 11425,5697 11514,5697 11514,5962 11425,5962 11425,5830 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id190">
+        <path fill="rgb(0,255,128)" stroke="none" d="M 5825,5827 L 539,6058 C 531,5896 531,5758 539,5596 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id191">
+        <path fill="rgb(0,255,128)" stroke="none" d="M 135,5830 L 135,5697 400,5697 400,5962 135,5962 135,5830 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 135,5830 L 135,5697 400,5697 400,5962 135,5962 135,5830 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id192">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 136,5830 L 136,5697 225,5697 225,5962 136,5962 136,5830 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id193">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 223,5830 L 223,5697 312,5697 312,5962 223,5962 223,5830 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id194">
+        <path fill="rgb(0,0,128)" stroke="none" d="M 312,5830 L 312,5697 401,5697 401,5962 312,5962 312,5830 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id195">
+        <path fill="rgb(255,0,148)" stroke="none" d="M 5825,5827 L 11112,6058 C 11105,6220 11093,6357 11072,6518 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id196">
+        <path fill="rgb(255,0,148)" stroke="none" d="M 11228,6313 L 11228,6180 11493,6180 11493,6445 11228,6445 11228,6313 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 11228,6313 L 11228,6180 11493,6180 11493,6445 11228,6445 11228,6313 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id197">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 11229,6313 L 11229,6180 11318,6180 11318,6445 11229,6445 11229,6313 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id198">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 11316,6313 L 11316,6180 11405,6180 11405,6445 11316,6445 11316,6313 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id199">
+        <path fill="rgb(0,0,148)" stroke="none" d="M 11404,6313 L 11404,6180 11493,6180 11493,6445 11404,6445 11404,6313 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id200">
+        <path fill="rgb(0,255,107)" stroke="none" d="M 5825,5829 L 539,5598 C 546,5436 558,5299 579,5138 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id201">
+        <path fill="rgb(0,255,107)" stroke="none" d="M 159,5345 L 159,5212 424,5212 424,5477 159,5477 159,5345 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 159,5345 L 159,5212 424,5212 424,5477 159,5477 159,5345 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id202">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 157,5345 L 157,5212 246,5212 246,5477 157,5477 157,5345 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id203">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 247,5345 L 247,5212 336,5212 336,5477 247,5477 247,5345 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id204">
+        <path fill="rgb(0,0,107)" stroke="none" d="M 334,5345 L 334,5212 423,5212 423,5477 334,5477 334,5345 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id205">
+        <path fill="rgb(255,0,170)" stroke="none" d="M 5825,5827 L 11072,6518 C 11051,6679 11027,6814 10992,6972 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id206">
+        <path fill="rgb(255,0,170)" stroke="none" d="M 11164,6795 L 11164,6662 11429,6662 11429,6927 11164,6927 11164,6795 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 11164,6795 L 11164,6662 11429,6662 11429,6927 11164,6927 11164,6795 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id207">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 11164,6793 L 11164,6660 11253,6660 11253,6925 11164,6925 11164,6793 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id208">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 11252,6793 L 11252,6660 11341,6660 11341,6925 11252,6925 11252,6793 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id209">
+        <path fill="rgb(0,0,170)" stroke="none" d="M 11339,6793 L 11339,6660 11428,6660 11428,6925 11339,6925 11339,6793 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id210">
+        <path fill="rgb(0,255,85)" stroke="none" d="M 5825,5827 L 579,5136 C 600,4975 624,4840 659,4682 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id211">
+        <path fill="rgb(0,255,85)" stroke="none" d="M 221,4863 L 221,4730 486,4730 486,4995 221,4995 221,4863 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 221,4863 L 221,4730 486,4730 486,4995 221,4995 221,4863 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id212">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 221,4863 L 221,4730 310,4730 310,4995 221,4995 221,4863 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id213">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 309,4863 L 309,4730 398,4730 398,4995 309,4995 309,4863 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id214">
+        <path fill="rgb(0,0,85)" stroke="none" d="M 397,4863 L 397,4730 486,4730 486,4995 397,4995 397,4863 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id215">
+        <path fill="rgb(255,0,191)" stroke="none" d="M 5825,5827 L 10992,6972 C 10957,7131 10921,7263 10873,7418 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id216">
+        <path fill="rgb(255,0,191)" stroke="none" d="M 11060,7266 L 11060,7133 11325,7133 11325,7398 11060,7398 11060,7266 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 11060,7266 L 11060,7133 11325,7133 11325,7398 11060,7398 11060,7266 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id217">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 11060,7266 L 11060,7133 11149,7133 11149,7398 11060,7398 11060,7266 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id218">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 11148,7266 L 11148,7133 11237,7133 11237,7398 11148,7398 11148,7266 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id219">
+        <path fill="rgb(0,0,191)" stroke="none" d="M 11236,7266 L 11236,7133 11325,7133 11325,7398 11236,7398 11236,7266 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id220">
+        <path fill="rgb(0,255,64)" stroke="none" d="M 5825,5827 L 659,4682 C 694,4523 730,4391 778,4236 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id221">
+        <path fill="rgb(0,255,64)" stroke="none" d="M 325,4391 L 325,4258 590,4258 590,4523 325,4523 325,4391 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 325,4391 L 325,4258 590,4258 590,4523 325,4523 325,4391 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id222">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 325,4391 L 325,4258 414,4258 414,4523 325,4523 325,4391 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id223">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 413,4391 L 413,4258 502,4258 502,4523 413,4523 413,4391 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id224">
+        <path fill="rgb(0,0,64)" stroke="none" d="M 501,4391 L 501,4258 590,4258 590,4523 501,4523 501,4391 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id225">
+        <path fill="rgb(255,0,212)" stroke="none" d="M 5825,5827 L 10873,7418 C 10824,7573 10777,7702 10715,7852 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id226">
+        <path fill="rgb(255,0,212)" stroke="none" d="M 10914,7728 L 10914,7595 11179,7595 11179,7860 10914,7860 10914,7728 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 10914,7728 L 10914,7595 11179,7595 11179,7860 10914,7860 10914,7728 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id227">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 10915,7728 L 10915,7595 11004,7595 11004,7860 10915,7860 10915,7728 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id228">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 11002,7728 L 11002,7595 11091,7595 11091,7860 11002,7860 11002,7728 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id229">
+        <path fill="rgb(0,0,212)" stroke="none" d="M 11090,7728 L 11090,7595 11179,7595 11179,7860 11090,7860 11090,7728 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id230">
+        <path fill="rgb(0,255,43)" stroke="none" d="M 5825,5827 L 778,4236 C 827,4081 874,3952 936,3802 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id231">
+        <path fill="rgb(0,255,43)" stroke="none" d="M 473,3928 L 473,3795 738,3795 738,4060 473,4060 473,3928 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 473,3928 L 473,3795 738,3795 738,4060 473,4060 473,3928 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id232">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 471,3928 L 471,3795 560,3795 560,4060 471,4060 471,3928 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id233">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 561,3928 L 561,3795 650,3795 650,4060 561,4060 561,3928 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id234">
+        <path fill="rgb(0,0,43)" stroke="none" d="M 648,3928 L 648,3795 737,3795 737,4060 648,4060 648,3928 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id235">
+        <path fill="rgb(255,0,233)" stroke="none" d="M 5825,5827 L 10715,7852 C 10653,8002 10595,8127 10520,8271 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id236">
+        <path fill="rgb(255,0,233)" stroke="none" d="M 10730,8176 L 10730,8043 10995,8043 10995,8308 10730,8308 10730,8176 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 10730,8176 L 10730,8043 10995,8043 10995,8308 10730,8308 10730,8176 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id237">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 10728,8176 L 10728,8043 10817,8043 10817,8308 10728,8308 10728,8176 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id238">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 10818,8176 L 10818,8043 10907,8043 10907,8308 10818,8308 10818,8176 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id239">
+        <path fill="rgb(0,0,233)" stroke="none" d="M 10905,8176 L 10905,8043 10994,8043 10994,8308 10905,8308 10905,8176 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id240">
+        <path fill="rgb(0,255,22)" stroke="none" d="M 5825,5827 L 936,3802 C 998,3652 1056,3527 1131,3383 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id241">
+        <path fill="rgb(0,255,22)" stroke="none" d="M 657,3480 L 657,3347 922,3347 922,3612 657,3612 657,3480 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 657,3480 L 657,3347 922,3347 922,3612 657,3612 657,3480 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id242">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 658,3480 L 658,3347 747,3347 747,3612 658,3612 658,3480 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id243">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 745,3480 L 745,3347 834,3347 834,3612 745,3612 745,3480 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id244">
+        <path fill="rgb(0,0,22)" stroke="none" d="M 833,3480 L 833,3347 922,3347 922,3612 833,3612 833,3480 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id245">
+        <path fill="rgb(255,0,255)" stroke="none" d="M 5825,5827 L 10520,8271 C 10445,8415 10376,8533 10289,8670 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id246">
+        <path fill="rgb(255,0,255)" stroke="none" d="M 10506,8606 L 10506,8473 10771,8473 10771,8738 10506,8738 10506,8606 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 10506,8606 L 10506,8473 10771,8473 10771,8738 10506,8738 10506,8606 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id247">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 10504,8606 L 10504,8473 10593,8473 10593,8738 10504,8738 10504,8606 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id248">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 10594,8606 L 10594,8473 10683,8473 10683,8738 10594,8738 10594,8606 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id249">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 10681,8606 L 10681,8473 10770,8473 10770,8738 10681,8738 10681,8606 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id250">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 5825,5827 L 1131,3383 C 1206,3239 1275,3121 1362,2984 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id251">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 881,3052 L 881,2919 1146,2919 1146,3184 881,3184 881,3052 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 881,3052 L 881,2919 1146,2919 1146,3184 881,3184 881,3052 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id252">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 882,3050 L 882,2917 971,2917 971,3182 882,3182 882,3050 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id253">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 969,3050 L 969,2917 1058,2917 1058,3182 969,3182 969,3050 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id254">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 1057,3050 L 1057,2917 1146,2917 1146,3182 1057,3182 1057,3050 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id255">
+        <path fill="rgb(234,0,255)" stroke="none" d="M 5825,5827 L 10289,8670 C 10201,8807 10123,8920 10024,9049 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id256">
+        <path fill="rgb(234,0,255)" stroke="none" d="M 10245,9015 L 10245,8882 10510,8882 10510,9147 10245,9147 10245,9015 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 10245,9015 L 10245,8882 10510,8882 10510,9147 10245,9147 10245,9015 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id257">
+        <path fill="rgb(234,0,0)" stroke="none" d="M 10243,9015 L 10243,8882 10332,8882 10332,9147 10243,9147 10243,9015 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id258">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 10333,9015 L 10333,8882 10422,8882 10422,9147 10333,9147 10333,9015 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id259">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 10420,9015 L 10420,8882 10509,8882 10509,9147 10420,9147 10420,9015 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id260">
+        <path fill="rgb(21,255,0)" stroke="none" d="M 5825,5827 L 1362,2984 C 1449,2847 1528,2734 1627,2605 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id261">
+        <path fill="rgb(21,255,0)" stroke="none" d="M 1142,2641 L 1142,2508 1407,2508 1407,2773 1142,2773 1142,2641 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 1142,2641 L 1142,2508 1407,2508 1407,2773 1142,2773 1142,2641 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id262">
+        <path fill="rgb(21,0,0)" stroke="none" d="M 1143,2641 L 1143,2508 1232,2508 1232,2773 1143,2773 1143,2641 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id263">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 1230,2641 L 1230,2508 1319,2508 1319,2773 1230,2773 1230,2641 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id264">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 1318,2641 L 1318,2508 1407,2508 1407,2773 1318,2773 1318,2641 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id265">
+        <path fill="rgb(213,0,255)" stroke="none" d="M 5825,5827 L 10024,9049 C 9925,9177 9837,9282 9727,9402 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id266">
+        <path fill="rgb(213,0,255)" stroke="none" d="M 9949,9402 L 9949,9269 10214,9269 10214,9534 9949,9534 9949,9402 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 9949,9402 L 9949,9269 10214,9269 10214,9534 9949,9534 9949,9402 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id267">
+        <path fill="rgb(213,0,0)" stroke="none" d="M 9949,9400 L 9949,9267 10038,9267 10038,9532 9949,9532 9949,9400 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id268">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 10037,9400 L 10037,9267 10126,9267 10126,9532 10037,9532 10037,9400 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id269">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 10125,9400 L 10125,9267 10214,9267 10214,9532 10125,9532 10125,9400 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id270">
+        <path fill="rgb(42,255,0)" stroke="none" d="M 5825,5829 L 1627,2607 C 1726,2479 1814,2373 1924,2254 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id271">
+        <path fill="rgb(42,255,0)" stroke="none" d="M 1436,2260 L 1436,2127 1701,2127 1701,2392 1436,2392 1436,2260 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 1436,2260 L 1436,2127 1701,2127 1701,2392 1436,2392 1436,2260 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id272">
+        <path fill="rgb(42,0,0)" stroke="none" d="M 1436,2258 L 1436,2125 1525,2125 1525,2390 1436,2390 1436,2258 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id273">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 1524,2258 L 1524,2125 1613,2125 1613,2390 1524,2390 1524,2258 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id274">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 1614,2258 L 1614,2125 1703,2125 1703,2390 1614,2390 1614,2258 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id275">
+        <path fill="rgb(192,0,255)" stroke="none" d="M 5825,5829 L 9727,9404 C 9617,9524 9520,9621 9401,9731 L 5825,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id276">
+        <path fill="rgb(192,0,255)" stroke="none" d="M 9624,9760 L 9624,9627 9889,9627 9889,9892 9624,9892 9624,9760 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 9624,9760 L 9624,9627 9889,9627 9889,9892 9624,9892 9624,9760 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id277">
+        <path fill="rgb(192,0,0)" stroke="none" d="M 9622,9758 L 9622,9625 9711,9625 9711,9890 9622,9890 9622,9758 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id278">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 9712,9758 L 9712,9625 9801,9625 9801,9890 9712,9890 9712,9758 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id279">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 9799,9758 L 9799,9625 9888,9625 9888,9890 9799,9890 9799,9758 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id280">
+        <path fill="rgb(63,255,0)" stroke="none" d="M 5827,5829 L 1926,2254 C 2035,2134 2133,2037 2252,1927 L 5827,5829 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id281">
+        <path fill="rgb(63,255,0)" stroke="none" d="M 1765,1900 L 1765,1767 2030,1767 2030,2032 1765,2032 1765,1900 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 1765,1900 L 1765,1767 2030,1767 2030,2032 1765,2032 1765,1900 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id282">
+        <path fill="rgb(63,0,0)" stroke="none" d="M 1764,1900 L 1764,1767 1853,1767 1853,2032 1764,2032 1764,1900 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id283">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 1852,1900 L 1852,1767 1941,1767 1941,2032 1852,2032 1852,1900 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id284">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 1941,1900 L 1941,1767 2030,1767 2030,2032 1941,2032 1941,1900 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id285">
+        <path fill="rgb(170,0,255)" stroke="none" d="M 5825,5827 L 9401,9729 C 9281,9838 9176,9927 9047,10025 L 5825,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id286">
+        <path fill="rgb(170,0,255)" stroke="none" d="M 9266,10084 L 9266,9951 9531,9951 9531,10216 9266,10216 9266,10084 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 9266,10084 L 9266,9951 9531,9951 9531,10216 9266,10216 9266,10084 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id287">
+        <path fill="rgb(170,0,0)" stroke="none" d="M 9264,10084 L 9264,9951 9353,9951 9353,10216 9264,10216 9264,10084 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id288">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 9354,10084 L 9354,9951 9443,9951 9443,10216 9354,10216 9354,10084 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id289">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 9441,10084 L 9441,9951 9530,9951 9530,10216 9441,10216 9441,10084 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id290">
+        <path fill="rgb(85,255,0)" stroke="none" d="M 5827,5827 L 2252,1925 C 2372,1816 2477,1727 2606,1629 L 5827,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id291">
+        <path fill="rgb(85,255,0)" stroke="none" d="M 2124,1572 L 2124,1439 2389,1439 2389,1704 2124,1704 2124,1572 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 2124,1572 L 2124,1439 2389,1439 2389,1704 2124,1704 2124,1572 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id292">
+        <path fill="rgb(85,0,0)" stroke="none" d="M 2122,1572 L 2122,1439 2211,1439 2211,1704 2122,1704 2122,1572 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id293">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 2212,1572 L 2212,1439 2301,1439 2301,1704 2212,1704 2212,1572 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id294">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 2299,1572 L 2299,1439 2388,1439 2388,1704 2299,1704 2299,1572 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id295">
+        <path fill="rgb(149,0,255)" stroke="none" d="M 5827,5827 L 9049,10025 C 8920,10124 8808,10203 8671,10290 L 5827,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id296">
+        <path fill="rgb(149,0,255)" stroke="none" d="M 8882,10379 L 8882,10246 9147,10246 9147,10511 8882,10511 8882,10379 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 8882,10379 L 8882,10246 9147,10246 9147,10511 8882,10511 8882,10379 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id297">
+        <path fill="rgb(149,0,0)" stroke="none" d="M 8881,10379 L 8881,10246 8970,10246 8970,10511 8881,10511 8881,10379 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id298">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 8970,10379 L 8970,10246 9059,10246 9059,10511 8970,10511 8970,10379 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id299">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 9058,10379 L 9058,10246 9147,10246 9147,10511 9058,10511 9058,10379 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id300">
+        <path fill="rgb(106,255,0)" stroke="none" d="M 5827,5827 L 2606,1629 C 2735,1530 2847,1451 2984,1364 L 5827,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id301">
+        <path fill="rgb(106,255,0)" stroke="none" d="M 2507,1277 L 2507,1144 2772,1144 2772,1409 2507,1409 2507,1277 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 2507,1277 L 2507,1144 2772,1144 2772,1409 2507,1409 2507,1277 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id302">
+        <path fill="rgb(106,0,0)" stroke="none" d="M 2507,1277 L 2507,1144 2596,1144 2596,1409 2507,1409 2507,1277 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id303">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 2595,1277 L 2595,1144 2684,1144 2684,1409 2595,1409 2595,1277 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id304">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 2683,1277 L 2683,1144 2772,1144 2772,1409 2683,1409 2683,1277 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id305">
+        <path fill="rgb(128,0,255)" stroke="none" d="M 5827,5827 L 8671,10290 C 8534,10377 8415,10446 8271,10521 L 5827,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id306">
+        <path fill="rgb(128,0,255)" stroke="none" d="M 8474,10642 L 8474,10509 8739,10509 8739,10774 8474,10774 8474,10642 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 8474,10642 L 8474,10509 8739,10509 8739,10774 8474,10774 8474,10642 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id307">
+        <path fill="rgb(128,0,0)" stroke="none" d="M 8472,10640 L 8472,10507 8561,10507 8561,10772 8472,10772 8472,10640 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id308">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 8562,10640 L 8562,10507 8651,10507 8651,10772 8562,10772 8562,10640 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id309">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 8649,10640 L 8649,10507 8738,10507 8738,10772 8649,10772 8649,10640 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id310">
+        <path fill="rgb(127,255,0)" stroke="none" d="M 5827,5827 L 2984,1364 C 3121,1277 3240,1208 3384,1133 L 5827,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id311">
+        <path fill="rgb(127,255,0)" stroke="none" d="M 2916,1016 L 2916,883 3181,883 3181,1148 2916,1148 2916,1016 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 2916,1016 L 2916,883 3181,883 3181,1148 2916,1148 2916,1016 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id312">
+        <path fill="rgb(127,0,0)" stroke="none" d="M 2916,1016 L 2916,883 3005,883 3005,1148 2916,1148 2916,1016 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id313">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 3004,1016 L 3004,883 3093,883 3093,1148 3004,1148 3004,1016 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id314">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 3094,1016 L 3094,883 3183,883 3183,1148 3094,1148 3094,1016 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id315">
+        <path fill="rgb(107,0,255)" stroke="none" d="M 5827,5827 L 8271,10521 C 8127,10596 8003,10654 7853,10716 L 5827,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id316">
+        <path fill="rgb(107,0,255)" stroke="none" d="M 8042,10866 L 8042,10733 8307,10733 8307,10998 8042,10998 8042,10866 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 8042,10866 L 8042,10733 8307,10733 8307,10998 8042,10998 8042,10866 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id317">
+        <path fill="rgb(107,0,0)" stroke="none" d="M 8042,10864 L 8042,10731 8131,10731 8131,10996 8042,10996 8042,10864 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id318">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 8130,10864 L 8130,10731 8219,10731 8219,10996 8130,10996 8130,10864 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id319">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 8218,10864 L 8218,10731 8307,10731 8307,10996 8218,10996 8218,10864 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id320">
+        <path fill="rgb(148,255,0)" stroke="none" d="M 5827,5827 L 3384,1133 C 3528,1058 3652,1000 3802,938 L 5827,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id321">
+        <path fill="rgb(148,255,0)" stroke="none" d="M 3347,792 L 3347,659 3612,659 3612,924 3347,924 3347,792 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 3347,792 L 3347,659 3612,659 3612,924 3347,924 3347,792 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id322">
+        <path fill="rgb(148,0,0)" stroke="none" d="M 3348,792 L 3348,659 3437,659 3437,924 3348,924 3348,792 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id323">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 3435,792 L 3435,659 3524,659 3524,924 3435,924 3435,792 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id324">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 3523,792 L 3523,659 3612,659 3612,924 3523,924 3523,792 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id325">
+        <path fill="rgb(85,0,255)" stroke="none" d="M 5827,5827 L 7853,10716 C 7703,10778 7574,10825 7419,10874 L 5827,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id326">
+        <path fill="rgb(85,0,255)" stroke="none" d="M 7594,11049 L 7594,10916 7859,10916 7859,11181 7594,11181 7594,11049 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 7594,11049 L 7594,10916 7859,10916 7859,11181 7594,11181 7594,11049 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id327">
+        <path fill="rgb(85,0,0)" stroke="none" d="M 7594,11049 L 7594,10916 7683,10916 7683,11181 7594,11181 7594,11049 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id328">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 7682,11049 L 7682,10916 7771,10916 7771,11181 7682,11181 7682,11049 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id329">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 7770,11049 L 7770,10916 7859,10916 7859,11181 7770,11181 7770,11049 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id330">
+        <path fill="rgb(170,255,0)" stroke="none" d="M 5827,5827 L 3802,938 C 3952,876 4081,829 4236,780 L 5827,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id331">
+        <path fill="rgb(170,255,0)" stroke="none" d="M 3795,609 L 3795,476 4060,476 4060,741 3795,741 3795,609 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 3795,609 L 3795,476 4060,476 4060,741 3795,741 3795,609 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id332">
+        <path fill="rgb(170,0,0)" stroke="none" d="M 3796,607 L 3796,474 3885,474 3885,739 3796,739 3796,607 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id333">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 3883,607 L 3883,474 3972,474 3972,739 3883,739 3883,607 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id334">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 3971,607 L 3971,474 4060,474 4060,739 3971,739 3971,607 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id335">
+        <path fill="rgb(64,0,255)" stroke="none" d="M 5827,5827 L 7419,10874 C 7264,10923 7131,10958 6973,10994 L 5827,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id336">
+        <path fill="rgb(64,0,255)" stroke="none" d="M 7132,11196 L 7132,11063 7397,11063 7397,11328 7132,11328 7132,11196 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 7132,11196 L 7132,11063 7397,11063 7397,11328 7132,11328 7132,11196 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id337">
+        <path fill="rgb(64,0,0)" stroke="none" d="M 7132,11196 L 7132,11063 7221,11063 7221,11328 7132,11328 7132,11196 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id338">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 7220,11196 L 7220,11063 7309,11063 7309,11328 7220,11328 7220,11196 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id339">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 7308,11196 L 7308,11063 7397,11063 7397,11328 7308,11328 7308,11196 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id340">
+        <path fill="rgb(191,255,0)" stroke="none" d="M 5827,5827 L 4236,780 C 4391,731 4524,696 4682,660 L 5827,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id341">
+        <path fill="rgb(191,255,0)" stroke="none" d="M 4257,461 L 4257,328 4522,328 4522,593 4257,593 4257,461 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 4257,461 L 4257,328 4522,328 4522,593 4257,593 4257,461 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id342">
+        <path fill="rgb(191,0,0)" stroke="none" d="M 4257,461 L 4257,328 4346,328 4346,593 4257,593 4257,461 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id343">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 4345,461 L 4345,328 4434,328 4434,593 4345,593 4345,461 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id344">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 4433,461 L 4433,328 4522,328 4522,593 4433,593 4433,461 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id345">
+        <path fill="rgb(43,0,255)" stroke="none" d="M 5827,5827 L 6973,10994 C 6814,11029 6679,11053 6518,11074 L 5827,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id346">
+        <path fill="rgb(43,0,255)" stroke="none" d="M 6659,11300 L 6659,11167 6924,11167 6924,11432 6659,11432 6659,11300 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 6659,11300 L 6659,11167 6924,11167 6924,11432 6659,11432 6659,11300 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id347">
+        <path fill="rgb(43,0,0)" stroke="none" d="M 6659,11300 L 6659,11167 6748,11167 6748,11432 6659,11432 6659,11300 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id348">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 6747,11300 L 6747,11167 6836,11167 6836,11432 6747,11432 6747,11300 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id349">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 6835,11300 L 6835,11167 6924,11167 6924,11432 6835,11432 6835,11300 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id350">
+        <path fill="rgb(212,255,0)" stroke="none" d="M 5827,5827 L 4682,660 C 4841,625 4976,601 5137,580 L 5827,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id351">
+        <path fill="rgb(212,255,0)" stroke="none" d="M 4731,357 L 4731,224 4996,224 4996,489 4731,489 4731,357 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 4731,357 L 4731,224 4996,224 4996,489 4731,489 4731,357 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id352">
+        <path fill="rgb(212,0,0)" stroke="none" d="M 4729,357 L 4729,224 4818,224 4818,489 4729,489 4729,357 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id353">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 4819,357 L 4819,224 4908,224 4908,489 4819,489 4819,357 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id354">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 4906,357 L 4906,224 4995,224 4995,489 4906,489 4906,357 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id355">
+        <path fill="rgb(22,0,255)" stroke="none" d="M 5827,5827 L 6518,11074 6518,11074 C 6357,11095 6221,11107 6058,11114 L 5827,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id356">
+        <path fill="rgb(22,0,255)" stroke="none" d="M 6178,11363 L 6178,11230 6443,11230 6443,11495 6178,11495 6178,11363 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 6178,11363 L 6178,11230 6443,11230 6443,11495 6178,11495 6178,11363 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id357">
+        <path fill="rgb(22,0,0)" stroke="none" d="M 6179,11363 L 6179,11230 6268,11230 6268,11495 6179,11495 6179,11363 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id358">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 6266,11363 L 6266,11230 6355,11230 6355,11495 6266,11495 6266,11363 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id359">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 6354,11363 L 6354,11230 6443,11230 6443,11495 6354,11495 6354,11363 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id360">
+        <path fill="rgb(233,255,0)" stroke="none" d="M 5827,5827 L 5137,580 C 5298,559 5434,547 5597,540 L 5827,5827 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id361">
+        <path fill="rgb(233,255,0)" stroke="none" d="M 5209,295 L 5209,162 5474,162 5474,427 5209,427 5209,295 Z"/>
+        <path fill="none" stroke="rgb(255,255,255)" stroke-width="35" d="M 5209,295 L 5209,162 5474,162 5474,427 5209,427 5209,295 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id362">
+        <path fill="rgb(233,0,0)" stroke="none" d="M 5209,293 L 5209,160 5298,160 5298,425 5209,425 5209,293 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id363">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 5297,293 L 5297,160 5386,160 5386,425 5297,425 5297,293 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id364">
+        <path fill="rgb(0,0,0)" stroke="none" d="M 5387,293 L 5387,160 5476,160 5476,425 5387,425 5387,293 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.EllipseShape">
+       <g id="id365">
+        <path fill="rgb(255,255,255)" stroke="none" d="M 6056,7577 C 5734,7620 5451,7583 5150,7458 4850,7334 4624,7160 4426,6902 4228,6645 4119,6380 4076,6058 4034,5736 4071,5453 4196,5153 4320,4853 4494,4626 4752,4428 5009,4230 5273,4121 5595,4079 5917,4036 6201,4074 6501,4198 6801,4322 7028,4496 7226,4754 7423,5012 7533,5276 7575,5598 7618,5920 7580,6203 7456,6503 7332,6803 7158,7030 6900,7228 6642,7426 6378,7535 6056,7577 L 6056,7577 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id366">
+        <path fill="rgb(255,255,255)" stroke="none" d="M 5693,5828 L 5693,5695 5958,5695 5958,5960 5693,5960 5693,5828 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" stroke-width="35" d="M 5693,5828 L 5693,5695 5958,5695 5958,5960 5693,5960 5693,5828 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id367">
+        <path fill="rgb(255,0,0)" stroke="none" d="M 5692,5828 L 5692,5695 5781,5695 5781,5960 5692,5960 5692,5828 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id368">
+        <path fill="rgb(0,255,0)" stroke="none" d="M 5781,5828 L 5781,5695 5870,5695 5870,5960 5781,5960 5781,5828 Z"/>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.RectangleShape">
+       <g id="id369">
+        <path fill="rgb(0,0,255)" stroke="none" d="M 5869,5828 L 5869,5695 5958,5695 5958,5960 5869,5960 5869,5828 Z"/>
+       </g>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>
