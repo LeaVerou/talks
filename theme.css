@@ -81,7 +81,8 @@ textarea {
 }
 
 section > header.slide {
-	
+	background: linear-gradient(90deg, red, yellow, lime, aqua, blue, fuchsia, red) no-repeat 0 15px black;
+	background-size: 100% 5px;
 }
 
 	section > header.slide > h1 {

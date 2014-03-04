@@ -1,6 +1,7 @@
 #intro {
 	background-image: url(img/baby.jpg);
-	background-position: left bottom;
+	background-position: left;
+	background-size: cover;
 }
 
 	#intro h1 {
