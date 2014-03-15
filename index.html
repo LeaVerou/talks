@@ -70,8 +70,22 @@ PrefixFree.atrules.push('keyframes');
 </section>
 
 <section class="image slide rgb-wheel" style="background-image: url(img/rgb-wheel-12.svg);" data-source="Illustration by László Németh"></section>
-<section class="image slide rgb-wheel" style="background-image: url(img/rgb-wheel-24.svg);" data-source="Illustration by László Németh"></section>
-<section class="image slide rgb-wheel" style="background-image: url(img/rgb-wheel-72.svg);" data-source="Illustration by László Németh"></section>
+
+<section class="mixing top-heavy image slide" id="rgb-mixing">
+	<div class="red"></div>
+	<div class="green"></div>
+	<div class="blue"></div>
+	<p class="caption">RGB: Additive color</p>
+</section>
+
+<section class="partial image slide" style="background-image: url(img/pixel-geometries.jpg); background-size: auto 85%;" data-source="Peter Halasz, commons.wikimedia.org/wiki/File:Pixel_geometry_01_Pengo.jpg"></section>
+
+<section class="tiles slide" id="device-pgs" data-source="http://www.anandtech.com/show/5689/the-new-ipad-retina-display-analysis/2">
+	<article style="background-image: url(img/pg-ipad2.jpg);">Apple iPad 2, 1024×768, 9.7″</article>
+	<article style="background-image: url(img/pg-ipadretina.jpg);">Apple iPad Retina Display (2012), 2048×1536, 9.7″</article>
+	<article style="background-image: url(img/pg-iphone4s.jpg);">Apple iPhone 4S, 960×640, 3.5″</article>
+	<article style="background-image: url(img/pg-asuseee.jpg);">ASUS Eee Pad Transformer Prime, 1280×800, 10.1″</article>
+</section>
 
 <section class="slide dont-resize" id="pixel-bits">
 	<div class="pixel">
@@ -85,6 +99,13 @@ PrefixFree.atrules.push('keyframes');
 	<p class="delayed">
 		= <strong>3</strong> bytes per pixel<br><span style="font-size: 60%;">(in uncompressed images)</span>
 	</p>
+	<p class="delayed">
+		=&nbsp;<strong>256³</strong> possible colors
+	</p>
+</section>
+
+<section class="slide" id="antialiasing">
+	<h1 data-steps="2">Anti-aliasing</h1>
 </section>
 
 <section class="slide" data-src="http://people.mozilla.org/~jdaggett/tests/subpixelexplorer.html" title="Subpixel Explorer by John Daggett"></section>
@@ -99,7 +120,7 @@ PrefixFree.atrules.push('keyframes');
 
 <section class="image slide" style="background-image: url(img/rgb-cube.jpg); background-size: auto 80%;" data-source="http://thomasdiewald.com/blog/?p=332"></section>
 
-<section class="slide" id="rgb-2d">
+<section class="slide dont-resize" id="rgb-2d">
 	<div class="plane" id="rgb-xy"><div></div><button class="plane-thumb"></button></div>
 	<input type="range" min="0" max="255" orient="vertical" id="rgb-z" class="color-slider" />
 	<select id="rgb-axis">
@@ -110,79 +131,124 @@ PrefixFree.atrules.push('keyframes');
 	<output></output>
 </section>
 
-<section class="color slide" data-color="rgb(0,0,0)"></section>
-
-<section class="slide" id="hex" data-steps="1">
-	<h1 class="delayed-children">
-		#<span class="red">ff</span><span class="green">00</span><span class="blue">5a</span>
-	</h1>
-	<p class="delayed">
-		= rgb(255, 0, 90)
-	</p>
-</section>
-
-<section class="slide" id="hex-digits">
-	<p>0 1 2 3 4 5 6 7 8 9</p>
-	<p>0 1 2 3 4 5 6 7 8 9 <strong class="delayed">a b c d e f</strong></p>
-</section>
-
-<section class="slide" id="hex-numbers">
-	<input id="decimal-counter" value="0" type="number" max="255" min="0" autofocus />
-	<div id="hex-counter">0</div>
-	<p class="delayed">Hex &rarr; decimal (0-ff): First digit &times; 16 + last digit</p>
-	<p class="delayed">E.g. 5a = 5 &times; 16 + 10 = 80 + 10 = 90</p>
-</section>
-
-<section class="slide">
-	<p>Decimal to hex:</p>
-	<pre><code>hex = decimal.toString(16);</code></pre>
+<section>
+	<header class="slide">
+		<h1>Colors in HTML 3.2</h1>
+	</header>
 	
-	<p style="margin-top: 20vh;">Hex to decimal:</p>
-	<pre><code>decimal = parseInt(hex, 16); /* faster */</code></pre>
-	<pre><code>decimal = +("0x" + hex);</code></pre>
-</section>
-
-<section class="color slide" data-color="#ff0066"></section>
-
-<section class="color-list slide">
-	red
-	lime
-	blue
-	aqua
-	fuchsia
-	yellow
-	orange
-	green
-	maroon
-	navy
-	olive
-	purple
-	teal
-	white
-	silver
-	gray
-	black
-</section>
-
-<section class="slide" id="css21-colors">
-	<h1>CSS 2.1 colors</h1>
+	<section class="slide" id="hex" data-steps="1">
+		<h1 class="delayed-children">
+			#<span class="red">ff</span><span class="green">00</span><span class="blue">5a</span>
+		</h1>
+		<p class="delayed">
+			<strong>=</strong>
+			Red: 255<br> Green: 0<br> Blue: 90
+		</p>
+	</section>
 	
-	<ul>
-		<li><code>rgb()</code> <span class="delayed">Confusing :(</span></li>
-		<li><code>#rgb</code> and <code>#rrggbb</code> <span class="delayed">More confusing >:(</span></li>
-		<li>Color names <span class="delayed">Mostly useless :'(</span></li>
-	</ul>
+	<section class="top-heavy image slide" id="thinking" data-source="http://www.flickr.com/photos/falequin/8443342362">
+		<h1>
+			So, 255 —> FF and 0 —> 00. What about 90? Hmmm…
+			90 = 5×16+10 —> 5A, so #FF005A!
+		</h1>
+	</section>
+	
+	<!--<section class="slide" id="hex-digits">
+		<p>0 1 2 3 4 5 6 7 8 9</p>
+		<p>0 1 2 3 4 5 6 7 8 9 <strong class="delayed">a b c d e f</strong></p>
+	</section>
+	
+	<section class="slide" id="hex-numbers">
+		<input id="decimal-counter" value="0" type="number" max="255" min="0" autofocus />
+		<div id="hex-counter">0</div>
+		<p class="delayed">Hex &rarr; decimal (0-ff): First digit &times; 16 + last digit</p>
+		<p class="delayed">E.g. 5a = 5 &times; 16 + 10 = 80 + 10 = 90</p>
+	</section>-->
+	
+	<section class="slide">
+		<p>Decimal to hex:</p>
+		<pre><code>hex = decimal.toString(16);</code></pre>
+		
+		<p style="margin-top: 20vh;">Hex to decimal:</p>
+		<pre><code>decimal = parseInt(hex, 16); /* faster */</code></pre>
+		<pre><code>decimal = +("0x" + hex);</code></pre>
+	</section>
+	
+	<section class="color slide" data-color="#0099aa"></section>
+	
+	<section class="color-list slide">
+		red
+		lime
+		blue
+		aqua
+		fuchsia
+		yellow
+		green
+		maroon
+		navy
+		olive
+		purple
+		teal
+		white
+		silver
+		gray
+		black
+	</section>
+	
+	<section class="slide" id="html32-colors">
+		<h1>HTML 3.2 colors</h1>
+		
+		<ul>
+			<li><code>#rrggbb</code> <span class="delayed comment">Confusing and cryptic >:(</span></li>
+			<li>Color names <span class="delayed comment">Mostly useless :'(</span></li>
+		</ul>
+		
+		<footer class="ref"><a href="http://www.w3.org/TR/REC-html32#body">w3.org/TR/REC-html32#body</a></footer>
+	</section>
 </section>
 
-<section class="slide" data-src="../whathecolor/index.html" title="leaverou.github.io/whathecolor" id="whathecolor"></section>
+<section>
+	<header class="slide">
+		<h1>Colors in CSS 1 - 2.1</h1>
+	</header>
 
-<section class="slide">
-	<h1>A simple JS Color “class”</h1>
-	<pre><code>self.Color = function (red, green, blue, alpha) {
+	<section class="color slide" data-color="rgb(255, 0, 90)"></section>
+	
+	<section class="color slide" data-color="rgb(100%, 0%, 35%)"></section>
+	
+	<section class="color slide" data-color="#f06"></section>
+
+	<section class="color-list slide">
+		orange
+	</section>
+
+	<section class="slide" id="css21-colors">
+		<h1>CSS 1 - 2.1 colors</h1>
+		
+		<ul>
+			<li><code>rgb()</code> <span class="delayed comment">Better, but still confusing :/</span></li>
+			<li><code>#rgb</code> <span class="delayed comment">Shorter, but still confusing :/</span></li>
+			<li><code style="color: orange;">orange</code> named color <span class="delayed comment">Not very useful :/</span></li>
+		</ul>
+		
+		<footer class="ref"><a href="http://www.w3.org/TR/CSS2/syndata.html#value-def-color">w3.org/TR/CSS2/syndata.html#value-def-color</a></footer>
+	</section>
+	
+	<section class="slide" data-src="../whathecolor/index.html" title="leaverou.github.io/whathecolor" id="whathecolor"></section>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>Colors in CSS Color Level 3</h1>
+	</header>
+	
+	<section class="slide">
+		<h1>A simple JS “class” for RGB colors</h1>
+		<pre><code>function Color(red, green, blue, alpha) {
 	if (Array.isArray(arguments[0])) {
 		</code><code class="delayed">var arr = arguments[0];
 		this.rgb = arr.slice(0,3);
-		alpha = arr[3] >= 0? arr[3] : arguments[1];</code><code>
+		alpha = arr[3];</code><code>
 	}
 	else {</code><code class="delayed">
 		this.red = red || 0;
@@ -192,12 +258,12 @@ PrefixFree.atrules.push('keyframes');
 	
 	this.alpha = alpha >= 0? alpha : 1;
 };</code></pre>
-</section>
-
-<section class="slide">
-	<h1><code>this.rgb</code> getter/setter</h1>
+	</section>
 	
-	<pre><code>Color.prototype = {
+	<section class="slide">
+		<h1><code>this.rgb</code> getter/setter</h1>
+		
+		<pre><code>Color.prototype = {
 	get rgb () {
 		return [this.red, this.green, this.blue];
 	},
@@ -209,67 +275,75 @@ PrefixFree.atrules.push('keyframes');
 	},
 	/* ... */
 }</code></pre>
-</section>
-
-<section class="slide">
-	<pre><code>var magenta = new Color(255, 0, 127);
+	</section>
+	
+	<section class="slide">
+		<pre><code>var magenta = new Color(255, 0, 127);
 var magenta = new Color(255, 0, 127, 1);
-var magenta = new Color([255, 0, 127], 1);
 var magenta = new Color([255, 0, 127, 1]);</code></pre>
-
-<pre class="delayed"><code>var magenta = new Color();
+	
+	<pre class="delayed"><code>var magenta = new Color();
 magenta.rgb = [255, 0, 127];</code></pre>
-
-<pre class="delayed"><code>var magenta = new Color();
+	
+	<pre class="delayed"><code>var magenta = new Color();
 magenta.red = 255;
 magenta.blue = 127;</code></pre>
-</code></pre>
-</section>
-
-<section class="slide" id="hsl">
-	<div id="hue-sat" data-steps="3"><div></div><button class="plane-thumb"></button></div>
-	<label>
-		<input type="range" min="0" max="100" id="lightness" class="color-slider" />
-		Lightness
-	</label>
-	<output></output>
-</section>
-
-<section class="color slide"></section>
-
-<section class="image slide" style="background-image: url(img/hsl-cone.png); background-size: auto 80%;"></section>
-
-<section class="slide" data-import="whathecolor"></section>
-
-<section class="color-list slide">
-	hsl(60, 100%, 50%)
-	hsl(240, 100%, 50%)
-</section>
-
-<section class="color-list slide">
-	hsl(0, 0%, 0%)
-	hsl(0, 0%, 50%)
-	hsl(0, 0%, 100%)
-</section>
-
-<section class="slide">
-	<p>A color space has</p>
-	<h1>Perceptual uniformity</h1>
+	</code></pre>
+	</section>
 	
-	<p>when the perceptual similarity of two colors <br>is measured by the distance between them.</p>
-	<p class="delayed" style="color: red;">RGB is <strong>not</strong> perceptually uniform.</p>
-	<p class="delayed" style="color: red;">HSL isn’t either, as it’s just a transformation of RGB.</p>
-</section>
-
-<section class="color-list slide">
-	rgb(255, 128, 255)
-	rgb(255, 0, 255)
-	rgb(128, 0, 255)
-</section>
-
-<section class="slide">
-	<h1>Lightness != luminance</h1>
-	<pre><code>el.style.background = color;
+	<section class="slide">
+		<h1>Example method: Invert</h1>
+		<pre class="delayed"><code>Color.prototype.invert = function () {
+	this.rgb = this.rgb.map(function(c) {
+		return 255 - c;
+	});
+};</code></pre>
+	</section>
+	
+	<section class="slide" id="hsl">
+		<div id="hue-sat" data-steps="3"><div></div><button class="plane-thumb"></button></div>
+		<label>
+			<input type="range" min="0" max="100" id="lightness" class="color-slider" />
+			Lightness
+		</label>
+		<output></output>
+	</section>
+	
+	<section class="color slide"></section>
+	
+	<section class="image slide" style="background-image: url(img/hsl-cone.png); background-size: auto 80%;"></section>
+	
+	<section class="slide" data-import="whathecolor"></section>
+	
+	<section class="color-list slide">
+		hsl(60, 100%, 50%)
+		hsl(240, 100%, 50%)
+	</section>
+	
+	<section class="color-list slide">
+		hsl(0, 0%, 0%)
+		hsl(0, 0%, 50%)
+		hsl(0, 0%, 100%)
+	</section>
+	
+	<section class="slide">
+		<p>A color space has</p>
+		<h1>Perceptual uniformity</h1>
+		
+		<p>when the perceptual similarity of two colors <br>is measured by the distance between them.</p>
+		<p class="delayed" style="color: red;">RGB is <strong>not</strong> perceptually uniform.</p>
+		<p class="delayed" style="color: red;">HSL isn’t either, as it’s just a transformation of RGB.</p>
+	</section>
+	
+	<section class="color-list slide">
+		rgb(255, 128, 255)
+		rgb(255, 0, 255)
+		rgb(128, 0, 255)
+	</section>
+	
+	<section class="slide">
+		<h1>Lightness != luminance</h1>
+		<pre><code>el.style.background = color;
 el.style.color = color.lightness > 50?
                    'black' : 'white';</code></pre>
 	<pre class="delayed"><code>get lightness () {
@@ -278,11 +352,11 @@ el.style.color = color.lightness > 50?
 		
 	return Math.round((min + max)/2.55/2);
 }</code></pre>
-</section>
-
-<section class="slide">
-	<h1>Relative luminance</h1>
-	<pre><code>get luminance () { // Formula from WCAG 2.0
+	</section>
+	
+	<section class="slide">
+		<h1>Relative luminance</h1>
+		<pre><code>get luminance () { // Formula from WCAG 2.0
 	var rgb = this.rgb.map(function(c){
 		c /= 255; // to 0-1 range
 		return c &lt; .03928 ? 
@@ -294,200 +368,208 @@ el.style.color = color.lightness > 50?
 	       71.52 * rgb[1] + // green
 	        7.22 * rgb[2];  // blue
 }</code></pre>
-</section>
-
-<section class="color slide" id="luminance-vs-lightness" data-color="gray">
-	<output id="luminance-percentage">0%</output>
-	<div>vs</div>
-	<output id="lightness-percentage">0%</output>
-</section>
-
-<section class="slide">
-	<h1>Color contrast</h1>
-	<pre><code>contrast: function(color) {
+	</section>
+	
+	<section class="color slide" id="luminance-vs-lightness" data-color="gray">
+		<output id="luminance-percentage">0%</output>
+		<div>vs</div>
+		<output id="lightness-percentage">0%</output>
+	</section>
+	
+	<section class="slide">
+		<h1>Color contrast</h1>
+		<pre><code>Color.prototype.contrast = function(color) {
 	var l1 = this.luminance;
 	var l2 = color.luminance;
 	var ret = (l1 + .05) / (l2 + .05);
 	
 	return ret < 1? 1 / ret : ret;
-}</code></pre>
-</section>
-
-<section class="slide" data-src="http://leaverou.github.io/contrast-ratio"></section>
-
-<section class="color slide" data-color="rgba(0, 0, 0, .5)"></section>
-
-<section class="top-heavy image slide" style="background-image: url(img/blender.jpg);" data-source="flickr.com/photos/chrishunkeler/7123689937">
-	<h1>Alpha blending</h1>
-</section>
-
-<section class="slide">
-	<h1>Alpha blending</h1>
-	<pre><code>over: function (dest) {
-	var destA = dest.alpha * (1-this.alpha);
+};</code></pre>
+	</section>
+	
+	<section class="slide" data-src="http://leaverou.github.io/contrast-ratio"></section>
+	
+	<section class="color slide" data-color="rgba(0, 0, 0, .5)"></section>
+	
+	<section class="top-heavy image slide" style="background-image: url(img/blender.jpg);" data-source="flickr.com/photos/chrishunkeler/7123689937">
+		<h1>Alpha blending</h1>
+	</section>
+	
+	<section class="slide">
+		<h1>Alpha blending</h1>
+		<pre><code>Color.prototype.over = function(dest) {
+	var α = dest.alpha * (1-this.alpha);
 	
 	this.rgb = this.rgb.map(function(c, i){
-		return c * this.alpha +
-		       dest.rgb[i] * destA;
+		return this.rgb[i] * this.alpha +
+		       dest.rgb[i] * α;
 	}, this);
 	
-	this.alpha += destA;
-}</code></pre>
-</section>
-
-<section class="slide">
-	<h1>Color interpolation</h1>
-	<pre><code>mix: function (color, weight) {
+	this.alpha += α;
+};</code></pre>
+	</section>
+	
+	<section class="slide">
+		<h1>Color interpolation</h1>
+		<pre><code>Color.prototype.mix = function (color, weight) {
 	this.rgba = this.rgba.map(function(c,i){
-		return c * weight +
+		return  this.rgba[i] * weight +
 		       color.rgba[i] * (1-weight);
 	});
-}</code></pre>
-	<div class="delayed">
-		<p>In SASS:</p>
-		<pre class="language-scss"><code>background: mix($color1, $color2, 50%);</code></pre>
-	</div>
-</section>
-
-<section class="code slide">
-<textarea>background: linear-gradient(white, black);</textarea>
-</section>
-
-<section class="slide">
-	<h1>Color interpolation</h1>
-	<section style="float: left;">
-		<h2>Premultiplied</h2>
-		<pre style="line-height: 2;">rgb(255, 255, 255)
+};</code></pre>
+		<div class="delayed">
+			<p style="margin-bottom: .3em;">In SASS:</p>
+			<pre class="language-scss"><code>background: mix($color1, $color2, 50%);</code></pre>
+		</div>
+	</section>
+	
+	<section class="code slide">
+	<textarea>background: linear-gradient(white, black);</textarea>
+	</section>
+	
+	<section class="slide">
+		<h1>Color interpolation</h1>
+		<section style="float: left;">
+			<h2>Premultiplied</h2>
+			<pre style="line-height: 2;">rgb(255, 255, 255)
 rgba(255, 255, 255, .75)
 rgba(255, 255, 255, .5)
 rgba(255, 255, 255, .25)
 rgba(255, 255, 255, 0)</pre>
-	</section>
-	<section style="float: right">
-		<h2>Non-premultiplied</h2>
-		<pre style="line-height: 2;">rgb(255, 255, 255)
+		</section>
+		<section style="float: right">
+			<h2>Non-premultiplied</h2>
+			<pre style="line-height: 2;">rgb(255, 255, 255)
 rgba(192, 192, 192, .75)
 rgba(128, 128, 128, .5)
 rgba(64, 64, 64, .25)
 rgba(0, 0, 0, 0)</pre>
+		</section>
 	</section>
-</section>
-
-<section class="partial image slide" id="named-colors-distribution" data-source="Visualization by Eric Meyer">
-	<h1>Named colors distribution</h1>
-</section>
-
-<section class="color-list slide">
-	blanchedalmond
-	cornflowerblue
-	darkgoldenrod
-	darkolivegreen
-	lavenderblush
-	lightgoldenrodyellow
-	lightseagreen
-	lightslategray
-	lightsteelblue
-	mediumaquamarine
-	mediumseagreen
-	mediumslateblue
-	mediumspringgreen
-	mediumturquoise
-	mediumvioletred
-	palegoldenrod
-	paleturquoise
-	palevioletred
-</section>
-
-<section class="color-list slide">
-	blanchedalmond
-	chartreuse
-	cornflowerblue
-	goldenrod
-	dodgerblue
-	gainsboro
-	lemonchiffon
-	linen
-	moccasin
-	oldlace
-	olivedrab
-	orchid
-</section>
-
-<section class="color-list slide">
-	indianred
-	navajowhite
-	peru
-</section>
-
-<section class="color-list slide">
-	gray
-	darkgray
-</section>
-
-<section class="code slide" id="currentColor-demo">
-<div class="box">Some text</div>
-<textarea>.box {
+	
+	<section class="partial image slide" id="named-colors-distribution" data-source="Visualization by Eric Meyer">
+		<h1 class="side">Named colors distribution</h1>
+	</section>
+	
+	<section class="color-list slide">
+		blanchedalmond
+		cornflowerblue
+		darkgoldenrod
+		darkolivegreen
+		lavenderblush
+		lightgoldenrodyellow
+		lightseagreen
+		lightslategray
+		lightsteelblue
+		mediumaquamarine
+		mediumseagreen
+		mediumslateblue
+		mediumspringgreen
+		mediumturquoise
+		mediumvioletred
+		palegoldenrod
+		paleturquoise
+		palevioletred
+	</section>
+	
+	<section class="color-list slide">
+		blanchedalmond
+		chartreuse
+		cornflowerblue
+		goldenrod
+		dodgerblue
+		gainsboro
+		lemonchiffon
+		linen
+		moccasin
+		oldlace
+		olivedrab
+		orchid
+	</section>
+	
+	<section class="color-list slide">
+		indianred
+		navajowhite
+		peru
+	</section>
+	
+	<section class="color-list slide">
+		gray
+		darkgray
+	</section>
+	
+	<section class="code slide" id="currentColor-demo">
+	<div class="box">Some text</div>
+	<textarea>.box {
 	color: red;
 	border: 10px solid;
 }</textarea>
-</section>
-
-<section class="slide" id="css3-colors">
-	<h1>CSS 3 colors</h1>
+	</section>
 	
-	<ul>
-		<li><code>hsl()</code> <span class="delayed">Better, but not great :/</span></li>
-		<li><code>rgba()</code> and <code>hsla()</code> <span class="delayed">Badly needed :)</span></li>
-		<li>MOAR Color names <span class="delayed">Mostly useless :'(</span></li>
-		<li><code>currentColor</code> <span class="delayed">:)</span>
-	</ul>
+	<section class="slide" id="css3-colors">
+		<h1>CSS Color Level 3 additions</h1>
+		
+		<ul>
+			<li><code>hsl()</code> <span class="delayed">Better, but not great :/</span></li>
+			<li><code>rgba()</code> and <code>hsla()</code> <span class="delayed">Badly needed :)</span></li>
+			<li>MOAR Color names <span class="delayed">Mostly useless :'(</span></li>
+			<li><code>currentColor</code> <span class="delayed">Cool, but limited :)</span>
+		</ul>
+		
+		<footer class="ref"><a href="http://www.w3.org/TR/css3-color/">w3.org/TR/css3-color</a></footer>
+	</section>
 </section>
 
-<section class="color slide" data-color="gray"></section>
+<section>
+	<header class="slide">
+		<h1>Colors in CSS Color Level 4</h1>
+	</header>
 
-<section class="slide">
-	<h1><code>gray()</code> with SASS</h1>
-	<pre class="language-scss"><code>@function gray($l, $alpha: 1) {
+	<section class="color slide" data-color="gray"></section>
+
+	<section class="slide">
+		<h1><code>gray()</code> with SASS</h1>
+		<pre class="language-scss"><code>@function gray($l, $alpha: 1) {
   @return rgba($l, $l, $l, $alpha);
 }</code></pre>
-	<pre class="language-css"><code>
+		<pre class="language-css"><code>
 background: gray(50%); /* &rarr; #7f7f7f */
 background: gray(255, .2); 
        /* &rarr; rgba(255, 255, 255, 0.2); */</code></pre>
-</section>
+	</section>
 
-<section class="color slide" data-color="#f005"></section>
-
-<section class="color slide" data-color="color(red tint(20%))"></section>
-
-<section class="slide" id="adjusters">
-	<h1>color() adjusters</h1>
-	<code>red</code>
-	<code>green</code>
-	<code>blue</code>
-	<code>alpha</code>
-	<code>rgb</code><br>
-	<code>hue</code>
-	<code>h</code><br>
-	<code>saturation</code>
-	<code>s</code><br>
-	<code>lightness</code>
-	<code>l</code><br>
-	<code>whiteness</code>
-	<code>w</code>
-	<code>blackness</code>
-	<code>b</code><br>
-	<code>tint</code>
-	<code>shade</code>
-	<code>blend</code>
-	<code>blenda</code><br>
-	<code>contrast</code>
-</section>
-
-<section class="slide">
-	<h1>tint &amp; shade in SASS</h1>
+	<section class="color slide" data-color="#f005"></section>
 	
-	<pre class="language-scss"><code>@function tint($color, $amount) {
+	<section class="color slide" data-color="color(red tint(20%))"></section>
+
+	<section class="slide" id="adjusters">
+		<h1>color() adjusters</h1>
+		<code>red</code>
+		<code>green</code>
+		<code>blue</code>
+		<code>alpha</code>
+		<code>rgb</code><br>
+		<code>hue</code>
+		<code>h</code><br>
+		<code>saturation</code>
+		<code>s</code><br>
+		<code>lightness</code>
+		<code>l</code><br>
+		<code>whiteness</code>
+		<code>w</code>
+		<code>blackness</code>
+		<code>b</code><br>
+		<code>tint</code>
+		<code>shade</code>
+		<code>blend</code>
+		<code>blenda</code>
+		<code>contrast</code>
+	</section>
+
+	<section class="slide">
+		<h1>tint &amp; shade in SASS</h1>
+		
+		<pre class="language-scss"><code>@function tint($color, $amount) {
 	@return mix(white, $color, $amount);
 }
 @function shade($color, $amount) {
@@ -496,31 +578,33 @@ background: gray(255, .2);
 
 background: tint(red, 10%); /* &rarr; #ff1919 */
 background: shade(red, 10%); /* &rarr; #e50000 */</code></pre>
-	<p class="delayed">Note: <code>tint()</code> &amp; <code>shade()</code> are already included in Bourbon</p>
-</section>
+		<p class="delayed">Note: <code>tint()</code> &amp; <code>shade()</code> are already included in Bourbon</p>
+	</section>
 
-<section class="image slide" style="background-image: url(img/hsb-picker.png); background-size: auto 94%; background-position: bottom;">
-	<h1 class="delayed"><code>hwb(335, 90%, 90%)</code></h1>
-</section>
+	<section class="image slide" style="background-image: url(img/hsb-picker.png); background-size: auto 94%; background-position: bottom;">
+		<h1 class="delayed"><code>hwb(335, 90%, 90%)</code></h1>
+	</section>
 
-<section class="slide" id="css4-colors">
-	<h1>CSS Color L4 <span>(Tentative)</span></h1>
-	
-	<ul>
-		<li><code>gray()</code></li>
-		<li><code>#rgba</code> and <code>#rrggbbaa</code></li>
-		<li><code>color()</code></li>
-		<li><code>hwb()</code></li>
-		<li>named hues in <code>hsl()</code>
-	</ul>
-</section>
+	<section class="slide" id="css4-colors">
+		<h1>CSS Color Level 4 <span class="comment">(Tentative)</span></h1>
+		
+		<ul>
+			<li><code>gray()</code></li>
+			<li><code>#rgba</code> and <code>#rrggbbaa</code></li>
+			<li><code>color()</code></li>
+			<li><code>hwb()</code></li>
+			<li>named hues in <code>hsl()</code>
+		</ul>
+		
+		<footer class="ref"><a href="http://dev.w3.org/csswg/css-color-4/">dev.w3.org/csswg/css-color-4</a></footer>
+	</section>
 
-<section class="slide" data-src="http://www.myth.io/"></section>
+	<section class="slide" data-src="http://www.myth.io/"></section>
 
-<section class="slide">
-	<h1>Parse any supported CSS color</h1>
-	
-	<pre><code>Color.fromString = function(str) {
+	<section class="slide">
+		<h1>Parse any (supported) CSS color</h1>
+		
+		<pre><code>Color.fromString = function(str) {
 	var dummy = document.createElement('div'), rgba;
 	dummy.style.color = str;
 	
@@ -535,8 +619,41 @@ background: shade(red, 10%); /* &rarr; #e50000 */</code></pre>
 	}
 	return null; // or throw TypeError()
 };</code></pre>
+	</section>
+
 </section>
 
+<section>
+	<header class="slide">
+		<h1>Other color spaces</h1>
+	</header>
+	
+	<section class="slide" data-import="rgb-mixing"></section>
+	
+	<section class="image slide" style="background-image: url(img/baby.jpg);" data-source="http://www.flickr.com/photos/awesomejoolie/6749752547/"></section>
+	
+	<section class="mixing top-heavy image slide" id="cmy-mixing">
+		<div class="red"></div>
+		<div class="green"></div>
+		<div class="blue"></div>
+		<p class="caption">CMY: Subtractive color</p>
+	</section>
+	
+	<section class="top-heavy image slide" id="real-cmy-mixing" data-source="With color profile: US Web Coated (SWOP) v2">
+		<h1>CMY: Theory and reality</h1>
+	</section>
+	
+	<section class="top-heavy image slide" id="real-cmyk-mixing" data-source="With color profile: US Web Coated (SWOP) v2">
+		<h1>Adding the Key in CMY<strong>K</strong></h1>
+	</section>
+	
+	<section class="top-heavy image slide" id="gamuts" data-source="Illustration by Pedro Jordan">
+		<h1 class="side">Color gamut</h1>
+	</section>
+	
+	<section class="bottom-heavy image slide" id="icc">
+		<h1 class="side">ICC color profiles</h1>
+	</section>
 </section>
 
 <footer class="slide">
@@ -550,44 +667,8 @@ background: shade(red, 10%); /* &rarr; #e50000 */</code></pre>
 	<p>Slides: <a href="http://lea.verou.me/chroma-zone">leaverou.github.io/chroma-zone</a></p>
 	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
 </footer>
+
 <!--
-<section>
-
-<header class="slide">
-	<h1>Other color spaces</h1>
-</header>
-
-<section class="mixing top-heavy image slide" id="rgb-mixing">
-	<div class="red"></div>
-	<div class="green"></div>
-	<div class="blue"></div>
-	<p class="caption">Additive color</p>
-</section>
-
-<section class="image slide" style="background-image: url(img/baby.jpg);" data-source="http://www.flickr.com/photos/awesomejoolie/6749752547/"></section>
-
-<section class="mixing top-heavy image slide" id="cmy-mixing">
-	<div class="red"></div>
-	<div class="green"></div>
-	<div class="blue"></div>
-	<p class="caption">Subtractive color</p>
-</section>
-
-<section class="top-heavy image slide" id="real-cmy-mixing" data-source="With color profile: US Web Coated (SWOP) v2">
-	<h1>CMY: Theory and reality</h1>
-</section>
-
-<section class="top-heavy image slide" id="real-cmyk-mixing" data-source="With color profile: US Web Coated (SWOP) v2">
-	<h1>Adding the Key in CMY<strong>K</strong></h1>
-</section>
-
-<section class="incomplete slide">
-	TODO: RGB vs CMYK Gamut
-</section>
-
-<section class="incomplete slide">
-	TODO: ICC profiles
-</section>
 
 <section class="code slide" id="block-text">
 <div class="block"></div>

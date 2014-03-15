@@ -50,7 +50,7 @@ textarea {
 }
 
 .slide {
-	padding: 5vmin;
+	padding: 4vmin 5vmin;
 	background: black;
 	color: white;
 }
@@ -80,9 +80,16 @@ textarea {
 	opacity: 1;
 }
 
+@keyframes rainbow-scroll {
+	to {
+		background-position: 100vw 15px;
+	}
+}
+
 section > header.slide {
-	background: linear-gradient(90deg, red, yellow, lime, aqua, blue, fuchsia, red) no-repeat 0 15px black;
+	background: linear-gradient(90deg, red, yellow, lime, aqua, blue, fuchsia, red) repeat-x 0 15px black;
 	background-size: 100% 5px;
+	animation: rainbow-scroll 10s infinite linear;
 }
 
 	section > header.slide > h1 {
@@ -103,13 +110,20 @@ section > header.slide {
 	color: white;
 }
 
+footer.ref a {
+	position: absolute;
+	bottom: 5vmin;
+	text-decoration: none;
+	font-size: 75%;
+}
+
 /* Syntax highlighting */
 
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: #666;
+	color: #777;
 }
 
 .token.punctuation {

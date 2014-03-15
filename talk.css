@@ -212,12 +212,12 @@
 }
 
 	.pixel .subpixel {
-		height: 90%;
-		width: 25%;
+		height: 95%;
+		width: 30%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		border-radius: 9vmin;
+		border-radius: 15vmin;
 	}
 	
 		.pixel .subpixel strong {
@@ -252,6 +252,7 @@
 	
 	#pixel-bits .pixel ~ p {
 		float: right;
+		clear: right;
 		max-width: 7em;
 		text-align: right;
 		font-size: 80%;
@@ -268,6 +269,40 @@
 			content: '\A';
 			white-space: pre;
 		}
+		
+#device-pgs {
+	
+}
+
+	#device-pgs article {
+		background-position: center;
+		background-size: cover;
+		color: white;
+		text-shadow: 2px 2px black, -2px -2px black, -2px 2px black, 2px -2px black, 0 0 2px black;
+		font-weight: bold;
+		line-height: 1.3;
+	}
+	
+#antialiasing {
+	padding: 0;
+}
+
+	#antialiasing h1 {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		font-weight: 100;
+		background: url(img/diamond-vector.png) no-repeat center;
+	}
+	
+	#antialiasing h1[data-step="1"] {
+		background-image: url(img/diamond-fullpixel-antialiasing.png);
+	}
+	
+	#antialiasing h1[data-step="2"] {
+		background-image: url(img/diamond-subpixel.png);
+	}
 		
 .code.slide {
 	
@@ -351,6 +386,7 @@
 			height: inherit;
 			background: white;
 			mask: url(img/masks.svg#gradient-mask);
+			-webkit-mask: linear-gradient(white, transparent);
 		}
 		
 			.plane:after {
@@ -358,6 +394,10 @@
 				left: -.5em;
 				transform-origin: bottom left;
 				transform: rotate(-90deg) translateX(1.5em);
+			}
+			
+			.plane:before {
+				bottom: -1.3em;
 			}
 			
 		.plane-thumb {
@@ -380,7 +420,7 @@
 		position: relative;
 		border: 0;
 		margin-left: -3.5em;
-		bottom: -1.5em;
+		bottom: -1.3em;
 		background: transparent;
 		color: inherit;
 		font: inherit;
@@ -400,7 +440,7 @@
 	}
 	
 	.color-slider {
-		
+		appearance: none;
 	}
 	
 	.color-slider[orient="vertical"] {
@@ -435,6 +475,40 @@
 			padding: 0 .1em;
 		}
 		
+		.-webkit- .color-slider {
+			border: 0;
+			background: transparent;
+		}
+		
+		.-webkit- .color-slider:not([orient="vertical"]) {
+			height: 1em;
+		}
+		
+		.-webkit- .color-slider[orient="vertical"] {
+			width: 0;
+			padding: 0 .5em;
+		}
+		
+		.color-slider::-webkit-slider-thumb {
+			appearance: none;
+			border-radius: .05em;
+			border: 2px solid black;
+			box-shadow: 0 0 0 3px hsla(0,0%,100%,.6);
+			background: transparent;
+			cursor: pointer;
+		}
+		
+		.color-slider:not([orient="vertical"])::-webkit-slider-thumb {
+			width: .3em;
+			height: 1em;
+			padding: .1em 0;
+		}
+		
+		.color-slider[orient="vertical"]::-webkit-slider-thumb {
+			height: .3em;
+			padding: 0 .1em;
+		}
+		
 	#rgb-2d input {
 		margin: 0 0 0 20px;
 	}
@@ -458,12 +532,19 @@
 	#rgb-2d output {
 		position: absolute;
 		top: 0; right: 0;
-		padding: 20px;
+		padding: .5em .8em;
 		width: 240px;
+		width: calc(100vw - 670px - 4.5rem - 5vmin);
 		border-radius: 10px 0 0 10px;
 		box-sizing: border-box;
 		margin: 5vmin 0 0 4vmin;
 		line-height: 1.2;
+	}
+	
+	@media (min-width: 1200px) {
+		#rgb-2d output {
+			font-size: 200%;
+		}
 	}
 
 #hex[data-step="1"] {
@@ -493,8 +574,31 @@
 		}
 		
 	#hex p {
-		margin: 0;
+		padding-left: 1em;
+		margin: .5em 0 0;
 		font-size: 250%;
+		line-height: 1.2;
+		text-indent: -.85em
+	}
+	
+#thinking {
+	background-image: url(img/thinking.jpg);
+	background-position: bottom;
+}
+
+	#thinking h1 {
+		background: transparent;
+		position: absolute;
+		left: auto;
+		right: 18vw;
+		bottom: 72vh;
+		width: 44vw;
+		margin: 0;
+		color: black;
+		font-size: 120%;
+		font-family: Reenie Beanie;
+		white-space: normal;
+		text-shadow: 0 1px white, 0 0 1px white;
 	}
 	
 #hex-digits {
@@ -549,7 +653,7 @@
 	background-color: #171717;
 }
 
-	#named-colors-distribution h1 {
+	.image.slide h1.side {
 		position: static;
 		float: left;
 		width: 6em;
@@ -560,11 +664,13 @@
 		font-size: 100%;
 	}
 	
-.color-list.slide {
+.color-list.slide,
+.tiles.slide {
 	padding: 0;
 }
 
-.color-list.slide:target {
+.color-list.slide:target,
+.tiles.slide:target {
 	display: flex;
 	flex-flow: row;
 	flex-wrap: wrap;
@@ -572,7 +678,8 @@
 	align-items: stretch;
 }
 
-	.color-list.slide article {
+	.color-list.slide article,
+	.tiles.slide article {
 		display: flex;
 		flex: 1 1 50%;
 		width: 50%;
@@ -580,6 +687,7 @@
 		align-items: center;
 		justify-content: center;
 		box-sizing: border-box;
+		text-align: center;
 		font-weight: 400;
 		color: black;
 		text-shadow: 0 0 1px white;
@@ -587,23 +695,31 @@
 		font-size: 80%;
 	}
 	
-	.color-list.slide article.dark {
+	.color-list.slide article.dark,
+	.tiles.slide article.dark {
 		color: white;
 		text-shadow: 1px 1px black, -1px -1px black, -1px 1px black, 1px -1px black, 0 0 1px black;
 	}
 	
 	.color-list.slide article:first-child:nth-last-child(-n+3),
-	.color-list.slide article:first-child:nth-last-child(-n+3) ~ article {
+	.color-list.slide article:first-child:nth-last-child(-n+3) ~ article,
+	.tiles.slide article:first-child:nth-last-child(-n+3),
+	.tiles.slide article:first-child:nth-last-child(-n+3) ~ article {
 		flex: 1 1 100%;
 		width: 100%;
 		font-size: 200%;
 	}
 	
+.comment {
+	color: red;
+	font-family: 'Reenie Beanie', sans-serif;
+	font-weight: normal;
+}
+	
 #css21-colors {
 	
 }
 
-	#css21-colors span.delayed,
 	#css3-colors span.delayed,
 	#css4-colors h1 span {
 		color: red;
@@ -692,9 +808,23 @@
 		line-height: 1.2;
 	}
 	
+	@media (max-width: 1199px) {
 		#hsl output b {
 			display: block;
 		}
+	}
+		
+	@media (min-width: 1200px) {
+		#hsl output {
+			width: 340px;
+			font-size: 140%;
+		}
+		
+		#hsl output b:first-of-type:after {
+			content: '\A';
+			white-space: pre;
+		}
+	}
 		
 #luminance-vs-lightness {
 	
@@ -833,6 +963,29 @@
 	background-size: 90% auto;
 	background-position: 50% 5vmin;
 }
+
+#gamuts {
+	background-image: url(img/gamuts.png), radial-gradient(circle, #777 50%, black);
+	background-size: auto 90%, auto;
+	background-position: center;
+	background-color: #767676;
+}
+
+	#gamuts h1 {
+		width: 4.5em;
+		font-size: 150%;
+	}
+
+#icc {
+	background-image: url(img/icc-profiles.png), radial-gradient(at 50% 70%, #3b3e4d, black 88%);
+	background-size: contain;
+	background-position: bottom;
+	background-color: #101117;
+}
+
+	#icc h1 {
+		font-size: 140%;
+	}
 
 footer.slide {
 	text-align: center;

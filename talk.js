@@ -42,26 +42,22 @@ $$('textarea').forEach(function(textarea) {
 var dc = $('#decimal-counter');
 var hc = $('#hex-counter');
 
-(dc.oninput = function () {
+dc && (dc.oninput = function () {
 	hc.textContent = (+dc.value).toString(16);
 })();
 
 })();
 
 // RGB Color picker
-(function() {
-
-if (location.hash != '#rgb-2d') {
-	var callee = arguments.callee;
-	
-	addEventListener('hashchange', function() {
-		if (location.hash == '#rgb-2d') {
-			callee()
-		}
-	});
-}
+slideshow.onSlide('rgb-2d', function() {
 
 var plane = $('#rgb-xy');
+
+if (!plane.offsetWidth) {
+	setTimeout(arguments.callee, 10);
+	return;
+}
+
 var planeY = plane.firstChild;
 var z = $('#rgb-z');
 var axis = $('#rgb-axis');
@@ -135,6 +131,7 @@ function updatePlane() {
 	             	arr.splice(ai, 0, +z.value);
 	             	return Color(arr);
 	             });
+	
 	plane.style.background = 'linear-gradient(90deg, ' + colors[2] + ',' + colors[3] + ')';
 	planeY.style.background = 'linear-gradient(90deg, ' + colors[0] + ',' + colors[1] + ')';
 }
@@ -172,7 +169,7 @@ updatePlane();
 setLabels();
 setColor(getXY(), +z.value);
 	
-})();
+}, true);
 
 $$('.color-list.slide').forEach(function(slide) {
 	var colors = slide.textContent.trim().split(/\n\s+/);
@@ -281,7 +278,7 @@ function getHueSat(xy) {
 	var r = wheelRect.width/2;
 	var distance = Math.sqrt(Math.pow(r - x, 2) + Math.pow(r - y, 2));
 	
-	var saturation = 100 * distance /r;
+	var saturation = r? 100 * distance / r : 0;
 	
 	var hue = 180 * Math.acos((x - r) / distance) / Math.PI + 180;
 	
