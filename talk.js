@@ -18,7 +18,7 @@ function colorInput(display, input, colorStr) {
 		
 		display.style.background = color;
 		
-		input.style.color = color.luminance > 50? 'black' : '';
+		input.style.color = color.luminance > 50 || color.alpha < .5? 'black' : '';
 	})();
 }
 

@@ -220,8 +220,8 @@ _.fromString = function(str) {
 	var rgba = normalized
 	               .match(/[\d.]+(?=,|\))/g)
 	               .map(function(c) { return +c });
-	
-	rgba[3] = rgba[3]? Math.round(+rgba[3]*100)/100 : 1; // Fix for precision issues
+
+	rgba[3] = rgba[3] >= 0? Math.round(+rgba[3]*100)/100 : 1; // Fix for precision issues
 	
 	return _(rgba);
 };
