@@ -10,8 +10,12 @@
 <link href="talk.css" rel="stylesheet" />
 <script src="../prefixfree/prefixfree.min.js"></script>
 <script>
-PrefixFree.properties.push('animation');
-PrefixFree.atrules.push('keyframes');
+if (PrefixFree.Prefix == 'Webkit') {
+	PrefixFree.properties.push('animation');
+	PrefixFree.atrules.push('keyframes');
+}
+
+PrefixFree.properties.push('filter');
 </script>
 
 </head>
@@ -62,7 +66,7 @@ PrefixFree.atrules.push('keyframes');
 <section>
 
 <header class="slide">
-	<h1>How color works on screen</h1>
+	<h1>How colour works on screen</h1>
 </header>
 
 <section class="slide" id="white-pixel">
@@ -149,7 +153,8 @@ PrefixFree.atrules.push('keyframes');
 	<section class="top-heavy image slide" id="thinking" data-source="http://www.flickr.com/photos/falequin/8443342362">
 		<h1>
 			So, 255 —> FF and 0 —> 00. What about 90? Hmmm…
-			90 = 5×16+10 —> 5A, so #FF005A!
+			90 = 5×16+10 —> 5A, so #FF005A!<br>
+			<div class="delayed">— No one, ever</div>
 		</h1>
 	</section>
 	
@@ -315,6 +320,10 @@ magenta.blue = 127;</code></pre>
 	
 	<section class="slide" data-import="whathecolor"></section>
 	
+	<section class="code slide" style="background: url(img/baby.jpg) bottom; background-size: cover;" id="filter">
+	<textarea>filter: hue-rotate(60deg);</textarea>
+	</section>
+	
 	<section class="color-list slide">
 		hsl(60, 100%, 50%)
 		hsl(240, 100%, 50%)
@@ -383,7 +392,7 @@ el.style.color = color.lightness > 50?
 	var l2 = color.luminance;
 	var ret = (l1 + .05) / (l2 + .05);
 	
-	return ret < 1? 1 / ret : ret;
+	return ret &lt; 1? 1 / ret : ret;
 };</code></pre>
 	</section>
 	
@@ -593,7 +602,8 @@ background: shade(red, 10%); /* &rarr; #e50000 */</code></pre>
 			<li><code>#rgba</code> and <code>#rrggbbaa</code></li>
 			<li><code>color()</code></li>
 			<li><code>hwb()</code></li>
-			<li>named hues in <code>hsl()</code>
+			<li>named hues and <code>&lt;angle></code> in <code>hsl()</code></li>
+			<li><code>rgb()</code> and <code>hsl()</code> will accept alpha values</li>
 		</ul>
 		
 		<footer class="ref"><a href="http://dev.w3.org/csswg/css-color-4/">dev.w3.org/csswg/css-color-4</a></footer>

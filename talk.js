@@ -1,5 +1,13 @@
 var slideshow = new SlideShow();
 
+/*StyleFix.register(function(css, raw) {
+	if (PrefixFree.Prefix + 'Filter' in document.body.style) {
+		css = css.replace(/\bfilter:/ig, PrefixFree.prefix + 'filter:');
+	}
+	
+	return css;
+});*/
+
 function colorInput(display, input, colorStr) {
 	input.value = colorStr;
 	

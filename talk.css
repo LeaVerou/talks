@@ -285,6 +285,10 @@
 	
 #antialiasing {
 	padding: 0;
+	background: linear-gradient(hsla(0,0%,100%,.2) 1px, transparent 0), 
+	            linear-gradient(to right, hsl(0,0%,20%) 1px, black 0);
+	background-size: 57px 57px;
+	background-position: -1px -16px;
 }
 
 	#antialiasing h1 {
@@ -583,23 +587,28 @@
 	
 #thinking {
 	background-image: url(img/thinking.jpg);
-	background-position: bottom;
+	background-position: bottom right;
 }
 
 	#thinking h1 {
 		background: transparent;
 		position: absolute;
 		left: auto;
-		right: 18vw;
-		bottom: 72vh;
-		width: 44vw;
+		right: 21vw;
+		bottom: 60vh;
+		width: 68vh;
 		margin: 0;
 		color: black;
-		font-size: 120%;
+		font-size: 110%;
 		font-family: Reenie Beanie;
 		white-space: normal;
 		text-shadow: 0 1px white, 0 0 1px white;
 	}
+	
+		#thinking h1 div {
+			text-align: right;
+			margin-right: 2em;
+		}
 	
 #hex-digits {
 	font-size: 400%;
@@ -824,6 +833,16 @@
 			content: '\A';
 			white-space: pre;
 		}
+	}
+	
+#filter {
+	background: url(img/baby.jpg) bottom;
+	background-size: cover;
+}
+
+	#filter textarea {
+		background: linear-gradient(rgba(0,0,0,.4), black);
+
 	}
 		
 #luminance-vs-lightness {
