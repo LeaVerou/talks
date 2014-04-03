@@ -91,7 +91,7 @@ $side: 200px;
 	animation-play-state: paused;
 }
 
-body#rgb-cube .cube,
+body#rgb-cube .cube:not(:hover),
 .slide#rgb-cube .cube[data-step] {
 	animation-play-state: running;
 }
@@ -146,7 +146,7 @@ body#rgb-cube .cube,
 	}
 	
 	&::after {
-		background: rgb-plane(fuchsia, red, blue, red);
+		background: rgb-plane(fuchsia, red, blue, black);
 	}
 }
 
