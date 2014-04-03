@@ -131,7 +131,7 @@ function updateSlider() {
 	xy[ai] = 0;
 	var color1 = Color(xy);
 
-	z.style.background = 'linear-gradient(' + color0 + ', ' + color1 + ')';
+	z.style.background = 'linear-gradient(-90deg,' + color0 + ', ' + color1 + ')';
 }
 
 function updatePlane() {
@@ -181,7 +181,9 @@ setColor(getXY(), +z.value);
 
 $$('.color-list.slide').forEach(function(slide) {
 	var colors = slide.textContent.trim().split(/\n\s+/);
+	
 	slide.textContent = '';
+	slide.style.background = 'transparent';
 	
 	colors.forEach(function(name) {
 		name = name.trim();
@@ -191,30 +193,28 @@ $$('.color-list.slide').forEach(function(slide) {
 		article.textContent = name;
 		article.style.background = name;
 		
-		var color = Color(name);
-		
-		if (color.luminance < 50) {
-			article.className = 'dark';
-		}
+		try {
+			var color = Color(name);
+			
+			if (color.luminance < 50) {
+				article.className = 'dark';
+			}
+		} catch(e) {}
 		
 		slide.appendChild(article);
 	});
 });
 
 // HSL color picker
-(function() {
-
-if (location.hash != '#hsl') {
-	var callee = arguments.callee;
-	
-	addEventListener('hashchange', function() {
-		if (location.hash == '#hsl') {
-			callee()
-		}
-	});
-}
+slideshow.onSlide('hsl', function() {
 
 var wheel = $('#hue-sat > div');
+
+if (!wheel.offsetWidth) {
+	setTimeout(arguments.callee, 10);
+	return;
+}
+
 var wheelRect = wheel.getBoundingClientRect();
 var thumb = $('.plane-thumb', wheel.parentNode);
 var selected = $('#hsl output');
@@ -316,7 +316,7 @@ wheel.parentNode.onmousedown = function (evt) {
 updateWheel();
 lightness.oninput();
 
-})();
+});
 
 // Luminance vs lightness demo
 (function() {

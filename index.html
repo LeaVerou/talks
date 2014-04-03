@@ -7,6 +7,7 @@
 <link href="../csss/slideshow.css" rel="stylesheet" />
 <link href="../csss/reusable.css" rel="stylesheet" />
 <link href="theme.css" rel="stylesheet" />
+<link href="rgb-cube.css" rel="stylesheet" />
 <link href="talk.css" rel="stylesheet" />
 <script src="../prefixfree/prefixfree.min.js"></script>
 <script>
@@ -122,11 +123,18 @@ PrefixFree.properties.push('filter');
 	<h1>Colour &amp; Code</h1>
 </header>
 
-<section class="image slide" style="background-image: url(img/rgb-cube.jpg); background-size: auto 80%;" data-source="http://thomasdiewald.com/blog/?p=332"></section>
+<section class="slide" id="rgb-cube">
+	<div class="cube" data-steps="1">
+		<div class="sides"></div>
+		<div class="axes">
+			<div class="axe-z"></div>
+		</div>
+	</div>
+</section>
 
 <section class="slide dont-resize" id="rgb-2d">
 	<div class="plane" id="rgb-xy"><div></div><button class="plane-thumb"></button></div>
-	<input type="range" min="0" max="255" orient="vertical" id="rgb-z" class="color-slider" />
+	<input type="range" min="0" max="255" id="rgb-z" class="color-slider" />
 	<select id="rgb-axis">
 		<option selected>Red</option>
 		<option>Green</option>
@@ -233,7 +241,7 @@ PrefixFree.properties.push('filter');
 		<ul>
 			<li><code>rgb()</code> <span class="delayed comment">Better, but still confusing :/</span></li>
 			<li><code>#rgb</code> <span class="delayed comment">Shorter, but still confusing :/</span></li>
-			<li><code style="color: orange;">orange</code> named color <span class="delayed comment">Not very useful :/</span></li>
+			<li><code style="color: orange;">orange</code> named color <span class="delayed comment">Are you kidding me?!</span></li>
 		</ul>
 		
 		<footer class="ref"><a href="http://www.w3.org/TR/CSS2/syndata.html#value-def-color">w3.org/TR/CSS2/syndata.html#value-def-color</a></footer>
@@ -249,56 +257,29 @@ PrefixFree.properties.push('filter');
 	
 	<section class="slide">
 		<h1>A simple JS “class” for RGB colors</h1>
-		<pre><code>function Color(red, green, blue, alpha) {
-	if (Array.isArray(arguments[0])) {
-		</code><code class="delayed">var arr = arguments[0];
-		this.rgb = arr.slice(0,3);
-		alpha = arr[3];</code><code>
-	}
-	else {</code><code class="delayed">
-		this.red = red || 0;
-		this.green = green || 0;
-		this.blue = blue || 0;</code><code>
-	}
-	
-	this.alpha = alpha >= 0? alpha : 1;
-};</code></pre>
-	</section>
-	
-	<section class="slide">
-		<h1><code>this.rgb</code> getter/setter</h1>
-		
-		<pre><code>Color.prototype = {
-	get rgb () {
-		return [this.red, this.green, this.blue];
-	},
-	
+		<pre><code>function Color(rgba) {
+	this.rgba = rgba || [0,0,0,1];
+};
+
+Color.prototype = {
+	get rgb () { return this.rgba.slice(0,3) },
 	set rgb(arr) {
-		this.red = arr[0];
-		this.green = arr[1];
-		this.blue = arr[2];
-	},
-	/* ... */
+		this.rgba = arr.concat(this.alpha);
+	}
+	
+	get alpha () { return this.rgba[3] },
+	set alpha (a) { this.rgba[3] = a }
 }</code></pre>
 	</section>
 	
 	<section class="slide">
-		<pre><code>var magenta = new Color(255, 0, 127);
-var magenta = new Color(255, 0, 127, 1);
-var magenta = new Color([255, 0, 127, 1]);</code></pre>
+		<pre><code>var magenta = new Color([255, 0, 127, 1]);</code></pre>
 	
 	<pre class="delayed"><code>var magenta = new Color();
 magenta.rgb = [255, 0, 127];</code></pre>
 	
-	<pre class="delayed"><code>var magenta = new Color();
-magenta.red = 255;
-magenta.blue = 127;</code></pre>
-	</code></pre>
-	</section>
-	
-	<section class="slide">
-		<h1>Example method: Invert</h1>
-		<pre class="delayed"><code>Color.prototype.invert = function () {
+	<pre class="delayed"><code>// Example method
+Color.prototype.invert = function () {
 	this.rgb = this.rgb.map(function(c) {
 		return 255 - c;
 	});
@@ -329,19 +310,13 @@ magenta.blue = 127;</code></pre>
 		hsl(240, 100%, 50%)
 	</section>
 	
-	<section class="color-list slide">
-		hsl(0, 0%, 0%)
-		hsl(0, 0%, 50%)
-		hsl(0, 0%, 100%)
-	</section>
-	
 	<section class="slide">
 		<p>A color space has</p>
 		<h1>Perceptual uniformity</h1>
 		
 		<p>when the perceptual similarity of two colors <br>is measured by the distance between them.</p>
 		<p class="delayed" style="color: red;">RGB is <strong>not</strong> perceptually uniform.</p>
-		<p class="delayed" style="color: red;">HSL isn’t either, as it’s just a transformation of RGB.</p>
+		<p class="delayed" style="color: red;">Neither is HSL, as it’s just a transformation of RGB.</p>
 	</section>
 	
 	<section class="color-list slide">
@@ -349,6 +324,8 @@ magenta.blue = 127;</code></pre>
 		rgb(255, 0, 255)
 		rgb(128, 0, 255)
 	</section>
+	
+	<section class="slide" data-import="rgb-cube"></section>
 	
 	<section class="slide">
 		<h1>Lightness != luminance</h1>
@@ -433,27 +410,24 @@ el.style.color = color.lightness > 50?
 	</section>
 	
 	<section class="code slide">
-	<textarea>background: linear-gradient(white, black);</textarea>
+		<textarea>background: linear-gradient(white, black);</textarea>
 	</section>
 	
 	<section class="slide">
 		<h1>Color interpolation</h1>
-		<section style="float: left;">
-			<h2>Premultiplied</h2>
-			<pre style="line-height: 2;">rgb(255, 255, 255)
-rgba(255, 255, 255, .75)
-rgba(255, 255, 255, .5)
-rgba(255, 255, 255, .25)
-rgba(255, 255, 255, 0)</pre>
-		</section>
-		<section style="float: right">
-			<h2>Non-premultiplied</h2>
-			<pre style="line-height: 2;">rgb(255, 255, 255)
+	
+		<h2>(Non-premultiplied)</h2>
+		<pre style="line-height: 2;">rgb(255, 255, 255)
 rgba(192, 192, 192, .75)
 rgba(128, 128, 128, .5)
 rgba(64, 64, 64, .25)
 rgba(0, 0, 0, 0)</pre>
-		</section>
+
+	</section>
+	
+	<section class="color-list slide" style="font-size: 100%;">
+		linear-gradient(90deg, white, transparent)
+		linear-gradient(90deg, white, hsla(0,0%,100%,0))
 	</section>
 	
 	<section class="partial image slide" id="named-colors-distribution" data-source="Visualization by Eric Meyer">
@@ -505,6 +479,10 @@ rgba(0, 0, 0, 0)</pre>
 	<section class="color-list slide">
 		gray
 		darkgray
+	</section>
+	
+	<section class="top-heavy image slide" style="background-image:url(img/wtf.jpg)" data-source="flickr.com/photos/mugley/3421060154/">
+		<h1>WTF?!</h1>
 	</section>
 	
 	<section class="code slide" id="currentColor-demo">

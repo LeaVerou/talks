@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title></title>
+<link rel="stylesheet" href="rgb-cube.css" />
+<script src="../prefixfree/prefixfree.min.js"></script>
+<script>
+if (PrefixFree.Prefix == 'Webkit') {
+	PrefixFree.properties.push('animation');
+	PrefixFree.atrules.push('keyframes');
+}
+</script>
+
+</head>
+<body id="rgb-cube">
+
+<div class="cube">
+	<div class="sides"></div>
+	<div class="axes">
+		<div class="axe-z"></div>
+	</div>
+</div>
+
+</body>
+</html>

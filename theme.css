@@ -38,7 +38,7 @@ input {
 }
 
 input[type="range"][orient="vertical"] {
-	-webkit-appearance: slider-vertical;
+	x-webkit-appearance: slider-vertical;
 	writing-mode: bt-lr;
 }
 
@@ -90,6 +90,12 @@ section > header.slide {
 	background: linear-gradient(90deg, red, yellow, lime, aqua, blue, fuchsia, red) repeat-x 0 15px black;
 	background-size: 100% 5px;
 	animation: rainbow-scroll 10s infinite linear;
+	align-items: center;
+	justify-content: center;
+}
+
+section > header.slide:target {
+	display: flex;
 }
 
 	section > header.slide > h1 {
