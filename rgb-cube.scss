@@ -25,12 +25,12 @@ $side: 200px;
 
 @function rgb-plane($c1, $c2, $c3, $c4) {
 	@return inline-svg(
-		svg-gradient('foo', $c1, $c2) +
-		svg-gradient('foo2', $c3, $c4) +
-		svg-rect('url(%23foo2)') +
+		svg-gradient('top', $c1, $c2) +
+		svg-gradient('bottom', $c3, $c4) +
 		svg-gradient('gradient', white, black, 0, 1, 0, 0) +
 		svg-mask('gradient-mask', svg-rect('url(%23gradient)')) +
-		svg-rect('url(%23foo)" mask="url(%23gradient-mask)')
+		svg-rect('url(%23bottom)') +
+		svg-rect('url(%23top)" mask="url(%23gradient-mask)')
 	);
 }
 
