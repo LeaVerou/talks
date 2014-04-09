@@ -190,6 +190,16 @@ _.prototype = {
 		}
 		
 		return source;
+	},
+	
+	multiply: function (dest) {
+		var destRGB = dest.rgb;
+		
+		var rgb = this.rgb.map(function(c, i) {
+			return (c * destRGB[i]) / 255;
+		});
+
+		return _(rgb);
 	}
 };
 
@@ -252,6 +262,37 @@ _.css4Color = function (str) {
 		}
 		
 		return _(hexRGB);
+	}
+	
+	var hwb = str.match(/^hwb\(([\d\s%deg.,]+)\)$/);
+
+	if (hwb) {
+		hwb = hwb[1].split(/\s*,\s*/).map(function(c) {
+			if (c.indexOf('%') > -1) {
+				return parseFloat(c) / 100;
+			}
+			
+			return +c;
+		});
+		
+		if (hwb[1] + hwb[2] > 1) {
+			var factor = 1/(hwb[1] + hwb[2]);
+			
+			hwb[1] *= factor;
+			hwb[2] *= factor;
+		}
+		
+		var rgb = _.fromString('hsl(' + hwb[0] + ',100%,50%)').rgb.map(function (c) {
+			c /= 255;
+
+			return Math.round(255 * (c * (1 - hwb[1] - hwb[2]) + hwb[1]));
+		});
+		
+		if (hwb.length > 3) {
+			rgb[3] = hwb[3];
+		}
+		
+		return _(rgb);
 	}
 	
 	var color = str.match(/^color\((.+?)\)$/i);

@@ -76,12 +76,12 @@ PrefixFree.properties.push('filter');
 
 <section class="image slide rgb-wheel" style="background-image: url(img/rgb-wheel-12.svg);" data-source="Illustration by László Németh"></section>
 
-<section class="mixing top-heavy image slide" id="rgb-mixing">
+<!--<section class="mixing top-heavy image slide" id="rgb-mixing">
 	<div class="red"></div>
 	<div class="green"></div>
 	<div class="blue"></div>
 	<p class="caption">RGB: Additive color</p>
-</section>
+</section>-->
 
 <section class="partial image slide" style="background-image: url(img/pixel-geometries.jpg); background-size: auto 85%;" data-source="Peter Halasz, commons.wikimedia.org/wiki/File:Pixel_geometry_01_Pengo.jpg"></section>
 
@@ -123,7 +123,7 @@ PrefixFree.properties.push('filter');
 	<h1>Colour &amp; Code</h1>
 </header>
 
-<section class="slide" id="rgb-cube">
+<section class="slide" id="rgb-cube" data-source="lea.verou.me/2014/04/dynamically-generated-svg-through-sass-a-3d-animated-rgb-cube">
 	<div class="cube" data-steps="1">
 		<div class="sides"></div>
 		<div class="axes">
@@ -256,8 +256,10 @@ PrefixFree.properties.push('filter');
 	</header>
 	
 	<section class="slide">
-		<h1>A simple JS “class” for RGB colors</h1>
+		<h1>Simple JS “class” for RGB colors</h1>
 		<pre><code>function Color(rgba) {
+	if (!(this instanceof Color)) return new Color(rgba);
+	
 	this.rgba = rgba || [0,0,0,1];
 };
 
@@ -302,7 +304,48 @@ Color.prototype.invert = function () {
 	<section class="slide" data-import="whathecolor"></section>
 	
 	<section class="code slide" style="background: url(img/baby.jpg) bottom; background-size: cover;" id="filter">
-	<textarea>filter: hue-rotate(60deg);</textarea>
+		<textarea>filter: hue-rotate(60deg);</textarea>
+	</section>
+	
+	<section class="code slide" style="background: url(img/baby.jpg) bottom; background-size: cover;" id="blend-mode">
+		<textarea>background: url(img/baby.jpg), 
+            hsl(335, 100%, 60%);
+background-blend-mode: multiply;</textarea>
+	</section>
+	
+	<section class="slide">
+		<h1>Multiply</h1>
+		
+		<pre><code class="de-emphasize">multiply: function(dest) {
+	this.rgb = this.rgb.map(function(c,i) {</code><code>
+		return 255 * (this.rgb[i]/255) *
+		             (dest.rgb[i]/255);</code><code class="de-emphasize">
+	});
+}</code></pre>
+		<pre class="delayed"><code>var red = Color([255,0,0]),
+    blue = Color([0,0,255]);
+red.multiply(blue);</code><code class="delayed"> // -> black</code></pre>
+	</section>
+	
+	<section class="slide" id="blending-modes">
+		<article>normal</article>
+		<article class="delayed">multiply</article>
+		<div class="delayed" style="display: inline;">
+			<article>screen</article>
+			<article>overlay</article>
+			<article>darken</article>
+			<article>lighten</article>
+			<article>color-dodge</article>
+			<article>color-burn</article>
+			<article>hard-light</article>
+			<article>soft-light</article>
+			<article>difference</article>
+			<article>exclusion</article>
+			<article>hue</article>
+			<article>saturation</article>
+			<article>color</article>
+			<article>luminosity</article>
+		</div>
 	</section>
 	
 	<section class="color-list slide">
@@ -356,7 +399,7 @@ el.style.color = color.lightness > 50?
 }</code></pre>
 	</section>
 	
-	<section class="color slide" id="luminance-vs-lightness" data-color="gray">
+	<section class="color slide" id="luminance-vs-lightness" data-color="hsl(335,100%,50%)">
 		<output id="luminance-percentage">0%</output>
 		<div>vs</div>
 		<output id="lightness-percentage">0%</output>
@@ -397,10 +440,10 @@ el.style.color = color.lightness > 50?
 	
 	<section class="slide">
 		<h1>Color interpolation</h1>
-		<pre><code>Color.prototype.mix = function (color, weight) {
-	this.rgba = this.rgba.map(function(c,i){
+		<pre><code class="de-emphasize">Color.prototype.mix = function (color, weight) {
+	this.rgba = this.rgba.map(function(c,i){</code><code>
 		return  this.rgba[i] * weight +
-		       color.rgba[i] * (1-weight);
+		       color.rgba[i] * (1-weight);</code><code class="de-emphasize">
 	});
 };</code></pre>
 		<div class="delayed">
@@ -476,7 +519,7 @@ rgba(0, 0, 0, 0)</pre>
 		peru
 	</section>
 	
-	<section class="color-list slide">
+	<section class="color-list slide" id="darkgray">
 		gray
 		darkgray
 	</section>
@@ -484,6 +527,8 @@ rgba(0, 0, 0, 0)</pre>
 	<section class="top-heavy image slide" style="background-image:url(img/wtf.jpg)" data-source="flickr.com/photos/mugley/3421060154/">
 		<h1>WTF?!</h1>
 	</section>
+	
+	<section class="slide" data-import="darkgray"></section>
 	
 	<section class="code slide" id="currentColor-demo">
 	<div class="box">Some text</div>
@@ -527,6 +572,28 @@ background: gray(255, .2);
 
 	<section class="color slide" data-color="#f005"></section>
 	
+	<section class="image slide" style="background-image: url(img/hsb-picker.png); background-size: auto 94%; background-position: bottom;" 
+	 data-source="HWB—A more intuitive Hue-Based Color Model, Alvy Ray Smith, 1996 alvyray.com/Papers/CG/HWB_JGTv208.pdf">
+		<h1 class="delayed">HWB != HSB</h1>
+	</section>
+	
+	<section class="color slide" data-color="hwb(335, 0%, 0%)"></section>
+	
+	<section class="slide">
+		<h1>hwb() with SASS</h1>
+		
+		<pre class="language-scss"><code>@function hwb($hue, $w, $b) {
+  $base: hsl($hue, 100%, 50%);
+  
+  @return $base * (1 - ($w + $b)/100%)
+          + 255*$w/100%;
+}
+
+body {
+  background: hwb(335, 20%, 20%); // #cc3372
+}</code></pre>
+	</section>
+	
 	<section class="color slide" data-color="color(red tint(20%))"></section>
 
 	<section class="slide" id="adjusters">
@@ -567,27 +634,23 @@ background: tint(red, 10%); /* &rarr; #ff1919 */
 background: shade(red, 10%); /* &rarr; #e50000 */</code></pre>
 		<p class="delayed">Note: <code>tint()</code> &amp; <code>shade()</code> are already included in Bourbon</p>
 	</section>
-
-	<section class="image slide" style="background-image: url(img/hsb-picker.png); background-size: auto 94%; background-position: bottom;">
-		<h1 class="delayed"><code>hwb(335, 90%, 90%)</code></h1>
-	</section>
+	
+	<section class="slide" data-src="http://www.myth.io/"></section>
 
 	<section class="slide" id="css4-colors">
-		<h1>CSS Color Level 4 <span class="comment">(Tentative)</span></h1>
+		<h1>CSS Color Level 4 <span class="comment">(Tentative!!)</span></h1>
 		
 		<ul>
 			<li><code>gray()</code></li>
 			<li><code>#rgba</code> and <code>#rrggbbaa</code></li>
-			<li><code>color()</code></li>
 			<li><code>hwb()</code></li>
+			<li><code>color()</code></li>
 			<li>named hues and <code>&lt;angle></code> in <code>hsl()</code></li>
 			<li><code>rgb()</code> and <code>hsl()</code> will accept alpha values</li>
 		</ul>
 		
 		<footer class="ref"><a href="http://dev.w3.org/csswg/css-color-4/">dev.w3.org/csswg/css-color-4</a></footer>
 	</section>
-
-	<section class="slide" data-src="http://www.myth.io/"></section>
 
 	<section class="slide">
 		<h1>Parse any (supported) CSS color</h1>
@@ -608,7 +671,8 @@ background: shade(red, 10%); /* &rarr; #e50000 */</code></pre>
 	return null; // or throw TypeError()
 };</code></pre>
 	</section>
-
+	
+	<section class="slide" data-src="http://leaverou.github.io/css-colors/#deeppink"></section>
 </section>
 
 <section>

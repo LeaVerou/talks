@@ -125,6 +125,10 @@ footer.ref a {
 
 /* Syntax highlighting */
 
+code.de-emphasize {
+	opacity: .4;
+}
+
 .token.comment,
 .token.prolog,
 .token.doctype,

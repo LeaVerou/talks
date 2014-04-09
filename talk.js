@@ -44,6 +44,10 @@ $$('textarea').forEach(function(textarea) {
 	new CSSSnippet(textarea);
 });
 
+$$('#blending-modes article').forEach(function(div) {
+	div.setAttribute('style', PrefixFree.prefixCSS('background-blend-mode:' + div.textContent))
+});
+
 // Decimal to hex converter
 (function() {
 

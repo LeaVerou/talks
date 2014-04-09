@@ -1,3 +1,9 @@
+#for-browser {
+	background-image: linear-gradient(to left, gray 1px, transparent 1px), linear-gradient(to top, gray 1px, transparent 1px);
+	background-repeat: no-repeat;
+	background-size: 1024px 768px;
+}
+
 #intro {
 	background-image: url(img/baby.jpg);
 	background-position: left;
@@ -40,14 +46,14 @@
 
 #hi {
 	padding: 1vmin;
-	background: yellowgreen;
+	background: hsl(336, 100%, 50%);
 	font-size: 200%;
 }
 	
 	#hi .delayed:not(.current):not(.displayed),
 	#csswg-announcement .delayed:not(.current):not(.displayed),
 	#contact.delayed:not(.current):not(.displayed) {
-		transform: translateY(-300%);
+		transform: translateY(-100vh);
 	}
 	
 	#hi .displayed {
@@ -116,27 +122,26 @@
 		margin: 0;
 	}
 	
-	#hi li {
-		display: inline;
-	}
-	
-		#hi li:before {
-			content: none;
+		#hi li {
+			display: inline;
 		}
 		
-		#hi li a {
-			display: inline-block;
-			padding: .2em .3em .25em;
-			border-radius: .2em;
-			line-height: 1;
-			text-decoration: none;
-			color: hsl(75, 70%, 60%);
-			background: black;
-		}
-		
-		#hi li a:hover {
-			color: white;
-		}
+			#hi li:before {
+				content: none;
+			}
+			
+			#hi li a {
+				display: inline-block;
+				padding: .2em .3em .25em;
+				border-radius: .2em;
+				line-height: 1;
+				text-decoration: none;
+				background: black;
+			}
+			
+			#hi li a:not(:hover) {
+				color: hsl(336, 100%, 95%);
+			}
 		
 	p#csswg {
 		
@@ -828,9 +833,39 @@
 	background-size: cover;
 }
 
-	#filter textarea {
+	.code.slide textarea {
 		background: linear-gradient(rgba(0,0,0,.4), black);
 
+	}
+
+#blending-modes {
+	
+}
+
+	@keyframes rainbow-scroll-2 {
+		to {
+			background-position: center, -200% 0;
+		}
+	}
+	
+	#blending-modes article {
+		display: inline-flex;
+		align-items: flex-end;
+		justify-content: center;
+		box-sizing: border-box;
+		padding: .5em;
+		border-radius: .1em;
+		margin: .3em 0;
+		width: 22vw;
+		height: 21vh;
+		background: url(img/ducky.png),
+		            linear-gradient(to right, blue, fuchsia, red, yellow, lime, aqua, blue);
+		background-repeat: no-repeat, repeat-x;
+		background-position: center, 0 0;
+		background-size: auto 90%, 200% 100%;
+		font: bold 50% Helevetica Neue, sans-serif;
+		text-shadow: 0 0 1px black, 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+		animation: rainbow-scroll-2 10s 6s infinite;
 	}
 		
 #luminance-vs-lightness {
