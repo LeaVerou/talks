@@ -57,10 +57,11 @@ PrefixFree.properties.push('filter');
 	</p>
 	<p class="delayed" id="oreilly">
 		<img src="img/oreilly.svg" alt="O’Reilly" style="display:block" />
-		author (2014)
+		author <span style="font-size: 70%;">(ETA Q4 2014)</span>
 	</p>
 	<p id="mit" class="delayed">
 		<img src="img/mit.svg" alt="MIT" />
+		<span style="display: inline-block;">PhD <br>candidate</span>
 	</p>
 </section>
 
@@ -74,14 +75,14 @@ PrefixFree.properties.push('filter');
 	<div class="pixel" data-steps="10"></div>
 </section>
 
-<section class="image slide rgb-wheel" style="background-image: url(img/rgb-wheel-12.svg);" data-source="Illustration by László Németh"></section>
-
-<!--<section class="mixing top-heavy image slide" id="rgb-mixing">
+<section class="mixing top-heavy image slide" id="rgb-mixing">
 	<div class="red"></div>
 	<div class="green"></div>
 	<div class="blue"></div>
 	<p class="caption">RGB: Additive color</p>
-</section>-->
+</section>
+
+<section class="image slide rgb-wheel" style="background-image: url(img/rgb-wheel-12.svg);" data-source="Illustration by László Németh"></section>
 
 <section class="partial image slide" style="background-image: url(img/pixel-geometries.jpg); background-size: auto 85%;" data-source="Peter Halasz, commons.wikimedia.org/wiki/File:Pixel_geometry_01_Pengo.jpg"></section>
 
@@ -92,11 +93,35 @@ PrefixFree.properties.push('filter');
 	<article style="background-image: url(img/pg-asuseee.jpg);">ASUS Eee Pad Transformer Prime, 1280×800, 10.1″</article>
 </section>
 
+<section class="slide" id="antialiasing">
+	<h1 data-steps="2">Anti-aliasing</h1>
+</section>
+
+<section class="slide" data-src="http://people.mozilla.org/~jdaggett/tests/subpixelexplorer.html" title="Subpixel Explorer by John Daggett"></section>
+
+<section class="slide" style="padding-top: 10vh;">
+<pre><code class="language-css">-webkit-font-smoothing: subpixel-antialiased;
+-webkit-font-smoothing: antialiased; /* greyscale anti-aliasing */
+-webkit-font-smoothing: none; /* NO anti-aliasing! */</code></pre>
+<pre><code class="language-css">-moz-osx-font-smoothing: grayscale;
+-moz-osx-font-smoothing: auto; /* subpixel anti-aliasing */</code></pre>
+<p class="delayed" style="color: red; font-size: 200%;">Please, avoid.</p>
+<p class="delayed" style="color: red; font-size: 200%;">No, really.</p>
+</section>
+
+</section>
+
+<section>
+
+<header class="slide">
+	<h1>Colour &amp; Code</h1>
+</header>
+
 <section class="slide dont-resize" id="pixel-bits">
 	<div class="pixel">
-		<div class="red subpixel"><strong>8</strong> bits</div>
-		<div class="green subpixel"><strong>8</strong> bits</div>
-		<div class="blue subpixel"><strong>8</strong> bits</div>
+		<div class="red subpixel"><strong>8</strong> bits<p class="delayed">= <strong>2<sup>8</sup></strong> states</p></div>
+		<div class="green subpixel"><strong>8</strong> bits<p class="delayed">= <strong>256</strong> states</p></div>
+		<div class="blue subpixel"><strong>8</strong> bits<p class="delayed">= <strong>0-255</strong> range</p></div>
 	</div>
 	<p class="delayed">
 		= <strong>24</strong> bits per pixel
@@ -108,20 +133,6 @@ PrefixFree.properties.push('filter');
 		=&nbsp;<strong>256³</strong> possible colors
 	</p>
 </section>
-
-<section class="slide" id="antialiasing">
-	<h1 data-steps="2">Anti-aliasing</h1>
-</section>
-
-<section class="slide" data-src="http://people.mozilla.org/~jdaggett/tests/subpixelexplorer.html" title="Subpixel Explorer by John Daggett"></section>
-
-</section>
-
-<section>
-
-<header class="slide">
-	<h1>Colour &amp; Code</h1>
-</header>
 
 <section class="slide" id="rgb-cube" data-source="lea.verou.me/2014/04/dynamically-generated-svg-through-sass-a-3d-animated-rgb-cube">
 	<div class="cube" data-steps="1">
@@ -573,7 +584,7 @@ background: gray(255, .2);
 	<section class="color slide" data-color="#f005"></section>
 	
 	<section class="image slide" style="background-image: url(img/hsb-picker.png); background-size: auto 94%; background-position: bottom;" 
-	 data-source="HWB—A more intuitive Hue-Based Color Model, Alvy Ray Smith, 1996 alvyray.com/Papers/CG/HWB_JGTv208.pdf">
+	 data-source="en.wikipedia.org/wiki/HWB_color_model">
 		<h1 class="delayed">HWB != HSB</h1>
 	</section>
 	
@@ -706,6 +717,12 @@ background: shade(red, 10%); /* &rarr; #e50000 */</code></pre>
 	<section class="bottom-heavy image slide" id="icc">
 		<h1 class="side">ICC color profiles</h1>
 	</section>
+	
+	<section class="image slide" style="background-image: url(img/deltae.png); background-size: auto;">
+		<h1 class="delayed">Color difference (CIEDE2000)</h1>
+	</section>
+	
+	<section class="image slide" style="background-image: url(img/rabbit.jpg);"></section>
 </section>
 
 <footer class="slide">
