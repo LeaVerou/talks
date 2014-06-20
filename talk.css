@@ -345,8 +345,10 @@
 		position: absolute;
 		right: 0;
 		left: 0;
-		bottom: 3vmin;
-		padding: 0 4vmin;
+		top: 50%;
+		margin-top: -.7em;
+		text-align: center;
+		padding: 0;
 		width: 100%;
 		box-sizing: border-box;
 		border: none;
@@ -876,7 +878,7 @@
 		background-size: auto 90%, 200% 100%;
 		font: bold 50% Helevetica Neue, sans-serif;
 		text-shadow: 0 0 1px black, 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
-		animation: rainbow-scroll-2 10s 6s infinite;
+		animation: rainbow-scroll-2 10s 3s infinite;
 	}
 		
 #luminance-vs-lightness {
@@ -933,6 +935,13 @@
 		#lightness-percentage:before {
 			content: 'Lightness';
 		}
+		
+	#luminance-vs-lightness input {
+		top: auto;
+		bottom: 4vmin;
+		text-align: left;
+		padding: 0 4vmin;
+	}
 		
 #currentColor-demo .box {
 	padding: .8em 1em;

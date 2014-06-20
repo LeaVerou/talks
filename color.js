@@ -78,6 +78,11 @@ _.prototype = {
 		return Math.round(21.26 * rgb[0] + 71.52 * rgb[1] + 7.22 * rgb[2]);
 	},
 	
+//	valueOf: function () {
+//		return (this.red << 16) + (this.green << 8) + this.blue;
+//		// return this.rgb.reduce(function (prev, current, i) { return prev + (current << 8*(2-i)) }, 0);
+//	},
+	
 	contrast: function(color) {
 		var l1 = this.luminance;
 		var l2 = color.luminance;
@@ -348,4 +353,3 @@ _.WHITE = new _(255,255,255);
 _.BLACK = new _(0,0,0);
 
 })();
-

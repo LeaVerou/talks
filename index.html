@@ -39,7 +39,7 @@ PrefixFree.properties.push('filter');
 <section class="inverse slide dont-resize darker" id="hi">
 	<figure class="delayed">
 		<img src="img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
-		<figcaption>about:lea</figcaption>
+		<figcaption>Hi, I’m Lea</figcaption>
 	</figure>
 	<div class="delayed">
 		<p>I make stuff</p>
@@ -75,12 +75,12 @@ PrefixFree.properties.push('filter');
 	<div class="pixel" data-steps="10"></div>
 </section>
 
-<section class="mixing top-heavy image slide" id="rgb-mixing">
+<!--<section class="mixing top-heavy image slide" id="rgb-mixing">
 	<div class="red"></div>
 	<div class="green"></div>
 	<div class="blue"></div>
 	<p class="caption">RGB: Additive color</p>
-</section>
+</section>-->
 
 <section class="image slide rgb-wheel" style="background-image: url(img/rgb-wheel-12.svg);" data-source="Illustration by László Németh"></section>
 
@@ -108,14 +108,6 @@ PrefixFree.properties.push('filter');
 <p class="delayed" style="color: red; font-size: 200%;">Please, avoid.</p>
 <p class="delayed" style="color: red; font-size: 200%;">No, really.</p>
 </section>
-
-</section>
-
-<section>
-
-<header class="slide">
-	<h1>Colour &amp; Code</h1>
-</header>
 
 <section class="slide dont-resize" id="pixel-bits">
 	<div class="pixel">
@@ -154,9 +146,17 @@ PrefixFree.properties.push('filter');
 	<output></output>
 </section>
 
+</section>
+
+<section>
+
+<header class="slide">
+	<h1>Colour &amp; Code</h1>
+</header>
+
 <section>
 	<header class="slide">
-		<h1>Colors in HTML 3.2</h1>
+		<h1>Colours in HTML 3.2</h1>
 	</header>
 	
 	<section class="slide" id="hex" data-steps="1">
@@ -189,14 +189,14 @@ PrefixFree.properties.push('filter');
 		<p class="delayed">E.g. 5a = 5 &times; 16 + 10 = 80 + 10 = 90</p>
 	</section>-->
 	
-	<section class="slide">
+	<!--<section class="slide">
 		<p>Decimal to hex:</p>
 		<pre><code>hex = decimal.toString(16);</code></pre>
 		
 		<p style="margin-top: 20vh;">Hex to decimal:</p>
 		<pre><code>decimal = parseInt(hex, 16); /* faster */</code></pre>
 		<pre><code>decimal = +("0x" + hex);</code></pre>
-	</section>
+	</section>-->
 	
 	<section class="color slide" data-color="#0099aa"></section>
 	
@@ -315,12 +315,12 @@ Color.prototype.invert = function () {
 	<section class="slide" data-import="whathecolor"></section>
 	
 	<section class="code slide" style="background: url(img/baby.jpg) bottom; background-size: cover;" id="filter">
-		<textarea>filter: hue-rotate(60deg);</textarea>
+		<textarea>filter: hue-rotate(0deg);</textarea>
 	</section>
 	
 	<section class="code slide" style="background: url(img/baby.jpg) bottom; background-size: cover;" id="blend-mode">
 		<textarea>background: url(img/baby.jpg), 
-            hsl(335, 100%, 60%);
+            hsl(335, 100%, 50%);
 background-blend-mode: multiply;</textarea>
 	</section>
 	
@@ -340,24 +340,26 @@ red.multiply(blue);</code><code class="delayed"> // -> black</code></pre>
 	
 	<section class="slide" id="blending-modes">
 		<article>normal</article>
-		<article class="delayed">multiply</article>
-		<div class="delayed" style="display: inline;">
-			<article>screen</article>
-			<article>overlay</article>
-			<article>darken</article>
-			<article>lighten</article>
-			<article>color-dodge</article>
-			<article>color-burn</article>
-			<article>hard-light</article>
-			<article>soft-light</article>
-			<article>difference</article>
-			<article>exclusion</article>
-			<article>hue</article>
-			<article>saturation</article>
-			<article>color</article>
-			<article>luminosity</article>
-		</div>
+		<article>multiply</article>
+
+		<article>screen</article>
+		<article>overlay</article>
+		<article>darken</article>
+		<article>lighten</article>
+		<article>color-dodge</article>
+		<article>color-burn</article>
+		<article>hard-light</article>
+		<article>soft-light</article>
+		<article>difference</article>
+		<article>exclusion</article>
+		<article>hue</article>
+		<article>saturation</article>
+		<article>color</article>
+		<article>luminosity</article>
+
 	</section>
+	
+	<section class="slide" data-import="blend-mode"></section>
 	
 	<section class="color-list slide">
 		hsl(60, 100%, 50%)
@@ -431,7 +433,7 @@ el.style.color = color.lightness > 50?
 	
 	<section class="color slide" data-color="rgba(0, 0, 0, .5)"></section>
 	
-	<section class="top-heavy image slide" style="background-image: url(img/blender.jpg);" data-source="flickr.com/photos/chrishunkeler/7123689937">
+	<!--<section class="top-heavy image slide" style="background-image: url(img/blender.jpg);" data-source="flickr.com/photos/chrishunkeler/7123689937">
 		<h1>Alpha blending</h1>
 	</section>
 	
@@ -449,6 +451,10 @@ el.style.color = color.lightness > 50?
 };</code></pre>
 	</section>
 	
+	<section class="code slide">
+		<textarea>background: linear-gradient(white, black);</textarea>
+	</section>
+	
 	<section class="slide">
 		<h1>Color interpolation</h1>
 		<pre><code class="de-emphasize">Color.prototype.mix = function (color, weight) {
@@ -461,10 +467,6 @@ el.style.color = color.lightness > 50?
 			<p style="margin-bottom: .3em;">In SASS:</p>
 			<pre class="language-scss"><code>background: mix($color1, $color2, 50%);</code></pre>
 		</div>
-	</section>
-	
-	<section class="code slide">
-		<textarea>background: linear-gradient(white, black);</textarea>
 	</section>
 	
 	<section class="slide">
@@ -482,7 +484,7 @@ rgba(0, 0, 0, 0)</pre>
 	<section class="color-list slide" style="font-size: 100%;">
 		linear-gradient(90deg, white, transparent)
 		linear-gradient(90deg, white, hsla(0,0%,100%,0))
-	</section>
+	</section>-->
 	
 	<section class="partial image slide" id="named-colors-distribution" data-source="Visualization by Eric Meyer">
 		<h1 class="side">Named colors distribution</h1>
@@ -593,15 +595,32 @@ background: gray(255, .2);
 	<section class="slide">
 		<h1>hwb() with SASS</h1>
 		
-		<pre class="language-scss"><code>@function hwb($hue, $w, $b) {
-  $base: hsl($hue, 100%, 50%);
+		<pre class="language-scss"><code style="tab-size: 2;">@function hwb($hue, $w, $b) {
+	$base: hsl($hue, 100%, 50%);
   
-  @return $base * (1 - ($w + $b)/100%)
-          + 255*$w/100%;
+	@return $base * (1 - ($w + $b)/100%)
+	        + 255*$w/100%;
 }
 
 body {
   background: hwb(335, 20%, 20%); // #cc3372
+}</code></pre>
+</section>
+	
+	<section class="slide">
+		<h1>hwb() with SASS</h1>
+		
+		<pre class="language-scss"><code style="tab-size: 2;">@function hwb($hue, $w, $b) {
+	$base: hsl($hue, 100%, 50%);
+  
+ @if ($w + $b > 100%) {
+	$factor: 100%/($w + $b);
+	$w: $w * $factor;
+	$b: $b * $factor;
+}
+  
+	@return $base * (1 - ($w + $b)/100%)
+	        + 255*$w/100%;
 }</code></pre>
 	</section>
 	
@@ -663,7 +682,7 @@ background: shade(red, 10%); /* &rarr; #e50000 */</code></pre>
 		<footer class="ref"><a href="http://dev.w3.org/csswg/css-color-4/">dev.w3.org/csswg/css-color-4</a></footer>
 	</section>
 
-	<section class="slide">
+	<!--<section class="slide">
 		<h1>Parse any (supported) CSS color</h1>
 		
 		<pre><code>Color.fromString = function(str) {
@@ -683,7 +702,7 @@ background: shade(red, 10%); /* &rarr; #e50000 */</code></pre>
 };</code></pre>
 	</section>
 	
-	<section class="slide" data-src="http://leaverou.github.io/css-colors/#deeppink"></section>
+	<section class="slide" data-src="http://leaverou.github.io/css-colors/#deeppink"></section>-->
 </section>
 
 <section>
@@ -718,11 +737,11 @@ background: shade(red, 10%); /* &rarr; #e50000 */</code></pre>
 		<h1 class="side">ICC color profiles</h1>
 	</section>
 	
+	<section class="image slide" style="background-image: url(img/rabbit.jpg);" data-source="flickr.com/photos/jm999uk/3513237937"></section>
+	
 	<section class="image slide" style="background-image: url(img/deltae.png); background-size: auto;">
 		<h1 class="delayed">Color difference (CIEDE2000)</h1>
 	</section>
-	
-	<section class="image slide" style="background-image: url(img/rabbit.jpg);"></section>
 </section>
 
 <footer class="slide">
@@ -748,8 +767,8 @@ background: shade(red, 10%); /* &rarr; #e50000 */</code></pre>
 -->
 
 <script src="../csss/slideshow.js"></script>
-<script src="../prism.js/prism.js"></script>
-<script src="../prism.js/components/prism-scss.js"></script>
+<script src="../prism/prism.js"></script>
+<script src="../prism/components/prism-scss.js"></script>
 <script src="../csss/plugins/css-edit.js"></script>
 <script src="../csss/plugins/css-snippets.js"></script>
 <script src="../incrementable/incrementable.js"></script>
