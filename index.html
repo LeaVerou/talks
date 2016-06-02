@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title>HTML Secrets: HTML can do whaaat?!</title>
+<link href="../csss/slideshow.css" rel="stylesheet" />
+<link href="../csss/reusable.css" rel="stylesheet" />
+<link href="prism.css" rel="stylesheet" />
+<link href="theme.css" rel="stylesheet" />
+<link href="talk.css" rel="stylesheet" />
+<script src="../prefixfree/prefixfree.min.js"></script>
+<script src="../conic-gradient/conic-gradient.js"></script>
+
+</head>
+<body class="language-markup">
+
+<section id="for-browser" class="dark slide">
+	<h1>Important</h1>
+	This slide deck was created for use in a controlled environment, during a talk. It works best with Chrome at 1280x720 or 1024x768. It may or may not work properly in other browsers.
+	The demos were live coded, so these slides are a bit pointless if you never watched the talk.
+</section>
+
+<header id="intro" class="slide dont-resize" data-source="flickr.com/photos/billward/16601966117">
+	<h1>
+		HTML Secrets
+	</h1>
+	<p>HTML can do whaaat?!</p>
+	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
+</header>
+
+<section>
+	<section class="inverse slide dont-resize darker hi">
+		<figure class="delayed">
+			<img src="img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
+			<figcaption>Hi, I’m Lea</figcaption>
+		</figure>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="lesbian" data-steps="3">
+		<div>
+		<p>#funfact</p>
+		<p>I grew up in Lesbos, Greece</p>
+		<p>…which technically makes me <strong>geogrpahically Lesbian</strong></p>
+		</div>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="doing-stuff">
+		<div class="delayed">
+			<p>I make stuff</p>
+			<ul>
+				<li><a href="http://prismjs.com">PrismJS</a></li>
+				<li><a href="http://leaverou.github.io/prefixfree">-prefix-free</a></li>
+				<li><a href="http://blissfuljs.com">Bliss</a></li>
+				<li><a href="http://css3test.com">css3test.com</a></li>
+				<li><a href="http://leaverou.github.io/awesomplete/">Awesomplete</a></li>
+				<li><a href="http://cubic-bezier.com/">cubic-bezier.com</a></li>
+				<li><a href="http://dabblet.com">dabblet.com</a></li>
+				<li><a href="http://leaverou.github.io/animatable/">Animatable</a></li>
+			</ul>
+			<small>More: <a href="http://github.com/leaverou">github.com/leaverou</a></small>
+		</div>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="csswg">
+		<p class="delayed">
+			<strong>CSS WG</strong>
+			Invited Expert
+		</p>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="mit">
+		<p class="delayed">
+			<img src="img/mit.svg" alt="MIT" />
+			HCI researcher @ CSAIL
+		</p>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="book">
+		<a href="http://shop.oreilly.com/product/0636920031123.do" class="delayed">
+			<img src="img/book.png" alt="CSS Secrets by O’Reilly" style="display:block" />
+			★★★★★ on Amazon
+		</a>
+	</section>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>What this talk is <strong>not</strong> about</h1>
+	</header>
+
+	<article class="slide" id="semantic">
+		<ul class="elements">
+			<li>article</li>
+			<li>section</li>
+			<li>header</li>
+			<li>hgroup</li>
+			<li>footer</li>
+			<li>main</li>
+			<li>nav</li>
+			<li>aside</li>
+			<li>figure</li>
+			<li>figcaption</li>
+			<li>time</li>
+			<li>data</li>
+			<li>mark</li>
+			<li>ruby</li>
+			<li>rt</li>
+			<li>rp</li>
+		</ul>
+	</article>
+
+	<article class="slide" id="semantic-markup">
+		<div>
+		<script class="html5" type="text/plain">
+			<header>
+				<hgroup>
+					<h1>Logo</h1>
+					<h2>My awesome tagline</h2>
+				</hgroup>
+				<nav>
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/about">About</a></li>
+						<li><a href="/contact">Contact</a></li>
+					</ul>
+				</nav>
+			</header>
+			<main>
+				<article>
+					<h1>Post title</h1>
+					<p>Some text</p>
+					<footer>
+						<time datetime="2016-05-20">3 weeks ago</time>
+					</footer>
+				</article>
+			</main>
+			<aside>
+				<p>Sidebar content no-one reads.</p>
+			</aside>
+			<footer>
+				<p>Copyright blurb</p>
+			</footer>
+		</script>
+		</div>
+		<div class="delayed">
+		<script class="html4" type="text/plain">
+			<div id="header" role="banner">
+				<div>
+					<h1>Logo</h1>
+					<h2>My awesome tagline</h2>
+				</div>
+				<div id="nav" role="navigation">
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/about">About</a></li>
+						<li><a href="/contact">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+			<div id="main" role="main">
+				<div class="post" role="article">
+					<h1>Post title</h1>
+					<p>Some text</p>
+					<div class="post-footer" role="contentinfo">
+						3 weeks ago
+					</div>
+				</div>
+			</div>
+			<div id="sidebar" role="complementary">
+				<p>Sidebar content no-one reads.</p>
+			</div>
+			<div id="footer" role="contentinfo">
+				<p>Copyright blurb</p>
+			</div>
+		</script>
+		</div>
+	</article>
+
+</section>
+
+<section>
+	<article class="demo slide">
+		<input type="range" min="0" max="100" step="1" class="edit-html">
+	</article>
+</section>
+
+<footer class="dark slide">
+	<img src="img/mark.svg" />
+	<h1>Thank you!</h1>
+	<ul>
+		<li><a href="mailto:lea@w3.org">lea@verou.me</a></li>
+		<li><a href="http://lea.verou.me">lea.verou.me</a></li>
+		<li><a href="http://twitter.com/leaverou">@leaverou</a></li>
+	</ul>
+	<p>Slides: <a href="http://leaverou.github.io/missing-slice">leaverou.github.io/missing-slice</a></p>
+	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
+</footer>
+
+<script src="../bliss/bliss.min.js"></script>
+<script src="../csss/slideshow.js"></script>
+<script src="prism.js"></script>
+<script src="../csss/plugins/css-edit.js"></script>
+<script src="../csss/plugins/css-snippets.js"></script>
+<script src="../incrementable/incrementable.js"></script>
+
+<script src="talk.js"></script>
+
+</body>
+</html>
