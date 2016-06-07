@@ -303,6 +303,41 @@ footer.slide {
 			}
 
 .demo.slide {
-	background: hsl(25, 50%, 90%);
-	color: black;
+	text-align: center;
 }
+
+	.demo.slide input {
+		width: -webkit-fill-available;
+		display: block;
+	}
+
+	.demo.slide .enlarge iframe {
+		border-width: 1px;
+		background: white;
+	}
+
+	.demo.slide:not(.dont-enlarge) [data-edit="contents"],
+	.demo.slide:not(.dont-enlarge) .enlarge {
+		width: 30%;
+		margin: 0 auto;
+		transform: scale(3);
+		transform-origin: top;
+	}
+
+.editor label {
+	position: absolute;
+	top: .5em;
+	right: .5em;
+	padding: .1em .4em;
+	border-radius: .3em;
+	background: hsl(30, 100%, 50%);
+	color: white;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 50%;
+	text-transform: uppercase;
+}
+
+	.editor label:hover {
+		background: hsl(15, 100%, 45%);
+	}

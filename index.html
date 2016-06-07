@@ -9,8 +9,8 @@
 <link href="prism.css" rel="stylesheet" />
 <link href="theme.css" rel="stylesheet" />
 <link href="talk.css" rel="stylesheet" />
+<link href="../multirange/multirange.css" rel="stylesheet" />
 <script src="../prefixfree/prefixfree.min.js"></script>
-<script src="../conic-gradient/conic-gradient.js"></script>
 
 </head>
 <body class="language-markup">
@@ -180,8 +180,137 @@
 </section>
 
 <section>
+	<header class="slide">
+		<h1>&lt;input type="range"></h1>
+	</header>
 	<article class="demo slide">
-		<input type="range" min="0" max="100" step="1" class="edit-html">
+		<input type="range" data-edit="html" />
+	</article>
+	<article class="demo slide">
+		<input type="range" multiple value="10,80" data-edit="html" />
+	</article>
+	<article class="slide" data-src="../multirange/index.html" data-title="http://leaverou.github.io/multirange/"></article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>&lt;datalist></h1>
+	</header>
+	<article class="demo slide">
+		<div data-edit="contents">
+			<input list="countries" />
+			<datalist id="countries">
+				<option>Greece</option>
+				<option>United Kingdom</option>
+				<option>United States</option>
+			</datalist>
+		</div>
+	</article>
+	<article class="demo slide">
+		<div data-edit="contents">
+			<input type="range" list="ticks" />
+			<datalist id="ticks">
+				<option>50</option>
+			</datalist>
+		</div>
+	</article>
+	<article class="demo slide">
+		<div data-edit="contents">
+			<input type="color" value="#ff0066" />
+		</div>
+	</article>
+	<article class="demo slide">
+		<div data-edit="contents">
+			<input type="color" list="palette" />
+			<datalist id="palette">
+				<option>#ff0066</option>
+				<option>#00aacc</option>
+			</datalist>
+		</div>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>autocomplete</h1>
+	</header>
+	<article class="demo slide">
+		<div data-edit="contents">
+			<input type="email" />
+		</div>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>&lt;a download></h1>
+	</header>
+	<article class="demo slide">
+		<div data-edit="contents">
+			<a href="prism.js" target="_blank">PrismJS</a>
+		</div>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>&lt;input type="file"></h1>
+	</header>
+	<article class="demo slide">
+		<!-- multiple, accept=mime, accept=extensions -->
+		<input type="file" data-edit="html">
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>&lt;iframe></h1>
+	</header>
+	<article class="demo slide">
+		<!-- srcdoc, sandbox -->
+		<iframe src="about:blank" data-edit="html"></iframe>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>&lt;details> & &lt;summary></h1>
+	</header>
+	<article class="demo slide">
+		<details data-edit="html">
+	<summary>My title</summary>
+	Content
+</details>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>&lt;dialog></h1>
+	</header>
+	<article class="demo slide dont-enlarge">
+		<div data-edit="contents css">
+			<dialog id="dialog">
+				<h1>Ceiling cat is watching</h1>
+				<p>Greetings, hoomans.</p>
+			</dialog>
+		</div>
+	</article>
+
+	<article class="demo slide dont-enlarge">
+		<div data-edit="contents css">
+			<button onclick="confirmation.showModal()">Confirm</button>
+			<dialog id="confirmation">
+				<h1>Confirmation</h1>
+				<p>Are you human?</p>
+				<form method="dialog">
+					<button type="submit" value="Yes">Yes</button>
+					<button type="submit" value="No">No</button>
+					<button type="submit" value="Maybe">Maybe?</button>
+				</form>
+			</dialog>
+		</div>
+
 	</article>
 </section>
 
@@ -203,7 +332,8 @@
 <script src="../csss/plugins/css-edit.js"></script>
 <script src="../csss/plugins/css-snippets.js"></script>
 <script src="../incrementable/incrementable.js"></script>
-
+<script src="../multirange/multirange.js"></script>
+<script src="editor.js"></script>
 <script src="talk.js"></script>
 
 </body>

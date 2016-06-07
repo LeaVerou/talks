@@ -45,43 +45,83 @@ pre + pre {
 	margin-top: 1.5em;
 }
 
-input {
+input:not([type=file]) {
 	font: inherit;
 	color: inherit;
-	border: 0;
-	background: transparent;
-	outline: none;
 }
 
-input[type="range"][orient="vertical"] {
-	x-webkit-appearance: slider-vertical;
-	writing-mode: bt-lr;
+	input[type="range"][orient="vertical"] {
+		-webkit-appearance: slider-vertical;
+		writing-mode: bt-lr;
+	}
+
+	input:not([type]),
+	input[type="text"],
+	input[type="email"],
+	input[type="tel"] {
+		background: white;
+		padding: 0 .3em;
+		border: .05em solid hsl(200, 40%, 80%);
+	}
+
+button {
+	font: inherit;
 }
 
 textarea {
-	background: transparent;
-	color: inherit;
 	border: 0;
 	outline: none;
+	width: 100%;
+	max-height: 50vh;
+	padding: 1rem 2rem;
+	box-sizing: border-box;
+	background: hsl(200, 10%, 20%) linear-gradient(rgba(0,0,0,.1) 50%, transparent 0);
+	background-origin: content-box;
+	background-size: auto 3em;
+	background-attachment: local;
+	box-shadow: 0 .1em .2em rgba(0,0,0,.3) inset;
+}
+
+textarea:not(.editor),
+div.editor {
 	position: absolute;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	width: 100%;
-	padding: .6em 1em;
-	box-sizing: border-box;
-	background: hsl(200, 10%, 25%) linear-gradient(rgba(0,0,0,.1) 50%, transparent 0);
-	background-origin: content-box;
-	background-size: auto 3em;
-	background-attachment: local;
+
 	color: white;
 	line-height: 1.5;
-	box-shadow: 0 .1em .2em rgba(0,0,0,.3) inset;
+
+}
+
+textarea.editor,
+div.editor > pre {
+	line-height: inherit;
+}
+
+textarea.editor {
+	display: block;
+	color: white;
+	-webkit-text-fill-color: transparent;
+	white-space: pre;
+}
+
+div.editor > pre {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+	padding: .6em 1em;
+	margin: 0;
+	pointer-events: none;
 }
 
 .slide {
 	display: flex;
 	flex-flow: column;
+	align-items: stretch;
 	padding: 2.5rem;
 	background-color: black;
 	color: white;
@@ -98,9 +138,10 @@ textarea {
 		text-shadow: none;
 	}
 
-	.light.slide {
-		color: white;
-		background: black;
+	.light.slide,
+	.demo.slide {
+		background: hsl(200, 40%, 90%);
+		color: black;
 	}
 
 	.slide > h1 {
@@ -180,3 +221,20 @@ code.de-emphasize {
 	line-height: 1;
 	color: #ccc;
 }
+
+dialog {
+	padding: 1em;
+	border: 1px solid rgba(0,0,0,.5);
+	box-shadow: .1em .1em .5em rgba(0,0,0,.5);
+}
+
+	dialog > h1 {
+		background: hsl(200, 20%, 50%);
+		color: white;
+		margin: -.85em -.85em 0;
+		padding: 0 .5em .1em;
+	}
+
+	dialog > :last-child {
+		margin-bottom: 0;
+	}

@@ -1,37 +1,32 @@
 var slideshow = new SlideShow();
 var $ = Bliss;
 
-/*StyleFix.register(function(css, raw) {
-	if (PrefixFree.Prefix + 'Filter' in document.body.style) {
-		css = css.replace(/\bfilter:/ig, PrefixFree.prefix + 'filter:');
-	}
+(function($, $$){
 
-	return css;
-});*/
+function createEditor(slide, label, o = {}) {
+	var lang = o.lang || label;
 
-function insertText(element, text) {
-	var textEvent = document.createEvent('TextEvent');
-
-	textEvent.initTextEvent('textInput', true, true, null, text);
-
-	element.dispatchEvent(textEvent);
+	return $.create("textarea", {
+		id: `${slide.id}-${label}-editor`,
+		className: `language-${lang} editor`,
+		"data-lang": lang,
+		inside: slide,
+		value: o.fromSource(),
+		events: {
+			input: o.toSource
+		}
+	});
 }
 
-$$(".tasty.slide").forEach(function(slide){
-	slide.classList.add("dont-resize");
-});
+$$('[data-edit]').forEach(element => {
+	var edit = element.getAttribute("data-edit").split(/\s+/);
+	var slide = element.closest(".slide");
+	var editors = element._.data.editors = {};
 
-$$(".pie").forEach(function(slide){
-	slide.classList.add("show-html");
-});
-
-$$(".edit-html").forEach(element => {
-	$.create("textarea", {
-		className: "editor",
-		inside: element.closest(".slide"),
-		value: element.outerHTML.replace("edit-html", "").replace('class=""', ""),
-		events: {
-			input: function(evt) {
+	if (edit.indexOf("html") > -1) {
+		editors.html = createEditor(slide, "html", {
+			fromSource: () => element.outerHTML.replace(/\s*data-edit=".+?"|=""(?=\s|>)/g, ""),
+			toSource: function() {
 				var pos = {
 					parent: element.parentNode,
 					next: element.nextSibling,
@@ -41,85 +36,94 @@ $$(".edit-html").forEach(element => {
 				element.outerHTML = this.value;
 
 				element = pos.prev? pos.prev.nextSibling :
-				          pos.next? pos.next.previousSibling :
-				          pos.parent.childNodes[0];
+						  pos.next? pos.next.previousSibling :
+						  pos.parent.childNodes[0];
 			}
-		}
-	})
-});
+		});
 
-$$("textarea.editor").forEach(textarea => {
-	new Incrementable(textarea);
-
-	textarea.addEventListener("keyup", function(evt){
-		if (evt.keyCode == 13) { // Enter
-			// Get indent
-			var before = this.value.slice(0, this.selectionStart-1);
-			var indents = before.match(/^\s*/mg);
-			var indent = indents && indents[indents.length - 1];
-
-			if (indent) {
-				insertText(this, indent);
-			}
-		}
-	});
-
-	textarea.addEventListener("keydown", function(evt){
-		if (evt.keyCode == 9) { // Tab
-			insertText(this, "\t");
-			evt.preventDefault();
-		}
-	});
-});
-
-$$('.show-html').forEach(function(element) {
-
-	element.onmouseenter = function (evt) {
-		if (!element.tooltip) {
-			element.tooltip = document.createElement('pre');
-
-			var code = document.createElement('code');
-			var attrs = {};
-
-			["class", "data-originalstyle", "data-originalcssText"].forEach(function(attr){
-				attrs[attr] = element.getAttribute(attr);
-
-				if (attr != "class") {
-					element.removeAttribute(attr);
-				}
+		if (!slide.classList.contains("dont-enlarge")) {
+			$.create("div", {
+				className: "enlarge",
+				around: element
 			});
-
-			element.classList.remove('show-html');
-			element.classList.remove('subject');
-
-			code.textContent = element.outerHTML || element.innerHTML;
-
-			for (var attr in attrs) {
-				var value = attrs[attr];
-
-				if (value != null) {
-					element.setAttribute(attr, value);
-				}
-			}
-
-			element.tooltip.className = 'tooltip';
-			code.className = 'language-markup';
-
-			element.tooltip.appendChild(code);
-
-			SlideShow.getSlide(element).appendChild(element.tooltip);
-
-			Prism.highlightElement(code);
 		}
+	}
+	else if (edit.indexOf("contents") > -1) {
+		editors.contents = createEditor(slide, "contents", {
+			lang: "html",
+			fromSource: () => Prism.plugins.NormalizeWhitespace.normalize(element.innerHTML.replace(/=""(?=\s|>)/g, "")),
+			toSource: function() {
+				element.innerHTML = this.value
+			}
+		});
+	}
 
-		element.tooltip.style.top = evt.clientY - 10 + 'px';
+	if (edit.indexOf("css") > -1) {
+		var style = $("style[data-slide]", slide) || $.create("style", {
+			"data-slide": "",
+			inside: slide
+		});
 
-		element.tooltip.classList.add('active');
+		editors.css = createEditor(slide, "css", {
+			fromSource: () => style.textContent,
+			toSource: function() {
+				style.textContent = this.value
+			}
+		});
+	}
 
-		element.tooltip.style.left = Math.min(innerWidth - element.tooltip.offsetWidth - 10, evt.clientX) + 'px';
-	};
+	if (edit.length > 1) {
+		// More than 1 editors, need the ability to toggle
+		var editorKeys = Object.keys(editors);
 
-	element.onmouseleave = function () {
-		element.tooltip.classList.remove('active');
+		requestAnimationFrame(() => {
+			editorKeys.forEach((label, i) => {
+				var editor = editors[label];
+
+				editor.parentNode.hidden = i > 0;
+
+				$.create("label", {
+					htmlFor: editor.id,
+					after: editor,
+					textContent: editor.dataset.lang,
+					tabIndex: "0",
+					onclick: function() {
+						editor.parentNode.setAttribute("hidden", "");
+						(editors[editorKeys[i+1]] || editors[editorKeys[0]]).parentNode.removeAttribute("hidden");
+					}
+				});
+			});
+		});
+
 	}
 });
+
+(function() {
+	var resize = evt => {
+		var textarea = evt.type == "input"? evt.target : $("textarea.editor", evt.target);
+
+		if (textarea && textarea.matches("textarea.editor")) {
+			textarea.style.height = "0";
+			textarea.parentNode.style.fontSize = "";
+
+			textarea.style.height = textarea.scrollHeight + "px";
+
+			var cs = getComputedStyle(textarea);
+
+			if (cs.height == cs.maxHeight) {
+				var ratio = Math.min(2, textarea.scrollHeight/textarea.offsetHeight) - 1;
+				textarea.parentNode.style.fontSize = 100 - Math.round(50 * ratio) + "%";
+			}
+		}
+	};
+
+	$.events(document.documentElement, "slidechange input", resize);
+	window.addEventListener("load", evt => {
+		requestAnimationFrame(() => resize({target: slideshow.currentSlide}));
+	})
+
+})();
+
+
+
+})(Bliss, Bliss.$);
