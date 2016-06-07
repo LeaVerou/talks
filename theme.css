@@ -231,7 +231,7 @@ dialog {
 	dialog > h1 {
 		background: hsl(200, 20%, 50%);
 		color: white;
-		margin: -.85em -.85em 0;
+		margin: -.85em -.85em 1em;
 		padding: 0 .5em .1em;
 	}
 

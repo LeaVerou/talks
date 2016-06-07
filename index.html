@@ -90,7 +90,7 @@
 	</header>
 
 	<article class="slide" id="semantic">
-		<ul class="elements">
+		<ul class="values elements">
 			<li>article</li>
 			<li>section</li>
 			<li>header</li>
@@ -239,6 +239,53 @@
 			<input type="email" />
 		</div>
 	</article>
+	<article class="slide" id="autocomplete-values">
+		<ul class="values">
+			<li class="personal">name</li>
+			<li class="personal">honorific-prefix</li>
+			<li class="personal">given-name</li>
+			<li class="personal">additional-name</li>
+			<li class="personal">family-name</li>
+			<li class="personal">honorific-suffix</li>
+			<li class="personal">nickname</li>
+			<li class="personal">username</li>
+			<li class="personal">new-password</li>
+			<li class="personal">current-password</li>
+			<li class="personal">organization-title</li>
+			<li class="personal">organization</li>
+			<li class="personal">language</li>
+			<li class="personal">sex</li>
+			<li class="personal">url</li>
+			<li class="personal">photo</li>
+			<li class="addr">street-address</li>
+			<li class="addr">address-line1</li>
+			<li class="addr">address-line2</li>
+			<li class="addr">address-line3</li>
+			<li class="addr">address-level4</li>
+			<li class="addr">address-level3</li>
+			<li class="addr">address-level2</li>
+			<li class="addr">address-level1</li>
+			<li class="addr">country</li>
+			<li class="addr">country-name</li>
+			<li class="addr">postal-code</li>
+			<li class="bday">bday</li>
+			<li class="bday">bday-day</li>
+			<li class="bday">bday-month</li>
+			<li class="bday">bday-year</li>
+			<li class="cc">cc-name</li>
+			<li class="cc">cc-given-name</li>
+			<li class="cc">cc-additional-name</li>
+			<li class="cc">cc-family-name</li>
+			<li class="cc">cc-number</li>
+			<li class="cc">cc-exp</li>
+			<li class="cc">cc-exp-month</li>
+			<li class="cc">cc-exp-year</li>
+			<li class="cc">cc-csc</li>
+			<li class="cc">cc-type</li>
+			<li class="currency">transaction-currency</li>
+			<li class="currency">transaction-amount</li>
+		</ul>
+	</article>
 </section>
 
 <section>
@@ -276,8 +323,8 @@
 	<header class="slide">
 		<h1>&lt;details> & &lt;summary></h1>
 	</header>
-	<article class="demo slide">
-		<details data-edit="html">
+	<article class="demo slide dont-enlarge">
+		<details data-edit="html css">
 	<summary>My title</summary>
 	Content
 </details>
@@ -289,6 +336,7 @@
 		<h1>&lt;dialog></h1>
 	</header>
 	<article class="demo slide dont-enlarge">
+		<!-- open attribute, dialog.showModal(), ::backdrop, Esc to close, dialog.close() -->
 		<div data-edit="contents css">
 			<dialog id="dialog">
 				<h1>Ceiling cat is watching</h1>
@@ -298,11 +346,11 @@
 	</article>
 
 	<article class="demo slide dont-enlarge">
+		<!-- method=dialog, returnValue, close event -->
 		<div data-edit="contents css">
 			<button onclick="confirmation.showModal()">Confirm</button>
 			<dialog id="confirmation">
-				<h1>Confirmation</h1>
-				<p>Are you human?</p>
+				<h1>Are you human?</h1>
 				<form method="dialog">
 					<button type="submit" value="Yes">Yes</button>
 					<button type="submit" value="No">No</button>
@@ -329,8 +377,8 @@
 <script src="../bliss/bliss.min.js"></script>
 <script src="../csss/slideshow.js"></script>
 <script src="prism.js"></script>
-<script src="../csss/plugins/css-edit.js"></script>
-<script src="../csss/plugins/css-snippets.js"></script>
+<!-- <script src="../csss/plugins/css-edit.js"></script>
+<script src="../csss/plugins/css-snippets.js"></script> -->
 <script src="../incrementable/incrementable.js"></script>
 <script src="../multirange/multirange.js"></script>
 <script src="editor.js"></script>

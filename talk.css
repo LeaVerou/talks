@@ -234,10 +234,13 @@ footer.slide {
 			text-decoration: none;
 		}
 
-		ul.elements {
+		ul.values {
 			list-style: none;
 			column-count: 2;
 			font-family: var(--font-mono);
+		}
+
+		ul.elements {
 			color: yellow;
 		}
 
@@ -340,4 +343,37 @@ footer.slide {
 
 	.editor label:hover {
 		background: hsl(15, 100%, 45%);
+	}
+
+#autocomplete-values ul {
+	font-size: 58%;
+	column-count: 3;
+	margin: 0;
+}
+
+	#autocomplete-values li::before {
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: .3em;
+		font-size: 120%;
+	}
+
+	#autocomplete-values li.cc::before {
+		content: "💳";
+	}
+
+	#autocomplete-values li.addr::before {
+		content: "🏠";
+	}
+
+	#autocomplete-values li.bday::before {
+		content: "🎂"
+	}
+
+	#autocomplete-values li.personal::before {
+		content: "📇"
+	}
+
+	#autocomplete-values li.currency::before {
+		content: "💰"
 	}
