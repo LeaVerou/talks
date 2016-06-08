@@ -173,7 +173,7 @@ div.editor > pre {
 section > header.slide {
 	align-items: center;
 	justify-content: center;
-	background: url(img/piettern.png);
+	background: url(img/htmlwallpaper.jpg) 50% 69% / cover;
 }
 
 section > header.slide:target {
@@ -215,11 +215,13 @@ code.de-emphasize {
 
 .hint {
 	position: absolute;
-	bottom: 0;
+	top: -5px;
 	left: 10px;
 	font-size: .8rem;
+	font-weight: bold;
 	line-height: 1;
-	color: #ccc;
+	color: rgba(0,0,0,.15);
+	mix-blend-mode: multiply;
 }
 
 dialog {

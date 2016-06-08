@@ -2,6 +2,8 @@
 
 var _ = Prism.Live = $.Class({
 	constructor: function(textarea) {
+		_.all.set(textarea, this);
+
 		this.textarea = textarea;
 
 		var cs = getComputedStyle(textarea);
@@ -28,8 +30,7 @@ var _ = Prism.Live = $.Class({
 
 		$.events(textarea, {
 			input: evt => {
-				this.code.textContent = this.textarea.value;
-				Prism.highlightElement(this.code);
+				this.update();
 			},
 
 			keyup: evt => {
@@ -127,6 +128,11 @@ var _ = Prism.Live = $.Class({
 		this.textarea.selectionEnd = v;
 	},
 
+	update: function() {
+		this.code.textContent = this.textarea.value;
+		Prism.highlightElement(this.code);
+	},
+
 	syncScroll: function() {
 		this.pre.scrollTop = this.textarea.scrollTop;
 		this.pre.scrollLeft = this.textarea.scrollLeft;
@@ -176,8 +182,10 @@ var _ = Prism.Live = $.Class({
 	},
 
 	static: {
+		all: new WeakMap(),
 		snippets: {
-			"test": "Snippets work!"
+			"test": "Snippets work!",
+			"submit": '<button type="submit">Submit</button>'
 		}
 	}
 });

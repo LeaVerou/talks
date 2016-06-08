@@ -25,7 +25,6 @@
 	<h1>
 		HTML Secrets
 	</h1>
-	<p>HTML can do whaaat?!</p>
 	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
 </header>
 
@@ -49,7 +48,7 @@
 		<div class="delayed">
 			<p>I make stuff</p>
 			<ul>
-				<li><a href="http://prismjs.com">PrismJS</a></li>
+				<li><a href="http://prismjs.com">Prism</a></li>
 				<li><a href="http://leaverou.github.io/prefixfree">-prefix-free</a></li>
 				<li><a href="http://blissfuljs.com">Bliss</a></li>
 				<li><a href="http://css3test.com">css3test.com</a></li>
@@ -82,6 +81,10 @@
 			★★★★★ on Amazon
 		</a>
 	</section>
+
+	<article class="hi slide" id="why-html">
+		<h1>HTML?!</h1>
+	</article>
 </section>
 
 <section>
@@ -177,6 +180,115 @@
 		</div>
 	</article>
 
+	<article class="slide" id="browsers">
+		<img src="img/chrome-logo.svg" alt="">
+		<img src="img/firefox-logo.svg" alt="">
+		<img src="img/opera-logo.svg" alt="">
+		<img src="img/safari-logo.png" alt="">
+		<img src="img/edge-logo.svg" alt="">
+		<a class="delayed" href="http://caniuse.com">caniuse.com</a>
+	</article>
+
+	<article class="slide" id="polyfills">
+		<a class="delayed" href="https://github.com/search?q=details+polyfill" target="_blank">github.com/search?q=details+polyfill</a>
+		<img src="img/polyfilla.png" alt="">
+	</article>
+</section>
+
+<section id="a-download">
+	<header class="slide">
+		<h1>&lt;a download></h1>
+	</header>
+	<article class="demo slide">
+		<div data-edit="contents">
+			<a href="js/prism.js" target="_blank">PrismJS</a>
+		</div>
+	</article>
+	<article class="demo slide">
+		<p class="hint">application/octet-stream, filename</p>
+		<div data-edit="contents">
+			<a href="data:text/javascript,alert('foo')"
+			   target="_blank">FooJS</a>
+		</div>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>&lt;input type="file"></h1>
+	</header>
+	<article class="demo slide">
+		<p class="hint">multiple, accept=mime, accept=extensions</p>
+		<input type="file" data-edit="html">
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>&lt;dialog></h1>
+	</header>
+	<article class="demo slide dont-enlarge" data-keys="Esc">
+		<p class="hint">open attribute, dialog.showModal(), Esc to close, dialog.close(), ::backdrop</p>
+		<div data-edit="contents css">
+			<dialog id="dialog">
+				<h1>Ceiling cat is watching</h1>
+				<p>Greetings, hoomans.</p>
+			</dialog>
+		</div>
+	</article>
+
+	<article class="demo slide dont-enlarge" data-keys="Esc Enter">
+		<p class="hint">method=dialog, returnValue, close event</p>
+		<div data-edit="contents css">
+			<button onclick="confirmation.showModal()">Confirm</button>
+			<dialog id="confirmation">
+				<h1>Are you a cat?</h1>
+				<form method="dialog">
+					<button value="Yes">Yes</button>
+					<button value="No">No</button>
+					<button value="404">File Not Found</button>
+				</form>
+			</dialog>
+		</div>
+
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>&lt;iframe></h1>
+	</header>
+	<article class="demo slide" id="iframe-demo">
+		<p class="hint">data:, srcdoc | sandbox</p>
+		<iframe src="about:blank" data-edit="html"></iframe>
+	</article>
+	<article class="slide" id="srcdoc-polyfill">
+		<pre class="language-javascript no-whitespace-normalization"><code>
+if (!("srcdoc" in document.createElement("iframe"))) {
+	</code><code class="delayed">$$("iframe[srcdoc]:not([src])").forEach(iframe => {
+		var doc = iframe.getAttribute("srcdoc");
+		iframe.src = "data:text/html," + doc;
+	});</code><code>
+}</code></pre>
+	</article>
+	<article class="slide" data-import="iframe-demo"></article>
+	<article class="slide dont-resize" id="sandbox-values" data-source="https://www.flickr.com/photos/katrinkaphotobug/4698001482/">
+		<!-- https://html.spec.whatwg.org/multipage/embedded-content.html#attr-iframe-sandbox -->
+
+		<ul>
+			<li><a href=browsers.html#attr-iframe-sandbox-allow-forms>forms</a></li>
+			<li><a href=browsers.html#attr-iframe-sandbox-allow-top-navigation>top-navigation</a></li>
+			<li><a href=browsers.html#attr-iframe-sandbox-allow-scripts>scripts</a></li>
+			<li><a href=browsers.html#attr-iframe-sandbox-allow-modals>modals</a></li>
+			<li><a href=browsers.html#attr-iframe-sandbox-allow-popups>popups</a></li>
+			<li><a href=browsers.html#attr-iframe-sandbox-allow-same-origin>same-origin</a></li>
+			<li><a href=browsers.html#attr-iframe-sandbox-allow-orientation-lock>orientation-lock</a></li>
+			<li><a href=browsers.html#attr-iframe-sandbox-allow-pointer-lock>pointer-lock</a></li>
+			<li><a href=browsers.html#attr-iframe-sandbox-allow-presentation>presentation</a></li>
+			<li><a href=browsers.html#attr-iframe-sandbox-allow-popups-to-escape-sandbox>popups-to-escape-sandbox</a></li>
+		</ul>
+
+	</article>
 </section>
 
 <section>
@@ -186,48 +298,12 @@
 	<article class="demo slide">
 		<input type="range" data-edit="html" />
 	</article>
+	<article class="slide" data-src="https://codepen.io/collection/DgYaMj"></article>
 	<article class="demo slide">
 		<input type="range" multiple value="10,80" data-edit="html" />
 	</article>
+	<article class="image slide" style="background-image: url(img/please.jpg)"></article>
 	<article class="slide" data-src="../multirange/index.html" data-title="http://leaverou.github.io/multirange/"></article>
-</section>
-
-<section>
-	<header class="slide">
-		<h1>&lt;datalist></h1>
-	</header>
-	<article class="demo slide">
-		<div data-edit="contents">
-			<input list="countries" />
-			<datalist id="countries">
-				<option>Greece</option>
-				<option>United Kingdom</option>
-				<option>United States</option>
-			</datalist>
-		</div>
-	</article>
-	<article class="demo slide">
-		<div data-edit="contents">
-			<input type="range" list="ticks" />
-			<datalist id="ticks">
-				<option>50</option>
-			</datalist>
-		</div>
-	</article>
-	<article class="demo slide">
-		<div data-edit="contents">
-			<input type="color" value="#ff0066" />
-		</div>
-	</article>
-	<article class="demo slide">
-		<div data-edit="contents">
-			<input type="color" list="palette" />
-			<datalist id="palette">
-				<option>#ff0066</option>
-				<option>#00aacc</option>
-			</datalist>
-		</div>
-	</article>
 </section>
 
 <section>
@@ -290,32 +366,39 @@
 
 <section>
 	<header class="slide">
-		<h1>&lt;a download></h1>
+		<h1>&lt;datalist></h1>
 	</header>
 	<article class="demo slide">
 		<div data-edit="contents">
-			<a href="prism.js" target="_blank">PrismJS</a>
+			<input list="countries" />
+			<datalist id="countries">
+				<option>Greece</option>
+				<option>United Kingdom</option>
+				<option>United States</option>
+			</datalist>
 		</div>
 	</article>
-</section>
-
-<section>
-	<header class="slide">
-		<h1>&lt;input type="file"></h1>
-	</header>
 	<article class="demo slide">
-		<!-- multiple, accept=mime, accept=extensions -->
-		<input type="file" data-edit="html">
+		<div data-edit="contents">
+			<input type="range" list="ticks" />
+			<datalist id="ticks">
+				<option>50</option>
+			</datalist>
+		</div>
 	</article>
-</section>
-
-<section>
-	<header class="slide">
-		<h1>&lt;iframe></h1>
-	</header>
 	<article class="demo slide">
-		<!-- srcdoc, sandbox -->
-		<iframe src="about:blank" data-edit="html"></iframe>
+		<div data-edit="contents">
+			<input type="color" value="#ff0066" />
+		</div>
+	</article>
+	<article class="demo slide">
+		<div data-edit="contents">
+			<input type="color" list="palette" />
+			<datalist id="palette">
+				<option>#ff0066</option>
+				<option>#00aacc</option>
+			</datalist>
+		</div>
 	</article>
 </section>
 
@@ -323,44 +406,87 @@
 	<header class="slide">
 		<h1>&lt;details> & &lt;summary></h1>
 	</header>
-	<article class="demo slide dont-enlarge">
+	<article class="demo slide dont-enlarge" id="details-demo" data-keys="Tab Enter">
 		<details data-edit="html css">
 	<summary>My title</summary>
 	Content
 </details>
 	</article>
+	<article class="demo slide dont-enlarge" id="accordion-demo" data-keys="Tab Enter">
+		<div data-edit="contents">
+			<div class="accordion">
+				<details>
+					<summary>First section</summary> Content
+				</details>
+				<details>
+					<summary>Other section</summary> More Content
+				</details>
+				<details>
+					<summary>Third section</summary> Even More Content
+				</details>
+			</div>
+			<script>
+			document.body.addEventListener("toggle", evt => {
+				if (evt.target.open) {
+					$$("details", evt.target.closest(".accordion")).forEach(details => {
+						if (details != evt.target) details.open = false;
+					});
+				}
+			}, true);
+			</script>
+		</div>
+	</article>
+	<article class="slide">
+		<pre><code class="language-css">
+		details::marker {
+			content: "+";
+		}
+
+		details[open]::marker {
+			content: "-";
+		}</code></pre>
+	</article>
 </section>
 
-<section>
+
+
+<section id="validation">
 	<header class="slide">
-		<h1>&lt;dialog></h1>
+		<h1>HTML Constraint Validation</h1>
 	</header>
-	<article class="demo slide dont-enlarge">
-		<!-- open attribute, dialog.showModal(), ::backdrop, Esc to close, dialog.close() -->
-		<div data-edit="contents css">
-			<dialog id="dialog">
-				<h1>Ceiling cat is watching</h1>
-				<p>Greetings, hoomans.</p>
-			</dialog>
-		</div>
+	<article class="demo slide">
+		<p class="hint">minlength, :invalid, required</p>
+		<style data-slide>input:invalid {
+	border-color: rgba(200, 0, 0, .4);
+	background: #fdd;
+}</style>
+		<input maxlength="10" data-edit="html css">
 	</article>
-
-	<article class="demo slide dont-enlarge">
-		<!-- method=dialog, returnValue, close event -->
-		<div data-edit="contents css">
-			<button onclick="confirmation.showModal()">Confirm</button>
-			<dialog id="confirmation">
-				<h1>Are you human?</h1>
-				<form method="dialog">
-					<button type="submit" value="Yes">Yes</button>
-					<button type="submit" value="No">No</button>
-					<button type="submit" value="Maybe">Maybe?</button>
-				</form>
-			</dialog>
-		</div>
-
+	<article class="demo slide">
+		<p class="hint">a, a+, dynamic pattern, (?=.*[A-Z]).*\d+.*</p>
+		<style data-slide>input:invalid {
+	border-color: rgba(200, 0, 0, .4);
+	background: #fdd;
+}</style>
+		<input pattern="a" data-edit="html css">
+	</article>
+	<article class="slide" data-src="http://html5pattern.com"></article>
+	<article class="demo slide">
+		<p class="hint">setCustomValidity</p>
+		<style data-slide>input:invalid {
+	border-color: rgba(200, 0, 0, .4);
+	background: #fdd;
+}</style>
+		<form data-edit="html css">
+	<input>
+</form>
 	</article>
 </section>
+
+<article class="slide" id="specs">
+	<a href="https://www.w3.org/TR/html51/" id="w3c" target="_blank">w3.org/TR/html51</a>
+	<a href="https://html.spec.whatwg.org/multipage" id="whatwg" target="_blank">html.spec.whatwg.org</a>
+</article>
 
 <footer class="dark slide">
 	<img src="img/mark.svg" />

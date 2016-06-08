@@ -23,32 +23,16 @@ $$('[data-edit]').forEach(element => {
 	var slide = element.closest(".slide");
 	var editors = element._.data.editors = {};
 
-	if (edit.indexOf("html") > -1) {
-		editors.html = createEditor(slide, "html", {
-			fromSource: () => element.outerHTML.replace(/\s*data-edit=".+?"|=""(?=\s|>)/g, ""),
-			toSource: function() {
-				var pos = {
-					parent: element.parentNode,
-					next: element.nextSibling,
-					prev: element.previousSibling
-				};
+	if (edit.indexOf("html") > -1 || edit.indexOf("contents") > -1) {
+		if (edit.indexOf("html") > -1) {
+			element.removeAttribute("data-edit");
 
-				element.outerHTML = this.value;
-
-				element = pos.prev? pos.prev.nextSibling :
-						  pos.next? pos.next.previousSibling :
-						  pos.parent.childNodes[0];
-			}
-		});
-
-		if (!slide.classList.contains("dont-enlarge")) {
-			$.create("div", {
-				className: "enlarge",
-				around: element
+			element = $.create("div", {
+				around: element,
+				"data-edit": edit.join(" ").replace("html", "contents")
 			});
 		}
-	}
-	else if (edit.indexOf("contents") > -1) {
+
 		editors.contents = createEditor(slide, "contents", {
 			lang: "html",
 			fromSource: () => Prism.plugins.NormalizeWhitespace.normalize(element.innerHTML.replace(/=""(?=\s|>)/g, "")),
@@ -123,6 +107,47 @@ $$('[data-edit]').forEach(element => {
 	})
 
 })();
+
+$("#details-demo").addEventListener("toggle", function(evt) {
+
+	var textarea = $("textarea", this);
+
+	textarea.value = $("details").outerHTML.replace(/\s*data-edit=".+?"|=""(?=\s|>)/g, "");
+	Prism.Live.all.get(textarea).update();
+}, true);
+
+// Display certain keys pressed
+var keys = {
+	"Tab": 9,
+	"Enter": 13,
+	"Esc": 27,
+}
+
+var keyCodes = Object.keys(keys).map(key => keys[key]);
+
+document.addEventListener("keyup", function(evt) {
+	var code = evt.keyCode;
+	var i = keyCodes.indexOf(code);
+
+	if (i > -1 && evt.target.nodeName != "TEXTAREA") {
+		var element = slideshow.currentSlide;
+		var label = Object.keys(keys)[i];
+
+		if (element && element.matches(`[data-keys~=${label}]`)) {
+			label = label.replace("Tab", "⇥").replace("Enter", "⏎")
+			label = (evt.ctrlKey? "⌃" : "") + (evt.shiftKey? "⇧" : "") + (evt.metaKey? "⌘" : "") + (evt.altKey? "⌥" : "") + label;
+
+			var key = $.create("kbd", {
+				textContent: label,
+				inside: element
+			});
+
+			setTimeout(() => {
+				$.transition(key, {opacity: 0}).then($.remove);
+			}, 800);
+		}
+	}
+});
 
 
 

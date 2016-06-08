@@ -100,6 +100,12 @@
 			background-size: auto, 100% auto;
 		}
 
+		#why-html h1 {
+			font-size: 500%;
+			margin: auto;
+			letter-spacing: -.05em;
+		}
+
 #lesbian {
 	background: url(img/greece.svg) no-repeat center / auto 90vh #f06;
 	background-origin: content-box;
@@ -235,13 +241,19 @@ footer.slide {
 		}
 
 		ul.values {
+			margin: 0;
 			list-style: none;
 			column-count: 2;
 			font-family: var(--font-mono);
 		}
 
+			ul.values a:not(:hover) {
+				text-decoration: none;
+			}
+
 		ul.elements {
 			color: yellow;
+			font-size: 120%;
 		}
 
 			ul.elements li::before,
@@ -305,22 +317,74 @@ footer.slide {
 				background: hsla(0,0%,100%,.1);
 			}
 
+#browsers {
+	display: block;
+	text-align: center;
+	padding-top: 25vh;
+	background: hsl(200, 10%, 20%);
+}
+
+	#browsers img {
+		display: inline-block;
+		vertical-align: top;
+		max-width: 15vmax;
+		margin: 0 .2em;
+	}
+
+	#browsers a {
+		display: block;
+		margin-top: 1em;
+		font-weight: bold;
+		font-size: 200%;
+	}
+
+		#browsers a:not(:hover) {
+			text-decoration: none;
+		}
+
+#polyfills {
+	display: block;
+	background: hsl(200, 15%, 40%);
+	text-align: center;
+}
+
+	#polyfills img {
+		position: absolute;
+		bottom: -70px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	#polyfills a {
+		font-weight: bold;
+		font-size: 150%;
+	}
+
+		#polyfills a:not(:hover) {
+			text-decoration: none;
+		}
+
 .demo.slide {
 	text-align: center;
 }
 
-	.demo.slide input {
+	.demo.slide input:not([type=checkbox]) {
 		width: -webkit-fill-available;
 		display: block;
 	}
 
-	.demo.slide .enlarge iframe {
+	.demo.slide input[type=file] {
+		display: inline-block;
+		width: fit-content;
+		max-width: 15vw;
+	}
+
+	.demo.slide iframe {
 		border-width: 1px;
 		background: white;
 	}
 
-	.demo.slide:not(.dont-enlarge) [data-edit="contents"],
-	.demo.slide:not(.dont-enlarge) .enlarge {
+	.demo.slide:not(.dont-enlarge) [data-edit="contents"] {
 		width: 30%;
 		margin: 0 auto;
 		transform: scale(3);
@@ -376,4 +440,110 @@ footer.slide {
 
 	#autocomplete-values li.currency::before {
 		content: "💰"
+	}
+
+#a-download [data-edit] a {
+	font-weight: bold;
+	color: hsl(200, 30%, 40%);
+}
+
+#sandbox-values {
+	padding: 0;
+	background: url(img/sandbox.jpg) right / 125% auto;
+}
+
+	#sandbox-values ul {
+		padding: 1em;
+		margin: 0 0 0 calc(100vw - 19em);
+		list-style: none;
+		background: rgba(0,0,0,.65);
+		font-family: var(--font-mono);
+		backdrop-filter: blur(4px);
+	}
+
+		#sandbox-values a:not(:hover) {
+			text-decoration: none;
+		}
+
+		#sandbox-values li a::before {
+			content: "allow-";
+			opacity: .6;
+		}
+
+details {
+	text-align: left;
+}
+
+#details-demo details {
+	width: fit-content;
+	margin: 0 auto;
+}
+
+.accordion > details {
+	padding: 0 1em;
+	background: white;
+	border: 1px solid rgba(0,0,0,.8);
+}
+
+.accordion > details + details {
+	border-top: 0;
+}
+
+	.accordion > details > summary {
+		padding: 0 .4em;
+		margin: 0 -1em;
+		background: hsl(200, 25%, 55%);
+		color: white;
+		font-weight: bold;
+		cursor: pointer;
+	}
+
+	.accordion > details > summary:hover,
+	.accordion > details > summary:focus {
+		background: hsl(200, 25%, 45%);
+	}
+
+kbd {
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
+	padding: .1em .5em;
+	border: 1px solid rgba(0,0,0,.3);
+	border-radius: .3em;
+	background: linear-gradient(rgba(0,0,0,.2), transparent) #eee;
+	font-size: 120%;
+	font-weight: bold;
+	font-family: var(--font-body);
+	box-shadow: 4px 4px hsl(0,0%,40%);
+}
+
+#srcdoc-polyfill pre {
+	font-size: 94%;
+}
+
+#specs {
+	color: white;
+	padding: 0;
+}
+
+	#specs > a {
+		flex: 1;
+		padding: 1em;
+		background: no-repeat left / auto 100% content-box border-box;
+		text-align: right;
+		font-size: 180%;
+	}
+
+		#specs > a:not(:hover) {
+			text-decoration: none;
+		}
+
+	#specs #w3c {
+		background-image: url(img/w3c.svg);
+		background-color: #1a5e9a;
+	}
+
+	#specs #whatwg {
+		background-image: url(img/whatwg.svg);
+		background-color: #3c790a;
 	}
