@@ -121,6 +121,7 @@ var keys = {
 	"Tab": 9,
 	"Enter": 13,
 	"Esc": 27,
+	"DownArrow": 40
 }
 
 var keyCodes = Object.keys(keys).map(key => keys[key]);
@@ -134,7 +135,9 @@ document.addEventListener("keyup", function(evt) {
 		var label = Object.keys(keys)[i];
 
 		if (element && element.matches(`[data-keys~=${label}]`)) {
-			label = label.replace("Tab", "⇥").replace("Enter", "⏎")
+			label = label.replace("Tab", "⇥")
+			             .replace("Enter", "⏎")
+						 .replace("DownArrow", "↓");
 			label = (evt.ctrlKey? "⌃" : "") + (evt.shiftKey? "⇧" : "") + (evt.metaKey? "⌘" : "") + (evt.altKey? "⌥" : "") + label;
 
 			var key = $.create("kbd", {
@@ -144,7 +147,7 @@ document.addEventListener("keyup", function(evt) {
 
 			setTimeout(() => {
 				$.transition(key, {opacity: 0}).then($.remove);
-			}, 800);
+			}, 600);
 		}
 	}
 });

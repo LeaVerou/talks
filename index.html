@@ -310,7 +310,7 @@ if (!("srcdoc" in document.createElement("iframe"))) {
 	<header class="slide">
 		<h1>autocomplete</h1>
 	</header>
-	<article class="demo slide">
+	<article class="demo slide dont-enlarge" data-keys="Enter DownArrow">
 		<div data-edit="contents">
 			<input type="email" />
 		</div>
@@ -407,6 +407,7 @@ if (!("srcdoc" in document.createElement("iframe"))) {
 		<h1>&lt;details> & &lt;summary></h1>
 	</header>
 	<article class="demo slide dont-enlarge" id="details-demo" data-keys="Tab Enter">
+		<p class="hint">no summary, details[open]</p>
 		<details data-edit="html css">
 	<summary>My title</summary>
 	Content
@@ -491,12 +492,14 @@ if (!("srcdoc" in document.createElement("iframe"))) {
 <footer class="dark slide">
 	<img src="img/mark.svg" />
 	<h1>Thank you!</h1>
+	<p style="margin-top: 0">Give me feedback! <a href="https://docs.google.com/forms/d/1k5av2WJvOfiY2AoDMe0WTZJFYJtyFDPXhQJd8SBudJQ/viewform">shoutkey.com/grow</a></p>
 	<ul>
-		<li><a href="mailto:lea@w3.org">lea@verou.me</a></li>
-		<li><a href="http://lea.verou.me">lea.verou.me</a></li>
-		<li><a href="http://twitter.com/leaverou">@leaverou</a></li>
+		<li style="--icon: '📨'"><a href="mailto:lea@w3.org">lea@verou.me</a></li>
+		<li style="--icon: '🌍'"><a href="http://lea.verou.me">lea.verou.me</a></li>
+		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
 	</ul>
-	<p>Slides: <a href="http://leaverou.github.io/missing-slice">leaverou.github.io/missing-slice</a></p>
+
+	<p>Slides: <a href="https://leaverou.github.io/html-secrets">leaverou.github.io/html-secrets</a></p>
 	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
 </footer>
 

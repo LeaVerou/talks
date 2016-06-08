@@ -221,7 +221,7 @@
 
 footer.slide {
 	text-align: center;
-	padding-top: 1em;
+	padding: 1em 0 0;
 }
 
 	footer.slide h1 {
@@ -229,93 +229,107 @@ footer.slide {
 	}
 
 	footer.slide > ul {
-		margin: auto;
-		width: 6em;
-		color: #f06;
-		text-align: left;
+		margin: 0 auto;
+		padding: 0 2em;
+		width: 100%;
+		box-sizing: border-box;
+		display: flex;
+		list-style: none;
+		background: #f06;
+		text-align: center;
 	}
 
+		footer.slide > ul li {
+			flex: 1
+		}
+
+		footer.slide > ul li::before {
+			content: var(--icon);
+			display: inline-block;
+			margin-right: .2em;
+		}
+
 		footer.slide > ul a {
-			color: white;
 			text-decoration: none;
+			font-weight: 500;
 		}
 
-		ul.values {
-			margin: 0;
-			list-style: none;
-			column-count: 2;
-			font-family: var(--font-mono);
-		}
+ul.values {
+	margin: 0;
+	list-style: none;
+	column-count: 2;
+	font-family: var(--font-mono);
+}
 
-			ul.values a:not(:hover) {
-				text-decoration: none;
-			}
+	ul.values a:not(:hover) {
+		text-decoration: none;
+	}
 
-		ul.elements {
-			color: yellow;
-			font-size: 120%;
-		}
+ul.elements {
+	color: yellow;
+	font-size: 120%;
+}
 
-			ul.elements li::before,
-			ul.elements li::after {
-				color: #999;
-			}
+	ul.elements li::before,
+	ul.elements li::after {
+		color: #999;
+	}
 
-			ul.elements li::before {
-				content: "<";
-			}
+	ul.elements li::before {
+		content: "<";
+	}
 
-			ul.elements li::after {
-				content: ">";
-			}
+	ul.elements li::after {
+		content: ">";
+	}
 
-		pre.html5,
-		pre.html4 {
-			position: relative;
-		}
+pre.html5,
+pre.html4 {
+	position: relative;
+}
 
-			pre.html5::before,
-			pre.html4::before {
-				content: "HTML5";
-				position: absolute;
-				top: 0;
-				right: 1em;
-				padding: .4em .5em;
-				border-radius: 0 0 .3em .3em;
-				background: hsl(20, 100%, 50%);
-				color: white;
-				font: bold 120%/1 var(--font-body);
-				font-family: var(--font-body);
-			}
+	pre.html5::before,
+	pre.html4::before {
+		content: "HTML5";
+		position: absolute;
+		top: 0;
+		right: 1em;
+		padding: .4em .5em;
+		border-radius: 0 0 .3em .3em;
+		background: hsl(20, 100%, 50%);
+		color: white;
+		font: bold 120%/1 var(--font-body);
+		font-family: var(--font-body);
+	}
 
-			pre.html4::before {
-				content: "HTML4";
-				background: hsl(40, 100%, 50%);
-				color: black;
-			}
+	pre.html4::before {
+		content: "HTML4";
+		background: hsl(40, 100%, 50%);
+		color: black;
+	}
 
-		#semantic-markup {
-			display: flex;
-			flex-flow: row;
-			padding: 0;
-		}
+#semantic-markup {
+	display: flex;
+	flex-flow: row;
+	padding: 0;
+}
 
-			#semantic-markup > div {
-				flex: 1;
-				display: flex;
-				flex-flow: row;
-			}
+	#semantic-markup > div {
+		flex: 1;
+		display: flex;
+		flex-flow: row;
+	}
 
-			#semantic-markup pre {
-				flex: 1;
-				margin: 0;
-				padding: 2em;
-				font-size: 2.2vh;
-			}
+	#semantic-markup pre {
+		flex: 1;
+		margin: 0;
+		padding: 2em;
+		font-size: 2.2vh;
+	}
 
-			#semantic-markup pre.html4 {
-				background: hsla(0,0%,100%,.1);
-			}
+	#semantic-markup pre.html4 {
+		background: hsla(0,0%,100%,.1);
+	}
 
 #browsers {
 	display: block;
@@ -377,6 +391,10 @@ footer.slide {
 		display: inline-block;
 		width: fit-content;
 		max-width: 15vw;
+	}
+
+	.demo.slide input:not([type]) + input:not([type]) {
+		margin-top: .1em;
 	}
 
 	.demo.slide iframe {
@@ -507,6 +525,7 @@ kbd {
 	position: absolute;
 	bottom: 1em;
 	right: 1em;
+	z-index: 2;
 	padding: .1em .5em;
 	border: 1px solid rgba(0,0,0,.3);
 	border-radius: .3em;
@@ -514,7 +533,7 @@ kbd {
 	font-size: 120%;
 	font-weight: bold;
 	font-family: var(--font-body);
-	box-shadow: 4px 4px hsl(0,0%,40%);
+	box-shadow: 3px 3px hsl(0,0%,40%), 3px 3px 10px rgba(0,0,0,.4);
 }
 
 #srcdoc-polyfill pre {
