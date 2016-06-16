@@ -41,11 +41,16 @@ code, textarea, pre {
 		font-size: inherit;
 	}
 
+	.slide > pre:only-child {
+		margin: auto;
+	}
+
 pre + pre {
 	margin-top: 1.5em;
 }
 
-input:not([type=file]) {
+input:not([type=file]),
+textarea:not([class]) {
 	font: inherit;
 	color: inherit;
 }
@@ -58,7 +63,8 @@ input:not([type=file]) {
 	input:not([type]),
 	input[type="text"],
 	input[type="email"],
-	input[type="tel"] {
+	input[type="tel"],
+	textarea:not([class]) {
 		background: white;
 		padding: 0 .3em;
 		border: .05em solid hsl(200, 40%, 80%);
@@ -68,7 +74,7 @@ button {
 	font: inherit;
 }
 
-textarea {
+textarea.editor {
 	border: 0;
 	outline: none;
 	width: 100%;
@@ -82,7 +88,6 @@ textarea {
 	box-shadow: 0 .1em .2em rgba(0,0,0,.3) inset;
 }
 
-textarea:not(.editor),
 div.editor {
 	position: absolute;
 	left: 0;
@@ -160,9 +165,10 @@ div.editor > pre {
 .iframe.slide > h1 {
 	/*bottom: .5em;
 	margin: 0;*/
-	background: black;
 	text-shadow: none;
 	font-weight: 100;
+	background: rgba(0,0,0,.5);
+	backdrop-filter: blur(4px);
 }
 
 .delayed.displayed,
@@ -233,8 +239,9 @@ dialog {
 	dialog > h1 {
 		background: hsl(200, 20%, 50%);
 		color: white;
-		margin: -.85em -.85em 1em;
+		margin: -1.25em -1.25em 1em;
 		padding: 0 .5em .1em;
+		font-size: 80%;
 	}
 
 	dialog > :last-child {

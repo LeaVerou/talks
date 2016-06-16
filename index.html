@@ -227,7 +227,7 @@
 	<header class="slide">
 		<h1>&lt;dialog></h1>
 	</header>
-	<article class="demo slide dont-enlarge" data-keys="Esc">
+	<article class="demo slide dont-enlarge" id="dialog-demo" data-keys="Esc">
 		<p class="hint">open attribute, dialog.showModal(), Esc to close, dialog.close(), ::backdrop</p>
 		<div data-edit="contents css">
 			<dialog id="dialog">
@@ -235,6 +235,14 @@
 				<p>Greetings, hoomans.</p>
 			</dialog>
 		</div>
+	</article>
+
+	<article class="slide" id="advisory">
+		<h1>
+			<span>Parental</span>
+			<span>Advisory</span>
+			<span>Inline Event Handlers</span>
+		</h1>
 	</article>
 
 	<article class="demo slide dont-enlarge" data-keys="Esc Enter">
@@ -265,9 +273,9 @@
 	<article class="slide" id="srcdoc-polyfill">
 		<pre class="language-javascript no-whitespace-normalization"><code>
 if (!("srcdoc" in document.createElement("iframe"))) {
-	</code><code class="delayed">$$("iframe[srcdoc]:not([src])").forEach(iframe => {
-		var doc = iframe.getAttribute("srcdoc");
-		iframe.src = "data:text/html," + doc;
+	</code><code class="delayed">$$("iframe[srcdoc]").forEach(iframe => {
+		var srcdoc = iframe.getAttribute("srcdoc");
+		iframe.src = "data:text/html," + srcdoc;
 	});</code><code>
 }</code></pre>
 	</article>
@@ -299,6 +307,55 @@ if (!("srcdoc" in document.createElement("iframe"))) {
 		<input type="range" data-edit="html" />
 	</article>
 	<article class="slide" data-src="https://codepen.io/collection/DgYaMj"></article>
+	<article class="demo slide" id="styled-slider">
+		<input type="range" data-edit="css" />
+		<style data-slide>input[type=range],
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; }
+
+input[type=range] { border-radius: .5em; }
+
+input[type=range]::-webkit-slider-runnable-track {
+	background: linear-gradient(to right, red, yellow, lime, aqua, blue, fuchsia, red);
+	border-radius: .2em;
+}
+
+input[type=range]::-moz-range-track {
+	background: linear-gradient(to right, red, yellow, lime, aqua, blue, fuchsia, red);
+	border-radius: .2em;
+}
+
+input[type=range]::-ms-track {
+	background: linear-gradient(to right, red, yellow, lime, aqua, blue, fuchsia, red);
+	border-radius: .2em;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	width: .5em;
+	height: 1em;
+	margin: -.03em 0;
+	border-radius: .15em;
+	border: 1px solid black;
+	box-shadow: 0 0 0 1px white;
+}
+
+input[type=range]::-moz-range-thumb {
+	width: 1em;
+	height: 2.3em;
+	border-radius: .15em;
+	border: 1px solid black;
+	background: transparent;
+	box-shadow: 0 0 0 1px white;
+}
+
+input[type=range]::-ms-thumb {
+	width: 1em;
+	height: 2.3em;
+	border-radius: .15em;
+	border: 1px solid black;
+	background: transparent;
+	box-shadow: 0 0 0 1px white;
+}</style>
+	</article>
 	<article class="demo slide">
 		<input type="range" multiple value="10,80" data-edit="html" />
 	</article>
@@ -309,11 +366,10 @@ if (!("srcdoc" in document.createElement("iframe"))) {
 <section>
 	<header class="slide">
 		<h1>autocomplete</h1>
-		<!-- https://medium.com/@grigs/autofill-what-web-devs-should-know-but-dont-d8f32575253c#.58pryzk7b -->
 	</header>
 	<article class="demo slide dont-enlarge" data-keys="Enter DownArrow">
 		<div data-edit="contents">
-			<input type="email" />
+			<input name="email" />
 		</div>
 	</article>
 	<article class="slide" id="autocomplete-values">
@@ -362,6 +418,17 @@ if (!("srcdoc" in document.createElement("iframe"))) {
 			<li class="currency">transaction-currency</li>
 			<li class="currency">transaction-amount</li>
 		</ul>
+	</article>
+	<article class="slide" id="https-cc">
+		<p>Need <a href="https://leaverou.github.io/html-secrets/#https-cc">https</a> for credit card info!</p>
+	</article>
+	<article class="demo slide dont-enlarge" data-keys="Enter DownArrow">
+		<div data-edit="contents">
+			<input autocomplete="cc-number" />
+		</div>
+	</article>
+	<article class="image slide" style="background-image: url(img/cc.jpg)" id="autofill-link">
+		<h1><a href="https://medium.com/@grigs/autofill-what-web-devs-should-know-but-dont-d8f32575253c">Autofill: What web devs should know, but don’t</a></h1>
 	</article>
 </section>
 
@@ -427,16 +494,19 @@ if (!("srcdoc" in document.createElement("iframe"))) {
 					<summary>Third section</summary> Even More Content
 				</details>
 			</div>
-			<script>
-			document.body.addEventListener("toggle", evt => {
-				if (evt.target.open) {
-					$$("details", evt.target.closest(".accordion")).forEach(details => {
-						if (details != evt.target) details.open = false;
-					});
-				}
-			}, true);
-			</script>
 		</div>
+	</article>
+	<article class="slide">
+<pre class="no-whitespace-normalization"><code class="language-javascript">document.body.addEventListener("toggle", evt => {
+	var accordion = evt.target.closest(".accordion");
+	if (evt.target.open && accordion) {</code><code class="delayed">
+		$$("details", accordion).forEach(details => {
+			if (details != evt.target) {
+				details.open = false;
+			}
+		});</code><code>
+	}
+}, true);</code></pre>
 	</article>
 	<article class="slide">
 		<pre><code class="language-css">
@@ -473,15 +543,131 @@ if (!("srcdoc" in document.createElement("iframe"))) {
 		<input pattern="a" data-edit="html css">
 	</article>
 	<article class="slide" data-src="http://html5pattern.com"></article>
-	<article class="demo slide">
-		<p class="hint">setCustomValidity</p>
-		<style data-slide>input:invalid {
+
+	<article class="demo slide" id="setcustomvalidity">
+		<p class="hint">no pattern, RegExp('^' + this.getAttribute('pattern') + '$').test(this.value), with title</p>
+		<style data-slide>textarea:invalid {
 	border-color: rgba(200, 0, 0, .4);
 	background: #fdd;
 }</style>
 		<form data-edit="html css">
-	<input>
+	<textarea pattern="a+">foo</textarea>
+	<button>Submit</button>
 </form>
+	</article>
+	<article class="slide">
+		<pre class="language-javascript"><code>element.setCustomValidity("message")</code></pre>
+	</article>
+	<article class="slide" data-import="setcustomvalidity"></article>
+	<article class="demo slide" id="filesize">
+		<form data-edit="html css">
+	<input type="file" onchange="this.setCustomValidity(
+		this.files[0].size > 75*1024? 'File over 75KB' : ''
+	)">
+	<button>Submit</button>
+</form>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>Structured data</h1>
+	</header>
+
+	<article class="image slide" style="background-image: url(img/truffle-results.png); background-position: top"></article>
+
+	<article class="slide" id="aggregaterating-microdata">
+		<script type="text/plain">
+			<span itemprop="aggregateRating"
+			      itemscope=""
+				  itemtype="http://schema.org/AggregateRating">
+				<meta itemprop="ratingValue" content="4.96">
+				<meta itemprop="reviewCount" content="23">
+			</span>
+		</script>
+	</article>
+	<article class="slide" data-src="https://schema.org/AggregateRating"></article>
+	<article class="slide" data-import="aggregaterating-microdata"></article>
+	<article class="slide" id="vocabulary-encoding">
+		<section>
+			<h1>Vocabulary: schema.org</h1>
+			<p>Open Graph protocol (og), Microformats</p>
+		</section>
+		<section>
+			<h1>Encoding: Microdata</h1>
+			<p>RDFa, JSON-LD, Microformats</p>
+		</section>
+	</article>
+
+	<article class="slide">
+		<h1 class="voc-enc"><span>schema.org</span> <span>RDFa</span></h1>
+		<script type="text/plain">
+			<span vocab="http://schema.org"
+			      typeof="AggregateRating"
+			      property="aggregateRating">
+				<meta property="ratingValue" content="4.96">
+				<meta property="reviewCount" content="23">
+			</span>
+		</script>
+	</article>
+	<article class="slide">
+		<h1 class="voc-enc"><span>schema.org</span> <span>JSON-LD</span></h1>
+		<pre class="language-javascript"><code>
+			&lt;script type="application/ld+json">
+			{
+				"@context": "http://schema.org/",
+				...
+				"aggregateRating": {
+					"@type": "AggregateRating",
+					"ratingValue": "4.96",
+					"reviewCount": "23"
+				},
+				...
+			}
+			&lt;/script>
+		</code></pre>
+	</article>
+	<article class="slide">
+		<h1 class="voc-enc"><span>Microformats</span> <span>Microformats</span></h1>
+
+		<script type="text/plain">
+			<div class="hreview-aggregate">
+				<div class="item">
+					<span class="fn">
+						Risotto with Truffle and Parmesan
+					</span>
+				</div>
+				<div class="rating">
+				  <span class="average">4.96</span>
+				</div>
+				<span class="count">23</span>
+			</div>
+		</script>
+	</article>
+	<article class="slide">
+		<h1 class="voc-enc"><span>Open Graph</span> <span>RDFa</span></h1>
+
+		<script type="text/plain">
+			<meta property="og:rating" content="4.9642858505249">
+			<meta property="og:rating_scale" content="5">
+		</script>
+	</article>
+	<article class="image slide" style="background-image: url(img/truffle-results.png); background-position: bottom"></article>
+	<article class="slide">
+		<pre class="no-whitespace-normalization"><code>&lt;section itemscope itemtype="http://schema.org/Recipe">
+	&lt;link itemprop="url"
+	      href="http://allrecipes.com/recipe/231374/[…]and-parmesan" />
+	&lt;meta itemprop="mainEntityOfPage" content="True" />
+</code><code class="delayed">
+	&lt;img src="http://images.media-allrecipes.com/[…].jpg"
+	     alt="Risotto with Truffle and Parmesan"
+	     itemprop="image"/>
+	&lt;h1 itemprop="name">Risotto with Truffle and Parmesan&lt;/h1>
+</code><code class="delayed">
+	&lt;p>Prep     &lt;time itemprop="prepTime" datetime="PT20M">20 m&lt;/time>
+	&lt;p>Cook     &lt;time itemprop="cookTime" datetime="PT30M">30 m&lt;/time>
+	&lt;p>Ready In &lt;time itemprop="totalTime" datetime="PT50M">50 m&lt;/time>
+</code></pre>
 	</article>
 </section>
 
@@ -493,7 +679,7 @@ if (!("srcdoc" in document.createElement("iframe"))) {
 <footer class="dark slide">
 	<img src="img/mark.svg" />
 	<h1>Thank you!</h1>
-	<p style="margin-top: 0">Give me feedback! <a href="https://docs.google.com/forms/d/1k5av2WJvOfiY2AoDMe0WTZJFYJtyFDPXhQJd8SBudJQ/viewform">shoutkey.com/grow</a></p>
+	<!-- <p style="margin-top: 0">Give me feedback! <a href="https://docs.google.com/forms/d/1k5av2WJvOfiY2AoDMe0WTZJFYJtyFDPXhQJd8SBudJQ/viewform">shoutkey.com/grow</a></p> -->
 	<ul>
 		<li style="--icon: '📨'"><a href="mailto:lea@w3.org">lea@verou.me</a></li>
 		<li style="--icon: '🌍'"><a href="http://lea.verou.me">lea.verou.me</a></li>

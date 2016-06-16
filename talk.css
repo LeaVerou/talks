@@ -402,12 +402,16 @@ pre.html4 {
 		background: white;
 	}
 
-	.demo.slide:not(.dont-enlarge) [data-edit="contents"] {
+	.demo.slide:not(.dont-enlarge) [data-edit~="contents"],
+	.demo.slide:not(.dont-enlarge) [data-edit~="css"] {
 		width: 30%;
 		margin: 0 auto;
 		transform: scale(3);
 		transform-origin: top;
+		font-size: 33%;
 	}
+
+
 
 .editor label {
 	position: absolute;
@@ -463,6 +467,7 @@ pre.html4 {
 #a-download [data-edit] a {
 	font-weight: bold;
 	color: hsl(200, 30%, 40%);
+	font-size: 300%;
 }
 
 #sandbox-values {
@@ -471,6 +476,7 @@ pre.html4 {
 }
 
 	#sandbox-values ul {
+		height: 100%;
 		padding: 1em;
 		margin: 0 0 0 calc(100vw - 19em);
 		list-style: none;
@@ -565,4 +571,161 @@ kbd {
 	#specs #whatwg {
 		background-image: url(img/whatwg.svg);
 		background-color: #3c790a;
+	}
+
+#https-cc {
+	background: hsl(0, 40%, 30%);
+	text-align: center;
+	justify-content: center;
+}
+
+	#https-cc p {
+		font-size: 120%;
+	}
+
+	#https-cc a {
+		font-weight: bold;
+		text-decoration: none;
+	}
+
+		#https-cc p::before {
+			content: "⚠️";
+			display: block;
+			font-size: 200px;
+			line-height: 1;
+		}
+
+#autofill-link h1 {
+	padding: .3em .3em .5em;
+}
+
+#autofill-link a {
+	text-decoration: none;
+}
+
+	#autofill-link a::after {
+		content: attr(href);
+		display: block;
+		margin-top: .3em;
+		font-size: 44%;
+		font-weight: bold;
+	}
+
+#dialog p::before {
+	content: url(img/ceilingcat.png);
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#setcustomvalidity button {
+	display: block;
+	margin: auto;
+}
+
+#advisory {
+	text-align: center;
+	font-family: AkzidenzGroteskBQ-BdCnd, Akzidenz-Grotesk BQ, Times, 'Arial Narrow', sans-serif;
+	font-stretch: condensed;
+	font-size: 500%;
+}
+
+	#advisory > h1 {
+		margin: 0;
+		flex: 1;
+		display: flex;
+		flex-flow: column;
+		padding: .2em;
+	}
+
+		#advisory > h1 > span {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex: 1;
+			padding: .3em;
+			text-transform: uppercase;
+		}
+
+		#advisory > h1 > span:nth-child(1) {
+			letter-spacing: .45em;
+			text-indent: .3em;
+		}
+
+		#advisory > h1 > span:nth-child(2) {
+			background: white;
+			color: black;
+			font-size: 180%;
+			letter-spacing: .06em;
+		}
+
+		#advisory > h1 > span:nth-child(3) {
+			font-size: 80%;
+		}
+
+#vocabulary-encoding {
+	padding: 0;
+}
+
+	#vocabulary-encoding > section {
+		display: flex;
+		flex-flow: column;
+		justify-content: center;
+		align-items: center;
+		flex: 1;
+		padding: 1em;
+		font-weight: bold;
+	}
+
+	#vocabulary-encoding > section:nth-child(2) {
+		background: white;
+		color: black;
+	}
+
+	#vocabulary-encoding h1 {
+		margin: 0;
+		font-weight: 100;
+		font-size: 250%;
+	}
+
+	#vocabulary-encoding p {
+		margin: .5em 0;
+	}
+
+	#vocabulary-encoding p::before {
+		content: "Others: ";
+		opacity: .5;
+	}
+
+h1.voc-enc {
+	width: fit-content;
+	margin: 0 auto;
+	text-align: left;
+	font-size: 60%;
+}
+
+	.voc-enc span {
+
+	}
+
+	.voc-enc span::before {
+		opacity: .6;
+	}
+
+	.voc-enc span:first-child::before {
+		content: "Vocabulary: ";
+	}
+
+	.voc-enc span:first-child::after {
+		content: "//";
+		display: inline-block;
+		vertical-align: middle;
+		line-height: .83;
+		font-size: 120%;
+		font-weight: bold;
+		margin: 0 .3em 0 .5em;
+		color: red;
+	}
+
+	.voc-enc span:nth-child(2)::before {
+		content: "Encoding: ";
 	}

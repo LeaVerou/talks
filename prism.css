@@ -73,14 +73,14 @@ code[class*="language-"] {
 .token.string,
 .token.char,
 .token.builtin {
-	color: #f28;
+	color: #f28; /* deep pink */
 }
 
 .token.operator,
 .token.entity,
 .token.url,
 .language-css .token.string,
-.toke.variable,
+.token.variable,
 .token.inserted {
 	color: yellowgreen;
 }
@@ -88,7 +88,7 @@ code[class*="language-"] {
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-	color: #0cf;
+	color: #0cf; /* aqua */
 }
 
 .token.regex,
@@ -110,6 +110,10 @@ code[class*="language-"] {
 
 .token.deleted {
 	color: red;
+}
+
+.token.function {
+	color: hsl(230, 70%, 75%);
 }
 
 /* Fallback, in case JS does not run, to ensure the code is at least visible */

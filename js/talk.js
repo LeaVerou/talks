@@ -112,7 +112,7 @@ $("#details-demo").addEventListener("toggle", function(evt) {
 
 	var textarea = $("textarea", this);
 
-	textarea.value = $("details").outerHTML.replace(/\s*data-edit=".+?"|=""(?=\s|>)/g, "");
+	textarea.value = $("details").closest("[data-edit]").innerHTML.replace(/=""(?=\s|>)/g, "");
 	Prism.Live.all.get(textarea).update();
 }, true);
 
@@ -152,6 +152,15 @@ document.addEventListener("keyup", function(evt) {
 	}
 });
 
-
+document.body.addEventListener("toggle", evt => {
+	var accordion = evt.target.closest(".accordion");
+	if (evt.target.open && accordion) {
+		$$("details", accordion).forEach(details => {
+			if (details != evt.target) {
+				details.open = false;
+			}
+		});
+	}
+}, true);
 
 })(Bliss, Bliss.$);
