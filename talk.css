@@ -644,6 +644,7 @@ kbd {
 			flex: 1;
 			padding: .3em;
 			text-transform: uppercase;
+			white-space: nowrap;
 		}
 
 		#advisory > h1 > span:nth-child(1) {
@@ -655,11 +656,21 @@ kbd {
 			background: white;
 			color: black;
 			font-size: 180%;
-			letter-spacing: .06em;
+			letter-spacing: .05em;
 		}
 
 		#advisory > h1 > span:nth-child(3) {
-			font-size: 80%;
+			font-size: 78%;
+		}
+
+		.fordemo {
+			font-family: var(--font-handwritten);
+			position: absolute;
+			bottom: -.2em;
+			right: .5em;
+			color: hsl(0, 50%, 60%);
+			line-height: 1rem;
+			font-size: 140%;
 		}
 
 #vocabulary-encoding {

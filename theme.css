@@ -2,6 +2,7 @@ html {
 	--font-mono: Consolas, Monaco, 'Andale Mono', monospace;
 	--font-body: 'Helvetica Neue', sans-serif;
 	--font-heading: var(--font-body);
+	--font-handwritten: 'Reenie Beanie', Marker Felt, cursive;
 }
 
 body {
@@ -79,7 +80,6 @@ textarea.editor {
 	outline: none;
 	width: 100%;
 	max-height: 50vh;
-	padding: 1rem 2rem;
 	box-sizing: border-box;
 	background: hsl(200, 10%, 20%) linear-gradient(rgba(0,0,0,.1) 50%, transparent 0);
 	background-origin: content-box;
@@ -93,14 +93,13 @@ div.editor {
 	left: 0;
 	right: 0;
 	bottom: 0;
-
 	color: white;
 	line-height: 1.5;
-
 }
 
 textarea.editor,
 div.editor > pre {
+	padding: 1rem 2rem;
 	line-height: inherit;
 }
 
@@ -118,7 +117,6 @@ div.editor > pre {
 	bottom: 0;
 	left: 0;
 	z-index: 1;
-	padding: .6em 1em;
 	margin: 0;
 	pointer-events: none;
 }

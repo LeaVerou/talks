@@ -218,8 +218,8 @@
 		<h1>&lt;input type="file"></h1>
 	</header>
 	<article class="demo slide">
-		<p class="hint">multiple, accept=mime, accept=extensions</p>
-		<input type="file" data-edit="html">
+		<p class="hint">mime/*, extensions, multiple</p>
+		<input type="file" data-edit="html" accept="image/png, image/jpeg">
 	</article>
 </section>
 
@@ -243,6 +243,7 @@
 			<span>Advisory</span>
 			<span>Inline Event Handlers</span>
 		</h1>
+		<p class="fordemo delayed">for demo purposes only!</p>
 	</article>
 
 	<article class="demo slide dont-enlarge" data-keys="Esc Enter">
@@ -535,7 +536,7 @@ input[type=range]::-ms-thumb {
 		<input maxlength="10" data-edit="html css">
 	</article>
 	<article class="demo slide">
-		<p class="hint">a, a+, dynamic pattern, (?=.*[A-Z]).*\d+.*</p>
+		<p class="hint">a, a+, (?=.*[A-Z]).*\d+.*, custom message, dynamic pattern</p>
 		<style data-slide>input:invalid {
 	border-color: rgba(200, 0, 0, .4);
 	background: #fdd;
@@ -560,6 +561,7 @@ input[type=range]::-ms-thumb {
 	</article>
 	<article class="slide" data-import="setcustomvalidity"></article>
 	<article class="demo slide" id="filesize">
+		<p class="hint">maxlength</p>
 		<form data-edit="html css">
 	<input type="file" onchange="this.setCustomValidity(
 		this.files[0].size > 75*1024? 'File over 75KB' : ''
