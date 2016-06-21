@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title>JS UX</title>
+<link href="../csss/slideshow.css" rel="stylesheet" />
+<link href="../csss/reusable.css" rel="stylesheet" />
+<link href="prism.css" rel="stylesheet" />
+<link href="theme.css" rel="stylesheet" />
+<link href="talk.css" rel="stylesheet" />
+<script src="../prefixfree/prefixfree.min.js"></script>
+
+</head>
+<body class="language-javascript">
+
+<section id="for-browser" class="dark slide">
+	<h1>Important</h1>
+	This slide deck was created for use in a controlled environment, during a talk. It works best with Chrome at 1280x720 or 1280x768. It may or may not work properly in other browsers.
+	The demos were live coded, so these slides are a bit pointless if you never watched the talk.
+</section>
+
+<header id="intro" class="slide dont-resize" data-source="flickr.com/photos/billward/16601966117">
+	<h1>
+		JSUX
+	</h1>
+	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
+</header>
+
+<section>
+	<section class="inverse slide dont-resize darker hi">
+		<figure class="delayed">
+			<img src="img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
+			<figcaption>Hi, I’m Lea</figcaption>
+		</figure>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="lesbian" data-steps="3">
+		<div>
+		<p>#funfact</p>
+		<p>I grew up in Lesbos, Greece</p>
+		<p>…which technically makes me <strong>geogrpahically Lesbian</strong></p>
+		</div>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="doing-stuff">
+		<div class="delayed">
+			<p>I make stuff</p>
+			<ul>
+				<li><a href="http://prismjs.com">Prism</a></li>
+				<li><a href="http://leaverou.github.io/prefixfree">-prefix-free</a></li>
+				<li><a href="http://blissfuljs.com">Bliss</a></li>
+				<li><a href="http://css3test.com">css3test.com</a></li>
+				<li><a href="http://leaverou.github.io/awesomplete/">Awesomplete</a></li>
+				<li><a href="http://cubic-bezier.com/">cubic-bezier.com</a></li>
+				<li><a href="http://dabblet.com">dabblet.com</a></li>
+				<li><a href="http://leaverou.github.io/animatable/">Animatable</a></li>
+			</ul>
+			<small>More: <a href="http://github.com/leaverou">github.com/leaverou</a></small>
+		</div>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="csswg">
+		<p class="delayed">
+			<strong>CSS WG</strong>
+			Invited Expert
+		</p>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="mit">
+		<p class="delayed">
+			<img src="img/mit.svg" alt="MIT" />
+			HCI researcher @ CSAIL
+		</p>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="book">
+		<a href="http://shop.oreilly.com/product/0636920031123.do" class="delayed">
+			<img src="img/book.png" alt="CSS Secrets by O’Reilly" style="display:block" />
+			★★★★★ on Amazon
+		</a>
+	</section>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>JS? UX? JSUX…?</h1>
+	</header>
+
+	<article class="slide">
+		<blockquote>
+			<p>“Usability is the ease of use and learnability of a human-made object.”</p>
+			<p class="cite"><a href="https://en.wikipedia.org/wiki/Usability"></a></p>
+		</blockquote>
+	</article>
+
+	<article class="slide">
+		<blockquote style="max-width: 25em">
+			<p>“User experience (UX) refers to a person's total experience using a particular product, system or service.”</p>
+			<p class="cite"><a href="https://en.wikipedia.org/wiki/User_experience"></a></p>
+		</blockquote>
+	</article>
+
+	<article class="slide">
+		<blockquote style="max-width: 24em">
+			<p>“The user interface (UI) is the space where interactions between humans and machines occur.”</p>
+			<p class="cite"><a href="https://en.wikipedia.org/wiki/User_interface"></a></p>
+		</blockquote>
+	</article>
+
+	<article class="image slide" style="background: url(img/gsheets.png) no-repeat center / contain;">
+		<h1>
+			A User Interface
+			(well, two really)
+		</h1>
+	</article>
+
+	<article class="image slide" style="background-image: url(img/book.jpg)">
+		<h1>Another User Interface</h1>
+	</article>
+
+	<article class="image slide" id="uinception">
+		<h1 class="caption">Another User Interface</h1>
+		<div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed">
+			<div class="delayed"><div class="delayed"><div class="delayed"></div></div></div>
+		</div></div></div></div></div></div></div></div></div></div></div></div></div></div></div>
+	</article>
+
+	<article class="image slide" style="background-image: url(img/faucet.jpg);">
+		<h1>Another User Interface</h1>
+	</article>
+
+	<article class="image slide" style="background-image: url(img/code.png);">
+		<h1>Another User Interface</h1>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>Function arguments</h1>
+	</header>
+
+	<article class="slide">
+		<blockquote>
+			<p>“Code is written once but read many times”</p>
+			<p class="cite">Unknown</p>
+		</blockquote>
+	</article>
+
+	<article class="sin slide">
+		<h1>Boolean traps</h1>
+	</article>
+
+	<article class="hos slide">
+		<pre><code>element.cloneNode(true);</code></pre>
+	</article>
+
+	<article class="hos slide">
+		<pre class="no-whitespace-normalization"><code class="delayed">// Change these numbers to see what each one is for...
+</code><code>ctx.ellipse(100, 100, 50, 75, .785398, 0, 6.2831853);</code></pre>
+	</article>
+
+	<article class="slide" id="microwave" data-source="Image credits: http://worrydream.com/LearnableProgramming">
+		<div>
+			<img src="img/worrydream2.png" alt="" class="delayed">
+			<img src="img/worrydream1.png" alt="">
+		</div>
+	</article>
+
+	<article class="slide" data-source="Image credits: http://worrydream.com/LearnableProgramming">
+		<img src="img/worrydream3.png" alt="" style="transform: scale(1.2)">
+	</article>
+
+	<article class="hos slide">
+		<pre><code>
+			element.cloneNode(true);
+		</code></pre>
+	</article>
+
+	<article class="hos slide">
+		<pre><code>
+			event.initKeyEvent("keypress", true, true, null, null,
+			                   false, false, false, false, 9, 0);
+		</code></pre>
+	</article>
+
+	<article class="sin slide">
+		<h1>Unpredictable argument order</h1>
+	</article>
+
+	<article class="hos slide" id="replaceChild">
+		<div>
+			<pre><code>parentNode.replaceChild(newChild, oldChild)</code></pre>
+			<pre><code>parentNode.replaceChild(oldChild, newChild)</code></pre>
+		</div>
+	</article>
+
+	<article class="hof slide">
+		<pre><code>
+			oldChild.replaceWith(newChild);
+		</code></pre>
+	</article>
+
+	<article class="solution slide">
+		<h1>Object literal argument</h1>
+		<pre><code>
+			(50000).toLocaleString("en", {
+				style: "currency",
+				currency: "EUR",
+				currencyDisplay: "name"
+			}); // "50,000.00 euros"
+		</code></pre>
+	</article>
+</section>
+
+<footer class="dark slide">
+	<img src="img/mark.svg" />
+	<h1>Thank you!</h1>
+	<ul>
+		<li style="--icon: '📨'"><a href="mailto:lea@w3.org">lea@verou.me</a></li>
+		<li style="--icon: '🌍'"><a href="http://lea.verou.me">lea.verou.me</a></li>
+		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
+	</ul>
+
+	<p>Slides: <a href="https://leaverou.github.io/html-secrets">leaverou.github.io/html-secrets</a></p>
+	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
+</footer>
+
+<script src="js/bliss.min.js"></script>
+<script src="../csss/slideshow.js"></script>
+<script src="js/prism.js"></script>
+<!--
+<script src="../incrementable/incrementable.js"></script>
+<script src="js/editor.js"></script> -->
+<script src="js/talk.js"></script>
+
+</body>
+</html>
