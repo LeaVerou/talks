@@ -2,8 +2,18 @@ var slideshow = new SlideShow();
 
 var $ = Bliss, $$ = $.$;
 
-$$(".hos.slide, .hof.slide").forEach(slide => {
-	var word = slide.classList.contains("hos")? "Shame" : "Fame"
+$$(".whynot.slide").forEach(slide => {
+	$.create("h1", {
+		textContent: "Why not…",
+		start: slide
+	})
+});
+
+$$(".hall.slide").forEach(slide => {
+	var word = slide.classList.contains("shame")? "Shame" :
+	           slide.classList.contains("fame")? "Fame" :
+			   slide.classList.contains("meh")? "Meh" : "What?!";
+
 	$.create("h1", {
 		innerHTML: `API Hall of <strong>${word}</strong>`,
 		start: slide

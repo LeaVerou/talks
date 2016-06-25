@@ -26,7 +26,7 @@
 	</h1>
 	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
 </header>
-
+<!--
 <section>
 	<section class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
@@ -81,7 +81,7 @@
 		</a>
 	</section>
 </section>
-
+-->
 <section>
 	<header class="slide">
 		<h1>JS? UX? JSUX…?</h1>
@@ -135,29 +135,45 @@
 	</article>
 </section>
 
+<article class="slide">
+	<blockquote>
+		<p>“Code is written once but read many times”</p>
+		<p class="cite">Unknown</p>
+	</blockquote>
+</article>
+
 <section>
-	<header class="slide">
-		<h1>Function arguments</h1>
+	<header class="commandment slide">
+		<h1>Sensible defaults</h1>
 	</header>
 
-	<article class="slide">
-		<blockquote>
-			<p>“Code is written once but read many times”</p>
-			<p class="cite">Unknown</p>
-		</blockquote>
-	</article>
 
-	<article class="sin slide">
+</section>
+<section>
+	<header class="sin slide">
 		<h1>Boolean traps</h1>
-	</article>
+	</header>
 
-	<article class="hos slide">
+	<article class="hall shame slide" id="cloneNode">
 		<pre><code>element.cloneNode(true);</code></pre>
 	</article>
 
-	<article class="hos slide">
+	<article class="hall shame slide">
 		<pre class="no-whitespace-normalization"><code class="delayed">// Change these numbers to see what each one is for...
 </code><code>ctx.ellipse(100, 100, 50, 75, .785398, 0, 6.2831853);</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>
+			element.addEventListener("focus", callback, true);
+		</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>
+			event.initKeyEvent("keypress", true, true, null, null,
+			                   false, false, false, false, 9, 0);
+		</code></pre>
 	</article>
 
 	<article class="slide" id="microwave" data-source="Image credits: http://worrydream.com/LearnableProgramming">
@@ -170,32 +186,20 @@
 	<article class="slide" data-source="Image credits: http://worrydream.com/LearnableProgramming">
 		<img src="img/worrydream3.png" alt="" style="transform: scale(1.2)">
 	</article>
+</section>
+<section>
+	<header class="sin slide">
+		<h1>Random argument order</h1>
+	</header>
 
-	<article class="hos slide">
-		<pre><code>
-			element.cloneNode(true);
-		</code></pre>
-	</article>
-
-	<article class="hos slide">
-		<pre><code>
-			event.initKeyEvent("keypress", true, true, null, null,
-			                   false, false, false, false, 9, 0);
-		</code></pre>
-	</article>
-
-	<article class="sin slide">
-		<h1>Unpredictable argument order</h1>
-	</article>
-
-	<article class="hos slide" id="replaceChild">
+	<article class="hall shame slide" id="replaceChild">
 		<div>
 			<pre><code>parentNode.replaceChild(newChild, oldChild)</code></pre>
 			<pre><code>parentNode.replaceChild(oldChild, newChild)</code></pre>
 		</div>
 	</article>
 
-	<article class="hof slide">
+	<article class="hall fame slide">
 		<pre><code>
 			oldChild.replaceWith(newChild);
 		</code></pre>
@@ -203,12 +207,464 @@
 
 	<article class="solution slide">
 		<h1>Object literal argument</h1>
+		<ul class="good">
+			<li>Labelled parameters</li>
+			<li>Any order</li>
+			<li>All optional</li>
+		</ul>
+	</article>
+
+	<article class="hall fame slide">
 		<pre><code>
 			(50000).toLocaleString("en", {
 				style: "currency",
 				currency: "EUR",
 				currencyDisplay: "name"
 			}); // "50,000.00 euros"
+		</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>
+			element.addEventListener("focus", callback, {
+				capture: true,
+				once: true
+			});
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<h1>ES6 Default Parameters</h1>
+		<pre><code>
+			function myFunk(o = {
+				option1: 5,
+				option2: false
+			}) {
+				console.log(o.option1, o.option2);
+			}
+		</code></pre>
+	</article>
+</section>
+<section>
+	<header class="commandment slide">
+		<h1 style="max-width: 8em">Order parameters by importance</h1>
+	</header>
+
+	<article class="hall shame slide">
+		<pre><code>
+			history.pushState(null, "", "http://lea.verou.me");
+		</code></pre>
+	</article>
+</section>
+<section>
+	<header class="sin slide">
+		<h1>True by default</h1>
+	</header>
+
+	<article class="slide">
+		<h1>Boolean parameters in JS</h1>
+
+		<ul>
+			<li><code>true</code></li>
+			<li><code>false</code></li>
+			<li class="delayed"><code>undefined</code></li>
+		</ul>
+	</article>
+
+	<article class="slide">
+		<h1>Boolean parameters in JS</h1>
+
+		<ul>
+			<li><code>!!true → true</code></li>
+			<li><code>!!false → false</code></li>
+			<li><code>!!undefined → false</code></li>
+		</ul>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>element.cloneNode(<em>deep</em>);</code></pre>
+		<pre><code>element.cloneNode(); // deep = true</code></pre>
+	</article>
+
+	<article class="solution slide">
+		<h1>Negate the concept</h1>
+		<pre><code>element.cloneNode(<em>shallow</em>);</code></pre>
+		<pre><code>element.cloneNode(); // shallow = false</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="sin slide">
+		<h1>Double Negatives</h1>
+	</header>
+
+	<article class="hall shame slide">
+		<pre><code>input.disabled = false;</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>input.enabled = true;</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="commandment slide">
+		<h1>Thou shalt chain</h1>
+	</header>
+
+	<article class="hall shame slide" id="setAttribute">
+		<pre><code>
+			var audio = document.createElement("audio");
+			audio.setAttribute("src", "rain.mp3");
+			audio.setAttribute("autoplay", "");
+			audio.setAttribute("start", "00:00:00.00");
+			audio.setAttribute("loopstart", "00:00:00");
+			audio.setAttribute("end", "00:01:00");
+			audio.setAttribute("playcount", "100");
+			audio.setAttribute("controls", "true");
+		</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>
+			document.createElement("audio")
+				.setAttribute("src", "rain.mp3");
+				.setAttribute("autoplay", "");
+				.setAttribute("start", "00:00:00.00");
+				.setAttribute("loopstart", "00:00:00");
+				.setAttribute("end", "00:01:00");
+				.setAttribute("playcount", "100");
+				.setAttribute("controls", "true");
+		</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>
+			ctx.clearRect(0, 0, 256, 192);
+			ctx.save();
+			ctx.translate(96, 96);
+			ctx.rotate(45*Math.PI/180);
+			ctx.scale(1.2);
+			ctx.drawImage(img1, 0,0,192,192, -288,-288,576,576);
+			ctx.drawImage(img2, 0,0,192,192, -96 ,-96 ,192,192);
+			ctx.drawImage(img3, 0,0,192,192, -32 ,-32 ,64 ,64);
+			ctx.restore();
+		</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>
+			ctx.clearRect(0, 0, 256, 192)
+			   .save()
+			   .translate(96, 96)
+			   .rotate(45*Math.PI/180)
+			   .scale(1.2)
+			   .drawImage(img1, 0,0,192,192, -288,-288,576,576)
+			   .drawImage(img2, 0,0,192,192, -96 ,-96 ,192,192)
+			   .drawImage(img3, 0,0,192,192, -32 ,-32 ,64 ,64)
+			   .restore();
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<h1>Returning undefined is wasteful</h1>
+	</article>
+
+	<article class="slide">
+		<pre><code>
+			yolo: function() {
+				// Function code here
+
+				return this;
+			}
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<pre><code>
+			function chainable(fn) {
+				return function() {
+					var ret = fn.apply(this, arguments);
+					return ret === undefined? this : ret;
+				}
+			}
+		</code></pre>
+	</article>
+
+	<article data-src="http://leaverou.github.io/chainvas"></article>
+</section>
+
+<section>
+	<header class="slide commandment">
+		<h1>Make the simple <strong>easy</strong> <br>& the complex <strong>possible</strong></h1>
+	</header>
+
+	<article class="hall fame slide">
+		<pre><code>
+			node.compareDocumentPosition(otherNode) ==
+				Node.DOCUMENT_POSITION_CONTAINS;
+		</code></pre>
+		<pre class="delayed"><code>node.contains(otherNode);</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="commandment slide">
+		<h1>Support doing operations en masse</h1>
+	</header>
+
+	<article class="slide" data-import="setAttribute"></article>
+
+	<article class="whynot slide">
+		<pre><code>
+			var audio = document.createElement("audio");
+			audio.setAttribute({
+				src: "rain.mp3",
+				autoplay: "",
+				start: "00:00:00.00",
+				loopstart: "00:00:00",
+				end: "00:01:00",
+				playcount: "100",
+				controls: "true"
+			});
+		</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>
+			var els = document.querySelectorAll(".foo");
+
+			for (let i=0; i&lt;els.length; i++) {
+				els[0].setAttribute("data-foo", "bar");
+			}
+		</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>
+			var els = document.querySelectorAll(".foo");
+
+			els.setAttribute("data-foo", "bar");
+		</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="sin slide">
+		<h1>Redundancy</h1>
+	</header>
+
+	<article class="hall shame slide">
+		<pre><code>element.parentNode.removeChild(element);</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>element.remove();</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>element.parentNode.insertBefore(newChild, element);</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>element.before(newChild);</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="sin slide">
+		<h1>Accessor functions</h1>
+	</header>
+
+	<article class="hall shame slide">
+		<pre><code>
+			let date = new Date();
+
+			date.getMonth(); // 5
+			date.setMonth(1);
+		</code></pre>
+	</article>
+
+	<article class="slide">JS is not Java</article>
+
+	<article class="whynot slide">
+		<pre><code>
+			let date = new Date();
+
+			date.month; // 5
+			date.month = 1;
+		</code></pre>
+	</article>
+
+	<article class="solution slide">
+		<h1>ES5 Accessors</h1>
+		<pre><code>
+			Object.defineProperty(Date.prototype, "month", {
+				get: function() { return this.getMonth(); },
+				set: function(m) { this.setMonth(m); }
+			});
+		</code></pre>
+	</article>
+
+	<article class="incomplete slide">
+		<h1>Exception: Parameters</h1>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>
+			localStorage.setItem("yolo", "yes");
+			localStorage.getItem("yolo"); // "yes"
+		</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>
+			localStorage.yolo = "yes";
+			localStorage.yolo; // "yes"
+		</code></pre>
+	</article>
+
+	<article class="solution slide">
+		<h1>ES6 Proxies</h1>
+		<pre><code>
+			MyStorage = new Proxy(MyHiddenObject, {
+				get: function(property) {
+					if (property in myObject) {
+						return myObject[property];
+					}
+					return myObject.getItem(property);
+				},
+				…
+			});
+		</code></pre>
+	</article>
+	<article class="solution slide">
+		<h1>ES6 Proxies</h1>
+		<pre><code>
+			MyStorage = new Proxy(MyHiddenObject, {
+				…
+				set: function(property, val) {
+					if (property in myObject) {
+						return myObject[property] = val;
+					}
+					myObject.setItem(property, val);
+				},
+				…
+			});
+		</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="sin slide">
+		<h1>Verbosity</h1>
+	</header>
+
+	<header class="commandment slide">
+		<h1>Use <strong>few, simple words</strong></h1>
+	</header>
+
+	<header class="commandment slide">
+		<h1>Name after <strong>what it does,</strong> not <strong>how it works</strong></h1>
+	</header>
+
+	<article class="hall shame slide">
+		<pre><code>
+			document.querySelector(".foo");
+			document.querySelectorAll(".foo");
+		</code></pre>
+	</article>
+
+	<article class="hall meh slide">
+		<pre><code>
+			document.query(".foo");
+			document.queryAll(".foo");
+		</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>
+			document.find(".foo");
+			document.findAll(".foo");
+		</code></pre>
+	</article>
+
+	<article class="hall slide">
+		<pre><code>
+			$(".foo");
+		</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="sin slide">
+		<h1>Boilerplate</h1>
+	</header>
+
+	<article class="hall shame slide">
+		<pre><code>
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "foo.json");
+			xhr.responseType = "json";
+			xhr.onload = function() {
+				doStuff(xhr.response);
+			}
+			xhr.send(null);
+		</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>
+			fetch("foo.json")
+			  .then(response => response.json())
+			  .then(doStuff);
+		</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="commandment slide">
+		<h1>Thou shalt respond <br>to changes</h1>
+	</header>
+
+	<article class="slide" data-src="http://masonry.desandro.com/"></article>
+
+	<article class="hall shame slide">
+		<blockquote style="max-width: 20em;">"layout is useful when an item has changed size, and all items need to be laid out again."</blockquote>
+		<pre><code>
+			packery.layout();
+		</code></pre>
+	</article>
+
+	<article class="solution slide">
+		<h1>Mutation observers</h1>
+		<pre><code>
+
+		</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="sin slide">
+		<h1>No toString() and toJSON()</h1>
+	</header>
+</section>
+
+<section>
+	<header class="commandment slide">
+		<h1>Thou shalt also<br> have an <strong>HTML API</strong></h1>
+	</header>
+</section>
+
+<section>
+	<article class="hall slide">
+		<pre class="partial"><code>
+			(50000).toLocaleString("en", {
+				style: "currency",
+				currency: "EUR",
+				currencyDisplay: "name",
+				<mark>useGrouping: false</mark>
+			}); // "50000.00 euros"
 		</code></pre>
 	</article>
 </section>

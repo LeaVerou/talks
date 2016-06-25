@@ -29,7 +29,7 @@ pre[class*="language-"] {
 pre[class*="language-"] {
 	padding: .4em .8em;
 	margin: .5em 0;
-	overflow: auto;
+
 }
 
 code[class*="language-"] {
@@ -121,5 +121,21 @@ script[type='text/plain'].language-markup {
 	display: block;
 	font: 100% Consolas, Monaco, monospace;
 	white-space: pre;
-	overflow: auto;
 }
+
+pre.partial > code {
+	color: hsla(0,0%,100%,.5);
+}
+
+	pre.partial > code .token {
+		opacity: .5;
+	}
+
+	.partial mark {
+		background: none;
+		color: white;
+	}
+
+		pre.partial > code mark .token {
+			opacity: 1;
+		}

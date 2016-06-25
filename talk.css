@@ -298,22 +298,26 @@ footer.slide {
 			line-height: 1.2;
 		}
 
-.hos.slide,
-.hof.slide {
-	--background: hsl(0, 50%, 20%);
+.hall.slide {
+	--background: hsl(0, 0%, 15%);
 	background: var(--background);
 }
 
-.hof.slide {
-	--background: hsl(80, 80%, 15%);
+.hall.shame.slide {
+	--background: hsl(0, 50%, 15%);
 }
 
-	.hos.slide h1,
-	.hof.slide h1 {
-		position: absolute;
-		top: 1em;
-		left: 50%;
-		transform: translateX(-50%);
+.hall.fame.slide {
+	--background: hsl(75, 80%, 12%);
+}
+
+.hall.meh.slide {
+	--background: hsl(50, 80%, 12%);
+}
+
+	.hall.slide h1 {
+		position: relative;
+		margin-bottom: auto;
 		max-width: 8em;
 		padding: .5em .6em 0 .3em;
 		background: hsla(0,0%,100%,.7);
@@ -324,14 +328,12 @@ footer.slide {
 		border-radius: .1em;
 	}
 
-		.hos.slide h1 strong,
-		.hof.slide h1 strong {
+		.hall.slide h1 strong {
 			font-size: 160%;
 			letter-spacing: -.05em;
 		}
 
-		.hos.slide h1::before,
-		.hof.slide h1::before {
+		.hall.slide h1::before {
 			content: "🏆";
 			position: relative;
 			z-index: 1;
@@ -341,13 +343,33 @@ footer.slide {
 
 		@keyframes flip {
 			from, 50% {
-				transform: translateY(-.15em);
+				transform: none;
 			}
 		}
 
-		.hos.slide:target h1::before {
-			animation: 1s flip forwards cubic-bezier(.1,1,.5,2);
+		@keyframes strain {
+			5% {
+				transform: translateY(-.15em) rotate(.5turn) scale(1.1);
+			}
+
+			10% {
+				transform: translateY(-.15em) rotate(.5turn);
+			}
+		}
+
+		.hall.slide:not(.fame):target h1::before {
+			animation: 1s flip forwards infinite alternate;
 			transform: translateY(-.15em) rotate(.5turn) ;
+		}
+
+		.hall.shame.slide:target h1::before,
+		.hall.meh.slide:target h1::before {
+			animation: 1s flip forwards cubic-bezier(.1,1,.5,2);
+			transform: translateY(-.15em) rotate(.5turn);
+		}
+
+		.hall.shame.slide:target h1::before {
+			animation: 1s flip forwards cubic-bezier(.1,1,.5,2), 4s 1s strain infinite;
 		}
 
 		@keyframes show {
@@ -358,50 +380,76 @@ footer.slide {
 
 		@keyframes poop {
 			to {
-				transform: translateY(200vh) scale(1.5);
+				transform: translateY(200vh) scale(2);
 			}
 		}
 
-		.hos.slide h1::after {
+		.hall.shame.slide h1::after {
 			content: "💩";
 			position: absolute;
 			left: 1.3em;
 			top: 2.2em;
 		}
 
-		.hos.slide:target h1::after {
-			animation: .1s 1s show both, 4s 1s poop infinite ease-in;
+		.hall.shame.slide:target h1::after {
+			animation: .1s 1s show both, 4s 1.2s poop infinite ease-in;
 			transform-origin: top;
 		}
 
-.sin.slide {
+		.hall.slide > :last-child {
+			margin-bottom: auto;
+		}
+
+.ribbon {
+	position: absolute;
+	top: 0; left: 0;
+	background: linear-gradient(to left, hsla(0,0%,100%,.4), transparent) hsl(0, 100%, 40%);
+	text-transform: uppercase;
+	transform: rotate(90deg) translateX(70.71068%) rotate(-90deg) rotate(-45deg) translateY(-100%);
+	transform-origin: 0 0;
+	padding: .2em 3em;
+	box-shadow: 0 0.1em 0 0.1em rgba(0, 0, 0, 0.15);
+	font-size: 80%;
+	font-weight: bold;
+	letter-spacing: -.05em;
+}
+
+.sin.slide,
+.solution.slide,
+.commandment.slide {
 
 }
 
-	.sin.slide h1,
-	.solution.slide h1 {
-		font-weight: 100;
-	}
+.sin.slide {
+	background: radial-gradient(rgba(0,0,0,.7) 20%, transparent 80%), url(img/hell.jpg) black center / cover;
+}
 
-	.sin.slide h1::before,
-	.solution.slide h1::before {
+.commandment.slide {
+	background: radial-gradient(rgba(0,0,0,.7) 20%, transparent 80%), url(img/god.jpg) black center / cover;
+}
+
+	.sin.slide::before,
+	.solution.slide::before,
+	.commandment.slide::before {
 		content: "UX Sin";
-		position: absolute;
-		top: 0; left: 0;
-		background: linear-gradient(to left, hsla(0,0%,100%,.4), transparent) hsl(0, 100%, 40%);
+		padding: .2em 1em;
+		margin-bottom: .6em;
+		background: hsl(0, 100%, 40%);
 		text-transform: uppercase;
-		transform: rotate(90deg) translateX(70.71068%) rotate(-90deg) rotate(-45deg) translateY(-100%);
-		transform-origin: 0 0;
-		padding: .2em 3em;
 		box-shadow: 0 0.1em 0 0.1em rgba(0, 0, 0, 0.15);
-		font-size: 70%;
 		font-weight: bold;
 		letter-spacing: -.05em;
+		text-align: center;
 	}
 
-	.solution.slide h1::before {
+	.solution.slide::before {
 		content: "Solution";
 		background-color: hsl(80, 80%, 35%);
+	}
+
+	.commandment.slide::before {
+		content: "UX Commandment";
+		background-color: hsl(200, 60%, 50%);
 	}
 
 #microwave {
@@ -448,3 +496,21 @@ footer.slide {
 		top: 0; left: 0;
 		animation-delay: calc(var(--interval) / 2)
 	}
+
+
+ul.good {
+
+}
+
+	ul.good > li {
+		list-style: none;
+	}
+
+		ul.good > li::before {
+			content: "✓";
+			display: inline-block;
+			vertical-align: middle;
+			font-size: 130%;
+			color: hsl(80, 80%, 50%);
+			text-indent: -1em;
+		}
