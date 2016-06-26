@@ -249,3 +249,36 @@ dialog {
 	dialog > :last-child {
 		margin-bottom: 0;
 	}
+
+.slide:target {
+	transition: none;
+}
+
+header.slide.next {
+	position: fixed;
+	top: auto;
+	right: 0;
+	bottom: 0;
+	left: auto;
+	z-index: 100;
+	visibility: visible;
+	background: none;
+	padding: 1em 2em;
+	font-size: .8vmin;
+}
+
+	header.slide.next h1 {
+		max-width: none;
+	}
+
+	header.slide.next h1 br {
+		display: none;
+	}
+
+		header.slide.next h1::before {
+			content: "Next up: "
+		}
+
+			header.slide.next:not(:hover) {
+				opacity: .25;
+			}

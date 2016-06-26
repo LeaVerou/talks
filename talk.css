@@ -327,6 +327,8 @@ footer.slide {
 		font-size: 100%;
 		text-align: left;
 		border-radius: .15em;
+
+		--poop-interval: 5s;
 	}
 
 	.hall.shame.slide h1 {
@@ -383,7 +385,7 @@ footer.slide {
 		}
 
 		.hall.shame.slide:target h1::before {
-			animation: 1s flip forwards cubic-bezier(.1,1,.5,2), 4s 1s strain infinite;
+			animation: 1s flip forwards cubic-bezier(.1,1,.5,2), var(--poop-interval) 1s strain infinite;
 		}
 
 		@keyframes show {
@@ -406,7 +408,7 @@ footer.slide {
 		}
 
 		.hall.shame.slide:target h1::after {
-			animation: .1s 1s show both, 4s 1.2s poop infinite ease-in;
+			animation: .1s 1s show both, var(--poop-interval) 1.2s poop infinite ease-in;
 			transform-origin: top;
 		}
 
@@ -445,7 +447,7 @@ footer.slide {
 	.sin.slide::before,
 	.solution.slide::before,
 	.commandment.slide::before {
-		content: "UX Sin";
+		content: "JS UX Deadly Sin";
 		padding: .2em 1em;
 		margin-bottom: .6em;
 		background: hsl(0, 100%, 40%);
@@ -462,7 +464,7 @@ footer.slide {
 	}
 
 	.commandment.slide::before {
-		content: "UX Commandment";
+		content: "JS UX Commandment";
 		background-color: hsl(200, 60%, 50%);
 	}
 
@@ -630,7 +632,7 @@ ul.good {
 }
 
 	#future-observers li + li {
-		margin-top: .8em;
+		margin-top: 1.5em;
 	}
 
 	#future-observers code {
@@ -654,3 +656,46 @@ ul.good {
 	border-radius: .5em;
 	box-shadow: .05em .1em .2em rgba(0,0,0,.5)
 }
+
+@keyframes matrix {
+	to {
+		background-position-y: calc(-1 * var(--size)), calc(3*var(--size) / 2);
+	}
+}
+
+/*@keyframes pulse { to { font-size: 80px; }}*/
+
+.whynot.slide {
+	--q: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+	<text style="fill: white; fill-opacity: .05; font: bold 80px/1 Times;" y=".8em">?</text></svg>');
+	--size: 30vmin;
+	background: var(--q) 0 0, var(--q) calc(var(--size) / 2) calc(var(--size) / 2);
+	background-size: var(--size) var(--size);
+	background-color: black;
+	animation: matrix 8s 5s infinite alternate ease-in;
+
+}
+
+.priorities.slide {
+
+}
+
+	.priorities.slide ol {
+		list-style: none;
+	}
+
+		.priorities.slide ol li {
+			position: relative;
+			margin: 2em 0;
+		}
+
+			.priorities.slide ol li + li::before {
+				content: ">";
+				position: absolute;
+				left: calc(50% - .5em);
+				bottom: .2em;
+				z-index: -1;
+				font-size: 300%;
+				font-weight: bold;
+				color: #f06;
+			}

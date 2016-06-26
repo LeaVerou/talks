@@ -14,12 +14,6 @@
 </head>
 <body class="language-javascript">
 
-<section id="for-browser" class="dark slide">
-	<h1>Important</h1>
-	This slide deck was created for use in a controlled environment, during a talk. It works best with Chrome at 1280x720 or 1280x768. It may or may not work properly in other browsers.
-	The demos were live coded, so these slides are a bit pointless if you never watched the talk.
-</section>
-
 <header id="intro" class="slide dont-resize" data-source="flickr.com/photos/billward/16601966117">
 	<h1>
 		JSUX
@@ -155,6 +149,7 @@
 			<pre><code>> new URL("foo.txt")</code></pre>
 			<pre class="error"><code>Uncaught TypeError: Failed to construct 'URL': Invalid URL</code></pre>
 			<pre><code>> new URL("foo.txt", location)</code></pre>
+			<pre><code>< URL {href: "https://leaverou.github.io/jsux/foo.txt", …}</code></pre>
 		</div>
 	</article>
 </section>
@@ -165,11 +160,6 @@
 
 	<article class="hall shame slide" id="cloneNode">
 		<pre><code>element.cloneNode(true);</code></pre>
-	</article>
-
-	<article class="hall shame slide">
-		<pre class="no-whitespace-normalization"><code class="delayed">// Change these numbers to see what each one is for...
-</code><code>ctx.ellipse(100, 100, 50, 75, .785398, 0, 6.2831853);</code></pre>
 	</article>
 
 	<article class="hall shame slide">
@@ -185,6 +175,11 @@
 		</code></pre>
 	</article>
 
+	<article class="hall shame slide" id="ellipse">
+		<pre class="no-whitespace-normalization"><code class="delayed">// Change these numbers to see what each one is for...
+</code><code>ctx.ellipse(100, 100, 50, 75, .785398);</code></pre>
+	</article>
+
 	<article class="slide" id="microwave" data-source="Image credits: http://worrydream.com/LearnableProgramming">
 		<div>
 			<img src="img/worrydream2.png" alt="" class="delayed">
@@ -195,22 +190,18 @@
 	<article class="slide" data-source="Image credits: http://worrydream.com/LearnableProgramming">
 		<img src="img/worrydream3.png" alt="" style="transform: scale(1.2)">
 	</article>
-</section>
-<section>
-	<header class="sin slide">
-		<h1>Random argument order</h1>
-	</header>
 
-	<article class="hall shame slide" id="replaceChild">
-		<div>
-			<pre><code>parentNode.replaceChild(newChild, oldChild)</code></pre>
-			<pre><code>parentNode.replaceChild(oldChild, newChild)</code></pre>
-		</div>
-	</article>
+	<article class="slide" data-import="ellipse"></article>
 
-	<article class="hall fame slide">
+	<article class="whynot slide">
 		<pre><code>
-			oldChild.replaceWith(newChild);
+			ctx.ellipse({
+				cx: 100,
+				cy: 100,
+				rx: 50,
+				ry: 75,
+				rotation: .785398
+			});
 		</code></pre>
 	</article>
 
@@ -233,15 +224,6 @@
 		</code></pre>
 	</article>
 
-	<article class="hall fame slide">
-		<pre><code>
-			element.addEventListener("focus", callback, {
-				capture: true,
-				once: true
-			});
-		</code></pre>
-	</article>
-
 	<article class="slide">
 		<h1>ES6 Default Parameters</h1>
 		<pre><code>
@@ -255,6 +237,33 @@
 	</article>
 </section>
 <section>
+	<header class="sin slide">
+		<h1>Random argument order</h1>
+	</header>
+
+	<article class="hall shame slide" id="replaceChild">
+		<div>
+			<pre><code>parentNode.replaceChild(newChild, oldChild)</code></pre>
+			<pre><code>parentNode.replaceChild(oldChild, newChild)</code></pre>
+		</div>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>
+			oldChild.replaceWith(newChild);
+		</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>
+			element.addEventListener("focus", callback, {
+				capture: true,
+				once: true
+			});
+		</code></pre>
+	</article>
+</section>
+<section>
 	<header class="commandment slide">
 		<h1 style="max-width: 8em">Order parameters by importance</h1>
 	</header>
@@ -264,11 +273,36 @@
 			history.pushState(null, "", "http://lea.verou.me");
 		</code></pre>
 	</article>
+
+	<article class="whynot slide">
+		<pre><code>
+			history.pushState("http://lea.verou.me");
+		</code></pre>
+	</article>
 </section>
+
+<section>
+	<header class="sin slide">
+		<h1>Double Negatives</h1>
+	</header>
+
+	<article class="hall shame slide">
+		<pre><code>input.disabled = false;</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>input.enabled = true;</code></pre>
+	</article>
+</section>
+
 <section>
 	<header class="sin slide">
 		<h1>True by default</h1>
 	</header>
+
+	<article class="slide">
+		<h1>Absence is a negative concept</h1>
+	</article>
 
 	<article class="slide">
 		<h1>Boolean parameters in JS</h1>
@@ -300,19 +334,24 @@
 		<pre><code>element.cloneNode(<em>shallow</em>);</code></pre>
 		<pre><code>element.cloneNode(); // shallow = false</code></pre>
 	</article>
-</section>
 
-<section>
-	<header class="sin slide">
-		<h1>Double Negatives</h1>
-	</header>
-
-	<article class="hall shame slide">
-		<pre><code>input.disabled = false;</code></pre>
+	<article class="hall slide">
+		<pre class="partial"><code>
+			(50000).toLocaleString("en", {
+				style: "currency",
+				currency: "EUR",
+				currencyDisplay: "name",
+				<mark>useGrouping: false</mark>
+			}); // "50000.00 euros"
+		</code></pre>
 	</article>
 
-	<article class="whynot slide">
-		<pre><code>input.enabled = true;</code></pre>
+	<article class="priorities slide">
+		<ol>
+			<li>👍 Sensible defaults</li>
+			<li>👎 No double negatives</li>
+			<li>👎 No true by default</li>
+		</ol>
 	</article>
 </section>
 
@@ -376,10 +415,6 @@
 	</article>
 
 	<article class="slide">
-		<h1>Returning undefined is wasteful</h1>
-	</article>
-
-	<article class="slide">
 		<pre><code>
 			yolo: function() {
 				// Function code here
@@ -387,6 +422,10 @@
 				return this;
 			}
 		</code></pre>
+	</article>
+
+	<article class="slide">
+		<h1>Returning undefined is wasteful</h1>
 	</article>
 
 	<article class="slide">
@@ -400,7 +439,7 @@
 		</code></pre>
 	</article>
 
-	<article data-src="http://leaverou.github.io/chainvas"></article>
+	<article class="slide" data-src="http://leaverou.github.io/chainvas"></article>
 </section>
 
 <section>
@@ -494,7 +533,9 @@
 		</code></pre>
 	</article>
 
-	<article class="slide">JS is not Java</article>
+	<article class="slide">
+		<h1>JS is not Java</h1>
+	</article>
 
 	<article class="whynot slide">
 		<pre><code>
@@ -536,7 +577,7 @@
 	<article class="solution slide">
 		<h1>ES6 Proxies</h1>
 		<pre><code>
-			MyStorage = new Proxy(MyHiddenObject, {
+			MyPublicObject = new Proxy(MyHiddenObject, {
 				get: function(property) {
 					if (property in myObject) {
 						return myObject[property];
@@ -550,7 +591,7 @@
 	<article class="solution slide">
 		<h1>ES6 Proxies</h1>
 		<pre><code>
-			MyStorage = new Proxy(MyHiddenObject, {
+			MyPublicObject = new Proxy(MyHiddenObject, {
 				…
 				set: function(property, val) {
 					if (property in myObject) {
@@ -574,7 +615,7 @@
 	</header>
 
 	<header class="commandment slide">
-		<h1>Name after <strong>what it does,</strong> not <strong>how it works</strong></h1>
+		<h1><strong style="display: block">What it does,</strong> not how it works</h1>
 	</header>
 
 	<article class="hall shame slide">
@@ -650,7 +691,6 @@
 			var observer = new MutationObserver(mutations => {
 				packery.layout();
 			});
-
 			var grid = document.getElementById("grid");
 			observer.observe(grid, {
 				childList: true,
@@ -686,7 +726,7 @@
 
 <section>
 	<header class="sin slide">
-		<h1>No toString() and toJSON()</h1>
+		<h1>Forgetting <strong>toString()</strong><br>and <strong>toJSON()</strong></h1>
 	</header>
 
 	<article class="hall shame slide">
@@ -714,19 +754,6 @@ return `${this.name}=${this.value}` }</code></pre>
 	</header>
 </section>
 
-<section>
-	<article class="hall slide">
-		<pre class="partial"><code>
-			(50000).toLocaleString("en", {
-				style: "currency",
-				currency: "EUR",
-				currencyDisplay: "name",
-				<mark>useGrouping: false</mark>
-			}); // "50000.00 euros"
-		</code></pre>
-	</article>
-</section>
-
 <footer class="dark slide">
 	<img src="img/mark.svg" />
 	<h1>Thank you!</h1>
@@ -736,7 +763,7 @@ return `${this.name}=${this.value}` }</code></pre>
 		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
 	</ul>
 
-	<p>Slides: <a href="https://leaverou.github.io/html-secrets">leaverou.github.io/html-secrets</a></p>
+	<p>Slides: <a href="https://leaverou.github.io/jsux">leaverou.github.io/jsux</a></p>
 	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
 </footer>
 
