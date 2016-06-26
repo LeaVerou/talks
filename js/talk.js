@@ -20,6 +20,22 @@ $$(".hall.slide").forEach(slide => {
 	});
 });
 
+Prism.languages.console = Prism.languages.javascript;
+
+Prism.languages.insertBefore("console", "comment", {
+	"prompt": /^[<>]/m
+});
+
+$$(".language-console").forEach(div => {
+	$$("pre:not(:first-of-type)", div).forEach(pre => {
+		pre.classList.add("delayed");
+		pre.classList.toggle("in", pre.textContent.trim().indexOf(">") === 0);
+		pre.classList.toggle("out", pre.textContent.trim().indexOf("<") === 0);
+		pre.classList.toggle("language-error", pre.classList.contains("error"));
+	});
+	div.closest(".slide").classList.add("console");
+});
+
 (function($, $$){
 
 /*

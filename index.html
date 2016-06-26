@@ -26,7 +26,7 @@
 	</h1>
 	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
 </header>
-<!--
+
 <section>
 	<section class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
@@ -80,8 +80,12 @@
 			★★★★★ on Amazon
 		</a>
 	</section>
+
+	<article class="slide hi">
+		<img src="img/referendum.png" alt="" class="tweet">
+	</article>
 </section>
--->
+
 <section>
 	<header class="slide">
 		<h1>JS? UX? JSUX…?</h1>
@@ -89,49 +93,48 @@
 
 	<article class="slide">
 		<blockquote>
-			<p>“Usability is the ease of use and learnability of a human-made object.”</p>
+			<p>“<em>Usability</em> is the ease of use and learnability of a human-made object.”</p>
 			<p class="cite"><a href="https://en.wikipedia.org/wiki/Usability"></a></p>
 		</blockquote>
 	</article>
 
 	<article class="slide">
 		<blockquote style="max-width: 25em">
-			<p>“User experience (UX) refers to a person's total experience using a particular product, system or service.”</p>
+			<p>“<em>User experience (UX)</em> refers to a person's total experience using a particular product, system or service.”</p>
 			<p class="cite"><a href="https://en.wikipedia.org/wiki/User_experience"></a></p>
 		</blockquote>
 	</article>
 
 	<article class="slide">
 		<blockquote style="max-width: 24em">
-			<p>“The user interface (UI) is the space where interactions between humans and machines occur.”</p>
-			<p class="cite"><a href="https://en.wikipedia.org/wiki/User_interface"></a></p>
+			<p>“The <em>User Interface (UI)</em> is everything designed into an information device with which a human being may interact”</p>
+			<p class="cite"><a href="https://books.google.co.il/books?id=Zmypu5-miawC&pg=PT256&lpg=PT256&dq=%22everything+designed+into+an+information+device+with+which+a+human+being+may+interact%22&source=bl&ots=mCh1jmmQ5b&sig=_GcD6kH-8wMVZU2a-uEbJhF1yYE&hl=en&sa=X&ved=0ahUKEwiTr_Ok58XNAhVMFMAKHXNDB0IQ6AEIJTAD#v=onepage&q=%22everything%20designed%20into%20an%20information%20device%20with%20which%20a%20human%20being%20may%20interact%22&f=false">Handbook of Research on Web Information Systems Quality</a></p>
 		</blockquote>
 	</article>
 
 	<article class="image slide" style="background: url(img/gsheets.png) no-repeat center / contain;">
 		<h1>
-			A User Interface
-			(well, two really)
+			GUInception
 		</h1>
 	</article>
 
+	<article class="image slide" style="background-image: url(img/faucet.jpg);">
+		<h1>A faucet is a UI</h1>
+	</article>
+
 	<article class="image slide" style="background-image: url(img/book.jpg)">
-		<h1>Another User Interface</h1>
+		<h1>A book is a UI</h1>
 	</article>
 
 	<article class="image slide" id="uinception">
-		<h1 class="caption">Another User Interface</h1>
+		<h1 class="caption">Slides are a UI</h1>
 		<div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed">
 			<div class="delayed"><div class="delayed"><div class="delayed"></div></div></div>
 		</div></div></div></div></div></div></div></div></div></div></div></div></div></div></div>
 	</article>
 
-	<article class="image slide" style="background-image: url(img/faucet.jpg);">
-		<h1>Another User Interface</h1>
-	</article>
-
 	<article class="image slide" style="background-image: url(img/code.png);">
-		<h1>Another User Interface</h1>
+		<h1>Your code is a UI</h1>
 	</article>
 </section>
 
@@ -147,7 +150,13 @@
 		<h1>Sensible defaults</h1>
 	</header>
 
-
+	<article class="hall shame slide">
+		<div class="language-console">
+			<pre><code>> new URL("foo.txt")</code></pre>
+			<pre class="error"><code>Uncaught TypeError: Failed to construct 'URL': Invalid URL</code></pre>
+			<pre><code>> new URL("foo.txt", location)</code></pre>
+		</div>
+	</article>
 </section>
 <section>
 	<header class="sin slide">
@@ -630,7 +639,6 @@
 	<article class="slide" data-src="http://masonry.desandro.com/"></article>
 
 	<article class="hall shame slide">
-		<blockquote style="max-width: 20em;">"layout is useful when an item has changed size, and all items need to be laid out again."</blockquote>
 		<pre><code>
 			packery.layout();
 		</code></pre>
@@ -639,8 +647,40 @@
 	<article class="solution slide">
 		<h1>Mutation observers</h1>
 		<pre><code>
+			var observer = new MutationObserver(mutations => {
+				packery.layout();
+			});
 
+			var grid = document.getElementById("grid");
+			observer.observe(grid, {
+				childList: true,
+				characterData: true
+			});
 		</code></pre>
+	</article>
+
+	<article class="slide" id="future-observers">
+		<h1>Soon:</h1>
+
+		<ul>
+			<li><code>ResizeObserver</code> <a href="https://wicg.github.io/ResizeObserver"></a></li>
+			<li><code>IntersectionObserver</code> <a href="https://wicg.github.io/IntersectionObserver"></a></li>
+		</ul>
+	</article>
+
+	<article class="talking slide" id="think-of-the-browsers" data-source="flickr.com/photos/x-ray_delta_one/4264423055/">
+		<h1>Won’t someone, please, think of performance?!</h1>
+	</article>
+
+	<article class="slide">
+		<h1>Use with restraint</h1>
+
+		<ul>
+			<li>Observe as little as possible</li>
+			<li>Narrow scope as much as possible</li>
+			<li><code>unobserve()</code> when no longer needed</li>
+			<li>Don’t force it on your users</li>
+		</ul>
 	</article>
 </section>
 
@@ -648,6 +688,24 @@
 	<header class="sin slide">
 		<h1>No toString() and toJSON()</h1>
 	</header>
+
+	<article class="hall shame slide">
+		<div class="language-console">
+			<pre><code>> document.body.attributes[0] + ""</code></pre>
+			<pre><code>< "[object Attr]"</code></pre>
+		</div>
+	</article>
+	<article class="slide">
+		<div class="language-console">
+			<pre><code>> Attr.prototype.toString = function() { return this.name }</code></pre>
+			<pre><code>> document.body.attributes[0] + ""</code></pre>
+			<pre><code>< "class"</code></pre>
+			<pre><code>> Attr.prototype.toString = function() {
+return `${this.name}=${this.value}` }</code></pre>
+			<pre><code>> document.body.attributes[0] + ""</code></pre>
+			<pre><code>< "class=language-javascript"</code></pre>
+		</div>
+	</article>
 </section>
 
 <section>

@@ -113,6 +113,11 @@ code[class*="language-"] {
 	color: red;
 }
 
+.token.prompt {
+	color: hsl(210, 50%, 60%); /* aqua */
+	font-weight: bold;
+}
+
 /* Fallback, in case JS does not run, to ensure the code is at least visible */
 .lang-markup script[type='text/plain'],
 .language-markup script[type='text/plain'],

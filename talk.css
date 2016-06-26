@@ -281,7 +281,7 @@ footer.slide {
 	}
 
 		#uinception div::before {
-			content: "Another User Interface";
+			content: "Slides are a UI";
 			display: block;
 			background: rgba(0,0,0,.5);
 			backdrop-filter: blur(4px);
@@ -301,8 +301,9 @@ footer.slide {
 .hall.slide {
 	--background: hsl(0, 0%, 15%);
 	background: var(--background);
+	--background: #111;
 }
-
+/*
 .hall.shame.slide {
 	--background: hsl(0, 50%, 15%);
 }
@@ -313,7 +314,7 @@ footer.slide {
 
 .hall.meh.slide {
 	--background: hsl(50, 80%, 12%);
-}
+}*/
 
 	.hall.slide h1 {
 		position: relative;
@@ -325,12 +326,25 @@ footer.slide {
 		color: var(--background);
 		font-size: 100%;
 		text-align: left;
-		border-radius: .1em;
+		border-radius: .15em;
+	}
+
+	.hall.shame.slide h1 {
+		background: hsla(0,100%,70%,.7);
+	}
+
+	.hall.fame.slide h1 {
+		background: hsla(80,100%,70%,.7);
+	}
+
+	.hall.meh.slide h1 {
+		background: hsla(50,100%,70%,.7);
 	}
 
 		.hall.slide h1 strong {
 			font-size: 160%;
 			letter-spacing: -.05em;
+			white-space: nowrap;
 		}
 
 		.hall.slide h1::before {
@@ -514,3 +528,129 @@ ul.good {
 			color: hsl(80, 80%, 50%);
 			text-indent: -1em;
 		}
+
+#think-of-the-browsers {
+	display: block;
+	background: #8f8f8f url(img/housewife.png) no-repeat bottom right / 450px auto;
+	background-color: #978;
+	background-size: 450px;
+	padding: 2em;
+	transition: 1s ease-in-out background-size;
+	color: black;
+}
+
+	#think-of-the-browsers:target {
+		background-size: 550px auto;
+	}
+
+	.talking.slide > h1 {
+			position: relative;
+			padding: .5em .3em .5em .7em;
+			border: .2em solid black;
+			width: 7.8em;
+			background: white;
+			font-weight: bold;
+			font-size: 200%;
+			border-radius: .8em;
+			text-align: left;
+		}
+
+		.talking.slide > h1:before,
+		.talking.slide > h1:after {
+			content: '';
+			position: absolute;
+			right: -.99em;
+			bottom: 1em;
+			width: 0;
+			height: 1px;
+			border: solid transparent;
+			border-width: 0 .8em .8em 0;
+		}
+
+		.talking.slide > h1:before {
+			border-bottom-color: black;
+			z-index: -1;
+		}
+
+		.talking.slide > h1:after {
+			margin-right: .5em;
+			margin-bottom: .2em;
+			border-bottom-color: white;
+		}
+
+.console.slide {
+	justify-content: flex-end;
+}
+
+	.language-console pre {
+		margin: 0;
+		text-indent: -2ch;
+		padding-left: 2ch;
+		transition: none;
+	}
+
+	.language-console pre.error {
+		color: red;
+		text-indent: 0;
+	}
+
+		.language-console pre.error code::before {
+			content: "×";
+			display: inline-block;
+			width: 1.4ch;
+			line-height: 1.4ch;
+			margin-right: .6ch;
+			text-align: center;
+			background: red;
+			color: white;
+			border-radius: 50%;
+			margin-left: -2ch;
+		}
+
+		.language-console pre.error code {
+			color: inherit;
+		}
+
+	.language-console pre.delayed:not(.current):not(.displayed) {
+		height: 0;
+	}
+
+	.language-console pre.in.delayed.current::after {
+		content: "";
+		border-right: 1px solid;
+		animation: 1s blink infinite step-start;
+	}
+
+	.language-console pre:not(:first-of-type) {
+		border-top: 1px solid hsla(0,0%,100%,.15);
+	}
+
+#future-observers {
+
+}
+
+	#future-observers li + li {
+		margin-top: .8em;
+	}
+
+	#future-observers code {
+		display: block;
+		padding: 0;
+		font-size: 150%;
+		line-height: 1;
+		font-weight: bold;
+		color: #0cf;
+	}
+
+	#future-observers a {
+		text-decoration: none;
+
+	}
+
+.tweet {
+	max-height: 80vh;
+	box-sizing: border-box;
+	border: 1em solid white;
+	border-radius: .5em;
+	box-shadow: .05em .1em .2em rgba(0,0,0,.5)
+}
