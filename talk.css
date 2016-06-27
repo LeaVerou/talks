@@ -479,10 +479,6 @@ footer.slide {
 		background-color: hsl(200, 60%, 50%);
 	}
 
-	#empathy::before {
-		content: "Most Important Commandment"
-	}
-
 	.caveat.slide::before {
 		content: "Caveat"
 	}
@@ -664,7 +660,7 @@ ul.good {
 	.language-console pre.in.delayed.current code {
 		overflow: hidden;
 		width: calc(var(--charcount) * 1ch);
-		animation: calc(var(--charcount) * .1s) typing forwards steps(calc(var(--charcount) - 2));
+		animation: calc(var(--charcount) * .08s) typing forwards steps(calc(var(--charcount) - 2));
 	}
 
 		.language-console pre.in.delayed.current::after {

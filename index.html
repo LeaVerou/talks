@@ -180,6 +180,24 @@
 		</code></pre>
 		<pre class="delayed"><code>node.contains(otherNode);</code></pre>
 	</article>
+
+	<article class="hall shame slide">
+
+		<div class="language-console overlay">
+			<pre><code>> var circle = document.querySelector("circle")</code></pre>
+			<pre><code>> circle.cx</code></pre>
+			<pre><code>< SVGAnimatedLength {baseVal: SVGLength, animVal: SVGLength}</code></pre>
+			<pre><code>> circle.cx.baseVal</code></pre>
+			<pre><code>< SVGLength {unitType: 1, value: 50, valueInSpecifiedUnits: 50, valueAsString: "50"}</code></pre>
+			<pre><code>> circle.cx.baseVal.value</code></pre>
+			<pre><code>< 50</code></pre>
+			<pre><code>> circle.cx = 5</code></pre>
+			<pre><code>> circle.cx.baseVal.value</code></pre>
+			<pre><code>< 50</code></pre>
+		</div>
+		<svg width="100" height="100"><circle cx="50" cy="50" r="40" fill="white" /></svg>
+		<pre><code>&lt;circle cx="50" cy="50" r="40" /></code></pre>
+	</article>
 </section>
 
 <section>
@@ -726,16 +744,29 @@ element.cloneNode(true); // shallow</code></pre>
 </section>
 
 <section>
-	<header class="sin slide">
-		<h1>Verbosity</h1>
+	<header class="commandment slide">
+		<h1>Use <strong>few simple <br>words, whole</strong></h1>
 	</header>
 
-	<header class="commandment slide">
-		<h1>Use <strong>few, simple words</strong></h1>
-	</header>
+	<article class="hall shame slide">
+		<pre><code>element.parentNode</code></pre>
+	</article>
 
+	<article class="whynot slide">
+		<pre><code>element.parent</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>element.childNodes</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>element.children</code></pre>
+	</article>
+</section>
+<section>
 	<header class="commandment slide">
-		<h1><strong style="display: block">What it does,</strong> not how it works</h1>
+		<h1>Describe <strong> what it does,</strong><br> not how it works</h1>
 	</header>
 
 	<article class="hall shame slide">
@@ -860,10 +891,24 @@ element.cloneNode(true); // shallow</code></pre>
 			<pre><code>< "class"</code></pre>
 		</div>
 	</article>
+
+	<article class="hall fame slide">
+		<div class="language-console">
+			<pre><code>> JSON.stringify({date: new Date()})</code></pre>
+			<pre><code>< '{"date":"2016-06-27T22:39:17.358Z"}'</code></pre>
+		</div>
+	</article>
+
+	<article class="hall shame slide">
+		<div class="language-console">
+			<pre><code>> JSON.stringify({regex: /a/})</code></pre>
+			<pre><code>< '{"regex":{}}'</code></pre>
+		</div>
+	</article>
 </section>
 
 <section class="language-markup">
-	<header class="commandment slide">
+	<header class="commandment slide" id="html-api">
 		<h1>Thou shalt also<br> have an <strong>HTML API</strong></h1>
 	</header>
 
@@ -907,15 +952,12 @@ element.cloneNode(true); // shallow</code></pre>
 
 	<article class="slide">
 		<script type="text/plain">
-			<input class="awesomplete" list="mylist" data-minchars="3" />
-			<datalist id="mylist">
-				<option>Ada</option>
-				<option>Java</option>
-				<option>JavaScript</option>
-				<option>Brainfuck</option>
-				<option>LOLCODE</option>
-				<option>Node.js</option>
-				<option>Ruby on Rails</option>
+			<input class="awesomplete" list="countries" data-minchars="3" />
+			<datalist id="countries">
+				<option>Greece</option>
+				<option>Israel</option>
+				<option>United States</option>
+				<option>United Kingdom</option>
 			</datalist>
 		</script>
 	</article>
@@ -945,9 +987,21 @@ element.cloneNode(true); // shallow</code></pre>
 	<article class="slide" data-src="http://leaverou.github.io/multirange" data-title="Soon: CSS API?"></article>
 </section>
 
-<article class="commandment slide" id="empathy">
-	<h1>Code with <strong>empathy</strong></h1>
-</article>
+<section>
+	<header class="slide" id="parting">
+		<h1>Parting words</h1>
+	</header>
+
+	<article class="commandment slide">
+		<h1>Stay foolish</h1>
+	</article>
+
+	<article class="commandment slide" id="empathy">
+		<h1>Code with <strong>empathy</strong></h1>
+	</article>	
+</section>
+
+
 
 <footer class="dark slide">
 	<img src="img/mark.svg" />
