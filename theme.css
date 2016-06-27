@@ -1,3 +1,5 @@
+/*@import 'https://fonts.googleapis.com/css?family=Reenie+Beanie';*/
+
 html {
 	--font-mono: Consolas, Monaco, 'Andale Mono', monospace;
 	--font-body: 'Helvetica Neue', sans-serif;
@@ -250,7 +252,18 @@ dialog {
 		margin-bottom: 0;
 	}
 
-.slide:target {
+.slide:last-child::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 1rem;
+	height: 1rem;
+	background: red;
+}
+
+/*
+.slide:last-child:target {
 	transition: none;
 }
 
@@ -282,3 +295,4 @@ header.slide.next {
 			header.slide.next:not(:hover) {
 				opacity: .25;
 			}
+*/

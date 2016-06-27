@@ -8,15 +8,18 @@
 <link href="../csss/reusable.css" rel="stylesheet" />
 <link href="prism.css" rel="stylesheet" />
 <link href="theme.css" rel="stylesheet" />
+<link href="../multirange/multirange.css" rel="stylesheet" />
 <link href="talk.css" rel="stylesheet" />
+
 <script src="../prefixfree/prefixfree.min.js"></script>
 
 </head>
 <body class="language-javascript">
 
-<header id="intro" class="slide dont-resize" data-source="flickr.com/photos/billward/16601966117">
+<header id="intro" class="slide dont-resize">
 	<h1>
-		JSUX
+		JS
+		UX
 	</h1>
 	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
 </header>
@@ -78,6 +81,8 @@
 	<article class="slide hi">
 		<img src="img/referendum.png" alt="" class="tweet">
 	</article>
+
+	<!-- <article class="slide" data-src="http://localhost:8000/html-secrets/#intro" data-title="leaverou.github.io/html-secrets"></article> -->
 </section>
 
 <section>
@@ -106,11 +111,7 @@
 		</blockquote>
 	</article>
 
-	<article class="image slide" style="background: url(img/gsheets.png) no-repeat center / contain;">
-		<h1>
-			GUInception
-		</h1>
-	</article>
+	<article class="image slide" style="background: url(img/gsheets.png) no-repeat center / contain;"></article>
 
 	<article class="image slide" style="background-image: url(img/faucet.jpg);">
 		<h1>A faucet is a UI</h1>
@@ -133,10 +134,7 @@
 </section>
 
 <article class="slide">
-	<blockquote>
-		<p>“Code is written once but read many times”</p>
-		<p class="cite">Unknown</p>
-	</blockquote>
+	<h1>Documentation is a last resort.</h1>
 </article>
 
 <section>
@@ -154,8 +152,39 @@
 	</article>
 </section>
 <section>
+	<header class="commandment slide">
+		<h1>Be liberal in what you accept</h1>
+	</header>
+
+	<article class="hall fame slide">
+		<div class="language-console">
+			<pre><code>> new URL("http://lea.verou.me")</code></pre>
+			<pre><code>< URL {href: "http://lea.verou.me", …}</code></pre>
+			<pre><code>> new URL(new URL("http://lea.verou.me"))</code></pre>
+			<pre><code>< URL {href: "http://lea.verou.me", …}</code></pre>
+			<pre><code>> new URL(location)</code></pre>
+			<pre><code>< URL {href: "https://leaverou.github.io/jsux/index.html", …}</code></pre>
+		</div>
+	</article>
+</section>
+
+<section>
+	<header class="slide commandment">
+		<h1>Make the simple <strong>easy</strong> <br>& the complex <strong>possible</strong></h1>
+	</header>
+
+	<article class="hall fame slide">
+		<pre><code>
+			node.compareDocumentPosition(otherNode) ==
+				Node.DOCUMENT_POSITION_CONTAINS;
+		</code></pre>
+		<pre class="delayed"><code>node.contains(otherNode);</code></pre>
+	</article>
+</section>
+
+<section>
 	<header class="sin slide">
-		<h1>Boolean traps</h1>
+		<h1>Parameter traps</h1>
 	</header>
 
 	<article class="hall shame slide" id="cloneNode">
@@ -173,6 +202,13 @@
 			event.initKeyEvent("keypress", true, true, null, null,
 			                   false, false, false, false, 9, 0);
 		</code></pre>
+	</article>
+
+	<article class="hall shame slide" id="replaceChild">
+		<div>
+			<pre><code>oldChild.parentNode.replaceChild(newChild, oldChild)</code></pre>
+			<pre><code>oldChild.parentNode.replaceChild(oldChild, newChild)</code></pre>
+		</div>
 	</article>
 
 	<article class="hall shame slide" id="ellipse">
@@ -196,6 +232,16 @@
 	<article class="whynot slide">
 		<pre><code>
 			ctx.ellipse({
+				center: [100, 100],
+				radius: [50, 75],
+				rotation: .785398
+			});
+		</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>
+			ctx.ellipse({
 				cx: 100,
 				cy: 100,
 				rx: 50,
@@ -203,6 +249,13 @@
 				rotation: .785398
 			});
 		</code></pre>
+	</article>
+
+	<article class="slide">
+		<blockquote>
+			<p>“Code is written once but read many times”</p>
+			<p class="cite">Unknown</p>
+		</blockquote>
 	</article>
 
 	<article class="solution slide">
@@ -224,6 +277,15 @@
 		</code></pre>
 	</article>
 
+	<article class="hall fame slide">
+		<pre><code>
+			element.addEventListener("focus", callback, {
+				capture: true,
+				once: true
+			});
+		</code></pre>
+	</article>
+
 	<article class="slide">
 		<h1>ES6 Default Parameters</h1>
 		<pre><code>
@@ -234,17 +296,27 @@
 				console.log(o.option1, o.option2);
 			}
 		</code></pre>
+		<div class="language-console overlay">
+			<pre><code>> myFunk()</code></pre>
+			<pre><code>< 5 false</code></pre>
+			<pre><code>> myFunk({})</code></pre>
+			<pre><code>< 5 false</code></pre>
+			<pre><code>> myFunk({option1: 42})</code></pre>
+			<pre><code>< 42 false</code></pre>
+		</div>
 	</article>
 </section>
 <section>
 	<header class="sin slide">
-		<h1>Random argument order</h1>
+		<h1>Unnecessary error conditions</h1>
 	</header>
 
-	<article class="hall shame slide" id="replaceChild">
-		<div>
-			<pre><code>parentNode.replaceChild(newChild, oldChild)</code></pre>
-			<pre><code>parentNode.replaceChild(oldChild, newChild)</code></pre>
+	<article class="hall shame slide">
+		<div class="language-console">
+			<pre><code>> var div = document.createElement("div"), p = document.createElement("p")</code></pre>
+			<pre><code>> document.body.replaceChild(div, p)</code></pre>
+			<pre class="error"><code>Uncaught DOMException: Failed to execute 'replaceChild' on 'Node': The
+  node to be replaced is not a child of this node.</code></pre>
 		</div>
 	</article>
 
@@ -254,14 +326,7 @@
 		</code></pre>
 	</article>
 
-	<article class="hall fame slide">
-		<pre><code>
-			element.addEventListener("focus", callback, {
-				capture: true,
-				once: true
-			});
-		</code></pre>
-	</article>
+
 </section>
 <section>
 	<header class="commandment slide">
@@ -325,14 +390,16 @@
 	</article>
 
 	<article class="hall shame slide">
-		<pre><code>element.cloneNode(<em>deep</em>);</code></pre>
-		<pre><code>element.cloneNode(); // deep = true</code></pre>
+		<pre><code>element.cloneNode(); // deep
+element.cloneNode(false); // shallow
+element.cloneNode(true); // deep</code></pre>
 	</article>
 
 	<article class="solution slide">
 		<h1>Negate the concept</h1>
-		<pre><code>element.cloneNode(<em>shallow</em>);</code></pre>
-		<pre><code>element.cloneNode(); // shallow = false</code></pre>
+		<pre><code>element.cloneNode(); // deep
+element.cloneNode(false); // deep
+element.cloneNode(true); // shallow</code></pre>
 	</article>
 
 	<article class="hall slide">
@@ -349,8 +416,8 @@
 	<article class="priorities slide">
 		<ol>
 			<li>👍 Sensible defaults</li>
-			<li>👎 No double negatives</li>
-			<li>👎 No true by default</li>
+			<li>👎 Double negatives</li>
+			<li>👎 True by default</li>
 		</ol>
 	</article>
 </section>
@@ -443,22 +510,8 @@
 </section>
 
 <section>
-	<header class="slide commandment">
-		<h1>Make the simple <strong>easy</strong> <br>& the complex <strong>possible</strong></h1>
-	</header>
-
-	<article class="hall fame slide">
-		<pre><code>
-			node.compareDocumentPosition(otherNode) ==
-				Node.DOCUMENT_POSITION_CONTAINS;
-		</code></pre>
-		<pre class="delayed"><code>node.contains(otherNode);</code></pre>
-	</article>
-</section>
-
-<section>
 	<header class="commandment slide">
-		<h1>Support doing operations en masse</h1>
+		<h1>Support masse params</h1>
 	</header>
 
 	<article class="slide" data-import="setAttribute"></article>
@@ -493,6 +546,14 @@
 			var els = document.querySelectorAll(".foo");
 
 			els.setAttribute("data-foo", "bar");
+		</code></pre>
+	</article>
+
+	<article class="caveat slide">
+		<h1>Do not <strong>only</strong> support mass operations</h1>
+		<pre><code>
+			// This is stupid:
+			element.setAttribute({name: value});
 		</code></pre>
 	</article>
 </section>
@@ -537,12 +598,62 @@
 		<h1>JS is not Java</h1>
 	</article>
 
-	<article class="whynot slide">
-		<pre><code>
-			let date = new Date();
+	<article class="slide">
+		<pre style="column-count: 3"><code>
+			private String name;
+			private String phone;
+			private String gender;
+			private int age;
+			private Date birthday;
+			private boolean alive;
 
-			date.month; // 5
-			date.month = 1;
+			public void setName(String name) {
+				this.name = name;
+			}
+
+			public String getName() {
+				return name;
+			}
+
+			public void setPhone(String phone) {
+				this.phone = phone;
+			}
+
+			public String getPhone() {
+				return phone;
+			}
+
+			public void setGender(String gender) {
+				this.gender = gender;
+			}
+
+			public String getGender() {
+				return gender;
+			}
+
+			public void setAge(int age) {
+				this.age = age;
+			}
+
+			public int getAge() {
+				return age;
+			}
+
+			public void setBirthday(Date birthday) {
+				this.birthday = birthday;
+			}
+
+			public Date getBirthday() {
+				return birthday;
+			}
+
+			public void setAlive(boolean alive) {
+				this.alive = alive;
+			}
+
+			public boolean getAlive() {
+				return alive;
+			}
 		</code></pre>
 	</article>
 
@@ -556,9 +667,18 @@
 		</code></pre>
 	</article>
 
-	<article class="incomplete slide">
-		<h1>Exception: Parameters</h1>
+	<article class="whynot slide">
+		<pre><code>
+			let date = new Date();
+
+			date.month; // 5
+			date.month = 1;
+		</code></pre>
 	</article>
+
+	<!-- <article class="incomplete slide">
+		<h1>Exception: Parameters</h1>
+	</article> -->
 
 	<article class="hall shame slide">
 		<pre><code>
@@ -687,24 +807,22 @@
 
 	<article class="solution slide">
 		<h1>Mutation observers</h1>
-		<pre><code>
-			var observer = new MutationObserver(mutations => {
-				packery.layout();
-			});
-			var grid = document.getElementById("grid");
-			observer.observe(grid, {
-				childList: true,
-				characterData: true
-			});
-		</code></pre>
+		<pre class="no-whitespace-normalization"><code>var observer = new MutationObserver(mutations => {
+	packery.layout();
+});</code>
+
+<code class="delayed">observer.observe(document.getElementById("grid"), {
+	childList: true
+});</code></pre>
 	</article>
 
 	<article class="slide" id="future-observers">
 		<h1>Soon:</h1>
 
 		<ul>
-			<li><code>ResizeObserver</code> <a href="https://wicg.github.io/ResizeObserver"></a></li>
-			<li><code>IntersectionObserver</code> <a href="https://wicg.github.io/IntersectionObserver"></a></li>
+			<li><strong>ResizeObserver</strong> <a href="https://wicg.github.io/ResizeObserver"></a></li>
+			<li><strong>IntersectionObserver</strong> <a href="https://wicg.github.io/IntersectionObserver"></a></li>
+			<li><strong>Houdini specs</strong> <a href="https://drafts.css-houdini.org"></a></li>
 		</ul>
 	</article>
 
@@ -740,19 +858,96 @@
 			<pre><code>> Attr.prototype.toString = function() { return this.name }</code></pre>
 			<pre><code>> document.body.attributes[0] + ""</code></pre>
 			<pre><code>< "class"</code></pre>
-			<pre><code>> Attr.prototype.toString = function() {
-return `${this.name}=${this.value}` }</code></pre>
-			<pre><code>> document.body.attributes[0] + ""</code></pre>
-			<pre><code>< "class=language-javascript"</code></pre>
 		</div>
 	</article>
 </section>
 
-<section>
+<section class="language-markup">
 	<header class="commandment slide">
 		<h1>Thou shalt also<br> have an <strong>HTML API</strong></h1>
 	</header>
+
+	<article class="slide">
+		<a href="https://twitter.com/leaverou/status/690583334414635009"><img src="img/nojspoll.png" class="tweet" /></a>
+	</article>
+
+	<article class="hall shame slide" style="background: black url(img/jquery-ui.png) no-repeat bottom right / auto 2em content-box border-box">
+		<script type="text/plain">
+			<div id="slider"></div>
+			<script>
+			$("#slider").slider({
+				values: [100, 400],
+				max: 500,
+				step: 50,
+				range: true
+			});
+			&lt;/script>
+		</script>
+	</article>
+
+	<article class="hall fame slide">
+		<div style="transform: scale(3); transform-origin: top">
+			<input type="range" value="100,400" max="500" step="50" multiple />
+		</div>
+
+		<script type="text/plain">
+			<input type="range" multiple value="100,400"
+			       max="500" step="50" />
+		</script>
+	</article>
+
+	<article class="slide">
+		<ul>
+			<li><strong>Classes</strong> for boolean settings</li>
+			<li><strong>Attributes</strong> for other primitives</li>
+			<li>Attributes with <strong>id</strong> or <strong>selector</strong> value for objects</li>
+			<li>Have an init setting.</li>
+		</ul>
+	</article>
+
+	<article class="slide">
+		<script type="text/plain">
+			<input class="awesomplete" list="mylist" data-minchars="3" />
+			<datalist id="mylist">
+				<option>Ada</option>
+				<option>Java</option>
+				<option>JavaScript</option>
+				<option>Brainfuck</option>
+				<option>LOLCODE</option>
+				<option>Node.js</option>
+				<option>Ruby on Rails</option>
+			</datalist>
+		</script>
+	</article>
+
+	<article class="slide">
+		<h1>Make them inheritable</h1>
+		<pre class="partial"><code>
+			&lt;body <mark>class="language-javascript"</mark>>
+				Use &lt;code>foo()&lt;/code> and &lt;code>bar()&lt;/code> to…
+
+				&lt;pre <mark>class="language-css"</mark>>
+					&lt;code>* { box-sizing: border-box }&lt;/code>
+				&lt;/pre>
+			&lt;/body>
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<h1>Global settings on &lt;script></h1>
+		<pre><code>&lt;script src="stretchy.min.js" data-filter=".foo">&lt;/script></code></pre>
+	</article>
+
+	<article class="slide language-javascript">
+		<pre><code>document.currentScript.getAttribute("data-filter")</code></pre>
+	</article>
+
+	<article class="slide" data-src="http://leaverou.github.io/multirange" data-title="Soon: CSS API?"></article>
 </section>
+
+<article class="commandment slide" id="empathy">
+	<h1>Code with <strong>empathy</strong></h1>
+</article>
 
 <footer class="dark slide">
 	<img src="img/mark.svg" />
@@ -773,6 +968,7 @@ return `${this.name}=${this.value}` }</code></pre>
 <!--
 <script src="../incrementable/incrementable.js"></script>
 <script src="js/editor.js"></script> -->
+<script src="../multirange/multirange.js"></script>
 <script src="js/talk.js"></script>
 
 </body>

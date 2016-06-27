@@ -27,14 +27,21 @@ Prism.languages.insertBefore("console", "comment", {
 });
 
 $$(".language-console").forEach(div => {
-	$$("pre:not(:first-of-type)", div).forEach(pre => {
+	$$("pre", div).forEach(pre => {
+		var code = pre.textContent;
 		pre.classList.add("delayed");
-		pre.classList.toggle("in", pre.textContent.trim().indexOf(">") === 0);
-		pre.classList.toggle("out", pre.textContent.trim().indexOf("<") === 0);
+		pre.classList.toggle("in", code.trim().indexOf(">") === 0);
+		pre.classList.toggle("out", code.trim().indexOf("<") === 0);
 		pre.classList.toggle("language-error", pre.classList.contains("error"));
+		pre.style.setProperty("--charcount", code.length)
 	});
-	div.closest(".slide").classList.add("console");
+
+	if (!div.classList.contains("overlay")) {
+		div.closest(".slide").classList.add("console");
+	}
 });
+
+Prism.languages.markup.tag.alias = "grouptoken";
 
 (function($, $$){
 

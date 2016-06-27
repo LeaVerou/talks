@@ -12,15 +12,22 @@
 }
 
 	#intro h1 {
-		position: absolute;
-		bottom: .2em;
-		width: 5em;
+		width: 2em;
+		background: yellow;
 		margin: 0;
+		padding: .4em;
 		text-align: left;
 		font-size: 450%;
 		line-height: .8;
 		letter-spacing: -.05em;
+		font-weight: 300;
+		color: black;
+		text-align: right;
 	}
+
+		#intro h1::first-line {
+			font-weight: bold;
+		}
 
 	#intro h2 {
 		width: 8em;
@@ -40,9 +47,11 @@
 	#intro .attribution {
 		position: absolute;
 		bottom: -.5em;
+		left: 0;
+		right: 0;
+		text-align: center;
 		color: white;
 		font-size: 80%;
-		mix-blend-mode: difference;
 	}
 
 		#intro .attribution a {
@@ -324,7 +333,7 @@ footer.slide {
 		background: hsla(0,0%,100%,.7);
 		font-weight: 900;
 		color: var(--background);
-		font-size: 100%;
+		font-size: 42px;
 		text-align: left;
 		border-radius: .15em;
 
@@ -446,13 +455,15 @@ footer.slide {
 
 	.sin.slide::before,
 	.solution.slide::before,
-	.commandment.slide::before {
-		content: "JS UX Deadly Sin";
+	.commandment.slide::before,
+	.caveat.slide::before {
+		content: "Deadly Sin";
 		padding: .2em 1em;
 		margin-bottom: .6em;
 		background: hsl(0, 100%, 40%);
 		text-transform: uppercase;
 		box-shadow: 0 0.1em 0 0.1em rgba(0, 0, 0, 0.15);
+		font-size: 36px;
 		font-weight: bold;
 		letter-spacing: -.05em;
 		text-align: center;
@@ -464,8 +475,16 @@ footer.slide {
 	}
 
 	.commandment.slide::before {
-		content: "JS UX Commandment";
+		content: "Commandment";
 		background-color: hsl(200, 60%, 50%);
+	}
+
+	#empathy::before {
+		content: "Most Important Commandment"
+	}
+
+	.caveat.slide::before {
+		content: "Caveat"
 	}
 
 #microwave {
@@ -584,16 +603,36 @@ ul.good {
 	justify-content: flex-end;
 }
 
+	.language-console.overlay {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: hsla(0, 0%, 25%, .8);
+		backdrop-filter: blur(5px);
+	}
+
+	div.language-console:not(.overlay) {
+		width: fill-available;
+	}
+
 	.language-console pre {
 		margin: 0;
-		text-indent: -2ch;
-		padding-left: 2ch;
+		padding: 0 .5em;
 		transition: none;
 	}
 
+	.language-console pre.in {
+		min-width: calc(var(--charcount) * 1ch);
+	}
+
+		.language-console pre:not(.error) code {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
 	.language-console pre.error {
 		color: red;
-		text-indent: 0;
 	}
 
 		.language-console pre.error code::before {
@@ -606,7 +645,6 @@ ul.good {
 			background: red;
 			color: white;
 			border-radius: 50%;
-			margin-left: -2ch;
 		}
 
 		.language-console pre.error code {
@@ -615,13 +653,25 @@ ul.good {
 
 	.language-console pre.delayed:not(.current):not(.displayed) {
 		height: 0;
+		padding-top: 0;
+		padding-bottom: 0;
 	}
 
-	.language-console pre.in.delayed.current::after {
-		content: "";
-		border-right: 1px solid;
-		animation: 1s blink infinite step-start;
+	@keyframes typing {
+		from { width: 2ch }
 	}
+
+	.language-console pre.in.delayed.current code {
+		overflow: hidden;
+		width: calc(var(--charcount) * 1ch);
+		animation: calc(var(--charcount) * .1s) typing forwards steps(calc(var(--charcount) - 2));
+	}
+
+		.language-console pre.in.delayed.current::after {
+			content: "";
+			border-right: 1px solid;
+			animation: 1s blink infinite step-start;
+		}
 
 	.language-console pre:not(:first-of-type) {
 		border-top: 1px solid hsla(0,0%,100%,.15);
@@ -632,28 +682,20 @@ ul.good {
 }
 
 	#future-observers li + li {
-		margin-top: 1.5em;
-	}
-
-	#future-observers code {
-		display: block;
-		padding: 0;
-		font-size: 150%;
-		line-height: 1;
-		font-weight: bold;
-		color: #0cf;
+		margin-top: .6em;
 	}
 
 	#future-observers a {
+		display: block;
 		text-decoration: none;
-
+		color: #0cf;
 	}
 
 .tweet {
 	max-height: 80vh;
 	box-sizing: border-box;
 	border: 1em solid white;
-	border-radius: .5em;
+	border-radius: 2vmin;
 	box-shadow: .05em .1em .2em rgba(0,0,0,.5)
 }
 
@@ -667,13 +709,12 @@ ul.good {
 
 .whynot.slide {
 	--q: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
-	<text style="fill: white; fill-opacity: .05; font: bold 80px/1 Times;" y=".8em">?</text></svg>');
+	<text style="fill: white; fill-opacity: .09; font: bold 80px/1 Times;" y=".8em">?</text></svg>');
 	--size: 30vmin;
 	background: var(--q) 0 0, var(--q) calc(var(--size) / 2) calc(var(--size) / 2);
 	background-size: var(--size) var(--size);
 	background-color: black;
 	animation: matrix 8s 5s infinite alternate ease-in;
-
 }
 
 .priorities.slide {
@@ -699,3 +740,10 @@ ul.good {
 				font-weight: bold;
 				color: #f06;
 			}
+
+input[type="range"].multirange.ghost {
+	--track-background: linear-gradient(to right,
+				transparent var(--low), var(--range-color) 0,
+				var(--range-color) var(--high), transparent 0
+			) no-repeat 0 55% / 100% 40%
+}

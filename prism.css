@@ -132,15 +132,16 @@ pre.partial > code {
 	color: hsla(0,0%,100%,.5);
 }
 
-	pre.partial > code .token {
+	pre.partial > code .token:not(.grouptoken) {
 		opacity: .5;
 	}
 
 	.partial mark {
 		background: none;
 		color: white;
+		opacity: 1;
 	}
 
-		pre.partial > code mark .token {
+		pre.partial > code mark .token:not(.grouptoken) {
 			opacity: 1;
 		}
