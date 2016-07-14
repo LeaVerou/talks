@@ -242,7 +242,7 @@
 	</article>
 
 	<article class="slide" data-source="Image credits: http://worrydream.com/LearnableProgramming">
-		<img src="img/worrydream3.png" alt="" style="transform: scale(1.2)">
+		<img src="img/worrydream3.png" alt="" style="transform: scale(1.5)">
 	</article>
 
 	<article class="slide" data-import="ellipse"></article>
@@ -529,7 +529,7 @@ element.cloneNode(true); // shallow</code></pre>
 
 <section>
 	<header class="commandment slide">
-		<h1>Support masse params</h1>
+		<h1>Support mass params</h1>
 	</header>
 
 	<article class="slide" data-import="setAttribute"></article>
@@ -572,6 +572,9 @@ element.cloneNode(true); // shallow</code></pre>
 		<pre><code>
 			// This is stupid:
 			element.setAttribute({name: value});
+
+			// This is also stupid
+			[element].setAttribute(name, value)
 		</code></pre>
 	</article>
 </section>
@@ -714,17 +717,15 @@ element.cloneNode(true); // shallow</code></pre>
 
 	<article class="solution slide">
 		<h1>ES6 Proxies</h1>
-		<pre><code>
-			MyPublicObject = new Proxy(MyHiddenObject, {
-				get: function(property) {
-					if (property in myObject) {
-						return myObject[property];
-					}
-					return myObject.getItem(property);
-				},
-				…
-			});
-		</code></pre>
+		<pre class="no-whitespace-normalization"><code>MyPublicObject = new Proxy(MyHiddenObject, {
+	get: function(property) {</code><code class="delayed">
+		if (property in myObject) {
+			return myObject[property];
+		}
+		return myObject.getItem(property);</code><code>
+	},
+	set: function(property, val) {…
+});</code></pre>
 	</article>
 	<article class="solution slide">
 		<h1>ES6 Proxies</h1>
@@ -737,7 +738,7 @@ element.cloneNode(true); // shallow</code></pre>
 					}
 					myObject.setItem(property, val);
 				},
-				…
+				has: function(property, val) {…
 			});
 		</code></pre>
 	</article>
@@ -998,7 +999,7 @@ element.cloneNode(true); // shallow</code></pre>
 
 	<article class="commandment slide" id="empathy">
 		<h1>Code with <strong>empathy</strong></h1>
-	</article>	
+	</article>
 </section>
 
 

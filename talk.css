@@ -705,7 +705,7 @@ ul.good {
 
 .whynot.slide {
 	--q: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
-	<text style="fill: white; fill-opacity: .09; font: bold 80px/1 Times;" y=".8em">?</text></svg>');
+	<text style="fill: white; fill-opacity: .15; font: bold 80px/1 Times;" y=".8em">?</text></svg>');
 	--size: 30vmin;
 	background: var(--q) 0 0, var(--q) calc(var(--size) / 2) calc(var(--size) / 2);
 	background-size: var(--size) var(--size);
