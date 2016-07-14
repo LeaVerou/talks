@@ -1,4 +1,9 @@
-/*@import 'https://fonts.googleapis.com/css?family=Reenie+Beanie';*/
+@font-face {
+  font-family: 'Reenie Beanie';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Reenie Beanie'), local('ReenieBeanie'), url(https://fonts.gstatic.com/s/reeniebeanie/v7/ljpKc6CdXusL1cnGUSamXwYWpCd0FFfjqwFBDnEN0bM.woff2) format('woff2');
+}
 
 html {
 	--font-mono: Consolas, Monaco, 'Andale Mono', monospace;
