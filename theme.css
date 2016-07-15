@@ -122,6 +122,7 @@ div.editor {
 	left: 0;
 	right: 0;
 	bottom: 0;
+	z-index: -1;
 	color: white;
 	line-height: 1.5;
 }
@@ -201,7 +202,7 @@ div.editor > pre {
 }
 
 section > header.slide > h1 {
-	max-width: 60vw;
+	max-width: 61vw;
 }
 
 #indicator {

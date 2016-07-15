@@ -312,20 +312,8 @@ footer.slide {
 	background: var(--background);
 	--background: #111;
 }
-/*
-.hall.shame.slide {
-	--background: hsl(0, 50%, 15%);
-}
 
-.hall.fame.slide {
-	--background: hsl(75, 80%, 12%);
-}
-
-.hall.meh.slide {
-	--background: hsl(50, 80%, 12%);
-}*/
-
-	.hall.slide h1 {
+	.hall.slide > h1 {
 		position: relative;
 		margin-bottom: auto;
 		max-width: 8em;
@@ -340,25 +328,37 @@ footer.slide {
 		--poop-interval: 5s;
 	}
 
-	.hall.shame.slide h1 {
+	.demo.hall.slide > h1 {
+		color: white;
+	}
+
+	.hall.shame.slide > h1 {
 		background: hsla(0,100%,70%,.7);
 	}
 
-	.hall.fame.slide h1 {
+		.demo.hall.shame.slide > h1 {
+			background: hsl(0,100%,40%);
+		}
+
+	.hall.fame.slide > h1 {
 		background: hsla(80,100%,70%,.7);
 	}
 
-	.hall.meh.slide h1 {
+		.demo.hall.fame.slide > h1 {
+			background: hsl(80,100%,30%);
+		}
+
+	.hall.meh.slide > h1 {
 		background: hsla(50,100%,70%,.7);
 	}
 
-		.hall.slide h1 strong {
+		.hall.slide > h1 strong {
 			font-size: 160%;
 			letter-spacing: -.05em;
 			white-space: nowrap;
 		}
 
-		.hall.slide h1::before {
+		.hall.slide > h1::before {
 			content: "🏆";
 			position: relative;
 			z-index: 1;
@@ -382,18 +382,18 @@ footer.slide {
 			}
 		}
 
-		.hall.slide:not(.fame):target h1::before {
+		.hall.slide:not(.fame):target > h1::before {
 			animation: 1s flip forwards infinite alternate;
 			transform: translateY(-.15em) rotate(.5turn) ;
 		}
 
-		.hall.shame.slide:target h1::before,
-		.hall.meh.slide:target h1::before {
+		.hall.shame.slide:target > h1::before,
+		.hall.meh.slide:target > h1::before {
 			animation: 1s flip forwards cubic-bezier(.1,1,.5,2);
 			transform: translateY(-.15em) rotate(.5turn);
 		}
 
-		.hall.shame.slide:target h1::before {
+		.hall.shame.slide:target > h1::before {
 			animation: 1s flip forwards cubic-bezier(.1,1,.5,2), var(--poop-interval) 1s strain infinite;
 		}
 
@@ -409,14 +409,14 @@ footer.slide {
 			}
 		}
 
-		.hall.shame.slide h1::after {
+		.hall.shame.slide > h1::after {
 			content: "💩";
 			position: absolute;
 			left: 1.3em;
 			top: 2.2em;
 		}
 
-		.hall.shame.slide:target h1::after {
+		.hall.shame.slide:target > h1::after {
 			animation: .1s 1s show both, var(--poop-interval) 1.2s poop infinite ease-in;
 			transform-origin: top;
 		}
@@ -489,7 +489,7 @@ footer.slide {
 
 	#microwave > div {
 		position: relative;
-		transform: scale(1.3)
+		transform: scale(1.4)
 	}
 
 		#microwave img:first-of-type {
@@ -546,7 +546,7 @@ ul.good {
 			text-indent: -1em;
 		}
 
-#think-of-the-browsers {
+.talking.housewife.slide {
 	display: block;
 	background: #8f8f8f url(img/housewife.png) no-repeat bottom right / 450px auto;
 	background-color: #978;
@@ -556,7 +556,7 @@ ul.good {
 	color: black;
 }
 
-	#think-of-the-browsers:target {
+	.talking.housewife.slide:target {
 		background-size: 550px auto;
 	}
 
@@ -705,7 +705,7 @@ ul.good {
 
 .whynot.slide {
 	--q: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
-	<text style="fill: white; fill-opacity: .15; font: bold 80px/1 Times;" y=".8em">?</text></svg>');
+	<text style="fill: white; fill-opacity: .12; font: bold 80px/1 Times;" y=".8em">?</text></svg>');
 	--size: 30vmin;
 	background: var(--q) 0 0, var(--q) calc(var(--size) / 2) calc(var(--size) / 2);
 	background-size: var(--size) var(--size);
@@ -742,4 +742,67 @@ input[type="range"].multirange.ghost {
 				transparent var(--low), var(--range-color) 0,
 				var(--range-color) var(--high), transparent 0
 			) no-repeat 0 55% / 100% 40%
+}
+
+.logo.slide {
+	background: black no-repeat bottom right / auto 2em content-box border-box;
+}
+
+.demo.slide {
+	text-align: center;
+	justify-content: flex-start;
+	background: hsl(200, 20%, 75%);
+}
+
+	.demo.hall.slide > h1 {
+		margin-bottom: 1em;
+	}
+
+	.demo.slide input:not([type=checkbox]) {
+		width: -webkit-fill-available;
+		display: block;
+	}
+
+	.demo.slide input[type=file] {
+		display: inline-block;
+		width: fit-content;
+		max-width: 15vw;
+	}
+
+	.demo.slide input:not([type]) + input:not([type]) {
+		margin-top: .1em;
+	}
+
+	.demo.slide iframe {
+		border-width: 1px;
+		background: white;
+	}
+
+	.demo.slide:not(.dont-enlarge) [data-edit~="contents"],
+	.demo.slide:not(.dont-enlarge) [data-edit~="css"] {
+		width: 30%;
+		margin: 0 auto;
+		transform: scale(3);
+		transform-origin: top;
+		font-size: 33%;
+	}
+
+#dialog p::before {
+	content: url(img/ceilingcat.png);
+	display: block;
+}
+
+kbd {
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
+	z-index: 2;
+	padding: .1em .5em;
+	border: 1px solid rgba(0,0,0,.3);
+	border-radius: .3em;
+	background: linear-gradient(rgba(0,0,0,.2), transparent) #eee;
+	font-size: 120%;
+	font-weight: bold;
+	font-family: var(--font-body);
+	box-shadow: 3px 3px hsl(0,0%,40%), 3px 3px 10px rgba(0,0,0,.4);
 }

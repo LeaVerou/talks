@@ -78,11 +78,9 @@
 		</a>
 	</section>
 
-	<article class="slide hi">
+	<!-- <article class="slide hi">
 		<img src="img/referendum.png" alt="" class="tweet">
-	</article>
-
-	<!-- <article class="slide" data-src="http://localhost:8000/html-secrets/#intro" data-title="leaverou.github.io/html-secrets"></article> -->
+	</article> -->
 </section>
 
 <section>
@@ -113,10 +111,6 @@
 
 	<article class="image slide" style="background: url(img/gsheets.png) no-repeat center / contain;"></article>
 
-	<article class="image slide" style="background-image: url(img/faucet.jpg);">
-		<h1>A faucet is a UI</h1>
-	</article>
-
 	<article class="image slide" style="background-image: url(img/book.jpg)">
 		<h1>A book is a UI</h1>
 	</article>
@@ -128,55 +122,30 @@
 		</div></div></div></div></div></div></div></div></div></div></div></div></div></div></div>
 	</article>
 
+	<article class="image slide" style="background-image: url(img/faucet.jpg);">
+		<h1>A faucet is a UI</h1>
+	</article>
+
 	<article class="image slide" style="background-image: url(img/code.png);">
 		<h1>Your code is a UI</h1>
 	</article>
+
+	<article class="image slide" style="background-image: url(img/githubnotifications.png)"></article>
 </section>
 
-<article class="slide">
-	<h1>Documentation is a last resort.</h1>
+<article class="image slide" style="background-image: url(img/uijoke.jpg)">
+	<h1 style="margin-top: calc(50vh)">Documentation is a last resort.</h1>
 </article>
 
 <section>
-	<header class="commandment slide">
-		<h1>Sensible defaults</h1>
-	</header>
-
-	<article class="hall shame slide">
-		<div class="language-console">
-			<pre><code>> new URL("foo.txt")</code></pre>
-			<pre class="error"><code>Uncaught TypeError: Failed to construct 'URL': Invalid URL</code></pre>
-			<pre><code>> new URL("foo.txt", location)</code></pre>
-			<pre><code>< URL {href: "https://leaverou.github.io/jsux/foo.txt", …}</code></pre>
-		</div>
-	</article>
-</section>
-<section>
-	<header class="commandment slide">
-		<h1>Be liberal in what you accept</h1>
-	</header>
-
-	<article class="hall fame slide">
-		<div class="language-console">
-			<pre><code>> new URL("http://lea.verou.me")</code></pre>
-			<pre><code>< URL {href: "http://lea.verou.me", …}</code></pre>
-			<pre><code>> new URL(new URL("http://lea.verou.me"))</code></pre>
-			<pre><code>< URL {href: "http://lea.verou.me", …}</code></pre>
-			<pre><code>> new URL(location)</code></pre>
-			<pre><code>< URL {href: "https://leaverou.github.io/jsux/index.html", …}</code></pre>
-		</div>
-	</article>
-</section>
-
-<section>
 	<header class="slide commandment">
-		<h1>Make the simple <strong>easy</strong> <br>& the complex <strong>possible</strong></h1>
+		<h1>Make the simple <strong>easy</strong> & the complex <strong>possible</strong></h1>
 	</header>
 
 	<article class="hall fame slide">
 		<pre><code>
-			node.compareDocumentPosition(otherNode) ==
-				Node.DOCUMENT_POSITION_CONTAINS;
+			!!(node.compareDocumentPosition(otherNode) &
+				Node.DOCUMENT_POSITION_CONTAINS);
 		</code></pre>
 		<pre class="delayed"><code>node.contains(otherNode);</code></pre>
 	</article>
@@ -197,6 +166,326 @@
 		</div>
 		<svg width="100" height="100"><circle cx="50" cy="50" r="40" fill="white" /></svg>
 		<pre><code>&lt;circle cx="50" cy="50" r="40" /></code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="sin slide">
+		<h1>Boilerplate</h1>
+	</header>
+
+	<article class="hall shame slide">
+		<pre><code>
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "foo.json");
+			xhr.responseType = "json";
+			xhr.onload = function() {
+				doStuff(xhr.response);
+			}
+			xhr.send(null);
+		</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>
+			fetch("foo.json")
+			  .then(response => response.json())
+			  .then(doStuff);
+		</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre style="font-size: 36%; overflow: auto;"><code>
+			var open = indexedDB.open("MyDatabase", 1);
+
+			open.onupgradeneeded = function() {
+			    var db = open.result;
+			    var store = db.createObjectStore("MyObjectStore", {keyPath: "id"});
+			    var index = store.createIndex("NameIndex", ["name.last", "name.first"]);
+			};
+
+			open.onsuccess = function() {
+			    var db = open.result;
+			    var tx = db.transaction("MyObjectStore", "readwrite");
+			    var store = tx.objectStore("MyObjectStore");
+			    var index = store.index("NameIndex");
+
+			    store.put({id: 12345, name: {first: "John", last: "Doe"}, age: 42});
+			    store.put({id: 67890, name: {first: "Bob", last: "Smith"}, age: 35});
+
+			    var getJohn = store.get(12345);
+			    var getBob = index.get(["Smith", "Bob"]);
+
+			    getJohn.onsuccess = function() {
+			        console.log(getJohn.result.name.first);  // => "John"
+			    };
+
+			    getBob.onsuccess = function() {
+			        console.log(getBob.result.name.first);   // => "Bob"
+			    };
+
+			    tx.oncomplete = function() {
+			        db.close();
+			    };
+			}
+		</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="commandment slide">
+		<h1>Sensible defaults</h1>
+	</header>
+
+	<article class="hall shame slide" id="url-error">
+		<div class="language-console">
+			<pre><code>> new URL("foo.txt")</code></pre>
+			<pre class="error"><code>Uncaught TypeError: Failed to construct 'URL': Invalid URL</code></pre>
+			<pre><code>> new URL("foo.txt", location)</code></pre>
+			<pre><code>< URL {href: "https://leaverou.github.io/jsux/foo.txt", …}</code></pre>
+		</div>
+	</article>
+</section>
+<section>
+	<header class="commandment slide">
+		<h1 style="width: 7em">Be liberal in what you accept
+			<a href="https://en.wikipedia.org/wiki/Robustness_principle" style="font-size: 50%; text-decoration: none; font-style: italic;">(Robustness Principle)</a></h1>
+	</header>
+
+	<article class="hall fame slide">
+		<div class="language-console">
+			<pre><code>> new URL("http://lea.verou.me")</code></pre>
+			<pre><code>< URL {href: "http://lea.verou.me", …}</code></pre>
+			<pre><code>> new URL(new URL("http://lea.verou.me"))</code></pre>
+			<pre><code>< URL {href: "http://lea.verou.me", …}</code></pre>
+			<pre><code>> new URL(location)</code></pre>
+			<pre><code>< URL {href: "https://leaverou.github.io/jsux/index.html", …}</code></pre>
+		</div>
+	</article>
+
+	<article class="hall shame slide" id="set-constructor">
+		<div class="language-console">
+			<pre><code>> new Set(42)</code></pre>
+			<pre class="error"><code>Uncaught TypeError: (var)[Symbol.iterator] is not a function</code></pre>
+			<pre><code>> new Set([42])</code></pre>
+			<pre><code>< Set {42}</code></pre>
+		</div>
+	</article>
+</section>
+
+<section>
+	<header class="commandment slide">
+		<h1>Support mass params</h1>
+	</header>
+
+	<article class="hall shame slide" id="setAttribute">
+		<pre><code>
+			var audio = document.createElement("audio");
+			audio.setAttribute("src", "rain.mp3");
+			audio.setAttribute("autoplay", "");
+			audio.setAttribute("start", "00:00:00.00");
+			audio.setAttribute("loopstart", "00:00:00");
+			audio.setAttribute("end", "00:01:00");
+			audio.setAttribute("playcount", "100");
+			audio.setAttribute("controls", "true");
+		</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>
+			var audio = document.createElement("audio");
+			audio.setAttribute({
+				src: "rain.mp3",
+				autoplay: "",
+				start: "00:00:00.00",
+				loopstart: "00:00:00",
+				end: "00:01:00",
+				playcount: "100",
+				controls: "true"
+			});
+		</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>
+			var els = document.querySelectorAll(".foo");
+
+			for (let i=0; i&lt;els.length; i++) {
+				els[0].setAttribute("data-foo", "bar");
+			}
+		</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>
+			var els = document.querySelectorAll(".foo");
+
+			els.setAttribute("data-foo", "bar");
+		</code></pre>
+	</article>
+
+	<article class="caveat slide">
+		<h1>Do not <strong>only</strong> support mass operations</h1>
+		<pre><code>
+			// This is stupid:
+			element.setAttribute({name: value});
+
+			// This is also stupid
+			[element].setAttribute(name, value)
+		</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="sin slide">
+		<h1>Accessor functions</h1>
+	</header>
+
+	<article class="hall shame slide">
+		<pre><code>
+			let date = new Date();
+
+			date.getMonth(); // 5
+			date.setMonth(1);
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<h1>JS is not Java</h1>
+	</article>
+
+	<article class="slide">
+		<pre style="column-count: 3"><code>
+			private String name;
+			private String phone;
+			private String gender;
+			private int age;
+			private Date birthday;
+			private boolean alive;
+
+			public void setName(String name) {
+				this.name = name;
+			}
+
+			public String getName() {
+				return name;
+			}
+
+			public void setPhone(String phone) {
+				this.phone = phone;
+			}
+
+			public String getPhone() {
+				return phone;
+			}
+
+			public void setGender(String gender) {
+				this.gender = gender;
+			}
+
+			public String getGender() {
+				return gender;
+			}
+
+			public void setAge(int age) {
+				this.age = age;
+			}
+
+			public int getAge() {
+				return age;
+			}
+
+			public void setBirthday(Date birthday) {
+				this.birthday = birthday;
+			}
+
+			public Date getBirthday() {
+				return birthday;
+			}
+
+			public void setAlive(boolean alive) {
+				this.alive = alive;
+			}
+
+			public boolean getAlive() {
+				return alive;
+			}
+		</code></pre>
+	</article>
+
+	<article class="solution slide">
+		<h1>ES5 Accessors</h1>
+		<pre><code>
+			Object.defineProperty(Date.prototype, "month", {
+				get: function() { return this.getMonth(); },
+				set: function(m) { this.setMonth(m); }
+			});
+		</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>
+			let date = new Date();
+
+			date.month; // 5
+			date.month = 1;
+		</code></pre>
+	</article>
+
+	<article class="talking housewife slide" data-source="flickr.com/photos/x-ray_delta_one/4264423055/">
+		<h1>Won’t someone, please, think of parameters?!</h1>
+	</article>
+
+	<article class="solution slide">
+		<h1>Have both</h1>
+		<pre><code>
+			let date = new Date();
+
+			date.month = 1;
+			date.setMonth(2, 31);
+		</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>
+			localStorage.setItem("yolo", "yes");
+			localStorage.getItem("yolo"); // "yes"
+		</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>
+			localStorage.yolo = "yes";
+			localStorage.yolo; // "yes"
+		</code></pre>
+	</article>
+
+	<article class="solution slide">
+		<h1>ES6 Proxies</h1>
+		<pre class="no-whitespace-normalization"><code>MyPublicObject = new Proxy(MyHiddenObject, {
+	get: function(property) {</code><code class="delayed">
+		if (property in myObject) {
+			return myObject[property];
+		}
+		return myObject.getItem(property);</code><code>
+	},
+	set: function(property, val) {…
+});</code></pre>
+	</article>
+	<article class="solution slide">
+		<h1>ES6 Proxies</h1>
+		<pre><code>
+			MyPublicObject = new Proxy(MyHiddenObject, {
+				…
+				set: function(property, val) {
+					if (property in myObject) {
+						return myObject[property] = val;
+					}
+					myObject.setItem(property, val);
+				},
+				has: function(property, val) {…
+			});
+		</code></pre>
 	</article>
 </section>
 
@@ -323,11 +612,22 @@
 			<pre><code>< 42 false</code></pre>
 		</div>
 	</article>
+
+	<article class="hall fame slide">
+		<pre><code>
+			var deep = true;
+			element.cloneNode(deep);
+		</code></pre>
+	</article>
 </section>
 <section>
 	<header class="sin slide">
 		<h1>Unnecessary error conditions</h1>
 	</header>
+
+	<article class="slide" data-import="url-error"></article>
+
+	<article class="slide" data-import="set-constructor"></article>
 
 	<article class="hall shame slide">
 		<div class="language-console">
@@ -445,18 +745,7 @@ element.cloneNode(true); // shallow</code></pre>
 		<h1>Thou shalt chain</h1>
 	</header>
 
-	<article class="hall shame slide" id="setAttribute">
-		<pre><code>
-			var audio = document.createElement("audio");
-			audio.setAttribute("src", "rain.mp3");
-			audio.setAttribute("autoplay", "");
-			audio.setAttribute("start", "00:00:00.00");
-			audio.setAttribute("loopstart", "00:00:00");
-			audio.setAttribute("end", "00:01:00");
-			audio.setAttribute("playcount", "100");
-			audio.setAttribute("controls", "true");
-		</code></pre>
-	</article>
+	<article class="slide" data-import="setAttribute"></article>
 
 	<article class="whynot slide">
 		<pre><code>
@@ -528,58 +817,6 @@ element.cloneNode(true); // shallow</code></pre>
 </section>
 
 <section>
-	<header class="commandment slide">
-		<h1>Support mass params</h1>
-	</header>
-
-	<article class="slide" data-import="setAttribute"></article>
-
-	<article class="whynot slide">
-		<pre><code>
-			var audio = document.createElement("audio");
-			audio.setAttribute({
-				src: "rain.mp3",
-				autoplay: "",
-				start: "00:00:00.00",
-				loopstart: "00:00:00",
-				end: "00:01:00",
-				playcount: "100",
-				controls: "true"
-			});
-		</code></pre>
-	</article>
-
-	<article class="hall shame slide">
-		<pre><code>
-			var els = document.querySelectorAll(".foo");
-
-			for (let i=0; i&lt;els.length; i++) {
-				els[0].setAttribute("data-foo", "bar");
-			}
-		</code></pre>
-	</article>
-
-	<article class="whynot slide">
-		<pre><code>
-			var els = document.querySelectorAll(".foo");
-
-			els.setAttribute("data-foo", "bar");
-		</code></pre>
-	</article>
-
-	<article class="caveat slide">
-		<h1>Do not <strong>only</strong> support mass operations</h1>
-		<pre><code>
-			// This is stupid:
-			element.setAttribute({name: value});
-
-			// This is also stupid
-			[element].setAttribute(name, value)
-		</code></pre>
-	</article>
-</section>
-
-<section>
 	<header class="sin slide">
 		<h1>Redundancy</h1>
 	</header>
@@ -598,149 +835,6 @@ element.cloneNode(true); // shallow</code></pre>
 
 	<article class="hall fame slide">
 		<pre><code>element.before(newChild);</code></pre>
-	</article>
-</section>
-
-<section>
-	<header class="sin slide">
-		<h1>Accessor functions</h1>
-	</header>
-
-	<article class="hall shame slide">
-		<pre><code>
-			let date = new Date();
-
-			date.getMonth(); // 5
-			date.setMonth(1);
-		</code></pre>
-	</article>
-
-	<article class="slide">
-		<h1>JS is not Java</h1>
-	</article>
-
-	<article class="slide">
-		<pre style="column-count: 3"><code>
-			private String name;
-			private String phone;
-			private String gender;
-			private int age;
-			private Date birthday;
-			private boolean alive;
-
-			public void setName(String name) {
-				this.name = name;
-			}
-
-			public String getName() {
-				return name;
-			}
-
-			public void setPhone(String phone) {
-				this.phone = phone;
-			}
-
-			public String getPhone() {
-				return phone;
-			}
-
-			public void setGender(String gender) {
-				this.gender = gender;
-			}
-
-			public String getGender() {
-				return gender;
-			}
-
-			public void setAge(int age) {
-				this.age = age;
-			}
-
-			public int getAge() {
-				return age;
-			}
-
-			public void setBirthday(Date birthday) {
-				this.birthday = birthday;
-			}
-
-			public Date getBirthday() {
-				return birthday;
-			}
-
-			public void setAlive(boolean alive) {
-				this.alive = alive;
-			}
-
-			public boolean getAlive() {
-				return alive;
-			}
-		</code></pre>
-	</article>
-
-	<article class="solution slide">
-		<h1>ES5 Accessors</h1>
-		<pre><code>
-			Object.defineProperty(Date.prototype, "month", {
-				get: function() { return this.getMonth(); },
-				set: function(m) { this.setMonth(m); }
-			});
-		</code></pre>
-	</article>
-
-	<article class="whynot slide">
-		<pre><code>
-			let date = new Date();
-
-			date.month; // 5
-			date.month = 1;
-		</code></pre>
-	</article>
-
-	<!-- <article class="incomplete slide">
-		<h1>Exception: Parameters</h1>
-	</article> -->
-
-	<article class="hall shame slide">
-		<pre><code>
-			localStorage.setItem("yolo", "yes");
-			localStorage.getItem("yolo"); // "yes"
-		</code></pre>
-	</article>
-
-	<article class="hall fame slide">
-		<pre><code>
-			localStorage.yolo = "yes";
-			localStorage.yolo; // "yes"
-		</code></pre>
-	</article>
-
-	<article class="solution slide">
-		<h1>ES6 Proxies</h1>
-		<pre class="no-whitespace-normalization"><code>MyPublicObject = new Proxy(MyHiddenObject, {
-	get: function(property) {</code><code class="delayed">
-		if (property in myObject) {
-			return myObject[property];
-		}
-		return myObject.getItem(property);</code><code>
-	},
-	set: function(property, val) {…
-});</code></pre>
-	</article>
-	<article class="solution slide">
-		<h1>ES6 Proxies</h1>
-		<pre><code>
-			MyPublicObject = new Proxy(MyHiddenObject, {
-				…
-				set: function(property, val) {
-					if (property in myObject) {
-						return myObject[property] = val;
-					}
-					myObject.setItem(property, val);
-				},
-				has: function(property, val) {…
-			});
-		</code></pre>
 	</article>
 </section>
 
@@ -799,32 +893,6 @@ element.cloneNode(true); // shallow</code></pre>
 </section>
 
 <section>
-	<header class="sin slide">
-		<h1>Boilerplate</h1>
-	</header>
-
-	<article class="hall shame slide">
-		<pre><code>
-			var xhr = new XMLHttpRequest();
-			xhr.open("GET", "foo.json");
-			xhr.responseType = "json";
-			xhr.onload = function() {
-				doStuff(xhr.response);
-			}
-			xhr.send(null);
-		</code></pre>
-	</article>
-
-	<article class="hall fame slide">
-		<pre><code>
-			fetch("foo.json")
-			  .then(response => response.json())
-			  .then(doStuff);
-		</code></pre>
-	</article>
-</section>
-
-<section>
 	<header class="commandment slide">
 		<h1>Thou shalt respond <br>to changes</h1>
 	</header>
@@ -858,7 +926,7 @@ element.cloneNode(true); // shallow</code></pre>
 		</ul>
 	</article>
 
-	<article class="talking slide" id="think-of-the-browsers" data-source="flickr.com/photos/x-ray_delta_one/4264423055/">
+	<article class="talking housewife slide" id="think-of-the-browsers" data-source="flickr.com/photos/x-ray_delta_one/4264423055/">
 		<h1>Won’t someone, please, think of performance?!</h1>
 	</article>
 
@@ -881,15 +949,20 @@ element.cloneNode(true); // shallow</code></pre>
 
 	<article class="hall shame slide">
 		<div class="language-console">
-			<pre><code>> document.body.attributes[0] + ""</code></pre>
+			<pre><code>> document.documentElement.attributes[0] + ""</code></pre>
 			<pre><code>< "[object Attr]"</code></pre>
 		</div>
 	</article>
-	<article class="slide">
+
+	<article class="whynot slide dont-resize">
+		<pre><code>
+			Attr.prototype.toString = function(){
+				return `${this.name}=${this.value}`;
+			}</code></pre>
 		<div class="language-console">
-			<pre><code>> Attr.prototype.toString = function() { return this.name }</code></pre>
-			<pre><code>> document.body.attributes[0] + ""</code></pre>
-			<pre><code>< "class"</code></pre>
+
+			<pre><code>> document.documentElement.attributes[0] + ""</code></pre>
+			<pre><code>< "lang=en"</code></pre>
 		</div>
 	</article>
 
@@ -917,7 +990,7 @@ element.cloneNode(true); // shallow</code></pre>
 		<a href="https://twitter.com/leaverou/status/690583334414635009"><img src="img/nojspoll.png" class="tweet" /></a>
 	</article>
 
-	<article class="hall shame slide" style="background: black url(img/jquery-ui.png) no-repeat bottom right / auto 2em content-box border-box">
+	<article class="hall shame logo slide" style="background-image: url(img/jquery-ui.png)">
 		<script type="text/plain">
 			<div id="slider"></div>
 			<script>
@@ -943,14 +1016,55 @@ element.cloneNode(true); // shallow</code></pre>
 	</article>
 
 	<article class="slide">
+		<h1>HTML API design</h1>
 		<ul>
-			<li><strong>Classes</strong> for boolean settings</li>
-			<li><strong>Attributes</strong> for other primitives</li>
-			<li>Attributes with <strong>id</strong> or <strong>selector</strong> value for objects</li>
-			<li>Have an init setting.</li>
+			<li>Have an <strong>init selector</strong>.</li>
+			<li>Settings
+				<ul>
+					<li><strong>Boolean</strong>: classes or attributes without value</li>
+					<li><strong>String, number</strong>: attributes</li>
+					<li><strong>Objects</strong>: Attributes with selector/id values</li>
+					<li><strong>Functions</strong>: JS-only</li>
+				</ul>
+			</li>
 		</ul>
 	</article>
 
+	<article class="logo slide" style="background-image: url(http://prismjs.com/logo.svg); background-size: auto 4em">
+		<h1>Have an init selector</h1>
+		<script type="text/plain">
+			<pre class="no-line-numbers">
+				<code class="language-javascript">
+					// code
+				</code>
+			</pre>
+		</script>
+		<p class="delayed">Init selector: <code class="language-css">code[class*="language-"],
+			[class*="language-"] code, code[class*="lang-"], [class*="lang-"]</code></p>
+	</article>
+
+	<article class="demo hall fame slide">
+		<div data-edit="contents">
+			<input type="range" max="100" step="2" list="ticks" />
+			<datalist id="ticks">
+				<option>0</option>
+				<option>50</option>
+				<option>60</option>
+				<option>70</option>
+			</datalist>
+		</div>
+	</article>
+
+	<article class="demo slide dont-enlarge hall shame" id="dialog-demo" data-keys="Esc">
+
+		<div data-edit="contents">
+			<dialog id="dialog">
+				<h1>Ceiling cat is watching</h1>
+				<p>Greetings, hoomans.</p>
+			</dialog>
+		</div>
+	</article>
+<!--
 	<article class="slide">
 		<script type="text/plain">
 			<input class="awesomplete" list="countries" data-minchars="3" />
@@ -961,10 +1075,10 @@ element.cloneNode(true); // shallow</code></pre>
 				<option>United Kingdom</option>
 			</datalist>
 		</script>
-	</article>
+	</article> -->
 
 	<article class="slide">
-		<h1>Make them inheritable</h1>
+		<h1>Consider inheritance</h1>
 		<pre class="partial"><code>
 			&lt;body <mark>class="language-javascript"</mark>>
 				Use &lt;code>foo()&lt;/code> and &lt;code>bar()&lt;/code> to…
@@ -1002,8 +1116,6 @@ element.cloneNode(true); // shallow</code></pre>
 	</article>
 </section>
 
-
-
 <footer class="dark slide">
 	<img src="img/mark.svg" />
 	<h1>Thank you!</h1>
@@ -1020,9 +1132,9 @@ element.cloneNode(true); // shallow</code></pre>
 <script src="js/bliss.min.js"></script>
 <script src="../csss/slideshow.js"></script>
 <script src="js/prism.js"></script>
-<!--
+
 <script src="../incrementable/incrementable.js"></script>
-<script src="js/editor.js"></script> -->
+<script src="js/editor.js"></script>
 <script src="../multirange/multirange.js"></script>
 <script src="js/talk.js"></script>
 

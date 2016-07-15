@@ -45,7 +45,7 @@ Prism.languages.markup.tag.alias = "grouptoken";
 
 (function($, $$){
 
-/*
+
 function createEditor(slide, label, o = {}) {
 	var lang = o.lang || label;
 
@@ -150,7 +150,7 @@ $$('[data-edit]').forEach(element => {
 	})
 
 })();
-
+/*
 $("#details-demo").addEventListener("toggle", function(evt) {
 
 	var textarea = $("textarea", this);
@@ -158,7 +158,7 @@ $("#details-demo").addEventListener("toggle", function(evt) {
 	textarea.value = $("details").closest("[data-edit]").innerHTML.replace(/=""(?=\s|>)/g, "");
 	Prism.Live.all.get(textarea).update();
 }, true);
-
+*/
 // Display certain keys pressed
 var keys = {
 	"Tab": 9,
@@ -194,7 +194,7 @@ document.addEventListener("keyup", function(evt) {
 		}
 	}
 });
-
+/*
 document.body.addEventListener("toggle", evt => {
 	var accordion = evt.target.closest(".accordion");
 	if (evt.target.open && accordion) {
