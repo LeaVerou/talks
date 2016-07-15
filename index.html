@@ -170,6 +170,21 @@
 </section>
 
 <section>
+	<header class="commandment slide">
+		<h1>Sensible defaults</h1>
+	</header>
+
+	<article class="hall shame slide" id="url-error">
+		<div class="language-console">
+			<pre><code>> new URL("foo.txt")</code></pre>
+			<pre class="error"><code>Uncaught TypeError: Failed to construct 'URL': Invalid URL</code></pre>
+			<pre><code>> new URL("foo.txt", location)</code></pre>
+			<pre><code>< URL {href: "https://leaverou.github.io/jsux/foo.txt", …}</code></pre>
+		</div>
+	</article>
+</section>
+
+<section>
 	<header class="sin slide">
 		<h1>Boilerplate</h1>
 	</header>
@@ -232,20 +247,6 @@
 	</article>
 </section>
 
-<section>
-	<header class="commandment slide">
-		<h1>Sensible defaults</h1>
-	</header>
-
-	<article class="hall shame slide" id="url-error">
-		<div class="language-console">
-			<pre><code>> new URL("foo.txt")</code></pre>
-			<pre class="error"><code>Uncaught TypeError: Failed to construct 'URL': Invalid URL</code></pre>
-			<pre><code>> new URL("foo.txt", location)</code></pre>
-			<pre><code>< URL {href: "https://leaverou.github.io/jsux/foo.txt", …}</code></pre>
-		</div>
-	</article>
-</section>
 <section>
 	<header class="commandment slide">
 		<h1 style="width: 7em">Be liberal in what you accept
