@@ -28,7 +28,7 @@
 	<section class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
 			<img src="img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
-			<figcaption>Hi, I’m Lea</figcaption>
+			<figcaption>Oi, eu sou a Lea</figcaption>
 		</figure>
 	</section>
 
@@ -130,7 +130,7 @@
 		<h1>Your code is a UI</h1>
 	</article>
 
-	<article class="image slide" style="background-image: url(img/githubnotifications.png)"></article>
+	<article class="image slide" style="background-image: url(img/githubnotifications.png); background-position: 0 0"></article>
 </section>
 
 <article class="image slide" style="background-image: url(img/uijoke.jpg)">
@@ -597,11 +597,11 @@
 	<article class="slide">
 		<h1>ES6 Default Parameters</h1>
 		<pre><code>
-			function myFunk(o = {
-				option1: 5,
-				option2: false
-			}) {
-				console.log(o.option1, o.option2);
+			function myFunk({
+				option1 = 5,
+				option2 = false
+			} = {}) {
+				console.log(option1, option2);
 			}
 		</code></pre>
 		<div class="language-console overlay">
@@ -1100,6 +1100,8 @@ element.cloneNode(true); // shallow</code></pre>
 		<pre><code>document.currentScript.getAttribute("data-filter")</code></pre>
 	</article>
 
+	<article class="slide" data-src="http://markapp.io"></article>
+
 	<article class="slide" data-src="http://leaverou.github.io/multirange" data-title="Soon: CSS API?"></article>
 </section>
 
@@ -1109,7 +1111,7 @@ element.cloneNode(true); // shallow</code></pre>
 	</header>
 
 	<article class="commandment slide">
-		<h1>Stay foolish</h1>
+		<h1>Cherish the <strong>n00b</strong> within</h1>
 	</article>
 
 	<article class="commandment slide" id="empathy">
