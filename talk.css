@@ -806,3 +806,46 @@ kbd {
 	font-family: var(--font-body);
 	box-shadow: 3px 3px hsl(0,0%,40%), 3px 3px 10px rgba(0,0,0,.4);
 }
+
+@keyframes multirange {
+	from {
+		bottom: -669px;
+		transform: none;
+		box-shadow: 0 970px 40px 150px transparent inset;
+	}
+
+	50% {
+		bottom: 0;
+		transform: none;
+	}
+
+	80% {
+		box-shadow: 0 970px 40px 150px transparent inset;
+	}
+}
+
+@keyframes multirange-h1 {
+	from { opacity: 0 }
+}
+
+#multirange {
+	overflow: hidden;
+}
+
+	#multirange::before {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		background: url(img/multirange.png) no-repeat center / cover;
+		width: 1280px;
+		height: 1445px;
+		transform: scale(1.25);
+		transform-origin: bottom;
+		box-shadow: 0 970px 40px 150px rgba(0,0,0,.5) inset;
+		animation: multirange 4s 3s both;
+	}
+
+	#multirange h1 {
+		margin-top: -1em;
+		animation: multirange-h1 1s 7s both;
+	}
