@@ -1,0 +1,322 @@
+#for-browser {
+	background: #333;
+	background-image: linear-gradient(to left, rgba(0,0,0,.5), rgba(0,0,0,.5)), linear-gradient(to left, rgba(0,0,0,.5), rgba(0,0,0,.5));
+	background-repeat: no-repeat;
+	background-size: 1280px 720px, 1024px 768px;
+}
+
+#intro {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+	#intro h1 {
+		position: absolute;
+		bottom: .2em;
+		width: 10em;
+		margin: 0;
+		text-align: left;
+		font-size: 450%;
+		line-height: .8;
+		letter-spacing: -.05em;
+	}
+
+	#intro h2 {
+		width: 8em;
+		margin: .4em 0 0;
+		font-size: 160%;
+		line-height: 1;
+		color: black;
+		letter-spacing: -.05em;
+		position: absolute;
+		right: 0;
+		bottom: .8em;
+		transform-origin: bottom right;
+		transform: rotate(90deg) translateY(2.5em);
+		text-align: right;
+	}
+
+	#intro .attribution {
+		position: absolute;
+		bottom: -.5em;
+		color: white;
+		font-size: 80%;
+		mix-blend-mode: difference;
+	}
+
+		#intro .attribution a {
+			text-decoration: none;
+		}
+
+.hi {
+	padding: 1vmin;
+	background: #f06;
+	font-size: 200%;
+}
+
+	.hi > .delayed:only-child:not(.current):not(.displayed) {
+		transform: translateY(-100vh);
+	}
+
+	.hi > .delayed:only-child {
+		margin: auto;
+	}
+
+	.hi p {
+		margin: 0;
+		padding-top: .5em;
+		font: 220%/1 'Reenie Beanie', sans-serif;
+	}
+
+	.hi figure {
+		margin: 2em auto 0;
+		width: fit-content;
+		max-height: 99vh;
+		background: white;
+		padding: 15px;
+		box-shadow: 2px 2px 30px black;
+		transform: rotate(-2deg);
+	}
+
+		.hi figure img {
+			max-width: 100%;
+			object-fit: cover;
+		}
+
+		.hi figure figcaption {
+			display: block;
+			padding-bottom: .1em;
+			text-align: center;
+			color: black;
+			text-shadow: none;
+			font: 300%/.7 'Reenie Beanie', cursive;
+		}
+
+		.hi figure img {
+			background: url(img/grass.svg), url(img/starburst.svg), linear-gradient(hsl(200, 84%, 85%), hsl(200, 84%, 90%));
+			background-position: 50% 200px, 0 -100px, 0 0;
+			background-repeat: repeat-x, no-repeat;
+			background-size: auto, 100% auto;
+		}
+
+		#why-html h1 {
+			font-size: 500%;
+			margin: auto;
+			letter-spacing: -.05em;
+		}
+
+#lesbian {
+	background: url(img/greece.svg) no-repeat center / auto 90vh #f06;
+	background-origin: content-box;
+}
+
+	#lesbian[data-step] {
+		background-size: auto 850%;
+		background-position: 67% 36%;
+	}
+
+	#lesbian div {
+		position: absolute;
+		bottom: 1em;
+		left: 1em;
+		transition: .5s opacity;
+	}
+
+		#lesbian div p:first-of-type {
+			position: fixed;
+			top: 0;
+			font-weight: bold;
+			font-size: 300%;
+		}
+
+		#lesbian div p:last-of-type {
+			font-size: 120%
+		}
+
+		#lesbian div p {
+			transition: inherit;
+			transition-property: height;
+			height: 1em;
+		}
+
+		#lesbian:not([data-step="2"]):not([data-step="3"]) > div {
+			opacity: 0
+		}
+
+			#lesbian:not([data-step="3"]) div p:last-of-type {
+				height: 0;
+				overflow: hidden;
+			}
+
+#book {
+
+}
+
+	#book a {
+		text-decoration: none;
+		color: white;
+		font-size: 85%;
+		font-weight: bold;
+	}
+
+	#book img {
+		display: block;
+		margin-bottom: 1em;
+		box-shadow: 1px 1px #aab, 2px 2px #bbc, 3px 3px #99a, 4px 4px #aab, 5px 5px #889, 6px 6px #99a, 7px 7px #778, 8px 8px #889,
+		            8px 8px 10px rgba(0,0,0,.6);
+	}
+
+#doing-stuff {}
+
+	#doing-stuff > div {
+		max-width: 50vw;
+	}
+
+.hi ul {
+	line-height: 1.7;
+	margin: 0;
+}
+
+	.hi li {
+		display: inline;
+	}
+
+		.hi li:before {
+			content: none;
+		}
+
+		.hi li a {
+			display: inline-block;
+			padding: .2em .3em .25em;
+			border-radius: .2em;
+			line-height: 1;
+			text-decoration: none;
+			background: black;
+		}
+
+		.hi li a:not(:hover) {
+			color: hsl(336, 100%, 95%);
+		}
+
+#csswg {}
+
+	#csswg strong {
+		display: block;
+		color: white;
+		font: bold 125% Helvetica Neue, sans-serif;
+	}
+
+#mit > p {
+	display: inline-block;
+	width: 6em;
+	padding-top: 1em;
+}
+
+	#mit img {
+		display: block;
+		width: 80%;
+		margin-bottom: .2em;
+	}
+
+footer.slide {
+	text-align: center;
+	padding: 1em 0 0;
+}
+
+	footer.slide h1 {
+		margin-top: 0;
+	}
+
+	footer.slide > ul {
+		margin: 0 auto;
+		padding: 0 2em;
+		width: 100%;
+		box-sizing: border-box;
+		display: flex;
+		list-style: none;
+		background: #f06;
+		text-align: center;
+	}
+
+		footer.slide > ul li {
+			flex: 1
+		}
+
+		footer.slide > ul li::before {
+			content: var(--icon);
+			display: inline-block;
+			margin-right: .2em;
+		}
+
+		footer.slide > ul a {
+			text-decoration: none;
+			font-weight: 500;
+		}
+
+kbd {
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
+	z-index: 2;
+	padding: .1em .5em;
+	border: 1px solid rgba(0,0,0,.3);
+	border-radius: .3em;
+	background: linear-gradient(rgba(0,0,0,.2), transparent) #eee;
+	font-size: 120%;
+	font-weight: bold;
+	font-family: var(--font-body);
+	box-shadow: 3px 3px hsl(0,0%,40%), 3px 3px 10px rgba(0,0,0,.4);
+}
+
+#specs {
+	color: white;
+	padding: 0;
+}
+
+	#specs > a {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		flex: 1;
+		padding: 1em;
+		padding-left: 3em;
+		background: url(img/w3c.svg) no-repeat 1em / auto 50% #1a5e9a;
+		text-align: right;
+		font-size: 180%;
+	}
+
+		#specs > a:not(:hover) {
+			text-decoration: none;
+		}
+
+	#specs .w3c.ed {
+		background-color: #d00;
+	}
+
+		.fordemo {
+			font-family: var(--font-handwritten);
+			position: absolute;
+			bottom: -.2em;
+			right: .5em;
+			color: hsl(0, 50%, 60%);
+			line-height: 1rem;
+			font-size: 140%;
+		}
+
+.block {
+	display: flex;
+	padding: 1em;
+	margin: .2em;
+	box-sizing: border-box;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	line-height: 1.1;
+	letter-spacing: -.05em;
+	background: #f06;
+}
+
+	.block .block {
+		background: gold;
+	}

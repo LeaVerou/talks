@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title>CSS Variables: var(--subtitle);</title>
+<link href="../csss/slideshow.css" rel="stylesheet" />
+<link href="../csss/reusable.css" rel="stylesheet" />
+<link href="prism.css" rel="stylesheet" />
+<link href="theme.css" rel="stylesheet" />
+<link href="talk.css" rel="stylesheet" />
+<!-- <script src="../prefixfree/prefixfree.min.js"></script> -->
+
+</head>
+<body class="language-markup">
+
+<section id="for-browser" class="dark slide">
+	<h1>Important</h1>
+	This slide deck was created for use in a controlled environment, during a talk. It works best with Chrome at 1280x720 or 1280x768. It may or may not work properly in other browsers.
+	The demos were live coded, so these slides are a bit pointless if you never watched the talk.
+</section>
+
+<header id="intro" class="slide dont-resize" data-source="flickr.com/photos/billward/16601966117">
+	<h1>
+		CSS Variables: <code>var(--subtitle)</code>
+	</h1>
+	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
+</header>
+
+<section>
+	<section class="inverse slide dont-resize darker hi">
+		<figure class="delayed">
+			<img src="img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
+			<figcaption>Hi, I’m Lea</figcaption>
+		</figure>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="lesbian" data-steps="3">
+		<div>
+		<p>#funfact</p>
+		<p>I grew up in Lesbos, Greece</p>
+		<p>…which technically makes me <strong>geogrpahically Lesbian</strong></p>
+		</div>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="doing-stuff">
+		<div class="delayed">
+			<p>I make stuff</p>
+			<ul>
+				<li><a href="http://prismjs.com">Prism</a></li>
+				<li><a href="http://leaverou.github.io/prefixfree">-prefix-free</a></li>
+				<li><a href="http://blissfuljs.com">Bliss</a></li>
+				<li><a href="http://css3test.com">css3test.com</a></li>
+				<li><a href="http://leaverou.github.io/awesomplete/">Awesomplete</a></li>
+				<li><a href="http://cubic-bezier.com/">cubic-bezier.com</a></li>
+				<li><a href="http://dabblet.com">dabblet.com</a></li>
+				<li><a href="http://leaverou.github.io/animatable/">Animatable</a></li>
+			</ul>
+			<small>More: <a href="http://github.com/leaverou">github.com/leaverou</a></small>
+		</div>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="csswg">
+		<p class="delayed">
+			<strong>CSS WG</strong>
+			Invited Expert
+		</p>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="mit">
+		<p class="delayed">
+			<img src="img/mit.svg" alt="MIT" />
+			HCI researcher @ CSAIL
+		</p>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="book">
+		<a href="http://shop.oreilly.com/product/0636920031123.do" class="delayed">
+			<img src="img/book.png" alt="CSS Secrets by O’Reilly" style="display:block" />
+			★★★★★ on Amazon
+		</a>
+	</section>
+</section>
+
+<!-- Basics -->
+<section>
+	<header class="slide">
+		<h1>Basics</h1>
+	</header>
+
+	<article class="demo slide horizontal">
+		<style data-slide>
+			div.block {
+				width: 6em;
+				height: 6em;
+				font-size: 50px;
+				background: radial-gradient(transparent 90%, currentColor 91%);
+				color: #f06;
+			}
+		</style>
+		<div class="block" data-edit="css html">CSS is awesome</div>
+	</article>
+
+	<article class="demo slide horizontal">
+		<style data-slide>
+			div.block {
+				width: calc(6 * var(--font-size));
+				height: calc(6 * var(--font-size));
+				--font-size: 50px;
+				font-size: var(--font-size);
+				background: radial-gradient(transparent 90%, var(--color) 91%);
+				--color: #f06;
+				color: var(--color);
+			}
+		</style>
+		<div class="block" data-edit="css html">CSS is awesome</div>
+	</article>
+
+	<article class="demo slide" data-edit="css" id="atsupports">
+		<style data-slide>
+			#atsupports.slide {
+				background: red;
+			}
+
+			@supports (--css: variables) {
+				#atsupports.slide {
+					background: green;
+				}
+			}
+		</style>
+	</article>
+
+	<article class="demo slide">
+		<style data-slide>
+			.block {
+				width: 10em;
+				height: 10em;
+			}
+		</style>
+		<h1 class="block" data-edit="css html">Variable values are token lists</h1>
+	</article>
+</section>
+
+<!-- Cool demos -->
+<section>
+	<header class="slide">
+		<h1>Cool use cases</h1>
+	</header>
+
+	<article class="demo slide" id="autoprefixing">
+		<style data-slide>
+			* {
+				--clip-path: initial;
+				-webkit-clip-path: var(--clip-path);
+				clip-path: var(--clip-path);
+			}
+		</style>
+		<div data-edit="css contents" class="blocks">
+			<div class="block block1">
+				<div class="block"></div>
+			</div>
+			<div class="block block2">
+				<div class="block"></div>
+			</div>
+			<div class="block block3">
+				<div class="block"></div>
+			</div>
+		</div>
+	</article>
+
+	<article class="demo slide" id="prepend">
+		<p class="hint">inline style too</p>
+		<style data-slide>
+			* {
+				--prepend: initial;
+			}
+
+			::before {
+				content: var(--prepend);
+			}
+		</style>
+		<div data-edit="css contents" class="blocks">
+			<div class="block block1">
+				<div class="block"></div>
+			</div>
+			<div class="block block2">
+				<div class="block"></div>
+			</div>
+			<div class="block block3">
+				<div class="block"></div>
+			</div>
+		</div>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>CSS Variables and JavaScript</h1>
+	</header>
+
+	<article class="slide">
+		<pre><code class="language-javascript">
+			element.style.getPropertyValue("--foo");
+			element.style.setProperty("--foo", 38 + 4);
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<pre><code class="language-javascript">
+			var html = document.documentElement;
+
+			document.addEventListener("mousemove", evt => {
+				html.style.setProperty("--mouse-x", evt.clientX + "px");
+				html.style.setProperty("--mouse-y", evt.clientY + "px");
+			});
+		</code></pre>
+	</article>
+
+	<article class="horizontal demo slide" data-edit="css" id="mouse">
+		<style data-slide>
+			#mouse.slide {
+				background-image: radial-gradient(
+					at var(--mouse-x, 50%) var(--mouse-y, 50%),
+					transparent, black);
+			}
+		</style>
+	</article>
+</section>
+
+<article class="slide" id="specs">
+	<a href="https://w3.org/TR/css-variables" class="w3c" target="_blank">w3.org/TR/css-variables</a>
+	<a href="https://drafts.csswg.org/css-variables" class="w3c ed" target="_blank">drafts.csswg.org/css-variables</a>
+</article>
+
+<footer class="dark slide">
+	<img src="img/mark.svg" />
+	<h1>Thank you!</h1>
+	<!-- <p style="margin-top: 0">Give me feedback! <a href="https://docs.google.com/forms/d/1k5av2WJvOfiY2AoDMe0WTZJFYJtyFDPXhQJd8SBudJQ/viewform">shoutkey.com/grow</a></p> -->
+	<ul>
+		<li style="--icon: '📨'"><a href="mailto:lea@w3.org">lea@verou.me</a></li>
+		<li style="--icon: '🌍'"><a href="http://lea.verou.me">lea.verou.me</a></li>
+		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
+	</ul>
+
+	<p>Slides: <a href="https://leaverou.github.io/html-secrets">leaverou.github.io/html-secrets</a></p>
+	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
+</footer>
+
+<script src="js/bliss.min.js"></script>
+<script src="../csss/slideshow.js"></script>
+<script src="js/prism.js"></script>
+<!-- <script src="../csss/plugins/css-edit.js"></script>
+<script src="../csss/plugins/css-snippets.js"></script> -->
+<script src="../incrementable/incrementable.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/talk.js"></script>
+
+</body>
+</html>
