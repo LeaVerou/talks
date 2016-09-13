@@ -168,7 +168,8 @@ div.editor {
 .slide {
 	display: flex;
 	flex-flow: column;
-	align-items: stretch;
+	align-items: center;
+	justify-content: center;
 	padding: 2.5rem;
 	background-color: black;
 	color: white;

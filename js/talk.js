@@ -102,7 +102,7 @@ $$('[data-edit]').forEach(element => {
 					var multiplier = 1;
 				}
 				else {
-					var multiplier = +editor.style.getPropertyValue("--font-size-multiplier") || 1;
+					var multiplier = +getComputedStyle(editor).getPropertyValue("--font-size-multiplier") || 1;
 					multiplier *= code == 189? .9 : 10/9;
 				}
 
@@ -175,7 +175,7 @@ document.addEventListener("keyup", function(evt) {
 */
 
 Prism.languages.insertBefore("css", "property", {
-	"variable": /\-\-(\b|\B)[\w-]+(?=\s*[:)])/i
+	"variable": /\-\-(\b|\B)[\w-]+(?=\s*[:,)])/i
 });
 
 document.addEventListener("slidechange", evt => {

@@ -130,6 +130,36 @@
 		</style>
 	</article>
 
+	<article class="browser-support slide">
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th><img src="img/chrome-logo.svg" alt="Chrome"></th>
+					<th><img src="img/firefox-logo.svg" alt="Firefox"></th>
+					<th><img src="img/edge-logo.svg" alt="Edge"></th>
+					<th><img src="img/safari-logo.png" alt="Safari"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>@supports</th>
+					<td>28</td>
+					<td>22</td>
+					<td>13</td>
+					<td>9</td>
+				</tr>
+				<tr>
+					<th>CSS Variables</th>
+					<td>49</td>
+					<td>31</td>
+					<td></td>
+					<td>9.1</td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
+
 	<article class="demo slide">
 		<style data-slide>
 			.block {
@@ -138,6 +168,39 @@
 			}
 		</style>
 		<h1 class="block" data-edit="css html">Variable values are token lists</h1>
+	</article>
+
+	<article class="demo slide" id="animation" data-edit="css" style="--font-size-multiplier: .8">
+		<style data-slide>
+			@keyframes bg {
+				from { --background: yellow; }
+				to { --background: #0ca; }
+			}
+
+			#animation.slide {
+				--background: orange;
+				background: var(--background);
+				animation: 1s bg infinite alternate;
+			}
+		</style>
+	</article>
+
+	<article class="slide poop" id="animation-poop">
+		<h1>CSS variables <span class="plus">+</span> animations <span class="equals">=</span><span class="poop">💩</span></h1>
+	</article>
+
+	<article class="demo slide" id="transition" data-edit="css" style="--font-size-multiplier: .8">
+		<style data-slide>
+			#transition.slide {
+				--background: orange;
+				background: var(--background);
+				transition: 1s;
+			}
+
+			#transition.slide:active {
+				--background: #0ca;
+			}
+		</style>
 	</article>
 </section>
 
@@ -153,6 +216,42 @@
 				--clip-path: initial;
 				-webkit-clip-path: var(--clip-path);
 				clip-path: var(--clip-path);
+			}
+		</style>
+		<div data-edit="css contents" class="blocks">
+			<div class="block block1">
+				<div class="block"></div>
+			</div>
+			<div class="block block2">
+				<div class="block"></div>
+			</div>
+			<div class="block block3">
+				<div class="block"></div>
+			</div>
+		</div>
+	</article>
+
+	<article class="demo slide" id="box-shadow" style="--font-size-multiplier: .6">
+		<p class="hint">No inherit from box-shadow, invalid at computed value time</p>
+		<style data-slide>
+			* {
+				--box-shadow-x: initial;
+				--box-shadow-y: initial;
+				--box-shadow-blur: initial;
+				--box-shadow-spread: initial;
+				--box-shadow-color: initial;
+				--box-shadow-inset: initial;
+
+				box-shadow: var(--box-shadow-x, 0)
+				            var(--box-shadow-y, 0)
+							var(--box-shadow-blur)
+							var(--box-shadow-spread, 0)
+							var(--box-shadow-color, currentColor)
+							var(--box-shadow-inset, );
+			}
+
+			.block1 {
+				--box-shadow-blur: 5px;
 			}
 		</style>
 		<div data-edit="css contents" class="blocks">
@@ -195,7 +294,7 @@
 
 <section>
 	<header class="slide">
-		<h1>CSS Variables and JavaScript</h1>
+		<h1>CSS Variables & JavaScript</h1>
 	</header>
 
 	<article class="slide">
