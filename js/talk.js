@@ -194,4 +194,19 @@ document.addEventListener("slidechange", evt => {
 	}
 });
 
+for (input of document.querySelectorAll("input")) {
+	input.style.setProperty("--value", input.value);
+}
+
+document.addEventListener("input", evt => {
+	if (evt.target.matches(":target input")) {
+		evt.target.style.setProperty("--value", input.value);
+	}
+});
+
+for (element of document.querySelectorAll(".typing")) {
+	let length = element.textContent.length;
+	element.style.setProperty("--length", length);
+}
+
 })(Bliss, Bliss.$);

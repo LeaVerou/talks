@@ -42,10 +42,6 @@ code, textarea, pre {
 		font-size: inherit;
 	}
 
-	.slide > pre:only-child {
-		margin: auto;
-	}
-
 pre + pre {
 	margin-top: 1.5em;
 }
@@ -77,6 +73,10 @@ button {
 
 .demo.slide {
 	text-align: center;
+}
+
+.demo.slide.horizontal {
+	justify-content: flex-start;
 }
 
 .demo.slide:not(.horizontal) {
@@ -281,20 +281,31 @@ code.de-emphasize {
 		left: 10px;
 	}
 
-dialog {
-	padding: 1em;
-	border: 1px solid rgba(0,0,0,.5);
-	box-shadow: .1em .1em .5em rgba(0,0,0,.5);
+blockquote {
+	position: relative;
+	font-style: italic;
+	width: 20em;
 }
 
-	dialog > h1 {
-		background: hsl(200, 20%, 50%);
-		color: white;
-		margin: -1.25em -1.25em 1em;
-		padding: 0 .5em .1em;
-		font-size: 80%;
+	blockquote::before {
+		content: "❝";
+		position: absolute;
+		right: 100%;
+		top: -.3em;
+		margin-right: .2em;
+		font-size: 400%;
+		color: #f06;
+		font-style: normal;
 	}
 
-	dialog > :last-child {
-		margin-bottom: 0;
+	blockquote .cite {
+		text-align: right;
+		font-style: normal;
+		font-size: 60%;
+		font-weight: bold;
+		color: #f06;
 	}
+
+		blockquote .cite a:not(:hover) {
+			text-decoration: none;
+		}

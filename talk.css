@@ -272,6 +272,7 @@ kbd {
 #specs {
 	color: white;
 	padding: 0;
+	align-items: stretch;
 }
 
 	#specs > a {
@@ -378,11 +379,23 @@ kbd {
 			75% { transform: rotate(10deg); }
 		}
 
-		.browser-support td:empty::before, span.poop {
-			content: "💩";
+		.browser-support td:empty::before {
 			display: block;
-			animation: poop-dance .8s 2s infinite alternate ease-in-out;
 		}
+
+span.poop,
+.browser-support td:empty::before {
+	animation: poop-dance .8s 2s infinite alternate ease-in-out;
+}
+
+span.poop {
+	display: inline-block;
+}
+
+	span.poop:empty::before,
+	.browser-support td:empty::before {
+		content: "💩";
+	}
 
 .poop.slide {
 
@@ -413,4 +426,54 @@ kbd {
 		line-height: 1;
 		margin: 0;
 		font-weight: 100;
+	}
+
+#daisy-chain {
+	background: url(img/daisy-chain.jpg) no-repeat top / contain black;
+	justify-content: flex-end;
+}
+
+	#daisy-chain code span {
+		--lengthD: var(--length, 15);
+		display: inline-block;
+		vertical-align: middle;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
+	@keyframes typing {
+		from { width: 0 }
+		to { width: calc(var(--lengthD) * 1ch); }
+	}
+
+	@keyframes caret {
+		50% { box-shadow: .03em 0; }
+	}
+
+	#daisy-chain span.delayed {
+		width: 0;
+	}
+
+	#daisy-chain span.current {
+		box-shadow: .03em 0 transparent;
+	}
+
+	#daisy-chain span.current,
+	#daisy-chain span.displayed {
+		width: auto;
+		--typing-duration: calc(var(--lengthD) * .2s);
+		animation: typing var(--typing-duration) steps(var(--lengthD)),
+		           caret .9s step-start calc(var(--lengthD) * .2 / .9);
+	}
+
+
+#typing {
+	background: black;
+}
+
+	#typing .typing {
+		display: inline-block;
+		white-space: nowrap;
+		font-size: 200%;
+		font-weight: bold;
 	}

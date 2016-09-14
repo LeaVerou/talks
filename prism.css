@@ -38,10 +38,11 @@ code[class*="language-"] {
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-	padding: .2em;
-	border-radius: .3em;
-	box-shadow: none;
 	white-space: normal;
+}
+
+.token.comment {
+	font: 125%/.8 var(--font-handwritten);
 }
 
 .token.comment,
@@ -73,7 +74,7 @@ code[class*="language-"] {
 .token.string,
 .token.char,
 .token.builtin {
-	color: hsl(335, 100%, 60%); /* deep pink */
+	color: hsl(335, 80%, 60%); /* deep pink */
 }
 
 .token.operator,
@@ -81,7 +82,7 @@ code[class*="language-"] {
 .token.url,
 .language-css .token.string,
 .token.inserted {
-	color: hsl(220, 60%, 80%);
+	color: hsl(182, 39%, 69%);
 }
 
 .token.attr-value,
@@ -97,7 +98,7 @@ code[class*="language-"] {
 }
 
 .token.function {
-	color: hsl(192, 100%, 70%); /* aqua */
+	color: hsl(186, 60%, 60%); /* aqua */
 }
 
 .token.important,
