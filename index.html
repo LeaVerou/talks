@@ -6,6 +6,7 @@
 <title>Mavo: Creating Interactive Data-Driven Web Applications by Authoring HTML</title>
 <link href="../csss/slideshow.css" rel="stylesheet" />
 <link href="../csss/reusable.css" rel="stylesheet" />
+<link rel="stylesheet" href="../mavo/dist/mavo.css">width: fit-content;<
 <link href="prism.css" rel="stylesheet" />
 <link href="theme.css" rel="stylesheet" />
 <link href="talk.css" rel="stylesheet" />
@@ -14,9 +15,7 @@
 </head>
 <body class="language-markup">
 
-<header class="video slide">
-	<video src="videos/authors.mp4"></video>
-</header>
+<header class="slide" data-video="videos/authors.mp4"></header>
 
 <section>
 	<article class="slide" id="the-problem" data-steps="2" data-credits="https://www.flickr.com/photos/mjhagen/2973212926 https://www.flickr.com/photos/97481684@N08/13969413085">
@@ -114,17 +113,44 @@
 		</code></pre>
 	</article>
 
-	<article class="slide">
+	<article class="example slide">
 		<pre><code>
 			&lt;span>Name:&lt;/span>
 			&lt;span <mark>property="firstName"</mark>>Lea&lt;/span>
 			&lt;span <mark>property="last_name"</mark>>Verou&lt;/span>
 		</code></pre>
-		<div class="mavo">
-			<span>Name:</span>
-			<span property="firstName">Lea</span>
-			<span property="last_name">Verou</span>
-		</div>
+	</article>
+
+	<article class="example slide">
+		<pre><code>
+			&lt;meter property="rating" value="3" max="5">&lt;/meter>
+		</code></pre>
+	</article>
+
+	<article class="example slide">
+		<pre><code>
+			&lt;time property="birthday" datetime="1986-06-13">
+				13 Jun 1986
+			&lt;/time>
+		</code></pre>
+	</article>
+
+	<article class="example slide">
+		<pre><code>
+			&lt;img property="avatar" src="img/adamcatlace.png" />
+		</code></pre>
+	</article>
+
+	<article class="example slide" id="form-elements">
+		<pre><code>
+			&lt;input property="name" value="Lea Verou"/>
+			&lt;input property="strength" type="range" />
+			&lt;select property="country">
+				&lt;option value="us">United States</option>
+				&lt;option value="gb">United Kingdom</option>
+				&lt;option value="jp">Japan</option>
+			&lt;/select>
+		</code></pre>
 	</article>
 </section>
 
@@ -154,6 +180,7 @@
 <script src="../incrementable/incrementable.js"></script>
 <script src="js/editor.js"></script>
 <script src="js/talk.js"></script>
+<script src="../mavo/dist/mavo.js"></script>
 
 </body>
 </html>

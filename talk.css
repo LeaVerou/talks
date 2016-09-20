@@ -74,3 +74,36 @@
 		box-shadow: none;
 		text-shadow: none;
 	}
+
+.example.slide > div {
+	display: flex;
+	flex-flow: column;
+	align-items: stretch;
+	justify-content: center;
+}
+
+.example-container {
+	margin-top: 2rem;
+}
+
+.mv-debug-storage {
+	margin-top: 3rem;
+	border-radius: .3em;
+	background: rgba(0,0,0,.5);
+	font-weight: bold;
+	font-size: 1rem;
+}
+
+	.mv-debug-storage:not([open]) {
+		width: fit-content;
+	}
+
+#form-elements input[type=range],
+#form-elements select {
+	transform: scale(2.5);
+	transform-origin: left;
+}
+
+#form-elements select {
+	margin-left: 200px;
+}

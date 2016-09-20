@@ -57,7 +57,7 @@ code, textarea, pre {
 		box-shadow: 0 -.05em 0 .1em var(--color);
 		color: inherit;
 		border-radius: 1px;
-		text-shadow: .01em .05em .2em black;
+		text-shadow: .01em .05em .2em rgba(0,0,0,.6);
 		transition: .6s;
 	}
 
@@ -81,7 +81,7 @@ textarea:not([class]) {
 	input[type="email"],
 	input[type="tel"],
 	textarea:not([class]) {
-		background: white;
+		background: transparent;
 		padding: 0 .3em;
 		border: .05em solid hsl(200, 40%, 80%);
 	}
@@ -343,7 +343,7 @@ blockquote {
 			text-decoration: none;
 		}
 
-table {
+.slide > table {
 	border-spacing: 0;
 	margin: 1em;
 }

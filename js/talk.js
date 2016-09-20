@@ -1,8 +1,33 @@
 var $ = Bliss, $$ = $.$;
 
 
-document.addEventListener("DOMContentLoaded", function(evt) {
+document.addEventListener("DOMContentLoaded", evt => {
 	// Stuff to run after slideshow has been created
+
+	$$(".example.slide").forEach((example, i) => {
+		var code = $("pre > code", example);
+
+		$.create("div", {
+			around: code.parentNode
+		});
+
+		var container = $.create({
+			className: "example-container",
+			innerHTML: code.textContent,
+			after: code.parentNode
+		});
+
+		var data = $("script[type='application/json']", example) || $.create("script", {
+			type: "application/json",
+		});
+
+		data.id = data.id || "data-" + example.id;
+
+		var mavoRoot = $("[data-store]", container) || container;
+
+		mavoRoot.classList.add("debug-saving");
+		mavoRoot.setAttribute("data-store", "#" + data.id);
+	});
 });
 
 // Make list items fall from the top one by one
