@@ -1,0 +1,76 @@
+#the-problem {
+	background: url(img/coding.png) center / cover black no-repeat;
+	transition: 1s background-image;
+}
+
+#the-problem[data-step="1"] {
+	background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"></svg>') center / 100% 124% black  no-repeat;
+}
+
+#the-problem[data-step="2"] {
+	background: url(img/frustration.jpg) center / cover black no-repeat;
+}
+
+	#the-problem ul {
+		position: absolute;
+		bottom: 0;
+		left: 1em;
+		padding: 0;
+		list-style: none;
+	}
+
+		#the-problem li {
+			font-weight: bold;
+			font-size: 150%;
+			line-height: 1;
+			transition: 1s 1.1s transform, 6s 2s font-size;
+		}
+
+		#the-problem:not([data-step]) li:not(.special) {
+			transform: translateY(-100vh);
+		}
+
+	#the-problem:not([data-step]) .special {
+		font-size: 300%;
+	}
+
+	#the-problem .html {
+		color: hsl(10, 100%, 50%);
+	}
+
+	#the-problem .css {
+		color: hsl(210, 100%, 50%);
+	}
+
+#todomvc {
+	flex-flow: row;
+}
+
+	#todomvc table {
+		width: 40vw;
+	}
+
+	#todomvc thead th {
+		padding-top: 0;
+		padding-bottom: 0;
+		font-size: 75%;
+		background: orange;
+	}
+
+	#todomvc img {
+		float: right;
+	}
+
+#mavo {
+	padding: 6em;
+}
+
+#todo-code {
+
+}
+
+	#todo-code:not([data-step]) mark {
+		background: transparent;
+		box-shadow: none;
+		text-shadow: none;
+	}
