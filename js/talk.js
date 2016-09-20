@@ -4,8 +4,8 @@ var $ = Bliss, $$ = $.$;
 document.addEventListener("DOMContentLoaded", evt => {
 	// Stuff to run after slideshow has been created
 
-	$$(".example.slide").forEach((example, i) => {
-		var code = $("pre > code", example);
+	$$(".example.slide").forEach((slide, i) => {
+		var code = $("pre > code", slide);
 
 		$.create("div", {
 			around: code.parentNode
@@ -17,15 +17,18 @@ document.addEventListener("DOMContentLoaded", evt => {
 			after: code.parentNode
 		});
 
-		var data = $("script[type='application/json']", example) || $.create("script", {
+		var data = $("script[type='application/json']", slide) || $.create("script", {
 			type: "application/json",
 		});
 
-		data.id = data.id || "data-" + example.id;
+		data.id = data.id || "data-" + slide.id;
 
 		var mavoRoot = $("[data-store]", container) || container;
 
-		mavoRoot.classList.add("debug-saving");
+		if (slide.classList.contains("visible-storage")) {
+			mavoRoot.classList.add("debug-saving");
+		}
+
 		mavoRoot.setAttribute("data-store", "#" + data.id);
 	});
 });

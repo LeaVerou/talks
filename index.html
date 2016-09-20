@@ -6,7 +6,7 @@
 <title>Mavo: Creating Interactive Data-Driven Web Applications by Authoring HTML</title>
 <link href="../csss/slideshow.css" rel="stylesheet" />
 <link href="../csss/reusable.css" rel="stylesheet" />
-<link rel="stylesheet" href="../mavo/dist/mavo.css">width: fit-content;<
+<link rel="stylesheet" href="../mavo/dist/mavo.css">
 <link href="prism.css" rel="stylesheet" />
 <link href="theme.css" rel="stylesheet" />
 <link href="talk.css" rel="stylesheet" />
@@ -70,6 +70,10 @@
 		<img src="img/logo.svg" alt="">
 	</article>
 
+	<article class="incomplete slide">
+		TODO: Related Work
+	</article>
+
 	<article class="video slide">
 		<video src="videos/todo.mp4"></video>
 	</article>
@@ -113,7 +117,7 @@
 		</code></pre>
 	</article>
 
-	<article class="example slide">
+	<article class="visible-storage example slide">
 		<pre><code>
 			&lt;span>Name:&lt;/span>
 			&lt;span <mark>property="firstName"</mark>>Lea&lt;/span>
@@ -121,13 +125,13 @@
 		</code></pre>
 	</article>
 
-	<article class="example slide">
+	<article class="visible-storage example slide">
 		<pre><code>
 			&lt;meter property="rating" value="3" max="5">&lt;/meter>
 		</code></pre>
 	</article>
 
-	<article class="example slide">
+	<article class="visible-storage example slide">
 		<pre><code>
 			&lt;time property="birthday" datetime="1986-06-13">
 				13 Jun 1986
@@ -141,7 +145,7 @@
 		</code></pre>
 	</article>
 
-	<article class="example slide" id="form-elements">
+	<article class="visible-storage example slide" id="form-elements">
 		<pre><code>
 			&lt;input property="name" value="Lea Verou"/>
 			&lt;input property="strength" type="range" />
@@ -152,12 +156,53 @@
 			&lt;/select>
 		</code></pre>
 	</article>
+
+	<article class="vertical example slide" id="multiple-properties">
+		<pre><code>
+			Hobbies:
+			&lt;ul>
+				&lt;li property="hobby">Eating&lt;/li>
+				&lt;li property="hobby">Sleeping&lt;/li>
+				&lt;li property="hobby">Purring&lt;/li>
+			&lt;/ul>
+		</code></pre>
+	</article>
+
+	<article class="vertical example slide">
+		<pre><code>
+			Hobbies:
+			&lt;ul>
+				&lt;li property="hobby"
+				    data-multiple>
+					Eating
+				&lt;/li>
+			&lt;/ul>
+		</code></pre>
+	</article>
+
+	<article class="incomplete slide">
+		TODO: Objects, expressions
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>User study</h1>
+	</header>
+
+	<article class="incomplete slide">
+		TODO
+	</article>
 </section>
 
 <section>
 	<article class="looping slide" data-video="videos/color-picker.mp4"></article>
 	<article class="looping slide" data-video="videos/logo.mp4"></article>
 	<article class="looping slide" data-video="videos/mortgage.mp4"></article>
+
+	<article class="incomplete slide">
+		TODO: Videos for the rest of demos
+	</article>
 </section>
 
 <footer class="slide">

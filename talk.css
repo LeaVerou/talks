@@ -82,8 +82,17 @@
 	justify-content: center;
 }
 
-.example-container {
+.vertical.example.slide > div {
+	flex-flow: row;
+	align-items: stretch;
+}
+
+.slide:not(.vertical) .example-container {
 	margin-top: 2rem;
+}
+
+.vertical.example.slide .example-container {
+	min-width: 30vw;
 }
 
 .mv-debug-storage {
@@ -107,3 +116,18 @@
 #form-elements select {
 	margin-left: 200px;
 }
+
+.example.slide ul {
+	margin: .3em 0;
+}
+
+.example.slide li {
+	list-style: none;
+}
+
+	.example.slide li::before {
+		content: "•";
+		position: absolute;
+		margin-left: -1em;
+		color: orange;
+	}
