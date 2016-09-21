@@ -190,6 +190,37 @@
 		<h1>User study</h1>
 	</header>
 
+	<article class="slide" id="subjects" data-steps="2">
+		<h1>20 participants</h1>
+		<svg class="def">
+			<symbol id="person" viewBox="0 0 100 100">
+				<circle r="23" cx="50" cy="25" />
+				<circle r="45" cx="50" cy="100" />
+				<path d="M38,26 a12,12 0 0,0 24,0" />
+			</symbol>
+		</svg>
+		<script>
+			for (var i=0; i<20; i++) {
+				let className = i <= 12? "female" : i <= 18? "male" : "other"
+				document.write(`
+					<svg style="transition-delay: ${i * .15}s, 0s" class="${className}">
+						<use href="#person" />
+					</svg>`
+				);
+			};
+		</script>
+
+		<div class="gender">
+			<div class="female"></div> Female
+			<div class="male"></div> Male
+			<div class="other"></div> Other
+		</div>
+
+		<p class="age">
+			<strong>Age</strong> <i>μ</i> = 35.9, <i>σ</i> = 10.2
+		</p>
+	</article>
+
 	<article class="incomplete slide">
 		TODO
 	</article>

@@ -131,3 +131,83 @@
 		margin-left: -1em;
 		color: orange;
 	}
+
+#subjects {
+	display: block;
+	--padding: 5vw;
+	padding: var(--padding);
+	text-align: center;
+}
+
+	#subjects svg.def {
+		display: none;
+	}
+
+	#subjects svg {
+		display: inline-block;
+		--size: calc((100vw - var(--padding) * 2) / 10);
+		width: var(--size);
+		height: var(--size);
+		margin-left: -.3em;
+		opacity: 0;
+		transition: .4s opacity, .4s fill;
+	}
+
+	#subjects:not([data-step]) svg {
+		fill: white;
+	}
+
+	#subjects[data-step] svg {
+		fill: var(--color);
+	}
+
+	#subjects:target svg {
+		opacity: 1;
+	}
+
+	#subjects svg path {
+		 stroke: white;
+		 stroke-width: 5;
+		 stroke-linecap: round;
+		 fill: none;
+	}
+
+	.other {
+		--color: yellowgreen;
+	}
+
+	.male {
+		--color: hsl(340, 70%, 70%);
+	}
+
+	.female {
+		--color: hsl(185, 70%, 60%);
+	}
+
+	.gender, .age {
+		opacity: 0;
+		transition: .4s opacity;
+	}
+
+		#subjects[data-step] .gender,
+		#subjects[data-step="2"] .age {
+			opacity: 1;
+		}
+
+	.gender > div {
+		display: inline-block;
+		padding: .35em;
+		margin-left: .5em;
+		border-radius: .1em;
+		background: var(--color);
+	}
+
+	.age {
+		margin: .5em 0;
+		padding-top: .5em;
+		border-top: 1px solid hsla(0,0%,100%,.2);
+	}
+
+		.age strong {
+			color: orange;
+		}
