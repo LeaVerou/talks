@@ -296,3 +296,69 @@
 	#estimate-before h1 {
 		font-weight: 100;
 	}
+
+	#estimate-before .graph {
+
+	}
+
+		#estimate-before .graph > div {
+
+		}
+
+.bar-chart {
+	position: relative;
+	display: flex;
+	align-items: flex-end;
+	width: 80%;
+	height: calc(100vh - 5rem - 3em);
+	padding: 1em 0 0 0;
+	border: solid white;
+	border-width: 0 0 .1em .1em;
+	background: linear-gradient(hsla(0,0%,100%,.1) 50%, transparent 0) 0 0 / auto calc(200% / var(--total, 6)) content-box content-box;
+	list-style: none;
+}
+
+	.bar-chart::before {
+		content: attr(title);
+		position: absolute;
+		transform-origin: -.8em 50%;
+		transform: rotate(-90deg);
+		font-weight: bold;
+	}
+
+	@keyframes bar-grow {
+		from { height: 0; }
+	}
+
+	.bar-chart li {
+		position: relative;
+		flex: 1;
+		--height: calc(100% * var(--people) / var(--total, 100));
+		height: var(--height);
+		margin: 0 5%;
+		background: pink;
+		text-align: center;
+		font-size: 200%;
+		font-weight: bold;
+		background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -20 100 120" fill="orange">\
+			<circle r="26" cx="50" cy="26" />\
+			<circle r="50" cx="50" cy="100" />\
+		</svg>') top / auto calc(100% / var(--people)) repeat-y;
+
+
+	}
+
+	.slide:target .bar-chart li {
+		animation: bar-grow 1s;
+	}
+
+		.bar-chart li::before {
+			content: '“' attr(title) '”';
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			margin-top: .2em;
+			font-size: 40%;
+			font-weight: normal;
+		}
