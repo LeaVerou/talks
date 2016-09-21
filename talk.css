@@ -238,6 +238,10 @@
 		bottom: var(--padding);
 	}
 
+	#tasks > article.delayed {
+		transition-timing-function: cubic-bezier(.3, .2, .5, 1.6);
+	}
+
 	#tasks > article.delayed:not(.current):not(.displayed) {
 		transform: scale(0);
 	}
@@ -263,3 +267,32 @@
 			#tasks > article.freestyle > h1::after {
 				content: "Freestyle study";
 			}
+
+#structured {}
+
+	#structured img,
+	#freestyle img {
+		width: 15vw;
+		height: 15vw;
+		border-radius: 50%;
+		object-fit: cover;
+	}
+
+	#structured h1,
+	#freestyle h1 {
+		font-weight: 100;
+		margin: 0;
+	}
+
+	#structured svg,
+	#freestyle svg {
+		fill: white;
+		width: 2.5vw;
+		height: 2.5vw;
+	}
+
+#estimate-before {}
+
+	#estimate-before h1 {
+		font-weight: 100;
+	}
