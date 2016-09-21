@@ -211,3 +211,55 @@
 		.age strong {
 			color: orange;
 		}
+
+#tasks {
+
+}
+
+	#tasks > article {
+		position: absolute;
+		padding: 16vw;
+		background: center / cover;
+		border-radius: 50%;
+		--padding: 3vw;
+	}
+
+	#tasks > article:first-child {
+		top: var(--padding);
+		left: var(--padding);
+	}
+
+	#tasks > article:nth-child(2) {
+		top: var(--padding);
+		right: var(--padding);
+	}
+
+	#tasks > article:nth-child(3) {
+		bottom: var(--padding);
+	}
+
+	#tasks > article.delayed:not(.current):not(.displayed) {
+		transform: scale(0);
+	}
+
+		#tasks > article > h1 {
+			position: absolute;
+			padding: 1vw;
+			background: hsl(200, 20%, 25%);
+			font-weight: 100;
+			white-space: nowrap;
+		}
+
+			#tasks > article > h1::after {
+				content: "Structured study";
+				display: block;
+				padding: .6vw;
+				margin: 1vw -1vw -1vw;
+				background: orange;
+				font-size: 50%;
+				font-weight: bold;
+			}
+
+			#tasks > article.freestyle > h1::after {
+				content: "Freestyle study";
+			}
