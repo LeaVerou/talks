@@ -90,6 +90,10 @@ button {
 	font: inherit;
 }
 
+img {
+	max-height: 100%;
+}
+
 .demo.slide {
 	text-align: center;
 }
