@@ -2,7 +2,7 @@
 	background: #333;
 	background-image: linear-gradient(to left, rgba(0,0,0,.5), rgba(0,0,0,.5)), linear-gradient(to left, rgba(0,0,0,.5), rgba(0,0,0,.5));
 	background-repeat: no-repeat;
-	background-size: 1280px 720px, 1024px 768px;
+	background-size: 1280px 768px, 1024px 768px;
 }
 
 #intro {
@@ -12,12 +12,10 @@
 }
 
 	#intro h1 {
-		position: absolute;
-		bottom: .2em;
-		width: 10em;
+
 		margin: 0;
 		text-align: left;
-		font-size: 450%;
+		font-size: 200%;
 		line-height: .8;
 		letter-spacing: -.05em;
 	}
@@ -308,7 +306,7 @@ kbd {
 .block {
 	display: flex;
 	padding: 1em;
-	margin: .2em;
+	margin: 1em;
 	box-sizing: border-box;
 	align-items: center;
 	justify-content: center;
@@ -461,19 +459,162 @@ span.poop {
 	#daisy-chain span.current,
 	#daisy-chain span.displayed {
 		width: auto;
-		--typing-duration: calc(var(--lengthD) * .2s);
+		--typing-duration: calc(var(--lengthD) * .15s);
 		animation: typing var(--typing-duration) steps(var(--lengthD)),
 		           caret .9s step-start calc(var(--lengthD) * .2 / .9);
 	}
 
 
-#typing {
+.typing.slide {
 	background: black;
 }
 
-	#typing .typing {
+	.typing.demo.slide .typing {
 		display: inline-block;
 		white-space: nowrap;
-		font-size: 200%;
-		font-weight: bold;
+		font: bold 200% var(--font-mono);
+		color: white;
 	}
+
+	.typing.demo.slide div.editor > textarea.editor {
+		max-height: 65vh;
+	}
+
+.background.slide {
+	background: center / cover;
+}
+
+#wtf {
+	background-image: url(img/wtf.jpg);
+}
+
+#limitations {
+	background-image: url(img/sad.jpg);
+}
+
+	.background.slide .caption {
+		padding: 0 1em;
+		background: rgba(0,0,0,.7);
+		transition: .4s;
+	}
+
+	#wtf .caption {
+		min-width: 15em;
+	}
+
+	.background.slide[data-step] .caption {
+		opacity: 0;
+	}
+
+	#wtf h1 {
+		background: orange;
+		border-radius: 50%;
+		width: 3.5em;
+		height: 3.5em;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		float: right;
+		font-stretch: condensed;
+		font-family: HelveticaNeue-CondensedBold;
+		font-size: 155%;
+	}
+
+	#limitations h1 {
+		color: orange;
+	}
+
+.takeaway.slide {
+
+}
+
+	.takeaway.slide h1 {
+		font-weight: 100;
+	}
+
+		.takeaway.slide h1::before {
+			content: "Takeaway";
+			display: block;
+			width: fit-content;
+			padding: .2em .5em;
+			margin: 0 auto .5em;
+			background: orange;
+			font-weight: bold;
+			text-transform: uppercase;
+			font-size: 70%;
+		}
+
+#responsive {
+	flex-flow: row wrap;
+	align-items: stretch;
+}
+
+	#responsive section {
+		color: rgba(0,0,0,.5);
+		background: linear-gradient(currentColor 50%, transparent 0) 0 0 / 100% 10% content-box content-box, silver;
+		background-repeat: round;
+		padding: .6em;
+		box-sizing: border-box;
+		mix-blend-mode: multiply;
+		flex: 25%;
+	}
+
+	#responsive section.wide3 {
+		flex: 100%;
+		background-color: #f06;
+		color: hsla(0,0%,100%,.6);
+	}
+
+	#responsive section.wide2 {
+		flex: 60%;
+		background-color: orange;
+	}
+
+	.talking.housewife.slide {
+		display: block;
+		background: #8f8f8f url(img/housewife.png) no-repeat bottom right / 450px auto;
+		background-color: #978;
+		background-size: 450px;
+		padding: 2em;
+		transition: 1s ease-in-out background-size;
+		color: black;
+	}
+
+		.talking.housewife.slide:target {
+			background-size: 550px auto;
+		}
+
+		.talking.slide > h1 {
+				position: relative;
+				padding: .5em .3em .5em .7em;
+				border: .2em solid black;
+				width: 9em;
+				background: white;
+				font-weight: bold;
+				font-size: 170%;
+				border-radius: .8em;
+				text-align: left;
+			}
+
+			.talking.slide > h1:before,
+			.talking.slide > h1:after {
+				content: '';
+				position: absolute;
+				right: -.99em;
+				bottom: 1em;
+				width: 0;
+				height: 1px;
+				border: solid transparent;
+				border-width: 0 .8em .8em 0;
+			}
+
+			.talking.slide > h1:before {
+				border-bottom-color: black;
+				z-index: -1;
+			}
+
+			.talking.slide > h1:after {
+				margin-right: .5em;
+				margin-bottom: .2em;
+				border-bottom-color: white;
+			}

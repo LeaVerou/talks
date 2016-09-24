@@ -16,7 +16,7 @@
 
 <section id="for-browser" class="dark slide">
 	<h1>Important</h1>
-	This slide deck was created for use in a controlled environment, during a talk. It works best with Chrome at 1280x720 or 1280x768. It may or may not work properly in other browsers.
+	This slide deck was created for use in a controlled environment, during a talk. It works best with Chrome. It may or may not work properly in other browsers.
 	The demos were live coded, so these slides are a bit pointless if you never watched the talk.
 </section>
 
@@ -27,11 +27,11 @@
 	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
 </header>
 
-<!-- <section>
+<section>
 	<section class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
 			<img src="img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
-			<figcaption>Hi, I’m Lea</figcaption>
+			<figcaption>Oi, eu sou Lea</figcaption>
 		</figure>
 	</section>
 
@@ -80,9 +80,8 @@
 			★★★★★ on Amazon
 		</a>
 	</section>
-</section> -->
+</section>
 
-<!-- Basics -->
 <section>
 	<header class="slide">
 		<h1>Basics</h1>
@@ -116,6 +115,55 @@
 		<div class="block" data-edit="css html">CSS is awesome</div>
 	</article>
 
+	<article class="takeaway slide">
+		<h1>CSS Variables work like normal CSS properties</h1>
+	</article>
+
+	<article class="demo slide" id="inheritance">
+		<p class="hint">inline style too</p>
+		<style data-slide>
+			div {
+				background: var(--background);
+			}
+			
+			.block {
+				--background: red;
+			}
+		</style>
+		<div data-edit="css contents" class="blocks">
+			<div class="block block1">
+				<div class="block"></div>
+			</div>
+			<div class="block block2">
+				<div class="block"></div>
+			</div>
+			<div class="block block3">
+				<div class="block"></div>
+			</div>
+		</div>
+	</article>
+
+	<article class="background slide" id="limitations" data-steps="1">
+		<div class="caption">
+			<h1>What you cannot do</h1>
+			<ul class="delayed-children">
+				<li><code>--url: "flag-" var(--country) ".png";</code></li>
+				<li><code>url(var(--url))</code></li>
+				<li>set a variable <strong>value</strong> to <code>initial</code>, <code>inherit</code>, <code>unset</code>, or <code>revert</code></li>
+			</ul>
+		</div>
+	</article>
+
+	<article class="background slide" id="wtf" data-steps="1">
+		<div class="caption">
+			<h1>WTFs</h1>
+			<ul class="delayed-children">
+				<li><code>--foo: ;</code> is valid <br><code>--foo:;</code> is invalid</li>
+				<li><code>--foo</code> ≠ <code>--FOO</code></li>
+			</ul>
+		</div>
+	</article>
+
 	<article class="slide">
 		<div style="display: flex; flex-flow: column" class="delayed-children">
 			<div class="block" style="background: red">No CSS variables support</div>
@@ -136,7 +184,7 @@
 		</code></pre>
 	</article>
 
-	<article class="demo slide" data-edit="css" id="atsupports">
+	<article class="demo slide" data-edit="css" id="atsupports" style="--font-size-multiplier: 1.2">
 		<style data-slide>
 			#atsupports.slide {
 				background: red;
@@ -148,6 +196,10 @@
 				}
 			}
 		</style>
+	</article>
+
+	<article class="talking housewife slide" data-source="flickr.com/photos/x-ray_delta_one/4264423055/">
+		<h1>Won’t someone, please, think of browser support?!</h1>
 	</article>
 
 	<article class="browser-support slide">
@@ -193,29 +245,33 @@
 	<article class="slide">
 		<table>
 			<tr>
-				<td>Number → px: </td>
+				<td>Number → unit: </td>
 				<td><code class="language-css">calc(var(--foo) * 1px)</code></td>
 			</tr>
 			<tr>
-				<td>px → number:</td>
+				<td>Unit → number:</td>
 				<td><span class="poop"></span><span class="poop"></span><span class="poop"></span></td>
 			</tr>
 		</table>
 	</article>
 
-	<article class="demo slide" id="animation" data-edit="css" style="--font-size-multiplier: .8">
+	<article class="takeaway slide">
+		<h1>Use variables for pure data, <br>not CSS values</h1>
+	</article>
+
+	<article class="demo slide" id="animation" data-edit="css" style="--font-size-multiplier: .8; color: white;">
+		<p class="hint">Try to animate --background | show that var() is ok-ish</p>
 		<style data-slide>
 			@keyframes bg {
-				from { --background: yellow; }
-				to { --background: #0ca; }
+				from { background: yellow; }
+				to { background: #0ca; }
 			}
 
 			#animation.slide {
-				--background: orange;
-				background: var(--background);
 				animation: 1s bg infinite alternate;
 			}
 		</style>
+		<h1 style="font-size: 150%">CSS Variables in @keyframes?</h1>
 	</article>
 
 	<article class="slide poop" id="animation-poop">
@@ -229,22 +285,123 @@
 		</blockquote>
 	</article>
 
-	<article class="demo slide" id="transition" data-edit="css" style="--font-size-multiplier: .8">
+	<article class="slide" data-import="animation"></article>
+
+	<article class="demo slide" id="transition" data-edit="css" style="--font-size-multiplier: .8; color: white">
 		<style data-slide>
 			#transition.slide {
-				--background: orange;
-				background: var(--background);
+				background: yellow;
 				transition: 1s;
 			}
 
 			#transition.slide:active {
-				--background: #0ca;
+				background: #0ca;
 			}
 		</style>
+		<h1>There is hope!</h1>
 	</article>
 </section>
 
-<!-- Cool demos -->
+<section>
+	<header class="slide">
+		<h1>Basic use cases</h1>
+	</header>
+
+	<!-- <article class="horizontal demo slide" data-edit="css" id="checkerboard">
+		<style data-slide>
+		#checkerboard {
+			background-color: #eee;
+			background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black),
+			                  linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black);
+			background-size:60px 60px;
+			background-position:0 0, 30px 30px
+		}
+
+		</style>
+	</article> -->
+
+	<article class="demo slide">
+		<p class="hint">Theming by class, by style, box-shadow transition</p>
+		<div data-edit="css contents">
+			<button>Click me</button>
+			<button class="pink">Click me</button>
+		</div>
+
+		<style data-slide>
+			button {
+				border: .1em solid black;
+				background: transparent;
+			}
+
+			button:hover {
+				background: black;
+				color: white;
+			}
+
+			button.pink {
+				border-color: #f06;
+				color: #f06;
+			}
+
+			button.pink:hover {
+				background: #f06;
+				color: white;
+			}
+		</style>
+		<style data-slide>
+			button {
+				border-radius: .3em;
+				padding: 0 .5em;
+				font-weight: bold;
+				font-size: 180%;
+				margin: .2em;
+			}
+		</style>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS Variables enable theming independent of CSS structure</h1>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>Default default values are possible</h1>
+		<pre><code>
+			--colorD: var(--color, black);
+			/* use --colorD instead of --color internally */
+		</code></pre>
+	</article>
+
+	<article class="slide demo" id="responsive" data-edit="css">
+		<section></section>
+		<section></section>
+		<section></section>
+
+		<section class="wide3"></section>
+
+		<section class="wide2"></section>
+		<section></section>
+		<style data-slide>
+		:root {
+			--gutter: 2px;
+		}
+
+		section {
+			margin: var(--gutter);
+		}
+
+		@media (min-width: 1000px) {
+			:root {
+				--gutter: 10px;
+			}
+		}
+		</style>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS Variables make <br>responsive design easier</h1>
+	</article>
+</section>
+
 <section>
 	<header class="slide">
 		<h1>Cool use cases</h1>
@@ -330,6 +487,10 @@
 			</div>
 		</div>
 	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS Variables let you define your own properties</h1>
+	</article>
 </section>
 
 <section>
@@ -399,26 +560,41 @@
 		<input type="range" data-edit="css">
 	</article>
 
+	<article class="horizontal demo typing slide" id="typing" data-edit="css" style="--font-size-multiplier: .8">
+		<p class="typing">CSS variables are awesome</p>
+		<style data-slide>
+			@keyframes typing { from { width: 0; } }
+			@keyframes caret { 50% { border-color: transparent; } }
+
+			p.typing {
+				width: 25ch;
+				border-right: 2px solid;
+				overflow: hidden;
+				animation: caret .5s step-end infinite alternate;
+			}
+		</style>
+	</article>
+
 	<article class="language-javascript slide">
 		<pre><code>
-			for (element of document.querySelectorAll(".typing")) {
+			for (let element of $$(".typing")) {
 				let length = element.textContent.length;
 				element.style.setProperty("--length", length);
 			}
 		</code></pre>
 	</article>
 
-	<article class="horizontal demo slide" id="typing" data-edit="css" style="--font-size-multiplier: .8">
-		<code class="typing">CSS variables are awesome</code>
+	<article class="horizontal demo typing slide" id="typing2" data-edit="css" style="--font-size-multiplier: .8">
+		<p class="typing" contentEditable>CSS variables are awesome</p>
 		<style data-slide>
 			@keyframes typing { from { width: 0; } }
 			@keyframes caret { 50% { border-color: transparent; } }
 
-			code.typing {
+			p.typing {
 				width: calc(var(--length) * 1ch);
 				border-right: 2px solid;
 				overflow: hidden;
-				animation: typing calc(var(--length) * .5s) steps(var(--length), end),
+				animation: typing calc(var(--length) * .4s) steps(var(--length)),
 				           caret .5s step-end infinite alternate;
 			}
 		</style>
@@ -432,7 +608,7 @@
 
 <footer class="dark slide">
 	<img src="img/mark.svg" />
-	<h1>Thank you!</h1>
+	<h1>Obrigada!</h1>
 	<!-- <p style="margin-top: 0">Give me feedback! <a href="https://docs.google.com/forms/d/1k5av2WJvOfiY2AoDMe0WTZJFYJtyFDPXhQJd8SBudJQ/viewform">shoutkey.com/grow</a></p> -->
 	<ul>
 		<li style="--icon: '📨'"><a href="mailto:lea@w3.org">lea@verou.me</a></li>

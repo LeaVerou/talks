@@ -69,10 +69,12 @@ textarea:not([class]) {
 
 button {
 	font: inherit;
+	cursor: pointer;
 }
 
 .demo.slide {
 	text-align: center;
+	font-size: 200%;
 }
 
 .demo.slide.horizontal {

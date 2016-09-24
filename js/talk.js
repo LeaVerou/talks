@@ -122,10 +122,10 @@ $$('[data-edit]').forEach(element => {
 
 			var cs = getComputedStyle(textarea);
 
-			if (cs.height == cs.maxHeight) {
-				var ratio = Math.min(2, textarea.scrollHeight/textarea.offsetHeight) - 1;
-				textarea.parentNode.style.fontSize = 100 - Math.round(50 * ratio) + "%";
-			}
+			// if (cs.height == cs.maxHeight) {
+			// 	var ratio = Math.min(2, textarea.scrollHeight/textarea.offsetHeight) - 1;
+			// 	textarea.parentNode.style.fontSize = 100 - Math.round(50 * ratio) + "%";
+			// }
 		}
 	};
 
@@ -175,7 +175,7 @@ document.addEventListener("keyup", function(evt) {
 */
 
 Prism.languages.insertBefore("css", "property", {
-	"variable": /\-\-(\b|\B)[\w-]+(?=\s*[:,)])/i
+	"variable": /\-\-(\b|\B)[\w-]+(?=\s*[:,)]|\s*$)/i
 });
 
 document.addEventListener("slidechange", evt => {
@@ -204,9 +204,20 @@ document.addEventListener("input", evt => {
 	}
 });
 
-for (element of document.querySelectorAll(".typing")) {
-	let length = element.textContent.length;
-	element.style.setProperty("--length", length);
+var setLength = element => {
+	console.log("yolo", element);
+	element.style.setProperty("--length", element.textContent.length)
+};
+
+for (let element of document.querySelectorAll("p.typing")) {
+	setLength(element);
+
+	var observer = new MutationObserver(r => setLength(element));
+	observer.observe(element, {
+		characterData: true,
+		childList: true,
+		subtree: true
+	});
 }
 
 })(Bliss, Bliss.$);
