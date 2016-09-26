@@ -31,7 +31,7 @@
 	<section class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
 			<img src="img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
-			<figcaption>Oi, eu sou Lea</figcaption>
+			<figcaption style="font-size: 240%">Hi, I’m Lea</figcaption>
 		</figure>
 	</section>
 
@@ -88,91 +88,95 @@
 	</header>
 
 	<article class="demo slide horizontal">
+		<p class="hint">--color, --corner, inline style too</p>
 		<style data-slide>
 			div.block {
-				width: 6em;
-				height: 6em;
-				font-size: 50px;
-				background: radial-gradient(transparent 90%, currentColor 91%);
+				background: radial-gradient(
+					transparent 90%,
+					currentColor 0);
 				color: #f06;
 			}
 		</style>
-		<div class="block" data-edit="css html">CSS is awesome</div>
-	</article>
-
-	<article class="demo slide horizontal">
 		<style data-slide>
 			div.block {
-				width: calc(6 * var(--font-size));
-				height: calc(6 * var(--font-size));
-				--font-size: 50px;
-				font-size: var(--font-size);
-				background: radial-gradient(transparent 90%, var(--color) 91%);
-				--color: #f06;
-				color: var(--color);
+				font-size: 150%;
+				width: 4em;
+				height: 4em;
 			}
 		</style>
 		<div class="block" data-edit="css html">CSS is awesome</div>
 	</article>
 
 	<article class="takeaway slide">
-		<h1>CSS Variables work like normal CSS properties</h1>
+		<h1>CSS Variables work like<br>normal CSS properties</h1>
 	</article>
 
 	<article class="demo slide" id="inheritance">
-		<p class="hint">inline style too</p>
-		<style data-slide>
+		<p class="hint">inheritance | cancel inheritance</p>
+		<style data-slide data-scope=".blocks">
 			div {
-				background: var(--background);
+				outline: var(--outline);
 			}
-			
-			.block {
-				--background: red;
+
+			.block1 {
+				--outline: .2em solid;
 			}
 		</style>
 		<div data-edit="css contents" class="blocks">
-			<div class="block block1">
-				<div class="block"></div>
+			<div class="block1">
+				<div></div>
 			</div>
-			<div class="block block2">
-				<div class="block"></div>
+			<div class="block2">
+				<div></div>
 			</div>
-			<div class="block block3">
-				<div class="block"></div>
+			<div class="block3">
+				<div></div>
 			</div>
 		</div>
 	</article>
 
-	<article class="background slide" id="limitations" data-steps="1">
-		<div class="caption">
-			<h1>What you cannot do</h1>
-			<ul class="delayed-children">
-				<li><code>--url: "flag-" var(--country) ".png";</code></li>
-				<li><code>url(var(--url))</code></li>
-				<li>set a variable <strong>value</strong> to <code>initial</code>, <code>inherit</code>, <code>unset</code>, or <code>revert</code></li>
-			</ul>
-		</div>
+	<article class="takeaway slide">
+		<h1>CSS Variables are <br>inherited properties</h1>
+	</article>
+
+	<article class="slide" data-import="inheritance"></article>
+
+	<article class="takeaway slide">
+		<h1>CSS Variables are <br>inherited properties<div class="note">but you can change that</div></h1>
+	</article>
+
+	<article class="horizontal demo slide" data-edit="css">
+		<style data-slide>
+			article {
+				background: url("img/sad.jpg") center / cover;
+			}
+		</style>
+	</article>
+
+	<article class="takeaway slide poop" id="url-poop">
+		<h1>CSS variables <span class="plus">+</span> url() <span class="equals">=</span><span class="poop">💩</span></h1>
 	</article>
 
 	<article class="background slide" id="wtf" data-steps="1">
 		<div class="caption">
 			<h1>WTFs</h1>
 			<ul class="delayed-children">
-				<li><code>--foo: ;</code> is valid <br><code>--foo:;</code> is invalid</li>
+				<li><code>--foo:;</code> is invalid</li>
+				<li><code>--foo: ;</code> is valid</li>
 				<li><code>--foo</code> ≠ <code>--FOO</code></li>
 			</ul>
 		</div>
 	</article>
 
-	<article class="slide">
-		<div style="display: flex; flex-flow: column" class="delayed-children">
-			<div class="block" style="background: red">No CSS variables support</div>
-			<div class="block" style="background: orange">No --accent-color set</div>
-			<div class="block" style="background: yellowgreen">--accent-color: yellowgreen</div>
-			<div class="block" style="background: transparent; border: 1px dashed gray">--accent-color: 5</div>
+	<article class="slide" id="default-values">
+		<div class="delayed-children">
+			<div style="background: red">No CSS variables support</div>
+			<div style="background: orange">No --accent-color set</div>
+			<div style="background: yellowgreen">--accent-color: yellowgreen</div>
+			<div style="background: transparent; border: 1px dashed gray">--accent-color: 5</div>
 		</div>
 
-		<pre><code>
+		<pre style="margin-top: 2em;"><code>
 			background: red;
 			background: var(--accent-color, orange);
 		</code></pre>
@@ -184,14 +188,14 @@
 		</code></pre>
 	</article>
 
-	<article class="demo slide" data-edit="css" id="atsupports" style="--font-size-multiplier: 1.2">
+	<article class="demo slide" data-edit="css" id="atsupports">
 		<style data-slide>
-			#atsupports.slide {
+			article {
 				background: red;
 			}
 
 			@supports (--css: variables) {
-				#atsupports.slide {
+				article {
 					background: green;
 				}
 			}
@@ -215,18 +219,18 @@
 			</thead>
 			<tbody>
 				<tr>
-					<th>@supports</th>
-					<td>28</td>
-					<td>22</td>
-					<td>13</td>
-					<td>9</td>
-				</tr>
-				<tr>
 					<th>CSS Variables</th>
 					<td>49</td>
 					<td>31</td>
 					<td></td>
 					<td>9.1</td>
+				</tr>
+				<tr>
+					<th>@supports</th>
+					<td>28</td>
+					<td>22</td>
+					<td>13</td>
+					<td>9</td>
 				</tr>
 			</tbody>
 		</table>
@@ -235,8 +239,8 @@
 	<article class="demo slide">
 		<style data-slide>
 			.block {
-				width: 10em;
-				height: 10em;
+				width: 8em;
+				height: 8em;
 			}
 		</style>
 		<h1 class="block" data-edit="css html">Variable values are token lists</h1>
@@ -250,7 +254,7 @@
 			</tr>
 			<tr>
 				<td>Unit → number:</td>
-				<td><span class="poop"></span><span class="poop"></span><span class="poop"></span></td>
+				<td style="font-size: 100px"><span class="poop"></span><span class="poop"></span><span class="poop"></span></td>
 			</tr>
 		</table>
 	</article>
@@ -259,22 +263,22 @@
 		<h1>Use variables for pure data, <br>not CSS values</h1>
 	</article>
 
-	<article class="demo slide" id="animation" data-edit="css" style="--font-size-multiplier: .8; color: white;">
+	<article class="horizontal demo slide" id="animation" data-edit="css" style="--division: 70">
 		<p class="hint">Try to animate --background | show that var() is ok-ish</p>
 		<style data-slide>
 			@keyframes bg {
-				from { background: yellow; }
-				to { background: #0ca; }
+				from { background-color: yellow; }
+				to { background-color: #0ca; }
 			}
 
 			#animation.slide {
 				animation: 1s bg infinite alternate;
 			}
 		</style>
-		<h1 style="font-size: 150%">CSS Variables in @keyframes?</h1>
+		<h1>CSS Variables in @keyframes?</h1>
 	</article>
 
-	<article class="slide poop" id="animation-poop">
+	<article class="takeaway slide poop" id="animation-poop">
 		<h1>CSS variables <span class="plus">+</span> animations <span class="equals">=</span><span class="poop">💩</span></h1>
 	</article>
 
@@ -285,9 +289,20 @@
 		</blockquote>
 	</article>
 
+	<article class="future slide">
+		<h1>🔮 Near Future 🔮</h1>
+		<pre><code class="language-javascript">
+			CSS.registerProperty({
+				name: "--background",
+				syntax: "&lt;color>",
+				initialValue: "black"
+			});
+		</code></pre>
+	</article>
+
 	<article class="slide" data-import="animation"></article>
 
-	<article class="demo slide" id="transition" data-edit="css" style="--font-size-multiplier: .8; color: white">
+	<article class="horizontal demo slide" id="transition" data-edit="css" style="--division: 70">
 		<style data-slide>
 			#transition.slide {
 				background: yellow;
@@ -304,24 +319,11 @@
 
 <section>
 	<header class="slide">
-		<h1>Basic use cases</h1>
+		<h1>Use cases</h1>
 	</header>
 
-	<!-- <article class="horizontal demo slide" data-edit="css" id="checkerboard">
-		<style data-slide>
-		#checkerboard {
-			background-color: #eee;
-			background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black),
-			                  linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black);
-			background-size:60px 60px;
-			background-position:0 0, 30px 30px
-		}
-
-		</style>
-	</article> -->
-
-	<article class="demo slide">
-		<p class="hint">Theming by class, by style, box-shadow transition</p>
+	<article class="demo slide" id="button">
+		<p class="hint">Theming by class, by style, box-shadow transition, default default values</p>
 		<div data-edit="css contents">
 			<button>Click me</button>
 			<button class="pink">Click me</button>
@@ -331,6 +333,7 @@
 			button {
 				border: .1em solid black;
 				background: transparent;
+				color: black;
 			}
 
 			button:hover {
@@ -407,8 +410,8 @@
 		<h1>Cool use cases</h1>
 	</header>
 
-	<article class="demo slide" id="autoprefixing">
-		<style data-slide>
+	<article class="demo slide" id="autoprefixing" style="--division: 70;">
+		<style data-slide data-scope=".blocks">
 			* {
 				--clip-path: initial;
 				-webkit-clip-path: var(--clip-path);
@@ -416,21 +419,47 @@
 			}
 		</style>
 		<div data-edit="css contents" class="blocks">
-			<div class="block block1">
-				<div class="block"></div>
+			<div class="block1">
+				<div></div>
 			</div>
-			<div class="block block2">
-				<div class="block"></div>
+			<div class="block2">
+				<div></div>
 			</div>
-			<div class="block block3">
-				<div class="block"></div>
+			<div class="block3">
+				<div></div>
 			</div>
 		</div>
 	</article>
 
-	<article class="demo slide" id="box-shadow" style="--font-size-multiplier: .6">
-		<p class="hint">No inherit from box-shadow, invalid at computed value time</p>
+	<article class="takeaway slide">
+		<h1>CSS Variables enable you to <br>set multiple properties with one</h1>
+	</article>
+
+	<article class="horizontal demo slide" id="purple-shadow" style="--division: 70;">
 		<style data-slide>
+			* {
+				--purple-shadow: initial;
+				box-shadow: var(--purple-shadow) rebeccapurple;
+			}
+
+			.block {
+				--purple-shadow: .1em .1em .5em;
+			}
+		</style>
+
+		<div class="block" data-edit="css html">
+			<div>Designers, please don't hate me! This is just an example! 😳</div>
+		</div>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS Variables enable you to create property shortcuts with pre-filled values
+		<div class="delayed note">(like function currying, in programmerese)</div></h1>
+	</article>
+
+	<article class="demo slide" id="box-shadow" style="--font-size-multiplier: .8; --division: 70;">
+		<p class="hint">No inherit from box-shadow, invalid at computed value time</p>
+		<style data-slide data-scope=".blocks">
 			* {
 				--box-shadow-x: initial;
 				--box-shadow-y: initial;
@@ -441,32 +470,36 @@
 
 				box-shadow: var(--box-shadow-x, 0)
 				            var(--box-shadow-y, 0)
-							var(--box-shadow-blur)
-							var(--box-shadow-spread, 0)
-							var(--box-shadow-color, currentColor)
-							var(--box-shadow-inset, );
+				            var(--box-shadow-blur)
+				            var(--box-shadow-spread, 0)
+				            var(--box-shadow-color, currentColor)
+				            var(--box-shadow-inset, );
 			}
 
 			.block1 {
-				--box-shadow-blur: 5px;
+
 			}
 		</style>
 		<div data-edit="css contents" class="blocks">
-			<div class="block block1">
-				<div class="block"></div>
+			<div class="block1">
+				<div></div>
 			</div>
-			<div class="block block2">
-				<div class="block"></div>
+			<div class="block2">
+				<div></div>
 			</div>
-			<div class="block block3">
-				<div class="block"></div>
+			<div class="block3">
+				<div></div>
 			</div>
 		</div>
 	</article>
 
+	<article class="takeaway slide">
+		<h1>CSS Variables enable you to <br>create custom longhands</h1>
+	</article>
+
 	<article class="demo slide" id="prepend">
 		<p class="hint">inline style too</p>
-		<style data-slide>
+		<style data-slide data-scope=".blocks">
 			* {
 				--prepend: initial;
 			}
@@ -476,20 +509,45 @@
 			}
 		</style>
 		<div data-edit="css contents" class="blocks">
-			<div class="block block1">
-				<div class="block"></div>
+			<div class="block1">
+				<div></div>
 			</div>
-			<div class="block block2">
-				<div class="block"></div>
+			<div class="block2">
+				<div></div>
 			</div>
-			<div class="block block3">
-				<div class="block"></div>
+			<div class="block3">
+				<div></div>
 			</div>
 		</div>
 	</article>
 
 	<article class="takeaway slide">
-		<h1>CSS Variables let you define your own properties</h1>
+		<h1>CSS Variables enable you to <br>define your own properties</h1>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>CSS Variables & SVG</h1>
+	</header>
+
+	<article class="horizontal demo slide" id="svg-eyes">
+		<style data-slide>
+			.iris {
+				cx: 50;
+			}
+		</style>
+		<div data-edit="contents css">
+			<svg viewBox="0 0 250 100">
+				<clipPath id="white-clip">
+					<path id="white-path" d="M1,50 a65,80 0 0,1 100,0 a80,80 0 0,1 -100,0 Z" />
+				</clipPath>
+				<use id="eye-white" href="#white-path" />
+				<use href="#eye-white" x="148" />
+				<circle id="iris" class="iris" cx="50" cy="45" r="18" clip-path="url(#white-clip)" />
+				<use class="iris" href="#iris" x="148" />
+			</svg>
+		</div>
 	</article>
 </section>
 
@@ -498,24 +556,31 @@
 		<h1>CSS Variables & JavaScript</h1>
 	</header>
 
-	<article class="slide">
-		<pre><code class="language-javascript">
-			// Get variable
+	<article class="slide language-javascript" style="align-items: flex-start; padding: 3em">
+		<pre><code>
+			// Get variable from inline style
 			element.style.getPropertyValue("--foo");
+		</code></pre>
+		<pre class="delayed"><code>
+			// Get variable from wherever
 			getComputedStyle(element).getPropertyValue("--foo");
-
-			// Set variable
+		</code></pre>
+		<pre class="delayed"><code>
+			// Set variable on inline style
 			element.style.setProperty("--foo", 38 + 4);
 		</code></pre>
 	</article>
 
 	<article class="slide">
 		<pre><code class="language-javascript">
-			var html = document.documentElement;
+			var root = document.documentElement;
 
 			document.addEventListener("mousemove", evt => {
-				html.style.setProperty("--mouse-x", evt.clientX + "px");
-				html.style.setProperty("--mouse-y", evt.clientY + "px");
+				let x = evt.clientX / innerWidth;
+				let y = evt.clientY / innerHeight;
+
+				root.style.setProperty("--mouse-x", x);
+				root.style.setProperty("--mouse-y", y);
 			});
 		</code></pre>
 	</article>
@@ -524,30 +589,34 @@
 		<style data-slide>
 			#mouse.slide {
 				background-image: radial-gradient(
-					at var(--mouse-x, 50%) var(--mouse-y, 50%),
+					at 50% 50%,
 					transparent, black);
 			}
 		</style>
 	</article>
 
+	<article class="slide" data-import="svg-eyes"></article>
+
 	<article class="language-javascript slide">
-		<pre><code>
+		<div><pre><code>
 			for (input of document.querySelectorAll("input")) {
 				input.style.setProperty("--value", input.value);
 			}
 		</code></pre>
 		<pre class="delayed"><code>
 			document.addEventListener("input", evt => {
-				evt.target.style.setProperty("--value", input.value);
+				var input = evt.target;
+				input.style.setProperty("--value", input.value);
 			});
-		</code></pre>
+		</code></pre></div>
 	</article>
 
 	<article class="horizontal demo slide" id="slider" style="--font-size-multiplier: .9">
 		<style data-slide>
 			input {
 				appearance: none;
-				background: linear-gradient(to right, #f06, transparent);
+				background: linear-gradient(to right,
+					#f06 50%, transparent 0);
 			}
 		</style>
 		<style data-slide>
@@ -560,8 +629,8 @@
 		<input type="range" data-edit="css">
 	</article>
 
-	<article class="horizontal demo typing slide" id="typing" data-edit="css" style="--font-size-multiplier: .8">
-		<p class="typing">CSS variables are awesome</p>
+	<article class="horizontal demo typing slide" id="typing" data-edit="css" style="--division: 70">
+		<p class="typing" contentEditable>CSS variables are awesome</p>
 		<style data-slide>
 			@keyframes typing { from { width: 0; } }
 			@keyframes caret { 50% { border-color: transparent; } }
@@ -577,14 +646,16 @@
 
 	<article class="language-javascript slide">
 		<pre><code>
-			for (let element of $$(".typing")) {
+			for (let element of document.querySelectorAll(".typing")) {
 				let length = element.textContent.length;
 				element.style.setProperty("--length", length);
 			}
 		</code></pre>
 	</article>
 
-	<article class="horizontal demo typing slide" id="typing2" data-edit="css" style="--font-size-multiplier: .8">
+	<article class="slide" data-import="typing"></article>
+
+	<article class="horizontal demo typing slide" id="typing2" data-edit="css">
 		<p class="typing" contentEditable>CSS variables are awesome</p>
 		<style data-slide>
 			@keyframes typing { from { width: 0; } }
@@ -599,6 +670,37 @@
 			}
 		</style>
 	</article>
+
+	<article class="slide">
+		<pre><code class="language-javascript">
+			for (let el of document.querySelectorAll(".scrolling")) {
+				el.addEventListener("scroll", evt => {
+					let maxScroll = el.scrollHeight - el.offsetHeight;
+					let scroll = el.scrollTop / maxScroll;
+					el.style.setProperty("--scroll", scroll);
+				});
+			}
+		</code></pre>
+	</article>
+
+	<article class="horizontal demo slide">
+		<style data-slide>
+			.scrolling {
+				background-image: linear-gradient(to right,
+					white 20%, transparent 0)
+			}
+		</style>
+		<div class="scrolling" data-edit="css html">
+			<p>The values of custom properties, and the values of var() functions substituted into custom properties, are case-sensitive, and must be preserved in their original author-given casing. (Many CSS values are ASCII case-insensitive, which user agents can take advantage of by "canonicalizing" them into a single casing, but that isn’t allowed for custom properties.)
+			<p>The initial value of a custom property is an empty value; that is, nothing at all. This initial value has a special interaction with the var() notation, which is explained in the section defining var().
+			<p>Custom properties are ordinary properties, so they can be declared on any element, are resolved with the normal inheritance and cascade rules, can be made conditional with @media and other conditional rules, can be used in HTML’s style attribute, can be read or set using the CSSOM, etc.
+			<p>Notably, they can even be transitioned or animated, but since the UA has no way to interpret their contents, they always use the "flips at 50%" behavior that is used for any other pair of values that can’t be intelligently interpolated. However, any custom property used in a @keyframes rule becomes animation-tainted, which affects how it is treated when referred to via the var() function in an animation property.</p>
+		</div>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS Variables are a revolution for <br>separation of style and behavior</h1>
+	</article>
 </section>
 
 <article class="slide" id="specs">
@@ -606,17 +708,38 @@
 	<a href="https://drafts.csswg.org/css-variables" class="w3c ed" target="_blank">drafts.csswg.org/css-variables</a>
 </article>
 
+<section>
+	<header class="slide">
+		<h1>🔮 Future 🔮</h1>
+	</header>
+
+	<article class="demo slide" data-edit="css">
+		<style data-slide>
+		:root {
+			--bg: {
+				background: yellowgreen;
+			}
+		}
+
+		.block {
+			background: red;
+			@apply --bg;
+		}
+		</style>
+		<div class="block">Native mixins are coming!</div>
+	</article>
+</section>
+
 <footer class="dark slide">
 	<img src="img/mark.svg" />
-	<h1>Obrigada!</h1>
-	<!-- <p style="margin-top: 0">Give me feedback! <a href="https://docs.google.com/forms/d/1k5av2WJvOfiY2AoDMe0WTZJFYJtyFDPXhQJd8SBudJQ/viewform">shoutkey.com/grow</a></p> -->
+	<h1>Thank you!</h1>
 	<ul>
 		<li style="--icon: '📨'"><a href="mailto:lea@w3.org">lea@verou.me</a></li>
 		<li style="--icon: '🌍'"><a href="http://lea.verou.me">lea.verou.me</a></li>
 		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
 	</ul>
 
-	<p>Slides: <a href="https://leaverou.github.io/html-secrets">leaverou.github.io/html-secrets</a></p>
+	<p>Slides: <a href="https://leaverou.github.io/css-variables">leaverou.github.io/css-variables</a></p>
 	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
 </footer>
 

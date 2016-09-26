@@ -5,44 +5,8 @@
  * @author Lea Verou
  */
 
-code[class*="language-"],
-pre[class*="language-"] {
-	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	text-align: left;
-	white-space: pre;
-	word-spacing: normal;
-	word-break: normal;
-	word-wrap: normal;
-	line-height: 1.5;
-
-	-moz-tab-size: 4;
-	-o-tab-size: 4;
-	tab-size: 4;
-
-	-webkit-hyphens: none;
-	-moz-hyphens: none;
-	-ms-hyphens: none;
-	hyphens: none;
-}
-
-/* Code blocks */
-pre[class*="language-"] {
-	padding: .4em .8em;
-	margin: .5em 0;
-	overflow: auto;
-}
-
-code[class*="language-"] {
-	color: white;
-}
-
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-	white-space: normal;
-}
-
 .token.comment {
-	font: 125%/.8 var(--font-handwritten);
+	font: 150%/.8 var(--font-handwritten);
 }
 
 .token.comment,
@@ -74,13 +38,13 @@ code[class*="language-"] {
 .token.string,
 .token.char,
 .token.builtin {
-	color: hsl(335, 80%, 60%); /* deep pink */
+	color: hsl(335, 80%, 70%); /* deep pink */
 }
 
 .token.operator,
 .token.entity,
 .token.url,
-.language-css .token.string,
+.language-css > .token.string,
 .token.inserted {
 	color: hsl(182, 39%, 69%);
 }

@@ -303,21 +303,24 @@ kbd {
 			font-size: 140%;
 		}
 
-.block {
+.block,
+.blocks div {
 	display: flex;
 	padding: 1em;
-	margin: 1em;
-	box-sizing: border-box;
+	margin-bottom: 1em;
 	align-items: center;
 	justify-content: center;
 	font-weight: bold;
 	line-height: 1.1;
 	letter-spacing: -.05em;
-	background: #f06;
+	background: white;
 }
 
-	.block .block {
-		background: gold;
+	.block .block,
+	.blocks div .block,
+	.blocks div div {
+		background: #f06;
+		margin: 1em;
 	}
 
 .browser-support {
@@ -427,7 +430,8 @@ span.poop {
 	}
 
 #daisy-chain {
-	background: url(img/daisy-chain.jpg) no-repeat top / contain black;
+	padding: 2em;
+	background: url(img/daisy-chain.jpg) no-repeat top / auto calc(100vh - 5em) black;
 	justify-content: flex-end;
 }
 
@@ -499,8 +503,17 @@ span.poop {
 	}
 
 	#wtf .caption {
-		min-width: 15em;
+		min-width: 19em;
 	}
+
+		#wtf .caption ul {
+			font-size: 150%;
+			list-style: none;
+		}
+
+		#wtf .caption .punctuation {
+			color: white;
+		}
 
 	.background.slide[data-step] .caption {
 		opacity: 0;
@@ -532,8 +545,7 @@ span.poop {
 		font-weight: 100;
 	}
 
-		.takeaway.slide h1::before {
-			content: "Takeaway";
+		.takeaway.slide .label {
 			display: block;
 			width: fit-content;
 			padding: .2em .5em;
@@ -541,7 +553,10 @@ span.poop {
 			background: orange;
 			font-weight: bold;
 			text-transform: uppercase;
-			font-size: 70%;
+			font-size: 60%;
+		}
+		.takeaway.slide .label span {
+			font-weight: 300;
 		}
 
 #responsive {
@@ -618,3 +633,67 @@ span.poop {
 				margin-bottom: .2em;
 				border-bottom-color: white;
 			}
+
+#default-values {}
+
+	#default-values .delayed-children {
+		display: flex;
+		flex-flow: column;
+	}
+
+		#default-values .delayed-children > div {
+			font-weight: bold;
+			padding: .6em 1em;
+			margin: .2em;
+			font-weight: bold;
+			letter-spacing: -.05em;
+			text-align: center;
+		}
+
+	#default-value pre {
+		margin-bottom: 0;
+	}
+
+#purple-shadow .block {
+	width: 9.3em;
+	font-size: 120%;
+	color: rebeccapurple;
+}
+
+.scrolling {
+	overflow: auto;
+	max-height: 50vh;
+	border: .2em solid white;
+	background: hsla(0,0%,100%,.2) no-repeat;
+	text-align: left;
+	padding: .5em 1em;
+	font: 100% Baskerville, Palatino, Georgia, serif;
+}
+
+#svg-eyes {
+	background: hsl(20, 40%, 70%);
+	--font-size-multiplier: .8;
+}
+
+	#svg-eyes svg {
+		width: 90vw;
+	}
+
+	#svg-eyes #eye-white {
+		fill: white;
+	}
+
+	#svg-eyes #iris {
+		stroke: hsl(200, 50%, 50%);
+		stroke-width: 14;
+		fill: black;
+	}
+
+	#svg-eyes .second-eye {
+		x: 150px;
+	}
+
+.note {
+	font-family: var(--font-handwritten);
+	color: orange;
+}

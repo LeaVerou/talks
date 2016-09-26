@@ -27,11 +27,16 @@ strong, b {
 	font-weight: bold; /* FF is weird */
 }
 
-code, textarea, pre {
+code, textarea, pre, div.editor {
 	margin: 0;
 	font: 100%/1.4 var(--font-mono);
 	font-family: var(--font-mono);
-	tab-size: 4;
+	tab-size: 3;
+	text-align: left;
+}
+
+pre {
+	overflow: auto;
 }
 
 	pre.delayed > code.delayed {
@@ -78,11 +83,11 @@ button {
 }
 
 .demo.slide.horizontal {
-	justify-content: flex-start;
+	padding-bottom: calc(var(--division, 50) * 1vh - 10vh);
 }
 
 .demo.slide:not(.horizontal) {
-	padding-left: 63vw;
+	padding-left: calc(var(--division, 60) * 1vw + 3vw);
 	align-items: center;
 	justify-content: center;
 }
@@ -106,7 +111,7 @@ div.editor {
 
 .demo.slide:not(.horizontal) div.editor {
 	top: 0;
-	width: 60vw;
+	width: calc(var(--division, 60) * 1vw);
 }
 
 .demo.slide.horizontal div.editor {
@@ -134,7 +139,7 @@ div.editor {
 	}
 
 	.demo.slide.horizontal div.editor > textarea.editor {
-		max-height: 50vh;
+		max-height: calc(var(--division, 50) * 1vh);
 		box-shadow: 0 .1em .2em rgba(0,0,0,.3) inset;
 	}
 
@@ -158,9 +163,8 @@ div.editor {
 		background: hsl(30, 100%, 50%);
 		color: white;
 		cursor: pointer;
-		font-weight: bold;
-		font-size: 1.5rem;
 		text-transform: uppercase;
+		font: bold 1.5rem/1.5 var(--font-heading);
 	}
 
 		.editor label:hover {
@@ -174,6 +178,7 @@ div.editor {
 	justify-content: center;
 	padding: 2.5rem;
 	background-color: black;
+	background: radial-gradient(transparent, rgba(0,0,0,.7)) hsl(200, 15%, 20%);
 	color: white;
 }
 
@@ -190,7 +195,7 @@ div.editor {
 
 	.light.slide,
 	.demo.slide {
-		background: hsl(200, 40%, 90%);
+		background: hsl(200, 40%, 80%);
 		color: black;
 	}
 
@@ -269,7 +274,7 @@ code.de-emphasize {
 	font-size: .8rem;
 	font-weight: bold;
 	line-height: 1;
-	color: rgba(0,0,0,.15);
+	color: rgba(0,0,0,.2);
 	mix-blend-mode: multiply;
 }
 
