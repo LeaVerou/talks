@@ -84,7 +84,7 @@
 
 <section>
 	<header class="slide">
-		<h1>Basics</h1>
+		<h1>CSS Variables</h1>
 	</header>
 
 	<article class="demo slide horizontal">
@@ -112,7 +112,7 @@
 	</article>
 
 	<article class="demo slide" id="inheritance">
-		<p class="hint">inheritance | cancel inheritance</p>
+		<p class="hint">inheritance, cancel inheritance, inherit keyword</p>
 		<style data-slide data-scope=".blocks">
 			div {
 				outline: var(--outline);
@@ -122,7 +122,7 @@
 				--outline: .2em solid;
 			}
 		</style>
-		<div data-edit="css contents" class="blocks">
+		<div data-edit="contents css" class="blocks">
 			<div class="block1">
 				<div></div>
 			</div>
@@ -136,13 +136,7 @@
 	</article>
 
 	<article class="takeaway slide">
-		<h1>CSS Variables are <br>inherited properties</h1>
-	</article>
-
-	<article class="slide" data-import="inheritance"></article>
-
-	<article class="takeaway slide">
-		<h1>CSS Variables are <br>inherited properties<div class="note">but you can change that</div></h1>
+		<h1>CSS Variables are <br>inherited properties<div class="delayed note">but you can change that</div></h1>
 	</article>
 
 	<article class="horizontal demo slide" data-edit="css">
@@ -236,7 +230,7 @@
 		</table>
 	</article>
 
-	<article class="demo slide">
+	<article class="horizontal demo slide">
 		<style data-slide>
 			.block {
 				width: 8em;
@@ -278,15 +272,15 @@
 		<h1>CSS Variables in @keyframes?</h1>
 	</article>
 
-	<article class="takeaway slide poop" id="animation-poop">
-		<h1>CSS variables <span class="plus">+</span> animations <span class="equals">=</span><span class="poop">💩</span></h1>
-	</article>
-
 	<article class="slide">
 		<blockquote style="width: 21em">
 			<p>[CSS variables] can even be <strong>tran&shy;sitioned or ani&shy;mated</strong>, but since the UA has no way to interpret their con&shy;tents, <strong>they always use the "flips at 50%"</strong> behav&shy;ior that is used for any oth&shy;er pair of val&shy;ues that can’t be intelligently interpolated.</p>
 			<p class="cite">— <a href="https://w3.org/TR/css-variables-1/">CSS Custom Properties for Cascading Variables Module Level 1</a></p>
 		</blockquote>
+	</article>
+
+	<article class="takeaway slide poop" id="animation-poop">
+		<h1>CSS variables <span class="plus">+</span> animations <span class="equals">=</span><span class="poop">💩</span></h1>
 	</article>
 
 	<article class="future slide">
@@ -432,7 +426,7 @@
 	</article>
 
 	<article class="takeaway slide">
-		<h1>CSS Variables enable you to <br>set multiple properties with one</h1>
+		<h1>CSS Variables enable you to <br>set multiple properties at once</h1>
 	</article>
 
 	<article class="horizontal demo slide" id="purple-shadow" style="--division: 70;">
@@ -534,7 +528,7 @@
 	<article class="horizontal demo slide" id="svg-eyes">
 		<style data-slide>
 			.iris {
-				cx: 50;
+				cx: 50px;
 			}
 		</style>
 		<div data-edit="contents css">

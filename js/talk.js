@@ -32,7 +32,7 @@ function scopeRule(rule, slide, scope) {
 			|| selector == ":root"
 		);
 
-		if (selector == "article") {
+		if (selector == "article" || selector == ".slide") {
 			rule.selectorText = `#${slide.id}`;
 		}
 		else if (shouldScope && selector.indexOf(scope) !== 0) {
