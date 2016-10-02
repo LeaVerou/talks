@@ -114,7 +114,7 @@
 	<article class="demo slide" id="inheritance">
 		<p class="hint">inheritance, cancel inheritance, inherit keyword</p>
 		<style data-slide data-scope=".blocks">
-			div {
+			* {
 				outline: var(--outline);
 			}
 
@@ -167,7 +167,7 @@
 			<div style="background: red">No CSS variables support</div>
 			<div style="background: orange">No --accent-color set</div>
 			<div style="background: yellowgreen">--accent-color: yellowgreen</div>
-			<div style="background: transparent; border: 1px dashed gray">--accent-color: 5</div>
+			<div style="background: transparent; border: 1px dashed gray">--accent-color: 42deg</div>
 		</div>
 
 		<pre style="margin-top: 2em;"><code>
@@ -176,9 +176,67 @@
 		</code></pre>
 	</article>
 
+	<!-- <article class="talking housewife slide" data-source="flickr.com/photos/x-ray_delta_one/4264423055/">
+		<h1>Invalid at computed-value time?!</h1>
+	</article> -->
+
+	<article class="takeaway slide">
+		<h1><em>Invalid at computed-value time</em> = initial</h1>
+	</article>
+
 	<article class="slide dont-resize" id="daisy-chain" data-source="Image source: https://www.flickr.com/photos/26235325@N05/5641177399">
 		<pre><code>
 			var(--color1<span class="delayed">, var(--color2<span class="delayed">, var(--color3<span class="delayed" style="--length: 5">, red</span>)</span>)</span>)
+		</code></pre>
+	</article>
+
+	<article class="demo slide" id="cycles">
+		<style data-slide data-scope=".blocks">
+			div {
+				--size: 8em;
+				height: var(--size);
+			}
+
+			.declarative {
+				filter: invert();
+			}
+		</style>
+
+		<div class="blocks" data-edit="css contents">
+			<div>CSS is awesome</div>
+			<div class="declarative">CSS is declarative</div>
+		</div>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>Cycles make variables invalid at computed-value time</h1>
+	</article>
+
+	<article class="slide" data-steps="2">
+		<style data-slide>
+			article.slide[data-step] {
+				background: orange;
+			}
+
+			article.slide[data-step] pre {
+				filter: invert();
+				mix-blend-mode: multiply;
+			}
+
+			article.slide[data-step="2"] {
+				background: none;
+			}
+
+			article.slide[data-step="2"] pre code .delete {
+				opacity: 0;
+			}
+		</style>
+
+		<pre><code>
+			--accent-color: 42deg;
+			<span class="delete">--accent-color: var(--accent-color);</span>
+			background: red;
+			background: var(--accent-color, orange);
 		</code></pre>
 	</article>
 
@@ -228,6 +286,10 @@
 				</tr>
 			</tbody>
 		</table>
+	</article>
+
+	<article class="image slide" id="edgestatus">
+		<h1><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/status/csscustompropertiesakacssvariables">status.modern.ie</a></h1>
 	</article>
 
 	<article class="horizontal demo slide">
@@ -543,6 +605,10 @@
 			</svg>
 		</div>
 	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS variables <span class="plus">+</span> SVG <span class="equals">=</span><span class="heart">♥️</span></h1>
+	</article>
 </section>
 
 <section>
@@ -605,22 +671,23 @@
 		</code></pre></div>
 	</article>
 
-	<article class="horizontal demo slide" id="slider" style="--font-size-multiplier: .9">
+	<article class="horizontal demo slide" id="slider">
 		<style data-slide>
 			input {
 				appearance: none;
-				background: linear-gradient(to right,
-					#f06 50%, transparent 0);
+				background: linear-gradient(to right, #f06 50%, white 0);
 			}
 		</style>
 		<style data-slide>
 			input {
+				width: 300px;
 				-webkit-appearance: none;
-				transform: scale(4);
+				transform: scale(3);
 				transform-origin: top;
+				border-radius: .1em;
 			}
 		</style>
-		<input type="range" data-edit="css">
+		<input type="range" data-edit="html css">
 	</article>
 
 	<article class="horizontal demo typing slide" id="typing" data-edit="css" style="--division: 70">
@@ -659,7 +726,7 @@
 				width: calc(var(--length) * 1ch);
 				border-right: 2px solid;
 				overflow: hidden;
-				animation: typing calc(var(--length) * .4s) steps(var(--length)),
+				animation: typing calc(var(--length) * .3s) steps(var(--length)),
 				           caret .5s step-end infinite alternate;
 			}
 		</style>
@@ -685,6 +752,8 @@
 			}
 		</style>
 		<div class="scrolling" data-edit="css html">
+			<p>The allowed syntax for custom properties is extremely permissive. The &lt;declaration-value> production matches any sequence of one or more tokens, so long as the sequence does not contain &lt;bad-string-token>, &lt;bad-url-token>, unmatched &lt;)-token>, &lt;]-token>, or &lt;}-token>, or top-level &lt;semicolon-token> tokens or &lt;delim-token> tokens with a value of "!".</p>
+			<p>In addition, if the value of a custom property contains a var() reference, the var() reference must be valid according to the specified var() grammar. If not, the custom property is invalid and must be ignored.</p>
 			<p>The values of custom properties, and the values of var() functions substituted into custom properties, are case-sensitive, and must be preserved in their original author-given casing. (Many CSS values are ASCII case-insensitive, which user agents can take advantage of by "canonicalizing" them into a single casing, but that isn’t allowed for custom properties.)
 			<p>The initial value of a custom property is an empty value; that is, nothing at all. This initial value has a special interaction with the var() notation, which is explained in the section defining var().
 			<p>Custom properties are ordinary properties, so they can be declared on any element, are resolved with the normal inheritance and cascade rules, can be made conditional with @media and other conditional rules, can be used in HTML’s style attribute, can be read or set using the CSSOM, etc.
@@ -703,7 +772,7 @@
 </article>
 
 <section>
-	<header class="slide">
+	<header class="future slide">
 		<h1>🔮 Future 🔮</h1>
 	</header>
 

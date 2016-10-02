@@ -384,6 +384,15 @@ kbd {
 			display: block;
 		}
 
+@keyframes pulse {
+	to { transform: scale(1.4); }
+}
+span.heart {
+	display: block;
+	font-size: 160px;
+	animation: pulse .2s infinite alternate;
+}
+
 span.poop,
 .browser-support td:empty::before {
 	animation: poop-dance .8s 2s infinite alternate ease-in-out;
@@ -697,3 +706,45 @@ span.poop {
 	font-family: var(--font-handwritten);
 	color: orange;
 }
+
+@keyframes fall {
+	from { transform: translateY(-160vh); }
+}
+
+@keyframes pos {
+	10% { left: 10vw }
+	20% { left: 80vw }
+	30% { left: 50vw }
+	40% { left: 30vw }
+	50% { left: 85vw }
+	60% { left: 20vw }
+	70% { left: 70vw }
+	80% { left: 0vw }
+	90% { left: 60vw }
+	to { left: 50vw }
+}
+
+.future.slide h1::before {
+	content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="250"><text style="font-size:90px" y="1em">🔮</text></svg>');
+	position: absolute;
+	bottom: -50vh;
+	animation: fall 3s infinite ease-in, pos 30s steps(1) infinite;
+	filter: drop-shadow(0 10px 10px rgba(0,0,0,.5));
+}
+
+#edgestatus {
+	justify-content: flex-start;
+	background-image: url(img/edgestatus.png);
+}
+
+	#edgestatus h1 {
+		position: absolute;
+		width: auto;
+		margin: 0;
+		padding: .5em 1em;
+		background: black;
+	}
+
+		#edgestatus h1 a:not(:hover) {
+			text-decoration: none;
+		}
