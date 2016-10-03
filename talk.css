@@ -165,37 +165,43 @@
 		            8px 8px 10px rgba(0,0,0,.6);
 	}
 
-#doing-stuff {}
-
-	#doing-stuff > div {
-		max-width: 50vw;
-	}
-
-.hi ul {
-	line-height: 1.7;
-	margin: 0;
+#projects {
+	padding: 0;
 }
 
-	.hi li {
-		display: inline;
+	#projects ul {
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-flow: row wrap;
+		align-items: center;
+		justify-content: center;
 	}
 
-		.hi li:before {
-			content: none;
+		#projects li {
+			list-style: none;
+			margin: 2vmin;
 		}
 
-		.hi li a {
-			display: inline-block;
-			padding: .2em .3em .25em;
-			border-radius: .2em;
-			line-height: 1;
-			text-decoration: none;
-			background: black;
-		}
+			#projects li a {
+				display: flex;
+				position: relative;
+				align-items: flex-end;
+				justify-content: center;
+				padding: .1em;
+				width: 23vw;
+				height: 23vh;
+				background: url(img/project-prism.png) top / cover no-repeat;
+				font-weight: bold;
+				letter-spacing: -.05em;
+				border: 1px solid white;
+				box-shadow: 0 -1.8em 0 rgba(0,0,0,.6) inset, 0 0 .5em rgba(0,0,0,.6);
+				text-shadow: 0 0 .3em black;
+			}
 
-		.hi li a:not(:hover) {
-			color: hsl(336, 100%, 95%);
-		}
+			#projects li a:not(:hover) {
+				text-decoration: none;
+			}
 
 #csswg {}
 

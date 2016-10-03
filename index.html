@@ -43,21 +43,19 @@
 		</div>
 	</section>
 
-	<section class="inverse slide dont-resize darker hi" id="doing-stuff">
-		<div class="delayed">
-			<p>I make stuff</p>
-			<ul>
-				<li><a href="http://prismjs.com">Prism</a></li>
-				<li><a href="http://leaverou.github.io/prefixfree">-prefix-free</a></li>
-				<li><a href="http://blissfuljs.com">Bliss</a></li>
-				<li><a href="http://css3test.com">css3test.com</a></li>
-				<li><a href="http://leaverou.github.io/awesomplete/">Awesomplete</a></li>
-				<li><a href="http://cubic-bezier.com/">cubic-bezier.com</a></li>
-				<li><a href="http://dabblet.com">dabblet.com</a></li>
-				<li><a href="http://leaverou.github.io/animatable/">Animatable</a></li>
-			</ul>
-			<small>More: <a href="http://github.com/leaverou">github.com/leaverou</a></small>
-		</div>
+	<section class="inverse slide dont-resize darker hi" id="projects">
+		<p>I make stuff</p>
+		<ul>
+			<li><a href="http://prismjs.com" style="background-image: url(img/project-prism.png)">PrismJS</a></li>
+			<li><a href="http://leaverou.github.io/prefixfree" style="background-image: url(img/project-prefixfree.png)">-prefix-free</a></li>
+			<li><a href="http://blissfuljs.com" style="background-image: url(img/project-bliss.png)">Bliss</a></li>
+			<li><a href="http://css3test.com" style="background-image: url(img/project-css3test.png)">css3test.com</a></li>
+			<li><a href="http://leaverou.github.io/awesomplete/" style="background-image: url(img/project-awesomplete.png)">Awesomplete</a></li>
+			<li><a href="http://cubic-bezier.com/" style="background-image: url(img/project-cubicbezier.png)">cubic-bezier.com</a></li>
+			<li><a href="http://dabblet.com" style="background-image: url(img/project-dabblet.png)">dabblet.com</a></li>
+			<li><a href="http://leaverou.github.io/animatable/" style="background-image: url(img/project-animatable.png)">Animatable</a></li>
+			<li><a href="http://leaverou.github.io/contrast-ratio/" style="background-image: url(img/project-contrastratio.png)">Contrast Ratio</a></li>
+		</ul>
 	</section>
 
 	<section class="inverse slide dont-resize darker hi" id="csswg">
@@ -151,7 +149,7 @@
 		<h1>CSS variables <span class="plus">+</span> url() <span class="equals">=</span><span class="poop">💩</span></h1>
 	</article>
 
-	<article class="background slide" id="wtf" data-steps="1">
+	<article class="background slide" id="wtf" data-steps="1" data-credits="flickr.com/photos/mugley/3421060154">
 		<div class="caption">
 			<h1>WTFs</h1>
 			<ul class="delayed-children">
@@ -295,8 +293,8 @@
 	<article class="horizontal demo slide">
 		<style data-slide>
 			.block {
-				width: 8em;
-				height: 8em;
+				width: 33vw;
+				height: 33vh;
 			}
 		</style>
 		<h1 class="block" data-edit="css html">Variable values are token lists</h1>
@@ -375,11 +373,11 @@
 
 <section>
 	<header class="slide">
-		<h1>Use cases</h1>
+		<h1>Common use cases</h1>
 	</header>
 
 	<article class="demo slide" id="button">
-		<p class="hint">Theming by class, by style, box-shadow transition, default default values</p>
+		<p class="hint">Theming by class, by style, box-shadow transition | default default values</p>
 		<div data-edit="css contents">
 			<button>Click me</button>
 			<button class="pink">Click me</button>
@@ -421,6 +419,8 @@
 	<article class="takeaway slide">
 		<h1>CSS Variables enable theming independent of CSS structure</h1>
 	</article>
+
+	<article class="slide" data-import="button"></article>
 
 	<article class="takeaway slide">
 		<h1>Default default values are possible</h1>
@@ -690,7 +690,7 @@
 		<input type="range" data-edit="html css">
 	</article>
 
-	<article class="horizontal demo typing slide" id="typing" data-edit="css" style="--division: 70">
+	<!-- <article class="horizontal demo typing slide" id="typing" data-edit="css" style="--division: 70">
 		<p class="typing" contentEditable>CSS variables are awesome</p>
 		<style data-slide>
 			@keyframes typing { from { width: 0; } }
@@ -730,7 +730,7 @@
 				           caret .5s step-end infinite alternate;
 			}
 		</style>
-	</article>
+	</article> -->
 
 	<article class="slide">
 		<pre><code class="language-javascript">
