@@ -1,3 +1,21 @@
+#adjust-resolution h1 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: calc(var(--vw) * 1px);
+	height: calc(var(--vh) * 1px);
+	flex: none;
+
+	margin: 0;
+	outline: 1px dashed hsla(0,0%,100%,.6);
+	outline-offset: -1px;
+}
+
+#intro video {
+	width: 100%;
+	background: url("http://localhost:8000/mavo-website/demos/contacts/img/rolodex.jpg");
+}
+
 #the-problem {
 	background: url(img/coding.png) center / cover black no-repeat;
 	transition: 1s background-image;
@@ -42,12 +60,26 @@
 		color: hsl(210, 100%, 50%);
 	}
 
+@keyframes scrollbg {
+	to { background-position: 50% 305%; }
+}
+
+#jslogos {
+	background: url(img/jslogos.png) center / 65% auto white;
+}
+
+	#jslogos:target {
+		animation: scrollbg 2s 2s infinite linear;
+	}
+
 #todomvc {
 	flex-flow: row;
+	padding: 3vw;
 }
 
 	#todomvc table {
 		width: 40vw;
+		margin: 0 3vw 0 0;
 	}
 
 	#todomvc thead th {
@@ -59,6 +91,7 @@
 
 	#todomvc img {
 		float: right;
+		max-width: 51vw;
 	}
 
 #mavo {
@@ -197,9 +230,14 @@
 	.gender > div {
 		display: inline-block;
 		padding: .35em;
+		min-width: 1em;
 		margin-left: .5em;
 		border-radius: .1em;
 		background: var(--color);
+		line-height: 1;
+		font-size: 80%;
+		font-weight: bold;
+		text-align: center;
 	}
 
 	.age {

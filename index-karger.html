@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title>Mavo: Creating Interactive Data-Driven Web Applications by Authoring HTML</title>
+<link href="../csss/slideshow.css" rel="stylesheet" />
+<link href="../csss/reusable.css" rel="stylesheet" />
+<link rel="stylesheet" href="mavo/mavo.css">
+<link href="prism.css" rel="stylesheet" />
+<link href="theme.css" rel="stylesheet" />
+<link href="talk.css" rel="stylesheet" />
+<!-- <script src="../prefixfree/prefixfree.min.js"></script> -->
+
+</head>
+<body class="language-markup">
+
+<header class="slide" data-video="videos/authors.mp4"></header>
+
+<section>
+  <article class="slide" id="motivation">
+    <ul>
+      <li>Exhibit showed non-programmers can create data presentations with just HTML
+      <li>Can we go farther and let them create data interactions?
+      <li>Focus on CRUD applications
+	<ul>
+	  <li>Collection of data objects
+	  <li>Create, Read, Update, Delete information
+	  <li>Stateless, aside from edits to data
+	  <li>Address book, portfolio, bibliography, photo album, conference website, calculator
+	</ul>
+      </ul>
+  </article>
+
+	<article class="slide" id="the-problem" data-steps="2" data-credits="https://www.flickr.com/photos/mjhagen/2973212926 https://www.flickr.com/photos/97481684@N08/13969413085">
+		<ul>
+			<li>npm</li>
+			<li>NodeJS</li>
+			<li>JSON</li>
+			<li>Schemas</li>
+			<li>MVC</li>
+			<li>Ajax</li>
+			<li>Events</li>
+			<li>Functions</li>
+			<li>OAuth</li>
+			<li>JavaScript</li>
+			<li class="special html">HTML</li>
+			<li class="special css">CSS</li>
+		</ul>
+	</article>
+
+	<article class="slide" id="todomvc">
+		<table>
+			<caption>todomvc.com</caption>
+			<thead>
+				<tr>
+					<th>Framework</th>
+					<th>SLOC</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Angular</td>
+					<td>294</td>
+				</tr>
+				<tr>
+					<td>Polymer</td>
+					<td>246</td>
+				</tr>
+				<tr>
+					<td>React</td>
+					<td>421</td>
+				</tr>
+				<tr>
+					<td>Backbone</td>
+					<td>297</td>
+				</tr>
+			</tbody>
+		</table>
+		<img src="img/todomvc.png" />
+	</article>
+
+	<article class="slide" id="mavo">
+		<img src="img/logo.svg" alt="">
+	</article>
+
+	<article class="video slide">
+		<video src="videos/todo.mp4"></video>
+	</article>
+
+
+	<article class="slide">
+		<pre><code>
+			&lt;body <mark style="visibility:hidden">data-store="local"</mark>&gt;
+				&lt;h1>My tasks&lt;/h1>
+				&lt;p><mark style="visibility:hidden">[count(done)]</mark> done of <mark  style="visibility:hidden">[count(task)]</mark> total&lt;/p>
+
+				&lt;ul>
+					&lt;li <mark  style="visibility:hidden">property="task" data-multiple</mark>>
+						&lt;input <mark  style="visibility:hidden">property="done"</mark> type="checkbox" />
+						&lt;span <mark  style="visibility:hidden">property="taskTitle"</mark>>Do stuff&lt;/span>
+					&lt;/li>
+				&lt;/ul>
+			&lt;/body>
+		</code></pre>
+	</article>
+
+
+	<article class="slide" id="todo-code" data-steps="1">
+		<pre><code>
+			&lt;body <mark>data-store="local"</mark>&gt;
+				&lt;h1>My tasks&lt;/h1>
+				&lt;p><mark>[count(done)]</mark> done of <mark>[count(task)]</mark> total&lt;/p>
+
+				&lt;ul>
+					&lt;li <mark>property="task" data-multiple</mark>>
+						&lt;input <mark>property="done"</mark> type="checkbox" />
+						&lt;span <mark>property="taskTitle"</mark>>Do stuff&lt;/span>
+					&lt;/li>
+				&lt;/ul>
+			&lt;/body>
+		</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>Mavo Syntax</h1>
+	</header>
+
+	<article class="slide">
+		<pre><code>
+			&lt;div <mark>data-store="local"</mark>>
+				&lt;!-- Mavo app -->
+			&lt;/div>
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<video src="videos/auth.mp4" style="height: 50vh; margin-bottom: 3vh" loop></video>
+		<pre><code>
+			&lt;div <mark>data-store="http://github.com/leaverou"</mark>>
+				&lt;!-- Mavo app -->
+			&lt;/div>
+		</code></pre>
+	</article>
+
+	<article class="visible-storage example slide">
+		<pre><code>
+			&lt;span>Name:&lt;/span>
+			&lt;span <mark>property="firstName"</mark>>Lea&lt;/span>
+			&lt;span <mark>property="last_name"</mark>>Verou&lt;/span>
+		</code></pre>
+	</article>
+
+	<article class="visible-storage example slide">
+		<pre><code>
+			&lt;meter property="rating" value="3" max="5">&lt;/meter>
+		</code></pre>
+	</article>
+
+	<article class="visible-storage example slide">
+		<pre><code>
+			&lt;time property="birthday" datetime="1986-06-13">
+				13 Jun 1986
+			&lt;/time>
+		</code></pre>
+	</article>
+
+	<article class="example slide">
+		<pre><code>
+			&lt;img property="avatar" src="img/adamcatlace.png" />
+		</code></pre>
+	</article>
+
+	<article class="visible-storage example slide" id="form-elements">
+		<pre><code>
+			&lt;input property="name" value="Lea Verou"/>
+			&lt;input property="strength" type="range" />
+			&lt;select property="country">
+				&lt;option value="us">United States</option>
+				&lt;option value="gb">United Kingdom</option>
+				&lt;option value="jp">Japan</option>
+			&lt;/select>
+		</code></pre>
+	</article>
+
+	<article class="vertical example slide" id="multiple-properties">
+		<pre><code>
+			Hobbies:
+			&lt;ul>
+				&lt;li property="hobby">Eating&lt;/li>
+				&lt;li property="hobby">Sleeping&lt;/li>
+				&lt;li property="hobby">Purring&lt;/li>
+			&lt;/ul>
+		</code></pre>
+	</article>
+
+	<article class="vertical example slide">
+		<pre><code>
+			Hobbies:
+			&lt;ul>
+				&lt;li property="hobby"
+				    data-multiple>
+					Eating
+				&lt;/li>
+			&lt;/ul>
+		</code></pre>
+	</article>
+
+	<article class="slide">
+	  <h1>Expressions</h1>
+	  <ul>
+	    <li>Spreadsheet-style expression syntax
+	    <li>But instead of grid cells, refer to properties by name
+	    <li>If referred property is multiple, aggregate functions like sum
+	  </ul>
+	</article>
+
+</section>
+
+
+<section>
+	<article class="looping slide" data-video="videos/color-picker.mp4"></article>
+	<article class="looping slide" data-video="videos/logo.mp4"></article>
+	<article class="looping slide" data-video="videos/mortgage.mp4"></article>
+
+</section>
+
+
+<section>
+	<header class="slide">
+		<h1>Evaluation</h1>
+	</header>
+
+
+	<article class="slide" id="subjects">
+	  <h1>20 Participants</h1>
+	  <ul>
+	    <li>recruited via web designer media/meetup groups
+	    <li>7 male, 12 female, 1 other
+	    <li>self described intermediate or better with HTML
+	    <li>13 beginner or worse programmers, 7 intermediate
+	    <li>Asked to bring HTML mockup of contact manager app
+	  </ul>
+	</article>
+
+	<article class="slide">
+	  <h1>Study Design</h1>
+	  <ul>
+	    <li>Tutorial (45 min)
+	    <li>Structured series of Tasks (~20 minutes)
+	      <ul>
+		<li>two distinct apps
+		<li>Increasing difficulty
+		<li>First, basic content management
+		<li>Followed by basic expressions
+		<li>Followed by aggregates and conditionals
+	      </ul>
+	    <li>Unstructured study of their contact manager
+	  </ul>
+	</article>
+
+
+	<article class="slide dont-resize" id="tasks">
+		<article style="background-image: url(img/foodie.png)" class="structured delayed">
+			<h1>Foodie log</h1>
+		</article>
+		<article style="background-image: url(img/decisions.png)" class="structured delayed">
+			<h1>Pros & Cons</h1>
+		</article>
+		<article style="background-image: url(img/contacts.png)" class="freestyle delayed">
+			<h1>Contacts manager</h1>
+		</article>
+	</article>
+
+	<article class="slide" id="structured">
+		<h1>
+			<img src="img/foodie.png" alt="">
+			<img src="img/decisions.png" alt=""><br>
+			Structured study
+		</h1>
+		<div>
+			<script>
+				for (var i=0; i<17; i++) {
+					document.write(`<svg><use href="#person" /></svg>`);
+				};
+			</script>
+		</div>
+	</article>
+
+
+	<article class="looping slide" data-video="videos/decisions.mp4"></article>
+
+	<article class="slide" id="estimate-before">
+		<h1>“How long do you think it will take you?”</h1>
+
+		<!-- <div class="graph">
+			<div style="--people: 5">Hours</div>
+			<div style="--people: 6">Days</div>
+			<div style="--people: 3">Weeks</div>
+			<div style="--people: 3">Months</div>
+		</div> -->
+
+		<ul class="bar-chart" title="People" style="--total: 6">
+			<li title="Hours" style="--people: 5"></li>
+			<li title="Days" style="--people: 6"></li>
+			<li title="Weeks" style="--people: 3"></li>
+			<li title="Months" style="--people: 3"></li>
+		</ul>
+	</article>
+
+	<article class="slide">
+	  <h1>Results</h1>
+	  <ul>
+	    <li>17 subjects did a structured task
+	      <li>100% success on data editing tasks (in 20 minutes)
+	      <li>97% success on basic expressions
+	      <li>75% success on complex expressions
+	      <li>2 point drop in perceived difficulty on 5-point Likert scale
+	    </ul>
+	</article>
+
+	<article class="slide" id="freestyle">
+		<h1>
+			<img src="img/contacts.png" alt=""><br>
+			Freestyle study
+		</h1>
+		<div>
+			<script>
+				for (var i=0; i<7; i++) {
+					document.write(`<svg><use href="#person" /></svg>`);
+				};
+			</script>
+		</div>
+	</article>
+	<article class="slide">
+		<img src="img/subjects-contacts.png" alt="">
+	</article>
+
+	<article class="slide">
+	  <h1>Results</h1>
+	  <ul>
+	    <li>7 subjects did a freestyle task
+	    <li>All were able to convert their own HTML to fully functional apps
+	    <li>Even though written before they knew about Mavo
+	    <li>Suggesting Mavo can work in real web designs
+	    <li>3 liked the study so much they went home and built real apps
+	  </ul>
+	</article>
+
+	<article class="slide">
+		<img src="img/userapps.png" alt="">
+	</article>
+
+	<article class="slide" id="feedback">
+	  <h1>Feedback</h1>
+	  <blockquote>Being able to do that... right in the HTML and not have to fool with a whole other JS file... That is fantastic.  I can't say how awesome that is.  I want this thing now.</blockquote>
+	  <blockquote>When is this going to be available?  This is terrific.  This is exactly the stuff I have a hard time with.</blockquote>
+	  <blockquote>It seems much more straightforward, everything is right there. It's almost too easy</blockquote>
+	</article>
+
+	<article class="slide" id="simple">
+	  <h1>Simplicity</h1>
+	  <blockquote>It didn't seem like a lot of new things had to be learned.</blockquote>
+	  <blockquote>It's very simple.  It's as logical as HTML.  You are eliminating a huge step in coding.</blockquote>
+	  <blockquote>I'm convinced it's magic to basically write templating logic and have it show up and be editable.  I think there's a lot less cognitive overhead to direct manipulation on the page, especially for a nontechnical user.</blockquote>
+         <blockquote>It's simpler than I expected.  My anxiety expects it to be hard, then I just say write what you think, and it turns out to be right.</blockquote>
+	</article>
+
+</section>
+
+<!-- <footer class="slide">
+	<img src="img/mark.svg" />
+	<h1>Thank you!</h1>
+
+	<ul>
+		<li style="--icon: '📨'"><a href="mailto:lea@w3.org">lea@verou.me</a></li>
+		<li style="--icon: '🌍'"><a href="http://lea.verou.me">lea.verou.me</a></li>
+		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
+	</ul>
+
+	<p>Slides: <a href="https://leaverou.github.io/mavo-talk">leaverou.github.io/mavo-talk</a></p>
+	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
+</footer> -->
+
+<script src="js/bliss.min.js"></script>
+<script src="../csss/slideshow.js"></script>
+<script src="js/prism.js"></script>
+<script src="../incrementable/incrementable.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/talk.js"></script>
+<script src="mavo/mavo.js"></script>
+
+</body>
+</html>

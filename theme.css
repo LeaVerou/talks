@@ -226,16 +226,24 @@ div.editor {
 		font-size: 120%;
 	}
 
-.video.slide {
+.video.slide:not(.cover) {
 	justify-content: flex-start;
 	padding: 0;
 }
 
-	.video.slide > video {
-		min-width: 100%;
+.video.slide {
+    padding: 3vw;
+}
+
+    .video.slide > video {
+        width: 94vw;
+    }
+
+	.video.slide.cover > video {
+		width: 100%;
 	}
 
-	.slide:not(.video) video {
+	.slide:not(.cover) video {
 		box-shadow: 0 .1em .5em black;
 		border-radius: 3px;
 	}

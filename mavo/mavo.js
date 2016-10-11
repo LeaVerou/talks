@@ -299,12 +299,6 @@ var _ = self.Mavo = $.Class({
 
 		this.setUnsavedChanges(false);
 
-		_.observe(this.wrapper, "class", () => {
-			var p = this.permissions;
-			var floating = !this.editing && (p.login || p.edit && !p.login && !(p.save && this.unsavedChanges));
-			this.ui.bar.classList.toggle("floating", floating);
-		});
-
 		this.permissions.onchange(({action, value}) => {
 			this.wrapper.classList.toggle(`can-${action}`, value);
 		});
@@ -668,7 +662,7 @@ var _ = $.extend(Mavo, {
 
 	// If the passed value is not an array, convert to an array
 	toArray: arr => {
-		return Array.isArray(arr)? arr : [arr];
+		return arr === undefined? [] : Array.isArray(arr)? arr : [arr];
 	},
 
 	// Recursively flatten a multi-dimensional array
@@ -2704,6 +2698,11 @@ var _ = Mavo.Primitive = $.Class({
 		else if (this.default === null) { // attribute does not exist
 			this.default = this.editor? this.editorValue : this.emptyValue;
 		}
+		else {
+			Mavo.observe(this.element, "data-default", record => {
+				this.default = this.element.getAttribute("data-default");
+			});
+		}
 
 		if (this.collection) {
 			// Collection of primitives, deal with setting textContent etc without the UI interfering.
@@ -3118,7 +3117,7 @@ var _ = Mavo.Primitive = $.Class({
 			return value;
 		}
 
-		if (this.editor) {
+		if (this.editor && document.activeElement != this.editor) {
 			this.editorValue = value;
 		}
 
@@ -3357,6 +3356,32 @@ var _ = Mavo.Primitive = $.Class({
 			}
 
 			return true;
+		},
+
+		register: function(selector, o = {}) {
+			if (o.attribute) {
+				Mavo.Primitive.attributes[selector] = o.attribute;
+			}
+
+			if (o.datatype) {
+				Mavo.Primitive.datatypes[selector] = o.datatype;
+			}
+
+			if (o.editor) {
+				Mavo.Primitive.editors[selector] = o.editor;
+			}
+
+			if (o.init) {
+				Mavo.hooks.add("primitive-init-start", function() {
+					if (this.element.matches(selector)) {
+						o.init.call(this, this.element);
+					}
+				});
+			}
+
+			for (let id of Mavo.toArray(o.is)) {
+				Mavo.selectors[id] += ", " + selector;
+			}
 		},
 
 		lazy: {
@@ -3606,6 +3631,21 @@ _.Popup = $.Class({
 });
 
 })(Bliss, Bliss.$);
+
+// Example plugin: button
+Mavo.Primitive.register("button, .counter", {
+	attribute: "data-clicked",
+	datatype: "number",
+	is: "formControl",
+	init: function(element) {
+		element.setAttribute("data-clicked", "0");
+
+		element.addEventListener("click", evt => {
+			let clicked = +element.getAttribute("data-clicked") || 0;
+			element.setAttribute("data-clicked", clicked + 1);
+		});
+	}
+});
 
 // Image upload widget via imgur
 Mavo.Primitive.editors.img = {
@@ -5064,8 +5104,6 @@ var _ = Mavo.Storage.Backend.register($.Class({
 		this.branch = this.branch || "master";
 		this.path = this.path || `${this.mavo.id}.json`;
 
-		// Transform the Github URL into something raw and CORS-enabled
-		this.url = new URL(`https://raw.githubusercontent.com/${this.username}/${this.repo}/${this.branch}/${this.path}?ts=${Date.now()}`);
 		this.permissions.on("read"); // TODO check if file actually is publicly readable
 
 		this.login(true);
@@ -5083,12 +5121,17 @@ var _ = Mavo.Storage.Backend.register($.Class({
 			o.data =  JSON.stringify(data);
 		}
 
-		return $.fetch("https://api.github.com/" + call, $.extend(o, {
-			responseType: "json",
-			headers: {
+		var request = $.extend(o, {
+			responseType: "json"
+		});
+
+		if (this.authenticated) {
+			request.headers = {
 				"Authorization": `token ${this.accessToken}`
-			}
-		}))
+			};
+		}
+
+		return $.fetch("https://api.github.com/" + call, request)
 		.catch(err => {
 			if (err && err.xhr) {
 				return Promise.reject(err.xhr);
@@ -5099,6 +5142,11 @@ var _ = Mavo.Storage.Backend.register($.Class({
 			}
 		})
 		.then(xhr => Promise.resolve(xhr.response));
+	},
+
+	get: function() {
+		return this.req(`repos/${this.username}/${this.repo}/contents/${this.path}`)
+		       .then(response => Promise.resolve(_.atob(response.content)));
 	},
 
 	/**
@@ -5294,7 +5342,9 @@ var _ = Mavo.Storage.Backend.register($.Class({
 			return ret;
 		},
 
-		btoa: str => btoa(unescape(encodeURIComponent(str)))
+		// Fix atob() and btoa() so they can handle Unicode
+		btoa: str => btoa(unescape(encodeURIComponent(str))),
+		atob: str => decodeURIComponent(escape(window.atob(str)))
 	}
 }));
 

@@ -15,9 +15,17 @@
 </head>
 <body class="language-markup">
 
-<header class="slide" data-video="videos/authors.mp4"></header>
+<article class="slide" id="adjust-resolution" style="--vw: 1024; --vh: 768">
+	<h1>1024 × 768</h1>
+</article>
+
+<header class="slide" data-video="videos/authors.mp4" id="intro"></header>
 
 <section>
+	<article class="incomplete slide">
+		TODO: Related Work
+	</article>
+
 	<article class="slide" id="the-problem" data-steps="2" data-credits="https://www.flickr.com/photos/mjhagen/2973212926 https://www.flickr.com/photos/97481684@N08/13969413085">
 		<ul>
 			<li>npm</li>
@@ -34,6 +42,8 @@
 			<li class="special css">CSS</li>
 		</ul>
 	</article>
+
+	<article class="slide" id="jslogos" data-credits="hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f"></article>
 
 	<article class="slide" id="todomvc">
 		<table>
@@ -68,10 +78,6 @@
 
 	<article class="slide" id="mavo">
 		<img src="img/logo.svg" alt="">
-	</article>
-
-	<article class="incomplete slide">
-		TODO: Related Work
 	</article>
 
 	<article class="video slide">
@@ -211,9 +217,9 @@
 		</script>
 
 		<div class="gender">
-			<div class="female"></div> Female
-			<div class="male"></div> Male
-			<div class="other"></div> Other
+			<div class="female">13</div> Female
+			<div class="male">6</div> Male
+			<div class="other">1</div> Other
 		</div>
 
 		<p class="age">

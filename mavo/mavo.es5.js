@@ -304,12 +304,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 			this.setUnsavedChanges(false);
 
-			_.observe(this.wrapper, "class", function () {
-				var p = _this.permissions;
-				var floating = !_this.editing && (p.login || p.edit && !p.login && !(p.save && _this.unsavedChanges));
-				_this.ui.bar.classList.toggle("floating", floating);
-			});
-
 			this.permissions.onchange(function (_ref) {
 				var action = _ref.action;
 				var value = _ref.value;
@@ -717,7 +711,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 		// If the passed value is not an array, convert to an array
 		toArray: function toArray(arr) {
-			return Array.isArray(arr) ? arr : [arr];
+			return arr === undefined ? [] : Array.isArray(arr) ? arr : [arr];
 		},
 
 		// Recursively flatten a multi-dimensional array
@@ -3091,6 +3085,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 			} else if (this.default === null) {
 				// attribute does not exist
 				this.default = this.editor ? this.editorValue : this.emptyValue;
+			} else {
+				Mavo.observe(this.element, "data-default", function (record) {
+					_this.default = _this.element.getAttribute("data-default");
+				});
 			}
 
 			if (this.collection) {
@@ -3523,7 +3521,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 				return value;
 			}
 
-			if (this.editor) {
+			if (this.editor && document.activeElement != this.editor) {
 				this.editorValue = value;
 			}
 
@@ -3764,6 +3762,55 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 				}
 
 				return true;
+			},
+
+			register: function register(selector) {
+				var o = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+				if (o.attribute) {
+					Mavo.Primitive.attributes[selector] = o.attribute;
+				}
+
+				if (o.datatype) {
+					Mavo.Primitive.datatypes[selector] = o.datatype;
+				}
+
+				if (o.editor) {
+					Mavo.Primitive.editors[selector] = o.editor;
+				}
+
+				if (o.init) {
+					Mavo.hooks.add("primitive-init-start", function () {
+						if (this.element.matches(selector)) {
+							o.init.call(this, this.element);
+						}
+					});
+				}
+
+				var _iteratorNormalCompletion2 = true;
+				var _didIteratorError2 = false;
+				var _iteratorError2 = undefined;
+
+				try {
+					for (var _iterator2 = Mavo.toArray(o.is)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+						var id = _step2.value;
+
+						Mavo.selectors[id] += ", " + selector;
+					}
+				} catch (err) {
+					_didIteratorError2 = true;
+					_iteratorError2 = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion2 && _iterator2.return) {
+							_iterator2.return();
+						}
+					} finally {
+						if (_didIteratorError2) {
+							throw _iteratorError2;
+						}
+					}
+				}
 			},
 
 			lazy: {
@@ -4018,6 +4065,21 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		}
 	});
 })(Bliss, Bliss.$);
+
+// Example plugin: button
+Mavo.Primitive.register("button, .counter", {
+	attribute: "data-clicked",
+	datatype: "number",
+	is: "formControl",
+	init: function init(element) {
+		element.setAttribute("data-clicked", "0");
+
+		element.addEventListener("click", function (evt) {
+			var clicked = +element.getAttribute("data-clicked") || 0;
+			element.setAttribute("data-clicked", clicked + 1);
+		});
+	}
+});
 "use strict";
 
 // Image upload widget via imgur
@@ -5569,8 +5631,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 			this.branch = this.branch || "master";
 			this.path = this.path || this.mavo.id + ".json";
 
-			// Transform the Github URL into something raw and CORS-enabled
-			this.url = new URL("https://raw.githubusercontent.com/" + this.username + "/" + this.repo + "/" + this.branch + "/" + this.path + "?ts=" + Date.now());
 			this.permissions.on("read"); // TODO check if file actually is publicly readable
 
 			this.login(true);
@@ -5591,12 +5651,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 				o.data = JSON.stringify(data);
 			}
 
-			return $.fetch("https://api.github.com/" + call, $.extend(o, {
-				responseType: "json",
-				headers: {
+			var request = $.extend(o, {
+				responseType: "json"
+			});
+
+			if (this.authenticated) {
+				request.headers = {
 					"Authorization": "token " + this.accessToken
-				}
-			})).catch(function (err) {
+				};
+			}
+
+			return $.fetch("https://api.github.com/" + call, request).catch(function (err) {
 				if (err && err.xhr) {
 					return Promise.reject(err.xhr);
 				} else {
@@ -5605,6 +5670,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 				}
 			}).then(function (xhr) {
 				return Promise.resolve(xhr.response);
+			});
+		},
+
+		get: function get() {
+			return this.req("repos/" + this.username + "/" + this.repo + "/contents/" + this.path).then(function (response) {
+				return Promise.resolve(_.atob(response.content));
 			});
 		},
 
@@ -5798,6 +5869,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 				return ret;
 			},
 
+			// Fix atob() and btoa() so they can handle Unicode
 			btoa: function (_btoa) {
 				function btoa(_x4) {
 					return _btoa.apply(this, arguments);
@@ -5810,7 +5882,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 				return btoa;
 			}(function (str) {
 				return btoa(unescape(encodeURIComponent(str)));
-			})
+			}),
+			atob: function atob(str) {
+				return decodeURIComponent(escape(window.atob(str)));
+			}
 		}
 	}));
 })(Bliss);
