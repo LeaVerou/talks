@@ -1,10 +1,10 @@
 @font-face {
-  font-family: 'Reenie Beanie';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Reenie Beanie'),
-       local('ReenieBeanie'),
-	   url("fonts/reenie-beanie.woff2") format('woff2');
+	font-family: 'Reenie Beanie';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Reenie Beanie'),
+		local('ReenieBeanie'),
+		url("fonts/reenie-beanie.woff2") format('woff2');
 }
 
 html {
@@ -226,27 +226,48 @@ div.editor {
 		font-size: 120%;
 	}
 
-.video.slide:not(.cover) {
+.video.slide.cover {
 	justify-content: flex-start;
 	padding: 0;
 }
 
 .video.slide {
-    padding: 3vw;
+	padding: 3vw;
+	background-color: hsl(200, 15%, 50%);
 }
 
-    .video.slide > video {
-        width: 94vw;
-    }
+	.video.slide video {
+		width: 90vw;
+	}
 
 	.video.slide.cover > video {
 		width: 100%;
 	}
 
-	.slide:not(.cover) video {
-		box-shadow: 0 .1em .5em black;
-		border-radius: 3px;
-	}
+.browser {
+	position: relative;
+	width: fit-content;
+	border-radius: 4px;
+	overflow: hidden;
+	box-shadow: 0 20px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(0,0,0,.3) inset;
+    --top: 38; --right: 146; --left: 201;
+    margin: 3vw;
+    padding-top: calc(var(--top) * 1px);
+}
+
+.browser::before {
+	content: "";
+	position: absolute;
+	top: 0; right: 0; left: 0;
+	border: solid;
+	border-width: 38px calc(var(--right) * 1px) 0 calc(var(--left) * 1px);
+	border-image: 100% var(--right) 0 var(--left) repeat;
+    border-image-source: url("img/chrome.png");
+}
+
+    .browser > :only-child {
+        display: block;
+    }
 
 .image.slide > h1:only-child,
 .image.slide > .caption,

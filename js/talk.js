@@ -39,10 +39,15 @@ for (let [i, li] of $$("#the-problem li:not(.special)").reverse().entries()) {
 
 // Create the videos for slides with a data-video attribute
 for (let slide of $$(".slide[data-video]")) {
+	let container = slide.classList.contains("cover")? slide : $.create("div", {
+		className: "browser",
+		inside: slide
+	});
+
 	$.create("video", {
 		src: slide.getAttribute("data-video"),
 		loop: slide.classList.contains("looping"),
-		inside: slide
+		inside: container
 	});
 
 	slide.classList.add("video");
