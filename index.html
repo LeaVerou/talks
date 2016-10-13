@@ -22,10 +22,6 @@
 <header class="slide" data-video="videos/authors.mp4" id="intro"></header>
 
 <section>
-	<article class="incomplete slide">
-		TODO: Related Work
-	</article>
-
 	<article class="slide" id="the-problem" data-steps="2" data-credits="https://www.flickr.com/photos/mjhagen/2973212926 https://www.flickr.com/photos/97481684@N08/13969413085">
 		<ul>
 			<li>npm</li>
@@ -74,6 +70,14 @@
 			</tbody>
 		</table>
 		<img src="img/todomvc.png" />
+	</article>
+
+	<article class="slide" data-src="http://www.simile-widgets.org/exhibit2" title="Exhibit: Data presentation with HTML"></article>
+
+	<article class="slide" id="research-question">
+		<h1>
+			<span>Research question</span>
+			Can non-programmers <br>create data interactions?</h1>
 	</article>
 
 	<article class="slide" id="mavo">
@@ -137,7 +141,8 @@
 
 	<article class="visible-storage example slide">
 		<pre><code>
-			&lt;time property="birthday" datetime="1986-06-13">
+			&lt;time property="birthday"
+			      datetime="1986-06-13">
 				13 Jun 1986
 			&lt;/time>
 		</code></pre>
@@ -154,14 +159,14 @@
 			&lt;input property="name" value="Lea Verou"/>
 			&lt;input property="strength" type="range" />
 			&lt;select property="country">
-				&lt;option value="us">United States</option>
-				&lt;option value="gb">United Kingdom</option>
-				&lt;option value="jp">Japan</option>
+				&lt;option value="us">United States&lt;/option>
+				&lt;option value="gb">United Kingdom&lt;/option>
+				&lt;option value="jp">Japan&lt;/option>
 			&lt;/select>
 		</code></pre>
 	</article>
 
-	<article class="vertical example slide" id="multiple-properties">
+	<article class="example slide" id="multiple-properties">
 		<pre><code>
 			Hobbies:
 			&lt;ul>
@@ -172,20 +177,155 @@
 		</code></pre>
 	</article>
 
-	<article class="vertical example slide">
+	<article class="example slide">
 		<pre><code>
 			Hobbies:
 			&lt;ul>
-				&lt;li property="hobby"
-				    data-multiple>
-					Eating
-				&lt;/li>
+				&lt;li property="hobby" data-multiple>Eating&lt;/li>
 			&lt;/ul>
 		</code></pre>
 	</article>
 
+	<article class="example slide" id="objects">
+		<pre style="font-size: 80%"><code>
+			&lt;article property="cat" data-multiple>
+				&lt;img src="img/adamcatlace.png" property="photo">
+				&lt;h1 property="name">Adam Catlace&lt;/h1>
+				&lt;span property="age">2&lt;/span>
+				&lt;p>Hobbies: &lt;span property="hobby" data-multiple>Eating&lt;/span>
+			&lt;/article>
+		</code></pre>
+	</article>
+
+	<article class="visible-storage example slide">
+		<pre><code>
+			&lt;input type="range" property="strength" />
+			Value: [strength] out of 100
+		</code></pre>
+	</article>
+
+	<article class="visible-storage example slide">
+		<pre><code>
+			&lt;input type="range" property="strength"
+			       max="[strength * 2]" />
+			&lt;p>Value: [strength] out of [strength * 2]
+		</code></pre>
+	</article>
+
+	<article class="visible-storage example slide">
+		<pre><code>
+			&lt;input type="range" property="strength"
+			       max="[max]" />
+			&lt;p>Value: [strength] out of
+			   &lt;span property="max">[strength * 2]&lt;/span>
+		</code></pre>
+	</article>
+
+	<article class="dont-resize example slide" id="color-picker">
+		<pre style="font-size: 80%;"><code>
+			&lt;div style="background-color: [color];">
+				&lt;input type="range" property="hue" max="360" />
+				&lt;input type="range" property="saturation" />
+				&lt;input type="range" property="lightness" />
+				&lt;code property="color">
+					hsl([hue], [saturation]%, [lightness]%)
+				&lt;/code>
+			&lt;/div>
+		</code></pre>
+	</article>
+
+	<article class="vertical example slide lite-cats" data-credits="Cat’s Shrödinger by The Oatmeal, Cat on Laptop from flickr.com/photos/nwater/8130196854">
+		<script type="application/json">{
+			"cat": [
+				{
+					"photo": "img/adamcatlace.png",
+					"name": "Adam Catlace",
+					"age": 2
+				},
+				{
+					"photo": "img/tpl.jpg",
+					"name": "Tim Purrners-Lee",
+					"age": 9
+				},
+				{
+					"photo": "img/alanpurring.jpg",
+					"name": "Alan Purring",
+					"age": 7
+				},
+				{
+					"photo": "img/vector.jpg",
+					"name": "Vector",
+					"age": 11
+				},
+				{
+					"photo": "img/shrodingcat.png",
+					"name": "Schrödingcat"
+				}
+			]
+		}</script>
+		<pre style="font-size: 80%"><code>
+			&lt;article property="cat"
+			         data-multiple>
+				&lt;img property="photo">
+				&lt;h1 property="name">&lt;/h1>
+				&lt;span property="age">&lt;/span>
+			&lt;/article>
+		</code></pre>
+	</article>
+
+	<article class="vertical example slide lite-cats" id="aggregate-expressions" data-credits="Cat’s Shrödinger by The Oatmeal, Cat on Laptop from flickr.com/photos/nwater/8130196854">
+		<script type="application/json" id="data-aggregate-expressions">{
+			"cat": [
+				{
+					"photo": "img/adamcatlace.png",
+					"name": "Adam Catlace",
+					"age": 2
+				},
+				{
+					"photo": "img/tpl.jpg",
+					"name": "Tim Purrners-Lee",
+					"age": 9
+				},
+				{
+					"photo": "img/alanpurring.jpg",
+					"name": "Alan Purring",
+					"age": 7
+				},
+				{
+					"photo": "img/vector.jpg",
+					"name": "Vector",
+					"age": 11
+				},
+				{
+					"photo": "img/shrodingcat.png",
+					"name": "Schrödingcat"
+				}
+			]
+		}</script>
+		<pre style="font-size: 80%"><code>
+			&lt;article property="cat"
+			         data-multiple>
+				&lt;img property="photo">
+				&lt;h1 property="name">&lt;/h1>
+				&lt;span property="age">&lt;/span>
+			&lt;/article>
+
+			&lt;h1>📊 Stats&lt;/h1>
+			&lt;p><mark>[count(cat)]</mark> cats
+			    (<mark>[count(age > 6)]</mark> old)
+			&lt;p><mark>[count(age)]</mark> ages: <mark>[age]</mark>
+			&lt;p>Average age: <mark>[average(age)]</mark>
+		</code></pre>
+	</article>
+</section>
+
+<section>
+	<article class="looping slide" data-video="videos/color-picker.mp4"></article>
+	<article class="looping slide" data-video="videos/logo.mp4"></article>
+	<article class="looping slide" data-video="videos/mortgage.mp4"></article>
+
 	<article class="incomplete slide">
-		TODO: Objects, expressions
+		TODO: Videos for the rest of demos
 	</article>
 </section>
 
@@ -194,7 +334,7 @@
 		<h1>Evaluation</h1>
 	</header>
 
-	<article class="slide" id="subjects" data-steps="2">
+	<article class="slide" id="subjects" data-steps="4">
 		<h1>20 participants</h1>
 		<svg class="def">
 			<symbol id="person" viewBox="0 0 100 100">
@@ -205,16 +345,19 @@
 		</svg>
 		<script>
 			for (var i=0; i<20; i++) {
-				let className = i <= 12? "female" : i <= 18? "male" : "other"
+				let className = i <= 12? "female" : i <= 18? "male" : "other";
+				className += i <= 12? " beginner" : " intermediate";
+				let contactManager = i < 8? `<text class="contacts" x="40" y="80" font-size="50" transform="rotate(5)">📇</text>` : "";
 				document.write(`
 					<svg style="transition-delay: ${i * .15}s, 0s" class="${className}">
 						<use href="#person" />
+						${contactManager}
 					</svg>`
 				);
 			};
 		</script>
 
-		<div class="gender">
+		<div class="gender legend">
 			<div class="female">13</div> Female
 			<div class="male">6</div> Male
 			<div class="other">1</div> Other
@@ -223,18 +366,20 @@
 		<p class="age">
 			<strong>Age</strong> <i>μ</i> = 35.9, <i>σ</i> = 10.2
 		</p>
+
+		<div class="skill legend">
+			<div class="beginner">13</div> Beginner or worse programmers
+			<div class="intermediate">7</div> Intermediate
+		</div>
 	</article>
 
-	<article class="slide dont-resize" id="tasks">
-		<article style="background-image: url(img/foodie.png)" class="structured delayed">
-			<h1>Foodie log</h1>
-		</article>
-		<article style="background-image: url(img/decisions.png)" class="structured delayed">
-			<h1>Pros & Cons</h1>
-		</article>
-		<article style="background-image: url(img/contacts.png)" class="freestyle delayed">
-			<h1>Contacts manager</h1>
-		</article>
+	<article class="slide" id="study-design">
+		<h1>Study design</h1>
+		<div class="timeline">
+			<div class="tutorial">Tutorial</div>
+			<div class="structured">Structured study</div>
+			<div class="unstructured">Unstructured study</div>
+		</div>
 	</article>
 
 	<article class="slide" id="structured">
@@ -252,15 +397,11 @@
 		</div>
 	</article>
 
+	<article class="looping slide" data-video="videos/decisions.mp4"></article>
+	<article class="looping slide" data-video="videos/foodie.mp4"></article>
+
 	<article class="slide" id="estimate-before">
 		<h1>“How long do you think it will take you?”</h1>
-
-		<!-- <div class="graph">
-			<div style="--people: 5">Hours</div>
-			<div style="--people: 6">Days</div>
-			<div style="--people: 3">Weeks</div>
-			<div style="--people: 3">Months</div>
-		</div> -->
 
 		<ul class="bar-chart" title="People" style="--total: 6">
 			<li title="Hours" style="--people: 5"></li>
@@ -268,6 +409,40 @@
 			<li title="Weeks" style="--people: 3"></li>
 			<li title="Months" style="--people: 3"></li>
 		</ul>
+	</article>
+
+	<article class="slide dont-resize" id="tasks">
+		<article style="background-image: url(img/foodie.png)" class="structured delayed">
+			<h1>Foodie log</h1>
+		</article>
+		<article style="background-image: url(img/decisions.png)" class="structured delayed">
+			<h1>Pros & Cons</h1>
+		</article>
+		<!-- <article style="background-image: url(img/contacts.png)" class="freestyle delayed">
+			<h1>Contacts manager</h1>
+		</article> -->
+		<h1 class="delayed">10-12 tasks</h1>
+		<p class="delayed">CRUD → Basic expressions → Aggregates & Conditionals</p>
+	</article>
+
+	<article class="success slide">
+		<h1>Success</h1>
+		<strong>100%</strong> on CRUD tasks
+	</article>
+
+	<article class="success slide">
+		<h1>Success</h1>
+		<strong>97%</strong> on basic expressions
+	</article>
+
+	<article class="success slide">
+		<h1>Success</h1>
+		<strong>75%</strong> on complex expressions
+	</article>
+
+	<article class="success slide">
+		<h1>Success</h1>
+		<strong>2<span class="down-arrow">⬇︎</span></strong> in perceived difficulty <br>on 5-point Likert scale
 	</article>
 
 	<article class="slide" id="freestyle">
@@ -287,39 +462,61 @@
 	<article class="slide">
 		<img src="img/subjects-contacts.png" alt="">
 	</article>
-	<article class="slide">
+
+	<article class="success slide">
+		<h1>Success</h1>
+		<strong>100%</strong> <span>were able to convert<br> their <b>own</b> HTML <br> to fully functional apps</span>
+	</article>
+
+	<article class="slide" id="own-apps">
+		<h1>Some even made apps for their own needs after the study!</h1>
 		<img src="img/userapps.png" alt="">
 	</article>
 
-	<article class="incomplete slide">
-		TODO
+	<article class="slide">
+		<blockquote>Being able to do that... right in the HTML and not have to fool with a whole other JS file... That is fantastic.  I can't say how awesome that is.  I want this thing now.</blockquote>
+	</article>
+	<article class="slide">
+		<blockquote>When is this going to be available? This is terrific. This is exactly the stuff I have a hard time with.</blockquote>
+	</article>
+	<article class="slide">
+		<blockquote>It seems much more straightforward, everything is right there. It's almost too easy</blockquote>
+	</article>
+	<article class="slide">
+		<blockquote>It didn't seem like a lot of new things had to be learned.</blockquote>
+	</article>
+	<article class="slide">
+		<blockquote>It's very simple.  It's as logical as HTML.  You are eliminating a huge step in coding.</blockquote>
+	</article>
+	<article class="slide">
+		<blockquote>I'm convinced it's magic to basically write templating logic and have it show up and be editable.  I think there's a lot less cognitive overhead to direct manipulation on the page, especially for a nontechnical user.</blockquote>
+	</article>
+	<article class="slide">
+		<blockquote>It's simpler than I expected.  My anxiety expects it to be hard, then I just say write what you think, and it turns out to be right.</blockquote>
 	</article>
 </section>
 
-<section>
-	<article class="looping slide" data-video="videos/color-picker.mp4"></article>
-	<article class="looping slide" data-video="videos/logo.mp4"></article>
-	<article class="looping slide" data-video="videos/mortgage.mp4"></article>
-	<article class="looping slide" data-video="videos/decisions.mp4"></article>
+<article class="future slide">
+	<h1>Future work</h1>
+	<ul>
+		<li>Better handling of schema mutations</li>
+		<li>Filtering & Sorting</li>
+		<li>Granular access control</li>
+	</ul>
+</article>
 
-	<article class="incomplete slide">
-		TODO: Videos for the rest of demos
-	</article>
-</section>
-
-<!-- <footer class="slide">
-	<img src="img/mark.svg" />
+<footer class="slide">
+	<img src="img/logo.svg" />
 	<h1>Thank you!</h1>
 
 	<ul>
-		<li style="--icon: '📨'"><a href="mailto:lea@w3.org">lea@verou.me</a></li>
-		<li style="--icon: '🌍'"><a href="http://lea.verou.me">lea.verou.me</a></li>
-		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
+		<li style="--icon: '🌍'"><a href="http://mavo.io">mavo.io</a></li>
+		<li style="--icon: '📨'"><a href="mailto:leaverou@mit.edu">leaverou@mit.edu</a></li>
 	</ul>
 
 	<p>Slides: <a href="https://leaverou.github.io/mavo-talk">leaverou.github.io/mavo-talk</a></p>
 	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
-</footer> -->
+</footer>
 
 <script src="js/bliss.min.js"></script>
 <script src="../csss/slideshow.js"></script>
