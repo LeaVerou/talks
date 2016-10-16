@@ -22,6 +22,35 @@
 <header class="slide" data-video="videos/authors.mp4" id="intro"></header>
 
 <section>
+	<article class="slide" id="comic" data-credits="zenpencils.com/comic/98-alan-watts-what-if-money-was-no-object">
+		<img src="img/goals.gif" alt="">
+		<img class="delayed" src="img/everyoneknows.png" alt="">
+	</article>
+
+	<article class="slide" id="crud-apps">
+		<ul style="column-count: 2">
+			<li>Portfolio</li>
+			<li>Publication list</li>
+			<li>Photo album</li>
+			<li>Conference website</li>
+			<li>Address book</li>
+			<li>Blog</li>
+			<li>PIM apps</li>
+			<li>Invoicing system</li>
+			<li>Calculators & converters</li>
+			<li>Restaurant menu</li>
+			<li>Trip log</li>
+			<li>…</li>
+		</ul>
+	</article>
+
+	<article class="slide">
+		<blockquote>
+			<p>“Ninety percent of everything is CRUD”</p>
+			<p class="cite">—Very Slightly Paraphrased <a href="https://en.wikipedia.org/wiki/Sturgeon%27s_law">Sturgeon’s Law</a></p>
+		</blockquote>
+	</article>
+
 	<article class="slide" id="the-problem" data-steps="2" data-credits="https://www.flickr.com/photos/mjhagen/2973212926 https://www.flickr.com/photos/97481684@N08/13969413085">
 		<ul>
 			<li>npm</li>
@@ -72,7 +101,7 @@
 		<img src="img/todomvc.png" />
 	</article>
 
-	<article class="slide" data-src="http://www.simile-widgets.org/exhibit2" title="Exhibit: Data presentation with HTML"></article>
+	<!-- <article class="slide" data-src="http://www.simile-widgets.org/exhibit2" title="Exhibit: Data presentation with HTML"></article> -->
 
 	<article class="slide" id="research-question">
 		<h1>
@@ -82,6 +111,44 @@
 
 	<article class="slide" id="mavo">
 		<img src="img/logo.svg" alt="">
+		<ul class="criteria delayed-children">
+			<li>Language, not system</li>
+			<li>Hierarchical data</li>
+			<li>CRUD + Computation</li>
+		</ul>
+	</article>
+
+	<article class="dont-resize slide" id="related-work">
+		<article style="background-image: url(img/dido.png)" class="round-item">
+			<div>
+				<h1>Dido</h1>
+				<ul class="criteria">
+					<li>Language, not system</li>
+					<li>Hierarchical data</li>
+					<li class="fail">CRUD + Computation</li>
+				</ul>
+			</div>
+		</article>
+		<article style="background-image: url(img/gneiss.png)" class="round-item">
+			<div>
+				<h1>Gneiss</h1>
+				<ul class="criteria">
+					<li class="fail">Language, not system</li>
+					<li>Hierarchical data</li>
+					<li>CRUD + Computation</li>
+				</ul>
+			</div>
+		</article>
+		<article style="background-image: url(img/quilt.png)" class="round-item">
+			<div>
+				<h1>Quilt</h1>
+				<ul class="criteria">
+					<li>Language, not system</li>
+					<li class="fail">Hierarchical data</li>
+					<li>CRUD + Computation</li>
+				</ul>
+			</div>
+		</article>
 	</article>
 
 	<article class="video slide" data-video="videos/todo.mp4"></article>
@@ -105,7 +172,7 @@
 
 <section>
 	<header class="slide">
-		<h1>Mavo Syntax</h1>
+		<h1>Mavo Tutorial</h1>
 	</header>
 
 	<article class="slide">
@@ -349,7 +416,7 @@
 				className += i <= 12? " beginner" : " intermediate";
 				let contactManager = i < 8? `<text class="contacts" x="40" y="80" font-size="50" transform="rotate(5)">📇</text>` : "";
 				document.write(`
-					<svg style="transition-delay: ${i * .15}s, 0s" class="${className}">
+					<svg style="transition-delay: ${i * .1}s, 0s" class="${className}">
 						<use href="#person" />
 						${contactManager}
 					</svg>`
@@ -412,16 +479,15 @@
 	</article>
 
 	<article class="slide dont-resize" id="tasks">
-		<article style="background-image: url(img/foodie.png)" class="structured delayed">
-			<h1>Foodie log</h1>
+		<article style="background-image: url(img/foodie.png)" class="round-item delayed">
+			<h1>Foodie log <span>12 tasks</span></h1>
 		</article>
-		<article style="background-image: url(img/decisions.png)" class="structured delayed">
-			<h1>Pros & Cons</h1>
+		<article style="background-image: url(img/decisions.png)" class="round-item delayed">
+			<h1>Pros & Cons <span>10 tasks</span></h1>
 		</article>
 		<!-- <article style="background-image: url(img/contacts.png)" class="freestyle delayed">
 			<h1>Contacts manager</h1>
 		</article> -->
-		<h1 class="delayed">10-12 tasks</h1>
 		<p class="delayed">CRUD → Basic expressions → Aggregates & Conditionals</p>
 	</article>
 

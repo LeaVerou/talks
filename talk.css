@@ -112,6 +112,10 @@
 	padding: 6em;
 }
 
+	#mavo .criteria {
+		margin-top: 1em;
+	}
+
 #todo-code {
 
 }
@@ -456,7 +460,7 @@ button.undo.mv-ui {
 		margin: 0;
 	}
 
-	#tasks > article {
+	.round-item {
 		position: absolute;
 		padding: 20vw;
 		background: center / cover;
@@ -464,49 +468,47 @@ button.undo.mv-ui {
 		--padding: 3vw;
 	}
 
-	#tasks > article:first-child {
+	.slide > .round-item:first-child {
 		top: var(--padding);
 		left: var(--padding);
 	}
 
-	#tasks > article:nth-child(2) {
+	.slide > .round-item:nth-child(2) {
 		top: var(--padding);
 		right: var(--padding);
 	}
 
-	#tasks > article:nth-child(3) {
+	.slide > .round-item:nth-child(3) {
 		bottom: var(--padding);
 	}
 
-	#tasks > article.delayed {
+	.slide > .round-item.delayed {
 		transition-timing-function: cubic-bezier(.3, .2, .5, 1.6);
 	}
 
-	#tasks > article.delayed:not(.current):not(.displayed) {
+	.slide > .round-item.delayed:not(.current):not(.displayed) {
 		transform: scale(0);
 	}
 
-		#tasks > article > h1 {
+		.slide > .round-item > :only-child {
 			position: absolute;
+			white-space: nowrap;
+		}
+
+		#tasks > article > h1 {
 			padding: 1vw;
 			background: hsl(200, 20%, 25%);
 			font-weight: 100;
 			font-size: 120%;
-			white-space: nowrap;
 		}
 
-			#tasks > article > h1::after {
-				content: "Structured study";
+			#tasks > article > h1 span {
 				display: block;
 				padding: .6vw;
 				margin: 1vw -1vw -1vw;
 				background: orange;
-				font-size: 50%;
+				font-size: 80%;
 				font-weight: bold;
-			}
-
-			#tasks > article.freestyle > h1::after {
-				content: "Freestyle study";
 			}
 
 #structured {}
@@ -713,3 +715,71 @@ footer.slide {
 	animation: fall 3s infinite ease-in, pos 30s steps(1) infinite;
 	filter: drop-shadow(0 10px 10px rgba(0,0,0,.5));
 }
+
+#comic {
+	background: white;
+	color: black;
+}
+
+	#comic img + img {
+		margin-top: .5em;
+	}
+
+.criteria {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+
+}
+
+	.criteria li {
+		display: flex;
+		align-items: center;
+		padding-right: .5em;
+		font-weight: bold;
+		--color: hsl(80, 100%, 35%);
+		background: linear-gradient(hsla(0,0%,100%,.75), hsla(0,0%,100%,.75)), var(--color);
+		color: var(--color);
+	}
+
+	.criteria li.fail {
+		--color: #c00;
+	}
+
+		.criteria li::before {
+			content: "✓";
+			padding: .1em .5em;
+			margin-right: .3em;
+			background: var(--color);
+			color: white;
+		}
+
+		.criteria li.fail::before {
+			content: "✕";
+		}
+
+#related-work {}
+
+	#related-work h1 {
+		margin: 0;
+		font-weight: 900;
+		line-height: .75;
+		font-size: 350%;
+		letter-spacing: -.05em;
+		color: hsl(200, 15%, 20%);
+		text-indent: -.06em;
+	}
+
+	#related-work .criteria {
+		box-shadow: 0 0 .4em hsla(0, 0%, 0%, .4);
+	}
+
+	#related-work .round-item {
+		padding: 18vw;
+		font-size: 70%;
+	}
+
+	#related-work .round-item > :only-child {
+		left: 10vw;
+		top: 40%;
+	}
