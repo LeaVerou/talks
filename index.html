@@ -28,7 +28,7 @@
 	</article>
 
 	<article class="slide" id="crud-apps">
-		<ul style="column-count: 2">
+		<ul>
 			<li>Portfolio</li>
 			<li>Publication list</li>
 			<li>Photo album</li>
@@ -40,16 +40,17 @@
 			<li>Calculators & converters</li>
 			<li>Restaurant menu</li>
 			<li>Trip log</li>
+			<li>Fitness tracker</li>
 			<li>…</li>
 		</ul>
 	</article>
 
-	<article class="slide">
+	<!-- <article class="slide">
 		<blockquote>
 			<p>“Ninety percent of everything is CRUD”</p>
 			<p class="cite">—Very Slightly Paraphrased <a href="https://en.wikipedia.org/wiki/Sturgeon%27s_law">Sturgeon’s Law</a></p>
 		</blockquote>
-	</article>
+	</article> -->
 
 	<article class="slide" id="the-problem" data-steps="2" data-credits="https://www.flickr.com/photos/mjhagen/2973212926 https://www.flickr.com/photos/97481684@N08/13969413085">
 		<ul>
@@ -119,7 +120,7 @@
 	</article>
 
 	<article class="dont-resize slide" id="related-work">
-		<article style="background-image: url(img/dido.png)" class="round-item">
+		<article style="background-image: url(img/dido.png)" class="round-item delayed">
 			<div>
 				<h1>Dido</h1>
 				<ul class="criteria">
@@ -129,7 +130,7 @@
 				</ul>
 			</div>
 		</article>
-		<article style="background-image: url(img/gneiss.png)" class="round-item">
+		<article style="background-image: url(img/gneiss.png)" class="round-item delayed">
 			<div>
 				<h1>Gneiss</h1>
 				<ul class="criteria">
@@ -139,7 +140,7 @@
 				</ul>
 			</div>
 		</article>
-		<article style="background-image: url(img/quilt.png)" class="round-item">
+		<article style="background-image: url(img/quilt.png)" class="round-item delayed">
 			<div>
 				<h1>Quilt</h1>
 				<ul class="criteria">
@@ -192,32 +193,25 @@
 		</code></pre>
 	</article>
 
-	<article class="visible-storage example slide">
-		<pre><code>
-			&lt;span>Name:&lt;/span>
-			&lt;span <mark>property="firstName"</mark>>Lea&lt;/span>
-			&lt;span <mark>property="last_name"</mark>>Verou&lt;/span>
-		</code></pre>
-	</article>
-
-	<article class="visible-storage example slide">
-		<pre><code>
-			&lt;meter property="rating" value="3" max="5">&lt;/meter>
-		</code></pre>
-	</article>
-
-	<article class="visible-storage example slide">
-		<pre><code>
-			&lt;time property="birthday"
-			      datetime="1986-06-13">
-				13 Jun 1986
-			&lt;/time>
-		</code></pre>
-	</article>
-
 	<article class="example slide">
-		<pre><code>
-			&lt;img property="avatar" src="img/adamcatlace.png" />
+		<pre style="font-size: 80%;"><code>
+			&lt;div class="cat">
+				&lt;img src="img/adamcatlace.png">
+				&lt;h1>Adam Catlace&lt;/h1>
+				&lt;time datetime="2014-06-01">1 Jun 2014&lt;/time>
+				Cuteness: &lt;meter value="3" max="5">&lt;/meter>
+			&lt;/div>
+		</code></pre>
+	</article>
+
+	<article class="visible-storage example slide">
+		<pre style="font-size: 80%;"><code>
+			&lt;div class="cat" <mark>data-store="local"</mark>>
+				&lt;img src="img/adamcatlace.png" <mark>property="photo"</mark>>
+				&lt;h1 <mark>property="name"</mark>>Adam Catlace&lt;/h1>
+				&lt;time <mark>property="birthday"</mark> datetime="2014-06-01">1 Jun 2014&lt;/time>
+				Cuteness: &lt;meter <mark>property="rating"</mark> value="3" max="5">&lt;/meter>
+			&lt;/div>
 		</code></pre>
 	</article>
 
@@ -264,37 +258,21 @@
 		</code></pre>
 	</article>
 
-	<article class="visible-storage example slide">
-		<pre><code>
-			&lt;input type="range" property="strength" />
-			Value: [strength] out of 100
-		</code></pre>
-	</article>
-
-	<article class="visible-storage example slide">
+	<article class="example slide">
 		<pre><code>
 			&lt;input type="range" property="strength"
-			       max="[strength * 2]" />
-			&lt;p>Value: [strength] out of [strength * 2]
-		</code></pre>
-	</article>
-
-	<article class="visible-storage example slide">
-		<pre><code>
-			&lt;input type="range" property="strength"
-			       max="[max]" />
-			&lt;p>Value: [strength] out of
-			   &lt;span property="max">[strength * 2]&lt;/span>
+			       title="Value: [strength] out of 100" />
+			Value: [strength / 100]
 		</code></pre>
 	</article>
 
 	<article class="dont-resize example slide" id="color-picker">
 		<pre style="font-size: 80%;"><code>
-			&lt;div style="background-color: [color];">
+			&lt;div style="background-color: <mark>[color]</mark>;">
 				&lt;input type="range" property="hue" max="360" />
 				&lt;input type="range" property="saturation" />
 				&lt;input type="range" property="lightness" />
-				&lt;code property="color">
+				&lt;code <mark>property="color"</mark>>
 					hsl([hue], [saturation]%, [lightness]%)
 				&lt;/code>
 			&lt;/div>
@@ -491,24 +469,42 @@
 		<p class="delayed">CRUD → Basic expressions → Aggregates & Conditionals</p>
 	</article>
 
-	<article class="success slide">
+	<article class="stat slide">
 		<h1>Success</h1>
 		<strong>100%</strong> on CRUD tasks
 	</article>
 
-	<article class="success slide">
+	<article class="stat slide">
 		<h1>Success</h1>
 		<strong>97%</strong> on basic expressions
 	</article>
 
-	<article class="success slide">
+	<article class="stat slide">
 		<h1>Success</h1>
 		<strong>75%</strong> on complex expressions
 	</article>
 
-	<article class="success slide">
+	<article class="stat slide">
 		<h1>Success</h1>
 		<strong>2<span class="down-arrow">⬇︎</span></strong> in perceived difficulty <br>on 5-point Likert scale
+	</article>
+
+	<article class="slide" id="stat-summary">
+		<article class="stat">
+			<strong>100%</strong> on CRUD tasks
+		</article>
+
+		<article class="stat">
+			<strong>97%</strong> on basic expressions
+		</article>
+
+		<article class="stat">
+			<strong>75%</strong> on complex expressions
+		</article>
+
+		<article class="stat">
+			<strong>2<span class="down-arrow">⬇︎</span></strong> in perceived difficulty <br>on 5-point Likert scale
+		</article>
 	</article>
 
 	<article class="slide" id="freestyle">
@@ -529,7 +525,7 @@
 		<img src="img/subjects-contacts.png" alt="">
 	</article>
 
-	<article class="success slide">
+	<article class="stat slide">
 		<h1>Success</h1>
 		<strong>100%</strong> <span>were able to convert<br> their <b>own</b> HTML <br> to fully functional apps</span>
 	</article>

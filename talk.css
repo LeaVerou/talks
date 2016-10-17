@@ -194,7 +194,7 @@
 		color: orange;
 	}
 
-[property=cat] {
+[property=cat], .cat {
 	min-width: 14em;
 	position: relative;
 	padding: .3em;
@@ -211,21 +211,35 @@
 	}
 
 	[property=cat] h1,
-	[property=cat] p {
+	[property=cat] p,
+	.cat h1,
+	.cat p {
 		margin: 0;
 		margin-left: 3.5em;
 	}
 
-	[property=cat] h1 {
+	[property=cat] h1,
+	.cat h1 {
 		display: inline;
 		margin-left: .5em;
+	}
+
+		.cat h1::after,
+		.cat time::after {
+			content: "\A";
+			white-space: pre;
+		}
+
+	.cat h1 {
+		margin-left: 0;
 	}
 
 	.lite-cats h1 {
 		font-weight: 100;
 	}
 
-	[property=cat] [property=photo] {
+	[property=cat] img,
+	.cat img {
 		width: 3em;
 		height: 3em;
 		border-radius: .5em;
@@ -233,14 +247,20 @@
 		float: left;
 	}
 
-	.lite-cats [property=cat] [property=photo] {
+	.cat img {
+		width: 4.6em;
+		height: 4.6em;
+		margin-right: .8em;
+	}
+
+	.lite-cats [property=cat] img {
 		width: 3em;
 		height: 1.8em;
 		margin: -.1em 0 0 -.1em;
 		border-radius: 0;
 	}
 
-		[property=cat] [property=photo][src=""] {
+		[property=cat] img[src=""] {
 			border: none;
 			background: hsla(0,0%,100%,.5);
 			content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
@@ -254,7 +274,13 @@
 		font-weight: bold;
 	}
 
-		[property=cat] [property=age]::before {
+	.cat time {
+		letter-spacing: -.03em;
+
+	}
+
+		[property=cat] [property=age]::before,
+		.cat time::before {
 			content: "🎂 ";
 		}
 
@@ -290,7 +316,7 @@
 		width: 40%;
 	}
 
-	#color-picker code {
+	#color-picker div[style] code {
 		font-weight: bold;
 		margin-top: 1em;
 	}
@@ -604,16 +630,16 @@ button.undo.mv-ui {
 			font-weight: normal;
 		}
 
-.success.slide {
+.stat.slide {
 	transition: .5s font-size;
 	line-height: 1.2;
 }
 
-.success.slide:target {
+.stat.slide:target {
 	font-size: 350%;
 }
 
-	.success.slide h1 {
+	.stat.slide h1 {
 		display: block;
 		width: fit-content;
 		padding: .2em .5em;
@@ -624,7 +650,7 @@ button.undo.mv-ui {
 		font-size: 80%;
 	}
 
-	.success.slide strong:first-of-type {
+	.stat > strong:first-of-type {
 		display: block;
 		font-size: 400%;
 		line-height: 1;
@@ -632,7 +658,7 @@ button.undo.mv-ui {
 		letter-spacing: -.05em;
 	}
 
-	.success.slide strong .down-arrow {
+	.stat > strong .down-arrow {
 		display: inline-block;
 		font-size: 75%;
 		vertical-align: .1em;
@@ -782,4 +808,22 @@ footer.slide {
 	#related-work .round-item > :only-child {
 		left: 10vw;
 		top: 40%;
+	}
+
+#stat-summary {
+	flex-flow: row wrap;
+}
+
+	#stat-summary article {
+		width: 50%;
+		text-align: center;
+	}
+
+#crud-apps {
+
+}
+
+	#crud-apps ul {
+		column-count: 2;
+		list-style: none;
 	}
