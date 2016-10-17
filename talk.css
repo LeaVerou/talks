@@ -390,18 +390,24 @@ button.undo.mv-ui {
 		 fill: none;
 	}
 
-	.other,
-	#subjects[data-step]:not([data-step="1"]):not([data-step="2"]) .beginner {
+	.other {
 		--color: yellowgreen;
+	}
+
+	#subjects[data-step]:not([data-step="1"]):not([data-step="2"]) .beginner {
+		--color: orange;
 	}
 
 	.male {
 		--color: hsl(340, 70%, 70%);
 	}
 
-	.female,
-	#subjects[data-step]:not([data-step="1"]):not([data-step="2"]) .intermediate {
+	.female {
 		--color: hsl(185, 70%, 60%);
+	}
+
+	#subjects[data-step]:not([data-step="1"]):not([data-step="2"]) .intermediate {
+		--color: #f06;
 	}
 
 	.legend, .age,
