@@ -97,7 +97,7 @@
 	font-weight: 100;
 }
 
-#research-question h1 span {
+.label {
 	display: block;
 	width: fit-content;
 	padding: .2em .5em;
@@ -454,8 +454,13 @@ button.undo.mv-ui {
 		padding: .5em;
 		font-weight: bold;
 		white-space: nowrap;
-		flex: 1;
+		color: black;
 	}
+
+		.timeline > div div {
+			font-size: 65%;
+			font-weight: 300;
+		}
 
 	.timeline .tutorial {
 		background: orange;
@@ -463,10 +468,12 @@ button.undo.mv-ui {
 
 	.timeline .structured {
 		background: yellowgreen;
+		flex: 1;
 	}
 
 	.timeline .unstructured {
 		background: hsl(185, 70%, 60%);
+		flex: 1;
 	}
 
 #tasks {
