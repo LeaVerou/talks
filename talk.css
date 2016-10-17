@@ -697,11 +697,25 @@ footer.slide {
 }
 
 	footer.slide h1 {
-		margin-top: 1em;
+		margin-bottom: 1em;
 	}
 
 	footer.slide > img {
 		max-width: 60vw;
+	}
+
+	footer.slide > .authors,
+	footer.slide > .affiliation {
+		margin: 0;
+	}
+
+	footer.slide > .authors {
+		margin-top: .6em;
+	}
+
+	footer.slide > .affiliation {
+		font-weight: bold;
+		margin-bottom: 2em;
 	}
 
 	footer.slide > ul {
@@ -762,6 +776,12 @@ footer.slide {
 
 	#comic img + img {
 		margin-top: .5em;
+	}
+
+	#comic[data-credits]::after {
+		color: black;
+		text-shadow: none;
+		opacity: .8;
 	}
 
 .criteria {
