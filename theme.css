@@ -360,7 +360,7 @@ code.de-emphasize {
 blockquote {
 	position: relative;
 	font-style: italic;
-	width: 20em;
+	width: calc(80vw - 4.5em);
 }
 
 	blockquote::before {
@@ -369,7 +369,7 @@ blockquote {
 		right: 100%;
 		top: -.3em;
 		margin-right: .2em;
-		font-size: 400%;
+		font-size: 300%;
 		color: #f06;
 		font-style: normal;
 	}

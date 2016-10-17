@@ -178,6 +178,7 @@
 	</header>
 
 	<article class="slide">
+		<h1>Persistence</h1>
 		<pre><code>
 			&lt;div <mark>data-store="local"</mark>>
 				&lt;!-- Mavo app -->
@@ -457,7 +458,22 @@
 		<!-- <article style="background-image: url(img/contacts.png)" class="freestyle delayed">
 			<h1>Contacts manager</h1>
 		</article> -->
-		<p class="delayed">CRUD → Basic expressions → Aggregates & Conditionals</p>
+		<div class="delayed progression">
+			<div>CRUD
+				<p class="delayed"><code>property</code>
+				<code>data-multiple</code>
+			</div> → <div>
+				Basic expressions
+				<p class="delayed"><code>[foo]</code>
+				<code>[count(foo)]</code>
+				<code>[average(foo)]</code>
+			</div> → <div>
+				Complex expressions
+				<p class="delayed">Multi-block-aggregate
+				<code>count(foo > 5)</code>
+				<code>if(foo < 5, yes, no)</code></p>
+			</div>
+		</div>
 	</article>
 
 	<article class="looping slide" data-video="videos/decisions.mp4"></article>
@@ -474,6 +490,10 @@
 		</ul>
 	</article>
 
+	<article class="slide">
+		<h1>Results</h1>
+	</article>
+
 	<article class="stat slide">
 		<h1>Success</h1>
 		<strong>100%</strong> on CRUD tasks
@@ -481,12 +501,12 @@
 
 	<article class="stat slide">
 		<h1>Success</h1>
-		<strong>97%</strong> on basic expressions
+		<strong>92.8%</strong> on basic expressions
 	</article>
 
 	<article class="stat slide">
 		<h1>Success</h1>
-		<strong>75%</strong> on complex expressions
+		<strong>74.6%</strong> on complex expressions
 	</article>
 
 	<article class="stat slide">
@@ -500,16 +520,61 @@
 		</article>
 
 		<article class="stat">
-			<strong>97%</strong> on basic expressions
+			<strong>92.8%</strong> on basic expressions
 		</article>
 
 		<article class="stat">
-			<strong>75%</strong> on complex expressions
+			<strong>74.6%</strong> on complex expressions
 		</article>
 
 		<article class="stat">
 			<strong>2<span class="down-arrow">⬇︎</span></strong> in perceived difficulty <br>on 5-point Likert scale
 		</article>
+	</article>
+
+	<article class="slide" id="hard-conditionals">
+		<h1 class="label">What was hard</h1>
+		<p>Conditionals <br><code>if(score > 0, Yes, No)</code>
+		<p class="delayed">Especially nested <br><code>if(score > 0, Yes, if(score &lt; 0, No, Maybe))</code></code>
+		<blockquote class="delayed">Just seeing those if statements...I did a little bit of Java and I remember those always screwed me over in that class. No surprise that that also tripped me up here.</blockquote>
+	</article>
+	<article class="slide" id="hard-refs">
+		<h1 class="label">What was hard</h1>
+		<p>Concatenation</p>
+		<table>
+			<thead>
+				<tr>
+					<th>HTML fragment (goal)</th>
+					<th>Success</th>
+				</tr>
+			</thead>
+			<tbody class="language-none">
+				<tr>
+					<td><code>&lt;/meter> <mark>[rating]</mark></code></td>
+					<td style="color: yellowgreen">100%</td>
+				</tr>
+				<tr>
+					<td><code>title="Overall rating: <mark>[rating]</mark>"</code></td>
+					<td style="color: yellowgreen">100%</td>
+				</tr>
+				<tr>
+					<td><code>&lt;/meter> <mark>[weight]</mark></code></td>
+					<td style="color: yellowgreen">100%</td>
+				</tr>
+				<tr>
+					<td><code>style="background: url(<mark>[pic]</mark>)"</code></td>
+					<td style="color: #f88">77.8%</td>
+				</tr>
+				<tr>
+					<td><code>class="weight-<mark>[weight]</mark>"</code></td>
+					<td style="color: #f88">75%</td>
+				</tr>
+				<tr>
+					<td><code>class="answer-<mark>[answer]</mark>"</code></td>
+					<td style="color: #f88">75%</td>
+				</tr>
+			</tbody>
+		</table>
 	</article>
 
 	<article class="slide" id="freestyle">
@@ -541,31 +606,29 @@
 	</article>
 
 	<article class="slide">
-		<blockquote>Being able to do that... right in the HTML and not have to fool with a whole other JS file... That is fantastic.  I can't say how awesome that is.  I want this thing now.</blockquote>
-	</article>
-	<article class="slide">
-		<blockquote>When is this going to be available? This is terrific. This is exactly the stuff I have a hard time with.</blockquote>
-	</article>
-	<article class="slide">
-		<blockquote>It seems much more straightforward, everything is right there. It's almost too easy</blockquote>
-	</article>
-	<article class="slide">
-		<blockquote>It didn't seem like a lot of new things had to be learned.</blockquote>
-	</article>
-	<article class="slide">
+		<h1>Simplicity</h1>
 		<blockquote>It's very simple.  It's as logical as HTML.  You are eliminating a huge step in coding.</blockquote>
+		<blockquote>It's simpler than I expected.  My anxiety expects it to be hard, then I just say write what you think, and it turns out to be right. It’s very intuitive.</blockquote>
+		<blockquote>It’s so expressive, it tells you exactly what it’s doing!</blockquote>
 	</article>
+
 	<article class="slide">
-		<blockquote>I'm convinced it's magic to basically write templating logic and have it show up and be editable.  I think there's a lot less cognitive overhead to direct manipulation on the page, especially for a nontechnical user.</blockquote>
+		<h1>Learnability</h1>
+		<blockquote>It didn't seem like a lot of new things had to be learned. Naming properties was just the same as giving classes and ids.</blockquote>
+		<blockquote>It seems much more straightforward, everything is right there. It's almost too easy!</blockquote>
 	</article>
+
 	<article class="slide">
-		<blockquote>It's simpler than I expected.  My anxiety expects it to be hard, then I just say write what you think, and it turns out to be right.</blockquote>
+		<h1>Utility</h1>
+		<blockquote>Being able to do that... right in the HTML and not have to fool with a whole other JS file... That is fantastic.  I can't say how awesome that is.  I want this thing now.</blockquote>
+		<blockquote>When is this going to be available? This is terrific. This is exactly the stuff I have a hard time with.</blockquote>
+		<blockquote>I'm convinced it's magic to write templating logic and have it show up and be editable.</blockquote>
 	</article>
 </section>
 
 <article class="future slide">
 	<h1>Future work</h1>
-	<ul>
+	<ul class="delayed-children">
 		<li>Better handling of schema mutations</li>
 		<li>Filtering & Sorting</li>
 		<li>Granular access control</li>
@@ -573,13 +636,9 @@
 </article>
 
 <footer class="slide">
-	<h1>Thank you!</h1>
 	<img src="img/logo.svg" />
 	<p class="authors">Lea Verou, Amy Zhang, David Karger</p>
 	<p class="affiliation">Haystack Group, MIT CSAIL</p>
-
-
-
 
 	<ul>
 		<li style="--icon: '🌍'"><a href="http://mavo.io">mavo.io</a></li>

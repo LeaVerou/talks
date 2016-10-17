@@ -550,6 +550,28 @@ button.undo.mv-ui {
 				font-weight: bold;
 			}
 
+	#tasks .progression {
+		font-size: 120%;
+	}
+
+		#tasks .progression > div {
+			position: relative;
+			display: inline-block;
+		}
+
+		#tasks .progression > div:first-of-type {
+			width: 5em;
+			text-align: right;
+		}
+
+			#tasks .progression div p {
+				position: absolute;
+				top: 100%;
+				left: 0; right: 0;
+				font-size: 50%;
+				white-space: pre-line;
+			}
+
 #structured {}
 
 	#structured img,
@@ -871,3 +893,23 @@ footer.slide {
 		column-count: 2;
 		list-style: none;
 	}
+
+#hard-conditionals h1,
+#hard-refs h1 {
+	font-size: 140%;
+}
+
+#hard-conditionals p,
+#hard-refs p {
+	text-align: center;
+	margin: .5em 0;
+}
+
+#hard-refs th {
+	padding: .1em .5em;
+	background: hsla(0,0%,100%,.3);
+}
+
+#hard-refs td {
+	padding: .2em .5em;
+}
