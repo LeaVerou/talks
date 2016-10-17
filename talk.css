@@ -802,8 +802,8 @@ footer.slide {
 	#related-work h1 {
 		margin: 0;
 		font-weight: 900;
-		line-height: .75;
-		font-size: 350%;
+		line-height: .78;
+		font-size: 250%;
 		letter-spacing: -.05em;
 		color: hsl(200, 15%, 20%);
 		text-indent: -.06em;
@@ -819,9 +819,20 @@ footer.slide {
 	}
 
 	#related-work .round-item > :only-child {
-		left: 10vw;
-		top: 40%;
+		left: 9vw;
+		top: 45%;
 	}
+
+	#related-work .ref {
+		display: inline-block;
+		vertical-align: .2em;
+		font-weight: 600;
+		font-size: 40%;
+		letter-spacing: -.03em;
+	}
+
+	#related-work .ref::before { content: "["; }
+	#related-work .ref::after { content: "]"; }
 
 #stat-summary {
 	flex-flow: row wrap;
