@@ -290,7 +290,15 @@ div.editor {
 section > header.slide {
 	align-items: center;
 	justify-content: center;
-	background: transparent;
+	--stripe: 15vw;
+	--stripe-gap: 10px;
+	background: repeating-linear-gradient(-30deg, white 0, white var(--stripe-gap), transparent var(--stripe-gap), transparent var(--stripe)),
+	repeating-linear-gradient(-30deg,
+	                  hsl(35, 100%, 50%) 0, hsl(35, 100%, 50%) var(--stripe),
+					  hsl(330, 100%, 50%) var(--stripe), hsl(330, 100%, 50%) calc(2 * var(--stripe)),
+					  hsl(85, 80%, 45%) calc(2 * var(--stripe)), hsl(85, 80%, 45%) calc(3 * var(--stripe)),
+					  hsl(200, 90%, 55%) calc(3 * var(--stripe)), hsl(200, 90%, 55%) calc(4 * var(--stripe))
+			    );
 }
 
 section > header.slide:target {
