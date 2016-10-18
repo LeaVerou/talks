@@ -215,6 +215,20 @@
 		</code></pre>
 	</article> -->
 
+	<article class="visible-storage example slide" id="form-elements">
+		<pre><code>
+			&lt;div <mark>data-store="local"</mark>>
+				&lt;input <mark>property="name"</mark> value="Lea Verou"/>
+				&lt;input <mark>property="strength"</mark> type="range" />
+				&lt;select <mark>property="country"</mark>>
+					&lt;option value="us">United States&lt;/option>
+					&lt;option value="gb">United Kingdom&lt;/option>
+					&lt;option value="jp">Japan&lt;/option>
+				&lt;/select>
+			&lt;/div>
+		</code></pre>
+	</article>
+
 	<article class="visible-storage example slide">
 		<pre style="font-size: 80%;"><code>
 			&lt;div class="cat" <mark>data-store="local"</mark>>
@@ -223,18 +237,6 @@
 				&lt;time <mark>property="birthday"</mark> datetime="2014-06-01">1 Jun 2014&lt;/time>
 				Cuteness: &lt;meter <mark>property="rating"</mark> value="3" max="5">&lt;/meter>
 			&lt;/div>
-		</code></pre>
-	</article>
-
-	<article class="visible-storage example slide" id="form-elements">
-		<pre><code>
-			&lt;input property="name" value="Lea Verou"/>
-			&lt;input property="strength" type="range" />
-			&lt;select property="country">
-				&lt;option value="us">United States&lt;/option>
-				&lt;option value="gb">United Kingdom&lt;/option>
-				&lt;option value="jp">Japan&lt;/option>
-			&lt;/select>
 		</code></pre>
 	</article>
 <!--
@@ -253,7 +255,7 @@
 		<pre><code>
 			Hobbies:
 			&lt;ul>
-				&lt;li property="hobby" data-multiple>Eating&lt;/li>
+				&lt;li property="hobby" <mark>data-multiple</mark>>Eating&lt;/li>
 			&lt;/ul>
 		</code></pre>
 	</article>
@@ -475,40 +477,6 @@
 		<strong>92.8%</strong> on basic expressions
 	</article>
 
-	<article class="stat slide">
-		<h1>Success</h1>
-		<strong>74.6%</strong> on complex expressions
-	</article>
-
-	<article class="stat slide">
-		<h1>Success</h1>
-		<strong>2<span class="down-arrow">⬇︎</span></strong> in perceived difficulty <br>on 5-point Likert scale
-	</article>
-
-	<article class="slide" id="stat-summary">
-		<article class="stat">
-			<strong>100%</strong> on CRUD tasks
-		</article>
-
-		<article class="stat">
-			<strong>92.8%</strong> on basic expressions
-		</article>
-
-		<article class="stat">
-			<strong>74.6%</strong> on complex expressions
-		</article>
-
-		<article class="stat">
-			<strong>2<span class="down-arrow">⬇︎</span></strong> in perceived difficulty <br>on 5-point Likert scale
-		</article>
-	</article>
-
-	<article class="slide" id="hard-conditionals">
-		<h1 class="label">What was hard</h1>
-		<p>Conditionals <br><code>if(score > 0, Yes, No)</code>
-		<p class="delayed">Especially nested <br><code>if(score > 0, Yes, if(score &lt; 0, No, Maybe))</code></code>
-		<blockquote class="delayed">Just seeing those if statements...I did a little bit of Java and I remember those always screwed me over in that class. No surprise that that also tripped me up here.</blockquote>
-	</article>
 	<article class="slide" id="hard-refs">
 		<h1 class="label">What was hard</h1>
 		<p>Concatenation</p>
@@ -546,6 +514,41 @@
 				</tr>
 			</tbody>
 		</table>
+	</article>
+
+	<article class="stat slide">
+		<h1>Success</h1>
+		<strong>74.6%</strong> on complex expressions
+	</article>
+
+	<article class="slide" id="hard-conditionals">
+		<h1 class="label">What was hard</h1>
+		<p>Conditionals <br><code>if(score > 0, Yes, No)</code>
+		<p class="delayed">Especially nested <br><code>if(score > 0, Yes, if(score &lt; 0, No, Maybe))</code></code>
+		<blockquote class="delayed">Just seeing those if statements...I did a little bit of Java and I remember those always screwed me over in that class. No surprise that that also tripped me up here.</blockquote>
+	</article>
+
+	<article class="stat slide">
+		<h1>Success</h1>
+		<strong>2<span class="down-arrow">⬇︎</span></strong> in perceived difficulty <br>on 5-point Likert scale
+	</article>
+
+	<article class="slide" id="stat-summary">
+		<article class="stat">
+			<strong>100%</strong> on CRUD tasks
+		</article>
+
+		<article class="stat">
+			<strong>92.8%</strong> on basic expressions
+		</article>
+
+		<article class="stat">
+			<strong>74.6%</strong> on complex expressions
+		</article>
+
+		<article class="stat">
+			<strong>2<span class="down-arrow">⬇︎</span></strong> in perceived difficulty <br>on 5-point Likert scale
+		</article>
 	</article>
 
 	<article class="slide" id="freestyle">
