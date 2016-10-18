@@ -292,6 +292,18 @@
 			content: ", ";
 		}
 
+#aggregate-expressions pre code div,
+#aggregate-expressions .example-container > h1,
+#aggregate-expressions .example-container > h1 ~ p {
+	transition: .4s opacity;
+}
+
+#aggregate-expressions:not([data-step]) pre code div,
+#aggregate-expressions:not([data-step]) .example-container > h1,
+#aggregate-expressions:not([data-step]) .example-container > h1 ~ p {
+	opacity: 0;
+}
+
 #aggregate-expressions [property=cat] ~ h1 {
 	font-weight: bold;
 	margin-bottom: .1em;
@@ -886,12 +898,58 @@ footer.slide {
 	}
 
 #crud-apps {
-
+	overflow: hidden;
+	padding: 0;
 }
 
+	#crud-apps h1 {
+		width: 3em;
+		position: absolute;
+		left: 0;
+		font-weight: 100;
+		background: orange;
+		padding: .5em;
+		color: black;
+		font-size: 220%;
+	}
+
+		#crud-apps h1 span {
+			position: relative;
+			display: block;
+			font-size: 40%;
+			line-height: 1.2;
+			font-weight: bold;
+			margin-top: 1em;
+		}
+
+			#crud-apps h1 span::before {
+				content: "&";
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: -.63em;
+				color: hsla(0,0%,0%,.3);
+				text-align: center;
+				font: italic 500%/1 Baskerville, serif;
+				mix-blend-mode: multiply;
+			}
+
+	@keyframes credits {
+		to {
+			transform: translateY(-100%);
+		}
+	}
+
 	#crud-apps ul {
-		column-count: 2;
+		position: absolute;
+		top: 0;
 		list-style: none;
+		line-height: 1.5;
+		font-weight: bold;
+		margin: 0;
+		padding: 0;
+		text-shadow: 0 calc(var(--total) * 1.5em - .3em);
+		animation: credits 5s linear infinite;
 	}
 
 #hard-conditionals h1,

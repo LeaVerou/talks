@@ -27,8 +27,9 @@
 		<img class="delayed" src="img/everyoneknows.png" alt="">
 	</article>
 
-	<article class="slide" id="crud-apps">
-		<ul>
+	<article class="dont-resize slide" id="crud-apps">
+		<h1>CRUD <span>Lightweight computation</span></h1>
+		<ul style="--total: 19">
 			<li>Portfolio</li>
 			<li>Publication list</li>
 			<li>Photo album</li>
@@ -39,10 +40,16 @@
 			<li>Menstruation tracker</li>
 			<li>Invoicing system</li>
 			<li>Calculators & converters</li>
+
 			<li>Restaurant menu</li>
 			<li>Trip log</li>
 			<li>Fitness tracker</li>
-			<li>…</li>
+			<li>Recipe collection</li>
+			<li>Broker property listing</li>
+			<li>Personal chequebook</li>
+			<li>Party RSVP</li>
+			<li>Bar inventory</li>
+			<li>Pet care tracker</li>
 		</ul>
 	</article>
 
@@ -55,6 +62,8 @@
 
 	<article class="slide" id="the-problem" data-steps="2" data-credits="https://www.flickr.com/photos/mjhagen/2973212926 https://www.flickr.com/photos/97481684@N08/13969413085">
 		<ul>
+			<li>Objects</li>
+			<li>DOM</li>
 			<li>npm</li>
 			<li>NodeJS</li>
 			<li>JSON</li>
@@ -116,7 +125,7 @@
 		<ul class="criteria delayed-children">
 			<li>Language, not system</li>
 			<li>Hierarchical data</li>
-			<li>CRUD + Computation</li>
+			<li>Lightweight Computation</li>
 		</ul>
 	</article>
 
@@ -127,7 +136,7 @@
 				<ul class="criteria">
 					<li>Language, not system</li>
 					<li>Hierarchical data</li>
-					<li class="fail">CRUD + Computation</li>
+					<li class="fail">Lightweight Computation</li>
 				</ul>
 			</div>
 		</article>
@@ -137,7 +146,7 @@
 				<ul class="criteria">
 					<li class="fail">Language, not system</li>
 					<li>Hierarchical data</li>
-					<li>CRUD + Computation</li>
+					<li>Lightweight Computation</li>
 				</ul>
 			</div>
 		</article>
@@ -147,7 +156,7 @@
 				<ul class="criteria">
 					<li>Language, not system</li>
 					<li class="fail">Hierarchical data</li>
-					<li>CRUD + Computation</li>
+					<li>Lightweight Computation</li>
 				</ul>
 			</div>
 		</article>
@@ -195,7 +204,7 @@
 		</code></pre>
 	</article>
 
-	<article class="example slide">
+	<!-- <article class="example slide">
 		<pre style="font-size: 80%;"><code>
 			&lt;div class="cat">
 				&lt;img src="img/adamcatlace.png">
@@ -204,7 +213,7 @@
 				Cuteness: &lt;meter value="3" max="5">&lt;/meter>
 			&lt;/div>
 		</code></pre>
-	</article>
+	</article> -->
 
 	<article class="visible-storage example slide">
 		<pre style="font-size: 80%;"><code>
@@ -228,7 +237,7 @@
 			&lt;/select>
 		</code></pre>
 	</article>
-
+<!--
 	<article class="example slide" id="multiple-properties">
 		<pre><code>
 			Hobbies:
@@ -238,7 +247,7 @@
 				&lt;li property="hobby">Purring&lt;/li>
 			&lt;/ul>
 		</code></pre>
-	</article>
+	</article> -->
 
 	<article class="example slide">
 		<pre><code>
@@ -281,46 +290,8 @@
 		</code></pre>
 	</article>
 
-	<article class="vertical example slide lite-cats" data-credits="Cat’s Shrödinger by The Oatmeal, Cat on Laptop from flickr.com/photos/nwater/8130196854">
-		<script type="application/json">{
-			"cat": [
-				{
-					"photo": "img/adamcatlace.png",
-					"name": "Adam Catlace",
-					"age": 2
-				},
-				{
-					"photo": "img/tpl.jpg",
-					"name": "Tim Purrners-Lee",
-					"age": 9
-				},
-				{
-					"photo": "img/alanpurring.jpg",
-					"name": "Alan Purring",
-					"age": 7
-				},
-				{
-					"photo": "img/vector.jpg",
-					"name": "Vector",
-					"age": 11
-				},
-				{
-					"photo": "img/shrodingcat.png",
-					"name": "Schrödingcat"
-				}
-			]
-		}</script>
-		<pre style="font-size: 80%"><code>
-			&lt;article property="cat"
-			         data-multiple>
-				&lt;img property="photo">
-				&lt;h1 property="name">&lt;/h1>
-				&lt;span property="age">&lt;/span>
-			&lt;/article>
-		</code></pre>
-	</article>
-
-	<article class="vertical example slide lite-cats" id="aggregate-expressions" data-credits="Cat’s Shrödinger by The Oatmeal, Cat on Laptop from flickr.com/photos/nwater/8130196854">
+	<article class="vertical example slide lite-cats" id="aggregate-expressions" data-steps="1"
+	         data-credits="Cat’s Shrödinger by The Oatmeal, Cat on Laptop from flickr.com/photos/nwater/8130196854">
 		<script type="application/json" id="data-aggregate-expressions">{
 			"cat": [
 				{
@@ -357,11 +328,11 @@
 				&lt;span property="age">&lt;/span>
 			&lt;/article>
 
-			&lt;h1>📊 Stats&lt;/h1>
+			<div>&lt;h1>📊 Stats&lt;/h1>
 			&lt;p><mark>[count(cat)]</mark> cats
 			    (<mark>[count(age > 6)]</mark> old)
 			&lt;p><mark>[count(age)]</mark> ages: <mark>[age]</mark>
-			&lt;p>Average age: <mark>[average(age)]</mark>
+			&lt;p>Average age: <mark>[average(age)]</mark></div>
 		</code></pre>
 	</article>
 </section>
