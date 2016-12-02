@@ -754,3 +754,28 @@ span.poop {
 		#edgestatus h1 a:not(:hover) {
 			text-decoration: none;
 		}
+
+#url-cases {
+
+}
+
+	#url-cases table td {
+		vertical-align: top;
+		padding: .5em;
+		font-weight: bold;
+		border-top: 1px solid hsla(0,0%,100%,.2);
+	}
+
+	#url-cases pre > code {
+		font-size: 75%;
+	}
+
+	#url-cases img {
+		display: inline-block;
+		vertical-align: middle;
+		height: 1.6em;
+	}
+
+	#url-cases a.bug {
+		font-size: 80%;
+	}

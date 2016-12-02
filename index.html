@@ -22,11 +22,12 @@
 
 <header id="intro" class="slide dont-resize" data-source="flickr.com/photos/billward/16601966117">
 	<h1>
-		CSS Variables: <code>var(--subtitle)</code>
+		<!-- CSS Variables: <code>var(--subtitle)</code> -->
+		CSS <span style="font: 150% 'Reenie Beanie', cursive; color: #f06">(Variable)</span> Secrets
 	</h1>
 	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
 </header>
-
+<!--
 <section>
 	<section class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
@@ -78,15 +79,15 @@
 			★★★★★ on Amazon
 		</a>
 	</section>
-</section>
+</section> -->
 
 <section>
-	<header class="slide">
+	<!-- <header class="slide">
 		<h1>CSS Variables</h1>
-	</header>
+	</header> -->
 
 	<article class="demo slide horizontal">
-		<p class="hint">--color, --corner, inline style too</p>
+		<p class="hint">--color, --corner, inline style, fallback</p>
 		<style data-slide>
 			div.block {
 				background: radial-gradient(
@@ -137,12 +138,57 @@
 		<h1>CSS Variables are <br>inherited properties<div class="delayed note">but you can change that</div></h1>
 	</article>
 
-	<article class="horizontal demo slide" data-edit="css">
+	<!-- <article class="horizontal demo slide" data-edit="css" id="url">
 		<style data-slide>
 			article {
 				background: url("img/sad.jpg") center / cover;
 			}
 		</style>
+	</article>
+
+	<article class="slide" id="url-cases">
+		<table>
+			<tr>
+				<td><pre><code>
+					--img: "sad";
+					background: url("img/" var(--img) ".jpg");
+				</code></pre></td>
+				<td>CSS limitation</td>
+			</tr>
+			<tr class="delayed">
+				<td><pre><code>
+					--img: "img/sad.jpg";
+					background: url(var(--img));
+				</code></pre></td>
+				<td>CSS bug</td>
+			</tr>
+			<tr class="delayed">
+				<td><pre><code>
+					--img: url("img/sad.jpg");
+					background: var(--img);
+				</code></pre></td>
+				<td>
+					<img src="img/chrome-logo.svg" alt="Chrome">
+					bug <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=618165" class="bug">#618165</a>
+				</td>
+			</tr>
+		</table>
+	</article>
+
+	<article class="slide" data-import="url"></article>
+
+	<article class="slide">
+		<pre><code>
+			/* a.css */
+			--a: "a.png";
+
+			/* b.css */
+			--b: url(var(--a));
+
+			/* c.css */
+			background-image: var(--b);
+		</code></pre>
+		<p><a href="https://github.com/w3c/csswg-drafts/issues/757">github.com/w3c/csswg-drafts/issues/757</a></p>
 	</article>
 
 	<article class="takeaway slide poop" id="url-poop">
@@ -158,7 +204,7 @@
 				<li><code>--foo</code> ≠ <code>--FOO</code></li>
 			</ul>
 		</div>
-	</article>
+	</article> -->
 
 	<article class="slide" id="default-values">
 		<div class="delayed-children">
@@ -182,7 +228,7 @@
 		<h1><em>Invalid at computed-value time</em> = initial</h1>
 	</article>
 
-	<article class="slide dont-resize" id="daisy-chain" data-source="Image source: https://www.flickr.com/photos/26235325@N05/5641177399">
+	<!-- <article class="slide dont-resize" id="daisy-chain" data-source="Image source: https://www.flickr.com/photos/26235325@N05/5641177399">
 		<pre><code>
 			var(--color1<span class="delayed">, var(--color2<span class="delayed">, var(--color3<span class="delayed" style="--length: 5">, red</span>)</span>)</span>)
 		</code></pre>
@@ -237,21 +283,7 @@
 			background: var(--accent-color, orange);
 		</code></pre>
 	</article>
-
-	<article class="demo slide" data-edit="css" id="atsupports">
-		<style data-slide>
-			article {
-				background: red;
-			}
-
-			@supports (--css: variables) {
-				article {
-					background: green;
-				}
-			}
-		</style>
-	</article>
-
+-->
 	<article class="talking housewife slide" data-source="flickr.com/photos/x-ray_delta_one/4264423055/">
 		<h1>Won’t someone, please, think of browser support?!</h1>
 	</article>
@@ -290,7 +322,21 @@
 		<h1><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/status/csscustompropertiesakacssvariables">status.modern.ie</a></h1>
 	</article>
 
-	<article class="horizontal demo slide">
+	<article class="demo slide" data-edit="css" id="atsupports">
+		<style data-slide>
+			article {
+				background: red;
+			}
+
+			@supports (--css: variables) {
+				article {
+					background: green;
+				}
+			}
+		</style>
+	</article>
+
+	<!-- <article class="horizontal demo slide">
 		<style data-slide>
 			.block {
 				width: 33vw;
@@ -368,12 +414,12 @@
 			}
 		</style>
 		<h1>There is hope!</h1>
-	</article>
+	</article> -->
 </section>
 
 <section>
 	<header class="slide">
-		<h1>Common use cases</h1>
+		<h1>Common use Cases</h1>
 	</header>
 
 	<article class="demo slide" id="button">
@@ -417,10 +463,10 @@
 	</article>
 
 	<article class="takeaway slide">
-		<h1>CSS Variables enable theming independent of CSS structure</h1>
+		<h1>CSS Variables enable theming<br> independent of CSS structure</h1>
 	</article>
 
-	<article class="slide" data-import="button"></article>
+	<!-- <article class="slide" data-import="button"></article>
 
 	<article class="takeaway slide">
 		<h1>Default default values are possible</h1>
@@ -428,7 +474,7 @@
 			--colorD: var(--color, black);
 			/* use --colorD instead of --color internally */
 		</code></pre>
-	</article>
+	</article> -->
 
 	<article class="slide demo" id="responsive" data-edit="css">
 		<section></section>
@@ -491,7 +537,7 @@
 		<h1>CSS Variables enable you to <br>set multiple properties at once</h1>
 	</article>
 
-	<article class="horizontal demo slide" id="purple-shadow" style="--division: 70;">
+	<!-- <article class="horizontal demo slide" id="purple-shadow" style="--division: 70;">
 		<style data-slide>
 			* {
 				--purple-shadow: initial;
@@ -504,14 +550,14 @@
 		</style>
 
 		<div class="block" data-edit="css html">
-			<div>Designers, please don't hate me! This is just an example! 😳</div>
+			<div>Purple shadows are awesome 🌈 (no, not really, please don’t)</div>
 		</div>
 	</article>
 
 	<article class="takeaway slide">
-		<h1>CSS Variables enable you to create property shortcuts with pre-filled values
+		<h1>CSS Variables let you create <br>single property mixins
 		<div class="delayed note">(like function currying, in programmerese)</div></h1>
-	</article>
+	</article> -->
 
 	<article class="demo slide" id="box-shadow" style="--font-size-multiplier: .8; --division: 70;">
 		<p class="hint">No inherit from box-shadow, invalid at computed value time</p>
