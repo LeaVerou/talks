@@ -17,16 +17,16 @@
 }
 
 #the-problem {
-	background: url(img/coding.png) center / 1152px 768px black no-repeat;
+	background: url(img/coding.png) center / cover black no-repeat;
 	transition: 1s background-image;
 }
 
 #the-problem[data-step="1"] {
-	background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"></svg>') center / 1152px 768px black  no-repeat;
+	background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"></svg>');
 }
 
 #the-problem[data-step="2"] {
-	background: url(img/frustration.jpg) center / cover black no-repeat;
+	background-image: url(img/crying-baby.jpg);
 }
 
 	#the-problem ul {
