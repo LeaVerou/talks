@@ -337,8 +337,8 @@
 	opacity: .5;
 }
 
-button.add.mv-ui,
-button.undo.mv-ui {
+button.mv-add.mv-ui,
+button.mv-undo.mv-ui {
 	padding: .1em .5em;
 	background: hsla(0,0%,100%,.75);
 	border-radius: .2em;
@@ -347,15 +347,16 @@ button.undo.mv-ui {
 	font-weight: bold;
 	font-size: 60%;
 	vertical-align: text-bottom;
+	cursor: pointer;
 }
 
-	button.add.mv-ui:hover,
-	button.undo.mv-ui:hover {
+	button.mv-add.mv-ui:hover,
+	button.mv-undo.mv-ui:hover {
 		background: hsla(0,0%,100%,.9);
 	}
 
-	button.add.mv-ui:active,
-	button.undo.mv-ui:active {
+	button.mv-add.mv-ui:active,
+	button.mv-undo.mv-ui:active {
 		background: hsla(0,0%,100%,.6);
 		padding: .2em .4em 0 .6em;
 	}
@@ -971,3 +972,17 @@ footer.slide {
 #hard-refs td {
 	padding: .2em .5em;
 }
+
+#uist {
+
+}
+
+	#uist img {
+		opacity: 1;
+		transform: translateY(100vh);
+		box-shadow: 0 0 1em rgba(0,0,0,.5);
+	}
+
+	#uist .delayed.current {
+		transform: translateY(10vh);
+	}

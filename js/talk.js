@@ -22,13 +22,13 @@ document.addEventListener("DOMContentLoaded", evt => {
 
 		data.id = data.id || "data-" + slide.id;
 
-		var mavoRoot = $("[data-store]", container) || container;
+		var mavoRoot = $("[mv-storage]", container) || container;
 
 		if (slide.classList.contains("visible-storage")) {
 			mavoRoot.classList.add("debug-saving");
 		}
 
-		mavoRoot.setAttribute("data-store", "#" + data.id);
+		mavoRoot.setAttribute("mv-storage", "#" + data.id);
 	});
 });
 

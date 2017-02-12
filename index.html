@@ -22,6 +22,10 @@
 <header class="slide" data-video="videos/authors.mp4" id="intro"></header>
 
 <section>
+	<article id="uist" class="slide" style="background: url(img/uist.png) center / 100% auto hsl(0, 0%, 87%)">
+		<img src="img/paper.png" alt="" class="delayed">
+	</article>
+
 	<article class="slide" id="comic" data-credits="zenpencils.com/comic/98-alan-watts-what-if-money-was-no-object">
 		<img src="img/goals.gif" alt="">
 		<img class="delayed" src="img/everyoneknows.png" alt="">
@@ -60,7 +64,7 @@
 		</blockquote>
 	</article> -->
 
-	<article class="slide" id="the-problem" data-steps="2" data-credits="https://www.flickr.com/photos/mjhagen/2973212926 https://www.flickr.com/photos/97481684@N08/13969413085">
+	<article class="slide" id="the-problem" data-steps="2" data-credits="https://www.flickr.com/photos/jeremympiehler/24378077365/ https://www.flickr.com/photos/97481684@N08/13969413085">
 		<ul>
 			<li>Objects</li>
 			<li>DOM</li>
@@ -166,12 +170,12 @@
 
 	<article class="slide" id="todo-code" data-steps="1">
 		<pre><code>
-			&lt;body <mark>data-store="local"</mark>>
+			&lt;body <mark>mv-storage="local"</mark>>
 				&lt;h1>My tasks&lt;/h1>
 				&lt;p><mark>[count(done)]</mark> done of <mark>[count(task)]</mark> total&lt;/p>
 
 				&lt;ul>
-					&lt;li <mark>property="task" data-multiple</mark>>
+					&lt;li <mark>property="task" mv-multiple</mark>>
 						&lt;input <mark>property="done"</mark> type="checkbox" />
 						&lt;span <mark>property="taskTitle"</mark>>Do stuff&lt;/span>
 					&lt;/li>
@@ -189,7 +193,7 @@
 	<article class="slide">
 		<h1>Persistence</h1>
 		<pre><code>
-			&lt;div <mark>data-store="local"</mark>>
+			&lt;div <mark>mv-storage="local"</mark>>
 				&lt;!-- Mavo app -->
 			&lt;/div>
 		</code></pre>
@@ -198,7 +202,7 @@
 	<article class="slide" id="data-source">
 		<video src="videos/auth.mp4" style="height: 50vh; margin-bottom: 3vh" loop></video>
 		<pre><code>
-			&lt;div <mark>data-store="http://github.com/leaverou"</mark>>
+			&lt;div <mark>mv-storage="http://github.com/leaverou"</mark>>
 				&lt;!-- Mavo app -->
 			&lt;/div>
 		</code></pre>
@@ -217,7 +221,7 @@
 
 	<article class="visible-storage example slide" id="form-elements">
 		<pre><code>
-			&lt;div <mark>data-store="local"</mark>>
+			&lt;div <mark>mv-storage="local"</mark>>
 				&lt;input <mark>property="name"</mark> value="Lea Verou"/>
 				&lt;input <mark>property="strength"</mark> type="range" />
 				&lt;select <mark>property="country"</mark>>
@@ -231,7 +235,7 @@
 
 	<article class="visible-storage example slide">
 		<pre style="font-size: 80%;"><code>
-			&lt;div class="cat" <mark>data-store="local"</mark>>
+			&lt;div class="cat" <mark>mv-storage="local"</mark>>
 				&lt;img src="img/adamcatlace.png" <mark>property="photo"</mark>>
 				&lt;h1 <mark>property="name"</mark>>Adam Catlace&lt;/h1>
 				&lt;time <mark>property="birthday"</mark> datetime="2014-06-01">1 Jun 2014&lt;/time>
@@ -255,21 +259,24 @@
 		<pre><code>
 			Hobbies:
 			&lt;ul>
-				&lt;li property="hobby" <mark>data-multiple</mark>>Eating&lt;/li>
+				&lt;li property="hobby" <mark>mv-multiple</mark>>Eating&lt;/li>
 			&lt;/ul>
 		</code></pre>
 	</article>
 
 	<article class="example slide" id="objects">
 		<pre style="font-size: 80%"><code>
-			&lt;article property="cat" data-multiple>
+			&lt;article property="cat" mv-multiple>
 				&lt;img src="img/adamcatlace.png" property="photo">
 				&lt;h1 property="name">Adam Catlace&lt;/h1>
 				&lt;span property="age">2&lt;/span>
-				&lt;p>Hobbies: &lt;span property="hobby" data-multiple>Eating&lt;/span>
+				&lt;p>Hobbies: &lt;span property="hobby" mv-multiple>Eating&lt;/span>
 			&lt;/article>
 		</code></pre>
 	</article>
+
+	<article class="looping slide" data-video="videos/talks.mp4"></article>
+	<article class="looping slide" data-video="videos/authors.mp4"></article>
 
 	<article class="example slide">
 		<pre><code>
@@ -291,6 +298,10 @@
 			&lt;/div>
 		</code></pre>
 	</article>
+
+	<article class="looping slide" data-video="videos/color-picker.mp4"></article>
+	<article class="looping slide" data-video="videos/logo.mp4"></article>
+	<article class="looping slide" data-video="videos/mortgage.mp4"></article>
 
 	<article class="vertical example slide lite-cats" id="aggregate-expressions" data-steps="1"
 	         data-credits="Cat’s Shrödinger by The Oatmeal, Cat on Laptop from flickr.com/photos/nwater/8130196854">
@@ -324,7 +335,7 @@
 		}</script>
 		<pre style="font-size: 80%"><code>
 			&lt;article property="cat"
-			         data-multiple>
+			         mv-multiple>
 				&lt;img property="photo">
 				&lt;h1 property="name">&lt;/h1>
 				&lt;span property="age">&lt;/span>
@@ -337,13 +348,7 @@
 			&lt;p>Average age: <mark>[average(age)]</mark></div>
 		</code></pre>
 	</article>
-</section>
 
-<section>
-	<article class="looping slide" data-video="videos/talks.mp4"></article>
-	<article class="looping slide" data-video="videos/color-picker.mp4"></article>
-	<article class="looping slide" data-video="videos/logo.mp4"></article>
-	<article class="looping slide" data-video="videos/mortgage.mp4"></article>
 	<article class="looping slide" data-video="videos/invoice.mp4"></article>
 </section>
 
@@ -434,7 +439,7 @@
 		<div class="delayed progression">
 			<div>CRUD
 				<p class="delayed"><code>property</code>
-				<code>data-multiple</code>
+				<code>mv-multiple</code>
 			</div> → <div>
 				Basic expressions
 				<p class="delayed"><code>[foo]</code>
