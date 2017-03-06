@@ -350,9 +350,40 @@
 	</article>
 
 	<article class="looping slide" data-video="videos/invoice.mp4"></article>
+	<article class="looping slide" data-video="videos/svgpath.mp4"></article>
+	<article class="slide" data-src="http://mavo.io/demos"></article>
 </section>
 
-<section>
+<article class="slide">
+	<h1>Extensibility</h1>
+
+	<table>
+		<thead>
+			<th>Goal</th>
+			<th>Object or Function</th>
+		</thead>
+		<tr>
+			<td>New storage backend</td>
+			<td><code>Mavo.Backend.register()</code></td>
+		</tr>
+		<tr>
+			<td>New element/attribute preset</td>
+			<td><code>Mavo.Elements.register()</code></td>
+		</tr>
+		<tr>
+			<td>New MavoScript function</td>
+			<td><code>Mavo.Functions</code></td>
+		</tr>
+		<tr>
+			<td>New MavoScript operator</td>
+			<td><code>Mavo.Script.operators</code></td>
+		</tr>
+	</table>
+
+	<p class="delayed">Low level extensibility: <strong>Hooking</strong></p>
+</article>
+
+<section id="evaluation">
 	<header class="slide">
 		<h1>Evaluation</h1>
 	</header>
@@ -533,9 +564,46 @@
 		<blockquote class="delayed">Just seeing those if statements...I did a little bit of Java and I remember those always screwed me over in that class. No surprise that that also tripped me up here.</blockquote>
 	</article>
 
+	<article class="slide">
+		<h1>
+			<span class="label">Post study work</span>
+			Markup-based conditionals
+		</h1>
+		<pre><code>
+			&lt;div mv-if="score > 0">Yes&lt;/div>
+			&lt;div mv-if="score = 0">Maybe&lt;/div>
+			&lt;div mv-if="score < 0">No&lt;/div>
+		</code></pre>
+	</article>
+
 	<article class="stat slide">
 		<h1>Success</h1>
 		<strong>2<span class="down-arrow">⬇︎</span></strong> in perceived difficulty <br>on 5-point Likert scale
+	</article>
+
+	<article class="slide">
+		<table style="font-size: 120%;">
+			<thead>
+				<tr>
+					<th>Application</th>
+					<th>Before Mavo</th>
+					<th>After Mavo</th>
+					<th>Difference</th>
+				</tr>
+			</thead>
+			<tr>
+				<td>Decisions</td>
+				<td>2.875</td>
+				<td>1.375</td>
+				<td style="color: #fbb">⬇︎1.5</td>
+			</tr>
+			<tr>
+				<td>Foodie log</td>
+				<td>3.667</td>
+				<td>1.223</td>
+				<td style="color: #fbb">⬇︎2.445</td>
+			</tr>
+		</table>
 	</article>
 
 	<article class="slide" id="stat-summary">
@@ -605,14 +673,46 @@
 	</article>
 </section>
 
-<article class="future slide">
-	<h1>Future work</h1>
-	<ul class="delayed-children">
-		<li>Better handling of schema mutations</li>
-		<li>Filtering & Sorting</li>
-		<li>Granular access control</li>
-	</ul>
-</article>
+<section>
+	<header class="future slide">
+		<h1>Future Work</h1>
+	</header>
+
+	<article class="slide">
+		<h1>Schema mutations</h1>
+	</article>
+
+	<article class="slide">
+		<h1>Filtering & Sorting</h1>
+	</article>
+
+	<article class="slide">
+		<h1>Granular access control</h1>
+	</article>
+
+	<article class="slide" data-credits="Emoji provided free by http://emojione.com">
+		<h1>Pivoting</h1>
+		<img src="img/insideout.svg" alt="">
+	</article>
+
+	<article class="slide" data-credits="Emoji provided free by http://emojione.com">
+		<h1>Graph schemas</h1>
+		<img src="img/graph.svg" alt="">
+	</article>
+
+	<article class="slide">
+		<h1>WYSIWYG</h1>
+	</article>
+
+	<article class="slide">
+		<h1>Mavo beyond the browser</h1>
+
+		<ul>
+			<li>Internet of Things</li>
+			<li>Mobile apps</li>
+		</ul>
+	</article>
+</section>
 
 <footer class="slide">
 	<img src="img/logo.svg" />

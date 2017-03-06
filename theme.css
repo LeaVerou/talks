@@ -432,3 +432,9 @@ blockquote {
 	th:first-child {
 		text-align: left;
 	}
+
+/* Ribbon */
+[data-type].slide:not(.hide-ribbon):after {
+	background: hsl(85, 80%, 45%);
+	font-size: 80%;	
+}
