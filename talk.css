@@ -570,6 +570,7 @@ button.mv-undo.mv-ui {
 
 	#tasks .progression {
 		font-size: 120%;
+		white-space: nowrap;
 	}
 
 		#tasks .progression > div {
@@ -991,3 +992,7 @@ footer.slide {
 	#uist .delayed.current {
 		transform: translateY(10vh);
 	}
+
+#form-elements .mv-bar {
+	display: none;
+}

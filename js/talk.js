@@ -16,19 +16,26 @@ document.addEventListener("DOMContentLoaded", evt => {
 			after: code.parentNode
 		});
 
-		var data = $("script[type='application/json']", slide) || $.create("script", {
-			type: "application/json",
-		});
+		var data = $("script[type='application/json']", slide);
+		var useStorage = true;
+
+		if (!data) {
+			useStorage = false;
+			data =  $.create("script", {
+	   			type: "application/json"
+			});
+   		}
 
 		data.id = data.id || "data-" + slide.id;
 
 		var mavoRoot = $("[mv-storage]", container) || container;
 
 		if (slide.classList.contains("visible-storage")) {
-			mavoRoot.classList.add("debug-saving");
+			useStorage = true;
+			mavoRoot.classList.add("mv-debug-saving");
 		}
 
-		mavoRoot.setAttribute("mv-storage", "#" + data.id);
+		mavoRoot.setAttribute("mv-storage", useStorage? "#" + data.id : "none");
 	});
 });
 
