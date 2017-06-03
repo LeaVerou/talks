@@ -16,6 +16,11 @@
 </head>
 <body class="language-javascript">
 
+<section id="for-browser" class="dark slide">
+	<h1>Important</h1>
+	These slides should look ok in most resolutions, but should look best at 1280 &times; 800 or 1280 &times; 720.
+</section>
+
 <header id="intro" class="slide dont-resize">
 	<h1>
 		JS
@@ -28,7 +33,7 @@
 	<section class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
 			<img src="img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
-			<figcaption>Oi, eu sou a Lea</figcaption>
+			<figcaption style="font-size: 240%">Hi, I’m Lea</figcaption>
 		</figure>
 	</section>
 
@@ -36,25 +41,23 @@
 		<div>
 		<p>#funfact</p>
 		<p>I grew up in Lesbos, Greece</p>
-		<p>…which technically makes me <strong>geogrpahically Lesbian</strong></p>
+		<p>…which technically makes me <strong>geographically Lesbian</strong></p>
 		</div>
 	</section>
 
-	<section class="inverse slide dont-resize darker hi" id="doing-stuff">
-		<div class="delayed">
-			<p>I make stuff</p>
-			<ul>
-				<li><a href="http://prismjs.com">Prism</a></li>
-				<li><a href="http://leaverou.github.io/prefixfree">-prefix-free</a></li>
-				<li><a href="http://blissfuljs.com">Bliss</a></li>
-				<li><a href="http://css3test.com">css3test.com</a></li>
-				<li><a href="http://leaverou.github.io/awesomplete/">Awesomplete</a></li>
-				<li><a href="http://cubic-bezier.com/">cubic-bezier.com</a></li>
-				<li><a href="http://dabblet.com">dabblet.com</a></li>
-				<li><a href="http://leaverou.github.io/animatable/">Animatable</a></li>
-			</ul>
-			<small>More: <a href="http://github.com/leaverou">github.com/leaverou</a></small>
-		</div>
+	<section class="inverse slide dont-resize darker hi" id="projects">
+		<p>I make stuff</p>
+		<ul>
+			<li><a href="http://mavo.io/" style="background-image: url(img/project-mavo.png)">Mavo</a></li>
+			<li><a href="http://prismjs.com" style="background-image: url(img/project-prism.png)">PrismJS</a></li>
+			<li><a href="http://leaverou.github.io/prefixfree" style="background-image: url(img/project-prefixfree.png)">-prefix-free</a></li>
+			<li><a href="http://blissfuljs.com" style="background-image: url(img/project-bliss.png)">Bliss</a></li>
+			<li><a href="http://css3test.com" style="background-image: url(img/project-css3test.png)">css3test.com</a></li>
+			<li><a href="http://leaverou.github.io/awesomplete/" style="background-image: url(img/project-awesomplete.png)">Awesomplete</a></li>
+			<li><a href="http://cubic-bezier.com/" style="background-image: url(img/project-cubicbezier.png)">cubic-bezier.com</a></li>
+			<li><a href="http://dabblet.com" style="background-image: url(img/project-dabblet.png)">dabblet.com</a></li>
+			<li><a href="http://leaverou.github.io/contrast-ratio/" style="background-image: url(img/project-contrastratio.png)">Contrast Ratio</a></li>
+		</ul>
 	</section>
 
 	<section class="inverse slide dont-resize darker hi" id="csswg">
@@ -69,6 +72,7 @@
 			<img src="img/mit.svg" alt="MIT" />
 			HCI researcher @ CSAIL
 		</p>
+		<img src="img/project-mavo.png" alt="" class="delayed">
 	</section>
 
 	<section class="inverse slide dont-resize darker hi" id="book">
@@ -77,10 +81,6 @@
 			★★★★★ on Amazon
 		</a>
 	</section>
-
-	<!-- <article class="slide hi">
-		<img src="img/referendum.png" alt="" class="tweet">
-	</article> -->
 </section>
 
 <section>
@@ -94,6 +94,8 @@
 			<p class="cite"><a href="https://en.wikipedia.org/wiki/Usability"></a></p>
 		</blockquote>
 	</article>
+
+	<article class="image slide" id="boots" data-credits="The Uncomfortable, Katerina Kamprani"></article>
 
 	<article class="slide">
 		<blockquote style="max-width: 25em">
@@ -180,6 +182,26 @@
 			<pre class="error"><code>Uncaught TypeError: Failed to construct 'URL': Invalid URL</code></pre>
 			<pre><code>> new URL("foo.txt", location)</code></pre>
 			<pre><code>< URL {href: "https://leaverou.github.io/jsux/foo.txt", …}</code></pre>
+		</div>
+	</article>
+
+	<article class="slide">
+		<h1>ES6 Default Parameters</h1>
+		<pre><code>
+			function callback(
+				timestamp = Date.now(),
+				future = timestamp + 3000
+			) {
+				console.log(timestamp, future);
+			}
+		</code></pre>
+		<div class="language-console overlay">
+			<pre><code>> callback()</code></pre>
+			<pre><code>< 1472325217105 1472325220105</code></pre>
+			<pre><code>> callback(42)</code></pre>
+			<pre><code>< 42 3042</code></pre>
+			<pre><code>> callback(42, 1000000000000)</code></pre>
+			<pre><code>< 42 1000000000000</code></pre>
 		</div>
 	</article>
 </section>
@@ -309,10 +331,8 @@
 
 	<article class="hall shame slide">
 		<pre><code>
-			var els = document.querySelectorAll(".foo");
-
-			for (let i=0; i&lt;els.length; i++) {
-				els[0].setAttribute("data-foo", "bar");
+			for (let el of document.querySelectorAll(".foo")) {
+				el.setAttribute("data-foo", "bar");
 			}
 		</code></pre>
 	</article>
@@ -322,6 +342,9 @@
 			var els = document.querySelectorAll(".foo");
 
 			els.setAttribute("data-foo", "bar");
+
+			// or…
+			DOM.setAttribute(els, "data-foo", "bar");
 		</code></pre>
 	</article>
 
@@ -433,12 +456,12 @@
 		</code></pre>
 	</article>
 
-	<article class="talking housewife slide" data-source="flickr.com/photos/x-ray_delta_one/4264423055/">
+	<article class="talking housewife slide" data-credits="flickr.com/photos/x-ray_delta_one/4264423055/">
 		<h1>Won’t someone, please, think of parameters?!</h1>
 	</article>
 
 	<article class="solution slide">
-		<h1>Have both</h1>
+		<h1>Have both!</h1>
 		<pre><code>
 			let date = new Date();
 
@@ -524,15 +547,15 @@
 </code><code>ctx.ellipse(100, 100, 50, 75, .785398);</code></pre>
 	</article>
 
-	<article class="slide" id="microwave" data-source="Image credits: http://worrydream.com/LearnableProgramming">
+	<article class="slide" id="microwave" data-credits="Bret Victor, Learnable Programming (http://worrydream.com/LearnableProgramming)">
 		<div>
 			<img src="img/worrydream2.png" alt="" class="delayed">
 			<img src="img/worrydream1.png" alt="">
 		</div>
 	</article>
 
-	<article class="slide" data-source="Image credits: http://worrydream.com/LearnableProgramming">
-		<img src="img/worrydream3.png" alt="" style="transform: scale(1.5)">
+	<article class="slide" data-credits="Bret Victor, Learnable Programming (http://worrydream.com/LearnableProgramming)">
+		<img src="img/worrydream3.png" alt="" style="transform: scale(1.8)">
 	</article>
 
 	<article class="slide" data-import="ellipse"></article>
@@ -595,9 +618,10 @@
 	</article>
 
 	<article class="slide">
-		<h1>ES6 Default Parameters</h1>
+		<h1>ES6 Default Parameters
+			<div style="font: 120%/1 'Reenie Beanie', sans-serif; color: yellowgreen;">+ destructuring!</div></h1>
 		<pre><code>
-			function myFunk({
+			function callback({
 				option1 = 5,
 				option2 = false
 			} = {}) {
@@ -605,11 +629,11 @@
 			}
 		</code></pre>
 		<div class="language-console overlay">
-			<pre><code>> myFunk()</code></pre>
+			<pre><code>> callback()</code></pre>
 			<pre><code>< 5 false</code></pre>
-			<pre><code>> myFunk({})</code></pre>
+			<pre><code>> callback({})</code></pre>
 			<pre><code>< 5 false</code></pre>
-			<pre><code>> myFunk({option1: 42})</code></pre>
+			<pre><code>> callback({option1: 42})</code></pre>
 			<pre><code>< 42 false</code></pre>
 		</div>
 	</article>
@@ -743,7 +767,7 @@ element.cloneNode(true); // shallow</code></pre>
 
 <section>
 	<header class="commandment slide">
-		<h1>Thou shalt chain</h1>
+		<h1>Thou shalt allow chaining</h1>
 	</header>
 
 	<article class="slide" data-import="setAttribute"></article>
@@ -859,6 +883,14 @@ element.cloneNode(true); // shallow</code></pre>
 	<article class="whynot slide">
 		<pre><code>element.children</code></pre>
 	</article>
+
+	<article class="hall shame slide">
+		<pre><code>element.addEventListnener("click", callback)</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>element.bind("click", callback)</code></pre>
+	</article>
 </section>
 <section>
 	<header class="commandment slide">
@@ -898,7 +930,9 @@ element.cloneNode(true); // shallow</code></pre>
 		<h1>Thou shalt respond <br>to changes</h1>
 	</header>
 
-	<article class="slide" data-src="http://masonry.desandro.com/"></article>
+	<article class="image slide" style="background-image: url(img/packery.png); background-position: top;">
+		<h1>packery.metafizzy.co</h1>
+	</article>
 
 	<article class="hall shame slide">
 		<pre><code>
@@ -918,7 +952,7 @@ element.cloneNode(true); // shallow</code></pre>
 	</article>
 
 	<article class="slide" id="future-observers">
-		<h1>Soon:</h1>
+		<h1>Also:</h1>
 
 		<ul>
 			<li><strong>ResizeObserver</strong> <a href="https://wicg.github.io/ResizeObserver"></a></li>
@@ -927,7 +961,7 @@ element.cloneNode(true); // shallow</code></pre>
 		</ul>
 	</article>
 
-	<article class="talking housewife slide" id="think-of-the-browsers" data-source="flickr.com/photos/x-ray_delta_one/4264423055/">
+	<article class="talking housewife slide" id="think-of-the-browsers" data-credits="flickr.com/photos/x-ray_delta_one/4264423055/">
 		<h1>Won’t someone, please, think of performance?!</h1>
 	</article>
 
@@ -976,8 +1010,20 @@ element.cloneNode(true); // shallow</code></pre>
 
 	<article class="hall shame slide">
 		<div class="language-console">
-			<pre><code>> JSON.stringify({regex: /a/})</code></pre>
+			<pre><code>> JSON.stringify({regex: /a/gi})</code></pre>
 			<pre><code>< '{"regex":{}}'</code></pre>
+		</div>
+	</article>
+
+	<article class="whynot slide dont-resize">
+		<pre><code>
+			RegExp.prototype.toJSON = function(){
+				return `/${this.source}/${this.flags}`;
+			}</code></pre>
+		<div class="language-console">
+
+			<pre><code>> JSON.stringify({regex: /a/gi})</code></pre>
+			<pre><code>< '{"regex":"/a/gi"}'</code></pre>
 		</div>
 	</article>
 </section>
@@ -1123,12 +1169,14 @@ element.cloneNode(true); // shallow</code></pre>
 </section>
 
 <footer class="dark slide">
-	<img src="img/mark.svg" />
-	<h1>Thank you!</h1>
+	<img src="img/mark.svg" class="logo" />
+	<h1>спасибо!</h1>
+	<img src="img/stickers.jpg" class="stickers delayed" alt="">
+	<p class="stickercaption delayed">Want one? Just ask! ---></p>
 	<ul>
-		<li style="--icon: '📨'"><a href="mailto:lea@w3.org">lea@verou.me</a></li>
-		<li style="--icon: '🌍'"><a href="http://lea.verou.me">lea.verou.me</a></li>
-		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
+		<li><a href="mailto:lea@w3.org">lea@verou.me</a></li>
+		<li><a href="http://lea.verou.me">lea.verou.me</a></li>
+		<li><a href="http://twitter.com/leaverou">@leaverou</a></li>
 	</ul>
 
 	<p>Slides: <a href="https://leaverou.github.io/jsux">leaverou.github.io/jsux</a></p>
