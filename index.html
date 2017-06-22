@@ -16,11 +16,6 @@
 </head>
 <body class="language-javascript">
 
-<section id="for-browser" class="dark slide">
-	<h1>Important</h1>
-	These slides should look ok in most resolutions, but should look best at 1280 &times; 800 or 1280 &times; 720.
-</section>
-
 <header id="intro" class="slide dont-resize">
 	<h1>
 		JS
@@ -33,7 +28,7 @@
 	<section class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
 			<img src="img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
-			<figcaption style="font-size: 240%">Hi, I’m Lea</figcaption>
+			<figcaption>Привет, я Лиа</figcaption>
 		</figure>
 	</section>
 
@@ -141,7 +136,7 @@
 
 <section>
 	<header class="slide commandment">
-		<h1>Make the simple <strong>easy</strong> & the complex <strong>possible</strong></h1>
+		<h1>Make the simple <strong>easy</strong> <br>& the complex <strong>possible</strong></h1>
 	</header>
 
 	<article class="hall fame slide">
@@ -356,6 +351,18 @@
 
 			// This is also stupid
 			[element].setAttribute(name, value)
+		</code></pre>
+	</article>
+
+	<article class="slide hall what">
+		<pre><code>
+			Object.defineProperty(obj, "property1", descriptor1);
+
+			Object.defineProperties(obj, {
+				property1: descriptor1,
+				property2: descriptor2,
+				...
+			});
 		</code></pre>
 	</article>
 </section>
@@ -638,12 +645,12 @@
 		</div>
 	</article>
 
-	<article class="hall fame slide">
+	<!-- <article class="hall fame slide">
 		<pre><code>
 			var deep = true;
 			element.cloneNode(deep);
 		</code></pre>
-	</article>
+	</article> -->
 </section>
 <section>
 	<header class="sin slide">
@@ -703,7 +710,7 @@
 	</article>
 </section>
 
-<section>
+<!-- <section>
 	<header class="sin slide">
 		<h1>True by default</h1>
 	</header>
@@ -763,7 +770,7 @@ element.cloneNode(true); // shallow</code></pre>
 			<li>👎 True by default</li>
 		</ol>
 	</article>
-</section>
+</section> -->
 
 <section>
 	<header class="commandment slide">
@@ -890,6 +897,17 @@ element.cloneNode(true); // shallow</code></pre>
 
 	<article class="whynot slide">
 		<pre><code>element.bind("click", callback)</code></pre>
+		<pre class="delayed"><code>element.on("click", callback)</code></pre>
+		<pre class="delayed"><code>element.addEvent("click", callback)</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>element.getBoundingClientRect().bottom</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>element.rect().bottom</code></pre>
+		<pre class="delayed"><code>element.rect.bottom</code></pre>
 	</article>
 </section>
 <section>
@@ -1062,8 +1080,15 @@ element.cloneNode(true); // shallow</code></pre>
 		</script>
 	</article>
 
+	<article class="slide" data-src="https://aframe.io/"></article>
+	<article class="slide" data-src="http://localhost:8001" title="https://mavo.io"></article>
+
 	<article class="slide">
-		<h1>HTML API design</h1>
+		<h1>Good HTML APIs <br>are easier for developers too</h1>
+	</article>
+
+	<article class="slide">
+		<h1>HTML API design basics</h1>
 		<ul>
 			<li>Have an <strong>init selector</strong>.</li>
 			<li>Settings
@@ -1092,12 +1117,11 @@ element.cloneNode(true); // shallow</code></pre>
 
 	<article class="demo hall fame slide">
 		<div data-edit="contents">
-			<input type="range" max="100" step="2" list="ticks" />
-			<datalist id="ticks">
-				<option>0</option>
-				<option>50</option>
-				<option>60</option>
-				<option>70</option>
+			<input type="color" list="palette" />
+			<datalist id="palette">
+				<option>#FF0066</option>
+				<option>#00aacc</option>
+				<option>#99CC00</option>
 			</datalist>
 		</div>
 	</article>
@@ -1138,6 +1162,25 @@ element.cloneNode(true); // shallow</code></pre>
 	</article>
 
 	<article class="slide">
+		<h1>Easy inheritance: CSS variables</h1>
+		<pre class="partial"><code>
+			&lt;body <mark>style="--language: javascript"</mark>>
+				Use &lt;code>foo()&lt;/code> and &lt;code>bar()&lt;/code> to…
+
+				&lt;pre <mark>style="--language: css"</mark>>
+					&lt;code>* { box-sizing: border-box }&lt;/code>
+				&lt;/pre>
+			&lt;/body>
+		</code></pre>
+	</article>
+
+	<article class="slide language-js">
+		<pre><code>
+			getComputedStyle(element).getPropertyValue("--language");
+		</code></pre>
+	</article>
+
+	<article class="slide">
 		<h1>Global settings on &lt;script></h1>
 		<pre><code>&lt;script src="stretchy.min.js" data-filter=".foo">&lt;/script></code></pre>
 	</article>
@@ -1146,7 +1189,44 @@ element.cloneNode(true); // shallow</code></pre>
 		<pre><code>document.currentScript.getAttribute("data-filter")</code></pre>
 	</article>
 
-	<article class="slide" data-src="http://markapp.io"></article>
+
+</section>
+
+<section class="language-markup">
+	<header class="sin slide">
+		<h1>Treating HTML <br>like a JS shortcut</h1>
+	</header>
+
+	<article class="image slide" style="background-image: url(img/packery-html.png)"></article>
+
+	<article class="whynot slide">
+		<script type="text/plain">
+			<div class="grid"
+			     data-packery-selector=".grid-item"
+			     data-packery-gutter="10">
+		</script>
+	</article>
+</section>
+
+<section class="language-markup">
+	<header class="sin slide">
+		<h1>Pointless HTML ≠ HTML API</h1>
+	</header>
+
+	<article class="slide" data-src="https://shop.polymer-project.org"></article>
+
+	<article class="hall shame slide">
+		<script type="text/plain">
+			<body>
+				<shop-app unresolved="">SHOP</shop-app>
+				<script>...&lt;/script>
+			</body>
+		</script>
+	</article>
+
+	<article class="top-heavy image slide" style="background-image: url(img/htmlapis.png)">
+		<h1>smashingmagazine.com/2017/02/designing-html-apis</h1>
+	</article>
 
 	<!-- <article class="slide" data-src="http://leaverou.github.io/multirange" data-title="Soon: CSS API?"></article> -->
 	<article id="multirange" class="image slide">

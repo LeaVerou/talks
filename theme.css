@@ -96,6 +96,8 @@ textarea:not([class]) {
 	input[type="tel"],
 	textarea:not([class]) {
 		background: white;
+        color: black;
+        font-weight: bold;
 		padding: 0 .3em;
 		border: .05em solid hsl(200, 40%, 80%);
 	}

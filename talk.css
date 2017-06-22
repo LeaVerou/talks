@@ -111,7 +111,7 @@
 					text-align: center;
 					color: black;
 					text-shadow: none;
-					font: 300%/.7 'Reenie Beanie', cursive;
+					font: 240%/.7 Marker Felt, 'Reenie Beanie', cursive;
 				}
 
 				.hi figure img {
@@ -629,14 +629,14 @@ ul.good {
 	display: block;
 	background: #8f8f8f url(img/housewife.png) no-repeat bottom right / 450px auto;
 	background-color: #978;
-	background-size: 450px;
+	background-size: 30vw auto;
 	padding: 2em;
 	transition: 1s ease-in-out background-size;
 	color: black;
 }
 
 	.talking.housewife.slide:target {
-		background-size: 550px auto;
+		background-size: 50vw auto;
 	}
 
 	.talking.slide > h1 {
@@ -784,7 +784,7 @@ ul.good {
 
 .whynot.slide {
 	--q: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
-	<text style="fill: white; fill-opacity: .12; font: bold 80px/1 Times;" y=".8em">?</text></svg>');
+	<text style="fill: white; fill-opacity: .2; font: bold 80px/1 Times;" y=".8em">?</text></svg>');
 	--size: 30vmin;
 	background: var(--q) 0 0, var(--q) calc(var(--size) / 2) calc(var(--size) / 2);
 	background-size: var(--size) var(--size);

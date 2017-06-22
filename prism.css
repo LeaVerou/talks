@@ -48,7 +48,7 @@ code[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: #666;
+	color: #777;
 }
 
 .token.punctuation {
@@ -132,7 +132,7 @@ pre.partial > code {
 	color: hsla(0,0%,100%,.5);
 }
 
-	pre.partial > code .token:not(.grouptoken) {
+	pre.partial > code .token:not(.grouptoken):not(.style-attr) {
 		opacity: .5;
 	}
 
@@ -142,6 +142,6 @@ pre.partial > code {
 		opacity: 1;
 	}
 
-		pre.partial > code mark .token:not(.grouptoken) {
+		pre.partial > code mark .token:not(.grouptoken):not(.style-attr) {
 			opacity: 1;
 		}
