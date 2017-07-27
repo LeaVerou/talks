@@ -1,0 +1,319 @@
+html {
+	--font-mono: Consolas, Monaco, 'Andale Mono', monospace;
+	--font-body: 'Helvetica Neue', sans-serif;
+	--font-heading: var(--font-body);
+	--font-handwritten: 'Reenie Beanie', Marker Felt, cursive;
+}
+
+body {
+	font: 100 100%/1.5 var(--font-body);
+	font-family: var(--font-body);
+	background: linear-gradient(45deg, silver 25%, transparent 25%, transparent 75%, silver 75%),
+	            linear-gradient(45deg, silver 25%, transparent 25%, transparent 75%, silver 75%) 20px 20px;
+	background-color: #eee;
+	background-size: 40px 40px;
+}
+
+h1 {
+	font-weight: bold;
+	line-height: 1.2;
+}
+
+a {
+	color: inherit;
+}
+
+strong, b {
+	font-weight: bold; /* FF is weird */
+}
+
+code, textarea, pre, div.editor {
+	margin: 0;
+	font: 100%/1.4 var(--font-mono);
+	font-family: var(--font-mono);
+	-moz-tab-size: 3;
+	tab-size: 3;
+	text-align: left;
+}
+
+pre {
+	overflow: auto;
+}
+
+	pre.delayed > code.delayed {
+		opacity: 1;
+	}
+
+	pre > code {
+		font-size: inherit;
+	}
+
+pre + pre {
+	margin-top: 1.5em;
+}
+
+input:not([type=file]),
+textarea:not([class]) {
+	font: inherit;
+	color: inherit;
+}
+
+	input[type="range"][orient="vertical"] {
+		-webkit-appearance: slider-vertical;
+		writing-mode: bt-lr;
+	}
+
+	input:not([type]),
+	input[type="text"],
+	input[type="email"],
+	input[type="tel"],
+	textarea:not([class]) {
+		background: white;
+		padding: 0 .3em;
+		border: .05em solid hsl(200, 40%, 80%);
+	}
+
+button {
+	font: inherit;
+	cursor: pointer;
+}
+
+.demo.slide {
+	text-align: center;
+	font-size: 200%;
+}
+
+.demo.slide.horizontal {
+	padding-bottom: calc(var(--division, 50) * 1vh - 10vh);
+}
+
+.demo.slide:not(.horizontal) {
+	padding-left: calc(var(--division, 60) * 1vw + 3vw);
+	align-items: center;
+	justify-content: center;
+}
+
+textarea.editor,
+div.editor > pre {
+	padding: 1rem 2rem;
+	line-height: inherit;
+	box-sizing: border-box;
+}
+
+div.editor {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	color: white;
+	font-size: calc(var(--font-size-multiplier, 1) * 100%);
+	line-height: 1.5;
+	box-sizing: border-box;
+}
+
+.demo.slide:not(.horizontal) div.editor {
+	top: 0;
+	width: calc(var(--division, 60) * 1vw);
+}
+
+.demo.slide.horizontal div.editor {
+	right: 0;
+}
+
+	textarea.editor {
+		display: block;
+		color: white;
+		height: 100%;
+		-webkit-text-fill-color: transparent;
+		white-space: pre;
+		border: 0;
+		outline: none;
+		width: 100%;
+		background: hsl(200, 10%, 20%) linear-gradient(rgba(0,0,0,.1) 50%, transparent 0);
+		background-origin: content-box;
+		background-size: auto 3em;
+		background-attachment: local;
+
+	}
+
+	.demo.slide:not(.horizontal) div.editor > textarea.editor {
+		box-shadow: -.1em 0 .2em rgba(0,0,0,.3) inset;
+	}
+
+	.demo.slide.horizontal div.editor > textarea.editor {
+		max-height: calc(var(--division, 50) * 1vh);
+		box-shadow: 0 .1em .2em rgba(0,0,0,.3) inset;
+	}
+
+	div.editor > pre {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
+		margin: 0;
+		pointer-events: none;
+	}
+
+	.editor label {
+		position: absolute;
+		top: .5em;
+		right: .5em;
+		padding: .1em .4em;
+		border-radius: .3em;
+		background: hsl(30, 100%, 50%);
+		color: white;
+		cursor: pointer;
+		text-transform: uppercase;
+		font: bold 1.5rem/1.5 var(--font-heading);
+	}
+
+		.editor label:hover {
+			background: hsl(15, 100%, 45%);
+		}
+
+.slide {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+	padding: 2.5rem;
+	background-color: black;
+	background: radial-gradient(transparent, rgba(0,0,0,.7)) hsl(200, 15%, 20%);
+	color: white;
+}
+
+@media (max-width: 1024px) {
+	.slide {
+		padding: 3vmin;
+	}
+}
+
+	.slide[data-source]::after {
+		color: black;
+		text-shadow: none;
+	}
+
+	.light.slide,
+	.demo.slide {
+		background: hsl(200, 40%, 80%);
+		color: black;
+	}
+
+	.slide > h1 {
+		text-align: center;
+		margin: 0 0 .6em;
+		font-size: 200%;
+	}
+
+	.slide h2 {
+		color: yellowgreen;
+		font-size: 120%;
+	}
+
+.image.slide > h1:only-child,
+.image.slide > .caption,
+.iframe.slide > h1 {
+	/*bottom: .5em;
+	margin: 0;*/
+	text-shadow: none;
+	font-weight: 100;
+	background: rgba(0,0,0,.5);
+	backdrop-filter: blur(4px);
+}
+
+.delayed.displayed,
+.delayed-children > .displayed {
+	opacity: 1;
+}
+
+section > header.slide {
+	align-items: center;
+	justify-content: center;
+	background: transparent;
+}
+
+section > header.slide:target {
+	display: flex;
+}
+
+	section > header.slide > h1 {
+		margin: auto;
+		padding: .5em .7em;
+		background: black;
+		text-align: center;
+		line-height: 1.2;
+		font-weight: 100;
+	}
+
+#indicator {
+	background: transparent;
+	text-shadow: none;
+	font-weight: 100;
+}
+
+::selection {
+	background: hsl(335, 100%, 40%);
+	color: white;
+}
+
+footer.ref a {
+	position: absolute;
+	bottom: 5vmin;
+	text-decoration: none;
+	font-size: 75%;
+}
+
+/* Syntax highlighting */
+
+code.de-emphasize {
+	opacity: .4;
+}
+
+.hint {
+	position: absolute;
+	font-size: .8rem;
+	font-weight: bold;
+	line-height: 1;
+	color: rgba(0,0,0,.2);
+	mix-blend-mode: multiply;
+}
+
+	.slide:not(.horizontal) .hint {
+		bottom: -5px;
+		right: 10px;
+	}
+
+	.slide.horizontal .hint {
+		top: -5px;
+		left: 10px;
+	}
+
+blockquote {
+	position: relative;
+	font-style: italic;
+	width: 20em;
+}
+
+	blockquote::before {
+		content: "❝";
+		position: absolute;
+		right: 100%;
+		top: -.3em;
+		margin-right: .2em;
+		font-size: 400%;
+		color: #f06;
+		font-style: normal;
+	}
+
+	blockquote .cite {
+		text-align: right;
+		font-style: normal;
+		font-size: 60%;
+		font-weight: bold;
+		color: #f06;
+	}
+
+		blockquote .cite a:not(:hover) {
+			text-decoration: none;
+		}

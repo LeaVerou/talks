@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title>CSS Variables: var(--subtitle);</title>
+<link href="../csss/slideshow.css" rel="stylesheet" />
+<link href="../csss/reusable.css" rel="stylesheet" />
+<link href="prism.css" rel="stylesheet" />
+<link href="theme.css" rel="stylesheet" />
+<link href="talk.css" rel="stylesheet" />
+<!-- <script src="../prefixfree/prefixfree.min.js"></script> -->
+
+</head>
+<body class="language-css">
+
+<section id="for-browser" class="dark slide">
+	<h1>Important</h1>
+	This slide deck was created for use in a controlled environment, during a talk. It works best with Chrome. It may or may not work properly in other browsers.
+	The demos were live coded, so these slides are a bit pointless if you never watched the talk.
+</section>
+
+<header id="intro" class="slide dont-resize" data-source="flickr.com/photos/billward/16601966117">
+	<h1>
+		<!-- CSS Variables: <code>var(--subtitle)</code> -->
+		CSS <span style="font: 150% 'Reenie Beanie', cursive; color: #f06">(Variable)</span> Secrets
+	</h1>
+	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
+</header>
+
+<section>
+	<section class="inverse slide dont-resize darker hi">
+		<figure class="delayed">
+			<img src="img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
+			<figcaption style="font-size: 240%">Hi, I’m Lea</figcaption>
+		</figure>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="lesbian" data-steps="3">
+		<div>
+		<p>#funfact</p>
+		<p>I grew up in Lesbos, Greece</p>
+		<p>…which technically makes me <strong>geographically Lesbian</strong></p>
+		</div>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="projects">
+		<p>I make stuff</p>
+		<ul>
+			<li><a href="http://mavo.io/" style="background-image: url(img/project-mavo.png)">Mavo</a></li>
+			<li><a href="http://prismjs.com" style="background-image: url(img/project-prism.png)">PrismJS</a></li>
+			<li><a href="http://leaverou.github.io/prefixfree" style="background-image: url(img/project-prefixfree.png)">-prefix-free</a></li>
+			<li><a href="http://blissfuljs.com" style="background-image: url(img/project-bliss.png)">Bliss</a></li>
+			<li><a href="http://css3test.com" style="background-image: url(img/project-css3test.png)">css3test.com</a></li>
+			<li><a href="http://leaverou.github.io/awesomplete/" style="background-image: url(img/project-awesomplete.png)">Awesomplete</a></li>
+			<li><a href="http://cubic-bezier.com/" style="background-image: url(img/project-cubicbezier.png)">cubic-bezier.com</a></li>
+			<li><a href="http://dabblet.com" style="background-image: url(img/project-dabblet.png)">dabblet.com</a></li>
+			<li><a href="http://leaverou.github.io/contrast-ratio/" style="background-image: url(img/project-contrastratio.png)">Contrast Ratio</a></li>
+		</ul>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="csswg">
+		<p class="delayed">
+			<strong>CSS WG</strong>
+			Invited Expert
+		</p>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="mit">
+		<p class="delayed">
+			<img src="img/mit.svg" alt="MIT" />
+			HCI researcher @ CSAIL
+		</p>
+		<img src="img/project-mavo.png" alt="" class="delayed">
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="book">
+		<a href="http://shop.oreilly.com/product/0636920031123.do" class="delayed">
+			<img src="img/book.png" alt="CSS Secrets by O’Reilly" style="display:block" />
+			★★★★★ on Amazon
+		</a>
+	</section>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>CSS Variables</h1>
+	</header>
+
+	<article class="demo slide horizontal">
+		<p class="hint">--color, --corner, inline style, fallback</p>
+		<style data-slide>
+			div.block {
+				background: radial-gradient(
+					transparent 90%,
+					currentColor 0);
+				color: #f06;
+			}
+		</style>
+		<style data-slide>
+			div.block {
+				font-size: 150%;
+				width: 4em;
+				height: 4em;
+			}
+		</style>
+		<div class="block" data-edit="css html">CSS is awesome</div>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS Variables work like<br>normal CSS properties</h1>
+	</article>
+
+	<article class="demo slide" id="inheritance">
+		<p class="hint">inheritance, cancel inheritance, inherit keyword</p>
+		<style data-slide data-scope=".blocks">
+			* {
+				outline: var(--outline);
+			}
+
+			.block1 {
+				--outline: .2em solid;
+			}
+		</style>
+		<div data-edit="contents css" class="blocks">
+			<div class="block1">
+				<div></div>
+			</div>
+			<div class="block2">
+				<div></div>
+			</div>
+		</div>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS Variables are <br>inherited properties<div class="delayed note">but you can change that</div></h1>
+	</article>
+
+	<article class="horizontal demo slide" data-edit="css" id="url">
+		<style data-slide>
+			article {
+				background: url("img/sad.jpg") center / cover;
+			}
+		</style>
+	</article>
+
+	<article class="slide" id="url-cases">
+		<table>
+			<tr>
+				<td><pre><code>
+					--img: "sad.jpg";
+					background: url("img/" var(--img));
+				</code></pre></td>
+				<td style="color: red">CSS limitation</td>
+			</tr>
+			<tr class="delayed">
+				<td><pre><code>
+					--img: "img/sad.jpg";
+					background: url(var(--img));
+				</code></pre></td>
+				<td style="color: red">CSS bug</td>
+			</tr>
+			<tr class="delayed">
+				<td><pre><code>
+					--img: url("img/sad.jpg");
+					background: var(--img);
+				</code></pre></td>
+				<td style="color: yellowgreen">Works!</td>
+			</tr>
+		</table>
+	</article>
+
+	<!-- <article class="slide">
+		<pre><code>
+			/* a.css */
+			--a: "a.png";
+
+			/* b.css */
+			--b: url(var(--a));
+
+			/* c.css */
+			background-image: var(--b);
+		</code></pre>
+		<p><a href="https://github.com/w3c/csswg-drafts/issues/757">github.com/w3c/csswg-drafts/issues/757</a></p>
+	</article> -->
+
+	<article class="takeaway slide poop" id="url-poop">
+		<h1>CSS variables <span class="plus">+</span> url() <span class="equals">=</span><span class="poop"><img src="img/poop.png" alt="💩"></span></h1>
+	</article>
+
+	<article class="background slide" id="wtf" data-steps="1" data-credits="flickr.com/photos/mugley/3421060154">
+		<div class="caption">
+			<h1>WTFs</h1>
+			<ul class="delayed-children">
+				<li><code>--foo:;</code> is invalid</li>
+				<li><code>--foo: ;</code> is valid</li>
+				<li><code>--foo</code> ≠ <code>--FOO</code></li>
+			</ul>
+		</div>
+	</article>
+
+	<article class="slide" id="default-values">
+		<div class="delayed-children">
+			<div style="background: red">No CSS variables support</div>
+			<div style="background: orange">No --accent-color set</div>
+			<div style="background: yellowgreen">--accent-color: yellowgreen</div>
+			<div style="background: transparent; border: 1px dashed gray">--accent-color: 42deg</div>
+		</div>
+
+		<pre style="margin-top: 2em;"><code>
+			background: red;
+			background: var(--accent-color, orange);
+		</code></pre>
+	</article>
+
+	<article class="talking housewife slide" data-source="flickr.com/photos/x-ray_delta_one/4264423055/">
+		<h1>Invalid at computed-value time?!</h1>
+	</article>
+
+	<article class="takeaway slide">
+		<h1><em>Invalid at computed-value time</em> = initial</h1>
+	</article>
+
+	<article class="slide dont-resize" id="daisy-chain" data-source="Image source: https://www.flickr.com/photos/26235325@N05/5641177399">
+		<pre><code>
+			var(--color1<span class="delayed">, var(--color2<span class="delayed">, var(--color3<span class="delayed" style="--length: 5">, red</span>)</span>)</span>)
+		</code></pre>
+	</article>
+
+	<article class="demo slide" id="cycles">
+		<style data-slide data-scope=".blocks">
+			div {
+				--size: 8em;
+				height: var(--size);
+			}
+
+			.declarative {
+				filter: invert();
+			}
+		</style>
+
+		<div class="blocks" data-edit="css contents">
+			<div>CSS is awesome</div>
+			<div class="declarative">CSS is declarative</div>
+		</div>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>Cycles make variables invalid at computed-value time</h1>
+	</article>
+
+	<article class="slide" data-steps="2">
+		<style data-slide>
+			article.slide[data-step] {
+				background: orange;
+			}
+
+			article.slide[data-step] pre {
+				filter: invert();
+				mix-blend-mode: multiply;
+			}
+
+			article.slide[data-step="2"] {
+				background: none;
+			}
+
+			article.slide[data-step="2"] pre code .delete {
+				opacity: 0;
+			}
+		</style>
+
+		<pre><code>
+			--accent-color: 42deg;
+			<span class="delete">--accent-color: var(--accent-color);</span>
+			background: red;
+			background: var(--accent-color, orange);
+		</code></pre>
+	</article>
+
+	<article class="talking housewife slide" data-source="flickr.com/photos/x-ray_delta_one/4264423055/">
+		<h1>Won’t someone, please, think of browser support?!</h1>
+	</article>
+
+	<article class="browser-support slide">
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th><img src="img/chrome-logo.svg" alt="Chrome"></th>
+					<th><img src="img/firefox-logo.svg" alt="Firefox"></th>
+					<th><img src="img/edge-logo.svg" alt="Edge"></th>
+					<th><img src="img/safari-logo.png" alt="Safari"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>CSS Variables</th>
+					<td>49</td>
+					<td>31</td>
+					<td>15</td>
+					<td>9.1</td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
+
+	<!-- <article class="image slide" id="edgestatus">
+		<h1><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/status/csscustompropertiesakacssvariables">status.modern.ie</a></h1>
+	</article> -->
+
+	<article class="demo slide" data-edit="css" id="atsupports">
+		<style data-slide>
+			article {
+				background: red;
+			}
+
+			@supports (--css: variables) {
+				article {
+					background: green;
+				}
+			}
+		</style>
+	</article>
+
+	<article class="browser-support slide">
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th><img src="img/chrome-logo.svg" alt="Chrome"></th>
+					<th><img src="img/firefox-logo.svg" alt="Firefox"></th>
+					<th><img src="img/edge-logo.svg" alt="Edge"></th>
+					<th><img src="img/safari-logo.png" alt="Safari"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>CSS Variables</th>
+					<td>49</td>
+					<td>31</td>
+					<td>15</td>
+					<td>9.1</td>
+				</tr>
+				<tr>
+					<th>@supports</th>
+					<td>28</td>
+					<td>22</td>
+					<td>13</td>
+					<td>9</td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
+
+	<article class="horizontal demo slide">
+		<p class="hint">Show division not working</p>
+		<style data-slide>
+			.block {
+				width: 33vw;
+				height: 33vh;
+			}
+		</style>
+		<h1 class="block" data-edit="css html">Variable values are token lists</h1>
+	</article>
+
+	<article class="slide">
+		<table>
+			<tr>
+				<td>Number → unit: </td>
+				<td><code class="language-css">calc(var(--foo) * 1px)</code></td>
+			</tr>
+			<tr>
+				<td>Unit → number:</td>
+				<td style="font-size: 100px"><span class="poop"></span><span class="poop"></span><span class="poop"></span></td>
+			</tr>
+		</table>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>Use variables for pure data, <br>not CSS values</h1>
+	</article>
+
+	<article class="horizontal demo slide" id="animation" data-edit="css" style="--division: 70">
+		<p class="hint">Try to animate --bg | show that var() is ok-ish</p>
+		<style data-slide>
+			@keyframes bg {
+				from { background-color: yellow; }
+				to { background-color: #0ca; }
+			}
+
+			#animation.slide {
+				animation: 1s bg infinite alternate;
+			}
+		</style>
+		<h1>CSS Variables in @keyframes?</h1>
+	</article>
+
+	<article class="slide">
+		<blockquote style="width: 21em">
+			<p>[CSS variables] can even be <strong>tran&shy;sitioned or ani&shy;mated</strong>, but since the UA has no way to interpret their con&shy;tents, <strong>they always use the "flips at 50%"</strong> behav&shy;ior that is used for any oth&shy;er pair of val&shy;ues that can’t be intelligently interpolated.</p>
+			<p class="cite">— <a href="https://w3.org/TR/css-variables-1/">CSS Custom Properties for Cascading Variables Module Level 1</a></p>
+		</blockquote>
+	</article>
+
+	<article class="takeaway slide poop" id="animation-poop">
+		<h1>CSS variables <span class="plus">+</span> animations <span class="equals">=</span><span class="poop"><img src="img/poop.png" alt="💩"></span></h1>
+	</article>
+
+	<article class="future slide" id="registerProperty">
+		<h1>🔮 Near Future 🔮</h1>
+		<pre><code class="language-javascript" id="registerPropertyCode" contentEditable style="outline: none">
+			CSS.registerProperty({
+				name: "--bg",
+				syntax: "&lt;color>",
+				initialValue: "black",
+				inherits: false
+			});
+		</code></pre>
+		<button onclick="eval(registerPropertyCode.textContent)" class="run delayed">Run!</button>
+	</article>
+
+	<article class="browser-support slide">
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th><img src="img/chrome-logo.svg" alt="Chrome"></th>
+					<th><img src="img/firefox-logo.svg" alt="Firefox"></th>
+					<th><img src="img/edge-logo.svg" alt="Edge"></th>
+					<th><img src="img/safari-logo.png" alt="Safari"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>CSS.registerProperty()</th>
+					<td>?</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
+
+	<article class="slide" data-import="registerProperty"></article>
+	<article class="slide" data-import="animation"></article>
+
+	<article class="horizontal demo slide" id="transition" data-edit="css" style="--division: 70">
+		<style data-slide>
+			#transition.slide {
+				background: yellow;
+				transition: 1s;
+			}
+
+			#transition.slide:active {
+				background: #0ca;
+			}
+		</style>
+		<h1>CSS Variables + Transitions = ?</h1>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS Variables can still <br>trigger transitions</h1>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>Common use Cases</h1>
+	</header>
+
+	<article class="demo slide" id="button">
+		<p class="hint">Theming by class, by style, box-shadow transition | default default values</p>
+		<div data-edit="contents css">
+			<button>Click me</button>
+			<button class="pink">Click me</button>
+		</div>
+
+		<style data-slide>
+			button {
+				border: .1em solid black;
+				background: transparent;
+				color: black;
+			}
+
+			button:hover {
+				background: black;
+				color: white;
+			}
+
+			button.pink {
+				border-color: #f06;
+				color: #f06;
+			}
+
+			button.pink:hover {
+				background: #f06;
+				color: white;
+			}
+		</style>
+		<style data-slide>
+			button {
+				border-radius: .3em;
+				padding: 0 .5em;
+				font-weight: bold;
+				font-size: 180%;
+				margin: .2em;
+			}
+		</style>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS Variables enable theming<br> independent of CSS structure</h1>
+	</article>
+
+	<article class="slide" data-import="button"></article>
+
+	<article class="takeaway slide">
+		<h1>Default default values are possible</h1>
+		<pre><code>
+			--colorD: var(--color, black);
+			/* use --colorD instead of --color internally */
+		</code></pre>
+	</article>
+
+	<article class="slide demo" id="responsive" data-edit="css">
+		<section></section>
+		<section></section>
+		<section></section>
+
+		<section class="wide3"></section>
+
+		<section class="wide2"></section>
+		<section></section>
+		<style data-slide>
+		:root {
+			--gutter: 2px;
+		}
+
+		section {
+			margin: var(--gutter);
+		}
+
+		@media (min-width: 1000px) {
+			:root {
+				--gutter: 10px;
+			}
+		}
+		</style>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS Variables make <br>responsive design easier</h1>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>Cool use cases</h1>
+	</header>
+
+	<article class="demo slide" id="autoprefixing" style="--division: 70;">
+		<style data-slide data-scope=".blocks">
+			* {
+				--clip-path: initial;
+				-webkit-clip-path: var(--clip-path);
+				clip-path: var(--clip-path);
+			}
+		</style>
+		<div data-edit="css contents" class="blocks">
+			<div class="block1">
+				<div></div>
+			</div>
+			<div class="block2">
+				<div></div>
+			</div>
+		</div>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS Variables enable you to <br>set multiple properties at once</h1>
+	</article>
+
+	<article class="horizontal demo slide" id="purple-shadow" style="--division: 70;">
+		<style data-slide>
+			* {
+				--purple-shadow: initial;
+				box-shadow: var(--purple-shadow) rebeccapurple;
+			}
+
+			.block {
+				--purple-shadow: .1em .1em .5em;
+			}
+		</style>
+
+		<div class="block" data-edit="css html">
+			<div>Man, we’re living in the future!!! 🌈🦄</div>
+		</div>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS Variables let you create <br>single property mixins
+		<div class="delayed note">(like function currying, in programmerese)</div></h1>
+	</article>
+
+	<article class="demo slide" id="box-shadow" style="--font-size-multiplier: .8; --division: 70;">
+		<p class="hint">No inherit from box-shadow, invalid at computed value time</p>
+		<style data-slide data-scope=".blocks">
+			* {
+				--box-shadow-x: initial;
+				--box-shadow-y: initial;
+				--box-shadow-blur: initial;
+				--box-shadow-spread: initial;
+				--box-shadow-color: initial;
+				--box-shadow-inset: initial;
+
+				box-shadow: var(--box-shadow-x, 0)
+				            var(--box-shadow-y, 0)
+				            var(--box-shadow-blur)
+				            var(--box-shadow-spread, 0)
+				            var(--box-shadow-color, currentColor)
+				            var(--box-shadow-inset, );
+			}
+
+			.block1 {
+
+			}
+		</style>
+		<div data-edit="css contents" class="blocks">
+			<div class="block1">
+				<div></div>
+			</div>
+			<div class="block2">
+				<div></div>
+			</div>
+		</div>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS Variables enable you to <br>create custom longhands</h1>
+	</article>
+
+	<article class="demo slide" id="prepend">
+		<p class="hint">inline style too</p>
+		<style data-slide data-scope=".blocks">
+			* {
+				--prepend: initial;
+			}
+
+			::before {
+				content: var(--prepend);
+			}
+		</style>
+		<div data-edit="css contents" class="blocks">
+			<div class="block1">
+				<div></div>
+			</div>
+			<div class="block2">
+				<div></div>
+			</div>
+			<div class="block3">
+				<div></div>
+			</div>
+		</div>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS Variables enable you to <br>define your own properties</h1>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>CSS Variables & SVG</h1>
+	</header>
+
+	<article class="horizontal demo slide" id="svg-eyes">
+		<style data-slide>
+			.iris {
+				cx: 50px;
+			}
+		</style>
+		<div data-edit="contents css">
+			<svg viewBox="0 0 250 100">
+				<clipPath id="white-clip">
+					<path id="white-path" d="M1,50 a65,80 0 0,1 100,0 a80,80 0 0,1 -100,0 Z" />
+				</clipPath>
+				<use id="eye-white" href="#white-path" />
+				<use href="#eye-white" x="148" />
+				<circle id="iris" class="iris" cx="50" cy="45" r="18" clip-path="url(#white-clip)" />
+				<use class="iris" href="#iris" x="148" />
+			</svg>
+		</div>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS variables <span class="plus">+</span> SVG <span class="equals">=</span><span class="heart" style="font-size: 90px;">♥️</span></h1>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>CSS Variables & JavaScript</h1>
+	</header>
+
+	<article class="slide language-javascript" style="align-items: flex-start; padding: 3em">
+		<pre><code>
+			// Get variable from inline style
+			element.style.getPropertyValue("--foo");
+		</code></pre>
+		<pre class="delayed"><code>
+			// Get variable from wherever
+			getComputedStyle(element).getPropertyValue("--foo");
+		</code></pre>
+		<pre class="delayed"><code>
+			// Set variable on inline style
+			element.style.setProperty("--foo", 38 + 4);
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<pre><code class="language-javascript">
+			var root = document.documentElement;
+
+			document.addEventListener("mousemove", evt => {
+				let x = evt.clientX / innerWidth;
+				let y = evt.clientY / innerHeight;
+
+				root.style.setProperty("--mouse-x", x);
+				root.style.setProperty("--mouse-y", y);
+			});
+		</code></pre>
+	</article>
+
+	<article class="horizontal demo slide" data-edit="css" id="mouse">
+		<style data-slide>
+			#mouse.slide {
+				background-image: radial-gradient(
+					at 50% 50%,
+					transparent, black);
+			}
+		</style>
+	</article>
+
+	<article class="slide" data-import="svg-eyes"></article>
+
+	<article class="language-javascript slide">
+		<div><pre><code>
+			for (input of document.querySelectorAll("input")) {
+				input.style.setProperty("--value", input.value);
+			}
+		</code></pre>
+		<pre class="delayed"><code>
+			document.addEventListener("input", evt => {
+				var input = evt.target;
+				input.style.setProperty("--value", input.value);
+			});
+		</code></pre></div>
+	</article>
+
+	<article class="horizontal demo slide" id="slider">
+		<style data-slide>
+			input {
+				appearance: none;
+				background: linear-gradient(to right, #f06 50%, white 0);
+			}
+		</style>
+		<style data-slide>
+			input {
+				width: 300px;
+				-webkit-appearance: none;
+				transform: scale(3);
+				transform-origin: top;
+				border-radius: .1em;
+			}
+		</style>
+		<input type="range" data-edit="html css">
+	</article>
+
+	<!-- <article class="horizontal demo typing slide" id="typing" data-edit="css" style="--division: 70">
+		<p class="typing" contentEditable>CSS variables are awesome</p>
+		<style data-slide>
+			@keyframes typing { from { width: 0; } }
+			@keyframes caret { 50% { border-color: transparent; } }
+
+			p.typing {
+				width: 25ch;
+				border-right: 2px solid;
+				overflow: hidden;
+				animation: caret .5s step-end infinite alternate;
+			}
+		</style>
+	</article>
+
+	<article class="language-javascript slide">
+		<pre><code>
+			for (let element of document.querySelectorAll(".typing")) {
+				let length = element.textContent.length;
+				element.style.setProperty("--length", length);
+			}
+		</code></pre>
+	</article>
+
+	<article class="slide" data-import="typing"></article>
+
+	<article class="horizontal demo typing slide" id="typing2" data-edit="css">
+		<p class="typing" contentEditable>CSS variables are awesome</p>
+		<style data-slide>
+			@keyframes typing { from { width: 0; } }
+			@keyframes caret { 50% { border-color: transparent; } }
+
+			p.typing {
+				width: calc(var(--length) * 1ch);
+				border-right: 2px solid;
+				overflow: hidden;
+				animation: typing calc(var(--length) * .3s) steps(var(--length)),
+				           caret .5s step-end infinite alternate;
+			}
+		</style>
+	</article> -->
+
+	<article class="slide">
+		<pre><code class="language-javascript">
+			for (let el of document.querySelectorAll(".scrolling")) {
+				el.addEventListener("scroll", evt => {
+					let maxScroll = el.scrollHeight - el.offsetHeight;
+					let scroll = el.scrollTop / maxScroll;
+					el.style.setProperty("--scroll", scroll);
+				});
+			}
+		</code></pre>
+	</article>
+
+	<article class="horizontal demo slide">
+		<style data-slide>
+			.scrolling {
+				background-image: linear-gradient(to right,
+					white 20%, transparent 0)
+			}
+		</style>
+		<div class="scrolling" data-edit="css html">
+			<p>The allowed syntax for custom properties is extremely permissive. The &lt;declaration-value> production matches any sequence of one or more tokens, so long as the sequence does not contain &lt;bad-string-token>, &lt;bad-url-token>, unmatched &lt;)-token>, &lt;]-token>, or &lt;}-token>, or top-level &lt;semicolon-token> tokens or &lt;delim-token> tokens with a value of "!".</p>
+			<p>In addition, if the value of a custom property contains a var() reference, the var() reference must be valid according to the specified var() grammar. If not, the custom property is invalid and must be ignored.</p>
+			<p>The values of custom properties, and the values of var() functions substituted into custom properties, are case-sensitive, and must be preserved in their original author-given casing. (Many CSS values are ASCII case-insensitive, which user agents can take advantage of by "canonicalizing" them into a single casing, but that isn’t allowed for custom properties.)
+			<p>The initial value of a custom property is an empty value; that is, nothing at all. This initial value has a special interaction with the var() notation, which is explained in the section defining var().
+			<p>Custom properties are ordinary properties, so they can be declared on any element, are resolved with the normal inheritance and cascade rules, can be made conditional with @media and other conditional rules, can be used in HTML’s style attribute, can be read or set using the CSSOM, etc.
+			<p>Notably, they can even be transitioned or animated, but since the UA has no way to interpret their contents, they always use the "flips at 50%" behavior that is used for any other pair of values that can’t be intelligently interpolated. However, any custom property used in a @keyframes rule becomes animation-tainted, which affects how it is treated when referred to via the var() function in an animation property.</p>
+		</div>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS Variables are a revolution for <br>separation of style and behavior</h1>
+	</article>
+</section>
+
+<article class="slide" id="specs">
+	<a href="https://w3.org/TR/css-variables" class="w3c" target="_blank">w3.org/TR/css-variables</a>
+	<a href="https://drafts.csswg.org/css-variables" class="w3c ed" target="_blank">drafts.csswg.org/css-variables</a>
+</article>
+
+<!-- <section>
+	<header class="future slide">
+		<h1>🔮 Future 🔮</h1>
+	</header>
+
+	<article class="demo slide" data-edit="css">
+		<style data-slide>
+		:root {
+			--bg: {
+				background: yellowgreen;
+			}
+		}
+
+		.block {
+			background: red;
+			@apply --bg;
+		}
+		</style>
+		<div class="block">Native mixins are coming!</div>
+	</article>
+</section> -->
+
+<footer class="dark slide">
+	<img src="img/mark.svg" class="logo" />
+	<h1>Ευχαριστώ πολύ!</h1>
+	<img src="img/stickers.jpg" class="stickers delayed" alt="">
+	<p class="stickercaption delayed">Want one? Just ask! ---></p>
+	<ul>
+		<li><a href="mailto:lea@w3.org">lea@verou.me</a></li>
+		<li><a href="http://lea.verou.me">lea.verou.me</a></li>
+		<li><a href="http://twitter.com/leaverou">@leaverou</a></li>
+	</ul>
+
+	<p>Slides: <a href="https://leaverou.github.io/css-variables">leaverou.github.io/css-variables</a></p>
+	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
+</footer>
+
+<script src="js/bliss.min.js"></script>
+<script src="../csss/slideshow.js"></script>
+<script src="js/prism.js"></script>
+<script src="../incrementable/incrementable.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/talk.js"></script>
+
+</body>
+</html>
