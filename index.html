@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title>JS UX</title>
+<link href="../csss/slideshow.css" rel="stylesheet" />
+<link href="../csss/reusable.css" rel="stylesheet" />
+<link href="prism.css" rel="stylesheet" />
+<link href="theme.css" rel="stylesheet" />
+<link href="../multirange/multirange.css" rel="stylesheet" />
+<link href="talk.css" rel="stylesheet" />
+
+<script src="../prefixfree/prefixfree.min.js"></script>
+
+</head>
+<body class="language-javascript">
+
+<header id="intro" class="slide dont-resize">
+	<h1>
+		JS
+		UX
+	</h1>
+	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
+</header>
+
+<section>
+	<section class="inverse slide dont-resize darker hi">
+		<figure class="delayed">
+			<img src="img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
+			<figcaption>Привет, я Лиа</figcaption>
+		</figure>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="lesbian" data-steps="3">
+		<div>
+		<p>#funfact</p>
+		<p>I grew up in Lesbos, Greece</p>
+		<p>…which technically makes me <strong>geographically Lesbian</strong></p>
+		</div>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="projects">
+		<p>I make stuff</p>
+		<ul>
+			<li><a href="http://mavo.io/" style="background-image: url(img/project-mavo.png)">Mavo</a></li>
+			<li><a href="http://prismjs.com" style="background-image: url(img/project-prism.png)">PrismJS</a></li>
+			<li><a href="http://leaverou.github.io/prefixfree" style="background-image: url(img/project-prefixfree.png)">-prefix-free</a></li>
+			<li><a href="http://blissfuljs.com" style="background-image: url(img/project-bliss.png)">Bliss</a></li>
+			<li><a href="http://css3test.com" style="background-image: url(img/project-css3test.png)">css3test.com</a></li>
+			<li><a href="http://leaverou.github.io/awesomplete/" style="background-image: url(img/project-awesomplete.png)">Awesomplete</a></li>
+			<li><a href="http://cubic-bezier.com/" style="background-image: url(img/project-cubicbezier.png)">cubic-bezier.com</a></li>
+			<li><a href="http://dabblet.com" style="background-image: url(img/project-dabblet.png)">dabblet.com</a></li>
+			<li><a href="http://leaverou.github.io/contrast-ratio/" style="background-image: url(img/project-contrastratio.png)">Contrast Ratio</a></li>
+		</ul>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="csswg">
+		<p class="delayed">
+			<strong>CSS WG</strong>
+			Invited Expert
+		</p>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="mit">
+		<p class="delayed">
+			<img src="img/mit.svg" alt="MIT" />
+			HCI researcher @ CSAIL
+		</p>
+		<img src="img/project-mavo.png" alt="" class="delayed">
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="book">
+		<a href="http://shop.oreilly.com/product/0636920031123.do" class="delayed">
+			<img src="img/book.png" alt="CSS Secrets by O’Reilly" style="display:block" />
+			★★★★★ on Amazon
+		</a>
+	</section>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>JS? UX? JSUX…?</h1>
+	</header>
+
+	<article class="slide">
+		<blockquote>
+			<p>“<em>Usability</em> is the ease of use and learnability of a human-made object.”</p>
+			<p class="cite"><a href="https://en.wikipedia.org/wiki/Usability"></a></p>
+		</blockquote>
+	</article>
+
+	<article class="image slide" id="boots" data-credits="The Uncomfortable, Katerina Kamprani"></article>
+
+	<article class="slide">
+		<blockquote style="max-width: 25em">
+			<p>“<em>User experience (UX)</em> refers to a person's total experience using a particular product, system or service.”</p>
+			<p class="cite"><a href="https://en.wikipedia.org/wiki/User_experience"></a></p>
+		</blockquote>
+	</article>
+
+	<article class="slide">
+		<blockquote style="max-width: 24em">
+			<p>“The <em>User Interface (UI)</em> is everything designed into an information device with which a human being may interact”</p>
+			<p class="cite"><a href="https://books.google.co.il/books?id=Zmypu5-miawC&pg=PT256&lpg=PT256&dq=%22everything+designed+into+an+information+device+with+which+a+human+being+may+interact%22&source=bl&ots=mCh1jmmQ5b&sig=_GcD6kH-8wMVZU2a-uEbJhF1yYE&hl=en&sa=X&ved=0ahUKEwiTr_Ok58XNAhVMFMAKHXNDB0IQ6AEIJTAD#v=onepage&q=%22everything%20designed%20into%20an%20information%20device%20with%20which%20a%20human%20being%20may%20interact%22&f=false">Handbook of Research on Web Information Systems Quality</a></p>
+		</blockquote>
+	</article>
+
+	<article class="image slide" style="background: url(img/gsheets.png) no-repeat center / contain;"></article>
+
+	<article class="image slide" style="background-image: url(img/book.jpg)">
+		<h1>A book is a UI</h1>
+	</article>
+
+	<article class="image slide" id="uinception">
+		<h1 class="caption">Slides are a UI</h1>
+		<div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed">
+			<div class="delayed"><div class="delayed"><div class="delayed"></div></div></div>
+		</div></div></div></div></div></div></div></div></div></div></div></div></div></div></div>
+	</article>
+
+	<article class="image slide" style="background-image: url(img/faucet.jpg);">
+		<h1>A faucet is a UI</h1>
+	</article>
+
+	<article class="image slide" style="background-image: url(img/code.png);">
+		<h1>Your code is a UI</h1>
+	</article>
+
+	<article class="image slide" style="background-image: url(img/githubnotifications.png); background-position: 0 0"></article>
+</section>
+
+<article class="image slide" style="background-image: url(img/uijoke.jpg)">
+	<h1 style="margin-top: calc(50vh)">Documentation is a last resort.</h1>
+</article>
+
+<section>
+	<header class="slide commandment">
+		<h1>Make the simple <strong>easy</strong> <br>& the complex <strong>possible</strong></h1>
+	</header>
+
+	<article class="hall fame slide">
+		<pre><code>
+			!!(node.compareDocumentPosition(otherNode) &
+				Node.DOCUMENT_POSITION_CONTAINS);
+		</code></pre>
+		<pre class="delayed"><code>node.contains(otherNode);</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+
+		<div class="language-console overlay">
+			<pre><code>> var circle = document.querySelector("circle")</code></pre>
+			<pre><code>> circle.cx</code></pre>
+			<pre><code>< SVGAnimatedLength {baseVal: SVGLength, animVal: SVGLength}</code></pre>
+			<pre><code>> circle.cx.baseVal</code></pre>
+			<pre><code>< SVGLength {unitType: 1, value: 50, valueInSpecifiedUnits: 50, valueAsString: "50"}</code></pre>
+			<pre><code>> circle.cx.baseVal.value</code></pre>
+			<pre><code>< 50</code></pre>
+			<pre><code>> circle.cx = 5</code></pre>
+			<pre><code>> circle.cx.baseVal.value</code></pre>
+			<pre><code>< 50</code></pre>
+		</div>
+		<svg width="100" height="100"><circle cx="50" cy="50" r="40" fill="white" /></svg>
+		<pre><code>&lt;circle cx="50" cy="50" r="40" /></code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="commandment slide">
+		<h1>Sensible defaults</h1>
+	</header>
+
+	<article class="hall shame slide" id="url-error">
+		<div class="language-console">
+			<pre><code>> new URL("foo.txt")</code></pre>
+			<pre class="error"><code>Uncaught TypeError: Failed to construct 'URL': Invalid URL</code></pre>
+			<pre><code>> new URL("foo.txt", location)</code></pre>
+			<pre><code>< URL {href: "https://leaverou.github.io/jsux/foo.txt", …}</code></pre>
+		</div>
+	</article>
+
+	<article class="slide">
+		<h1>ES6 Default Parameters</h1>
+		<pre><code>
+			function callback(
+				timestamp = Date.now(),
+				future = timestamp + 3000
+			) {
+				console.log(timestamp, future);
+			}
+		</code></pre>
+		<div class="language-console overlay">
+			<pre><code>> callback()</code></pre>
+			<pre><code>< 1472325217105 1472325220105</code></pre>
+			<pre><code>> callback(42)</code></pre>
+			<pre><code>< 42 3042</code></pre>
+			<pre><code>> callback(42, 1000000000000)</code></pre>
+			<pre><code>< 42 1000000000000</code></pre>
+		</div>
+	</article>
+</section>
+
+<section>
+	<header class="sin slide">
+		<h1>Boilerplate</h1>
+	</header>
+
+	<article class="hall shame slide">
+		<pre><code>
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "foo.json");
+			xhr.responseType = "json";
+			xhr.onload = function() {
+				doStuff(xhr.response);
+			}
+			xhr.send(null);
+		</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>
+			fetch("foo.json")
+			  .then(response => response.json())
+			  .then(doStuff);
+		</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre style="font-size: 36%; overflow: auto;"><code>
+			var open = indexedDB.open("MyDatabase", 1);
+
+			open.onupgradeneeded = function() {
+			    var db = open.result;
+			    var store = db.createObjectStore("MyObjectStore", {keyPath: "id"});
+			    var index = store.createIndex("NameIndex", ["name.last", "name.first"]);
+			};
+
+			open.onsuccess = function() {
+			    var db = open.result;
+			    var tx = db.transaction("MyObjectStore", "readwrite");
+			    var store = tx.objectStore("MyObjectStore");
+			    var index = store.index("NameIndex");
+
+			    store.put({id: 12345, name: {first: "John", last: "Doe"}, age: 42});
+			    store.put({id: 67890, name: {first: "Bob", last: "Smith"}, age: 35});
+
+			    var getJohn = store.get(12345);
+			    var getBob = index.get(["Smith", "Bob"]);
+
+			    getJohn.onsuccess = function() {
+			        console.log(getJohn.result.name.first);  // => "John"
+			    };
+
+			    getBob.onsuccess = function() {
+			        console.log(getBob.result.name.first);   // => "Bob"
+			    };
+
+			    tx.oncomplete = function() {
+			        db.close();
+			    };
+			}
+		</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="commandment slide">
+		<h1 style="width: 7em">Be liberal in what you accept
+			<a href="https://en.wikipedia.org/wiki/Robustness_principle" style="font-size: 50%; text-decoration: none; font-style: italic;">(Robustness Principle)</a></h1>
+	</header>
+
+	<article class="hall fame slide">
+		<div class="language-console">
+			<pre><code>> new URL("http://lea.verou.me")</code></pre>
+			<pre><code>< URL {href: "http://lea.verou.me", …}</code></pre>
+			<pre><code>> new URL(new URL("http://lea.verou.me"))</code></pre>
+			<pre><code>< URL {href: "http://lea.verou.me", …}</code></pre>
+			<pre><code>> new URL(location)</code></pre>
+			<pre><code>< URL {href: "https://leaverou.github.io/jsux/index.html", …}</code></pre>
+		</div>
+	</article>
+
+	<article class="hall shame slide" id="set-constructor">
+		<div class="language-console">
+			<pre><code>> new Set(42)</code></pre>
+			<pre class="error"><code>Uncaught TypeError: (var)[Symbol.iterator] is not a function</code></pre>
+			<pre><code>> new Set([42])</code></pre>
+			<pre><code>< Set {42}</code></pre>
+		</div>
+	</article>
+</section>
+
+<section>
+	<header class="commandment slide">
+		<h1>Support mass params</h1>
+	</header>
+
+	<article class="hall shame slide" id="setAttribute">
+		<pre><code>
+			var audio = document.createElement("audio");
+			audio.setAttribute("src", "rain.mp3");
+			audio.setAttribute("autoplay", "");
+			audio.setAttribute("start", "00:00:00.00");
+			audio.setAttribute("loopstart", "00:00:00");
+			audio.setAttribute("end", "00:01:00");
+			audio.setAttribute("playcount", "100");
+			audio.setAttribute("controls", "true");
+		</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>
+			var audio = document.createElement("audio");
+			audio.setAttribute({
+				src: "rain.mp3",
+				autoplay: "",
+				start: "00:00:00.00",
+				loopstart: "00:00:00",
+				end: "00:01:00",
+				playcount: "100",
+				controls: "true"
+			});
+		</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>
+			for (let el of document.querySelectorAll(".foo")) {
+				el.setAttribute("data-foo", "bar");
+			}
+		</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>
+			var els = document.querySelectorAll(".foo");
+
+			els.setAttribute("data-foo", "bar");
+
+			// or…
+			DOM.setAttribute(els, "data-foo", "bar");
+		</code></pre>
+	</article>
+
+	<article class="caveat slide">
+		<h1>Do not <strong>only</strong> support mass operations</h1>
+		<pre><code>
+			// This is stupid:
+			element.setAttribute({name: value});
+
+			// This is also stupid
+			[element].setAttribute(name, value)
+		</code></pre>
+	</article>
+
+	<article class="slide hall what">
+		<pre><code>
+			Object.defineProperty(obj, "property1", descriptor1);
+
+			Object.defineProperties(obj, {
+				property1: descriptor1,
+				property2: descriptor2,
+				...
+			});
+		</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="sin slide">
+		<h1>Accessor functions</h1>
+	</header>
+
+	<article class="hall shame slide">
+		<pre><code>
+			let date = new Date();
+
+			date.getMonth(); // 5
+			date.setMonth(1);
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<h1>JS is not Java</h1>
+	</article>
+
+	<article class="slide">
+		<pre style="column-count: 3"><code>
+			private String name;
+			private String phone;
+			private String gender;
+			private int age;
+			private Date birthday;
+			private boolean alive;
+
+			public void setName(String name) {
+				this.name = name;
+			}
+
+			public String getName() {
+				return name;
+			}
+
+			public void setPhone(String phone) {
+				this.phone = phone;
+			}
+
+			public String getPhone() {
+				return phone;
+			}
+
+			public void setGender(String gender) {
+				this.gender = gender;
+			}
+
+			public String getGender() {
+				return gender;
+			}
+
+			public void setAge(int age) {
+				this.age = age;
+			}
+
+			public int getAge() {
+				return age;
+			}
+
+			public void setBirthday(Date birthday) {
+				this.birthday = birthday;
+			}
+
+			public Date getBirthday() {
+				return birthday;
+			}
+
+			public void setAlive(boolean alive) {
+				this.alive = alive;
+			}
+
+			public boolean getAlive() {
+				return alive;
+			}
+		</code></pre>
+	</article>
+
+	<article class="solution slide">
+		<h1>ES5 Accessors</h1>
+		<pre><code>
+			Object.defineProperty(Date.prototype, "month", {
+				get: function() { return this.getMonth(); },
+				set: function(m) { this.setMonth(m); }
+			});
+		</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>
+			let date = new Date();
+
+			date.month; // 5
+			date.month = 1;
+		</code></pre>
+	</article>
+
+	<article class="talking housewife slide" data-credits="flickr.com/photos/x-ray_delta_one/4264423055/">
+		<h1>Won’t someone, please, think of parameters?!</h1>
+	</article>
+
+	<article class="solution slide">
+		<h1>Have both!</h1>
+		<pre><code>
+			let date = new Date();
+
+			date.month = 1;
+			date.setMonth(2, 31);
+		</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>
+			localStorage.setItem("yolo", "yes");
+			localStorage.getItem("yolo"); // "yes"
+		</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>
+			localStorage.yolo = "yes";
+			localStorage.yolo; // "yes"
+		</code></pre>
+	</article>
+
+	<article class="solution slide">
+		<h1>ES6 Proxies</h1>
+		<pre class="no-whitespace-normalization"><code>MyPublicObject = new Proxy(MyHiddenObject, {
+	get: function(property) {</code><code class="delayed">
+		if (property in myObject) {
+			return myObject[property];
+		}
+		return myObject.getItem(property);</code><code>
+	},
+	set: function(property, val) {…
+});</code></pre>
+	</article>
+	<article class="solution slide">
+		<h1>ES6 Proxies</h1>
+		<pre><code>
+			MyPublicObject = new Proxy(MyHiddenObject, {
+				…
+				set: function(property, val) {
+					if (property in myObject) {
+						return myObject[property] = val;
+					}
+					myObject.setItem(property, val);
+				},
+				has: function(property, val) {…
+			});
+		</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="sin slide">
+		<h1>Parameter traps</h1>
+	</header>
+
+	<article class="hall shame slide" id="cloneNode">
+		<pre><code>element.cloneNode(true);</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>
+			element.addEventListener("focus", callback, true);
+		</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>
+			event.initKeyEvent("keypress", true, true, null, null,
+			                   false, false, false, false, 9, 0);
+		</code></pre>
+	</article>
+
+	<article class="hall shame slide" id="replaceChild">
+		<div>
+			<pre><code>oldChild.parentNode.replaceChild(newChild, oldChild)</code></pre>
+			<pre><code>oldChild.parentNode.replaceChild(oldChild, newChild)</code></pre>
+		</div>
+	</article>
+
+	<article class="hall shame slide" id="ellipse">
+		<pre class="no-whitespace-normalization"><code class="delayed">// Change these numbers to see what each one is for...
+</code><code>ctx.ellipse(100, 100, 50, 75, .785398);</code></pre>
+	</article>
+
+	<article class="slide" id="microwave" data-credits="Bret Victor, Learnable Programming (http://worrydream.com/LearnableProgramming)">
+		<div>
+			<img src="img/worrydream2.png" alt="" class="delayed">
+			<img src="img/worrydream1.png" alt="">
+		</div>
+	</article>
+
+	<article class="slide" data-credits="Bret Victor, Learnable Programming (http://worrydream.com/LearnableProgramming)">
+		<img src="img/worrydream3.png" alt="" style="transform: scale(1.8)">
+	</article>
+
+	<article class="slide" data-import="ellipse"></article>
+
+	<article class="whynot slide">
+		<pre><code>
+			ctx.ellipse({
+				center: [100, 100],
+				radius: [50, 75],
+				rotation: .785398
+			});
+		</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>
+			ctx.ellipse({
+				cx: 100,
+				cy: 100,
+				rx: 50,
+				ry: 75,
+				rotation: .785398
+			});
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<blockquote>
+			<p>“Code is written once but read many times”</p>
+			<p class="cite">Unknown</p>
+		</blockquote>
+	</article>
+
+	<article class="solution slide">
+		<h1>Object literal argument</h1>
+		<ul class="good">
+			<li>Labelled parameters</li>
+			<li>Any order</li>
+			<li>All optional</li>
+		</ul>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>
+			(50000).toLocaleString("en", {
+				style: "currency",
+				currency: "EUR",
+				currencyDisplay: "name"
+			}); // "50,000.00 euros"
+		</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>
+			element.addEventListener("focus", callback, {
+				capture: true,
+				once: true
+			});
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<h1>ES6 Default Parameters
+			<div style="font: 120%/1 'Reenie Beanie', sans-serif; color: yellowgreen;">+ destructuring!</div></h1>
+		<pre><code>
+			function callback({
+				option1 = 5,
+				option2 = false
+			} = {}) {
+				console.log(option1, option2);
+			}
+		</code></pre>
+		<div class="language-console overlay">
+			<pre><code>> callback()</code></pre>
+			<pre><code>< 5 false</code></pre>
+			<pre><code>> callback({})</code></pre>
+			<pre><code>< 5 false</code></pre>
+			<pre><code>> callback({option1: 42})</code></pre>
+			<pre><code>< 42 false</code></pre>
+		</div>
+	</article>
+
+	<!-- <article class="hall fame slide">
+		<pre><code>
+			var deep = true;
+			element.cloneNode(deep);
+		</code></pre>
+	</article> -->
+</section>
+<section>
+	<header class="sin slide">
+		<h1>Unnecessary error conditions</h1>
+	</header>
+
+	<article class="slide" data-import="url-error"></article>
+
+	<article class="slide" data-import="set-constructor"></article>
+
+	<article class="hall shame slide">
+		<div class="language-console">
+			<pre><code>> var div = document.createElement("div"), p = document.createElement("p")</code></pre>
+			<pre><code>> document.body.replaceChild(div, p)</code></pre>
+			<pre class="error"><code>Uncaught DOMException: Failed to execute 'replaceChild' on 'Node': The
+  node to be replaced is not a child of this node.</code></pre>
+		</div>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>
+			oldChild.replaceWith(newChild);
+		</code></pre>
+	</article>
+
+
+</section>
+<section>
+	<header class="commandment slide">
+		<h1 style="max-width: 8em">Order parameters by importance</h1>
+	</header>
+
+	<article class="hall shame slide">
+		<pre><code>
+			history.pushState(null, "", "http://lea.verou.me");
+		</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>
+			history.pushState("http://lea.verou.me");
+		</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="sin slide">
+		<h1>Double Negatives</h1>
+	</header>
+
+	<article class="hall shame slide">
+		<pre><code>input.disabled = false;</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>input.enabled = true;</code></pre>
+	</article>
+</section>
+
+<!-- <section>
+	<header class="sin slide">
+		<h1>True by default</h1>
+	</header>
+
+	<article class="slide">
+		<h1>Absence is a negative concept</h1>
+	</article>
+
+	<article class="slide">
+		<h1>Boolean parameters in JS</h1>
+
+		<ul>
+			<li><code>true</code></li>
+			<li><code>false</code></li>
+			<li class="delayed"><code>undefined</code></li>
+		</ul>
+	</article>
+
+	<article class="slide">
+		<h1>Boolean parameters in JS</h1>
+
+		<ul>
+			<li><code>!!true → true</code></li>
+			<li><code>!!false → false</code></li>
+			<li><code>!!undefined → false</code></li>
+		</ul>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>element.cloneNode(); // deep
+element.cloneNode(false); // shallow
+element.cloneNode(true); // deep</code></pre>
+	</article>
+
+	<article class="solution slide">
+		<h1>Negate the concept</h1>
+		<pre><code>element.cloneNode(); // deep
+element.cloneNode(false); // deep
+element.cloneNode(true); // shallow</code></pre>
+	</article>
+
+	<article class="hall slide">
+		<pre class="partial"><code>
+			(50000).toLocaleString("en", {
+				style: "currency",
+				currency: "EUR",
+				currencyDisplay: "name",
+				<mark>useGrouping: false</mark>
+			}); // "50000.00 euros"
+		</code></pre>
+	</article>
+
+	<article class="priorities slide">
+		<ol>
+			<li>👍 Sensible defaults</li>
+			<li>👎 Double negatives</li>
+			<li>👎 True by default</li>
+		</ol>
+	</article>
+</section> -->
+
+<section>
+	<header class="commandment slide">
+		<h1>Thou shalt allow chaining</h1>
+	</header>
+
+	<article class="slide" data-import="setAttribute"></article>
+
+	<article class="whynot slide">
+		<pre><code>
+			document.createElement("audio")
+				.setAttribute("src", "rain.mp3");
+				.setAttribute("autoplay", "");
+				.setAttribute("start", "00:00:00.00");
+				.setAttribute("loopstart", "00:00:00");
+				.setAttribute("end", "00:01:00");
+				.setAttribute("playcount", "100");
+				.setAttribute("controls", "true");
+		</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>
+			ctx.clearRect(0, 0, 256, 192);
+			ctx.save();
+			ctx.translate(96, 96);
+			ctx.rotate(45*Math.PI/180);
+			ctx.scale(1.2);
+			ctx.drawImage(img1, 0,0,192,192, -288,-288,576,576);
+			ctx.drawImage(img2, 0,0,192,192, -96 ,-96 ,192,192);
+			ctx.drawImage(img3, 0,0,192,192, -32 ,-32 ,64 ,64);
+			ctx.restore();
+		</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>
+			ctx.clearRect(0, 0, 256, 192)
+			   .save()
+			   .translate(96, 96)
+			   .rotate(45*Math.PI/180)
+			   .scale(1.2)
+			   .drawImage(img1, 0,0,192,192, -288,-288,576,576)
+			   .drawImage(img2, 0,0,192,192, -96 ,-96 ,192,192)
+			   .drawImage(img3, 0,0,192,192, -32 ,-32 ,64 ,64)
+			   .restore();
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<pre><code>
+			yolo: function() {
+				// Function code here
+
+				return this;
+			}
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<h1>Returning undefined is wasteful</h1>
+	</article>
+
+	<article class="slide">
+		<pre><code>
+			function chainable(fn) {
+				return function() {
+					var ret = fn.apply(this, arguments);
+					return ret === undefined? this : ret;
+				}
+			}
+		</code></pre>
+	</article>
+
+	<article class="slide" data-src="http://leaverou.github.io/chainvas"></article>
+</section>
+
+<section>
+	<header class="sin slide">
+		<h1>Redundancy</h1>
+	</header>
+
+	<article class="hall shame slide">
+		<pre><code>element.parentNode.removeChild(element);</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>element.remove();</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>element.parentNode.insertBefore(newChild, element);</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>element.before(newChild);</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="commandment slide">
+		<h1>Use <strong>few simple <br>words, whole</strong></h1>
+	</header>
+
+	<article class="hall shame slide">
+		<pre><code>element.parentNode</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>element.parent</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>element.childNodes</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>element.children</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>element.addEventListnener("click", callback)</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>element.bind("click", callback)</code></pre>
+		<pre class="delayed"><code>element.on("click", callback)</code></pre>
+		<pre class="delayed"><code>element.addEvent("click", callback)</code></pre>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>element.getBoundingClientRect().bottom</code></pre>
+	</article>
+
+	<article class="whynot slide">
+		<pre><code>element.rect().bottom</code></pre>
+		<pre class="delayed"><code>element.rect.bottom</code></pre>
+	</article>
+</section>
+<section>
+	<header class="commandment slide">
+		<h1>Describe <strong> what it does,</strong><br> not how it works</h1>
+	</header>
+
+	<article class="hall shame slide">
+		<pre><code>
+			document.querySelector(".foo");
+			document.querySelectorAll(".foo");
+		</code></pre>
+	</article>
+
+	<article class="hall meh slide">
+		<pre><code>
+			document.query(".foo");
+			document.queryAll(".foo");
+		</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>
+			document.find(".foo");
+			document.findAll(".foo");
+		</code></pre>
+	</article>
+
+	<article class="hall slide">
+		<pre><code>
+			$(".foo");
+		</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="commandment slide">
+		<h1>Thou shalt respond <br>to changes</h1>
+	</header>
+
+	<article class="image slide" style="background-image: url(img/packery.png); background-position: top;">
+		<h1>packery.metafizzy.co</h1>
+	</article>
+
+	<article class="hall shame slide">
+		<pre><code>
+			packery.layout();
+		</code></pre>
+	</article>
+
+	<article class="solution slide">
+		<h1>Mutation observers</h1>
+		<pre class="no-whitespace-normalization"><code>var observer = new MutationObserver(mutations => {
+	packery.layout();
+});</code>
+
+<code class="delayed">observer.observe(document.getElementById("grid"), {
+	childList: true
+});</code></pre>
+	</article>
+
+	<article class="slide" id="future-observers">
+		<h1>Also:</h1>
+
+		<ul>
+			<li><strong>ResizeObserver</strong> <a href="https://wicg.github.io/ResizeObserver"></a></li>
+			<li><strong>IntersectionObserver</strong> <a href="https://wicg.github.io/IntersectionObserver"></a></li>
+			<li><strong>Houdini specs</strong> <a href="https://drafts.css-houdini.org"></a></li>
+		</ul>
+	</article>
+
+	<article class="talking housewife slide" id="think-of-the-browsers" data-credits="flickr.com/photos/x-ray_delta_one/4264423055/">
+		<h1>Won’t someone, please, think of performance?!</h1>
+	</article>
+
+	<article class="slide">
+		<h1>Use with restraint</h1>
+
+		<ul>
+			<li>Observe as little as possible</li>
+			<li>Narrow scope as much as possible</li>
+			<li><code>unobserve()</code> when no longer needed</li>
+			<li>Don’t force it on your users</li>
+		</ul>
+	</article>
+</section>
+
+<section>
+	<header class="sin slide">
+		<h1>Forgetting <strong>toString()</strong><br>and <strong>toJSON()</strong></h1>
+	</header>
+
+	<article class="hall shame slide">
+		<div class="language-console">
+			<pre><code>> document.documentElement.attributes[0] + ""</code></pre>
+			<pre><code>< "[object Attr]"</code></pre>
+		</div>
+	</article>
+
+	<article class="whynot slide dont-resize">
+		<pre><code>
+			Attr.prototype.toString = function(){
+				return `${this.name}=${this.value}`;
+			}</code></pre>
+		<div class="language-console">
+
+			<pre><code>> document.documentElement.attributes[0] + ""</code></pre>
+			<pre><code>< "lang=en"</code></pre>
+		</div>
+	</article>
+
+	<article class="hall fame slide">
+		<div class="language-console">
+			<pre><code>> JSON.stringify({date: new Date()})</code></pre>
+			<pre><code>< '{"date":"2016-06-27T22:39:17.358Z"}'</code></pre>
+		</div>
+	</article>
+
+	<article class="hall shame slide">
+		<div class="language-console">
+			<pre><code>> JSON.stringify({regex: /a/gi})</code></pre>
+			<pre><code>< '{"regex":{}}'</code></pre>
+		</div>
+	</article>
+
+	<article class="whynot slide dont-resize">
+		<pre><code>
+			RegExp.prototype.toJSON = function(){
+				return `/${this.source}/${this.flags}`;
+			}</code></pre>
+		<div class="language-console">
+
+			<pre><code>> JSON.stringify({regex: /a/gi})</code></pre>
+			<pre><code>< '{"regex":"/a/gi"}'</code></pre>
+		</div>
+	</article>
+</section>
+
+<section class="language-markup">
+	<header class="commandment slide" id="html-api">
+		<h1>Thou shalt also<br> have an <strong>HTML API</strong></h1>
+	</header>
+
+	<article class="slide">
+		<a href="https://twitter.com/leaverou/status/690583334414635009"><img src="img/nojspoll.png" class="tweet" /></a>
+	</article>
+
+	<article class="hall shame logo slide" style="background-image: url(img/jquery-ui.png)">
+		<script type="text/plain">
+			<div id="slider"></div>
+			<script>
+			$("#slider").slider({
+				values: [100, 400],
+				max: 500,
+				step: 50,
+				range: true
+			});
+			&lt;/script>
+		</script>
+	</article>
+
+	<article class="hall fame slide">
+		<div style="transform: scale(3); transform-origin: top">
+			<input type="range" value="100,400" max="500" step="50" multiple />
+		</div>
+
+		<script type="text/plain">
+			<input type="range" multiple value="100,400"
+			       max="500" step="50" />
+		</script>
+	</article>
+
+	<article class="slide" data-src="https://aframe.io/"></article>
+	<article class="slide" data-src="http://localhost:8001" title="https://mavo.io"></article>
+
+	<article class="slide">
+		<h1>Good HTML APIs <br>are easier for developers too</h1>
+	</article>
+
+	<article class="slide">
+		<h1>HTML API design basics</h1>
+		<ul>
+			<li>Have an <strong>init selector</strong>.</li>
+			<li>Settings
+				<ul>
+					<li><strong>Boolean</strong>: classes or attributes without value</li>
+					<li><strong>String, number</strong>: attributes</li>
+					<li><strong>Objects</strong>: Attributes with selector/id values</li>
+					<li><strong>Functions</strong>: JS-only</li>
+				</ul>
+			</li>
+		</ul>
+	</article>
+
+	<article class="logo slide" style="background-image: url(http://prismjs.com/logo.svg); background-size: auto 4em">
+		<h1>Have an init selector</h1>
+		<script type="text/plain">
+			<pre class="no-line-numbers">
+				<code class="language-javascript">
+					// code
+				</code>
+			</pre>
+		</script>
+		<p class="delayed">Init selector: <code class="language-css">code[class*="language-"],
+			[class*="language-"] code, code[class*="lang-"], [class*="lang-"]</code></p>
+	</article>
+
+	<article class="demo hall fame slide">
+		<div data-edit="contents">
+			<input type="color" list="palette" />
+			<datalist id="palette">
+				<option>#FF0066</option>
+				<option>#00aacc</option>
+				<option>#99CC00</option>
+			</datalist>
+		</div>
+	</article>
+
+	<article class="demo slide dont-enlarge hall shame" id="dialog-demo" data-keys="Esc">
+
+		<div data-edit="contents">
+			<dialog id="dialog">
+				<h1>Ceiling cat is watching</h1>
+				<p>Greetings, hoomans.</p>
+			</dialog>
+		</div>
+	</article>
+<!--
+	<article class="slide">
+		<script type="text/plain">
+			<input class="awesomplete" list="countries" data-minchars="3" />
+			<datalist id="countries">
+				<option>Greece</option>
+				<option>Israel</option>
+				<option>United States</option>
+				<option>United Kingdom</option>
+			</datalist>
+		</script>
+	</article> -->
+
+	<article class="slide">
+		<h1>Consider inheritance</h1>
+		<pre class="partial"><code>
+			&lt;body <mark>class="language-javascript"</mark>>
+				Use &lt;code>foo()&lt;/code> and &lt;code>bar()&lt;/code> to…
+
+				&lt;pre <mark>class="language-css"</mark>>
+					&lt;code>* { box-sizing: border-box }&lt;/code>
+				&lt;/pre>
+			&lt;/body>
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<h1>Easy inheritance: CSS variables</h1>
+		<pre class="partial"><code>
+			&lt;body <mark>style="--language: javascript"</mark>>
+				Use &lt;code>foo()&lt;/code> and &lt;code>bar()&lt;/code> to…
+
+				&lt;pre <mark>style="--language: css"</mark>>
+					&lt;code>* { box-sizing: border-box }&lt;/code>
+				&lt;/pre>
+			&lt;/body>
+		</code></pre>
+	</article>
+
+	<article class="slide language-js">
+		<pre><code>
+			getComputedStyle(element).getPropertyValue("--language");
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<h1>Global settings on &lt;script></h1>
+		<pre><code>&lt;script src="stretchy.min.js" data-filter=".foo">&lt;/script></code></pre>
+	</article>
+
+	<article class="slide language-javascript">
+		<pre><code>document.currentScript.getAttribute("data-filter")</code></pre>
+	</article>
+
+
+</section>
+
+<section class="language-markup">
+	<header class="sin slide">
+		<h1>Treating HTML <br>like a JS shortcut</h1>
+	</header>
+
+	<article class="image slide" style="background-image: url(img/packery-html.png)"></article>
+
+	<article class="whynot slide">
+		<script type="text/plain">
+			<div class="grid"
+			     data-packery-selector=".grid-item"
+			     data-packery-gutter="10">
+		</script>
+	</article>
+</section>
+
+<section class="language-markup">
+	<header class="sin slide">
+		<h1>Pointless HTML ≠ HTML API</h1>
+	</header>
+
+	<article class="slide" data-src="https://shop.polymer-project.org"></article>
+
+	<article class="hall shame slide">
+		<script type="text/plain">
+			<body>
+				<shop-app unresolved="">SHOP</shop-app>
+				<script>...&lt;/script>
+			</body>
+		</script>
+	</article>
+
+	<article class="top-heavy image slide" style="background-image: url(img/htmlapis.png)">
+		<h1>smashingmagazine.com/2017/02/designing-html-apis</h1>
+	</article>
+
+	<!-- <article class="slide" data-src="http://leaverou.github.io/multirange" data-title="Soon: CSS API?"></article> -->
+	<article id="multirange" class="image slide">
+		<h1>Soon: CSS API?</h1>
+	</article>
+</section>
+
+<section>
+	<header class="slide" id="parting">
+		<h1>Parting words</h1>
+	</header>
+
+	<article class="commandment slide">
+		<h1>Cherish the <strong>n00b</strong> within</h1>
+	</article>
+
+	<article class="commandment slide" id="empathy">
+		<h1>Code with <strong>empathy</strong></h1>
+	</article>
+</section>
+
+<footer class="dark slide">
+	<img src="img/mark.svg" class="logo" />
+	<h1>спасибо!</h1>
+	<img src="img/stickers.jpg" class="stickers delayed" alt="">
+	<p class="stickercaption delayed">Want one? Just ask! ---></p>
+	<ul>
+		<li><a href="mailto:lea@w3.org">lea@verou.me</a></li>
+		<li><a href="http://lea.verou.me">lea.verou.me</a></li>
+		<li><a href="http://twitter.com/leaverou">@leaverou</a></li>
+	</ul>
+
+	<p>Slides: <a href="https://leaverou.github.io/jsux">leaverou.github.io/jsux</a></p>
+	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
+</footer>
+
+<script src="js/bliss.min.js"></script>
+<script src="../csss/slideshow.js"></script>
+<script src="js/prism.js"></script>
+
+<script src="../incrementable/incrementable.js"></script>
+<script src="js/editor.js"></script>
+<script src="../multirange/multirange.js"></script>
+<script src="js/talk.js"></script>
+
+</body>
+</html>
