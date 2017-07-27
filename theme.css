@@ -1,0 +1,247 @@
+html {
+	--font-mono: Consolas, Monaco, 'Andale Mono', monospace;
+	--font-body: 'Helvetica Neue', sans-serif;
+	--font-heading: var(--font-body);
+	--font-handwritten: 'Reenie Beanie', Marker Felt, cursive;
+}
+
+body {
+	font: 100 100%/1.5 var(--font-body);
+	font-family: var(--font-body);
+	background: linear-gradient(45deg, silver 25%, transparent 25%, transparent 75%, silver 75%),
+	            linear-gradient(45deg, silver 25%, transparent 25%, transparent 75%, silver 75%) 20px 20px;
+	background-color: #eee;
+	background-size: 40px 40px;
+}
+
+h1 {
+	font-weight: bold;
+	line-height: 1.2;
+}
+
+a {
+	color: inherit;
+}
+
+strong, b {
+	font-weight: bold; /* FF is weird */
+}
+
+code, textarea, pre {
+	margin: 0;
+	font: 100%/1.4 var(--font-mono);
+	font-family: var(--font-mono);
+	tab-size: 4;
+}
+
+	pre.delayed > code.delayed {
+		opacity: 1;
+	}
+
+	pre > code {
+		font-size: inherit;
+	}
+
+	.slide > pre:only-child {
+		margin: auto;
+	}
+
+pre + pre {
+	margin-top: 1.5em;
+}
+
+input:not([type=file]),
+textarea:not([class]) {
+	font: inherit;
+	color: inherit;
+}
+
+	input[type="range"][orient="vertical"] {
+		-webkit-appearance: slider-vertical;
+		writing-mode: bt-lr;
+	}
+
+	input:not([type]),
+	input[type="text"],
+	input[type="email"],
+	input[type="tel"],
+	textarea:not([class]) {
+		background: white;
+		padding: 0 .3em;
+		border: .05em solid hsl(200, 40%, 80%);
+	}
+
+button {
+	font: inherit;
+}
+
+textarea.editor {
+	border: 0;
+	outline: none;
+	width: 100%;
+	max-height: 50vh;
+	box-sizing: border-box;
+	background: hsl(200, 10%, 20%) linear-gradient(rgba(0,0,0,.1) 50%, transparent 0);
+	background-origin: content-box;
+	background-size: auto 3em;
+	background-attachment: local;
+	box-shadow: 0 .1em .2em rgba(0,0,0,.3) inset;
+}
+
+div.editor {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	color: white;
+	line-height: 1.5;
+}
+
+textarea.editor,
+div.editor > pre {
+	padding: 1rem 2rem;
+	line-height: inherit;
+}
+
+textarea.editor {
+	display: block;
+	color: white;
+	-webkit-text-fill-color: transparent;
+	white-space: pre;
+}
+
+div.editor > pre {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+	margin: 0;
+	pointer-events: none;
+}
+
+.slide {
+	display: flex;
+	flex-flow: column;
+	align-items: stretch;
+	padding: 2.5rem;
+	background-color: black;
+	color: white;
+}
+
+@media (max-width: 1024px) {
+	.slide {
+		padding: 3vmin;
+	}
+}
+
+	.slide[data-source]::after {
+		color: black;
+		text-shadow: none;
+	}
+
+	.light.slide,
+	.demo.slide {
+		background: hsl(200, 40%, 90%);
+		color: black;
+	}
+
+	.slide > h1 {
+		text-align: center;
+		margin: 0 0 .6em;
+		font-size: 200%;
+	}
+
+	.slide h2 {
+		color: yellowgreen;
+		font-size: 120%;
+	}
+
+.image.slide > h1:only-child,
+.image.slide > .caption,
+.iframe.slide > h1 {
+	/*bottom: .5em;
+	margin: 0;*/
+	text-shadow: none;
+	font-weight: 100;
+	background: rgba(0,0,0,.5);
+	backdrop-filter: blur(4px);
+}
+
+.delayed.displayed,
+.delayed-children > .displayed {
+	opacity: 1;
+}
+
+section > header.slide {
+	align-items: center;
+	justify-content: center;
+	background: url(img/htmlwallpaper.jpg) 50% 69% / cover;
+}
+
+section > header.slide:target {
+	display: flex;
+}
+
+	section > header.slide > h1 {
+		margin: auto;
+		padding: .5em .7em;
+		background: black;
+		text-align: center;
+		line-height: 1.2;
+		font-weight: 100;
+	}
+
+#indicator {
+	background: transparent;
+	text-shadow: none;
+	font-weight: 100;
+}
+
+::selection {
+	background: hsl(335, 100%, 40%);
+	color: white;
+}
+
+footer.ref a {
+	position: absolute;
+	bottom: 5vmin;
+	text-decoration: none;
+	font-size: 75%;
+}
+
+/* Syntax highlighting */
+
+code.de-emphasize {
+	opacity: .4;
+}
+
+.hint {
+	position: absolute;
+	top: -5px;
+	left: 10px;
+	font-size: .8rem;
+	font-weight: bold;
+	line-height: 1;
+	color: rgba(0,0,0,.15);
+	mix-blend-mode: multiply;
+}
+
+dialog {
+	padding: 1em;
+	border: 1px solid rgba(0,0,0,.5);
+	box-shadow: .1em .1em .5em rgba(0,0,0,.5);
+}
+
+	dialog > h1 {
+		background: hsl(200, 20%, 50%);
+		color: white;
+		margin: -1.25em -1.25em 1em;
+		padding: 0 .5em .1em;
+		font-size: 80%;
+	}
+
+	dialog > :last-child {
+		margin-bottom: 0;
+	}
