@@ -115,6 +115,10 @@
 	padding: 0;
 }
 
+	#projects .caption {
+		position: absolute;
+	}
+
 	#projects ul {
 		padding: 0;
 		margin: 0;
