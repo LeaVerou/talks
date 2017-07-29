@@ -22,7 +22,7 @@
 	}
 
 	.hi > .delayed:only-child {
-		margin: auto;
+		xmargin: auto;
 	}
 
 	.hi p {
@@ -1176,6 +1176,31 @@ footer.slide {
 	background: linear-gradient(to right, var(--color1), var(--color2));
 	border-radius: .3em;
 }
+
+	.graph-1d::before,
+	.graph-1d::after {
+		position: absolute;
+		white-space: pre;
+		font-weight: bold;
+		font-size: 40%;
+		margin-top: -1.2em;
+		text-transform: uppercase;
+	}
+
+	.graph-1d::before {
+		content: attr(data-label-before);
+		color: var(--color1);
+		right: 100%;
+		margin-right: 2em;
+		text-align: right;
+	}
+
+	.graph-1d::after {
+		content: attr(data-label-after);
+		color: var(--color2);
+		left: 100%;
+		margin-left: 2em;
+	}
 
 	.graph-1d > * {
 		position: absolute;

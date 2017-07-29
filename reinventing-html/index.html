@@ -22,7 +22,7 @@
 <!-- <header class="slide" data-video="videos/authors.mp4" id="intro"></header> -->
 
 <section>
-	<section class="inverse slide dont-resize darker hi">
+	<section id="hi" class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
 			<img src="../shared/img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
 			<figcaption style="font-size: 240%">Hi, I’m Lea</figcaption>
@@ -37,8 +37,17 @@
 		</div>
 	</section>
 
-	<section class="inverse slide dont-resize darker hi" id="projects">
-		<p>I make stuff</p>
+	<article class="image slide" id="vb6" style="background-image: url(img/vb6.gif);">
+		<h1>
+			<strong>1998</strong> Visual Basic 6
+		</h1>
+	</article>
+
+	<section class="slide dont-resize" id="projects">
+		<h1 class="caption">
+			<strong>2009</strong>
+			Open Source
+		</h1>
 		<ul>
 			<li><a href="http://prismjs.com" style="background-image: url(../shared/img/project-prism.png)">PrismJS</a></li>
 			<li><a href="http://leaverou.github.io/prefixfree" style="background-image: url(../shared/img/project-prefixfree.png)">-prefix-free</a></li>
@@ -177,9 +186,10 @@
 	<article class="slide" id="html">
 		<img src="img/html.svg" alt="">
 		<ul class="criteria delayed-children">
-			<li>Portable</li>
 			<li>Forgiving</li>
 			<li>Accessible</li>
+			<li>Small</li>
+			<li>Portable</li>
 		</ul>
 	</article>
 
@@ -198,7 +208,9 @@
 	<article class="slide" id="landscape">
 		<h1>Current Landscape</h1>
 
-		<div class="graph-1d">
+		<div class="graph-1d" data-label-before="High Effort
+High Control" data-label-after="Low Effort
+Low Control">
 			<div style="--x: 0">Vanilla JS</div>
 			<div style="--x: .1">JS Frameworks</div>
 			<div style="--x: .5" class="qqq">???</div>
