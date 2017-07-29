@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title>Mavo: Creating Interactive Data-Driven Web Applications by Authoring HTML</title>
+<link href="../csss/slideshow.css" rel="stylesheet" />
+<link href="../csss/reusable.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://get.mavo.io/mavo.css">
+<link href="prism.css" rel="stylesheet" />
+<link href="theme.css" rel="stylesheet" />
+<link href="talk.css" rel="stylesheet" />
+<!-- <script src="../prefixfree/prefixfree.min.js"></script> -->
+
+</head>
+<body class="language-markup">
+
+<article class="slide" id="adjust-resolution" style="--vw: 1440; --vh: 900">
+	<h1>1440 × 900</h1>
+</article>
+
+<!-- <header class="slide" data-video="videos/authors.mp4" id="intro"></header> -->
+
+<section>
+	<section class="inverse slide dont-resize darker hi">
+		<figure class="delayed">
+			<img src="../shared/img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
+			<figcaption style="font-size: 240%">Hi, I’m Lea</figcaption>
+		</figure>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="lesbian" data-steps="3">
+		<div>
+		<p>#funfact</p>
+		<p>I grew up in Lesbos, Greece</p>
+		<p>…which technically makes me <strong>geographically Lesbian</strong></p>
+		</div>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="projects">
+		<p>I make stuff</p>
+		<ul>
+			<li><a href="http://prismjs.com" style="background-image: url(../shared/img/project-prism.png)">PrismJS</a></li>
+			<li><a href="http://leaverou.github.io/prefixfree" style="background-image: url(../shared/img/project-prefixfree.png)">-prefix-free</a></li>
+			<li><a href="http://blissfuljs.com" style="background-image: url(../shared/img/project-bliss.png)">Bliss</a></li>
+			<li><a href="http://css3test.com" style="background-image: url(../shared/img/project-css3test.png)">css3test.com</a></li>
+			<li><a href="http://leaverou.github.io/awesomplete/" style="background-image: url(../shared/img/project-awesomplete.png)">Awesomplete</a></li>
+			<li><a href="http://cubic-bezier.com/" style="background-image: url(../shared/img/project-cubicbezier.png)">cubic-bezier.com</a></li>
+			<li><a href="http://dabblet.com" style="background-image: url(../shared/img/project-dabblet.png)">dabblet.com</a></li>
+			<li><a href="http://leaverou.github.io/contrast-ratio/" style="background-image: url(../shared/img/project-contrastratio.png)">Contrast Ratio</a></li>
+			<li><a href="http://leaverou.github.io/animatable/" style="background-image: url(../shared/img/project-animatable.png)">Animatable</a></li>
+		</ul>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="csswg">
+		<p class="delayed">
+			<strong>CSS WG</strong>
+			Invited Expert
+		</p>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="mit">
+		<p class="delayed">
+			<img src="../shared/img/mit.svg" alt="MIT" />
+			HCI researcher @ CSAIL
+		</p>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="book">
+		<a href="http://shop.oreilly.com/product/0636920031123.do" class="delayed">
+			<img src="../shared/img/book.png" alt="CSS Secrets by O’Reilly" style="display:block" />
+			★★★★★ on Amazon
+		</a>
+	</section>
+</section>
+
+<section>
+	<!-- <article class="slide" id="comic" data-credits="zenpencils.com/comic/98-alan-watts-what-if-money-was-no-object">
+		<img src="img/goals.gif" alt="">
+		<img class="delayed" src="img/everyoneknows.png" alt="">
+	</article>
+
+	<article class="dont-resize slide" id="crud-apps">
+		<h1>CRUD <span>Lightweight computation</span></h1>
+		<ul style="--total: 19">
+			<li>Portfolio</li>
+			<li>Publication list</li>
+			<li>Photo album</li>
+			<li>Conference website</li>
+			<li>Address book</li>
+			<li>Blog</li>
+			<li>PIM apps</li>
+			<li>Menstruation tracker</li>
+			<li>Invoicing system</li>
+			<li>Calculators & converters</li>
+
+			<li>Restaurant menu</li>
+			<li>Trip log</li>
+			<li>Fitness tracker</li>
+			<li>Recipe collection</li>
+			<li>Broker property listing</li>
+			<li>Personal chequebook</li>
+			<li>Party RSVP</li>
+			<li>Bar inventory</li>
+			<li>Pet care tracker</li>
+		</ul>
+	</article>
+
+	<article class="slide">
+		<blockquote>
+			<p>“Ninety percent of everything is CRUD”</p>
+			<p class="cite">—Very Slightly Paraphrased <a href="https://en.wikipedia.org/wiki/Sturgeon%27s_law">Sturgeon’s Law</a></p>
+		</blockquote>
+	</article> -->
+
+	<article class="slide" id="the-problem" data-steps="2" data-credits="https://www.flickr.com/photos/jeremympiehler/24378077365/ https://www.flickr.com/photos/97481684@N08/13969413085">
+		<ul>
+			<li>Objects</li>
+			<li>DOM</li>
+			<li>npm</li>
+			<li>NodeJS</li>
+			<li>JSON</li>
+			<li>Schemas</li>
+			<li>MVC</li>
+			<li>Ajax</li>
+			<li>Events</li>
+			<li>Functions</li>
+			<li>OAuth</li>
+			<li>JavaScript</li>
+			<li class="special html">HTML</li>
+			<li class="special css">CSS</li>
+		</ul>
+	</article>
+
+	<article class="slide" id="jslogos" data-credits="hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f"></article>
+
+	<article class="slide" id="todomvc">
+		<table>
+			<caption>todomvc.com</caption>
+			<thead>
+				<tr>
+					<th>Framework</th>
+					<th>SLOC</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Angular</td>
+					<td>294</td>
+				</tr>
+				<tr>
+					<td>Polymer</td>
+					<td>246</td>
+				</tr>
+				<tr>
+					<td>React</td>
+					<td>421</td>
+				</tr>
+				<tr>
+					<td>Backbone</td>
+					<td>297</td>
+				</tr>
+			</tbody>
+		</table>
+		<img src="img/todomvc.png" />
+	</article>
+
+	<!-- <article class="slide" data-src="http://www.simile-widgets.org/exhibit2" title="Exhibit: Data presentation with HTML"></article> -->
+
+	<article class="slide" id="research-question">
+		<h1>
+			<span class="label">Question</span>
+			What would HTML look like<br>
+			if it were designed for web apps?</h1>
+	</article>
+
+	<article class="slide" id="html">
+		<img src="img/html.svg" alt="">
+		<ul class="criteria delayed-children">
+			<li>Portable</li>
+			<li>Forgiving</li>
+			<li>Accessible</li>
+		</ul>
+	</article>
+
+	<article class="slide">
+		<h1>Things people need the most</h1>
+
+		<ul>
+			<li>Persistence</li>
+			<li>Editing</li>
+			<li>Collections</li>
+			<li>Uploads</li>
+			<li>Data flow</li>
+		</ul>
+	</article>
+
+	<article class="slide" id="landscape">
+		<h1>Current Landscape</h1>
+
+		<div class="graph-1d">
+			<div style="--x: 0">Vanilla JS</div>
+			<div style="--x: .1">JS Frameworks</div>
+			<div style="--x: .5" class="qqq">???</div>
+			<div style="--x: 1">Prefab</div>
+		</div>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>Mavo Tutorial</h1>
+	</header>
+
+	<article class="looping video slide" data-video="videos/todo.mp4" style="--url: 'https://mavo.io/demos/todo'"></article>
+
+	<article class="slide" id="todo-code" data-steps="1">
+		<pre><code>
+			&lt;body <mark>mv-storage="local"</mark>>
+				&lt;h1>My tasks&lt;/h1>
+				&lt;p><mark>[count(done)]</mark> done of <mark>[count(task)]</mark> total&lt;/p>
+
+				&lt;ul>
+					&lt;li <mark>property="task" mv-multiple</mark>>
+						&lt;input <mark>property="done"</mark> type="checkbox" />
+						&lt;span <mark>property="taskTitle"</mark>>Do stuff&lt;/span>
+					&lt;/li>
+				&lt;/ul>
+			&lt;/body>
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<h1>Persistence</h1>
+		<pre><code>
+			&lt;div <mark>mv-storage="local"</mark>>
+				&lt;!-- Mavo app -->
+			&lt;/div>
+		</code></pre>
+	</article>
+
+	<article class="slide" id="data-source">
+		<video src="videos/auth.mp4" style="height: 50vh; margin-bottom: 3vh" loop></video>
+		<pre><code>
+			&lt;div <mark>mv-storage="http://github.com/leaverou"</mark>>
+				&lt;!-- Mavo app -->
+			&lt;/div>
+		</code></pre>
+	</article>
+
+	<!-- <article class="example slide">
+		<pre style="font-size: 80%;"><code>
+			&lt;div class="cat">
+				&lt;img src="img/adamcatlace.png">
+				&lt;h1>Adam Catlace&lt;/h1>
+				&lt;time datetime="2014-06-01">1 Jun 2014&lt;/time>
+				Cuteness: &lt;meter value="3" max="5">&lt;/meter>
+			&lt;/div>
+		</code></pre>
+	</article> -->
+
+	<article class="visible-storage example slide" id="form-elements">
+		<pre><code>
+			&lt;div <mark>mv-storage="local"</mark> class="mv-autosave">
+				&lt;input <mark>property="name"</mark> value="Lea Verou"/>
+				&lt;input <mark>property="strength"</mark> type="range" />
+				&lt;select <mark>property="country"</mark>>
+					&lt;option value="us">United States&lt;/option>
+					&lt;option value="gb">United Kingdom&lt;/option>
+					&lt;option value="jp">Japan&lt;/option>
+				&lt;/select>
+			&lt;/div>
+		</code></pre>
+	</article>
+
+	<article class="visible-storage example slide">
+		<pre style="font-size: 80%;"><code>
+			&lt;div class="cat" <mark>mv-storage="local"</mark>>
+				&lt;img src="img/adamcatlace.png" <mark>property="photo"</mark>>
+				&lt;h1 <mark>property="name"</mark>>Adam Catlace&lt;/h1>
+				&lt;time <mark>property="birthday"</mark> datetime="2014-06-01">1 Jun 2014&lt;/time>
+				Cuteness: &lt;meter <mark>property="rating"</mark> value="3" max="5">&lt;/meter>
+			&lt;/div>
+		</code></pre>
+	</article>
+<!--
+	<article class="example slide" id="multiple-properties">
+		<pre><code>
+			Hobbies:
+			&lt;ul>
+				&lt;li property="hobby">Eating&lt;/li>
+				&lt;li property="hobby">Sleeping&lt;/li>
+				&lt;li property="hobby">Purring&lt;/li>
+			&lt;/ul>
+		</code></pre>
+	</article> -->
+
+	<article class="example slide">
+		<pre><code>
+			Hobbies:
+			&lt;ul>
+				&lt;li property="hobby" <mark>mv-multiple</mark>>Eating&lt;/li>
+			&lt;/ul>
+		</code></pre>
+	</article>
+
+	<article class="example slide" id="objects">
+		<pre style="font-size: 80%"><code>
+			&lt;article property="cat" mv-multiple>
+				&lt;img src="img/adamcatlace.png" property="photo">
+				&lt;h1 property="name">Adam Catlace&lt;/h1>
+				&lt;span property="age">2&lt;/span>
+				&lt;p>Hobbies: &lt;span property="hobby" mv-multiple>Eating&lt;/span>
+			&lt;/article>
+		</code></pre>
+	</article>
+
+	<article class="looping slide" data-video="videos/talks.mp4"></article>
+	<article class="looping slide" data-video="videos/authors.mp4"></article>
+
+	<article class="example slide">
+		<pre><code>
+			&lt;input type="range" property="strength"
+			       title="Value: [strength] out of 100" />
+			Value: [strength / 100]
+		</code></pre>
+	</article>
+
+	<article class="dont-resize example slide" id="color-picker">
+		<pre style="font-size: 80%;"><code>
+			&lt;div style="background-color: <mark>[color]</mark>;">
+				&lt;input type="range" property="hue" max="360" />
+				&lt;input type="range" property="saturation" />
+				&lt;input type="range" property="lightness" />
+				&lt;code <mark>property="color"</mark>>
+					hsl([hue], [saturation]%, [lightness]%)
+				&lt;/code>
+			&lt;/div>
+		</code></pre>
+	</article>
+
+	<article class="looping slide" data-video="videos/color-picker.mp4"></article>
+	<article class="looping slide" data-video="videos/logo.mp4"></article>
+	<article class="looping slide" data-video="videos/mortgage.mp4"></article>
+
+	<article class="vertical example slide lite-cats" id="aggregate-expressions" data-steps="1"
+	         data-credits="Cat’s Shrödinger by The Oatmeal, Cat on Laptop from flickr.com/photos/nwater/8130196854">
+		<script type="application/json" id="data-aggregate-expressions">{
+			"cat": [
+				{
+					"photo": "img/adamcatlace.png",
+					"name": "Adam Catlace",
+					"age": 2
+				},
+				{
+					"photo": "img/tpl.jpg",
+					"name": "Tim Purrners-Lee",
+					"age": 9
+				},
+				{
+					"photo": "img/alanpurring.jpg",
+					"name": "Alan Purring",
+					"age": 7
+				},
+				{
+					"photo": "img/vector.jpg",
+					"name": "Vector",
+					"age": 11
+				},
+				{
+					"photo": "img/shrodingcat.png",
+					"name": "Schrödingcat"
+				}
+			]
+		}</script>
+		<pre style="font-size: 80%"><code>
+			&lt;article property="cat"
+			         mv-multiple>
+				&lt;img property="photo">
+				&lt;h1 property="name">&lt;/h1>
+				&lt;span property="age">&lt;/span>
+			&lt;/article>
+
+			<div>&lt;h1>📊 Stats&lt;/h1>
+			&lt;p><mark>[count(cat)]</mark> cats
+			    (<mark>[count(age > 6)]</mark> old)
+			&lt;p><mark>[count(age)]</mark> ages: <mark>[age]</mark>
+			&lt;p>Average age: <mark>[average(age)]</mark></div>
+		</code></pre>
+	</article>
+
+	<article class="looping slide" data-video="videos/invoice.mp4"></article>
+	<article class="looping slide" data-video="videos/svgpath.mp4"></article>
+	<article class="slide" data-src="http://mavo.io/demos"></article>
+</section>
+
+<article class="slide">
+	<h1>Extensibility</h1>
+
+	<table>
+		<thead>
+			<th>Goal</th>
+			<th>Object or Function</th>
+		</thead>
+		<tr>
+			<td>New storage backend</td>
+			<td><code>Mavo.Backend.register()</code></td>
+		</tr>
+		<tr>
+			<td>New element/attribute preset</td>
+			<td><code>Mavo.Elements.register()</code></td>
+		</tr>
+		<tr>
+			<td>New MavoScript function</td>
+			<td><code>Mavo.Functions</code></td>
+		</tr>
+		<tr>
+			<td>New MavoScript operator</td>
+			<td><code>Mavo.Script.operators</code></td>
+		</tr>
+	</table>
+
+	<p class="delayed">Low level extensibility: <strong>Hooking</strong></p>
+</article>
+
+<section id="evaluation">
+	<header class="slide">
+		<h1>Science, bitches!</h1>
+	</header>
+
+	<article class="slide" id="study-design">
+		<h1>Study design</h1>
+		<div class="timeline">
+			<div class="tutorial">Mavo Tutorial</div>
+			<div class="structured">
+				Structured study
+				<div>What is Mavo’s Usability & Learnability?</div>
+			</div>
+			<div class="unstructured">
+				Freestyle study
+				<div>Are Mavo’s capabilities sufficent?</div>
+			</div>
+		</div>
+	</article>
+
+	<article class="slide" id="subjects" data-steps="4">
+		<h1>20 participants</h1>
+		<svg class="def">
+			<symbol id="person" viewBox="0 0 100 100">
+				<circle r="23" cx="50" cy="25" />
+				<circle r="45" cx="50" cy="100" />
+				<path d="M38,26 a12,12 0 0,0 24,0" />
+			</symbol>
+		</svg>
+		<script>
+			for (var i=0; i<20; i++) {
+				let className = i <= 12? "female" : i <= 18? "male" : "other";
+				className += i <= 12? " beginner" : " intermediate";
+				let contactManager = i <8? `<text class="contacts" x="40" y="80" font-size="50" transform="rotate(5)">📇</text>` : "";
+				document.write(`
+					<svg style="transition-delay: ${i * .1}s, 0s" class="${className}">
+						<use href="#person" />
+						${contactManager}
+					</svg>`
+				);
+			};
+		</script>
+
+		<div class="gender legend">
+			<div class="female">13</div> Female
+			<div class="male">6</div> Male
+			<div class="other">1</div> Other
+		</div>
+
+		<p class="age">
+			<strong>Age</strong> <i>μ</i> = 35.9, <i>σ</i> = 10.2
+		</p>
+
+		<div class="skill legend">
+			<div class="beginner">13</div> Beginner or worse programmers
+			<div class="intermediate">7</div> Intermediate
+		</div>
+	</article>
+
+	<article class="slide" id="structured">
+		<h1>
+			<img src="img/foodie.png" alt="">
+			<img src="img/decisions.png" alt=""><br>
+			Structured study
+		</h1>
+		<div>
+			<script>
+				for (var i=0; i<17; i++) {
+					document.write(`<svg><use href="#person" /></svg>`);
+				};
+			</script>
+		</div>
+	</article>
+
+	<article class="slide dont-resize" id="tasks">
+		<article style="background-image: url(img/foodie.png)" class="round-item delayed">
+			<h1>Foodie log <span>12 tasks</span></h1>
+		</article>
+		<article style="background-image: url(img/decisions.png)" class="round-item delayed">
+			<h1>Pros & Cons <span>10 tasks</span></h1>
+		</article>
+		<!-- <article style="background-image: url(img/contacts.png)" class="freestyle delayed">
+			<h1>Contacts manager</h1>
+		</article> -->
+		<div class="delayed progression">
+			<div>CRUD
+				<p class="delayed"><code>property</code>
+				<code>mv-multiple</code>
+			</div> → <div>
+				Basic expressions
+				<p class="delayed"><code>[foo]</code>
+				<code>[count(foo)]</code>
+				<code>[average(foo)]</code>
+			</div> → <div>
+				Complex expressions
+				<p class="delayed">Multi-block-aggregate
+				<code>count(foo > 5)</code>
+				<code>if(foo < 5, yes, no)</code></p>
+			</div>
+		</div>
+	</article>
+
+	<article class="looping slide" data-video="videos/decisions.mp4"></article>
+	<article class="looping slide" data-video="videos/foodie.mp4"></article>
+
+	<article class="slide" id="estimate-before">
+		<h1>“How long do you think it will take you?”</h1>
+
+		<ul class="bar-chart" title="People" style="--total: 6">
+			<li title="Hours" style="--people: 5"></li>
+			<li title="Days" style="--people: 6"></li>
+			<li title="Weeks" style="--people: 3"></li>
+			<li title="Months" style="--people: 3"></li>
+		</ul>
+	</article>
+
+	<article class="slide">
+		<h1>Results</h1>
+	</article>
+
+	<article class="stat slide">
+		<h1>Success</h1>
+		<strong>100%</strong> on CRUD tasks
+	</article>
+
+	<article class="stat slide">
+		<h1>Success</h1>
+		<strong>92.8%</strong> on basic expressions
+	</article>
+
+	<article class="slide" id="hard-refs">
+		<h1 class="label">What was hard</h1>
+		<p>Concatenation</p>
+		<table>
+			<thead>
+				<tr>
+					<th>HTML fragment (goal)</th>
+					<th>Success</th>
+				</tr>
+			</thead>
+			<tbody class="language-none">
+				<tr>
+					<td><code>&lt;/meter> <mark>[rating]</mark></code></td>
+					<td style="color: yellowgreen">100%</td>
+				</tr>
+				<tr>
+					<td><code>title="Overall rating: <mark>[rating]</mark>"</code></td>
+					<td style="color: yellowgreen">100%</td>
+				</tr>
+				<tr>
+					<td><code>&lt;/meter> <mark>[weight]</mark></code></td>
+					<td style="color: yellowgreen">100%</td>
+				</tr>
+				<tr>
+					<td><code>style="background: url(<mark>[pic]</mark>)"</code></td>
+					<td style="color: #f88">77.8%</td>
+				</tr>
+				<tr>
+					<td><code>class="weight-<mark>[weight]</mark>"</code></td>
+					<td style="color: #f88">75%</td>
+				</tr>
+				<tr>
+					<td><code>class="answer-<mark>[answer]</mark>"</code></td>
+					<td style="color: #f88">75%</td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
+
+	<article class="stat slide">
+		<h1>Success</h1>
+		<strong>74.6%</strong> on complex expressions
+	</article>
+
+	<article class="slide" id="hard-conditionals">
+		<h1 class="label">What was hard</h1>
+		<p>Conditionals <br><code>if(score > 0, Yes, No)</code>
+		<p class="delayed">Especially nested <br><code>if(score > 0, Yes, if(score &lt; 0, No, Maybe))</code></code>
+		<blockquote class="delayed">Just seeing those if statements...I did a little bit of Java and I remember those always screwed me over in that class. No surprise that that also tripped me up here.</blockquote>
+	</article>
+
+	<article class="slide">
+		<h1>
+			<span class="label">Post study work</span>
+			Markup-based conditionals
+		</h1>
+		<pre><code>
+			&lt;div mv-if="score > 0">Yes&lt;/div>
+			&lt;div mv-if="score = 0">Maybe&lt;/div>
+			&lt;div mv-if="score < 0">No&lt;/div>
+		</code></pre>
+	</article>
+
+	<article class="stat slide">
+		<h1>Success</h1>
+		<strong>2<span class="down-arrow">⬇︎</span></strong> in perceived difficulty <br>on 5-point Likert scale
+	</article>
+
+	<article class="slide">
+		<table>
+			<thead>
+				<tr>
+					<th>Application</th>
+					<th>Before Mavo</th>
+					<th>After Mavo</th>
+					<th>Difference</th>
+				</tr>
+			</thead>
+			<tr>
+				<td>Decisions</td>
+				<td>2.875</td>
+				<td>1.375</td>
+				<td style="color: #fbb">⬇︎1.5</td>
+			</tr>
+			<tr>
+				<td>Foodie log</td>
+				<td>3.667</td>
+				<td>1.223</td>
+				<td style="color: #fbb">⬇︎2.445</td>
+			</tr>
+		</table>
+	</article>
+
+	<article class="slide" id="stat-summary">
+		<article class="stat">
+			<strong>100%</strong> on CRUD tasks
+		</article>
+
+		<article class="stat">
+			<strong>92.8%</strong> on basic expressions
+		</article>
+
+		<article class="stat">
+			<strong>74.6%</strong> on complex expressions
+		</article>
+
+		<article class="stat">
+			<strong>2<span class="down-arrow">⬇︎</span></strong> in perceived difficulty <br>on 5-point Likert scale
+		</article>
+	</article>
+
+	<article class="slide" id="freestyle">
+		<h1>
+			<img src="img/contacts.png" alt=""><br>
+			Freestyle study
+		</h1>
+		<div>
+			<script>
+				for (var i=0; i<7; i++) {
+					document.write(`<svg><use href="#person" /></svg>`);
+				};
+			</script>
+		</div>
+	</article>
+
+	<article class="slide">
+		<img src="img/subjects-contacts.png" alt="">
+	</article>
+
+	<article class="stat slide">
+		<h1>Success</h1>
+		<strong>100%</strong> <span>were able to convert<br> their <b>own</b> HTML <br> to fully functional apps</span>
+	</article>
+
+	<article class="slide" id="own-apps">
+		<h1>Some even made apps for their own needs after the study!</h1>
+		<img src="img/userapps.png" alt="">
+	</article>
+
+	<article class="slide">
+		<h1>Simplicity</h1>
+		<blockquote>It's very simple.  It's as logical as HTML.  You are eliminating a huge step in coding.</blockquote>
+		<blockquote>It's simpler than I expected.  My anxiety expects it to be hard, then I just say write what you think, and it turns out to be right. It’s very intuitive.</blockquote>
+		<blockquote>It’s so expressive, it tells you exactly what it’s doing!</blockquote>
+	</article>
+
+	<article class="slide">
+		<h1>Learnability</h1>
+		<blockquote>It didn't seem like a lot of new things had to be learned. Naming properties was just the same as giving classes and ids.</blockquote>
+		<blockquote>It seems much more straightforward, everything is right there. It's almost too easy!</blockquote>
+	</article>
+
+	<article class="slide">
+		<h1>Utility</h1>
+		<blockquote>Being able to do that... right in the HTML and not have to fool with a whole other JS file... That is fantastic.  I can't say how awesome that is.  I want this thing now.</blockquote>
+		<blockquote>When is this going to be available? This is terrific. This is exactly the stuff I have a hard time with.</blockquote>
+		<blockquote>I'm convinced it's magic to write templating logic and have it show up and be editable.</blockquote>
+	</article>
+
+	<article id="uist" class="slide" style="background: url(img/uist.png) center / 100% auto hsl(0, 0%, 87%)">
+		<img src="img/paper.png" alt="" class="delayed">
+	</article>
+</section>
+
+<section>
+	<header class="future slide">
+		<h1>Future Work</h1>
+	</header>
+
+	<article class="slide">
+		<h1>Schema mutations</h1>
+	</article>
+
+	<article class="slide">
+		<h1>Filtering & Sorting</h1>
+	</article>
+
+	<article class="slide">
+		<h1>Granular access control</h1>
+	</article>
+
+	<article class="slide" data-credits="Emoji provided free by http://emojione.com">
+		<h1>Pivoting</h1>
+		<img src="img/insideout.svg" alt="">
+	</article>
+
+	<article class="slide" data-credits="Emoji provided free by http://emojione.com">
+		<h1>Graph schemas</h1>
+		<img src="img/graph.svg" alt="">
+	</article>
+
+	<article class="slide">
+		<h1>WYSIWYG</h1>
+	</article>
+
+	<article class="slide">
+		<h1>Mavo beyond the browser</h1>
+
+		<ul>
+			<li>Internet of Things</li>
+			<li>Mobile apps</li>
+		</ul>
+	</article>
+</section>
+
+<footer class="slide">
+	<img src="img/logo.svg" />
+	<p class="authors">Lea Verou, Amy Zhang, David Karger</p>
+	<p class="affiliation">Haystack Group, MIT CSAIL</p>
+
+	<ul>
+		<li style="--icon: '🌍'"><a href="http://mavo.io">mavo.io</a></li>
+		<li style="--icon: '📨'"><a href="mailto:leaverou@mit.edu">leaverou@mit.edu</a></li>
+		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
+	</ul>
+
+	<p>Slides: <a href="https://leaverou.github.io/mavo-talk">leaverou.github.io/mavo-talk</a></p>
+	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
+</footer>
+
+<script src="js/bliss.min.js"></script>
+<script src="../csss/slideshow.js"></script>
+<script src="js/prism.js"></script>
+<script src="../incrementable/incrementable.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/talk.js"></script>
+<script src="https://get.mavo.io/mavo.js"></script>
+
+</body>
+</html>
