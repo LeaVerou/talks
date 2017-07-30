@@ -285,14 +285,12 @@ div.editor {
 	}
 
 .image.slide > h1:only-child,
-.image.slide > .caption,
+.slide > .caption,
 .iframe.slide > h1 {
 	/*bottom: .5em;
 	margin: 0;*/
 	text-shadow: none;
-	font-weight: 100;
 	background: rgba(0,0,0,.5);
-	backdrop-filter: blur(4px);
 }
 
 .delayed.displayed,
@@ -326,6 +324,16 @@ section > header.slide:target {
 		line-height: 1.2;
 		font-weight: 100;
 	}
+
+@keyframes scrollscreenshot {
+	to {
+		background-position-y: calc(var(--screenshot-height) * -.5px + 50vh);
+	}
+}
+
+.long-screenshot.slide:target {
+	animation: scrollscreenshot calc(var(--screenshot-height) * 1ms) 5s forwards ease-in;
+}
 
 #indicator {
 	background: transparent;

@@ -116,7 +116,7 @@
 }
 
 	#projects .caption {
-		
+		margin-top: -1em;
 	}
 
 	#projects ul {
@@ -153,24 +153,26 @@
 				text-decoration: none;
 			}
 
-#csswg {}
-
-	#csswg strong {
-		display: block;
-		color: white;
-		font: bold 125% Helvetica Neue, sans-serif;
-	}
-
-#mit > p {
-	display: inline-block;
-	width: 6em;
-	padding-top: 1em;
+img.inline{
+	height: .9em;
 }
 
-	#mit img {
+#book {
+
+}
+
+	#book a {
+		text-decoration: none;
+		color: white;
+		font-size: 85%;
+		font-weight: bold;
+	}
+
+	#book img {
 		display: block;
-		width: 80%;
-		margin-bottom: .2em;
+		margin-bottom: 1em;
+		box-shadow: 1px 1px #aab, 2px 2px #bbc, 3px 3px #99a, 4px 4px #aab, 5px 5px #889, 6px 6px #99a, 7px 7px #778, 8px 8px #889,
+		            8px 8px 10px rgba(0,0,0,.6);
 	}
 
 #intro video {
@@ -179,22 +181,29 @@
 }
 
 #the-problem {
-	background: url(img/coding.png) center / cover black no-repeat;
+	background: url(img/excited-coder.svg) left bottom / cover #d6e7eb no-repeat;
 	transition: 1s background-image;
+	color: black;
 }
 
 #the-problem[data-step="1"] {
-	background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"></svg>');
+	background-image: url(img/troubled-coder.svg);
 }
 
 #the-problem[data-step="2"] {
-	background-image: url(img/crying-baby.jpg);
+	background-image: url(img/frustrated-coder.svg);
+}
+
+#the-problem:after {
+	color: black;
+	text-shadow: none;
+	font-weight: 400;
 }
 
 	#the-problem ul {
 		position: absolute;
 		bottom: 0;
-		left: 1em;
+		right: 1em;
 		padding: 0;
 		list-style: none;
 	}
@@ -215,15 +224,15 @@
 	}
 
 	#the-problem .html {
-		color: hsl(10, 100%, 50%);
+		color: hsl(10, 100%, 30%);
 	}
 
 	#the-problem .css {
-		color: hsl(210, 100%, 50%);
+		color: hsl(210, 100%, 30%);
 	}
 
 @keyframes scrollbg {
-	to { background-position: 50% 305%; }
+	to { background-position-y: -50vh; }
 }
 
 #jslogos {
