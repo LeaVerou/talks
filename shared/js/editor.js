@@ -57,7 +57,7 @@ var _ = Prism.Live = $.Class({
 						var before = this.beforeCaret();
 
 						if (/(^|\r|\n)\s*$/.test(before)) {
-							// Spaces or line break before charet
+							// Spaces or line break before caret
 							this.insert("\t");
 						}
 						else {
@@ -78,8 +78,15 @@ var _ = Prism.Live = $.Class({
 							}
 							else {
 								// Tag
-								this.insert(`<${selector}></${selector}>`);
-								this.moveCaret(-selector.length - 3);
+								if (_.selfClosing.indexOf(selector) > -1) {
+									this.insert(`<${selector} />`);
+									this.moveCaret(-2);
+								}
+								else {
+									this.insert(`<${selector}></${selector}>`);
+									this.moveCaret(-selector.length - 3);
+								}
+
 							}
 						}
 
@@ -186,7 +193,8 @@ var _ = Prism.Live = $.Class({
 		snippets: {
 			"test": "Snippets work!",
 			"submit": '<button type="submit">Submit</button>'
-		}
+		},
+		selfClosing: ["input", "img", "link", "meta", "base", "br", "hr"]
 	}
 });
 

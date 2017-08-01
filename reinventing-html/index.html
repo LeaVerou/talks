@@ -89,7 +89,7 @@
 </section>
 
 <section>
-	<article class="slide" id="research-question">
+	<article class="slide" id="the-question">
 		<h1>
 			<span class="label">The Question</span>
 			What would HTML look like<br>
@@ -153,6 +153,8 @@
 			<li>JSON</li>
 			<li>Schemas</li>
 			<li>MVC</li>
+			<li>Data binding</li>
+			<li>Components</li>
 			<li>Ajax</li>
 			<li>Events</li>
 			<li>Functions</li>
@@ -164,6 +166,8 @@
 	</article>
 
 	<article class="slide" id="jslogos" data-credits="hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f"></article>
+
+	<article class="image slide" style="background-image: url(img/crying-baby.jpg)"></article>
 
 	<article class="slide" id="todomvc">
 		<table>
@@ -196,7 +200,18 @@
 		<img src="img/todomvc.png" />
 	</article>
 
-	<!-- <article class="slide" data-src="http://www.simile-widgets.org/exhibit2" title="Exhibit: Data presentation with HTML"></article> -->
+	<article class="slide" id="landscape">
+		<h1>State of Web development</h1>
+
+		<div class="graph-1d" data-label-before="More Effort
+More Control" data-label-after="Less Effort
+Less Control">
+			<div style="--x: 0">Vanilla JS</div>
+			<div style="--x: .1">JS Frameworks</div>
+			<div style="--x: .5" class="qqq">???</div>
+			<div style="--x: 1">Prefab</div>
+		</div>
+	</article>
 
 	<article class="slide">
 		<h1>Things people need the most</h1>
@@ -210,24 +225,13 @@
 		</ul>
 	</article>
 
-	<article class="slide" id="landscape">
-		<h1>Current Landscape</h1>
 
-		<div class="graph-1d" data-label-before="High Effort
-High Control" data-label-after="Low Effort
-Low Control">
-			<div style="--x: 0">Vanilla JS</div>
-			<div style="--x: .1">JS Frameworks</div>
-			<div style="--x: .5" class="qqq">???</div>
-			<div style="--x: 1">Prefab</div>
-		</div>
-	</article>
 </section>
 
 <section>
-	<header class="slide">
-		<h1>Mavo Tutorial</h1>
-	</header>
+	<article class="slide" id="mavo">
+		<h1><img src="img/logo.svg" alt="Mavo"></h1>
+	</article>
 
 	<article class="looping video slide" data-video="videos/todo.mp4" style="--url: 'https://mavo.io/demos/todo'"></article>
 
@@ -248,9 +252,26 @@ Low Control">
 	</article>
 
 	<article class="slide">
+		<h1>Activate Mavo</h1>
+		<pre><code>
+			&lt;link rel="stylesheet" href="//get.mavo.io/mavo.css"/>
+			&lt;script src="//get.mavo.io/mavo.js">&lt;/script>
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<h1>Define an app</h1>
+		<pre><code>
+			&lt;div <mark>mv-app="appName"</mark>>
+				&lt;!-- Mavo app -->
+			&lt;/div>
+		</code></pre>
+	</article>
+
+	<article class="slide">
 		<h1>Persistence</h1>
 		<pre><code>
-			&lt;div <mark>mv-storage="local"</mark>>
+			&lt;div mv-app <mark>mv-storage="local"</mark>>
 				&lt;!-- Mavo app -->
 			&lt;/div>
 		</code></pre>
@@ -277,28 +298,21 @@ Low Control">
 	</article> -->
 
 	<article class="visible-storage example slide" id="form-elements">
-		<pre><code>
-			&lt;div <mark>mv-storage="local"</mark> class="mv-autosave">
-				&lt;input <mark>property="name"</mark> value="Lea Verou"/>
-				&lt;input <mark>property="strength"</mark> type="range" />
-				&lt;select <mark>property="country"</mark>>
-					&lt;option value="us">United States&lt;/option>
-					&lt;option value="gb">United Kingdom&lt;/option>
-					&lt;option value="jp">Japan&lt;/option>
-				&lt;/select>
-			&lt;/div>
-		</code></pre>
+		<p class="hint">mv-autosave, &lt;select>, mv-bar</p>
+		<textarea><div mv-app="myform" mv-storage="local">
+	<input property="name" value="Lea Verou"/>
+	<input property="strength" type="range" />
+</div></textarea>
 	</article>
 
-	<article class="visible-storage example slide">
-		<pre style="font-size: 80%;"><code>
-			&lt;div class="cat" <mark>mv-storage="local"</mark>>
-				&lt;img src="img/adamcatlace.png" <mark>property="photo"</mark>>
-				&lt;h1 <mark>property="name"</mark>>Adam Catlace&lt;/h1>
-				&lt;time <mark>property="birthday"</mark> datetime="2014-06-01">1 Jun 2014&lt;/time>
-				Cuteness: &lt;meter <mark>property="rating"</mark> value="3" max="5">&lt;/meter>
-			&lt;/div>
-		</code></pre>
+	<article class="visible-storage example slide" id="objects">
+		<p class="hint">|mv-multiple, hobbies collection</p>
+		<textarea><div mv-app class="cat" mv-storage="local">
+	<img src="img/adamcatlace.png" property="photo">
+	<h1 property="name">Adam Catlace</h1>
+	<time property="birthday" datetime="2014-06-01">1 Jun 2014</time>
+	Cuteness: <meter property="rating" value="3" max="5"></meter>
+</div></textarea>
 	</article>
 <!--
 	<article class="example slide" id="multiple-properties">
@@ -313,97 +327,86 @@ Low Control">
 	</article> -->
 
 	<article class="example slide">
-		<pre><code>
-			Hobbies:
-			&lt;ul>
-				&lt;li property="hobby" <mark>mv-multiple</mark>>Eating&lt;/li>
-			&lt;/ul>
-		</code></pre>
+		<textarea>Hobbies:
+<ul>
+	<li property="hobby" mv-multiple>Eating</li>
+</ul></textarea>
 	</article>
 
-	<article class="example slide" id="objects">
-		<pre style="font-size: 80%"><code>
-			&lt;article property="cat" mv-multiple>
-				&lt;img src="img/adamcatlace.png" property="photo">
-				&lt;h1 property="name">Adam Catlace&lt;/h1>
-				&lt;span property="age">2&lt;/span>
-				&lt;p>Hobbies: &lt;span property="hobby" mv-multiple>Eating&lt;/span>
-			&lt;/article>
-		</code></pre>
-	</article>
+	<article class="slide" data-import="objects"></article>
 
 	<article class="looping slide" data-video="videos/talks.mp4"></article>
 	<article class="looping slide" data-video="videos/authors.mp4"></article>
 
-	<article class="example slide">
-		<pre><code>
-			&lt;input type="range" property="strength"
-			       title="Value: [strength] out of 100" />
-			Value: [strength / 100]
+	<article class="example slide" style="--font-size-multiplier: 1.2">
+		<textarea><input type="range" property="strength"
+       title="Value: [strength] out of 100" />
+Value: [strength / 100]</textarea>
 		</code></pre>
 	</article>
 
 	<article class="dont-resize example slide" id="color-picker">
-		<pre style="font-size: 80%;"><code>
-			&lt;div style="background-color: <mark>[color]</mark>;">
-				&lt;input type="range" property="hue" max="360" />
-				&lt;input type="range" property="saturation" />
-				&lt;input type="range" property="lightness" />
-				&lt;code <mark>property="color"</mark>>
-					hsl([hue], [saturation]%, [lightness]%)
-				&lt;/code>
-			&lt;/div>
-		</code></pre>
+		<textarea><div style="background-color: [color];">
+	<input type="range" property="hue" max="360" />
+	<input type="range" property="saturation" />
+	<input type="range" property="lightness" />
+	<code property="color">
+		hsl([hue], [saturation]%, [lightness]%)
+	</code>
+</div></textarea>
 	</article>
 
-	<article class="looping slide" data-video="videos/color-picker.mp4"></article>
-	<article class="looping slide" data-video="videos/logo.mp4"></article>
-	<article class="looping slide" data-video="videos/mortgage.mp4"></article>
+	<article class="looping slide" data-video="videos/color-picker.mp4" style="--url: 'https://mavo.io/demos/color-picker'"></article>
+	<article class="looping slide" data-video="videos/logo.mp4" style="--url: 'https://mavo.io/demos/logo'"></article>
+	<article class="looping slide" data-video="videos/mortgage.mp4" style="--url: 'https://mavo.io/demos/mortgage'"></article>
 
 	<article class="vertical example slide lite-cats" id="aggregate-expressions" data-steps="1"
 	         data-credits="Cat’s Shrödinger by The Oatmeal, Cat on Laptop from flickr.com/photos/nwater/8130196854">
-		<script type="application/json" id="data-aggregate-expressions">{
-			"cat": [
-				{
-					"photo": "img/adamcatlace.png",
-					"name": "Adam Catlace",
-					"age": 2
-				},
-				{
-					"photo": "img/tpl.jpg",
-					"name": "Tim Purrners-Lee",
-					"age": 9
-				},
-				{
-					"photo": "img/alanpurring.jpg",
-					"name": "Alan Purring",
-					"age": 7
-				},
-				{
-					"photo": "img/vector.jpg",
-					"name": "Vector",
-					"age": 11
-				},
-				{
-					"photo": "img/shrodingcat.png",
-					"name": "Schrödingcat"
-				}
-			]
-		}</script>
-		<pre style="font-size: 80%"><code>
-			&lt;article property="cat"
-			         mv-multiple>
-				&lt;img property="photo">
-				&lt;h1 property="name">&lt;/h1>
-				&lt;span property="age">&lt;/span>
-			&lt;/article>
+			 <p class="hint">count(cat), count(age > 6), count(age), average(age)</p>
 
-			<div>&lt;h1>📊 Stats&lt;/h1>
-			&lt;p><mark>[count(cat)]</mark> cats
-			    (<mark>[count(age > 6)]</mark> old)
-			&lt;p><mark>[count(age)]</mark> ages: <mark>[age]</mark>
-			&lt;p>Average age: <mark>[average(age)]</mark></div>
-		</code></pre>
+			<textarea><div mv-app="cats" mv-storage="#data-aggregate-expressions">
+	<article property="cat" mv-multiple>
+		<img property="photo">
+		<h1 property="name"></h1>
+		<span property="age"></span>
+	</article>
+</div>
+
+
+
+
+
+<script type="application/json" id="data-aggregate-expressions">{
+	"cat": [
+		{
+			"photo": "img/adamcatlace.png",
+			"name": "Adam Catlace",
+			"age": 2
+		},
+		{
+			"photo": "img/tpl.jpg",
+			"name": "Tim Purrners-Lee",
+			"age": 9
+		},
+		{
+			"photo": "img/alanpurring.jpg",
+			"name": "Alan Purring",
+			"age": 7
+		},
+		{
+			"photo": "img/vector.jpg",
+			"name": "Vector",
+			"age": 11
+		},
+		{
+			"photo": "img/shrodingcat.png",
+			"name": "Schrödingcat"
+		}
+	]
+}</script>
+
+</textarea>
+
 	</article>
 
 	<article class="looping slide" data-video="videos/invoice.mp4"></article>
@@ -797,11 +800,11 @@ Low Control">
 	</a>
 </section>
 
-<script src="js/bliss.min.js"></script>
+<script src="../shared/js/bliss.min.js"></script>
 <script src="../csss/slideshow.js"></script>
 <script src="js/prism.js"></script>
 <script src="../incrementable/incrementable.js"></script>
-<script src="js/editor.js"></script>
+<script src="../shared/js/editor.js"></script>
 <script src="js/talk.js"></script>
 <script src="https://get.mavo.io/mavo.js"></script>
 

@@ -182,7 +182,7 @@ img.inline{
 
 #the-problem {
 	background: url(img/excited-coder.svg) left bottom / cover #d6e7eb no-repeat;
-	transition: 1s background-image;
+	transition: .5s background-image;
 	color: black;
 }
 
@@ -194,7 +194,8 @@ img.inline{
 	background-image: url(img/frustrated-coder.svg);
 }
 
-#the-problem:after {
+#the-problem:after,
+#jslogos:after {
 	color: black;
 	text-shadow: none;
 	font-weight: 400;
@@ -206,13 +207,14 @@ img.inline{
 		right: 1em;
 		padding: 0;
 		list-style: none;
+		font-family: var(--font-handwritten);
 	}
 
 		#the-problem li {
 			font-weight: bold;
-			font-size: 150%;
+			font-size: 120%;
 			line-height: 1;
-			transition: 1s 1.1s transform, 6s 2s font-size;
+			transition: 1s 1.1s transform, 4s 5s font-size;
 		}
 
 		#the-problem:not([data-step]) li:not(.special) {
@@ -220,23 +222,25 @@ img.inline{
 		}
 
 	#the-problem:not([data-step]) .special {
-		font-size: 300%;
+		font-size: 280%;
 	}
 
 	#the-problem .html {
-		color: hsl(10, 100%, 30%);
+		color: hsl(10, 100%, 50%);
+		mix-blend-mode: multiply;
 	}
 
 	#the-problem .css {
-		color: hsl(210, 100%, 30%);
+		color: hsl(210, 100%, 50%);
+		mix-blend-mode: multiply;
 	}
 
 @keyframes scrollbg {
-	to { background-position-y: -50vh; }
+	to { background-position-y: -977px; }
 }
 
 #jslogos {
-	background: url(img/jslogos.png) center / 65% auto white;
+	background: url(img/jslogos.png) 50% 0 white;
 }
 
 	#jslogos:target {
@@ -265,9 +269,23 @@ img.inline{
 		max-width: 51vw;
 	}
 
-#research-question h1 {
+#the-question h1 {
 	font-weight: 100;
 }
+
+#mavo {
+
+}
+
+	#mavo img {
+		height: 0;
+		filter: drop-shadow(0 0 .2em rgba(0,0,0,.5));
+		transition: 1s height cubic-bezier(.31,.23,.5,1.5);
+	}
+
+	#mavo:target img {
+		height: 2.5em;
+	}
 
 .label {
 	display: block;
@@ -307,25 +325,85 @@ img.inline{
 	box-shadow: 0 20px 80px rgba(0,0,0,.6);
 }
 
-.example.slide > div {
-	display: flex;
-	flex-flow: column;
-	align-items: stretch;
-	justify-content: center;
+.example.slide {
+	padding: 0;
 }
 
-.vertical.example.slide > div {
-	flex-flow: row;
-	align-items: stretch;
-}
+	.example.slide iframe {
+		--scale: 1.5;
+		width: calc(100% / var(--scale) - 2em / var(--scale));
+		height: calc(100% / var(--scale) - 2em / var(--scale));
+		transform: scale(var(--scale));
+		transform-origin: 0 0;
+		top: 1em;
+		left: 1em;
+		background: hsla(0,0%,100%,.5);
+		border-radius: 8px;
+	}
 
-.slide:not(.vertical) .example-container {
-	margin-top: 2rem;
-}
+	div.editor {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		z-index: 1;
+		color: white;
+		font-size: calc(var(--font-size-multiplier, 1) * 80%);
+		line-height: 1.5;
+		box-sizing: border-box;
+		right: 0;
+		box-shadow: 0 .1em .2em rgba(0,0,0,.3) inset;
+	}
 
-.vertical.example.slide .example-container {
-	min-width: 30vw;
-}
+		div.editor > textarea,
+		div.editor > pre {
+			padding: 1rem 2rem;
+			line-height: inherit;
+			box-sizing: border-box;
+			background: transparent;
+		}
+
+		div.editor > textarea {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: 1;
+			color: white;
+			width: 100%;
+			height: 100%;
+			caret-color: white;
+			color: transparent;
+			white-space: pre;
+			border: 0;
+			outline: none;
+		}
+
+		div.editor > pre {
+			margin: 0;
+			max-height: 50vh;
+			background: hsl(200, 10%, 20%) linear-gradient(rgba(0,0,0,.1) 50%, transparent 0);
+			background-origin: content-box;
+			background-size: auto 3em;
+			background-attachment: local;
+		}
+
+		.editor label {
+			position: absolute;
+			top: .5em;
+			right: .5em;
+			padding: .1em .4em;
+			border-radius: .3em;
+			background: hsl(30, 100%, 50%);
+			color: white;
+			cursor: pointer;
+			font-weight: bold;
+			font-size: 1.5rem;
+			text-transform: uppercase;
+		}
+
+			.editor label:hover {
+				background: hsl(15, 100%, 45%);
+			}
 
 .mv-debug-storage {
 	margin-top: 3rem;
@@ -344,129 +422,7 @@ img.inline{
 		text-align: left;
 	}
 
-.example.slide input[type=range][property],
-.example.slide select[property] {
-	transform: scale(2.5);
-	transform-origin: left;
-	margin-right: 210px;
-}
 
-#form-elements input:not([type]) {
-	width: 6em;
-}
-
-.example.slide ul {
-	margin: .3em 0;
-}
-
-.example.slide li {
-	list-style: none;
-}
-
-	.example.slide li::before {
-		content: "•";
-		position: absolute;
-		margin-left: -1em;
-		color: orange;
-	}
-
-[property=cat], .cat {
-	min-width: 14em;
-	position: relative;
-	padding: .3em;
-	margin: .2em;
-	border: 1px solid hsla(0,0%,100%,.3);
-}
-
-.lite-cats [property=cat] {
-	padding: .1em;
-}
-
-	.example.slide [property=cat]::before {
-		content: none;
-	}
-
-	[property=cat] h1,
-	[property=cat] p,
-	.cat h1,
-	.cat p {
-		margin: 0;
-		margin-left: 3.5em;
-	}
-
-	[property=cat] h1,
-	.cat h1 {
-		display: inline;
-		margin-left: .5em;
-	}
-
-		.cat h1::after,
-		.cat time::after {
-			content: "\A";
-			white-space: pre;
-		}
-
-	.cat h1 {
-		margin-left: 0;
-	}
-
-	.lite-cats h1 {
-		font-weight: 100;
-	}
-
-	[property=cat] img,
-	.cat img {
-		width: 3em;
-		height: 3em;
-		border-radius: .5em;
-		object-fit: cover;
-		float: left;
-	}
-
-	.cat img {
-		width: 4.6em;
-		height: 4.6em;
-		margin-right: .8em;
-	}
-
-	.lite-cats [property=cat] img {
-		width: 3em;
-		height: 1.8em;
-		margin: -.1em 0 0 -.1em;
-		border-radius: 0;
-	}
-
-		[property=cat] img[src=""] {
-			border: none;
-			background: hsla(0,0%,100%,.5);
-			content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
-			<text x="9" y="85" font-size="80">😻</text>\
-			</svg>')
-		}
-
-	[property=cat] [property=age] {
-		position: absolute;
-		top: 0; right: .5em;
-		font-weight: bold;
-	}
-
-	.cat time {
-		letter-spacing: -.03em;
-
-	}
-
-		[property=cat] [property=age]::before,
-		.cat time::before {
-			content: "🎂 ";
-		}
-
-	[property=cat] [property=hobby]:last-of-type {
-		margin-right: .4em;
-	}
-
-		[property=cat] [property=hobby] + [property=hobby]::before {
-			content: ", ";
-		}
 
 #aggregate-expressions pre code div,
 #aggregate-expressions .example-container > h1,
@@ -489,25 +445,6 @@ img.inline{
 	font-size: 80%;
 	margin: 0;
 }
-
-#color-picker {}
-
-	#color-picker div[style] {
-		padding: 1em 2em;
-		display: flex;
-		flex-flow: column;
-		border-radius: .2em;
-	}
-
-	#color-picker input[type=range] {
-		margin: 15px 0;
-		width: 40%;
-	}
-
-	#color-picker div[style] code {
-		font-weight: bold;
-		margin-top: 1em;
-	}
 
 .slide[data-credits]::after {
 	opacity: .5;

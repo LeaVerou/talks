@@ -3,39 +3,51 @@ var $ = Bliss, $$ = $.$;
 document.addEventListener("DOMContentLoaded", evt => {
 	// Stuff to run after slideshow has been created
 
+
 	$$(".example.slide").forEach((slide, i) => {
-		var code = $("pre > code", slide);
-
-		$.create("div", {
-			around: code.parentNode
+		var textarea = $("textarea", slide);
+		if (!textarea) {
+			return;
+		}
+		var editor = new Prism.Live(textarea);
+		var iframe = $.create("iframe", {
+			after: editor.wrapper
 		});
+		var update = () => {
+			iframe.srcdoc = `<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://get.mavo.io/mavo.css">
+	<link rel="stylesheet" href="examples.css">
+	<script src="https://get.mavo.io/mavo.js"></script>
+</head>
+<body>${textarea.value}</body>
+</html>`;
+		};
 
-		var container = $.create({
-			className: "example-container",
-			innerHTML: code.textContent,
-			after: code.parentNode
-		});
+		textarea.addEventListener("keydown", Mavo.rr(evt => {
+			if (!evt || evt.keyCode == 13 && (evt.metaKey || evt.ctrlKey)) {
+				update();
+				evt && evt.preventDefault();
+			}
+		}));
 
 		var data = $("script[type='application/json']", slide);
-		var useStorage = true;
 
-		if (!data) {
-			useStorage = false;
-			data =  $.create("script", {
-	   			type: "application/json"
-			});
-   		}
+		iframe.onload = evt => {
+			var iDoc = iframe.contentDocument;
+			var mavoRoot = $("[mv-app], [mv-storage]", iDoc.documentElement) || iDoc.body;
 
-		data.id = data.id || "data-" + slide.id;
+			iDoc.body.id = slide.id;
 
-		var mavoRoot = $("[mv-storage]", container) || container;
+			if (!mavoRoot.hasAttribute("mv-app")) {
+				mavoRoot.setAttribute("mv-app", slide.id + "Example")
+			}
 
-		if (slide.classList.contains("visible-storage")) {
-			useStorage = true;
-			mavoRoot.classList.add("mv-debug-saving");
-		}
-
-		mavoRoot.setAttribute("mv-storage", useStorage? "#" + data.id : "none");
+			if (!mavoRoot.hasAttribute("mv-storage") && data) {
+				mavoRoot.setAttribute("mv-storage", "#" + data.id);
+			}
+		};
 	});
 });
 
