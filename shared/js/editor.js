@@ -193,13 +193,22 @@ var _ = Prism.Live = $.Class({
 		var value = this.textarea.value;
 		var index = value.lastIndexOf(until, this.selectionStart);
 
-		return value.slice(index > -1? index : 0, this.selectionStart);
+		if (index === -1 || !until) {
+			index = 0;
+		}
+
+		return value.slice(index, this.selectionStart);
 	},
 
 	afterCaret: function(until = "") {
 		var value = this.textarea.value;
 		var index = value.indexOf(until, this.selectionEnd);
-		return value.slice(this.selectionEnd, index > -1? index : undefined);
+
+		if (index === -1 || !until) {
+			index = undefined;
+		}
+
+		return value.slice(this.selectionEnd, index);
 	},
 
 	moveCaret: function(chars) {

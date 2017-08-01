@@ -12,18 +12,11 @@ document.addEventListener("DOMContentLoaded", evt => {
 		}
 		var editor = new Prism.Live(textarea);
 		var iframe = $.create("iframe", {
+			name: "iframe" + (i+1),
 			after: editor.wrapper
 		});
 		var update = () => {
-			iframe.srcdoc = `<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" href="${mavoHost}/mavo.css">
-	<link rel="stylesheet" href="examples.css">
-	<script src="${mavoHost}/mavo.js"></script>
-</head>
-<body>${textarea.value}</body>
-</html>`;
+			iframe.src = "demo.html";
 		};
 
 		textarea.addEventListener("keydown", Mavo.rr(evt => {
@@ -35,8 +28,9 @@ document.addEventListener("DOMContentLoaded", evt => {
 
 		var data = $("script[type='application/json']", slide);
 
-		iframe.onload = evt => {
+		iframe.addEventListener("DOMFrameContentLoaded", evt => {
 			var iDoc = iframe.contentDocument;
+			iDoc.body.innerHTML = textarea.value;
 			var mavoRoot = $("[mv-app], [mv-storage]", iDoc.documentElement) || iDoc.body;
 
 			iDoc.body.id = slide.id;
@@ -50,7 +44,7 @@ document.addEventListener("DOMContentLoaded", evt => {
 					mavoRoot.setAttribute("mv-storage", "#" + data.id);
 				}
 			}
-		};
+		});
 	});
 });
 
@@ -80,7 +74,6 @@ $.events(document, "slidechange", evt => {
 
 	$$(".slide:not(:target) video").forEach(video => {
 		if (!video.paused) {
-			console.log("pause", video);
 			video.pause();
 		}
 	});
@@ -88,7 +81,6 @@ $.events(document, "slidechange", evt => {
 	if (slide) {
 		$$("video", slide).forEach(video => {
 			video.currentTime = 0;
-			console.log("play", video);
 			video.play();
 		});
 	}

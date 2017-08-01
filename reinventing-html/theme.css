@@ -14,6 +14,9 @@
 	--font-handwritten: 'Reenie Beanie', Marker Felt, var(--font-body);
 	--color1: hsl(40, 100%, 50%);
 	--color2: hsl(180, 100%, 40%);
+	--color3: #f06;
+	--color4: yellowgreen;
+	--color5: yellow;
 }
 
 body {
@@ -204,6 +207,7 @@ img {
 }
 
 section > header.slide {
+	overflow: hidden !important;
 	align-items: center;
 	justify-content: center;
 	--stripe: 15vw;
@@ -232,12 +236,17 @@ section > header.slide:target {
 
 @keyframes scrollscreenshot {
 	to {
-		background-position-y: calc(var(--screenshot-height) * -.5px + 50vh);
+		background-position-y: calc(var(--screenshot-height) * var(--ratio) * -1 + 100vh);
 	}
 }
 
 .long-screenshot.slide:target {
+	--ratio: calc(100vw / var(--screenshot-width));
 	animation: scrollscreenshot calc(var(--screenshot-height) * 1ms) 5s forwards ease-in;
+}
+
+.slide[data-credits]::after {
+	font-weight: 300;
 }
 
 #indicator {

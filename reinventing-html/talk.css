@@ -1,15 +1,79 @@
+@font-face {
+	font-family: 'webapps';
+	font-style: normal;
+	font-weight: 400;
+	src: url("fonts/webapps.woff2") format('woff2');
+}
+
 #adjust-resolution h1 {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	flex-flow: column;
 	width: calc(var(--vw) * 1px);
 	height: calc(var(--vh) * 1px);
 	flex: none;
-
+	padding: 1em;
+	box-sizing: border-box;
 	margin: 0;
 	outline: 1px dashed hsla(0,0%,100%,.6);
 	outline-offset: -1px;
 }
+
+	#adjust-resolution h1 span {
+		display: block;
+		font-size: 50%;
+		font-weight: 300;
+	}
+
+#intro {
+	align-items: flex-end;
+	justify-content: flex-start;
+	background: url(../html-secrets/img/htmlwallpaper.jpg) right 60% / 140% auto;
+}
+
+	#intro h1 {
+		margin-top: .15em;
+		margin-right: .3em;
+		font-size: 310%;
+		color: black;
+		text-shadow: 0 0 1em #ffe;
+	}
+
+	#intro strong,
+	#intro small {
+		display: block;
+	}
+
+	#intro strong {
+		font-size: 220%;
+		line-height: .8em;
+		display: none;
+	}
+
+	#intro span {
+		font-size: 89%;
+		text-transform: uppercase;
+	}
+
+	#intro small {
+		font-size: 61%;
+		font-weight: 300;
+		line-height: 1;
+	}
+
+	#intro p {
+		margin-top: 0;
+
+		text-align: right;
+		font-size: 150%;
+		line-height: 1.1;
+	}
+
+	#intro p:first-line {
+		font-size: 55%;
+		font-weight: bold;
+	}
 
 .hi {
 	padding: 1vmin;
@@ -71,6 +135,7 @@
 #lesbian {
 	background: url(../shared/img/greece.svg) no-repeat center / auto 90vh #f06;
 	background-origin: content-box;
+	overflow: hidden;
 }
 
 	#lesbian[data-step] {
@@ -207,12 +272,11 @@ img.inline{
 		right: 1em;
 		padding: 0;
 		list-style: none;
-		font-family: var(--font-handwritten);
 	}
 
 		#the-problem li {
 			font-weight: bold;
-			font-size: 120%;
+			font-size: 100%;
 			line-height: 1;
 			transition: 1s 1.1s transform, 4s 5s font-size;
 		}
@@ -269,13 +333,17 @@ img.inline{
 		max-width: 51vw;
 	}
 
-#the-question h1 {
+.single-sentence h1 {
 	font-weight: 100;
 }
 
 #mavo {
-
+	background: radial-gradient(transparent, rgba(0,0,0,.7)) hsl(200, 15%, 20%);
 }
+
+	#mavo h1 {
+		background: none;
+	}
 
 	#mavo img {
 		height: 0;
@@ -348,10 +416,6 @@ img.inline{
 	}
 
 	div.editor {
-		/*position: absolute;
-		left: 0;
-		bottom: 0;
-		z-index: 1;*/
 		position: relative;
 		color: white;
 		font-size: calc(var(--font-size-multiplier, 1) * 80%);
@@ -359,6 +423,12 @@ img.inline{
 		box-sizing: border-box;
 		right: 0;
 		box-shadow: 0 .1em .2em rgba(0,0,0,.3) inset;
+	}
+
+	@media (min-width: 1599px) {
+		div.editor {
+			font-size: calc(var(--font-size-multiplier, 1) * 100%);
+		}
 	}
 
 		div.editor > textarea,
@@ -451,10 +521,6 @@ img.inline{
 #aggregate-expressions [property=cat] ~ p {
 	font-size: 80%;
 	margin: 0;
-}
-
-.slide[data-credits]::after {
-	opacity: .5;
 }
 
 button.mv-add.mv-ui,
@@ -853,7 +919,7 @@ footer.slide {
 }
 
 	footer.slide h1 {
-		margin-bottom: 1em;
+		margin-top: 1em;
 	}
 
 	footer.slide > img {
@@ -930,6 +996,10 @@ footer.slide {
 	color: black;
 }
 
+	#comic:not(:target) img {
+		display: none;
+	}
+
 	#comic img + img {
 		margin-top: .5em;
 	}
@@ -937,7 +1007,6 @@ footer.slide {
 	#comic[data-credits]::after {
 		color: black;
 		text-shadow: none;
-		opacity: .8;
 	}
 
 .criteria {
@@ -1072,6 +1141,47 @@ footer.slide {
 		padding: 0;
 		text-shadow: 0 calc(var(--total) * 1.5em - .3em);
 		animation: credits 5s linear infinite;
+	}
+
+#building-blocks {
+
+}
+
+	#building-blocks ul {
+		display: flex;
+		align-items: center;
+		font-size: 120%;
+	}
+
+	#building-blocks li {
+		list-style: none;
+		margin: 1em;
+		text-align: center;
+	}
+
+	#building-blocks li::before {
+		content: attr(data-icon);
+		font-family: 'webapps';
+		display: block;
+		font-weight: normal;
+		color: var(--color1);
+		font-size: 200%;
+	}
+
+	#building-blocks li:nth-child(2)::before {
+		color: var(--color4);
+	}
+
+	#building-blocks li:nth-child(3)::before {
+		color: var(--color3);
+	}
+
+	#building-blocks li:nth-child(4)::before {
+		color: var(--color2);
+	}
+
+	#building-blocks li:nth-child(5)::before {
+		color: var(--color5);
 	}
 
 #hard-conditionals h1,

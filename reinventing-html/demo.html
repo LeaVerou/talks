@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+var mavoHost = location.hostname == "localhost"? "../../mavo/dist" : "https://get.mavo.io";
+document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src="${mavoHost}/mavo.js"></` + "script>");
+
+if (window.parent) {
+	document.addEventListener("DOMContentLoaded", function() {
+		var iframe = parent.document.getElementsByName(name)[0];
+		parent.Bliss.fire(iframe, "DOMFrameContentLoaded")
+	});
+}
+
+</script>
+<link rel="stylesheet" href="examples.css">
+</head>
+<body>
+<div mv-app="cats" mv-storage="https://github.com/leaverou/mv-data/cats.json">
+	<h1>[count(cat)] cats, average age [average(age)]</h1>
+	<article property="cat" mv-multiple>
+		<img property="photo">
+		<h2 property="name"></h2>
+		<span property="age"></span>
+	</article>
+</div>
+</body>
+</html>

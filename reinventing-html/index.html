@@ -6,21 +6,34 @@
 <title>Mavo: Creating Interactive Data-Driven Web Applications by Authoring HTML</title>
 <link href="../csss/slideshow.css" rel="stylesheet" />
 <link href="../csss/reusable.css" rel="stylesheet" />
-<!-- <link rel="stylesheet" href="https://get.mavo.io/mavo.css"> -->
-<link rel="stylesheet" href="../../mavo/dist/mavo.css">
+<script>
+var mavoHost = location.hostname == "localhost"? "../../mavo/dist" : "https://get.mavo.io";
+document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src="${mavoHost}/mavo.js"></` + "script>");
+</script>
 <link href="prism.css" rel="stylesheet" />
 <link href="theme.css" rel="stylesheet" />
 <link href="talk.css" rel="stylesheet" />
-<!-- <script src="../prefixfree/prefixfree.min.js"></script> -->
+
 
 </head>
 <body class="language-markup">
 
-<article class="slide" id="adjust-resolution" style="--vw: 1440; --vh: 900">
-	<h1>1440 × 900</h1>
+<article class="slide" id="adjust-resolution" style="--vw: 1600; --vh: 900">
+	<h1>
+		1600 × 900
+		<span>This is a slide deck coded to a specific environment, not a web app for public consumption. It works best in Chrome, with the Experimental Web Platform flag on.</span>
+	</h1>
+
 </article>
 
-<!-- <header class="slide" data-video="videos/authors.mp4" id="intro"></header> -->
+<header class="slide" id="intro">
+	<h1>
+		<strong>HTML</strong>
+		<span>Re-imagined</span>
+		<small>for the Era of Web Apps</small>
+	</h1>
+	<p>Lea Verou, MIT <br>@leaverou</p>
+</header>
 
 <section>
 	<section id="hi" class="inverse slide dont-resize darker hi">
@@ -80,8 +93,12 @@
 		</h1>
 	</section>
 
-	<article class="top-heavy long-screenshot image slide" style="background-image: url(img/csswg-commas.png); --screenshot-height: 35852">
-		<h1>Standards: The Reality</h1>
+	<article class="top-heavy image slide" style="background-image: url(img/wizard.jpg);">
+		<h1>How Web developers see us</h1>
+	</article>
+
+	<article class="top-heavy long-screenshot image slide" style="background-image: url(img/csswg-commas.png); --screenshot-height: 35852; --screenshot-width: 2800">
+		<h1>How standards really work</h1>
 	</article>
 
 	<section class="top-heavy image slide" id="mit" style="background-image: url(img/haystack.png)">
@@ -90,44 +107,14 @@
 </section>
 
 <section>
-	<article class="slide" id="the-question">
+	<article class="single-sentence slide" id="the-question">
 		<h1>
 			<span class="label">The Question</span>
 			What would HTML look like<br>
-			if it were designed for web apps?</h1>
+			if it were designed for web apps?
+		</h1>
 	</article>
-
-	<!-- <article class="slide" id="comic" data-credits="zenpencils.com/comic/98-alan-watts-what-if-money-was-no-object">
-		<img src="img/goals.gif" alt="">
-		<img class="delayed" src="img/everyoneknows.png" alt="">
-	</article>
-
-	<article class="dont-resize slide" id="crud-apps">
-		<h1>CRUD <span>Lightweight computation</span></h1>
-		<ul style="--total: 19">
-			<li>Portfolio</li>
-			<li>Publication list</li>
-			<li>Photo album</li>
-			<li>Conference website</li>
-			<li>Address book</li>
-			<li>Blog</li>
-			<li>PIM apps</li>
-			<li>Menstruation tracker</li>
-			<li>Invoicing system</li>
-			<li>Calculators & converters</li>
-
-			<li>Restaurant menu</li>
-			<li>Trip log</li>
-			<li>Fitness tracker</li>
-			<li>Recipe collection</li>
-			<li>Broker property listing</li>
-			<li>Personal chequebook</li>
-			<li>Party RSVP</li>
-			<li>Bar inventory</li>
-			<li>Pet care tracker</li>
-		</ul>
-	</article>
-
+<!--
 	<article class="slide">
 		<blockquote>
 			<p>“Ninety percent of everything is CRUD”</p>
@@ -148,18 +135,21 @@
 	<article class="slide" id="the-problem" data-steps="2" data-credits="Mart Virkus @ toggl.com">
 		<ul>
 			<li>Objects</li>
-			<li>DOM</li>
+			<li>Classes</li>
 			<li>npm</li>
 			<li>NodeJS</li>
-			<li>JSON</li>
 			<li>Schemas</li>
-			<li>MVC</li>
-			<li>Data binding</li>
-			<li>Components</li>
 			<li>Ajax</li>
 			<li>Events</li>
 			<li>Functions</li>
 			<li>OAuth</li>
+			<li>Databases</li>
+			<li>JSON</li>
+			<li>Virtual DOM</li>
+			<li>DOM</li>
+			<li>Components</li>
+			<li>MVC</li>
+			<li>Data binding</li>
 			<li>JavaScript</li>
 			<li class="special html">HTML</li>
 			<li class="special css">CSS</li>
@@ -214,24 +204,71 @@ Less Control">
 		</div>
 	</article>
 
-	<article class="slide">
-		<h1>Things people need the most</h1>
+	<article class="slide" id="comic" data-credits="zenpencils.com/comic/98-alan-watts-what-if-money-was-no-object">
+		<img src="img/goals.gif" alt="">
+		<img class="delayed" src="img/everyoneknows.png" alt="">
+	</article>
 
-		<ul>
-			<li>Persistence</li>
-			<li>Editing</li>
-			<li>Collections</li>
-			<li>Uploads</li>
-			<li>Data flow</li>
+	<article class="single-sentence slide">
+		<h1>When you make something accessible to novices, it becomes easier for everybody.</h1>
+	</article>
+
+	<article class="single-sentence slide" id="research-question">
+		<h1>
+			<span class="label">Research Question</span>
+			Can non-programmers <br>create web applications?
+		</h1>
+	</article>
+
+	<article class="dont-resize slide" id="crud-apps" data-credits="Icons by Font Awesome, subset in Fontello">
+		<h1>CRUD <span>Lightweight computation</span></h1>
+		<ul style="--total: 19">
+			<li>Portfolio</li>
+			<li>Publication list</li>
+			<li>Photo album</li>
+			<li>Conference website</li>
+			<li>Address book</li>
+			<li>Blog</li>
+			<li>PIM apps</li>
+			<li>Menstruation tracker</li>
+			<li>Invoicing system</li>
+			<li>Calculators & converters</li>
+			<li>Restaurant menu</li>
+			<li>Trip log</li>
+			<li>Fitness tracker</li>
+			<li>Recipe collection</li>
+			<li>Broker property listing</li>
+			<li>Personal chequebook</li>
+			<li>Party RSVP</li>
+			<li>Bar inventory</li>
+			<li>Pet care tracker</li>
 		</ul>
 	</article>
 
+	<article class="slide" id="building-blocks">
+		<h1>Building blocks</h1>
 
+		<ul>
+			<li data-icon="✏">Editing</li>
+			<li data-icon="▦">Collections</li>
+			<li data-icon="⛁">Persistence</li>
+			<li data-icon="☁">Uploads</li>
+			<li data-icon="⇄">Data flow</li>
+		</ul>
+	</article>
 </section>
 
 <section>
-	<article class="slide" id="mavo">
+	<header class="slide" id="mavo">
 		<h1><img src="img/logo.svg" alt="Mavo"></h1>
+	</header>
+
+	<article class="slide">
+		<h1>Try Mavo out</h1>
+		<pre><code>
+			&lt;link rel="stylesheet" href="//get.mavo.io/mavo.css"/>
+			&lt;script src="//get.mavo.io/mavo.js">&lt;/script>
+		</code></pre>
 	</article>
 
 	<article class="looping video slide" data-video="videos/todo.mp4" style="--url: 'https://mavo.io/demos/todo'"></article>
@@ -249,14 +286,6 @@ Less Control">
 					&lt;/li>
 				&lt;/ul>
 			&lt;/body>
-		</code></pre>
-	</article>
-
-	<article class="slide">
-		<h1>Activate Mavo</h1>
-		<pre><code>
-			&lt;link rel="stylesheet" href="//get.mavo.io/mavo.css"/>
-			&lt;script src="//get.mavo.io/mavo.js">&lt;/script>
 		</code></pre>
 	</article>
 
@@ -322,25 +351,24 @@ Less Control">
 
 	<article class="slide" data-import="objects"></article>
 
-	<article class="looping slide" data-video="videos/talks.mp4"></article>
-	<article class="looping slide" data-video="videos/authors.mp4"></article>
-	<article class="slide" data-src="http://localhost:8001/demos" data-title="mavo.io/demos"></article>
+	<article class="looping slide" data-video="videos/talks.mp4" style="--url: 'http://lea.verou.me/speaking'"></article>
+	<article class="looping slide" data-video="videos/authors.mp4" style="--url: 'https://mavo.io/demos/contacts'"></article>
+	<article class="slide" data-src="http://localhost:8001/demos/?full" data-title="mavo.io/demos"></article>
 
 	<article class="example slide" style="--font-size-multiplier: 1.2">
+		<p class="hint">strength / 100</p>
 		<textarea><input type="range" property="strength"
        title="Value: [strength] out of 100" />
-Value: [strength / 100]</textarea>
+Value: [strength]</textarea>
 		</code></pre>
 	</article>
 
-	<article class="dont-resize example slide" id="color-picker">
+	<article class="dont-resize example slide" id="color-picker" style="--font-size-multiplier: .9">
 		<textarea><div style="background-color: [color];">
 	<input type="range" property="hue" max="360" />
 	<input type="range" property="saturation" />
 	<input type="range" property="lightness" />
-	<code property="color">
-		hsl([hue], [saturation]%, [lightness]%)
-	</code>
+	<code property="color">hsl([hue], [saturation]%, [lightness]%)</code>
 </div></textarea>
 	</article>
 
@@ -349,50 +377,17 @@ Value: [strength / 100]</textarea>
 	<article class="looping slide" data-video="videos/mortgage.mp4" style="--url: 'https://mavo.io/demos/mortgage'"></article>
 
 	<article class="vertical example slide lite-cats" id="aggregate-expressions" data-steps="1"
-	         data-credits="Cat’s Shrödinger by The Oatmeal, Cat on Laptop from flickr.com/photos/nwater/8130196854">
+	         data-credits="Cat’s Shrödinger by The Oatmeal, Cat on Laptop from flickr.com/photos/nwater/8130196854"
+			 style="--font-size-multiplier: .9">
 			 <p class="hint">count(cat), count(age > 6), count(age), average(age)</p>
 
-			<textarea><div mv-app="cats" mv-storage="#data-aggregate-expressions">
+			<textarea><div mv-app="cats" mv-storage="https://github.com/leaverou/mv-data/cats.json">
 	<article property="cat" mv-multiple>
 		<img property="photo">
 		<h2 property="name"></h2>
 		<span property="age"></span>
 	</article>
 </div>
-
-
-
-
-
-<script type="application/json" id="data-aggregate-expressions">{
-	"cat": [
-		{
-			"photo": "img/adamcatlace.png",
-			"name": "Adam Catlace",
-			"age": 2
-		},
-		{
-			"photo": "img/tpl.jpg",
-			"name": "Tim Purrners-Lee",
-			"age": 9
-		},
-		{
-			"photo": "img/alanpurring.jpg",
-			"name": "Alan Purring",
-			"age": 7
-		},
-		{
-			"photo": "img/vector.jpg",
-			"name": "Vector",
-			"age": 11
-		},
-		{
-			"photo": "img/shrodingcat.png",
-			"name": "Schrödingcat"
-		}
-	]
-}</script>
-
 </textarea>
 
 	</article>
@@ -404,8 +399,8 @@ Value: [strength / 100]</textarea>
 </div></textarea>
 	</article> -->
 
-	<article class="looping slide" data-video="videos/invoice.mp4"></article>
-	<article class="looping slide" data-video="videos/svgpath.mp4"></article>
+	<article class="looping slide" data-video="videos/invoice.mp4" style="--url: 'https://mavo.io/demos/invoice'"></article>
+	<article class="looping slide" data-video="videos/svgpath.mp4" style="--url: 'https://mavo.io/demos/svgpath'"></article>
 </section>
 
 <article class="slide">
@@ -434,28 +429,15 @@ Value: [strength / 100]</textarea>
 		</tr>
 	</table>
 
-	<p class="delayed">Low level extensibility: <strong>Hooking</strong></p>
+	<p class="delayed">Low level extensibility: <strong>Hooks</strong></p>
 </article>
 
-<section id="evaluation">
-	<header class="slide">
-		<h1>Science, bitches!</h1>
-	</header>
+<article class="slide" data-src="https://plugins.mavo.io"></article>
 
-	<article class="slide" id="study-design">
-		<h1>Study design</h1>
-		<div class="timeline">
-			<div class="tutorial">Mavo Tutorial</div>
-			<div class="structured">
-				Structured study
-				<div>What is Mavo’s Usability & Learnability?</div>
-			</div>
-			<div class="unstructured">
-				Freestyle study
-				<div>Are Mavo’s capabilities sufficent?</div>
-			</div>
-		</div>
-	</article>
+<section id="evaluation">
+	<header class="image slide" style="background: url(img/science.png) white center / auto 80% no-repeat; filter: invert();" data-credits="xkcd">
+
+	</header>
 
 	<article class="slide" id="subjects" data-steps="4">
 		<h1>20 participants</h1>
@@ -493,6 +475,21 @@ Value: [strength / 100]</textarea>
 		<div class="skill legend">
 			<div class="beginner">13</div> Beginner or worse programmers
 			<div class="intermediate">7</div> Intermediate
+		</div>
+	</article>
+
+	<article class="slide" id="study-design">
+		<h1>Study design</h1>
+		<div class="timeline">
+			<div class="tutorial">Mavo Tutorial</div>
+			<div class="structured">
+				Structured study
+				<div>What is Mavo’s Usability & Learnability?</div>
+			</div>
+			<div class="unstructured">
+				Freestyle study
+				<div>Are Mavo’s capabilities sufficent?</div>
+			</div>
 		</div>
 	</article>
 
@@ -539,8 +536,8 @@ Value: [strength / 100]</textarea>
 		</div>
 	</article>
 
-	<article class="looping slide" data-video="videos/decisions.mp4"></article>
-	<article class="looping slide" data-video="videos/foodie.mp4"></article>
+	<article class="looping slide" data-video="videos/decisions.mp4" style="--url: 'https://mavo.io/demos/decisions'"></article>
+	<article class="looping slide" data-video="videos/foodie.mp4" style="--url: 'https://mavo.io/demos/foodie'"></article>
 
 	<article class="slide" id="estimate-before">
 		<h1>“How long do you think it will take you?”</h1>
@@ -632,10 +629,11 @@ Value: [strength / 100]</textarea>
 
 	<article class="stat slide">
 		<h1>Success</h1>
-		<strong>2<span class="down-arrow">⬇︎</span></strong> in perceived difficulty <br>on 5-point Likert scale
+		<strong>2<span class="down-arrow">⬇︎</span></strong> in perceived difficulty <br>on a 5-point scale
 	</article>
 
 	<article class="slide">
+		<h1>Difficulty ratings</h1>
 		<table>
 			<thead>
 				<tr>
@@ -774,18 +772,19 @@ Value: [strength / 100]</textarea>
 
 <footer class="slide">
 	<img src="img/logo.svg" />
-	<p class="authors">Lea Verou, Amy Zhang, David Karger</p>
-	<p class="affiliation">Haystack Group, MIT CSAIL</p>
+	<h1>Thank you!</h1>
 
 	<ul>
 		<li style="--icon: '🌍'"><a href="http://mavo.io">mavo.io</a></li>
-		<li style="--icon: '📨'"><a href="mailto:leaverou@mit.edu">leaverou@mit.edu</a></li>
+		<li style="--icon: '📨'"><a href="mailto:lea@verou.me">lea@verou.me</a></li>
 		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
 	</ul>
 
-	<p>Slides: <a href="https://leaverou.github.io/mavo-talk">leaverou.github.io/mavo-talk</a></p>
+	<p>Slides: <a href="https://leaverou.github.io/talks/reinventing-html">leaverou.github.io/talks/reinventing-html</a></p>
 	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
 </footer>
+
+<article class="image slide" style="background-image: url(../css-variables/img/stickers.jpg)"></article>
 
 <section class="inverse slide dont-resize darker hi" id="book">
 	<a href="http://shop.oreilly.com/product/0636920031123.do" class="delayed">
@@ -800,8 +799,6 @@ Value: [strength / 100]</textarea>
 <script src="../incrementable/incrementable.js"></script>
 <script src="../shared/js/editor.js"></script>
 <script src="js/talk.js"></script>
-<!-- <script src="https://get.mavo.io/mavo.js"></script> -->
-<script src="../../mavo/dist/mavo.js"></script>
 
 </body>
 </html>
