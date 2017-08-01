@@ -6,7 +6,8 @@
 <title>Mavo: Creating Interactive Data-Driven Web Applications by Authoring HTML</title>
 <link href="../csss/slideshow.css" rel="stylesheet" />
 <link href="../csss/reusable.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://get.mavo.io/mavo.css">
+<!-- <link rel="stylesheet" href="https://get.mavo.io/mavo.css"> -->
+<link rel="stylesheet" href="../../mavo/dist/mavo.css">
 <link href="prism.css" rel="stylesheet" />
 <link href="theme.css" rel="stylesheet" />
 <link href="talk.css" rel="stylesheet" />
@@ -268,9 +269,10 @@ Less Control">
 		</code></pre>
 	</article>
 
-	<article class="example slide">
-		<textarea><div mv-app="appName">
-	<!-- Mavo app -->
+	<article class="example slide nofixup">
+		<p class="hint">mv-app, mv-app="appName", mv-bar="none", custom mv-bar</p>
+		<textarea><div id="myApp">
+	Nothing to see here yet :)
 </div></textarea>
 	</article>
 
@@ -292,18 +294,7 @@ Less Control">
 		</code></pre>
 	</article>
 
-	<!-- <article class="example slide">
-		<pre style="font-size: 80%;"><code>
-			&lt;div class="cat">
-				&lt;img src="img/adamcatlace.png">
-				&lt;h1>Adam Catlace&lt;/h1>
-				&lt;time datetime="2014-06-01">1 Jun 2014&lt;/time>
-				Cuteness: &lt;meter value="3" max="5">&lt;/meter>
-			&lt;/div>
-		</code></pre>
-	</article> -->
-
-	<article class="visible-storage example slide" id="form-elements">
+	<article class="example slide" id="form-elements">
 		<p class="hint">mv-autosave, &lt;select>, mv-bar</p>
 		<textarea><div mv-app="myform" mv-storage="local">
 	<input property="name" value="Lea Verou"/>
@@ -312,7 +303,7 @@ Less Control">
 	</article>
 
 	<article class="visible-storage example slide" id="objects">
-		<p class="hint">|mv-multiple, hobbies collection</p>
+		<p class="hint">How multiple element types get edited | mv-multiple, hobbies collection</p>
 		<textarea><div mv-app class="cat" mv-storage="local">
 	<img src="img/adamcatlace.png" property="photo">
 	<h2 property="name">Adam Catlace</h2>
@@ -320,22 +311,12 @@ Less Control">
 	Cuteness: <meter property="rating" value="3" max="5"></meter>
 </div></textarea>
 	</article>
-<!--
-	<article class="example slide" id="multiple-properties">
-		<pre><code>
-			Hobbies:
-			&lt;ul>
-				&lt;li property="hobby">Eating&lt;/li>
-				&lt;li property="hobby">Sleeping&lt;/li>
-				&lt;li property="hobby">Purring&lt;/li>
-			&lt;/ul>
-		</code></pre>
-	</article> -->
 
 	<article class="example slide">
+		<p class="hint">mv-multiple</p>
 		<textarea>Hobbies:
 <ul>
-	<li property="hobby" mv-multiple>Eating</li>
+	<li property="hobby">Eating</li>
 </ul></textarea>
 	</article>
 
@@ -819,7 +800,8 @@ Value: [strength / 100]</textarea>
 <script src="../incrementable/incrementable.js"></script>
 <script src="../shared/js/editor.js"></script>
 <script src="js/talk.js"></script>
-<script src="https://get.mavo.io/mavo.js"></script>
+<!-- <script src="https://get.mavo.io/mavo.js"></script> -->
+<script src="../../mavo/dist/mavo.js"></script>
 
 </body>
 </html>

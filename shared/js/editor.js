@@ -1,5 +1,7 @@
 (function($, $$){
 
+var superKey = navigator.platform.indexOf("Mac") === 0? "metaKey" : "ctrlKey";
+
 var _ = Prism.Live = $.Class({
 	constructor: function(textarea) {
 		_.all.set(textarea, this);
@@ -63,17 +65,28 @@ var _ = Prism.Live = $.Class({
 					evt.preventDefault();
 
 					if (this.hasSelection) {
-						if (evt.shiftKey) {
-							// Outdent
+						var before = this.beforeCaret("\n");
+						var isBeforeIndented = /^\t/gm.test(before);
+						var hasLineAbove = before.length == this.selectionStart;
+						var outdent = evt.shiftKey;
+
+						this.selectionStart -= before.length;
+
+						if (outdent) {
 							var selection = this.selection.replace(/^\t/gm, "");
 						}
-						else {
-							// Indent
-							var selection = this.selection.replace(/\n/g, "\n\t")
-							                              .replace(/^/, "\t");
+						else { // Indent
+							var selection = this.selection.replace(/^/gm, "\t");
 						}
 
 						this.replace(selection);
+
+						if (outdent) {
+							this.selectionStart += before.length + 1 - (outdent + isBeforeIndented);
+						}
+						else {
+							this.selectionStart += before.length + 1 + !hasLineAbove;
+						}
 					}
 					else {
 						// Nothing selected, expand snippet
@@ -107,13 +120,23 @@ var _ = Prism.Live = $.Class({
 						requestAnimationFrame(() => $.fire(this.textarea, "input"));
 					}
 				}
-				else if (evt.key == "/" && evt.metaKey) { // Cmd + /
+				else if (evt.key == "/" && evt[superKey]) { // Cmd + /
 					var comments = this.context.comments;
 
 					this.wrapSelection({
 						before: comments[0],
 						after: comments[1]
 					});
+				}
+				else if (evt.key == "D" && evt.shiftKey && evt[superKey]) {
+					// Duplicate line
+					var before = this.beforeCaret("\n");
+					var after = this.afterCaret("\n");
+					var text = before + this.selection + after;
+
+					this.insert(text, this.selectionStart - before.length);
+
+					evt.preventDefault();
 				}
 				else if (_.pairs[evt.key]) {
 					var other = _.pairs[evt.key];
@@ -129,9 +152,7 @@ var _ = Prism.Live = $.Class({
 
 		textarea.addEventListener("scroll", evt => {
 			this.syncScroll();
-		}, {
-			passive: true
-		})
+		}, {passive: true})
 	},
 
 	get selectionStart() {
@@ -168,12 +189,17 @@ var _ = Prism.Live = $.Class({
 		this.pre.scrollLeft = this.textarea.scrollLeft;
 	},
 
-	beforeCaret: function() {
-		return this.textarea.value.slice(0, this.selectionStart);
+	beforeCaret: function(until = "") {
+		var value = this.textarea.value;
+		var index = value.lastIndexOf(until, this.selectionStart);
+
+		return value.slice(index > -1? index : 0, this.selectionStart);
 	},
 
-	afterCaret: function() {
-		return this.textarea.value.slice(this.selectionEnd);
+	afterCaret: function(until = "") {
+		var value = this.textarea.value;
+		var index = value.indexOf(until, this.selectionEnd);
+		return value.slice(this.selectionEnd, index > -1? index : undefined);
 	},
 
 	moveCaret: function(chars) {
@@ -259,6 +285,7 @@ var _ = Prism.Live = $.Class({
 					"submit": '<button type="submit">Submit</button>',
 					custom: function (selector, before, after) {
 						var isName = /^[\w:-]+$/.test(selector);
+						var isSelector = isName || /^[.\w:-]+$/.test(selector);
 
 						if (isName && /<[^>]+$/.test(before) && /[^<]*>/.test(after)) {
 							// Attribute
@@ -267,15 +294,23 @@ var _ = Prism.Live = $.Class({
 
 							return true;
 						}
-						else if (isName) {
+						else if (isSelector) {
+							var parts = selector.split(/\./);
+							var tag = parts[0] || "div";
+							var classes = parts.slice(1);
+
+							classes = classes.length? ` class="${classes.join(" ")}"` : "";
+
+							var offset = classes.length - 2;
+
 							// Tag
-							if (_.languages.markup.selfClosing.indexOf(selector) > -1) {
-								this.insert(`<${selector} />`);
+							if (_.languages.markup.selfClosing.indexOf(tag) > -1) {
+								this.insert(`<${tag}${classes} />`);
 								this.moveCaret(-2);
 							}
 							else {
-								this.insert(`<${selector}></${selector}>`);
-								this.moveCaret(-selector.length - 3);
+								this.insert(`<${tag}${classes}></${tag}>`);
+								this.moveCaret(-tag.length - 3);
 							}
 
 							return true;

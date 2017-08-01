@@ -266,13 +266,13 @@ code.de-emphasize {
 
 .hint {
 	position: absolute;
+	top: -5px;
+	left: 10px;
 	font-size: .8rem;
 	font-weight: bold;
 	line-height: 1;
 	color: rgba(0,0,0,.15);
 	mix-blend-mode: multiply;
-	top: -5px;
-	left: 10px;
 }
 
 blockquote {

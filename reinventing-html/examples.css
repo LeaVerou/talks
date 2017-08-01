@@ -2,6 +2,10 @@ body {
 	font: 150%/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+button, input, select {
+	font: inherit
+}
+
 input[type=range][property] {
 	transform: scale(2);
 	transform-origin: left;
@@ -23,7 +27,12 @@ ul {
 }
 
 li {
-	list-style: square;
+	list-style: disc;
+}
+
+li[property][mv-mode="edit"] + .mv-item-bar {
+	right: 0;
+	margin-top: -2.5em;
 }
 
 [property=cat],

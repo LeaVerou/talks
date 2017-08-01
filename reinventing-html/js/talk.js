@@ -1,4 +1,5 @@
 var $ = Bliss, $$ = $.$;
+var mavoHost = location.hostname == "localhost"? "../../mavo/dist" : "https://get.mavo.io"
 
 document.addEventListener("DOMContentLoaded", evt => {
 	// Stuff to run after slideshow has been created
@@ -17,9 +18,9 @@ document.addEventListener("DOMContentLoaded", evt => {
 			iframe.srcdoc = `<!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="https://get.mavo.io/mavo.css">
+	<link rel="stylesheet" href="${mavoHost}/mavo.css">
 	<link rel="stylesheet" href="examples.css">
-	<script src="https://get.mavo.io/mavo.js"></script>
+	<script src="${mavoHost}/mavo.js"></script>
 </head>
 <body>${textarea.value}</body>
 </html>`;
@@ -40,12 +41,14 @@ document.addEventListener("DOMContentLoaded", evt => {
 
 			iDoc.body.id = slide.id;
 
-			if (!mavoRoot.hasAttribute("mv-app")) {
-				mavoRoot.setAttribute("mv-app", slide.id + "Example")
-			}
+			if (!slide.classList.contains("nofixup")) {
+				if (!mavoRoot.hasAttribute("mv-app")) {
+					mavoRoot.setAttribute("mv-app", slide.id + "Example")
+				}
 
-			if (!mavoRoot.hasAttribute("mv-storage") && data) {
-				mavoRoot.setAttribute("mv-storage", "#" + data.id);
+				if (!mavoRoot.hasAttribute("mv-storage") && data) {
+					mavoRoot.setAttribute("mv-storage", "#" + data.id);
+				}
 			}
 		};
 	});
