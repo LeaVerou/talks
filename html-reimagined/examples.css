@@ -2,6 +2,12 @@ body {
 	font: 150%/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+@media (max-width: 600px) {
+	body {
+		font-size: 100%;
+	}
+}
+
 button, input, select {
 	font: inherit
 }
