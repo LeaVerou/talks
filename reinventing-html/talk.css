@@ -327,25 +327,32 @@ img.inline{
 
 .example.slide {
 	padding: 0;
+	flex-flow: column-reverse;
+	align-items: stretch;
 }
 
 	.example.slide iframe {
-		--scale: 1.5;
+		/*--scale: 1.5;
 		width: calc(100% / var(--scale) - 2em / var(--scale));
 		height: calc(100% / var(--scale) - 2em / var(--scale));
 		transform: scale(var(--scale));
-		transform-origin: 0 0;
-		top: 1em;
-		left: 1em;
+		transform-origin: 0 0;*/
+		position: static;
+		width: auto;
+		margin: 1em;
+		margin-bottom: 0;
 		background: hsla(0,0%,100%,.5);
 		border-radius: 8px;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
 	}
 
 	div.editor {
-		position: absolute;
+		/*position: absolute;
 		left: 0;
 		bottom: 0;
-		z-index: 1;
+		z-index: 1;*/
+		position: relative;
 		color: white;
 		font-size: calc(var(--font-size-multiplier, 1) * 80%);
 		line-height: 1.5;
@@ -387,7 +394,7 @@ img.inline{
 			background-attachment: local;
 		}
 
-		.editor label {
+		/*.editor label {
 			position: absolute;
 			top: .5em;
 			right: .5em;
@@ -403,7 +410,7 @@ img.inline{
 
 			.editor label:hover {
 				background: hsl(15, 100%, 45%);
-			}
+			}*/
 
 .mv-debug-storage {
 	margin-top: 3rem;

@@ -1,3 +1,7 @@
+body {
+	font: 150%/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
 input[type=range][property] {
 	transform: scale(2);
 	transform-origin: left;
@@ -10,6 +14,10 @@ input:not([type])[property] {
 	margin-right: 1em;
 }
 
+h1 {
+	font-weight: 100;
+}
+
 ul {
 	margin: .3em 0;
 }
@@ -18,14 +26,14 @@ li {
 	list-style: square;
 }
 
-[property=cat], .cat {
+[property=cat],
+.cat {
 	min-width: 14em;
 	position: relative;
 	padding: .3em;
 	margin: .4em 0;
 	border: 1px solid hsl(200, 40%, 85%);
 	border-radius: .2em;
-	overflow: hidden;
 }
 
 .lite-cats [property=cat] {
@@ -36,31 +44,38 @@ li {
 		content: none;
 	}
 
-	[property=cat] h1,
+	[property=cat]::after,
+	.cat::after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+
+	[property=cat] h2,
 	[property=cat] p,
-	.cat h1,
+	.cat h2,
 	.cat p {
 		margin: 0;
 		margin-left: 3.5em;
 	}
 
-	[property=cat] h1,
-	.cat h1 {
+	[property=cat] h2,
+	.cat h2 {
 		display: inline;
 		margin-left: .5em;
 	}
 
-		.cat h1::after,
+		.cat h2::after,
 		.cat time::after {
 			content: "\A";
 			white-space: pre;
 		}
 
-	.cat h1 {
+	.cat h2 {
 		margin-left: 0;
 	}
 
-	.lite-cats h1 {
+	.lite-cats h2 {
 		font-weight: 100;
 	}
 

@@ -75,8 +75,19 @@ for (let slide of $$(".slide[data-video]")) {
 $.events(document, "slidechange", evt => {
 	var slide = evt.target;
 
+	$$(".slide:not(:target) video").forEach(video => {
+		if (!video.paused) {
+			console.log("pause", video);
+			video.pause();
+		}
+	});
+
 	if (slide) {
-		$$("video", slide).forEach(video => video.play());
+		$$("video", slide).forEach(video => {
+			video.currentTime = 0;
+			console.log("play", video);
+			video.play();
+		});
 	}
 });
 

@@ -42,7 +42,7 @@ code[class*="language-"] {
 }
 
 .token.comment {
-	font: 125%/.8 var(--font-handwritten);
+	/*font: 125%/.8 var(--font-handwritten);*/
 }
 
 .token.comment,

@@ -268,6 +268,12 @@ Less Control">
 		</code></pre>
 	</article>
 
+	<article class="example slide">
+		<textarea><div mv-app="appName">
+	<!-- Mavo app -->
+</div></textarea>
+	</article>
+
 	<article class="slide">
 		<h1>Persistence</h1>
 		<pre><code>
@@ -309,7 +315,7 @@ Less Control">
 		<p class="hint">|mv-multiple, hobbies collection</p>
 		<textarea><div mv-app class="cat" mv-storage="local">
 	<img src="img/adamcatlace.png" property="photo">
-	<h1 property="name">Adam Catlace</h1>
+	<h2 property="name">Adam Catlace</h2>
 	<time property="birthday" datetime="2014-06-01">1 Jun 2014</time>
 	Cuteness: <meter property="rating" value="3" max="5"></meter>
 </div></textarea>
@@ -337,6 +343,7 @@ Less Control">
 
 	<article class="looping slide" data-video="videos/talks.mp4"></article>
 	<article class="looping slide" data-video="videos/authors.mp4"></article>
+	<article class="slide" data-src="http://localhost:8001/demos" data-title="mavo.io/demos"></article>
 
 	<article class="example slide" style="--font-size-multiplier: 1.2">
 		<textarea><input type="range" property="strength"
@@ -367,7 +374,7 @@ Value: [strength / 100]</textarea>
 			<textarea><div mv-app="cats" mv-storage="#data-aggregate-expressions">
 	<article property="cat" mv-multiple>
 		<img property="photo">
-		<h1 property="name"></h1>
+		<h2 property="name"></h2>
 		<span property="age"></span>
 	</article>
 </div>
@@ -409,9 +416,15 @@ Value: [strength / 100]</textarea>
 
 	</article>
 
+	<!-- <article class="example slide">
+		<textarea><div>
+	<article>
+	</article>
+</div></textarea>
+	</article> -->
+
 	<article class="looping slide" data-video="videos/invoice.mp4"></article>
 	<article class="looping slide" data-video="videos/svgpath.mp4"></article>
-	<article class="slide" data-src="http://mavo.io/demos"></article>
 </section>
 
 <article class="slide">
