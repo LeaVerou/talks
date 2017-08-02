@@ -1317,3 +1317,17 @@ footer.slide {
 	border-radius: 2vmin;
 	box-shadow: 0.05em 0.1em 0.2em rgba(0,0,0,.5);
 }
+
+#karger {
+	background: url(img/david-karger.jpg) right / contain no-repeat, linear-gradient(to bottom, hsl(200, 7%, 39%), 55%, hsl(200, 5%, 63%));
+}
+
+	#karger h1 strong {
+		display: block;
+	}
+
+	#karger h1 a {
+		display: block;
+		font-size: 50%;
+		text-decoration: none;
+	}

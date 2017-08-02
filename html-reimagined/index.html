@@ -20,7 +20,8 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 <article class="slide" id="adjust-resolution" style="--vw: 1600; --vh: 900">
 	<h1>
 		1600 × 900
-		<span>This is a slide deck coded to a specific environment, not a web app for public consumption. It works best in Chrome, with the Experimental Web Platform flag on.</span>
+		<span>This is a slide deck coded to a specific environment, not a web app for public consumption.
+			It works best in Chrome, with the Experimental Web Platform Features flag on.</span>
 	</h1>
 
 </article>
@@ -106,36 +107,29 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 		<h1>How standards really work</h1>
 	</article>
 
-	<section class="top-heavy image slide" id="mit" style="background-image: url(img/haystack.png)">
-		<h1><strong>2014&thinsp;–</strong> Haystack Group, <img src="../shared/img/mit.svg" alt="MIT" class="inline" /></h1>
+	<section class="inverse slide dont-resize darker hi" id="book">
+		<a href="http://shop.oreilly.com/product/0636920031123.do" class="delayed">
+			<img src="../shared/img/book.png" alt="CSS Secrets by O’Reilly" style="display:block" />
+			★★★★★ on Amazon
+		</a>
 	</section>
+
+	<section class="top-heavy image slide" id="mit" style="background-image: url(img/haystack.png)">
+		<h1><strong>2014&thinsp;–</strong> Haystack Group, MIT CSAIL</h1>
+	</section>
+
+	<article class="top-heavy image slide" id="karger">
+		<h1>
+			<strong>David Karger</strong>
+			<a href="https://en.wikipedia.org/wiki/David_Karger">en.wikipedia.org/wiki/David_Karger</a>
+		</h1>
+	</article>
 </section>
 
 <section>
-	<article class="single-sentence slide" id="the-question">
-		<h1>
-			<span class="label">The Question</span>
-			What would HTML look like<br>
-			if it were designed for web apps?
-		</h1>
-	</article>
-<!--
-	<article class="slide">
-		<blockquote>
-			<p>“Ninety percent of everything is CRUD”</p>
-			<p class="cite">—Very Slightly Paraphrased <a href="https://en.wikipedia.org/wiki/Sturgeon%27s_law">Sturgeon’s Law</a></p>
-		</blockquote>
-	</article> -->
-
-	<article class="slide" id="html">
-		<img src="img/html.svg" alt="">
-		<ul class="criteria delayed-children">
-			<li>Forgiving</li>
-			<li>Accessible</li>
-			<li>Small syntax</li>
-			<li>Portable</li>
-		</ul>
-	</article>
+	<header class="slide">
+		<h1>The Problem</h1>
+	</header>
 
 	<article class="slide" id="the-problem" data-steps="2" data-credits="Mart Virkus @ toggl.com">
 		<ul>
@@ -196,6 +190,10 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 		<img src="img/todomvc.png" />
 	</article>
 
+	<article class="slide">
+		<img src="../jsux/img/nojspoll.png" class="tweet" alt="">
+	</article>
+
 	<article class="slide" id="landscape">
 		<h1>State of Web development</h1>
 
@@ -209,17 +207,13 @@ Less Control">
 		</div>
 	</article>
 
-	<article class="slide">
-		<img src="../jsux/img/nojspoll.png" class="tweet" alt="">
+	<article class="single-sentence slide">
+		<h1>When you make something accessible to novices, it becomes easier for everybody.</h1>
 	</article>
 
 	<article class="slide" id="comic" data-credits="zenpencils.com/comic/98-alan-watts-what-if-money-was-no-object">
 		<img src="img/goals.gif" alt="">
 		<img class="delayed" src="img/everyoneknows.png" alt="">
-	</article>
-
-	<article class="single-sentence slide">
-		<h1>When you make something accessible to novices, it becomes easier for everybody.</h1>
 	</article>
 
 	<article class="single-sentence slide" id="research-question">
@@ -229,15 +223,42 @@ Less Control">
 		</h1>
 	</article>
 
+	<!-- <article class="single-sentence slide" id="the-question">
+		<h1>
+			<span class="label">The Question</span>
+			What would HTML look like<br>
+			if it were designed for web apps?
+		</h1>
+	</article> -->
+
+
+</section>
+
+<section>
+	<header class="slide" id="mavo">
+		<h1><img src="img/logo.svg" alt="Mavo"></h1>
+	</header>
+
+	<article class="slide" id="html">
+		<img src="img/html.svg" alt="">
+		<ul class="criteria delayed-children">
+			<li>Forgiving</li>
+			<li>Fails gracefully</li>
+			<li>Small syntax</li>
+			<li>Portable</li>
+		</ul>
+	</article>
+
 	<article class="dont-resize slide" id="crud-apps" data-credits="Icons by Font Awesome, subset in Fontello">
 		<h1>CRUD <span>Lightweight computation</span></h1>
-		<ul style="--total: 19">
+		<ul style="--total: 21">
 			<li>Portfolio</li>
 			<li>Publication list</li>
 			<li>Photo album</li>
 			<li>Conference website</li>
 			<li>Address book</li>
 			<li>Blog</li>
+			<li>Resumé</li>
 			<li>PIM apps</li>
 			<li>Menstruation tracker</li>
 			<li>Invoicing system</li>
@@ -251,6 +272,7 @@ Less Control">
 			<li>Party RSVP</li>
 			<li>Bar inventory</li>
 			<li>Pet care tracker</li>
+			<li>Reservation system</li>
 		</ul>
 	</article>
 
@@ -265,12 +287,6 @@ Less Control">
 			<li data-icon="⇄">Data flow</li>
 		</ul>
 	</article>
-</section>
-
-<section>
-	<header class="slide" id="mavo">
-		<h1><img src="img/logo.svg" alt="Mavo"></h1>
-	</header>
 
 	<article class="slide">
 		<h1>Try Mavo out</h1>
@@ -324,7 +340,7 @@ Less Control">
 	</article>
 
 	<article class="slide" id="data-source">
-		<video src="videos/auth.mp4" style="height: 50vh; margin-bottom: 3vh" loop></video>
+		<video src="videos/auth.mp4" style="height: 50vh; margin-bottom: 3vh" preload="none"></video>
 		<pre><code>
 			&lt;div <mark>mv-storage="http://github.com/leaverou"</mark>>
 				&lt;!-- Mavo app -->
@@ -342,11 +358,11 @@ Less Control">
 
 	<article class="visible-storage example slide" id="objects">
 		<p class="hint">How multiple element types get edited | mv-multiple, hobbies collection</p>
-		<textarea><div mv-app class="cat" mv-storage="local">
+		<textarea><div mv-app mv-storage="local" class="cat">
 	<img src="img/adamcatlace.png" property="photo">
 	<h2 property="name">Adam Catlace</h2>
 	<time property="birthday" datetime="2014-06-01">1 Jun 2014</time>
-	<p>Cuteness: <meter property="rating" value="3" max="5"></meter></p>
+	<p>Cuteness: <meter property="rating" value="3" max="5"></meter>
 </div></textarea>
 	</article>
 
@@ -392,7 +408,7 @@ Value: [strength]</textarea>
 			 style="--font-size-multiplier: .9">
 			 <p class="hint">count(cat), count(age > 6), count(age), average(age)</p>
 
-			<textarea><div mv-app="cats" mv-storage="https://github.com/leaverou/mv-data/cats.json">
+			<textarea><div mv-app="cats" mv-storage="https://github.com/leaverou/mv-data/cats.json" class="cat">
 	<article property="cat" mv-multiple>
 		<img property="photo">
 		<h2 property="name"></h2>
@@ -410,7 +426,7 @@ Value: [strength]</textarea>
 			<li>Log in with your Github account</li>
 			<li>Make some edits (maybe add your cat? ;)</li>
 			<li>Save</li>
-			<li>Send edit suggestion</li>
+			<li>Click “Send Edit Suggestion”</li>
 		</ol>
 	</article>
 
@@ -819,13 +835,6 @@ Value: [strength]</textarea>
 </footer>
 
 <article class="image slide" style="background-image: url(../css-variables/img/stickers.jpg)"></article>
-
-<section class="inverse slide dont-resize darker hi" id="book">
-	<a href="http://shop.oreilly.com/product/0636920031123.do" class="delayed">
-		<img src="../shared/img/book.png" alt="CSS Secrets by O’Reilly" style="display:block" />
-		★★★★★ on Amazon
-	</a>
-</section>
 
 <script src="../shared/js/bliss.min.js"></script>
 <script src="../csss/slideshow.js"></script>

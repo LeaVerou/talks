@@ -39,11 +39,9 @@ li {
 
 li[property][mv-mode="edit"] + .mv-item-bar {
 	right: 0;
-	margin-top: -2.5em;
 }
 
-[property=cat],
-.cat {
+[property=cat] {
 	min-width: 14em;
 	position: relative;
 	padding: .3em;
@@ -52,62 +50,62 @@ li[property][mv-mode="edit"] + .mv-item-bar {
 	border-radius: .2em;
 }
 
-.lite-cats [property=cat] {
+/*.lite-cats [property=cat] {
 	padding: .1em;
-}
+}*/
 
 	[property=cat]::before {
 		content: none;
 	}
 
-	[property=cat]::after,
-	.cat::after {
+	[property=cat]::after {
 		content: "";
 		display: block;
 		clear: both;
 	}
 
-	[property=cat] > :not(img),
-	.cat > :not(img):not([property=cat]) {
+	.cat img ~ :not(.mv-ui) {
 		display: block;
 		margin: 0;
-		margin-left: 3.5em;
+		margin-left: 9rem;
 	}
 
-		.cat h2::after,
-		.cat time::after {
-			content: "\A";
-			white-space: pre;
-		}
+	.cat h2,
+	.cat p {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
 
-	.lite-cats h2 {
+	/*.lite-cats h2 {
 		font-weight: 100;
-	}
+	}*/
 
-	[property=cat] img,
+
 	.cat img {
-		width: 3em;
-		height: 3em;
+		width: 8rem;
+		height: 8rem;
 		border-radius: .5em;
 		object-fit: cover;
 		float: left;
-		margin-right: .5em;
 	}
 
-	.cat img {
-		width: 4.6em;
-		height: 4.6em;
-		margin-right: .8em;
+	.cat[mv-app="cats"] img {
+		width: 4rem;
+		height: 4rem;
 	}
 
+		.cat[mv-app="cats"] img ~ * {
+			margin-left: 5rem;
+		}
+/*
 	.lite-cats [property=cat] img {
 		width: 3em;
 		height: 1.8em;
 		margin: -.1em 0 0 -.1em;
 		border-radius: 0;
-	}
+	}*/
 
-		[property=cat] img[src=""] {
+		.cat img[src=""] {
 			border: none;
 			background: hsla(0,0%,100%,.5);
 			content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
@@ -115,7 +113,7 @@ li[property][mv-mode="edit"] + .mv-item-bar {
 			</svg>')
 		}
 
-	[property=cat] [property=age] {
+	.cat [property=age] {
 		position: absolute;
 		top: 1em;
 		right: .5em;
@@ -123,20 +121,20 @@ li[property][mv-mode="edit"] + .mv-item-bar {
 	}
 
 	.cat time {
+		display: block;
 		letter-spacing: -.03em;
 	}
 
-		[property=cat] [property=age]::before,
+		.cat[property=age]::before,
 		.cat time::before {
 			content: "🎂 ";
 		}
 
-	[property=cat] [property=hobby]:last-of-type {
+	.cat [property=hobby]:last-of-type {
 		margin-right: .4em;
 	}
 
-		[property=cat] [property=hobby] + [property=hobby]::before,
-		[property=cat] [property=hobby] + .mv-item-bar + [property=hobby]::before {
+		.cat [property=hobby]:not(:last-of-type)::after {
 			content: ", ";
 		}
 
@@ -187,3 +185,7 @@ button.mv-undo.mv-ui {
 		background: hsl(200, 40%, 60%);
 		padding: .2em .4em 0 .6em;
 	}
+
+.mv-item-bar.mv-adjacent {
+	transform: translate(-10%, -150%);
+}

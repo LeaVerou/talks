@@ -1,50 +1,9 @@
 var $ = Bliss, $$ = $.$;
-var mavoHost = location.hostname == "localhost"? "../../mavo/dist" : "https://get.mavo.io"
 
 document.addEventListener("DOMContentLoaded", evt => {
 	// Stuff to run after slideshow has been created
-
-
 	$$(".example.slide").forEach((slide, i) => {
-		var textarea = $("textarea", slide);
-		if (!textarea) {
-			return;
-		}
-		var editor = new Prism.Live(textarea);
-		var iframe = $.create("iframe", {
-			name: "iframe" + (i+1),
-			after: editor.wrapper
-		});
-		var update = () => {
-			iframe.src = "demo.html";
-		};
 
-		textarea.addEventListener("keydown", Mavo.rr(evt => {
-			if (!evt || evt.keyCode == 13 && (evt.metaKey || evt.ctrlKey)) {
-				update();
-				evt && evt.preventDefault();
-			}
-		}));
-
-		var data = $("script[type='application/json']", slide);
-
-		iframe.addEventListener("DOMFrameContentLoaded", evt => {
-			var iDoc = iframe.contentDocument;
-			iDoc.body.innerHTML = textarea.value;
-			var mavoRoot = $("[mv-app], [mv-storage]", iDoc.documentElement) || iDoc.body;
-
-			iDoc.body.id = slide.id;
-
-			if (!slide.classList.contains("nofixup")) {
-				if (!mavoRoot.hasAttribute("mv-app")) {
-					mavoRoot.setAttribute("mv-app", slide.id + "Example")
-				}
-
-				if (!mavoRoot.hasAttribute("mv-storage") && data) {
-					mavoRoot.setAttribute("mv-storage", "#" + data.id);
-				}
-			}
-		});
 	});
 });
 
@@ -72,6 +31,42 @@ $.events(document, "slidechange", evt => {
 		slide.classList.add("video");
 		slide.removeAttribute("data-video");
 	}
+	else if (slide.matches(".example:not(.initialized)")) {
+		let textarea = $("textarea", slide);
+		let editor = new Prism.Live(textarea);
+		let iframe = $.create("iframe", {
+			name: "iframe" + slide.getAttribute("data-index"),
+			after: editor.wrapper
+		});
+
+		let update = () => {
+			iframe.src = "demo.html?" + Date.now();
+			//console.log("update", iframe.name);
+		};
+
+		textarea.addEventListener("keydown", Mavo.rr(evt => {
+			if (!evt || evt.keyCode == 13 && (evt.metaKey || evt.ctrlKey)) {
+				update();
+				evt && evt.preventDefault();
+			}
+		}));
+
+		iframe.addEventListener("DOMFrameContentLoaded", evt => {
+			var iDoc = iframe.contentDocument;
+			iDoc.body.innerHTML = textarea.value;
+			var mavoRoot = $("[mv-app], [mv-storage]", iDoc.documentElement) || iDoc.body;
+
+			iDoc.body.id = slide.id;
+
+			if (!slide.classList.contains("nofixup")) {
+				if (!mavoRoot.hasAttribute("mv-app")) {
+					mavoRoot.setAttribute("mv-app", slide.id + "Example")
+				}
+			}
+		});
+
+		slide.classList.add("initialized");
+	}
 
 	$$(".slide:not(:target) video").forEach(video => {
 		if (!video.paused) {
@@ -81,6 +76,7 @@ $.events(document, "slidechange", evt => {
 
 	if (slide) {
 		$$("video", slide).forEach(video => {
+			video.loop = true;
 			video.currentTime = 0;
 			video.play();
 		});
