@@ -400,16 +400,10 @@ img.inline{
 }
 
 	.example.slide iframe {
-		/*--scale: 1.5;
-		width: calc(100% / var(--scale) - 2em / var(--scale));
-		height: calc(100% / var(--scale) - 2em / var(--scale));
-		transform: scale(var(--scale));
-		transform-origin: 0 0;*/
 		position: static;
 		width: auto;
 		margin: 1em;
 		margin-bottom: 0;
-		background: hsla(0,0%,100%,.5);
 		border-radius: 8px;
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
@@ -523,28 +517,20 @@ img.inline{
 	margin: 0;
 }
 
-button.mv-add.mv-ui,
-button.mv-undo.mv-ui {
-	padding: .1em .5em;
-	background: hsla(0,0%,100%,.75);
-	border-radius: .2em;
-	border: none;
-	color: black;
-	font-weight: bold;
-	font-size: 60%;
-	vertical-align: text-bottom;
-	cursor: pointer;
+#phone {
+	padding-top: 0;
+	padding-bottom: 0;
+	justify-content: flex-start;
+	flex-flow: row;
 }
 
-	button.mv-add.mv-ui:hover,
-	button.mv-undo.mv-ui:hover {
-		background: hsla(0,0%,100%,.9);
-	}
-
-	button.mv-add.mv-ui:active,
-	button.mv-undo.mv-ui:active {
-		background: hsla(0,0%,100%,.6);
-		padding: .2em .4em 0 .6em;
+	#phone iframe {
+		position: static;
+		width: 44.4vh;
+		height: 79vh;
+		padding: 10vh 4vh 9vh;
+		margin: 0 4vw;
+		background: url(img/smartphone.png) center / auto 100% no-repeat;
 	}
 
 /* EVALUATION */
@@ -1322,4 +1308,12 @@ footer.slide {
 
 #landscape .qqq {
 	animation: qqq 5s infinite alternate linear;
+}
+
+.tweet {
+	max-height: 80vh;
+	box-sizing: border-box;
+	border: 1em solid white;
+	border-radius: 2vmin;
+	box-shadow: 0.05em 0.1em 0.2em rgba(0,0,0,.5);
 }

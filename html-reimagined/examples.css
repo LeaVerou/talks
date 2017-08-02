@@ -1,5 +1,6 @@
 body {
 	font: 150%/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	background: hsl(200, 40%, 96%);
 }
 
 @media (max-width: 600px) {
@@ -66,18 +67,11 @@ li[property][mv-mode="edit"] + .mv-item-bar {
 		clear: both;
 	}
 
-	[property=cat] h2,
-	[property=cat] p,
-	.cat h2,
-	.cat p {
+	[property=cat] > :not(img),
+	.cat > :not(img):not([property=cat]) {
+		display: block;
 		margin: 0;
 		margin-left: 3.5em;
-	}
-
-	[property=cat] h2,
-	.cat h2 {
-		display: inline;
-		margin-left: .5em;
 	}
 
 		.cat h2::after,
@@ -85,10 +79,6 @@ li[property][mv-mode="edit"] + .mv-item-bar {
 			content: "\A";
 			white-space: pre;
 		}
-
-	.cat h2 {
-		margin-left: 0;
-	}
 
 	.lite-cats h2 {
 		font-weight: 100;
@@ -101,6 +91,7 @@ li[property][mv-mode="edit"] + .mv-item-bar {
 		border-radius: .5em;
 		object-fit: cover;
 		float: left;
+		margin-right: .5em;
 	}
 
 	.cat img {
@@ -126,7 +117,7 @@ li[property][mv-mode="edit"] + .mv-item-bar {
 
 	[property=cat] [property=age] {
 		position: absolute;
-		top: 1em; 
+		top: 1em;
 		right: .5em;
 		font-weight: bold;
 	}
@@ -144,7 +135,8 @@ li[property][mv-mode="edit"] + .mv-item-bar {
 		margin-right: .4em;
 	}
 
-		[property=cat] [property=hobby] + [property=hobby]::before {
+		[property=cat] [property=hobby] + [property=hobby]::before,
+		[property=cat] [property=hobby] + .mv-item-bar + [property=hobby]::before {
 			content: ", ";
 		}
 
@@ -169,4 +161,29 @@ li[property][mv-mode="edit"] + .mv-item-bar {
 		line-height: 1;
 		color: white;
 		text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+	}
+
+button.mv-add.mv-ui,
+button.mv-undo.mv-ui {
+	padding: .2em .5em;
+	background: hsl(200, 40%, 80%);
+	border-radius: .2em;
+	border: none;
+	color: black;
+	font-weight: bold;
+	font-size: 60%;
+	vertical-align: text-bottom;
+	cursor: pointer;
+	mix-blend-mode: multiply;
+}
+
+	button.mv-add.mv-ui:hover,
+	button.mv-undo.mv-ui:hover {
+		background: hsl(200, 40%, 70%);
+	}
+
+	button.mv-add.mv-ui:active,
+	button.mv-undo.mv-ui:active {
+		background: hsl(200, 40%, 60%);
+		padding: .2em .4em 0 .6em;
 	}
