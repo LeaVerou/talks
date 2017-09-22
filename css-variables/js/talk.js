@@ -153,7 +153,11 @@ $$('[data-edit]').forEach(element => {
 							scopeRule(rule, slide, scope);
 						}
 					}
-					else console.log("FAIL on", slide.id, style.outerHTML, style.media);
+					else {
+						console.log("FAIL on", slide.id, style.outerHTML, style.media);
+
+						//setTimeout(arguments.callee.bind(this), 1000)
+					}
 				}
 			});
 

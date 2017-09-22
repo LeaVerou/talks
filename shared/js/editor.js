@@ -1,3 +1,8 @@
+/**
+	Prism Live: Code editor based on Prism.js
+	Works best in Chrome. Currently only very basic support in other browsers (no snippets, no shortcuts)
+	@author Lea Verou
+*/
 (function($, $$){
 
 var superKey = navigator.platform.indexOf("Mac") === 0? "metaKey" : "ctrlKey";
@@ -97,23 +102,26 @@ var _ = Prism.Live = $.Class({
 							this.insert("\t");
 						}
 						else {
-							// HTML expansion
+							// Snippets
 							var after = this.afterCaret();
 							var selector = before.match(/\S*$/)[0];
 
 							this.delete(selector);
 
+							var handled = false;
+
 							if (selector in this.context.snippets || selector in _.snippets) {
 								// Static Snippets
 								this.insert(this.context.snippets[selector] || _.snippets[selector]);
+								handled = true;
 							}
 							else if (this.context.snippets.custom) {
-								var handled = this.context.snippets.custom.call(this, selector, before, after);
+								handled = this.context.snippets.custom.call(this, selector, before, after);
+							}
 
-								if (!handled) {
-									// Nothing worked, insert a Tab character
-									this.insert(selector + "\t");
-								}
+							if (!handled) {
+								// Nothing worked, insert a Tab character
+								this.insert(selector + "\t");
 							}
 						}
 
@@ -326,10 +334,43 @@ var _ = Prism.Live = $.Class({
 						}
 					}
 				}
+			},
+			"css": {
+				snippets: {
+					custom: function (property, before, after) {
+						// Expand property
+						var style = document.documentElement.style;
+
+						if (!/^--/.test(property) && !(property in style)) {
+							// Nonexistent property, try as a shortcut
+							var properties = Object.keys(style)
+												.map(a => a.replace(/[A-Z]/g, $0 => "-" + $0.toLowerCase()))
+												.filter(a => a.indexOf(property) === 0)
+												.sort((a, b) => a.length - b.length);
+
+							if (properties.length) {
+								if (properties.length > 1) {
+									// Many options, don't add the 1.5 colons
+									// (mimic terminal autocomplete)
+									this.insert(properties[0]);
+									return true;
+								}
+
+								property = properties[0];
+							}
+						}
+
+						this.insert(`${property}: ;`);
+						this.moveCaret(-1);
+						return true;
+					}
+				}
 			}
 		}
 	}
 });
+
+Prism.Live.languages.html = Prism.Live.languages.markup;
 
 $.ready().then(() => {
 	$$("textarea.editor").forEach(textarea => new _(textarea));

@@ -53,6 +53,10 @@
 	font-size: 200%;
 }
 
+.hi:target {
+	overflow: hidden;
+}
+
 	.hi > .delayed:only-child:not(.current):not(.displayed) {
 		transform: translateY(-100vh);
 	}
@@ -247,6 +251,10 @@
 footer.slide {
 	text-align: center;
 	padding: 1em 0 0;
+}
+
+footer.slide:target {
+	overflow-x: hidden;
 }
 
 	footer.slide h1 {
@@ -539,12 +547,18 @@ span.poop {
 	}
 
 	#wtf .caption {
-		min-width: 19em;
+		min-width: 20em;
+		font-size: 100%;
+		width: auto;
+		margin: auto;
+		padding: 1em;
 	}
 
 		#wtf .caption ul {
 			font-size: 150%;
 			list-style: none;
+			margin: 0;
+			padding: 0;
 		}
 
 		#wtf .caption .punctuation {
@@ -564,6 +578,7 @@ span.poop {
 		align-items: center;
 		justify-content: center;
 		float: right;
+		margin: 0;
 		font-stretch: condensed;
 		font-family: HelveticaNeue-CondensedBold;
 		font-size: 155%;
@@ -623,16 +638,20 @@ span.poop {
 
 	.talking.housewife.slide {
 		display: block;
-		background: #8f8f8f url(img/housewife.png) no-repeat bottom right / 450px auto;
-		background-color: #978;
-		background-size: 450px;
+		background: #978 url(img/housewife.png) no-repeat bottom right / 50vmin auto;
 		padding: 2em;
 		transition: 1s ease-in-out background-size;
 		color: black;
 	}
 
 		.talking.housewife.slide:target {
-			background-size: 550px auto;
+			background-size: 70vmin auto;
+		}
+
+		@media (min-aspect-ratio: 16/10) {
+			.talking.housewife.slide:target {
+				background-size: 90vh auto;
+			}
 		}
 
 		.talking.slide > h1 {
@@ -751,8 +770,12 @@ span.poop {
 	to { left: 50vw }
 }
 
+.future.slide {
+	overflow-y: hidden;
+}
+
 .future.slide h1::before {
-	content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="250"><text style="font-size:90px" y="1em">🔮</text></svg>');
+	content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="140"><text style="font-size:90px" y="1em">🔮</text></svg>');
 	position: absolute;
 	bottom: -50vh;
 	animation: fall 3s infinite ease-in, pos 30s steps(1) infinite;

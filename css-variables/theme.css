@@ -1,3 +1,7 @@
+* {
+	text-decoration-color: inherit;
+}
+
 html {
 	--font-mono: Consolas, Monaco, 'Andale Mono', monospace;
 	--font-body: 'Helvetica Neue', sans-serif;
@@ -12,6 +16,7 @@ body {
 	            linear-gradient(45deg, silver 25%, transparent 25%, transparent 75%, silver 75%) 20px 20px;
 	background-color: #eee;
 	background-size: 40px 40px;
+	text-decoration-skip: ink;
 }
 
 h1 {
@@ -132,7 +137,6 @@ div.editor {
 		background-origin: content-box;
 		background-size: auto 3em;
 		background-attachment: local;
-
 	}
 
 	.demo.slide:not(.horizontal) div.editor > textarea.editor {
@@ -181,6 +185,7 @@ div.editor {
 	background-color: black;
 	background: radial-gradient(transparent, rgba(0,0,0,.7)) hsl(200, 15%, 20%);
 	color: white;
+	text-decoration-color: hsla(0,0%,100%,.5);
 }
 
 @media (max-width: 1024px) {

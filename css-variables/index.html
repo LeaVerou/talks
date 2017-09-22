@@ -32,7 +32,7 @@
 	<section class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
 			<img src="img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
-			<figcaption style="font-size: 240%">Hi, I’m Lea</figcaption>
+			<figcaption style="font-size: 240%">Cześć, jestem Lea</figcaption>
 		</figure>
 	</section>
 
@@ -47,15 +47,15 @@
 	<section class="inverse slide dont-resize darker hi" id="projects">
 		<p>I make stuff</p>
 		<ul>
-			<li><a href="http://mavo.io/" style="background-image: url(img/project-mavo.png)">Mavo</a></li>
-			<li><a href="http://prismjs.com" style="background-image: url(img/project-prism.png)">PrismJS</a></li>
-			<li><a href="http://leaverou.github.io/prefixfree" style="background-image: url(img/project-prefixfree.png)">-prefix-free</a></li>
-			<li><a href="http://blissfuljs.com" style="background-image: url(img/project-bliss.png)">Bliss</a></li>
-			<li><a href="http://css3test.com" style="background-image: url(img/project-css3test.png)">css3test.com</a></li>
-			<li><a href="http://leaverou.github.io/awesomplete/" style="background-image: url(img/project-awesomplete.png)">Awesomplete</a></li>
-			<li><a href="http://cubic-bezier.com/" style="background-image: url(img/project-cubicbezier.png)">cubic-bezier.com</a></li>
-			<li><a href="http://dabblet.com" style="background-image: url(img/project-dabblet.png)">dabblet.com</a></li>
-			<li><a href="http://leaverou.github.io/contrast-ratio/" style="background-image: url(img/project-contrastratio.png)">Contrast Ratio</a></li>
+			<li><a href="http://mavo.io/" style="background-image: url(../shared/img/project-mavo.png)">Mavo</a></li>
+			<li><a href="http://prismjs.com" style="background-image: url(../shared/img/project-prism.png)">PrismJS</a></li>
+			<li><a href="http://leaverou.github.io/prefixfree" style="background-image: url(../shared/img/project-prefixfree.png)">-prefix-free</a></li>
+			<li><a href="http://blissfuljs.com" style="background-image: url(../shared/img/project-bliss.png)">Bliss</a></li>
+			<li><a href="http://css3test.com" style="background-image: url(../shared/img/project-css3test.png)">css3test.com</a></li>
+			<li><a href="http://leaverou.github.io/awesomplete/" style="background-image: url(../shared/img/project-awesomplete.png)">Awesomplete</a></li>
+			<li><a href="http://cubic-bezier.com/" style="background-image: url(../shared/img/project-cubicbezier.png)">cubic-bezier.com</a></li>
+			<li><a href="http://dabblet.com" style="background-image: url(../shared/img/project-dabblet.png)">dabblet.com</a></li>
+			<li><a href="http://leaverou.github.io/contrast-ratio/" style="background-image: url(../shared/img/project-contrastratio.png)">Contrast Ratio</a></li>
 		</ul>
 	</section>
 
@@ -71,7 +71,7 @@
 			<img src="img/mit.svg" alt="MIT" />
 			HCI researcher @ CSAIL
 		</p>
-		<img src="img/project-mavo.png" alt="" class="delayed">
+		<img src="../shared/img/project-mavo.png" alt="" class="delayed">
 	</section>
 
 	<section class="inverse slide dont-resize darker hi" id="book">
@@ -92,7 +92,7 @@
 		<style data-slide>
 			div.block {
 				background: radial-gradient(
-					transparent 90%,
+					transparent calc(100% - 20px),
 					currentColor 0);
 				color: #f06;
 			}
@@ -207,7 +207,7 @@
 			<div style="background: transparent; border: 1px dashed gray">--accent-color: 42deg</div>
 		</div>
 
-		<pre style="margin-top: 2em;"><code>
+		<pre style="margin-top: 2em; overflow: visible"><code>
 			background: red;
 			background: var(--accent-color, orange);
 		</code></pre>
@@ -246,7 +246,7 @@
 	</article>
 
 	<article class="takeaway slide">
-		<h1>Cycles make variables invalid at computed-value time</h1>
+		<h1>Cycles make variables invalid <br> at computed-value time</h1>
 	</article>
 
 	<article class="slide" data-steps="2">
@@ -381,7 +381,7 @@
 	</article>
 
 	<article class="horizontal demo slide" id="animation" data-edit="css" style="--division: 70">
-		<p class="hint">Try to animate --bg | show that var() is ok-ish</p>
+		<p class="hint">Try to animate --color | show that var() is ok-ish</p>
 		<style data-slide>
 			@keyframes bg {
 				from { background-color: yellow; }
@@ -410,7 +410,7 @@
 		<h1>🔮 Near Future 🔮</h1>
 		<pre><code class="language-javascript" id="registerPropertyCode" contentEditable style="outline: none">
 			CSS.registerProperty({
-				name: "--bg",
+				name: "--color",
 				syntax: "&lt;color>",
 				initialValue: "black",
 				inherits: false
@@ -445,7 +445,7 @@
 	<article class="slide" data-import="registerProperty"></article>
 	<article class="slide" data-import="animation"></article>
 
-	<article class="horizontal demo slide" id="transition" data-edit="css" style="--division: 70">
+	<!-- <article class="horizontal demo slide" id="transition" data-edit="css" style="--division: 70">
 		<style data-slide>
 			#transition.slide {
 				background: yellow;
@@ -461,6 +461,10 @@
 
 	<article class="takeaway slide">
 		<h1>CSS Variables can still <br>trigger transitions</h1>
+	</article> -->
+
+	<article class="takeaway slide">
+		<h1>CSS variables <span class="plus">+</span> animations <span class="equals">=</span>🔮<span class="heart" style="font-size: 90px;">♥️</span></h1>
 	</article>
 </section>
 
@@ -880,9 +884,9 @@
 	</article>
 </section> -->
 
-<footer class="dark slide">
+<footer class="dark slide dont-resize">
 	<img src="img/mark.svg" class="logo" />
-	<h1>Ευχαριστώ πολύ!</h1>
+	<h1>Dziękuję Wam!</h1>
 	<img src="img/stickers.jpg" class="stickers delayed" alt="">
 	<p class="stickercaption delayed">Want one? Just ask! ---></p>
 	<ul>
@@ -899,7 +903,7 @@
 <script src="../csss/slideshow.js"></script>
 <script src="js/prism.js"></script>
 <script src="../incrementable/incrementable.js"></script>
-<script src="js/editor.js"></script>
+<script src="../shared/js/editor.js"></script>
 <script src="js/talk.js"></script>
 
 </body>
