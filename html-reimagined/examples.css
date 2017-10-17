@@ -161,6 +161,29 @@ li[property][mv-mode="edit"] + .mv-item-bar {
 		text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
 	}
 
+#clock {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	margin: 0;
+	font-size: 800%;
+	font-weight: bold;
+	letter-spacing: -.02em;
+}
+
+#clock,
+#clock > div:not([class]) {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#clock > div:not([class]) {
+	flex: 1;
+	height: 100%;
+}
+
 button.mv-add.mv-ui,
 button.mv-undo.mv-ui {
 	padding: .2em .5em;

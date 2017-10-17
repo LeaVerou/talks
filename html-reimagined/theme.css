@@ -26,6 +26,8 @@ body {
 	            linear-gradient(45deg, silver 25%, transparent 25%, transparent 75%, silver 75%) 20px 20px;
 	background-color: #eee;
 	background-size: 40px 40px;
+	text-decoration-skip: ink;
+	font-synthesis: none;
 }
 
 h1 {
@@ -35,6 +37,7 @@ h1 {
 
 a {
 	color: inherit;
+	text-decoration-color: hsla(0,0%,100%,.4);
 }
 
 strong, b {

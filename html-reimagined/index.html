@@ -39,7 +39,7 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 	<section id="hi" class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
 			<img src="../shared/img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
-			<figcaption style="font-size: 240%">Hi, I’m Lea</figcaption>
+			<figcaption style="font-size: 240%">Bonjour, je suis Lea</figcaption>
 		</figure>
 	</section>
 
@@ -50,7 +50,9 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 		<p>…which technically makes me <strong>geographically Lesbian</strong></p>
 		</div>
 	</section>
+</section>
 
+<section class="show-next">
 	<article class="top-heavy image slide" id="vb6" style="background-image: url(img/vb6.gif);">
 		<h1>
 			<strong>1998&thinsp;–&thinsp;2005</strong> Visual Basic 6
@@ -126,7 +128,7 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 	</article>
 </section>
 
-<section>
+<section class="show-next">
 	<header class="slide">
 		<h1>The Problem</h1>
 	</header>
@@ -158,6 +160,15 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 	<article class="slide" id="jslogos" data-credits="hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f"></article>
 
 	<article class="image slide" style="background-image: url(img/crying-baby.jpg)"></article>
+
+	<article class="slide" id="workflow-quote">
+		<blockquote >
+			<p>“Our default workflow has been complicated <br>by the needs of large web applications”</p>
+			<p>— Mikeal Rogers
+				<small>https://medium.com/@mikeal/ive-seen-the-future-it-s-full-of-html-2577246f2210</small>
+			</p>
+		</blockquote>
+	</article>
 
 	<article class="slide" id="todomvc">
 		<table>
@@ -194,6 +205,11 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 		<img src="../jsux/img/nojspoll.png" class="tweet" alt="">
 	</article>
 
+	<article class="slide" id="comic" data-credits="zenpencils.com/comic/98-alan-watts-what-if-money-was-no-object">
+		<img src="img/goals.gif" alt="">
+		<img class="delayed" src="img/everyoneknows.png" alt="">
+	</article>
+
 	<article class="slide" id="landscape">
 		<h1>State of Web development</h1>
 
@@ -208,12 +224,10 @@ Less Control">
 	</article>
 
 	<article class="single-sentence slide">
-		<h1>When you make something accessible to novices, it becomes easier for everybody.</h1>
-	</article>
-
-	<article class="slide" id="comic" data-credits="zenpencils.com/comic/98-alan-watts-what-if-money-was-no-object">
-		<img src="img/goals.gif" alt="">
-		<img class="delayed" src="img/everyoneknows.png" alt="">
+		<h1>
+			<span class="label">Takeaway</span>
+			When you make something accessible to<br> novices, it becomes easier for everybody.
+		</h1>
 	</article>
 
 	<article class="single-sentence slide" id="research-question">
@@ -222,16 +236,6 @@ Less Control">
 			Can non-programmers <br>create web applications?
 		</h1>
 	</article>
-
-	<!-- <article class="single-sentence slide" id="the-question">
-		<h1>
-			<span class="label">The Question</span>
-			What would HTML look like<br>
-			if it were designed for web apps?
-		</h1>
-	</article> -->
-
-
 </section>
 
 <section>
@@ -249,7 +253,7 @@ Less Control">
 		</ul>
 	</article>
 
-	<article class="dont-resize slide" id="crud-apps" data-credits="Icons by Font Awesome, subset in Fontello">
+	<!-- <article class="dont-resize slide" id="crud-apps" data-credits="Icons by Font Awesome, subset in Fontello">
 		<h1>CRUD <span>Lightweight computation</span></h1>
 		<ul style="--total: 21">
 			<li>Portfolio</li>
@@ -274,7 +278,7 @@ Less Control">
 			<li>Pet care tracker</li>
 			<li>Reservation system</li>
 		</ul>
-	</article>
+	</article> -->
 
 	<article class="slide" id="building-blocks">
 		<h1>Building blocks</h1>
@@ -324,7 +328,7 @@ Less Control">
 	</article>
 
 	<article class="example slide nofixup">
-		<p class="hint">mv-app, mv-app="appName", mv-bar="none", custom mv-bar, different sizes</p>
+		<p class="hint">mv-app, mv-app="appName"</p>
 		<textarea><div id="myApp">
 	Nothing to see here yet :)
 </div></textarea>
@@ -403,6 +407,11 @@ Value: [strength]</textarea>
 	<article class="looping slide" data-video="videos/logo.mp4" style="--url: 'https://mavo.io/demos/logo'"></article>
 	<article class="looping slide" data-video="videos/mortgage.mp4" style="--url: 'https://mavo.io/demos/mortgage'"></article>
 
+	<article class="dont-resize example slide" id="clock" style="--font-size-multiplier: 1.3">
+		<p class="hint">$now * 6 / 1000 mod 360</p>
+		<textarea>[time($now)]</textarea>
+	</article>
+
 	<article class="vertical example slide lite-cats" id="aggregate-expressions" data-steps="1"
 	         data-credits="Cat’s Shrödinger by The Oatmeal, Cat on Laptop from flickr.com/photos/nwater/8130196854"
 			 style="--font-size-multiplier: .9">
@@ -439,6 +448,7 @@ Value: [strength]</textarea>
 
 	<article class="looping slide" data-video="videos/invoice.mp4" style="--url: 'https://mavo.io/demos/invoice'"></article>
 	<article class="looping slide" data-video="videos/svgpath.mp4" style="--url: 'https://mavo.io/demos/svgpath'"></article>
+	<article class="slide" data-src="https://forkgasm.com"></article>
 </section>
 
 <article class="slide">
@@ -772,8 +782,42 @@ Value: [strength]</textarea>
 		<h1>Future Work</h1>
 	</header>
 
-	<article class="slide">
+	<article class="image slide" id="iceberg">
+		<p>&lt;-- Mavo right now</p>
+		<p>&lt;-- Our vision</p>
+	</article>
+
+	<article class="slide" data-steps="1">
+		<h1>Data Interactions</h1>
+		<div class="annotation">
+			<img src="img/todomvc.png" />
+			<svg viewBox="0 0 100 100">
+				<ellipse rx="12" ry="5" cx="84" cy="69.4" />
+			</svg>
+		</div>
+
+	</article>
+
+	<article class="slide" id="access-control">
 		<h1>Granular access control</h1>
+		<div>
+			<img src="http://people.csail.mit.edu/axz/img/pic2.jpg" alt="">
+			<p>Bacon ipsum dolor amet leberkas turducken ball tip strip steak. Venison burgdoggen leberkas doner beef ground round andouille turkey ham hock bresaola pork kevin biltong fatback. </p>
+			<p><a href="" class="reply">Reply</a></p>
+		</div>
+		<div>
+			<img src="../shared/img/mark.svg" alt="">
+			<p>Biltong tri-tip corned beef spare ribs tail capicola cow ground round kevin ham hock shoulder chuck jowl shank.</p>
+			<p><a href="" class="reply">Reply</a>
+			<a href="" class="edit">Edit</a>
+			<a href="" class="delete">Delete</a></p>
+		</div>
+		<div>
+			<img src="img/david-karger.jpg" alt="">
+			<p>Meatball ham hock andouille capicola, kielbasa ham doner shankle. Hamburger bacon frankfurter, leberkas pancetta brisket shoulder pork chop venison.</p>
+			<p><a href="" class="reply">Reply</a></p>
+		</div>
+
 	</article>
 
 	<article class="slide">
@@ -781,11 +825,14 @@ Value: [strength]</textarea>
 	</article>
 
 	<article class="slide">
-		<h1>Server-side rendering</h1>
-	</article>
-
-	<article class="slide">
-		<h1>Filtering & Sorting</h1>
+		<h1>Data Exploration
+			<div style="font-weight: 100;" class="delayed-children">
+				<div>Sorting</div>
+				<div>Filtering</div>
+				<div>Grouping</div>
+				<div>Searching</div>
+			</div>
+		</h1>
 	</article>
 
 	<article class="slide" data-credits="Emoji provided free by http://emojione.com">
@@ -799,7 +846,7 @@ Value: [strength]</textarea>
 	</article>
 
 	<article class="slide">
-		<h1>Mavo beyond the browser</h1>
+		<h1>Beyond the browser</h1>
 
 		<ul>
 			<li>Internet of Things</li>
@@ -807,28 +854,41 @@ Value: [strength]</textarea>
 		</ul>
 	</article>
 
-	<article class="slide">
+	<article class="slide" id="get-involved">
 		<h1>Get involved</h1>
 
 		<ul>
-			<li><a href="https://github.com/mavoweb/mavo">github.com/mavoweb/mavo</a></li>
-			<li><a href="https://github.com/mavoweb/mavo">github.com/mavoweb/mavo-plugins</a></li>
-			<li><a href="https://github.com/mavoweb/mavo">github.com/mavoweb/mavo.io</a></li>
-			<li><a href="https://gitter.im/mavoweb">gitter.im/mavoweb</a></li>
+			<li>Core: <a href="https://github.com/mavoweb/mavo">github.com/mavoweb/mavo</a></li>
+			<li>Plugins: <a href="https://github.com/mavoweb/mavo">github.com/mavoweb/mavo-plugins</a></li>
+			<li>Docs: <a href="https://github.com/mavoweb/mavo">github.com/mavoweb/mavo.io</a></li>
+			<li>Chat: <a href="https://gitter.im/mavoweb">gitter.im/mavoweb</a></li>
 		</ul>
 	</article>
 </section>
 
-<footer class="slide">
-	<img src="img/logo.svg" />
-	<h1>Thank you!</h1>
+<article class="slide" id="thankyou" title="Thank you!" data-credits="gifimage.net, giphy.com"></article>
 
-	<ul>
-		<li style="--icon: '🌍'"><a href="http://mavo.io">mavo.io</a></li>
-		<li style="--icon: '📨'"><a href="mailto:lea@verou.me">lea@verou.me</a></li>
-		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@mavoweb</a></li>
-		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
-	</ul>
+<footer class="slide">
+	<div class="sections">
+		<section>
+			<img src="img/logo.svg" />
+
+			<ul>
+				<li style="--icon: '🌍'"><a href="http://mavo.io">mavo.io</a></li>
+				<li style="--icon: '🐱'"><a href="http://github.com/mavoweb">github.com/mavoweb</a></li>
+				<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@mavoweb</a></li>
+			</ul>
+		</section>
+		<section>
+			<img src="../shared/img/mark.svg" />
+
+			<ul>
+				<li style="--icon: '🌍'"><a href="http://mavo.io">lea.verou.me</a></li>
+				<li style="--icon: '✉'"><a href="mailto:lea@verou.me">lea@verou.me</a></li>
+				<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
+			</ul>
+		</section>
+	</div>
 
 	<p>Slides: <a href="https://leaverou.github.io/talks/html-reimagined">leaverou.github.io/talks/html-reimagined</a></p>
 	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>

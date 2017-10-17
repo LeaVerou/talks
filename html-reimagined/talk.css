@@ -5,6 +5,13 @@
 	src: url("fonts/webapps.woff2") format('woff2');
 }
 
+@font-face {
+	font-family: 'Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: url("../shared/fonts/slide-icons.woff2") format('woff2');
+}
+
 #adjust-resolution h1 {
 	display: flex;
 	align-items: center;
@@ -331,6 +338,10 @@ img.inline{
 	#todomvc img {
 		float: right;
 		max-width: 51vw;
+	}
+
+	img[src$="todomvc.png"] {
+		box-shadow: .1em .1em 2em black;
 	}
 
 .single-sentence h1 {
@@ -900,56 +911,61 @@ img.inline{
 	}
 
 footer.slide {
-	text-align: center;
 	padding: 1em 0 0;
 }
+
+	footer.slide .sections {
+		display: flex;
+		width: 100%;
+		background: hsla(0,0%,100%,.1);
+	}
+
+		footer.slide .sections > section {
+			display: flex;
+			flex-flow: column;
+			align-items: space-between;
+			justify-content: center;
+			flex: 1;
+			padding: 1em;
+		}
+
+		footer.slide .sections > section:first-child {
+			background: black;
+		}
 
 	footer.slide h1 {
 		margin-top: 1em;
 	}
 
-	footer.slide > img {
-		max-width: 60vw;
+	footer.slide img {
+		max-width: 30vw;
+		margin: auto;
+		margin-top: 0;
 	}
 
-	footer.slide > .authors,
-	footer.slide > .affiliation {
-		margin: 0;
-	}
-
-	footer.slide > .authors {
-		margin-top: .6em;
-	}
-
-	footer.slide > .affiliation {
-		font-weight: bold;
-		margin-bottom: 2em;
-	}
-
-	footer.slide > ul {
-		margin: 0 auto;
-		padding: 0 2em;
-		width: 100%;
+	footer.slide ul {
+		margin: 1em auto 0;
+		padding: 0;
 		box-sizing: border-box;
-		display: flex;
 		list-style: none;
-		background: #f06;
-		text-align: center;
 	}
 
-		footer.slide > ul li {
+		footer.slide ul li {
 			flex: 1
 		}
 
-		footer.slide > ul li::before {
+		footer.slide ul li::before {
 			content: var(--icon);
 			display: inline-block;
-			margin-right: .2em;
+			margin-right: .3em;
+			font-family: Icons;
+			font-weight: normal;
+			color: #f06;
 		}
 
-		footer.slide > ul a {
+		footer.slide ul a {
 			text-decoration: none;
-			font-weight: 500;
+			font-weight: bold;
 		}
 
 @keyframes fall {
@@ -1331,3 +1347,153 @@ footer.slide {
 		font-size: 50%;
 		text-decoration: none;
 	}
+
+#workflow-quote {
+
+}
+
+	#workflow-quote blockquote {
+		font-size: 140%;
+	}
+
+	#workflow-quote p:last-of-type {
+		font-style: normal;
+		font-size: 70%;
+	}
+
+	#workflow-quote small {
+		display: block;
+		font-size: 50%;
+		font-weight: 300;
+		text-indent: 2.6em;
+	}
+
+#thankyou {
+	background: url(img/thankyou.gif) no-repeat,
+	            url(img/unicorn.gif) 100% 80% no-repeat hsl(344, 88%, 73%);
+	background-blend-mode: multiply, normal;
+}
+
+#iceberg {
+	background-image: url(img/iceberg.jpg);
+	font: 500%/1 var(--font-handwritten);
+	transition: 2s background-position-x;
+}
+
+	#iceberg:target {
+		background-position-x: left;
+	}
+
+	#iceberg p {
+		position: absolute;
+		right: 1em;
+		margin: 0;
+		transition: 2s right;
+		text-shadow: 0 0 .1em rgba(0,0,0,.8);
+	}
+
+	#iceberg:target p {
+		right: 4em;
+	}
+
+	#iceberg p:first-of-type {
+		top: 20vh;
+	}
+
+	#iceberg p:last-of-type {
+		bottom: 40vh;
+	}
+
+.annotation {
+	position: relative;
+	width: fit-content;
+}
+
+	.annotation svg {
+		position: absolute;
+		top: 0;
+		right: 0;
+		max-width: 100%;
+	}
+
+	.annotation svg ellipse {
+		stroke: red;
+		fill: none;
+		stroke-linecap: round;
+		stroke-dasharray: 300 300;
+		stroke-dashoffset: -56;
+		transition: 1s stroke-dashoffset;
+	}
+
+	.slide[data-step] .annotation svg ellipse {
+		stroke-dashoffset: 0;
+	}
+
+#access-control {
+
+}
+
+	#access-control div {
+		width: 35em;
+		font-size: 50%;
+		border: 1px solid hsla(0,0%,100%,.4);
+		border-radius: .3em;
+		margin-bottom: .5em;
+		padding: .8em;
+		background: hsla(0,0%,100%,.1);
+	}
+
+	#access-control p {
+		margin: 0;
+		margin-left: 7em;
+	}
+
+	#access-control p:first-of-type {
+		font-family: Blokk;
+	}
+
+	#access-control p:last-of-type {
+		font-weight: bold;
+		margin-top: .5em;
+	}
+
+		#access-control a {
+			text-decoration: none;
+			margin-right: 1em;
+			font-size: 120%;
+		}
+
+		#access-control a::before {
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: .3em;
+		}
+
+		#access-control .reply::before {
+			content: "↩";
+			transform: scaleY(-1);
+			color: hsl(200, 100%, 80%);
+			vertical-align: .1em;
+		}
+
+		#access-control .edit::before {
+			content: "✏️";
+		}
+
+		#access-control .delete::before {
+			content: "❌";
+			color: #f44;
+		}
+
+	#access-control img {
+		float: left;
+		width: 6em;
+		height: 6em;
+		border-radius: 50%;
+		margin: 0 1em 0 0;
+	}
+
+#get-involved a {
+	font-weight: bold;
+	letter-spacing: -.03em;
+}
