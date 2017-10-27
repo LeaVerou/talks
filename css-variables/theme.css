@@ -1,3 +1,10 @@
+@font-face {
+	font-family: 'Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: url("../shared/fonts/slide-icons.woff2") format('woff2');
+}
+
 * {
 	text-decoration-color: inherit;
 }

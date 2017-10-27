@@ -84,8 +84,14 @@
 
 <section>
 	<header class="slide">
-		<h1>CSS Variables</h1>
+		<h1><span class="delayed">¿¡</span>CSS Variables<span class="delayed">?!</span></h1>
 	</header>
+
+	<article class="slide language-js" id="preprocessors">
+		<p><code class="delayed strike">$color: #ff0066;</code></p>
+		<p><code class="delayed strike">@color: #ff0066;</code></p>
+		<strong class="delayed">NOPE.</strong>
+	</article>
 
 	<article class="demo slide horizontal">
 		<p class="hint">--color, --corner, inline style, fallback</p>
@@ -381,7 +387,7 @@
 	</article>
 
 	<article class="horizontal demo slide" id="animation" data-edit="css" style="--division: 70">
-		<p class="hint">Try to animate --color | show that var() is ok-ish</p>
+		<p class="hint">Try to animate --color | show that var() is ok</p>
 		<style data-slide>
 			@keyframes bg {
 				from { background-color: yellow; }
@@ -419,6 +425,8 @@
 		<button onclick="eval(registerPropertyCode.textContent)" class="run delayed">Run!</button>
 	</article>
 
+	<article class="slide" data-import="animation"></article>
+
 	<article class="browser-support slide">
 		<table>
 			<thead>
@@ -433,7 +441,7 @@
 			<tbody>
 				<tr>
 					<th>CSS.registerProperty()</th>
-					<td>?</td>
+					<td class="incomplete">⛳️</td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -441,9 +449,6 @@
 			</tbody>
 		</table>
 	</article>
-
-	<article class="slide" data-import="registerProperty"></article>
-	<article class="slide" data-import="animation"></article>
 
 	<!-- <article class="horizontal demo slide" id="transition" data-edit="css" style="--division: 70">
 		<style data-slide>
@@ -598,7 +603,7 @@
 		</style>
 
 		<div class="block" data-edit="css html">
-			<div>Man, we’re living in the future!!! 🌈🦄</div>
+			<div>🎶 Laughing in the purple rain 👬☔️</div>
 		</div>
 	</article>
 
@@ -669,7 +674,8 @@
 	</article>
 
 	<article class="takeaway slide">
-		<h1>CSS Variables enable you to <br>define your own properties</h1>
+		<h1>CSS Variables enable you to <br>define your own properties
+		<div class="delayed note">(in some cases)</div></h1>
 	</article>
 </section>
 
@@ -734,6 +740,13 @@
 				root.style.setProperty("--mouse-y", y);
 			});
 		</code></pre>
+	</article>
+
+	<article class="slide">
+		<p><img src="../html-reimagined/img/logo.svg" alt="Mavo" style="height: 4em"></p>
+		<pre><code class="language-markup">&lt;html mv-app
+      style="--mouse-x: [$mouse.x / innerWidth];
+	          --mouse-y: [$mouse.y / innerHeight];"></code></pre>
 	</article>
 
 	<article class="horizontal demo slide" data-edit="css" id="mouse">
@@ -890,9 +903,9 @@
 	<img src="img/stickers.jpg" class="stickers delayed" alt="">
 	<p class="stickercaption delayed">Want one? Just ask! ---></p>
 	<ul>
-		<li><a href="mailto:lea@w3.org">lea@verou.me</a></li>
-		<li><a href="http://lea.verou.me">lea.verou.me</a></li>
-		<li><a href="http://twitter.com/leaverou">@leaverou</a></li>
+		<li style="--icon: '🌍'"><a href="http://mavo.io">lea.verou.me</a></li>
+		<li style="--icon: '✉'"><a href="mailto:lea@verou.me">lea@verou.me</a></li>
+		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
 	</ul>
 
 	<p>Slides: <a href="https://leaverou.github.io/talks/css-variables">leaverou.github.io/talks/css-variables</a></p>

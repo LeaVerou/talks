@@ -279,7 +279,10 @@ footer.slide:target {
 		footer.slide > ul li::before {
 			content: var(--icon);
 			display: inline-block;
-			margin-right: .2em;
+			margin-right: .3em;
+			font-family: 'Icons';
+			font-weight: normal;
+			color: hsl(200, 15%, 20%);
 		}
 
 		footer.slide > ul a {
@@ -401,6 +404,10 @@ kbd {
 
 	.browser-support td {
 		background: hsl(80, 80%, 40%);
+	}
+
+	.browser-support td.incomplete {
+		background: hsl(45, 100%, 50%);
 	}
 
 	.browser-support td:empty {
@@ -859,3 +866,42 @@ button.run {
 		.stickercaption:not(.current):not(.displayed) {
 			transform: translateX(-150vw);
 		}
+
+.delayed.strike {
+	position: relative;
+	opacity: 1;
+	line-height: 1.2;
+}
+
+	.delayed.strike::before {
+		content: "";
+		position: absolute;
+		top: .4em;
+		left: -.1em;
+		height: .1em;
+		background: hsla(0, 100%, 80%, .9);
+		width: 0%;
+		border-radius: 1em;
+		transition: .5s;
+	}
+
+	.delayed.strike.current::before,
+	.delayed.strike.displayed::before {
+		width: 100%;
+	}
+
+#preprocessors {
+
+}
+
+	#preprocessors code {
+		font-size: 200%;
+	}
+
+	#preprocessors strong {
+		color: hsla(0, 100%, 80%, .9);
+	}
+
+img[alt="Mavo"] {
+	filter: drop-shadow(0 0 .2em rgba(0,0,0,.5));
+}
