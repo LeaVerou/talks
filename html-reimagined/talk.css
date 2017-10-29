@@ -12,6 +12,11 @@
 	src: url("../shared/fonts/slide-icons.woff2") format('woff2');
 }
 
+.note {
+	font-family: var(--font-handwritten);
+	color: orange;
+}
+
 #adjust-resolution h1 {
 	display: flex;
 	align-items: center;
@@ -1145,46 +1150,42 @@ footer.slide {
 		animation: credits 5s linear infinite;
 	}
 
-#building-blocks {
-
+ul.blocks {
+	display: flex;
+	align-items: center;
+	font-size: 120%;
 }
 
-	#building-blocks ul {
-		display: flex;
-		align-items: center;
-		font-size: 120%;
-	}
+ul.blocks li {
+	list-style: none;
+	margin: 1em;
+	text-align: center;
+}
 
-	#building-blocks li {
-		list-style: none;
-		margin: 1em;
-		text-align: center;
-	}
+ul.blocks li::before {
+	content: attr(data-icon);
+	font-family: 'webapps';
+	display: block;
+	font-weight: normal;
+	color: var(--color1);
+	font-size: 200%;
+}
 
-	#building-blocks li::before {
-		content: attr(data-icon);
-		font-family: 'webapps';
-		display: block;
-		font-weight: normal;
-		color: var(--color1);
-		font-size: 200%;
-	}
+ul.blocks li:nth-child(2)::before {
+	color: var(--color4);
+}
 
-	#building-blocks li:nth-child(2)::before {
-		color: var(--color4);
-	}
+ul.blocks li:nth-child(3)::before {
+	color: var(--color3);
+}
 
-	#building-blocks li:nth-child(3)::before {
-		color: var(--color3);
-	}
+ul.blocks li:nth-child(4)::before {
+	color: var(--color2);
+}
 
-	#building-blocks li:nth-child(4)::before {
-		color: var(--color2);
-	}
-
-	#building-blocks li:nth-child(5)::before {
-		color: var(--color5);
-	}
+ul.blocks li:nth-child(5)::before {
+	color: var(--color5);
+}
 
 #hard-conditionals h1,
 #hard-refs h1 {
@@ -1319,7 +1320,7 @@ footer.slide {
 
 @keyframes qqq {
 	from { --x: .15; }
-	to { --x: .95; }
+	to { --x: .85; }
 }
 
 #landscape .qqq {
@@ -1409,25 +1410,51 @@ footer.slide {
 	width: fit-content;
 }
 
-	.annotation svg {
+	.annotation svg,
+	svg.annotation {
 		position: absolute;
 		top: 0;
 		right: 0;
 		max-width: 100%;
 	}
 
-	.annotation svg ellipse {
+	.annotation svg ellipse,
+	svg.annotation ellipse {
 		stroke: red;
 		fill: none;
+		stroke-width: .5vmin;
 		stroke-linecap: round;
-		stroke-dasharray: 300 300;
-		stroke-dashoffset: -56;
+		stroke-dasharray: 500 500;
+		stroke-dashoffset: -315;
 		transition: 1s stroke-dashoffset;
+		rx: calc(50px - .25vmin);
+		ry: calc(50px - .25vmin);
+		cx: 50px;
+		cy: 50px;
 	}
 
-	.slide[data-step] .annotation svg ellipse {
+	.slide[data-step] .annotation svg ellipse,
+	.slide[data-step] svg.annotation ellipse {
 		stroke-dashoffset: 0;
 	}
+
+#data-interactions .annotation svg {
+	width: 22%;
+	height: 11%;
+	top: 77%;
+	left: 73%;
+}
+
+#csswg svg.annotation {
+	top: 4vh;
+	left: 22vw;
+	width: 29vw;
+	height: 25vh;
+}
+
+#csswg img {
+	vertical-align: -.1em;
+}
 
 #access-control {
 
@@ -1497,3 +1524,29 @@ footer.slide {
 	font-weight: bold;
 	letter-spacing: -.03em;
 }
+
+#realtime {
+	background: hsl(264, 55%, 56%);
+}
+
+.delayed.strike {
+	position: relative;
+	opacity: 1;
+}
+
+	.delayed.strike::after {
+		content: "";
+		position: absolute;
+		bottom: .6em;
+		left: -.1em;
+		height: .1em;
+		background: hsla(0, 100%, 80%, .9);
+		width: 0%;
+		border-radius: 1em;
+		transition: .5s;
+	}
+
+	.delayed.strike.current::after,
+	.delayed.strike.displayed::after {
+		width: 105%;
+	}

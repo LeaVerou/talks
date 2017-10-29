@@ -39,7 +39,7 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 	<section id="hi" class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
 			<img src="../shared/img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
-			<figcaption style="font-size: 240%">Bonjour, je suis Lea</figcaption>
+			<figcaption style="font-size: 240%">Hi, I’m Lea</figcaption>
 		</figure>
 	</section>
 
@@ -52,8 +52,8 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 	</section>
 </section>
 
-<section class="show-next">
-	<article class="top-heavy image slide" id="vb6" style="background-image: url(img/vb6.gif);">
+<section>
+	<!-- <article class="top-heavy image slide" id="vb6" style="background-image: url(img/vb6.gif);">
 		<h1>
 			<strong>1998&thinsp;–&thinsp;2005</strong> Visual Basic 6
 		</h1>
@@ -75,13 +75,13 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 		<h1>
 			<strong>2009&thinsp;–</strong> lea.verou.me
 		</h1>
-	</article>
+	</article> -->
 
 	<section class="top-heavy slide dont-resize" id="projects">
-		<h1 class="caption">
+		<!-- <h1 class="caption">
 			<strong>2009&thinsp;–</strong>
 			Open Source
-		</h1>
+		</h1> -->
 		<ul>
 			<li><a href="http://prismjs.com" style="background-image: url(../shared/img/project-prism.png)">PrismJS</a></li>
 			<li><a href="http://leaverou.github.io/prefixfree" style="background-image: url(../shared/img/project-prefixfree.png)">-prefix-free</a></li>
@@ -95,19 +95,24 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 		</ul>
 	</section>
 
-	<section class="top-heavy image slide" id="csswg" style="background-image: url(img/csswg.jpg)" data-credits="Daniel Glazman">
-		<h1>
-			<strong>2012&thinsp;–</strong> CSS Working Group, <img src="../shared/img/w3c.svg" alt="W3C" class="inline">
+	<section class="top-heavy image slide" id="csswg" style="background-image: url(img/csswg.jpg)" data-credits="Daniel Glazman" data-steps="1">
+		<h1 class="caption">
+			<!-- <strong>2012&thinsp;–</strong>-->
+			<img src="../shared/img/w3c.svg" alt="W3C" class="inline">
+			CSS Working Group
 		</h1>
+		<svg viewBox="0 0 100 100" class="annotation">
+			<ellipse />
+		</svg>
 	</section>
 
-	<article class="top-heavy image slide" style="background-image: url(img/wizard.jpg);">
+	<!-- <article class="top-heavy image slide" style="background-image: url(img/wizard.jpg);">
 		<h1>How Web developers see us</h1>
 	</article>
 
 	<article class="top-heavy long-screenshot image slide" style="background-image: url(img/csswg-commas.png); --screenshot-height: 35852; --screenshot-width: 2800">
 		<h1>How standards really work</h1>
-	</article>
+	</article> -->
 
 	<section class="inverse slide dont-resize darker hi" id="book">
 		<a href="http://shop.oreilly.com/product/0636920031123.do" class="delayed">
@@ -120,18 +125,21 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 		<h1><strong>2014&thinsp;–</strong> Haystack Group, MIT CSAIL</h1>
 	</section>
 
-	<article class="top-heavy image slide" id="karger">
+	<!-- <article class="top-heavy image slide" id="karger">
 		<h1>
 			<strong>David Karger</strong>
 			<a href="https://en.wikipedia.org/wiki/David_Karger">en.wikipedia.org/wiki/David_Karger</a>
 		</h1>
-	</article>
+	</article> -->
 </section>
 
 <section class="show-next">
-	<header class="slide">
-		<h1>The Problem</h1>
-	</header>
+	<article class="single-sentence slide" id="research-question">
+		<h1>
+			<span class="label">Research Question</span>
+			How can we make <br>web programming easier?
+		</h1>
+	</article>
 
 	<article class="slide" id="the-problem" data-steps="2" data-credits="Mart Virkus @ toggl.com">
 		<ul>
@@ -160,15 +168,6 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 	<article class="slide" id="jslogos" data-credits="hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f"></article>
 
 	<article class="image slide" style="background-image: url(img/crying-baby.jpg)"></article>
-
-	<article class="slide" id="workflow-quote">
-		<blockquote >
-			<p>“Our default workflow has been complicated <br>by the needs of large web applications”</p>
-			<p>— Mikeal Rogers
-				<small>https://medium.com/@mikeal/ive-seen-the-future-it-s-full-of-html-2577246f2210</small>
-			</p>
-		</blockquote>
-	</article>
 
 	<article class="slide" id="todomvc">
 		<table>
@@ -201,17 +200,21 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 		<img src="img/todomvc.png" />
 	</article>
 
+	<article class="slide" id="workflow-quote">
+		<blockquote >
+			<p>“Our default workflow has been complicated <br>by the needs of large web applications”</p>
+			<p>— Mikeal Rogers
+				<small>https://medium.com/@mikeal/ive-seen-the-future-it-s-full-of-html-2577246f2210</small>
+			</p>
+		</blockquote>
+	</article>
+
 	<article class="slide">
 		<img src="../jsux/img/nojspoll.png" class="tweet" alt="">
 	</article>
 
-	<article class="slide" id="comic" data-credits="zenpencils.com/comic/98-alan-watts-what-if-money-was-no-object">
-		<img src="img/goals.gif" alt="">
-		<img class="delayed" src="img/everyoneknows.png" alt="">
-	</article>
-
 	<article class="slide" id="landscape">
-		<h1>State of Web development</h1>
+		<h1>Creating on the Web</h1>
 
 		<div class="graph-1d" data-label-before="More Effort
 More Control" data-label-after="Less Effort
@@ -219,8 +222,14 @@ Less Control">
 			<div style="--x: 0">Vanilla JS</div>
 			<div style="--x: .1">JS Frameworks</div>
 			<div style="--x: .5" class="qqq">???</div>
-			<div style="--x: 1">Prefab</div>
+			<div style="--x: .9">Prefab</div>
+			<div style="--x: 1">Services</div>
 		</div>
+	</article>
+
+	<article class="slide" id="comic" data-credits="zenpencils.com/comic/98-alan-watts-what-if-money-was-no-object">
+		<img src="img/goals.gif" alt="">
+		<img class="delayed" src="img/everyoneknows.png" alt="">
 	</article>
 
 	<article class="single-sentence slide">
@@ -229,20 +238,9 @@ Less Control">
 			When you make something accessible to<br> novices, it becomes easier for everybody.
 		</h1>
 	</article>
-
-	<article class="single-sentence slide" id="research-question">
-		<h1>
-			<span class="label">Research Question</span>
-			Can non-programmers <br>create web applications?
-		</h1>
-	</article>
 </section>
 
 <section>
-	<header class="slide" id="mavo">
-		<h1><img src="img/logo.svg" alt="Mavo"></h1>
-	</header>
-
 	<article class="slide" id="html">
 		<img src="img/html.svg" alt="">
 		<ul class="criteria delayed-children">
@@ -252,6 +250,10 @@ Less Control">
 			<li>Portable</li>
 		</ul>
 	</article>
+
+	<header class="slide" id="mavo">
+		<h1><img src="img/logo.svg" alt="Mavo"></h1>
+	</header>
 
 	<!-- <article class="dont-resize slide" id="crud-apps" data-credits="Icons by Font Awesome, subset in Fontello">
 		<h1>CRUD <span>Lightweight computation</span></h1>
@@ -281,9 +283,9 @@ Less Control">
 	</article> -->
 
 	<article class="slide" id="building-blocks">
-		<h1>Building blocks</h1>
+		<h1>Mavo Building Blocks</h1>
 
-		<ul>
+		<ul class="blocks">
 			<li data-icon="✏">Editing</li>
 			<li data-icon="▦">Collections</li>
 			<li data-icon="⛁">Persistence</li>
@@ -292,12 +294,23 @@ Less Control">
 		</ul>
 	</article>
 
+	<article class="single-sentence slide">
+		<h1>
+			<span class="label">Note</span>
+			Mavo is just one answer,<br>
+			not necessarily the best
+			<div class="note delayed">What’s important is the question!</div>
+		</h1>
+	</article>
+
 	<article class="slide">
 		<h1>Try Mavo out</h1>
 		<pre><code>
 			&lt;link rel="stylesheet" href="//get.mavo.io/mavo.css"/>
 			&lt;script src="//get.mavo.io/mavo.js">&lt;/script>
 		</code></pre>
+
+		<p class="delayed" style="font-size: 200%">or just visit <a style="font-weight: bold" href="https://play.mavo.io">play.mavo.io</a>!</p>
 	</article>
 
 	<article class="looping video slide" data-video="videos/todo.mp4" style="--url: 'https://mavo.io/demos/todo'"></article>
@@ -319,7 +332,7 @@ Less Control">
 	</article>
 
 	<article class="slide">
-		<h1>Define an app</h1>
+		<h1>Activate Mavo</h1>
 		<pre><code>
 			&lt;div <mark>mv-app="appName"</mark>>
 				&lt;!-- Mavo app -->
@@ -327,12 +340,12 @@ Less Control">
 		</code></pre>
 	</article>
 
-	<article class="example slide nofixup">
+	<!-- <article class="example slide nofixup">
 		<p class="hint">mv-app, mv-app="appName"</p>
 		<textarea><div id="myApp">
 	Nothing to see here yet :)
 </div></textarea>
-	</article>
+	</article> -->
 
 	<article class="slide">
 		<h1>Persistence</h1>
@@ -384,12 +397,11 @@ Less Control">
 	<article class="looping slide" data-video="videos/portfolio.mp4" style="--url: 'https://mavo.io/demos/portfolio'"></article>
 	<article class="looping slide" data-video="videos/talks.mp4" style="--url: 'http://lea.verou.me/speaking'"></article>
 	<article class="looping slide" data-video="videos/authors.mp4" style="--url: 'https://mavo.io/demos/contacts'"></article>
-	<article class="slide" data-src="http://localhost:8001/demos/?full" data-title="mavo.io/demos"></article>
 
-	<article class="example slide" style="--font-size-multiplier: 1.2">
-		<p class="hint">strength / 100</p>
-		<textarea><input type="range" property="strength"
-       title="Value: [strength] out of 100" />
+	<article class="example slide" id="slider">
+		<p class="hint">strength / 100, font: 400% Skia;
+font-variation-settings: 'wght' [strength/30];</p>
+		<textarea><input type="range" property="strength" />
 Value: [strength]</textarea>
 		</code></pre>
 	</article>
@@ -409,13 +421,13 @@ Value: [strength]</textarea>
 
 	<article class="dont-resize example slide" id="clock" style="--font-size-multiplier: 1.3">
 		<p class="hint">$now * 6 / 1000 mod 360</p>
-		<textarea>[time($now)]</textarea>
+		<textarea><div>[time($now)]</div></textarea>
 	</article>
 
 	<article class="vertical example slide lite-cats" id="aggregate-expressions" data-steps="1"
 	         data-credits="Cat’s Shrödinger by The Oatmeal, Cat on Laptop from flickr.com/photos/nwater/8130196854"
 			 style="--font-size-multiplier: .9">
-			 <p class="hint">count(cat), count(age > 6), count(age), average(age)</p>
+			 <p class="hint">refresh, count(cat), count(age > 6), count(age), average(age)</p>
 
 			<textarea><div mv-app="cats" mv-storage="https://github.com/leaverou/mv-data/cats.json" class="cat">
 	<article property="cat" mv-multiple>
@@ -448,10 +460,11 @@ Value: [strength]</textarea>
 
 	<article class="looping slide" data-video="videos/invoice.mp4" style="--url: 'https://mavo.io/demos/invoice'"></article>
 	<article class="looping slide" data-video="videos/svgpath.mp4" style="--url: 'https://mavo.io/demos/svgpath'"></article>
+	<article class="slide" data-src="http://localhost:8001/demos/?full" data-title="mavo.io/demos"></article>
 	<article class="slide" data-src="https://forkgasm.com"></article>
 </section>
 
-<article class="slide">
+<!-- <article class="slide">
 	<h1>Extensibility</h1>
 
 	<table>
@@ -478,7 +491,7 @@ Value: [strength]</textarea>
 	</table>
 
 	<p class="delayed">Low level extensibility: <strong>Hooks</strong></p>
-</article>
+</article> -->
 
 <article class="slide" data-src="https://plugins.mavo.io"></article>
 
@@ -486,6 +499,14 @@ Value: [strength]</textarea>
 	<header class="image slide" style="background: url(img/science.png) white center / auto 80% no-repeat; filter: invert();" data-credits="xkcd">
 
 	</header>
+
+	<article class="single-sentence slide">
+		<h1>
+			<span class="label">Research Question</span>
+			How can we make <br>web programming easier?
+			<div class="note delayed">Does Mavo make web programming easier?</div>
+		</h1>
+	</article>
 
 	<article class="slide" id="subjects" data-steps="4">
 		<h1>20 participants</h1>
@@ -787,12 +808,12 @@ Value: [strength]</textarea>
 		<p>&lt;-- Our vision</p>
 	</article>
 
-	<article class="slide" data-steps="1">
+	<article class="slide" data-steps="1" id="data-interactions">
 		<h1>Data Interactions</h1>
 		<div class="annotation">
 			<img src="img/todomvc.png" />
-			<svg viewBox="0 0 100 100">
-				<ellipse rx="12" ry="5" cx="84" cy="69.4" />
+			<svg viewBox="0 0 100 100" preserveAspectRatio="none">
+				<ellipse />
 			</svg>
 		</div>
 
@@ -820,18 +841,19 @@ Value: [strength]</textarea>
 
 	</article>
 
-	<article class="slide">
-		<h1>Server sent updates</h1>
+	<article class="slide" id="realtime" data-credits="firebase.google.com">
+		<h1>Realtime apps</h1>
+		<img src="img/sync.png" alt="">
 	</article>
 
-	<article class="slide">
-		<h1>Data Exploration
-			<div style="font-weight: 100;" class="delayed-children">
-				<div>Sorting</div>
-				<div>Filtering</div>
-				<div>Grouping</div>
-				<div>Searching</div>
-			</div>
+	<article class="slide" id="data-exploration">
+		<h1>Data Exploration</h1>
+			<ul class="blocks">
+				<li data-icon="" class="delayed strike">Sorting</li>
+				<li data-icon="">Filtering</li>
+				<li data-icon="">Grouping</li>
+				<li data-icon="🔍">Searching</li>
+			</ul>
 		</h1>
 	</article>
 

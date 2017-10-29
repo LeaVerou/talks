@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+ 
+.icon-exchange:before { content: '\21c4'; } /* '⇄' */
+.icon-th:before { content: '\25a6'; } /* '▦' */
+.icon-upload-cloud:before { content: '\2601'; } /* '☁' */
+.icon-database:before { content: '\26c1'; } /* '⛁' */
+.icon-pencil:before { content: '\270f'; } /* '✏' */
+.icon-th-list:before { content: '\e801'; } /* '' */
+.icon-filter:before { content: '\f0b0'; } /* '' */
+.icon-sort-alt-down:before { content: '\f161'; } /* '' */
+.icon-search:before { content: '🔍'; } /* '\1f50d' */
