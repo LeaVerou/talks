@@ -162,7 +162,7 @@
 		transition: .5s opacity;
 	}
 
-		#lesbian div p:first-of-type {
+		#lesbian .funfact {
 			position: fixed;
 			top: 0;
 			font-weight: bold;
@@ -175,15 +175,15 @@
 
 		#lesbian div p {
 			transition: inherit;
-			transition-property: height;
+			transition-property: height, opacity;
 			height: 1em;
 		}
 
-		#lesbian:not([data-step="2"]):not([data-step="3"]) > div {
+		#lesbian:not([data-step]) > div p + p {
 			opacity: 0
 		}
 
-			#lesbian:not([data-step="3"]) div p:last-of-type {
+			#lesbian:not([data-step="2"]) div p:last-of-type {
 				height: 0;
 				overflow: hidden;
 			}

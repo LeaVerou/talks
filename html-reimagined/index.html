@@ -43,11 +43,12 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 		</figure>
 	</section>
 
-	<section class="inverse slide dont-resize darker hi" id="lesbian" data-steps="3">
+	<section class="inverse slide dont-resize darker hi" id="lesbian" data-steps="2">
+
 		<div>
-		<p>#funfact</p>
-		<p>I grew up in Lesbos, Greece</p>
-		<p>…which technically makes me <strong>geographically Lesbian</strong></p>
+			<p class="funfact">#funfact</p>
+			<p>I grew up in Lesbos, Greece</p>
+			<p>…which technically makes me <strong>geographically Lesbian</strong></p>
 		</div>
 	</section>
 </section>
@@ -78,10 +79,6 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 	</article> -->
 
 	<section class="top-heavy slide dont-resize" id="projects">
-		<!-- <h1 class="caption">
-			<strong>2009&thinsp;–</strong>
-			Open Source
-		</h1> -->
 		<ul>
 			<li><a href="http://prismjs.com" style="background-image: url(../shared/img/project-prism.png)">PrismJS</a></li>
 			<li><a href="http://leaverou.github.io/prefixfree" style="background-image: url(../shared/img/project-prefixfree.png)">-prefix-free</a></li>
@@ -97,9 +94,8 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 
 	<section class="top-heavy image slide" id="csswg" style="background-image: url(img/csswg.jpg)" data-credits="Daniel Glazman" data-steps="1">
 		<h1 class="caption">
-			<!-- <strong>2012&thinsp;–</strong>-->
-			<img src="../shared/img/w3c.svg" alt="W3C" class="inline">
-			CSS Working Group
+			<!-- <img src="../shared/img/w3c.svg" alt="W3C" class="inline"> -->
+			CSS Working Group Invited Expert
 		</h1>
 		<svg viewBox="0 0 100 100" class="annotation">
 			<ellipse />
@@ -241,6 +237,10 @@ Less Control">
 </section>
 
 <section>
+	<header class="slide" id="mavo">
+		<h1><img src="img/logo.svg" alt="Mavo"></h1>
+	</header>
+
 	<article class="slide" id="html">
 		<img src="img/html.svg" alt="">
 		<ul class="criteria delayed-children">
@@ -250,10 +250,6 @@ Less Control">
 			<li>Portable</li>
 		</ul>
 	</article>
-
-	<header class="slide" id="mavo">
-		<h1><img src="img/logo.svg" alt="Mavo"></h1>
-	</header>
 
 	<!-- <article class="dont-resize slide" id="crud-apps" data-credits="Icons by Font Awesome, subset in Fontello">
 		<h1>CRUD <span>Lightweight computation</span></h1>
@@ -292,15 +288,6 @@ Less Control">
 			<li data-icon="☁">Uploads</li>
 			<li data-icon="⇄">Data flow</li>
 		</ul>
-	</article>
-
-	<article class="single-sentence slide">
-		<h1>
-			<span class="label">Note</span>
-			Mavo is just one answer,<br>
-			not necessarily the best
-			<div class="note delayed">What’s important is the question!</div>
-		</h1>
 	</article>
 
 	<article class="slide">
@@ -374,7 +361,7 @@ Less Control">
 	</article>
 
 	<article class="visible-storage example slide" id="objects">
-		<p class="hint">How multiple element types get edited | mv-multiple, hobbies collection</p>
+		<p class="hint">How multiple element types get edited , mv-multiple, hobbies collection</p>
 		<textarea><div mv-app mv-storage="local" class="cat">
 	<img src="img/adamcatlace.png" property="photo">
 	<h2 property="name">Adam Catlace</h2>
@@ -383,7 +370,7 @@ Less Control">
 </div></textarea>
 	</article>
 
-	<article class="example slide">
+	<!-- <article class="example slide">
 		<p class="hint">mv-multiple</p>
 		<textarea>Hobbies:
 <ul>
@@ -391,7 +378,7 @@ Less Control">
 </ul></textarea>
 	</article>
 
-	<article class="slide" data-import="objects"></article>
+	<article class="slide" data-import="objects"></article> -->
 
 	<article class="looping slide" data-video="videos/homepage.mp4" style="--url: 'https://mavo.io/demos/homepage'"></article>
 	<article class="looping slide" data-video="videos/portfolio.mp4" style="--url: 'https://mavo.io/demos/portfolio'"></article>
@@ -399,8 +386,7 @@ Less Control">
 	<article class="looping slide" data-video="videos/authors.mp4" style="--url: 'https://mavo.io/demos/contacts'"></article>
 
 	<article class="example slide" id="slider">
-		<p class="hint">strength / 100, font: 400% Skia;
-font-variation-settings: 'wght' [strength/30];</p>
+		<p class="hint">strength / 100, add &lt;p>, font-size: [strength]px;</p>
 		<textarea><input type="range" property="strength" />
 Value: [strength]</textarea>
 		</code></pre>
@@ -440,7 +426,7 @@ Value: [strength]</textarea>
 
 	</article>
 
-	<article class="slide dont-resize" id="phone">
+	<!-- <article class="slide dont-resize" id="phone">
 		<iframe src="demo.html"></iframe>
 		<ol class="delayed-children">
 			<li>Visit <a href="https://bit.ly/mavocats" style="font-weight: bold; text-decoration: none">bit.ly/mavocats</a></li>
@@ -449,7 +435,7 @@ Value: [strength]</textarea>
 			<li>Save</li>
 			<li>Click “Send Edit Suggestion”</li>
 		</ol>
-	</article>
+	</article> -->
 
 	<!-- <article class="example slide">
 		<textarea><div>
@@ -462,6 +448,7 @@ Value: [strength]</textarea>
 	<article class="looping slide" data-video="videos/svgpath.mp4" style="--url: 'https://mavo.io/demos/svgpath'"></article>
 	<article class="slide" data-src="http://localhost:8001/demos/?full" data-title="mavo.io/demos"></article>
 	<article class="slide" data-src="https://forkgasm.com"></article>
+	<article class="slide" data-src="https://drafts.csswg.org/issues?spec=css-images-3&doc=cr-2012" title="CSS WG Disposition of Comments app"></article>
 </section>
 
 <!-- <article class="slide">
@@ -633,7 +620,7 @@ Value: [strength]</textarea>
 		<strong>92.8%</strong> on basic expressions
 	</article>
 
-	<article class="slide" id="hard-refs">
+	<!-- <article class="slide" id="hard-refs">
 		<h1 class="label">What was hard</h1>
 		<p>Concatenation</p>
 		<table>
@@ -670,14 +657,14 @@ Value: [strength]</textarea>
 				</tr>
 			</tbody>
 		</table>
-	</article>
+	</article> -->
 
 	<article class="stat slide">
 		<h1>Success</h1>
 		<strong>74.6%</strong> on complex expressions
 	</article>
 
-	<article class="slide" id="hard-conditionals">
+	<!-- <article class="slide" id="hard-conditionals">
 		<h1 class="label">What was hard</h1>
 		<p>Conditionals <br><code>if(score > 0, Yes, No)</code>
 		<p class="delayed">Especially nested <br><code>if(score > 0, Yes, if(score &lt; 0, No, Maybe))</code></code>
@@ -694,14 +681,14 @@ Value: [strength]</textarea>
 			&lt;div mv-if="score = 0">Maybe&lt;/div>
 			&lt;div mv-if="score < 0">No&lt;/div>
 		</code></pre>
-	</article>
+	</article> -->
 
 	<article class="stat slide">
 		<h1>Success</h1>
 		<strong>2<span class="down-arrow">⬇︎</span></strong> in perceived difficulty <br>on a 5-point scale
 	</article>
 
-	<article class="slide">
+	<!-- <article class="slide">
 		<h1>Difficulty ratings</h1>
 		<table>
 			<thead>
@@ -725,7 +712,7 @@ Value: [strength]</textarea>
 				<td style="color: #fbb">⬇︎2.445</td>
 			</tr>
 		</table>
-	</article>
+	</article> -->
 
 	<article class="slide" id="stat-summary">
 		<article class="stat">
@@ -799,16 +786,16 @@ Value: [strength]</textarea>
 </section>
 
 <section>
-	<header class="future slide">
+	<!-- <header class="future slide">
 		<h1>Future Work</h1>
-	</header>
+	</header> -->
 
 	<article class="image slide" id="iceberg">
 		<p>&lt;-- Mavo right now</p>
 		<p>&lt;-- Our vision</p>
 	</article>
 
-	<article class="slide" data-steps="1" id="data-interactions">
+	<!-- <article class="slide" data-steps="1" id="data-interactions">
 		<h1>Data Interactions</h1>
 		<div class="annotation">
 			<img src="img/todomvc.png" />
@@ -874,7 +861,7 @@ Value: [strength]</textarea>
 			<li>Internet of Things</li>
 			<li>Mobile apps</li>
 		</ul>
-	</article>
+	</article> -->
 
 	<article class="slide" id="get-involved">
 		<h1>Get involved</h1>
@@ -888,7 +875,18 @@ Value: [strength]</textarea>
 	</article>
 </section>
 
+<article class="single-sentence slide">
+	<h1>
+		<span class="label">Note</span>
+		Mavo is just one answer,<br>
+		not necessarily the best
+		<div class="note delayed">What’s important is the question!</div>
+	</h1>
+</article>
+
 <article class="slide" id="thankyou" title="Thank you!" data-credits="gifimage.net, giphy.com"></article>
+
+<article class="image slide" style="background-image: url(../css-variables/img/stickers.jpg)"></article>
 
 <footer class="slide">
 	<div class="sections">
@@ -915,8 +913,6 @@ Value: [strength]</textarea>
 	<p>Slides: <a href="https://leaverou.github.io/talks/html-reimagined">leaverou.github.io/talks/html-reimagined</a></p>
 	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
 </footer>
-
-<article class="image slide" style="background-image: url(../css-variables/img/stickers.jpg)"></article>
 
 <script src="../shared/js/bliss.min.js"></script>
 <script src="../csss/slideshow.js"></script>
