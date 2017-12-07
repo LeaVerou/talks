@@ -1,7 +1,19 @@
+@font-face {
+	font-family: 'Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: url("../shared/fonts/slide-icons.woff2") format('woff2');
+}
+
+#introduction .slide {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+}
 
 .hi {
 	padding: 1vmin;
-	background: #f06;
 	font-size: 200%;
 }
 
@@ -60,48 +72,49 @@
 			letter-spacing: -.05em;
 		}
 
-#lesbian {
-	background: url(img/greece.svg) no-repeat center / auto 90vh #f06;
-	background-origin: content-box;
-}
-
-	#lesbian[data-step] {
-		background-size: auto 850%;
-		background-position: 67% 36%;
-	}
-
-	#lesbian div {
-		position: absolute;
-		bottom: 1em;
-		left: 1em;
-		transition: .5s opacity;
-	}
-
-		#lesbian div p:first-of-type {
-			position: fixed;
-			top: 0;
-			font-weight: bold;
-			font-size: 300%;
+		#lesbian {
+			background: url(../shared/img/greece.svg) no-repeat center / auto 90vh #f06;
+			background-origin: content-box;
+			overflow: hidden;
 		}
 
-		#lesbian div p:last-of-type {
-			font-size: 120%
-		}
-
-		#lesbian div p {
-			transition: inherit;
-			transition-property: height;
-			height: 1em;
-		}
-
-		#lesbian:not([data-step="2"]):not([data-step="3"]) > div {
-			opacity: 0
-		}
-
-			#lesbian:not([data-step="3"]) div p:last-of-type {
-				height: 0;
-				overflow: hidden;
+			#lesbian[data-step] {
+				background-size: auto 850%;
+				background-position: 67% 36%;
 			}
+
+			#lesbian div {
+				position: absolute;
+				bottom: 1em;
+				left: 1em;
+				transition: .5s opacity;
+			}
+
+				#lesbian .funfact {
+					position: fixed;
+					top: 0;
+					font-weight: bold;
+					font-size: 300%;
+				}
+
+				#lesbian div p:last-of-type {
+					font-size: 120%
+				}
+
+				#lesbian div p {
+					transition: inherit;
+					transition-property: height, opacity;
+					height: 1em;
+				}
+
+				#lesbian:not([data-step]) > div p + p {
+					opacity: 0
+				}
+
+					#lesbian:not([data-step="2"]) div p:last-of-type {
+						height: 0;
+						overflow: hidden;
+					}
 
 #book {
 
@@ -161,14 +174,33 @@
 
 #csswg {}
 
+	#csswg.image {
+		background-image: url(img/csswg.jpg);
+	}
+
 	#csswg strong {
 		display: block;
 		color: white;
 		font: bold 125% Helvetica Neue, sans-serif;
 	}
 
+	#csswg svg.annotation {
+		top: 4vh;
+		left: 22vw;
+		width: 29vw;
+		height: 25vh;
+	}
+
+	#csswg h1 img {
+		vertical-align: -.1em;
+	}
+
 #mit {
 	padding: 0;
+}
+
+#mit.image {
+	background-image: url(img/haystack.png);
 }
 
 	#mit > p {
@@ -243,3 +275,9 @@ footer.slide:target {
 			text-decoration: none;
 			font-weight: 500;
 		}
+
+#thankyou {
+	background: url(img/thankyou.gif) no-repeat,
+	            url(img/unicorn.gif) 100% 80% no-repeat hsl(344, 88%, 73%);
+	background-blend-mode: multiply, normal;
+}
