@@ -43,14 +43,14 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 		</figure>
 	</section>
 
-	<section class="inverse slide dont-resize darker hi" id="lesbian" data-steps="2">
+	<!-- <section class="inverse slide dont-resize darker hi" id="lesbian" data-steps="2">
 
 		<div>
 			<p class="funfact">#funfact</p>
 			<p>I grew up in Lesbos, Greece</p>
 			<p>…which technically makes me <strong>geographically Lesbian</strong></p>
 		</div>
-	</section>
+	</section> -->
 </section>
 
 <section>
@@ -95,7 +95,7 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 	<section class="top-heavy image slide" id="csswg" style="background-image: url(img/csswg.jpg)" data-credits="Daniel Glazman" data-steps="1">
 		<h1 class="caption">
 			<!-- <img src="../shared/img/w3c.svg" alt="W3C" class="inline"> -->
-			CSS Working Group Invited Expert
+			W3C CSS Working Group Invited Expert
 		</h1>
 		<svg viewBox="0 0 100 100" class="annotation">
 			<ellipse />
@@ -133,7 +133,7 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 	<article class="single-sentence slide" id="research-question">
 		<h1>
 			<span class="label">Research Question</span>
-			How can we make <br>web programming easier?
+			Can we make web programming<br> accessible to novices?
 		</h1>
 	</article>
 
@@ -205,6 +205,11 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 		</blockquote>
 	</article>
 
+	<article class="slide" id="comic" data-credits="zenpencils.com/comic/98-alan-watts-what-if-money-was-no-object">
+		<img src="img/goals.gif" alt="">
+		<img class="delayed" src="img/everyoneknows.png" alt="">
+	</article>
+
 	<article class="slide">
 		<img src="../jsux/img/nojspoll.png" class="tweet" alt="">
 	</article>
@@ -221,11 +226,6 @@ Less Control">
 			<div style="--x: .9">Prefab</div>
 			<div style="--x: 1">Services</div>
 		</div>
-	</article>
-
-	<article class="slide" id="comic" data-credits="zenpencils.com/comic/98-alan-watts-what-if-money-was-no-object">
-		<img src="img/goals.gif" alt="">
-		<img class="delayed" src="img/everyoneknows.png" alt="">
 	</article>
 
 	<article class="single-sentence slide">
@@ -410,6 +410,8 @@ Value: [strength]</textarea>
 		<textarea><div>[time($now)]</div></textarea>
 	</article>
 
+	<article class="slide" data-src="https://codepen.io/leaverou/embed/RjMBwy/?height=265&theme-id=0&default-tab=html,result&embed-version=2" title="codepen.io/leaverou/pen/RjMBwy"></article>
+
 	<article class="vertical example slide lite-cats" id="aggregate-expressions" data-steps="1"
 	         data-credits="Cat’s Shrödinger by The Oatmeal, Cat on Laptop from flickr.com/photos/nwater/8130196854"
 			 style="--font-size-multiplier: .9">
@@ -437,18 +439,12 @@ Value: [strength]</textarea>
 		</ol>
 	</article> -->
 
-	<!-- <article class="example slide">
-		<textarea><div>
-	<article>
-	</article>
-</div></textarea>
-	</article> -->
-
 	<article class="looping slide" data-video="videos/invoice.mp4" style="--url: 'https://mavo.io/demos/invoice'"></article>
 	<article class="looping slide" data-video="videos/svgpath.mp4" style="--url: 'https://mavo.io/demos/svgpath'"></article>
 	<article class="slide" data-src="http://localhost:8001/demos/?full" data-title="mavo.io/demos"></article>
 	<article class="slide" data-src="https://forkgasm.com"></article>
-	<article class="slide" data-src="https://drafts.csswg.org/issues?spec=css-images-3&doc=cr-2012" title="CSS WG Disposition of Comments app"></article>
+	<article class="slide" data-src="http://laistomaz.com"></article>
+	<!-- <article class="slide" data-src="https://drafts.csswg.org/issues?spec=css-images-3&doc=cr-2012" title="CSS WG Disposition of Comments app"></article> -->
 </section>
 
 <!-- <article class="slide">
@@ -489,9 +485,8 @@ Value: [strength]</textarea>
 
 	<article class="single-sentence slide">
 		<h1>
-			<span class="label">Research Question</span>
-			How can we make <br>web programming easier?
-			<div class="note delayed">Does Mavo make web programming easier?</div>
+			<span class="label">User Study</span>
+			Does Mavo make web programming<br> accessible to novices?
 		</h1>
 	</article>
 
@@ -620,7 +615,7 @@ Value: [strength]</textarea>
 		<strong>92.8%</strong> on basic expressions
 	</article>
 
-	<!-- <article class="slide" id="hard-refs">
+	<article class="slide" id="hard-refs">
 		<h1 class="label">What was hard</h1>
 		<p>Concatenation</p>
 		<table>
@@ -657,14 +652,14 @@ Value: [strength]</textarea>
 				</tr>
 			</tbody>
 		</table>
-	</article> -->
+	</article>
 
 	<article class="stat slide">
 		<h1>Success</h1>
 		<strong>74.6%</strong> on complex expressions
 	</article>
 
-	<!-- <article class="slide" id="hard-conditionals">
+	<article class="slide" id="hard-conditionals">
 		<h1 class="label">What was hard</h1>
 		<p>Conditionals <br><code>if(score > 0, Yes, No)</code>
 		<p class="delayed">Especially nested <br><code>if(score > 0, Yes, if(score &lt; 0, No, Maybe))</code></code>
@@ -688,7 +683,7 @@ Value: [strength]</textarea>
 		<strong>2<span class="down-arrow">⬇︎</span></strong> in perceived difficulty <br>on a 5-point scale
 	</article>
 
-	<!-- <article class="slide">
+	<article class="slide">
 		<h1>Difficulty ratings</h1>
 		<table>
 			<thead>
@@ -712,7 +707,7 @@ Value: [strength]</textarea>
 				<td style="color: #fbb">⬇︎2.445</td>
 			</tr>
 		</table>
-	</article> -->
+	</article>
 
 	<article class="slide" id="stat-summary">
 		<article class="stat">
@@ -795,7 +790,7 @@ Value: [strength]</textarea>
 		<p>&lt;-- Our vision</p>
 	</article>
 
-	<!-- <article class="slide" data-steps="1" id="data-interactions">
+	<article class="slide" data-steps="1" id="data-interactions">
 		<h1>Data Interactions</h1>
 		<div class="annotation">
 			<img src="img/todomvc.png" />
@@ -849,10 +844,10 @@ Value: [strength]</textarea>
 		<img src="img/insideout.svg" alt="">
 	</article>
 
-	<article class="slide" data-credits="Emoji provided free by http://emojione.com">
+	<!-- <article class="slide" data-credits="Emoji provided free by http://emojione.com">
 		<h1>Data pointers</h1>
 		<img src="img/graph.svg" alt="">
-	</article>
+	</article> -->
 
 	<article class="slide">
 		<h1>Beyond the browser</h1>
@@ -861,7 +856,7 @@ Value: [strength]</textarea>
 			<li>Internet of Things</li>
 			<li>Mobile apps</li>
 		</ul>
-	</article> -->
+	</article>
 
 	<article class="slide" id="get-involved">
 		<h1>Get involved</h1>
