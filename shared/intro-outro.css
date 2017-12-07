@@ -1,0 +1,245 @@
+
+.hi {
+	padding: 1vmin;
+	background: #f06;
+	font-size: 200%;
+}
+
+.hi:target {
+	overflow: hidden;
+}
+
+	.hi > .delayed:only-child:not(.current):not(.displayed) {
+		transform: translateY(-100vh);
+	}
+
+	.hi > .delayed:only-child {
+		margin: auto;
+	}
+
+	.hi p {
+		margin: 0;
+		padding-top: .5em;
+		font: 220%/1 'Reenie Beanie', sans-serif;
+	}
+
+	.hi figure {
+		margin: 2em auto 0;
+		width: fit-content;
+		max-height: 99vh;
+		background: white;
+		padding: 15px;
+		box-shadow: 2px 2px 30px black;
+		transform: rotate(-2deg);
+	}
+
+		.hi figure img {
+			max-width: 100%;
+			object-fit: cover;
+		}
+
+		.hi figure figcaption {
+			display: block;
+			padding-bottom: .1em;
+			text-align: center;
+			color: black;
+			text-shadow: none;
+			font: 300%/.7 'Reenie Beanie', cursive;
+		}
+
+		.hi figure img {
+			background: url(img/grass.svg), url(img/starburst.svg), linear-gradient(hsl(200, 84%, 85%), hsl(200, 84%, 90%));
+			background-position: 50% 200px, 0 -100px, 0 0;
+			background-repeat: repeat-x, no-repeat;
+			background-size: auto, 100% auto;
+		}
+
+		#why-html h1 {
+			font-size: 500%;
+			margin: auto;
+			letter-spacing: -.05em;
+		}
+
+#lesbian {
+	background: url(img/greece.svg) no-repeat center / auto 90vh #f06;
+	background-origin: content-box;
+}
+
+	#lesbian[data-step] {
+		background-size: auto 850%;
+		background-position: 67% 36%;
+	}
+
+	#lesbian div {
+		position: absolute;
+		bottom: 1em;
+		left: 1em;
+		transition: .5s opacity;
+	}
+
+		#lesbian div p:first-of-type {
+			position: fixed;
+			top: 0;
+			font-weight: bold;
+			font-size: 300%;
+		}
+
+		#lesbian div p:last-of-type {
+			font-size: 120%
+		}
+
+		#lesbian div p {
+			transition: inherit;
+			transition-property: height;
+			height: 1em;
+		}
+
+		#lesbian:not([data-step="2"]):not([data-step="3"]) > div {
+			opacity: 0
+		}
+
+			#lesbian:not([data-step="3"]) div p:last-of-type {
+				height: 0;
+				overflow: hidden;
+			}
+
+#book {
+
+}
+
+	#book a {
+		text-decoration: none;
+		color: white;
+		font-size: 85%;
+		font-weight: bold;
+	}
+
+	#book img {
+		display: block;
+		margin-bottom: 1em;
+		box-shadow: 1px 1px #aab, 2px 2px #bbc, 3px 3px #99a, 4px 4px #aab, 5px 5px #889, 6px 6px #99a, 7px 7px #778, 8px 8px #889,
+		            8px 8px 10px rgba(0,0,0,.6);
+	}
+
+#projects {
+	padding: 0;
+}
+
+	#projects ul {
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-flow: row wrap;
+		align-items: center;
+		justify-content: center;
+	}
+
+		#projects li {
+			list-style: none;
+			margin: 2vmin;
+		}
+
+			#projects li a {
+				display: flex;
+				position: relative;
+				align-items: flex-end;
+				justify-content: center;
+				padding: .1em;
+				width: 23vw;
+				height: 23vh;
+				background: url(img/project-prism.png) top / cover no-repeat;
+				font-weight: bold;
+				letter-spacing: -.05em;
+				border: 1px solid white;
+				box-shadow: 0 -1.8em 0 rgba(0,0,0,.6) inset, 0 0 .5em rgba(0,0,0,.6);
+				text-shadow: 0 0 .3em black;
+			}
+
+			#projects li a:not(:hover) {
+				text-decoration: none;
+			}
+
+#csswg {}
+
+	#csswg strong {
+		display: block;
+		color: white;
+		font: bold 125% Helvetica Neue, sans-serif;
+	}
+
+#mit {
+	padding: 0;
+}
+
+	#mit > p {
+		width: 6em;
+		padding: 1em;
+		margin: auto;
+		transform-origin: top;
+	}
+
+	#mit > p.displayed {
+		transform: scale(.5);
+	}
+
+		#mit > p img {
+			display: block;
+			width: 80%;
+			margin-bottom: .2em;
+		}
+
+	#mit > img {
+		width: 100%;
+		margin-bottom: -70vh;
+		transition-property: opacity, transform, margin;
+		transform: translateY(-35vh);
+	}
+
+		#mit > img:not(.current):not(.displayed) {
+			transform: translateY(90vh);
+			margin-bottom: -100vh;
+		}
+
+
+
+footer.slide {
+	text-align: center;
+	padding: 1em 0 0;
+}
+
+footer.slide:target {
+	overflow-x: hidden;
+}
+
+	footer.slide h1 {
+		margin-top: 0;
+	}
+
+	footer.slide > ul {
+		margin: 0 auto;
+		padding: 0 2em;
+		width: 100%;
+		box-sizing: border-box;
+		display: flex;
+		list-style: none;
+		background: #f06;
+		text-align: center;
+	}
+
+		footer.slide > ul li {
+			flex: 1
+		}
+
+		footer.slide > ul li::before {
+			content: var(--icon);
+			display: inline-block;
+			margin-right: .3em;
+			font-family: 'Icons';
+			font-weight: normal;
+			color: hsl(200, 15%, 20%);
+		}
+
+		footer.slide > ul a {
+			text-decoration: none;
+			font-weight: 500;
+		}
