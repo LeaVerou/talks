@@ -597,33 +597,6 @@ button.run {
 	border-radius: .2em;
 }
 
-.stickers {
-	position: absolute;
-	top: -2em;
-	right: -2em;
-	width: 11em;
-	height: 11em;
-	object-fit: cover;
-	border-radius: 50%;
-	transition: .5s cubic-bezier(.3, .2, .5, 1.6);
-}
-
-	.stickers.delayed:not(.current):not(.displayed) {
-		transform: scale(0);
-	}
-
-	.stickercaption {
-		font: 100%/1.5 var(--font-handwritten);
-		position: absolute;
-		top: -.5em;
-		right: 9em;
-		color: #f06;
-	}
-
-		.stickercaption:not(.current):not(.displayed) {
-			transform: translateX(-150vw);
-		}
-
 .delayed.strike {
 	position: relative;
 	opacity: 1;

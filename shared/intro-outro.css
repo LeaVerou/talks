@@ -5,6 +5,14 @@
 	src: url("../shared/fonts/slide-icons.woff2") format('woff2');
 }
 
+@font-face {
+  font-family: 'Reenie Beanie';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Reenie Beanie'), local('ReenieBeanie'), url(https://fonts.gstatic.com/s/reeniebeanie/v7/ljpKc6CdXusL1cnGUSamXwYWpCd0FFfjqwFBDnEN0bM.woff2) format('woff2');
+}
+
+
 #introduction .slide {
 	display: flex;
 	flex-flow: column;
@@ -120,19 +128,25 @@
 
 }
 
-	#book a {
+	#book > a {
 		text-decoration: none;
 		color: white;
 		font-size: 85%;
 		font-weight: bold;
+		transform: translateY(-100vh);
+		transition: .4s .2s transform;
 	}
 
-	#book img {
-		display: block;
-		margin-bottom: 1em;
-		box-shadow: 1px 1px #aab, 2px 2px #bbc, 3px 3px #99a, 4px 4px #aab, 5px 5px #889, 6px 6px #99a, 7px 7px #778, 8px 8px #889,
-		            8px 8px 10px rgba(0,0,0,.6);
+	#book:target > a {
+		transform: scale(1.2);
 	}
+
+		#book img {
+			display: block;
+			margin: 0 auto 1em;
+			box-shadow: 1px 1px #aab, 2px 2px #bbc, 3px 3px #99a, 4px 4px #aab, 5px 5px #889, 6px 6px #99a, 7px 7px #778, 8px 8px #889,
+			            8px 8px 10px rgba(0,0,0,.6);
+		}
 
 #projects {
 	padding: 0;
@@ -281,3 +295,63 @@ footer.slide:target {
 	            url(img/unicorn.gif) 100% 80% no-repeat hsl(344, 88%, 73%);
 	background-blend-mode: multiply, normal;
 }
+
+.annotation {
+	position: relative;
+	width: fit-content;
+}
+
+	.annotation svg,
+	svg.annotation {
+		position: absolute;
+		top: 0;
+		right: 0;
+		max-width: 100%;
+	}
+
+	.annotation svg ellipse,
+	svg.annotation ellipse {
+		stroke: red;
+		fill: none;
+		stroke-width: .5vmin;
+		stroke-linecap: round;
+		stroke-dasharray: 500 500;
+		stroke-dashoffset: -315;
+		transition: 1s stroke-dashoffset;
+		rx: calc(50px - .25vmin);
+		ry: calc(50px - .25vmin);
+		cx: 50px;
+		cy: 50px;
+	}
+
+	.slide[data-step] .annotation svg ellipse,
+	.slide[data-step] svg.annotation ellipse {
+		stroke-dashoffset: 0;
+	}
+
+.stickers {
+	position: absolute;
+	top: -2em;
+	right: -2em;
+	width: 11em;
+	height: 11em;
+	object-fit: cover;
+	border-radius: 50%;
+	transition: .5s cubic-bezier(.3, .2, .5, 1.6);
+}
+
+	.stickers.delayed:not(.current):not(.displayed) {
+		transform: scale(0);
+	}
+
+	.stickercaption {
+		font: 100%/1.5 var(--font-handwritten, 'Reenie Beanie', Marker Felt, cursive);
+		position: absolute;
+		top: -.5em;
+		right: 22rem;
+		color: #f06;
+	}
+
+		.stickercaption:not(.current):not(.displayed) {
+			transform: translateX(-150vw);
+		}

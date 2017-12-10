@@ -1348,39 +1348,6 @@ ul.blocks li:nth-child(5)::before {
 		bottom: 40vh;
 	}
 
-.annotation {
-	position: relative;
-	width: fit-content;
-}
-
-	.annotation svg,
-	svg.annotation {
-		position: absolute;
-		top: 0;
-		right: 0;
-		max-width: 100%;
-	}
-
-	.annotation svg ellipse,
-	svg.annotation ellipse {
-		stroke: red;
-		fill: none;
-		stroke-width: .5vmin;
-		stroke-linecap: round;
-		stroke-dasharray: 500 500;
-		stroke-dashoffset: -315;
-		transition: 1s stroke-dashoffset;
-		rx: calc(50px - .25vmin);
-		ry: calc(50px - .25vmin);
-		cx: 50px;
-		cy: 50px;
-	}
-
-	.slide[data-step] .annotation svg ellipse,
-	.slide[data-step] svg.annotation ellipse {
-		stroke-dashoffset: 0;
-	}
-
 #data-interactions .annotation svg {
 	width: 22%;
 	height: 11%;
