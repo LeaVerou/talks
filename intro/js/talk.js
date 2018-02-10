@@ -50,17 +50,29 @@ function scopeRule(rule, slide, scope) {
 	}
 }
 
-$$(".demo.slide").forEach(slide => slide.classList.add("dont-resize"));
+$$(".demo.slide").forEach(slide => {
+	// This is before editors have been created
+	slide.classList.add("dont-resize");
+});
+
+function createURL(html) {
+	html = html.replace(/&#x200b;/g, "");
+	var blob = new Blob([html], {type : "text/html"});
+
+	return URL.createObjectURL(blob);
+}
 
 // Create blob URLs for each preview link
 $$("[data-html]").forEach(function(a) {
 	var slide = a.closest(".slide");
-	var selector = a.getAttribute("data-html");
-	var element = $(selector, slide) || $(selector, slide.parentNode) || $(selector);
-	var html = Prism.plugins.NormalizeWhitespace.normalize(element? element.textContent : selector);
-	var blob = new Blob([html], {type : "text/html"});
 
-	a.href = URL.createObjectURL(blob);
+	a.addEventListener("click", evt => {
+		var selector = a.getAttribute("data-html");
+		var element = $(selector, slide) || $(selector, slide.parentNode) || $(selector);
+		var html = Prism.plugins.NormalizeWhitespace.normalize(element? element.textContent : selector);
+
+		a.href = createURL(html);
+	});
 });
 
 $$("details.notes").forEach(details => {
@@ -69,11 +81,70 @@ $$("details.notes").forEach(details => {
 	$$(details.childNodes).forEach(e => div.append(e));
 	details.append(div);
 
-	$.create("summary", {
-		textContent: "Notes",
-		inside: details
-	});
+	var summary = $("summary", details);
+
+	if (!summary) {
+		var slide = details.closest(".slide");
+		summary = $.create("summary", {textContent: slide.title || "Notes"});
+	}
+
+	details.prepend(summary);
 });
+
+// Specificity battle slide
+{
+	let slide = $("#specificity-battle");
+	let output = {
+		0: $("output[for=selector1]", slide),
+		1: $("output[for=selector2]", slide),
+		greater: $('output[for="selector1, selector2"]', slide)
+	};
+	let input = $$("input", slide);
+
+	function update() {
+		var specificity = [];
+		var base = 9;
+
+		for (let i=0; i<2; i++) {
+			specificity[i] = calculateSpecificity(input[i].value);
+			base = Math.max(base, ...specificity);
+			output[i].innerHTML = `<div>${specificity[i].join("</div> <div>")}</div>`;
+			output[i].className = "";
+		}
+
+		base++;
+
+		var diff = parseInt(specificity[0].join(""), base) - parseInt(specificity[1].join(""), base);
+
+		if (diff < 0) {
+			// 2 wins
+			output.greater.textContent = "<";
+			output[1].className = "winner";
+		}
+		else if (diff > 0) {
+			// 1 wins
+			output.greater.textContent = ">";
+			output[0].className = "winner";
+		}
+		else {
+			output.greater.textContent = "=";
+		}
+
+	}
+
+	$$("input", slide).forEach(input => input.addEventListener("input", update));
+	update();
+}
+
+function calculateSpecificity(selector) {
+	selector = selector.replace(/("|').+?\1/g, "");
+	return [
+		(selector.match(/#/g) || []).length,
+		(selector.match(/\.|:(?!not|:)|\[/g) || []).length,
+		(selector.match(/(^|\s)[\w-]+/g) || []).length
+	];
+}
+
 
 (function() {
 	document.addEventListener("keydown", evt => {
@@ -137,10 +208,31 @@ function fixHTML(html) {
 	return html.replace(/=""(?=\s|>)/g, "");
 }
 
+$$("code.property").forEach(code => {
+	$.create("a", {
+		href: `https://developer.mozilla.org/en-US/docs/Web/CSS/${code.textContent}`,
+		around: code,
+		target: "_blank"
+	});
+});
+
 $$("[data-edit]").forEach(element => {
 	var edit = element.getAttribute("data-edit").split(/\s+/);
 	var slide = element.closest(".slide");
+	var isolated = slide.classList.contains("isolated");
 	var editors = element._.data.editors = {};
+
+	if (isolated) {
+		var iframe = $.create("iframe", {
+			name: "iframe-" + slide.id,
+			src: "demo.html",
+			inside: slide
+		});
+
+		var loaded = new Promise (r => iframe.addEventListener("load", r, {once:true}));
+
+		// slide.classList.add("horizontal");
+	}
 
 	edit.forEach(code => {
 		if (code == "html" || code == "contents") {
@@ -160,6 +252,18 @@ $$("[data-edit]").forEach(element => {
 					element.innerHTML = this.value;
 				}
 			});
+
+			if (isolated) {
+				loaded.then(() => {
+					var body = iframe.contentDocument.body;
+
+					Array.from(element.childNodes).forEach(node => body.append(node));
+
+
+					element.remove();
+					element = body;
+				});
+			}
 		}
 
 		if (code == "css") {
@@ -173,22 +277,24 @@ $$("[data-edit]").forEach(element => {
 				toSource: function() {
 					style.textContent = this.value;
 
-					if (!style.sheet) {
-						// Stupid Chrome bug
-						style.textContent = style.textContent + "/**/";
-					}
-
-					if (style.sheet) {
-						let scope = style.getAttribute("data-scope") || `#${slide.id}`;
-
-						for (let rule of style.sheet.cssRules) {
-							scopeRule(rule, slide, scope);
+					if (!isolated) {
+						if (!style.sheet) {
+							// Stupid Chrome bug
+							style.textContent = style.textContent + "/**/";
 						}
-					}
-					else {
-						console.log("FAIL on", slide.id, style.outerHTML, style.media);
 
-						// setTimeout(arguments.callee.bind(this), 1000)
+						if (style.sheet) {
+							let scope = style.getAttribute("data-scope") || `#${slide.id}`;
+
+							for (let rule of style.sheet.cssRules) {
+								scopeRule(rule, slide, scope);
+							}
+						}
+						else {
+							console.log("FAIL on", slide.id, style.outerHTML, style.media);
+
+							// setTimeout(arguments.callee.bind(this), 1000)
+						}
 					}
 				}
 			});
@@ -196,6 +302,12 @@ $$("[data-edit]").forEach(element => {
 			slide.addEventListener("slidechange", evt => {
 				editors.css.dispatchEvent(new InputEvent("input"));
 			});
+
+			if (isolated) {
+				loaded.then(() => {
+					$$("style[data-slide]", slide).forEach(style => iframe.contentDocument.head.append(style));
+				});
+			}
 		}
 	});
 
@@ -215,16 +327,62 @@ $$("[data-edit]").forEach(element => {
 					textContent: editor.dataset.lang,
 					tabIndex: "0",
 					onclick: function() {
-						editor.parentNode.setAttribute("hidden", "");
+						editor.parentNode.removeAttribute("hidden");
 						var newEditor = (editors[editorKeys[i+1]] || editors[editorKeys[0]]);
-						newEditor.parentNode.removeAttribute("hidden");
+						newEditor.parentNode.setAttribute("hidden", "");
 
 						resizeTextarea($("textarea", newEditor.parentNode));
 					}
 				});
 			});
 		});
+	}
 
+	// Open in new Tab button
+
+	var cssEditor = $("textarea.language-css", slide);
+	var htmlEditor = $("textarea.language-html", slide);
+
+	if (htmlEditor) {
+		var a = $.create("a", {
+			className: "button new-tab",
+			textContent: "Open in new Tab",
+			inside: slide,
+			target: "_blank",
+			events: {
+				click: evt => {
+					var css = cssEditor? "\n\n" + cssEditor.value : "";
+					var html = htmlEditor.value;
+					var title = slide.title || slide.dataset.title || "Demo";
+
+					if (html.indexOf("<body") === -1) {
+						html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<title>${title}</title>
+<style>
+body {
+	font-size: 200%;
+}
+
+input, select, textarea, button {
+	font: inherit;
+}${css}
+</style>
+
+</head>
+<body>
+${html}
+</body>
+</html>`;
+					}
+
+					a.href = createURL(html);
+				}
+			}
+		});
 	}
 });
 
@@ -281,7 +439,14 @@ for (let el of document.querySelectorAll(".scrolling")) {
 
 // Remove spaces in syntax breakdown and add classes to the ones that are towards the end
 $$(".syntax-breakdown code").forEach(function(code) {
-	code.innerHTML = code.innerHTML.replace(/[\t\r\n]/g, "");
+	var slide = code.closest(".slide");
+
+	if (!slide.classList.contains("vertical")) {
+		code.innerHTML = code.innerHTML.replace(/[\t\r\n]/g, "");
+	}
+	else {
+		code.innerHTML = Prism.plugins.NormalizeWhitespace.normalize(code.innerHTML);
+	}
 
 	var text = code.textContent;
 

@@ -3,7 +3,7 @@
 	Works best in Chrome. Currently only very basic support in other browsers (no snippets, no shortcuts)
 	@author Lea Verou
 */
-(function($, $$){
+(function($, $$) {
 
 var superKey = navigator.platform.indexOf("Mac") === 0? "metaKey" : "ctrlKey";
 
@@ -51,7 +51,7 @@ var _ = Prism.Live = $.Class({
 			keyup: evt => {
 				if (evt.key == "Enter") { // Enter
 					// Maintain indent on line breaks
-					var before = this.textarea.value.slice(0, this.selectionStart-1);
+					var before = this.value.slice(0, this.selectionStart-1);
 					var indents = before.match(/^\s*/mg);
 					var indent = indents && indents[indents.length - 1];
 
@@ -129,12 +129,7 @@ var _ = Prism.Live = $.Class({
 					}
 				}
 				else if (evt.key == "/" && evt[superKey]) { // Cmd + /
-					var comments = this.context.comments;
-
-					this.wrapSelection({
-						before: comments[0],
-						after: comments[1]
-					});
+					this.toggleComment();
 				}
 				else if (evt.key == "D" && evt.shiftKey && evt[superKey]) {
 					// Duplicate line
@@ -160,7 +155,7 @@ var _ = Prism.Live = $.Class({
 
 		textarea.addEventListener("scroll", evt => {
 			this.syncScroll();
-		}, {passive: true})
+		}, {passive: true});
 	},
 
 	get selectionStart() {
@@ -184,11 +179,19 @@ var _ = Prism.Live = $.Class({
 	},
 
 	get selection() {
-		return this.textarea.value.slice(this.selectionStart, this.selectionEnd);
+		return this.value.slice(this.selectionStart, this.selectionEnd);
+	},
+
+	get value() {
+		return this.textarea.value;
+	},
+
+	set value(v) {
+		this.textarea.value = v;
 	},
 
 	update: function() {
-		this.code.textContent = this.textarea.value;
+		this.code.textContent = this.value;
 		Prism.highlightElement(this.code);
 	},
 
@@ -197,20 +200,26 @@ var _ = Prism.Live = $.Class({
 		this.pre.scrollLeft = this.textarea.scrollLeft;
 	},
 
+	beforeCaretIndex: function(until = "") {
+		return this.value.lastIndexOf(until, this.selectionStart);
+	},
+
+	afterCaretIndex: function(until = "") {
+		return this.value.indexOf(until, this.selectionEnd);
+	},
+
 	beforeCaret: function(until = "") {
-		var value = this.textarea.value;
-		var index = value.lastIndexOf(until, this.selectionStart);
+		var index = this.beforeCaretIndex(until);
 
 		if (index === -1 || !until) {
 			index = 0;
 		}
 
-		return value.slice(index, this.selectionStart);
+		return this.value.slice(index, this.selectionStart);
 	},
 
 	afterCaret: function(until = "") {
-		var value = this.textarea.value;
-		var index = value.indexOf(until, this.selectionEnd);
+		var index = this.afterCaretIndex(until);
 
 		if (index === -1 || !until) {
 			index = undefined;
@@ -256,6 +265,47 @@ var _ = Prism.Live = $.Class({
 		}
 	},
 
+	// Set text between indexes and restore caret position
+	set: function(start, end, text) {
+		var ss = this.selectionStart;
+		var se = this.selectionEnd;
+
+		this.selectionStart = start;
+		this.selectionEnd = end;
+
+		document.execCommand("insertText", false, text);
+
+		this.selectionStart = ss;
+		this.selectionEnd = se;
+	},
+
+	wrap: function({before, after, start = this.selectionStart, end = this.selectionEnd} = {}) {
+		var ss = this.selectionStart;
+		var se = this.selectionEnd;
+		var between = this.value.slice(start, end);
+
+		this.set(start, end, before + between + after);
+
+		if (ss > start) {
+			ss += before.length;
+		}
+
+		if (se > start) {
+			se += before.length;
+		}
+
+		if (ss > end) {
+			ss += after.length;
+		}
+
+		if (se > end) {
+			se += after.length;
+		}
+
+		this.selectionStart = ss;
+		this.selectionEnd = se;
+	},
+
 	wrapSelection: function(o = {}) {
 		var hadSelection = this.hasSelection;
 
@@ -271,13 +321,57 @@ var _ = Prism.Live = $.Class({
 		else {
 			this.moveCaret(-o.after.length);
 		}
-
 	},
 
-	delete: function(characters) {
-		characters = characters > 0? characters : (characters + "").length;
-		while(characters--) {
-			document.execCommand("delete");
+	toggleComment: function() {
+		var comments = this.context.comments;
+
+		// Are we inside a comment?
+		var start = this.beforeCaretIndex(comments[0]);
+		var end = this.afterCaretIndex(comments[1]);
+
+		if (start === -1 || end === -1) {
+			// Not inside comment, add
+			if (this.hasSelection) {
+				this.wrapSelection({
+					before: comments[0],
+					after: comments[1]
+				});
+			}
+			else {
+				// No selection, wrap line
+				end = this.afterCaretIndex("\n");
+				this.wrap({
+					before: comments[0],
+					after: comments[1],
+					start: this.beforeCaretIndex("\n") + 1,
+					end: end < 0? this.value.length : end
+				});
+			}
+		}
+		else {
+			// Inside comment, remove
+			this.set(start, end + comments[1].length, this.value.slice(start + comments[0].length, end));
+		}
+	},
+
+	delete: function(characters, {forward, pos} = {}) {
+		var i = characters = characters > 0? characters : (characters + "").length;
+
+		if (pos) {
+			var selectionStart = this.selectionStart;
+			this.selectionStart = pos;
+			this.selectionEnd = pos + this.selectionEnd - selectionStart;
+		}
+
+		while (i--) {
+			document.execCommand(forward? "forwardDelete" : "delete");
+		}
+
+		if (pos) {
+			// Restore caret
+			this.selectionStart = selectionStart - characters;
+			this.selectionEnd = this.selectionEnd - pos + this.selectionStart;
 		}
 	},
 

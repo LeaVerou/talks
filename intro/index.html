@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>CSS Variables: var(--subtitle);</title>
+<title>An Introduction to Modern Web Technologies</title>
 <link href="../csss/slideshow.css" rel="stylesheet" />
 <link href="../csss/reusable.css" rel="stylesheet" />
 <link href="../shared/intro-outro.css" rel="stylesheet" />
@@ -27,7 +27,7 @@
 
 	<article class="slide syntax-breakdown">
 		<code>
-			Hello <span title="Start tag">&lt;em></span><span title="Element content" data-index="1">world</span><span title="End tag">&lt;/em></span>!
+			Hello <span title="Start tag" contentEditable>&lt;em></span><span title="Element content" data-index="1" contentEditable>world</span><span title="End tag" contentEditable>&lt;/em></span>!
 		</code>
 		<a data-html="code" target="_blank" class="delayed">Open page in new tab</a>
 	</article>
@@ -35,12 +35,412 @@
 	<article class="slide" title="Browser dev tools">
 		<img src="img/inspector.png" alt="">
 		<details class="notes">
-			<p>Note that even if we don’t add <code>&lt;html></code>, <code>&lt;head></code>, and <code>&lt;body></code> elements, the browser will do it for us</p>
+			<ul>
+				<li>The browser offers us Developer Tools that allow us to peek under the hood and inspect the current state of the page.</li>
+				<li>Even if we don’t add <code>&lt;html></code>, <code>&lt;head></code>, and <code>&lt;body></code> elements, the browser will do it for us.</li>
+				<li>The HTML elements on the page form a tree called the DOM Tree, with the <code>&lt;html></code> element at its root.</li>
+			</ul>
+		</details>
+	</article>
+
+	<!-- TODO: Activity: Delete annoying overlays/ads from page -->
+
+	<article class="slide syntax-breakdown vertical">
+		<code style="--length: 10em" class="language-html">
+			<span title="Flag for modern rendering">&lt;!DOCTYPE html></span>
+			<span title="Root element">&lt;html lang="en"></span>
+			<span title="Contains metadata">&lt;head></span>
+				<span title="Page encoding">&lt;meta charset="UTF-8"></span>
+				<span title="Title for tab & bookmarks">&lt;title></span>My first page!&lt;/title>
+			&lt;/head>
+			<span title="Contains page content">&lt;body></span>
+				Page Content goes here!
+			&lt;/body>
+			&lt;/html>
+		</code>
+		<a data-html="code" target="_blank" class="delayed">Open page in new tab</a>
+	</article>
+
+	<article class="slide syntax-breakdown">
+		<code style="font-size: 180%;" class="language-html">
+			Hello <br>&lt;a <span title="Attribute name">href</span>="<span title="Attribute value">http://ft.com/world</span>">&#x200b;world
+			&lt;/a>
+		</code>
+		<a data-html="code" target="_blank" class="delayed">Open page in new tab</a>
+		<details class="notes">
+			Attributes allow us to control parameters of each element
+		</details>
+	</article>
+
+	<article class="isolated demo slide" id="headings">
+		<div data-edit="contents">
+			<h1>Heading 1</h1>
+			<h2>Heading 2</h2>
+			<h3>Heading 3</h3>
+			<h4>Heading 4</h4>
+			<h5>Heading 5</h5>
+			<h6>Heading 6</h6>
+			<p>Paragraph</p>
+		</div>
+	</article>
+
+	<article class="isolated demo slide" id="lists">
+		<div data-edit="contents">
+			<ul>
+				<li>Item 1</li>
+				<li>Item 2</li>
+			</ul>
+
+			<ol>
+				<li>Item 1</li>
+				<li>Item 2</li>
+			</ol>
+
+			<dl>
+				<dt>First name:</dt>
+				<dd>Lea</dd>
+
+				<dt>Last name:</dt>
+				<dd>Verou</dd>
+			</dl>
+		</div>
+		<details class="notes">
+			<ul>
+				<li>There are three types of lists: unordered lists (<code>&lt;ul></code>), ordered lists (<code>&lt;ol></code>),
+					and definition lists (<code>&lt;dl></code>) for key-value pairs</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="isolated demo slide" id="input-element" title="The &lt;input> & &lt;textarea> elements">
+		<div data-edit="contents">
+			<p>
+				<input placeholder="Type in me!" />
+			</p>
+			<p>
+				<input type="range" />
+			</p>
+			<p>
+				<input type="number"
+				       min="1" max="10" value="3" />
+			</p>
+			<p>
+				<input type="date" value="2018-02-15"
+				       min="2018-02-10" />
+			</p>
+			<p>
+				<textarea>Hey</textarea>
+			</p>
+		</div>
+		<details class="notes">
+			<ul>
+				<li>The <code>&lt;input></code> element can generate a wide variety of form controls, differentiated by the <code>type</code> attribute.
+				If no <code>type</code> attribute is present, <code>type="text"</code> is assumed.</li>
+				<li>
+					The following only applies to textual inputs (<code>text</code>, <code>url</code>, <code>email</code>, <code>tel</code> etc):
+					<ul>
+						<li>The <code>placeholder</code> attribute shows placeholder text when the field is empty. This is available on <code>&lt;textarea></code> too.</li>
+						<li>The <code>pattern</code> attribute allows you to restrict input. This does not currently work on <code>&lt;textarea></code>s, but there are efforts to make it so.</li>
+					</ul>
+				</li>
+				<li>
+					In numerical and date inputs (<code>number</code>, <code>range</code>, <code>date</code>, <code>time</code> etc),
+					the <code>min</code> and <code>max</code> attributes allow you to restrict the range of input.
+				</li>
+				<li>
+					On <code>number</code> and <code>range</code> inputs, you can use the <code>step</code> attribute to control the increment (1 by default).
+				</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="isolated demo slide" id="multiple-choices" title="Multiple choices">
+		<div data-edit="contents">
+			<p>
+				<input type="checkbox">
+				<input type="checkbox" checked>
+			</p>
+			<p>
+				<input type="radio" name="foo" checked>
+				<input type="radio" name="foo">
+			</p>
+			<p>
+				<select>
+					<option>🥑</option>
+					<option>🥩</option>
+					<option>🥓</option>
+					<option>🥥</option>
+					<option>🍳</option>
+				</select>
+			</p>
+			<p>
+				<input list="countries">
+				<datalist id="countries">
+					<option>Greece</option>
+					<option>United Kingdom</option>
+					<option>United States</option>
+				</datalist>
+			</p>
+		</div>
+		<details class="notes">
+			<ul>
+				<li>Group radio buttons via the <code>name</code> attribute.</li>
+				<li>Set checked state on checkbox and radio buttons via the <code>checked attribute</code></li>
+				<li><code>&lt;label></code> elements are very useful for all form controls, but especially checkboxes and radios as they increase the target area!</li>
+				<li>
+					Depending on the number of options, different form controls are more appropriate for usability:
+					<ul>
+						<li>For &lt; 4 options, prefer radios, as they are the most efficient.</li>
+						<li>Between 5-20 options, <code>&lt;select></code> menus are ideal</li>
+						<li>For longer than 20 options, search time for <code>&lt;select></code> menus becomes longer than typing the first few characters.
+							In those cases, use <code>&lt;input></code> with <code>&lt;datalist</code> for autocomplete)</li>
+					</ul>
+				</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="isolated demo slide" id="buttons-forms" title="Buttons & Forms">
+		<div data-edit="contents">
+			<form action="demo.html" target="_blank">
+				<input />
+				<button>Click me</button>
+			</form>
+		</div>
+		<details class="notes">
+			<ul>
+				<li>The <code>&lt;button></code> element creates buttons.</li>
+				<li>These buttons don’t do anything by themselves, but you can make them useful via JavaScript or <code>&lt;form></code> elements.</li>
+				<li>The <code>action</code> attribute of <code>&lt;form></code> elements controls which file will receive the submission. By default it's the current file.</li>
+				<li>What’s submitted? Only elements that are enabled and have a <code>name</code> attribute.</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="isolated demo slide">
+		<div data-edit="contents">
+
+		</div>
+	</article>
+
+	<article class="slide syntax-breakdown vertical">
+		<code style="font-size: 180%;">
+			<span title="Selector">h1</span> {
+				<span title="Property">color</span>: <span title="Property value">white</span>;
+				<span title="Declaration">background: black</span>;
+			}
+		</code>
+
+		<details class="notes">
+			<summary>Anatomy of a CSS rule</summary>
+			<ul>
+				<li>The <em>selector</em> tells the browser which elements the rule is about</li>
+				<li><em>Declarations</em> are property-value pairs. Each declration controls a certain stylistic aspect.</li>
+				<li>Declarations are separated by semicolons. The last semicolon is optional (but recommended).</li>
+			</ul>
 		</details>
 	</article>
 
 	<article class="slide">
+		<a href="http://cssdiner.com" target="_blank">
+			<img src="img/cssdiner.png" alt="">
+		</a>
+	</article>
 
+	<article class="demo slide" id="conflicts">
+		<style data-slide>
+			#container article {
+				background: hsl(0, 60%, 50%);
+			}
+
+			article.box {
+				background: yellowgreen;
+			}
+		</style>
+<div id="container" data-edit="html css">
+	<article>Why am I red?</article>
+</div>
+	</article>
+
+	<article class="slide" id="specificity-battle">
+		<h1><span style="display: inline-block; transform: scaleX(-1)">🤺</span> Specificity battle! 🤺</h1>
+		<div>
+			<div>
+				<input value="#container article" id="selector1" />
+				<output for="selector1"></output>
+			</div>
+			<output for="selector1, selector2">></output>
+			<div>
+				<input value="article.box" id="selector2" />
+				<output for="selector2"></output>
+			</div>
+		</div>
+	</article>
+
+	<article class="demo slide horizontal" id="box-model">
+		<style data-slide>
+			.box {
+				width: 400px;
+				padding: 40px;
+				border-width: 20px;
+			}
+		</style>
+		<div class="box" data-edit="css html">Bacon ipsum dolor amet alcatra meatball burgdoggen,
+			venison ham hock turkey shoulder pancetta swine brisket jowl.</div>
+		<details class="notes">
+			<summary>The Box Model</summary>
+			<ul>
+				<li>Padding & border widths are <strong>added</strong> to width and height, not subtracted from it.</li>
+				<li>You can change that with <code>box-sizing: border-box</code></li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="isolated horizontal demo slide" id="flexbox">
+<nav data-edit="css html">
+	<a href="index.html">Home</a>
+	<a href="about.html">About</a>
+	<a href="publications.html">Publications</a>
+	<a href="talks.html">Talks</a>
+	<a href="http://twitter.com/leaverou">Twitter</a>
+</nav>
+		<style data-slide>
+			nav {
+				/* display: flex; */
+				border: 1px solid;
+			}
+
+			nav > a {
+				/* flex: 1; */
+				background: orange;
+			}
+		</style>
+		<details class="notes">
+			<li><code>display: flex</code> enables Flexbox layout on an element.
+				This element becomes the <em>Flex Container</em> and its children are called <em>Flex Items</em>.</li>
+			<li><code><code class="property">flex</code>: N</code> defines the proportion that a flex item spreads over.</li>
+			<li><code><code class="property">flex-direction</code>: column</code> on the flex container makes the items flow from top to bottom</li>
+			<li><code class="property">align-items</code> and <code class="property">justify-content</code> on the flex container specify alignment in each direction. Which direction depends on the value of <code>flex-direction</code></li>
+		</details>
+	</article>
+
+	<article class="slide">
+		<a href="http://flexboxfroggy.com" target="_blank"><img src="img/flexboxfroggy.png" alt=""></a>
+	</article>
+
+	<article class="isolated demo slide">
+<dl data-edit="css html">
+	<dt>Name</dt>
+	<dd>Sir Adam Catlace</dd>
+	<dt>Species</dt>
+	<dd>Feline</dd>
+	<dt>Picture</dt>
+	<dd><img src="http://csssecrets.io/images/adamcatlace.jpg" alt=""></dd>
+	<dt>Born</dt>
+	<dd>June 1st, 2014</dd>
+	<dt>Nationality</dt>
+	<dd>Greek</dd>
+	<dt>Country of Residence</dt>
+	<dd>United Kingdom</dd>
+</dl>
+		<style data-slide>
+			dl {
+				display: grid;
+			}
+
+			dt, dd {
+				border: 1px solid silver;
+			}
+		</style>
+		<details class="notes">
+			<summary>Grid Layout</summary>
+			<ul>
+				<li><code>display: grid</code> enables Grid layout on an element.
+					This element becomes the <em>Grid Container</em> and its children are called <em>Grid Items</em>.</li>
+				<li><code>display: grid</code> doesn’t do much on its own, you also have to define the <em>Grid template</em>.
+					There is a number of properties to do that, such as:
+					<ul>
+						<li><code class="property">grid-template-rows</code></li>
+						<li><code class="property">grid-template-columns</code></li>
+						<li><code class="property">grid-template</code></li>
+						<li>…and many more</li>
+					</ul>
+				</li>
+				<li>The <code>1fr</code> unit allows us to distribute the available space in fractions without having to do any math with percentages.</li>
+				<li>The <code class="property">grid-gap</code> property allows us to set spacing between the grid cells.</li>
+				<li>The <code class="property">grid-row</code> and <code class="property">grid-column</code> properties allow us to place items on specific rows and/or columns. Note that multiple items <em>can</em> be placed in the same cell, and then they will overlap!</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="isolated demo slide" style="--division: 50">
+		<div data-edit="contents css">
+			<header><h1>My awesome website</h1></header>
+			<nav>Navigation</nav>
+			<main>Main area</main>
+			<footer>Footer</footer>
+		</div>
+		<style data-slide>
+			body {
+				/* display: grid; */
+				/* grid-template-areas: "head head"
+				                     "nav  main"
+				                     "nav  foot"; */
+				/* grid-template-rows: auto 1fr 3em; */
+				/* grid-template-columns: 150px 1fr; */
+				min-height: 100vh;
+				margin: 0;
+			}
+
+			header {
+				background: gold;
+			}
+
+			nav {
+				background: yellowgreen;
+			}
+
+			main {
+				background: white;
+			}
+
+			footer {
+				background: slategray;
+			}
+		</style>
+		<details class="notes">
+			<ul>
+				<li><code>grid-template-areas</code> allows you to define named areas in your grid.</li>
+				<li><code>grid-area</code> allows you to assign an element to a named area.</li>
+				<li>You can use the browser developer tools to inspect your grid.</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="slide">
+		<a href="http://cssgridgarden.com/" target="_blank"><img src="img/gridgarden.png" alt=""></a>
+	</article>
+
+	<article class="resources slide">
+		<h1>Grid Layout</h1>
+
+		<ul>
+			<li>
+				<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout">Basic concepts of grid layout</a>
+			</li>
+			<li>
+				<a href="https://css-tricks.com/snippets/css/complete-guide-grid/">A Complete Guide to Grid</a>
+			</li>
+			<li>
+				<a href="https://css-tricks.com/things-ive-learned-css-grid-layout/">Things I’ve Learned About CSS Grid Layout</a>
+			</li>
+			<li>
+				<a href="https://gridbyexample.com/">Grid by Example</a>
+			</li>
+			<li>
+				<a href="http://labs.jensimmons.com/">The Experimental Layout Lab of Jen Simmons</a>
+			</li>
+		</ul>
 	</article>
 </section>
 
@@ -83,208 +483,6 @@
 				margin: .2em;
 			}
 		</style>
-	</article>
-
-	<article class="takeaway slide">
-		<h1>CSS Variables work like<br>normal CSS properties</h1>
-	</article>
-
-	<article class="takeaway slide">
-		<h1>CSS Variables enable theming<br> independent of CSS structure</h1>
-	</article>
-
-	<article class="demo slide" id="inheritance">
-		<p class="hint">inheritance, cancel inheritance, inherit keyword</p>
-		<style data-slide data-scope=".blocks">
-			* {
-				outline: var(--outline);
-			}
-
-			.block1 {
-				--outline: .2em solid;
-			}
-		</style>
-		<div data-edit="contents css" class="blocks">
-			<div class="block1">
-				<div></div>
-			</div>
-			<div class="block2">
-				<div></div>
-			</div>
-		</div>
-	</article>
-
-	<article class="takeaway slide">
-		<h1>CSS Variables are <br>inherited properties<div class="delayed note">but you can change that</div></h1>
-	</article>
-
-	<article class="slide" id="default-values">
-		<div class="delayed-children">
-			<div style="background: red">No CSS variables support</div>
-			<div style="background: orange">No --accent-color set</div>
-			<div style="background: yellowgreen">--accent-color: yellowgreen</div>
-			<div style="background: transparent; border: 1px dashed gray">--accent-color: 42deg</div>
-		</div>
-
-		<pre style="margin-top: 2em; overflow: visible"><code>
-			background: red;
-			background: var(--accent-color, orange);
-		</code></pre>
-	</article>
-
-	<article class="takeaway slide">
-		<h1><em>Invalid at computed-value time</em> = initial</h1>
-	</article>
-
-	<article class="demo slide" id="cycles">
-		<style data-slide data-scope=".blocks">
-			div {
-				--size: 8em;
-				height: var(--size);
-			}
-
-			.declarative {
-				filter: invert();
-			}
-		</style>
-
-		<div class="blocks" data-edit="css contents">
-			<div>CSS is awesome</div>
-			<div class="declarative">CSS is declarative</div>
-		</div>
-	</article>
-
-	<article class="takeaway slide">
-		<h1>Cycles make variables invalid <br> at computed-value time</h1>
-	</article>
-
-	<article class="horizontal demo slide">
-		<p class="hint">Show division not working</p>
-		<style data-slide>
-			.block {
-				width: 33vw;
-				height: 33vh;
-			}
-		</style>
-		<h1 class="block" data-edit="css html">Variable values are token lists</h1>
-	</article>
-
-	<article class="slide">
-		<table>
-			<tr>
-				<td>Number → unit: </td>
-				<td><code class="language-css">calc(var(--foo) * 1px)</code></td>
-			</tr>
-			<tr>
-				<td>Unit → number:</td>
-				<td style="font-size: 100px"><span class="poop"></span><span class="poop"></span><span class="poop"></span></td>
-			</tr>
-		</table>
-	</article>
-
-	<article class="takeaway slide">
-		<h1>Use variables for pure data, <br>not CSS values</h1>
-	</article>
-
-	<article class="horizontal demo slide" id="animation" data-edit="css" style="--division: 70">
-		<p class="hint">Try to animate --color | show that var() is ok</p>
-		<style data-slide>
-			@keyframes bg {
-				from { background-color: yellow; }
-				to { background-color: #0ca; }
-			}
-
-			#animation.slide {
-				animation: 1s bg infinite alternate;
-			}
-		</style>
-		<h1>CSS Variables in @keyframes?</h1>
-	</article>
-
-	<article class="slide">
-		<blockquote style="width: 21em">
-			<p>[CSS variables] can even be <strong>tran&shy;sitioned or ani&shy;mated</strong>, but since the UA has no way to interpret their con&shy;tents, <strong>they always use the "flips at 50%"</strong> behav&shy;ior that is used for any oth&shy;er pair of val&shy;ues that can’t be intelligently interpolated.</p>
-			<p class="cite">— <a href="https://w3.org/TR/css-variables-1/">CSS Custom Properties for Cascading Variables Module Level 1</a></p>
-		</blockquote>
-	</article>
-
-	<article class="future slide" id="registerProperty">
-		<h1>🔮 Near Future 🔮</h1>
-		<pre><code class="language-javascript" id="registerPropertyCode" contentEditable style="outline: none">
-			CSS.registerProperty({
-				name: "--color",
-				syntax: "&lt;color>",
-				initialValue: "black",
-				inherits: false
-			});
-		</code></pre>
-		<button onclick="eval(registerPropertyCode.textContent)" class="run delayed">Run!</button>
-	</article>
-
-	<article class="slide" data-import="animation"></article>
-
-	<article class="browser-support slide">
-		<table>
-			<thead>
-				<tr>
-					<th></th>
-					<th><img src="img/chrome-logo.svg" alt="Chrome"></th>
-					<th><img src="img/firefox-logo.svg" alt="Firefox"></th>
-					<th><img src="img/edge-logo.svg" alt="Edge"></th>
-					<th><img src="img/safari-logo.png" alt="Safari"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>CSS.registerProperty()</th>
-					<td class="incomplete">⛳️</td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
-	</article>
-
-	<article class="takeaway slide">
-		<h1>CSS variables <span class="plus">+</span> animations <span class="equals">=</span>🔮<span class="heart" style="font-size: 90px;">♥️</span></h1>
-	</article>
-</section>
-
-<section>
-
-
-
-
-
-	<article class="slide demo" id="responsive" data-edit="css">
-		<section></section>
-		<section></section>
-		<section></section>
-
-		<section class="wide3"></section>
-
-		<section class="wide2"></section>
-		<section></section>
-		<style data-slide>
-		:root {
-			--gutter: 2px;
-		}
-
-		section {
-			margin: var(--gutter);
-		}
-
-		@media (min-width: 1000px) {
-			:root {
-				--gutter: 10px;
-			}
-		}
-		</style>
-	</article>
-
-	<article class="takeaway slide">
-		<h1>CSS Variables make <br>responsive design easier</h1>
 	</article>
 </section>
 
@@ -362,76 +560,10 @@
 	</article>
 
 	<article class="slide" data-import="svg-eyes"></article>
-
-	<article class="language-javascript slide">
-		<div><pre><code>
-			for (input of document.querySelectorAll("input")) {
-				input.style.setProperty("--value", input.value);
-			}
-		</code></pre>
-		<pre class="delayed"><code>
-			document.addEventListener("input", evt => {
-				var input = evt.target;
-				input.style.setProperty("--value", input.value);
-			});
-		</code></pre></div>
-	</article>
-
-	<article class="horizontal demo slide" id="slider">
-		<style data-slide>
-			input {
-				appearance: none;
-				background: linear-gradient(to right, #f06 50%, white 0);
-			}
-		</style>
-		<style data-slide>
-			input {
-				width: 300px;
-				-webkit-appearance: none;
-				transform: scale(3);
-				transform-origin: top;
-				border-radius: .1em;
-			}
-		</style>
-		<input type="range" data-edit="html css">
-	</article>
-
-	<article class="slide">
-		<pre><code class="language-javascript">
-			for (let el of document.querySelectorAll(".scrolling")) {
-				el.addEventListener("scroll", evt => {
-					let maxScroll = el.scrollHeight - el.offsetHeight;
-					let scroll = el.scrollTop / maxScroll;
-					el.style.setProperty("--scroll", scroll);
-				});
-			}
-		</code></pre>
-	</article>
-
-	<article class="horizontal demo slide">
-		<style data-slide>
-			.scrolling {
-				background-image: linear-gradient(to right,
-					white 20%, transparent 0)
-			}
-		</style>
-		<div class="scrolling" data-edit="css html">
-			<p>The allowed syntax for custom properties is extremely permissive. The &lt;declaration-value> production matches any sequence of one or more tokens, so long as the sequence does not contain &lt;bad-string-token>, &lt;bad-url-token>, unmatched &lt;)-token>, &lt;]-token>, or &lt;}-token>, or top-level &lt;semicolon-token> tokens or &lt;delim-token> tokens with a value of "!".</p>
-			<p>In addition, if the value of a custom property contains a var() reference, the var() reference must be valid according to the specified var() grammar. If not, the custom property is invalid and must be ignored.</p>
-			<p>The values of custom properties, and the values of var() functions substituted into custom properties, are case-sensitive, and must be preserved in their original author-given casing. (Many CSS values are ASCII case-insensitive, which user agents can take advantage of by "canonicalizing" them into a single casing, but that isn’t allowed for custom properties.)
-			<p>The initial value of a custom property is an empty value; that is, nothing at all. This initial value has a special interaction with the var() notation, which is explained in the section defining var().
-			<p>Custom properties are ordinary properties, so they can be declared on any element, are resolved with the normal inheritance and cascade rules, can be made conditional with @media and other conditional rules, can be used in HTML’s style attribute, can be read or set using the CSSOM, etc.
-			<p>Notably, they can even be transitioned or animated, but since the UA has no way to interpret their contents, they always use the "flips at 50%" behavior that is used for any other pair of values that can’t be intelligently interpolated. However, any custom property used in a @keyframes rule becomes animation-tainted, which affects how it is treated when referred to via the var() function in an animation property.</p>
-		</div>
-	</article>
-
-	<article class="takeaway slide">
-		<h1>CSS Variables are a revolution for <br>separation of style and behavior</h1>
-	</article>
 </section>
 
 <footer class="dark slide dont-resize">
-	<img src="img/mark.svg" class="logo" />
+	<img src="../shared/img/mark.svg" class="logo" />
 	<h1>Thank you!</h1>
 
 	<ul>

@@ -19,6 +19,7 @@ html {
 
 	--color-magenta: #f06;
 	--color-orange: orange;
+	--color-green: yellowgreen;
 	--color-aqua: hsl(191, 100%, 40%);
 	--color-yellow: gold;
 	--color-light-gray: hsl(220, 10%, 95%);
@@ -43,6 +44,10 @@ h1 {
 a {
 	color: inherit;
 }
+
+	a.button {
+		text-decoration: none;
+	}
 
 strong, b {
 	font-weight: bold; /* FF is weird */
@@ -94,9 +99,11 @@ textarea:not([class]) {
 	input[type="email"],
 	input[type="tel"],
 	textarea:not([class]) {
-		background: white;
+		background: rgba(0,0,0,.5) padding-box;
 		padding: 0 .3em;
-		border: .05em solid hsl(200, 40%, 80%);
+		box-sizing: border-box;
+		border: .05em solid hsla(0, 0%, 100%, .2);
+		font-weight: bold;
 	}
 
 button {
@@ -105,7 +112,6 @@ button {
 }
 
 .demo.slide {
-	text-align: center;
 	font-size: 200%;
 }
 
@@ -118,6 +124,149 @@ button {
 	align-items: center;
 	justify-content: center;
 }
+
+	.isolated.demo.slide {
+		padding: 0;
+		flex-flow: row;
+		align-items: stretch;
+	}
+
+	.isolated.horizontal.demo.slide {
+		flex-flow: column;
+	}
+
+		.isolated.demo.slide > iframe {
+			position: static;
+			flex: 1;
+			width: auto;
+			margin: 1.5em;
+			border-radius: 8px;
+			background: hsla(0,0%,100%,.8);
+		}
+
+		.isolated.horizontal.demo.slide > iframe {
+			margin-bottom: 0;
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+
+		.isolated:not(.horizontal).demo.slide > iframe {
+			margin-left: 0;
+			border-bottom-left-radius: 0;
+			border-top-left-radius: 0;
+			height: calc(100% - 3em);
+		}
+
+		.isolated.demo.slide {
+			--division: 50;
+		}
+
+		.isolated.demo.slide div.editor {
+			position: relative;
+		}
+
+		.isolated:not(.horizontal).demo.slide div.editor {
+			order: -1;
+		}
+
+.demo.slide details.notes,
+.demo.slide .button.new-tab {
+	top: .25em;
+	z-index: 2;
+}
+
+.demo.slide details.notes {
+	left: auto;
+	bottom: auto;
+	right: 1.5em;
+	z-index: 2;
+	text-align: left;
+}
+
+.demo.slide .button.new-tab {
+	position: absolute;
+	left: calc(var(--division, 60) * 1% + .5em);
+}
+
+	details.notes div > ul {
+		padding-left: 1em;
+	}
+
+	details.notes > summary,
+	.button {
+		padding: 0 .4em;
+		border: 1px solid hsla(30,0%,100%, .3);
+		border-radius: .3em;
+		cursor: pointer;
+		white-space: nowrap;
+		font-weight: bold;
+		letter-spacing: -.03em;
+		font-size: 60%;
+	}
+
+		.demo.slide details.notes > summary,
+		.demo.slide .button {
+			color: black;
+			border-color: rgba(0,0,0,.2);
+		}
+
+	details.notes > summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.slide:not(.demo) details.notes:not([open]):not(:hover) > summary {
+		color: hsla(0, 0%, 100%, .6);
+	}
+
+	details.notes > div {
+		position: absolute;
+		bottom: 1.6em;
+		left: 0;
+		width: 50vw;
+		min-width: 280px;
+		max-width: calc(100vw - 4em);
+		max-height: 70vh;
+		overflow: auto;
+		padding: .8em 1em;
+		border: 1px solid rgba(0,0,0,.3);
+		border-radius: .5em;
+		background: var(--color-light-gray);
+		color: black;
+		text-shadow: 0 .1em .1em white;
+		font-size: 70%;
+		box-shadow: .1em .2em 1em rgba(0,0,0,.5);
+	}
+
+	.demo.slide details.notes > div {
+		bottom: auto;
+		top: 1.6em;
+		left: auto;
+		right: 0;
+		box-shadow: .05em .1em .4em rgba(0,0,0,.2);
+	}
+
+		details.notes > div > * {
+			margin: 0;
+		}
+
+	details.notes[open]::before {
+		content: '';
+		position: absolute;
+		bottom: 1em;
+		left: 40%;
+		z-index: 1;
+		width: 14px;
+		height: 14px;
+		background: var(--color-light-gray);
+		transform: rotate(45deg);
+	}
+
+	.demo.slide details.notes[open]::before {
+		bottom: auto;
+		top: 1em;
+		left: auto;
+		right: 40%;
+	}
 
 textarea.editor,
 div.editor > pre {
@@ -135,6 +284,24 @@ div.editor {
 	line-height: 1.5;
 	box-sizing: border-box;
 }
+
+	.demo.slide div.editor[hidden] {
+		display: block;
+		visibility: hidden;
+		position: absolute;
+		order: 1;
+	}
+
+		.demo.slide div.editor[hidden] label {
+			visibility: visible;
+			margin-top: 3rem;
+			font-size: 54%;
+		}
+
+		.demo.slide div.editor[hidden] label:not(:hover):not(:focus) {
+			opacity: .2;
+
+		}
 
 .demo.slide:not(.horizontal) div.editor {
 	top: 0;
@@ -182,9 +349,10 @@ div.editor {
 
 	.editor label {
 		position: absolute;
-		top: .5em;
-		right: .5em;
-		padding: .1em .4em;
+		top: .8rem;
+		right: .8rem;
+		z-index: 1;
+		padding: .1rem .5rem;
 		border-radius: .3em;
 		background: hsl(30, 100%, 50%);
 		color: white;

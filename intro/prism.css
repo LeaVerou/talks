@@ -5,15 +5,11 @@
  * @author Lea Verou
  */
 
-.token.comment {
-	font: 150%/.8 var(--font-handwritten);
-}
-
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: #aaa;
+	color: hsla(220, 10%, 90%, .5);
 }
 
 .token.punctuation {
