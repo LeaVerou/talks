@@ -467,7 +467,11 @@ var _ = Prism.Live = $.Class({
 Prism.Live.languages.html = Prism.Live.languages.markup;
 
 $.ready().then(() => {
-	$$("textarea.editor").forEach(textarea => new _(textarea));
+	$$("textarea.editor").forEach(textarea => {
+		if (!_.all.get(textarea)) {
+			new _(textarea);
+		}
+	});
 });
 
 })(Bliss, Bliss.$);

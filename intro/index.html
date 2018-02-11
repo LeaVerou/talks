@@ -9,6 +9,7 @@
 <link href="../shared/intro-outro.css" rel="stylesheet" />
 <link href="prism.css" rel="stylesheet" />
 <link href="theme.css" rel="stylesheet" />
+<link href="demo.css" rel="stylesheet" />
 <link href="talk.css" rel="stylesheet" />
 
 </head>
@@ -17,13 +18,36 @@
 <header id="intro" class="slide dont-resize" data-source="flickr.com/photos/billward/16601966117">
 	<h1>
 		An Introduction to Modern Web Technologies
-		<span class="note">HTML, CSS, JS, SVG</span>
+		<span class="note">for programmers & Computer Scientists</span>
 	</h1>
 	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
 </header>
 
 <section id="html">
 	<header class="image slide" title="HTML" style="background-image: url(img/htmlwallpaper.jpg)"></header>
+
+	<article class="slide dont-resize" id="architecture" data-steps="1">
+		<article id="html-box">
+			<h2>HTML</h2>
+			<h3>Structure</h3>
+			<p>“What does it mean?”</p>
+			<span class="file">.html</span>
+		</article>
+		<div>
+			<article id="css-box">
+				<h2>CSS</h2>
+				<h3>Presentation</h3>
+				<p>“How does it look?”</p>
+				<span class="file">.css</span>
+			</article>
+			<article id="js-box">
+				<h2>JavaScript</h2>
+				<h3>Behavior</h3>
+				<p>“What does it do?”</p>
+				<span class="file">.js</span>
+			</article>
+		</div>
+	</article>
 
 	<article class="slide syntax-breakdown">
 		<code>
@@ -32,13 +56,26 @@
 		<a data-html="code" target="_blank" class="delayed">Open page in new tab</a>
 	</article>
 
-	<article class="slide" title="Browser dev tools">
+	<article class="slide dont-resize" title="Browser dev tools">
 		<img src="img/inspector.png" alt="">
 		<details class="notes">
 			<ul>
-				<li>The browser offers us Developer Tools that allow us to peek under the hood and inspect the current state of the page.</li>
 				<li>Even if we don’t add <code>&lt;html></code>, <code>&lt;head></code>, and <code>&lt;body></code> elements, the browser will do it for us.</li>
+				<li>The browser offers us Developer Tools that allow us to peek under the hood and inspect the current state of the page.</li>
 				<li>The HTML elements on the page form a tree called the DOM Tree, with the <code>&lt;html></code> element at its root.</li>
+				<li>How many nodes does the DOM tree of our little page have?</li>
+				<li>Note that some CSS is applied anyway, from the browser.</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="slide dont-resize" title="The Console">
+		<img src="img/console.png" alt="">
+		<details class="notes">
+			<ul>
+				<li>The Console tab allows us to experiment with JavaScript.</li>
+				<li><code>$0</code> always refers to the currently selected element. <code>$1</code> to the previously selected element, <code>$2</code> to the one before it and so on.</li>
+				<li><code>element.textContent</code> gives us the content of an element as text. Try changing it!</li>
 			</ul>
 		</details>
 	</article>
@@ -72,7 +109,7 @@
 		</details>
 	</article>
 
-	<article class="isolated demo slide" id="headings">
+	<article class="isolated demo slide" id="headings" title="Headings">
 		<div data-edit="contents">
 			<h1>Heading 1</h1>
 			<h2>Heading 2</h2>
@@ -82,6 +119,27 @@
 			<h6>Heading 6</h6>
 			<p>Paragraph</p>
 		</div>
+		<details class="notes">
+			<ul>
+				<li>6 levels of headings</li>
+				<li>Do <strong>not</strong> use just to make text bigger, it breaks navigation for visually impaired users. Use CSS instead, which gives you more control anyway.</li>
+				<li>Use <code>&lt;h1></code> only once per document</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="isolated horizontal demo slide" id="multimedia" title="Multimedia">
+		<div data-edit="contents">
+			<img src="http://csssecrets.io/images/adamcatlace.jpg" alt="A kitten, roughly 3 weeks old">
+			<video src="https://leaverou.github.io/talks/intro/war-kitten.mp4" controls></video>
+			<audio src="https://freesound.org/data/previews/175/175409_1326576-lq.mp3" controls></audio>
+		</div>
+		<details class="notes">
+			<ul>
+				<li><code>&lt;img></code> elements are for images, <code>&lt;video></code> for videos and <code>&lt;audio></code> for sound files.</li>
+
+			</ul>
+		</details>
 	</article>
 
 	<article class="isolated demo slide" id="lists">
@@ -223,6 +281,18 @@
 		</div>
 	</article>
 
+	<article class="slide" data-type="Resources">
+		<h1>HTML</h1>
+
+		<ul>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">HTML elements reference</a></li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML">Introduction to HTML</a></li>
+			<li><a href="https://www.codecademy.com/courses/web-beginner-en-HZA3b">HTML Basics</a></li>
+			<li><a href="https://html.spec.whatwg.org/multipage/">HTML Living standard</a></li>
+			<li><a href="https://www.w3.org/TR/html/">HTML 5.2 specification</a></li>
+		</ul>
+	</article>
+
 	<article class="slide syntax-breakdown vertical">
 		<code style="font-size: 180%;">
 			<span title="Selector">h1</span> {
@@ -247,7 +317,7 @@
 		</a>
 	</article>
 
-	<article class="demo slide" id="conflicts">
+	<article class="isolated demo slide" id="conflicts">
 		<style data-slide>
 			#container article {
 				background: hsl(0, 60%, 50%);
@@ -258,7 +328,9 @@
 			}
 		</style>
 <div id="container" data-edit="html css">
-	<article>Why am I red?</article>
+	<article class="box">
+		What color am I?
+	</article>
 </div>
 	</article>
 
@@ -421,7 +493,7 @@
 		<a href="http://cssgridgarden.com/" target="_blank"><img src="img/gridgarden.png" alt=""></a>
 	</article>
 
-	<article class="resources slide">
+	<article class="slide" data-type="Resources">
 		<h1>Grid Layout</h1>
 
 		<ul>
@@ -582,6 +654,7 @@
 <script src="../incrementable/incrementable.js"></script>
 <script src="../shared/js/editor.js"></script>
 <script src="js/talk.js"></script>
+<script src="js/demo.js"></script>
 
 </body>
 </html>

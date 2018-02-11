@@ -1,0 +1,196 @@
+
+.demo.slide {
+	font-size: 200%;
+	padding: 0;
+	align-items: stretch;
+	justify-content: stretch;
+}
+
+	.demo.slide [data-edit~="contents"] {
+		flex: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.isolated.demo.slide {
+		padding: 0;
+		flex-flow: row;
+		align-items: stretch;
+		--division: 50;
+	}
+
+	.isolated.horizontal.demo.slide {
+		flex-flow: column;
+	}
+
+		.isolated.demo.slide > iframe {
+			position: static;
+			flex: 1;
+			width: auto;
+			margin: 1.5em;
+			border-radius: 8px;
+			background: hsla(0,0%,100%,.8);
+		}
+
+		.isolated.horizontal.demo.slide > iframe {
+			margin-bottom: 0;
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+
+		.isolated:not(.horizontal).demo.slide > iframe {
+			margin-left: 0;
+			border-bottom-left-radius: 0;
+			border-top-left-radius: 0;
+			height: calc(100% - 3em);
+		}
+
+		.isolated:not(.horizontal).demo.slide div.editor-container {
+			order: -1;
+		}
+
+.demo.slide details.notes,
+.demo.slide .button {
+	position: absolute;
+	top: .25em;
+	z-index: 2;
+}
+
+.demo.slide details.notes {
+	left: auto;
+	bottom: auto;
+	right: 1.5em;
+	z-index: 2;
+	text-align: left;
+}
+
+.demo.slide .button.new-tab {
+	left: calc(var(--division, 60) * 1% + .5em);
+}
+
+.demo.slide .button.next {
+	left: calc(var(--division, 60) * 1% + 9.5em);
+}
+
+.demo.slide details.notes > summary,
+.demo.slide .button {
+	color: black;
+	border-color: rgba(0,0,0,.2);
+}
+
+.demo.slide details.notes > div {
+	bottom: auto;
+	top: 1.6em;
+	left: auto;
+	right: 0;
+	box-shadow: .05em .1em .4em rgba(0,0,0,.2);
+}
+
+	.demo.slide details.notes[open]::before {
+		bottom: auto;
+		top: 1em;
+		left: auto;
+		right: 40%;
+	}
+
+
+	textarea.editor,
+	div.editor > pre {
+		padding: .2rem 2rem;
+		line-height: inherit;
+		box-sizing: border-box;
+	}
+
+	div.editor {
+		position: relative;
+		color: white;
+		font-size: calc(var(--font-size-multiplier, 1) * 100%);
+		line-height: 1.5;
+		box-sizing: border-box;
+		max-height: 100vh;
+		transition: .2s;
+		transition-property: max-height, flex;
+	}
+
+	.editor-container {
+		display: flex;
+		flex-flow: column;
+	}
+
+		.editor-container div.editor {
+			flex: 1;
+		}
+
+		.demo.slide div.editor.collapsed {
+			display: block;
+			max-height: 1.6em;
+			flex: 0;
+		}
+
+			.demo.slide div.editor.collapsed pre {
+				opacity: .2;
+			}
+
+			.demo.slide div.editor.collapsed textarea,
+			.demo.slide div.editor.collapsed pre {
+				overflow: hidden;
+			}
+
+	.demo.slide:not(.horizontal) div.editor-container {
+		top: 0;
+		width: calc(var(--division, 60) * 1vw);
+	}
+
+		textarea.editor {
+			display: block;
+			color: white;
+			height: 100%;
+			-webkit-text-fill-color: transparent;
+			white-space: pre;
+			border: 0;
+			outline: none;
+			width: 100%;
+			background: hsl(200, 10%, 20%) linear-gradient(rgba(0,0,0,.1) 50%, transparent 0);
+			background-origin: content-box;
+			background-size: auto 3em;
+			background-attachment: local;
+		}
+
+		.demo.slide:not(.horizontal) div.editor > textarea.editor {
+			box-shadow: -.1em 0 .2em rgba(0,0,0,.3) inset;
+		}
+
+		.demo.slide.horizontal div.editor > textarea.editor {
+			max-height: calc(var(--division, 50) * 1vh);
+			box-shadow: 0 .1em .2em rgba(0,0,0,.3) inset;
+		}
+
+		div.editor > pre {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: 1;
+			margin: 0;
+			pointer-events: none;
+		}
+
+		.editor label {
+			position: absolute;
+			top: .6rem;
+			right: 1rem;
+			z-index: 1;
+			padding: .1rem .5rem;
+			border-radius: .2em;
+			background: hsl(30, 100%, 50%);
+			color: white;
+			cursor: pointer;
+			text-transform: uppercase;
+			font: bold 1.2rem/1.5 var(--font-heading);
+		}
+
+			.editor label:hover {
+				background: hsl(15, 100%, 45%);
+			}
