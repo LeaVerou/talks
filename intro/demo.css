@@ -1,9 +1,9 @@
-
 .demo.slide {
 	font-size: 200%;
 	padding: 0;
 	align-items: stretch;
 	justify-content: stretch;
+	flex-flow: row-reverse;
 }
 
 	.demo.slide [data-edit~="contents"] {
@@ -11,6 +11,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		flex-flow: column;
 	}
 
 	.isolated.demo.slide {
@@ -20,7 +21,7 @@
 		--division: 50;
 	}
 
-	.isolated.horizontal.demo.slide {
+	.horizontal.demo.slide {
 		flex-flow: column;
 	}
 
@@ -53,13 +54,13 @@
 .demo.slide details.notes,
 .demo.slide .button {
 	position: absolute;
-	top: .25em;
+	top: .4em;
+	bottom: auto;
 	z-index: 2;
 }
 
 .demo.slide details.notes {
-	left: auto;
-	bottom: auto;
+	top: .25em;
 	right: 1.5em;
 	z-index: 2;
 	text-align: left;
@@ -71,6 +72,7 @@
 
 .demo.slide .button.next {
 	left: calc(var(--division, 60) * 1% + 9.5em);
+	right: auto;
 }
 
 .demo.slide details.notes > summary,
@@ -78,22 +80,6 @@
 	color: black;
 	border-color: rgba(0,0,0,.2);
 }
-
-.demo.slide details.notes > div {
-	bottom: auto;
-	top: 1.6em;
-	left: auto;
-	right: 0;
-	box-shadow: .05em .1em .4em rgba(0,0,0,.2);
-}
-
-	.demo.slide details.notes[open]::before {
-		bottom: auto;
-		top: 1em;
-		left: auto;
-		right: 40%;
-	}
-
 
 	textarea.editor,
 	div.editor > pre {
@@ -124,8 +110,7 @@
 
 		.demo.slide div.editor.collapsed {
 			display: block;
-			max-height: 1.6em;
-			flex: 0;
+			max-height: var(--collapsed-height, 1.6em);
 		}
 
 			.demo.slide div.editor.collapsed pre {

@@ -40,10 +40,10 @@ var _ = Prism.Live = $.Class({
 
 
 		if (self.Incrementable) {
-			new Incrementable(textarea);
+			new Incrementable(this.textarea);
 		}
 
-		$.events(textarea, {
+		$.events(this.textarea, {
 			input: evt => {
 				this.update();
 			},
@@ -191,7 +191,14 @@ var _ = Prism.Live = $.Class({
 	},
 
 	update: function() {
-		this.code.textContent = this.value;
+		var code = this.value;
+
+		if (/\n$/.test(this.value)) {
+			code += "\u200b";
+		}
+
+		this.code.textContent = code;
+
 		Prism.highlightElement(this.code);
 	},
 
@@ -225,11 +232,15 @@ var _ = Prism.Live = $.Class({
 			index = undefined;
 		}
 
-		return value.slice(this.selectionEnd, index);
+		return this.value.slice(this.selectionEnd, index);
+	},
+
+	setCaret: function(pos) {
+		this.selectionStart = this.selectionEnd = pos;
 	},
 
 	moveCaret: function(chars) {
-		this.selectionStart = this.selectionEnd = this.selectionEnd + chars;
+		this.setCaret(this.selectionEnd + chars);
 	},
 
 	insert: function(text, index) {
@@ -396,7 +407,7 @@ var _ = Prism.Live = $.Class({
 					"submit": '<button type="submit">Submit</button>',
 					custom: function (selector, before, after) {
 						var isName = /^[\w:-]+$/.test(selector);
-						var isSelector = isName || /^[.\w:-]+$/.test(selector);
+						var isSnippet = isName || selector.match(/^[.#\w:-]+(\{.+?\})?(\*\d+)?$/);
 
 						if (isName && /<[^>]+$/.test(before) && /[^<]*>/.test(after)) {
 							// Attribute
@@ -405,24 +416,58 @@ var _ = Prism.Live = $.Class({
 
 							return true;
 						}
-						else if (isSelector) {
-							var parts = selector.split(/\./);
-							var tag = parts[0] || "div";
-							var classes = parts.slice(1);
+						else if (isSnippet) {
+							var times = 1;
+							var content = "";
 
-							classes = classes.length? ` class="${classes.join(" ")}"` : "";
-
-							var offset = classes.length - 2;
-
-							// Tag
-							if (_.languages.markup.selfClosing.indexOf(tag) > -1) {
-								this.insert(`<${tag}${classes} />`);
-								this.moveCaret(-2);
+							if (isSnippet[1]) {
+								// Content
+								content = isSnippet[1].slice(1, -1);
 							}
-							else {
-								this.insert(`<${tag}${classes}></${tag}>`);
-								this.moveCaret(-tag.length - 3);
+
+							if (isSnippet[2]) { // Times
+								times = isSnippet[2].slice(1);
 							}
+
+							var tag = selector.match(/^[\w:-]+/) || "div";
+							var html = `<${tag}`;
+
+							var id = selector.match(/#([\w-]+)/);
+
+							if (id) {
+								id = id[1];
+								html += ` id="${id}"`;
+							}
+
+							var classes = selector.match(/\.[\w-]+/g);
+
+							if (classes) {
+								classes = classes.map(x => x.slice(1));
+								html += ` class="${classes.join(" ")}"`;
+							}
+
+							var selfClosing = _.languages.markup.selfClosing.indexOf(tag) > -1;
+
+							html += selfClosing? " />" : ">";
+
+							var caret = this.selectionStart;
+							var tagLength = html.length;
+
+							for (var i=0; i<times; i++) {
+								// Tag
+								if (selfClosing) {
+									this.insert(html);
+								}
+								else {
+									this.insert(`${html}${content}</${tag}>`);
+								}
+
+								if (times > 1 && i + 1 < times) {
+									this.insert("\n");
+								}
+							}
+
+							this.setCaret(caret + tagLength + (selfClosing? -2 : 0));
 
 							return true;
 						}

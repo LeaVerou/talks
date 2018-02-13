@@ -148,6 +148,24 @@
 			            8px 8px 10px rgba(0,0,0,.6);
 		}
 
+	#languages {
+		position: absolute;
+		right: 1em;
+		bottom: 1em;
+		font-size: 55%;
+		font-weight: 500;
+	}
+
+		#languages h3 {
+			margin: 0;
+			font-weight: 100;
+		}
+
+		#languages ul {
+			margin: 0;
+			padding-left: 1em;
+		}
+
 #projects {
 	padding: 0;
 }
@@ -162,16 +180,28 @@
 	}
 
 		#projects li {
+			position: relative;
 			list-style: none;
 			margin: 2vmin;
 		}
+
+			#projects li .github-button {
+				visibility: hidden;
+			}
+
+			#projects li iframe[src^="https://buttons.github.io/"] {
+				position: absolute;
+				bottom: .5em;
+				right: .5em;
+				filter: drop-shadow(1px 1px 3px rgba(0,0,0,.5));
+			}
 
 			#projects li a {
 				display: flex;
 				position: relative;
 				align-items: flex-end;
-				justify-content: center;
-				padding: .1em;
+				justify-content: flex-start;
+				padding: .1em .4em;
 				width: 23vw;
 				height: 23vh;
 				background: url(img/project-prism.png) top / cover no-repeat;
@@ -207,6 +237,17 @@
 
 	#csswg h1 img {
 		vertical-align: -.1em;
+	}
+
+	#csswg .w3c {
+		display: inline-block;
+		vertical-align: -.3em;
+		background: #005a9c;
+		width: 1em;
+		height: 1em;
+		padding: .15em;
+		border-radius: 50%;
+		background: url("../shared/img/w3c.svg") no-repeat center / contain content-box border-box, #005a9c;
 	}
 
 #mit {
@@ -291,9 +332,9 @@ footer.slide:target {
 		}
 
 #thankyou {
-	background: url(img/thankyou.gif) no-repeat,
-	            url(img/unicorn.gif) 100% 80% no-repeat hsl(344, 88%, 73%);
-	background-blend-mode: multiply, normal;
+	background: /*url(img/thankyou.gif) no-repeat,*/
+	            url(img/unicorn.gif) center no-repeat hsl(344, 88%, 73%);
+	background-blend-mode:  normal;
 }
 
 .annotation {

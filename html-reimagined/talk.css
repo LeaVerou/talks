@@ -137,48 +137,6 @@
 				overflow: hidden;
 			}
 
-#projects {
-	padding: 0;
-}
-
-	#projects .caption {
-		margin-top: -1em;
-	}
-
-	#projects ul {
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-flow: row wrap;
-		align-items: center;
-		justify-content: center;
-	}
-
-		#projects li {
-			list-style: none;
-			margin: 2vmin;
-		}
-
-			#projects li a {
-				display: flex;
-				position: relative;
-				align-items: flex-end;
-				justify-content: center;
-				padding: .1em;
-				width: 23vw;
-				height: 23vh;
-				background: url(img/project-prism.png) top / cover no-repeat;
-				font-weight: bold;
-				letter-spacing: -.05em;
-				border: 1px solid white;
-				box-shadow: 0 -1.8em 0 rgba(0,0,0,.6) inset, 0 0 .5em rgba(0,0,0,.6);
-				text-shadow: 0 0 .3em black;
-			}
-
-			#projects li a:not(:hover) {
-				text-decoration: none;
-			}
-
 img.inline{
 	height: .9em;
 }

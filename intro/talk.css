@@ -1,5 +1,5 @@
 .speaker .slide[id=headings]::before,
-.speaker .slide[id=headings] ~ .slide::before {
+.speaker .slide[id=headings] ~ .slide:nth-child(-n+15)::before {
 	content: "Follow along at leaverou.github.io/talks/intro#" attr(id);
 	position: absolute;
 	bottom: 0;
@@ -14,7 +14,7 @@
 	font-size: 65%;
 }
 
-	.speaker .horizontal.demo.slide::before {
+	.speaker .horizontal.demo.slide.slide::before {
 		bottom: auto;
 		top: 0;
 		right: auto;
@@ -81,17 +81,17 @@
 	align-items: flex-start;
 }
 
-	.syntax-breakdown code {
+	.syntax-breakdown > code {
 		font-size: 250%;
 	}
 
-	.syntax-breakdown.vertical code {
+	.syntax-breakdown.vertical > code {
 		white-space: pre;
 		width: min-content;
 		--length: calc(80vw - 18em);
 	}
 
-	.syntax-breakdown code span {
+	.syntax-breakdown > code span {
 		position: relative;
 		padding: .1em .1em 0;
 		opacity: 1;
@@ -100,31 +100,31 @@
 		transition: none;
 	}
 
-	.syntax-breakdown.vertical code span {
+	.syntax-breakdown.vertical > code span {
 		padding: .1em 0 0;
 	}
 
-	.syntax-breakdown code span.current {
+	.syntax-breakdown > code span.current {
 		background: var(--color1);
 		filter: drop-shadow(.1em .1em .4em black);
 		z-index: 1;
 	}
 
-	.syntax-breakdown.vertical code span.current {
+	.syntax-breakdown.vertical > code span.current {
 		box-shadow: .2em 0 var(--color1), -.2em 0 var(--color1);
 	}
 
-		.syntax-breakdown code span.current,
-		.syntax-breakdown code span.current * {
+		.syntax-breakdown > code span.current,
+		.syntax-breakdown > code span.current * {
 			color: white !important;
 		}
 
-	.syntax-breakdown code span.displayed {
+	.syntax-breakdown > code span.displayed {
 		opacity: 1;
 	}
 
-	.syntax-breakdown code span[title].current::before,
-	.syntax-breakdown code span[title].current::after {
+	.syntax-breakdown > code span[title].current::before,
+	.syntax-breakdown > code span[title].current::after {
 		position: absolute;
 		bottom: calc(-80vh + 4em);
 		left: 50%;
@@ -134,8 +134,8 @@
 		letter-spacing: -.03em;
 	}
 
-	.syntax-breakdown.vertical code span[title].current::before,
-	.syntax-breakdown.vertical code span[title].current::after {
+	.syntax-breakdown.vertical > code span[title].current::before,
+	.syntax-breakdown.vertical > code span[title].current::after {
 		z-index: 1;
 		top: 50%;
 
@@ -144,7 +144,7 @@
 	}
 
 	/* Line */
-	.syntax-breakdown code span[title].current::before {
+	.syntax-breakdown > code span[title].current::before {
 		content: '';
 		top: 0;
 		z-index: -1;
@@ -152,7 +152,7 @@
 		background: linear-gradient(var(--color1) 20%, var(--color2) 80%);
 	}
 
-	.syntax-breakdown.vertical code span[title].current::before {
+	.syntax-breakdown.vertical > code span[title].current::before {
 		height: .5rem;
 		width: auto;
 		right: calc(-1 * var(--length));
@@ -162,7 +162,7 @@
 	}
 
 	/* Tooltip */
-	.syntax-breakdown code span[title].current::after {
+	.syntax-breakdown > code span[title].current::after {
 		content: attr(title);
 		width: max-content;
 		max-width: 80vw;
@@ -171,11 +171,11 @@
 		color: black;
 	}
 
-	.syntax-breakdown code span[title].current.after-middle::after {
+	.syntax-breakdown > code span[title].current.after-middle::after {
 		max-width: 40vw;
 	}
 
-	.syntax-breakdown.vertical code span[title].current::after {
+	.syntax-breakdown.vertical > code span[title].current::after {
 		bottom: auto;
 	}
 
@@ -449,14 +449,6 @@ a[data-html] {
 		background: var(--color-magenta);
 	}
 
-details.notes {
-	position: absolute;
-	left: 1em;
-	bottom: 1em;
-	font-weight: 300;
-	text-align: left;
-}
-
 #box-model {
 	--cell-size: 100px;
 	--grid-color: rgba(0,0,0,.2);
@@ -710,28 +702,67 @@ details.notes {
 		background-color: var(--color-magenta);
 	}
 
-	.slide[data-type="Resources"] a::before {
+	.slide[data-type="Resources"] a::before,
+	a[href^="https://developer.mozilla.org/en-US/docs/"]:only-child::before {
 		display: inline-block;
 		vertical-align: -.1em;
 		border-radius: 3px;
 		margin-right: .3em;
 		width: 1em;
-		max-height: 1.2em;
+		height: 1em;
+		background: var(--image) bottom / contain no-repeat;
+		content: "";
 	}
 
-	a[href^="https://developer.mozilla.org/en-US/docs/"]::before {
-		content: url("https://cdn.mdn.mozilla.net/static/img/favicon32.7f3da72dcea1.png");
+	a[href^="https://developer.mozilla.org/en-US/docs/"]:only-child::before {
+		--image: url("https://cdn.mdn.mozilla.net/static/img/favicon32.7f3da72dcea1.png");
 	}
 
-	a[href^="https://www.w3.org/"]::before {
-		content: url("https://www.w3.org/favicon.ico");
+	a[href^="https://www.w3.org/"]:only-child::before {
+		--image: url("https://www.w3.org/favicon.ico");
 	}
 
-	a[href*=".whatwg.org"]::before {
-		content: url("https://resources.whatwg.org/logo.svg");
+	a[href*=".whatwg.org"]:only-child::before {
+		--image: url("https://resources.whatwg.org/logo.svg");
 	}
 
-	a[href*=".codecademy.com"]::before {
-		content: url("https://www.codecademy.com/favicon.ico");
+	a[href*=".codecademy.com"]:only-child::before {
+		--image: url("https://www.codecademy.com/favicon.ico");
 		filter: invert() hue-rotate(180deg);
+	}
+
+#colors {
+	background: transparent;
+	align-items: stretch;
+	justify-content: stretch;
+	padding: 0;
+}
+
+	#colors input {
+		flex: 1;
+		margin: 0;
+		font-size: 200%;
+		padding-left: 1em;
+		text-shadow: 0 0 1px black, 0 0 2px black;
+		border: none;
+	}
+
+	#colors input:focus {
+		outline: none;
+	}
+
+#all-properties {
+	font: 100%/1.5 var(--font-mono);
+	text-align: left;
+	column-width: 11em;
+}
+
+#all-properties:target {
+	display: block;
+	bottom: auto;
+}
+
+	#all-properties a {
+		white-space: nowrap;
+		display: block;
 	}

@@ -24,7 +24,7 @@
 </header>
 
 <section id="html">
-	<header class="image slide" title="HTML" style="background-image: url(img/htmlwallpaper.jpg)"></header>
+	<!-- <header class="image slide" title="HTML" style="background-image: url(img/htmlwallpaper.jpg)"></header> -->
 
 	<article class="slide dont-resize" id="architecture" data-steps="1">
 		<article id="html-box">
@@ -128,16 +128,38 @@
 		</details>
 	</article>
 
+	<article class="isolated demo horizontal slide" title="Links">
+		<div data-edit="contents">
+			<p>
+				<a href="http://haystack.mit.edu">Haystack Group</a>
+			</p>
+			<p>
+				<a href="https://w3.org/TR/html/textlevel-semantics.html#the-a-element">
+					&lt;a> element specification
+				</a>
+			</p>
+		</div>
+		<details class="notes">
+			<ul>
+				<li><code class="element">a</code> elements let you link to other websites or even places in the current page.</li>
+				<li>The <code>href</code> attribute contains the <em>link target</em>, which is an absolute or relative (to the current page) URL</li>
+				<li>The content of the link is the text presented. Sadly there is no shortcut if you want to show the URL itself, you have to duplicate it (or automate this via CSS or JS).</li>
+				<li>To link to places in the current page, assign an <code class="attribute">id</code> attribute to the target element, then use <code>#id</code> as the link.</li>
+				<li>You can also use <code>#hashes</code> in absolute URLs</li>
+			</ul>
+		</details>
+	</article>
+
 	<article class="isolated horizontal demo slide" id="multimedia" title="Multimedia" style="--font-size-multiplier: .75">
 		<div data-edit="contents">
 			<img src="http://csssecrets.io/images/adamcatlace.jpg" alt="A kitten, roughly 3 weeks old">
-			<video src="https://leaverou.github.io/talks/intro/cat.mp4" controls></video>
+			<video src="https://leaverou.github.io/talks/intro/war-kitten.mp4" controls></video>
 			<audio src="https://freesound.org/data/previews/175/175409_1326576-lq.mp3" controls></audio>
 		</div>
 		<details class="notes">
 			<ul>
-				<li><code>&lt;img></code> elements are for images, <code>&lt;video></code> for videos and <code>&lt;audio></code> for sound files.</li>
-
+				<li><code class="element">img</code> elements are for images, <code class="element">video</code> for videos and <code class="element">audio</code> for sound files.</li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Video_and_audio_content">Video and audio content</a></li>
 			</ul>
 		</details>
 	</article>
@@ -275,12 +297,6 @@
 		</details>
 	</article>
 
-	<article class="isolated demo slide">
-		<div data-edit="contents">
-
-		</div>
-	</article>
-
 	<article class="slide" data-type="Resources">
 		<h1>HTML</h1>
 
@@ -288,6 +304,7 @@
 			<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">HTML elements reference</a></li>
 			<li><a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML">Introduction to HTML</a></li>
 			<li><a href="https://www.codecademy.com/courses/web-beginner-en-HZA3b">HTML Basics</a></li>
+			<li><a href="http://htmldog.com/guides/html/">HTML Tutorials</a></li>
 			<li><a href="https://html.spec.whatwg.org/multipage/">HTML Living standard</a></li>
 			<li><a href="https://www.w3.org/TR/html/">HTML 5.2 specification</a></li>
 		</ul>
@@ -304,11 +321,57 @@
 		<details class="notes">
 			<summary>Anatomy of a CSS rule</summary>
 			<ul>
-				<li>The <em>selector</em> tells the browser which elements the rule is about</li>
-				<li><em>Declarations</em> are property-value pairs. Each declration controls a certain stylistic aspect.</li>
+				<li>The <em><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Selectors" target="_blank">selector</a></em> tells the browser which elements the rule is about, in this case <code class="element">h1</code> headings.</li>
+				<li><em>Declarations</em> are property-value pairs. Each declaration controls a certain stylistic aspect.</li>
 				<li>Declarations are separated by semicolons. The last semicolon is optional (but recommended).</li>
+				<li>Here we can see two CSS properties: <code class="property">color</code> which sets the text color, and <code class="property">background</code> which sets the background.</li>
 			</ul>
 		</details>
+	</article>
+
+	<article class="slide" id="applying-css" title="Applying CSS">
+		<pre class="language-markup"><code>
+			&lt;!DOCTYPE html>
+			&lt;html>
+			&lt;head>
+				&lt;link rel="stylesheet" href="style.css">
+				<span class="delayed">&lt;style>
+					a:not(:hover) {
+						text-decoration: none;
+					}
+				&lt;/style></span>
+			&lt;/head>
+			&lt;body>
+				<span class="delayed">&lt;h1 style="color: #f06">Title&lt;/h1></span>
+			&lt;/body>
+			&lt;/html>
+		</code></pre>
+		<details class="notes">
+			<p>3 ways to apply CSS to your page:</p>
+			<ul>
+				<li>Via an external file and the <code class="element">link</code> element. This is the recommended way.</li>
+				<li>By writing CSS in the <code class="element">style</code> element</li>
+				<li>For one-off cases, by using the <code class="attribute">style</code> attribute</li>
+				<li>Both <code class="element">link</code> and <code class="element">style</code> elements are only supposed to go in the <code class="element">head</code>.</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="slide dont-resize" id="all-properties">
+		<script>
+		for (let property in document.documentElement.style) {
+			let value = document.documentElement.style[property];
+
+			if (typeof value === "string") {
+				let hyphenated = property.replace(/[A-Z]/g, l => "-" + l.toLowerCase());
+
+				if (!/^(\-\w+|webkit)\-/i.test(hyphenated)) {
+
+					document.write(`<code class="property">${hyphenated}</code> `);
+				}
+			}
+		}
+		</script>
 	</article>
 
 	<article class="slide">
@@ -317,7 +380,7 @@
 		</a>
 	</article>
 
-	<article class="isolated demo slide" id="conflicts">
+	<article class="isolated demo slide" title="Conflicts" style="--collapsed-height: 50%">
 		<style data-slide>
 			#container article {
 				background: hsl(0, 60%, 50%);
@@ -328,10 +391,28 @@
 			}
 		</style>
 <div id="container" data-edit="html css">
-	<article class="box">
+	<article class="box" hidden>
 		What color am I?
 	</article>
 </div>
+		<details class="notes">
+			<ul>
+				<li>CSS resolves conflicts via selector <em>specificity</em>, not source order.</li>
+				<li><a href="https://www.w3.org/TR/selectors/#specificity-rules">Specificity</a> is calculated as follows:
+					<ol>
+						<li>Count the number of ids in the selector (= A)</li>
+						<li>Count the number of classes, attribute selectors, pseudo-classes (except <code>:not()</code>) (= B)</li>
+						<li>Count the number of tag selectors (= C)</li>
+						<li>Specificities are compared by comparing the three components in order:
+							the specificity with a larger A value is bigger;
+							if the two A values are tied, then the specificity with a larger B value is bigger;
+							if the two B values are also tied, then the specificity with a larger C value is bigger;
+							if all the values are tied, the two specificities are equal.</li>
+					</ol>
+				</li>
+				<li>If specificity is the same, then the conflict is resolved based on source order.</li>
+			</ul>
+		</details>
 	</article>
 
 	<article class="slide" id="specificity-battle">
@@ -347,6 +428,46 @@
 				<output for="selector2"></output>
 			</div>
 		</div>
+	</article>
+
+	<article class="isolated horizontal demo slide" title="Inheritance">
+		<style data-slide>
+			ul {
+				border: 1px solid red;
+				color: slategray;
+			}
+		</style>
+		<div id="container" data-edit="contents css">
+			<ul>
+				<li>This little piggy went to market</li>
+				<li>This little piggy stayed home</li>
+				<li>This little piggy had roast beef</li>
+				<li>This little piggy had none</li>
+				<li>And this little piggy cried "wee wee wee" all the way home</li>
+			</ul>
+		</div>
+		<details class="notes">
+			<ul>
+				<li>Some properties are inherited by default, and some are not.</li>
+				<li>Use the value <code>inherit</code> to inherit from a non-inherited property and the value <code>initial</code> to reset an inherited property.</li>
+				<li>Inherited declarations always have lower priority than those targeting the element directly.</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="with-next slide" id="colors" title="Colors in CSS">
+		<input value="#ff0467">
+		<input value="gray">
+		<input value="rgba(0, 180, 150, .8)">
+		<input value="hsla(30, 50%, 50%, 1)">
+		<details class="notes top-right">
+			<ul>
+				<li><a href="http://leaverou.github.io/chroma-zone/#rgb-2d" target="_blank">RGB</a> is modeled after 8 bit subpixel intensity, not human usability. It's very hard to adjust a color.</li>
+				<li>Hex colors are the least intuitive format: It’s RGB that is additionally hex-encoded! Mainly useful for copying from a color picker.</li>
+				<li>Named colors are readable, but few, irregularly distributed and often internally inconsistent (e.g. <code>darkgray</code> is lighter than <code>gray</code>!)</li>
+				<li><a href="http://leaverou.github.io/chroma-zone/#hsl" target="_blank">HSL</a> is probably the most human-friendly out of the currently supported formats, but has its issues too (e.g. <code>hsl(60, 100%, 50%)</code> and <code>hsl(240, 100%, 50%)</code> have the same HSL lightness, but are they equally light?)</li>
+			</ul>
+		</details>
 	</article>
 
 	<article class="demo slide horizontal" id="box-model">
@@ -365,6 +486,101 @@
 				<li>Padding & border widths are <strong>added</strong> to width and height, not subtracted from it.</li>
 				<li>You can change that with <code>box-sizing: border-box</code></li>
 			</ul>
+		</details>
+	</article>
+
+	<article class="isolated horizontal demo slide" title="Transforms">
+		<img data-edit="css html" src="img/poop.png" alt="💩" />
+		<style data-slide>
+			img {
+				transform: rotate(18deg);
+			}
+		</style>
+		<details class="notes">
+			<li>The <code class="property">transform</code> property allows you to apply linear 2D and 3D transformations.</li>
+			<li>Its value is a list of <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function">functions</a>,
+				like <code>scale()</code>, <code>rotate()</code>, <code>translate()</code> etc</li>
+			<li>The functions are applied left to right and <strong>transform the coordinate system</strong> that the next transforms are operating on.</li>
+			<li><code class="property">transform-origin</code> sets the origin of the transformation, e.g. the centerpoint for a rotation.
+				This property is applied by first translating the element by the negated value of the property, then applying the element's transform, then translating by the property value</li>
+			<li><a href="https://drafts.csswg.org/css-transforms-2/#individual-transforms">There are also</a>
+				individual <code class="property">rotate</code>, <code class="property">scale</code>, <code class="property">translate</code> properties, but they have limited support.</li>
+			<li>The space the transformed element was occupying does not change.</li>
+		</details>
+	</article>
+
+	<article class="isolated horizontal demo slide" title="Transitions">
+		<img data-edit="css html" src="img/poop.png" alt="💩" />
+		<style data-slide>
+			img {
+				transition: 1s;
+			}
+
+			img:hover {
+				transform: rotate(1turn);
+			}
+		</style>
+		<details class="notes">
+			<li><code class="property">transition</code> makes style changes smooth, whenever possible.</li>
+			<li>It is actually a shorthand of <code class="property">transition-duration</code>, <code class="property">transition-delay</code>, <code class="property">property</code>, <code class="property">transition-timing-function</code></li>
+			<li>The minimum it needs is a duration, but it also accepts a property, delay, easing.</li>
+			<li>Both <code class="property">transition</code> and its longhands accept comma-separated lists, to create multiple transitions with different parameters for different properties.</li>
+			<li>Keyword changes cannot be interpolated, but lengths, numbers, colors, transforms etc can.</li>
+		</details>
+	</article>
+
+	<article class="isolated demo slide" title="Animations" style="--division: 60">
+		<img data-edit="css html" src="img/poop.png" alt="💩" />
+		<style data-slide>
+			@keyframes spin {
+				to {
+					transform: rotate(1turn);
+				}
+			}
+
+			img {
+				animation: 1s spin infinite;
+			}
+		</style>
+		<details class="notes">
+			<li>Animations are more complex than transitions but give us more control.</li>
+			<li>We define animations with the <code class="css">@keyframes</code> rule.</li>
+			<li>We apply animations to elements with the <code class="property">animation</code> property.</li>
+			<li>The <code class="property">animation</code> property is actually a shorthand for:
+				<ul>
+					<li><code class="property">animation-name</code>: Which animation to run?</li>
+					<li><code class="property">animation-duration</code>: How long should each iteration last?</li>
+					<li><code class="property">animation-delay</code>: Any delay before it starts?</li>
+					<li><code class="property">animation-iteration-count</code>: How many times should it play? (number or <code>infinite</code>)</li>
+					<li><code class="property">animation-timing-function</code>: How should it progress over time?</li>
+					<li><code class="property">animation-direction</code>Should any iterations be reversed?</li>
+					<li><code class="property">animation-fill-mode</code>How should it behave before and after it’s applied?</li>
+					<li><code class="property">animation-play-state</code>: Should it be paused?</li>
+				</ul>
+			</li>
+			<li>At a minimum, a name and duration is needed for an animation to play.</li>
+			<li>All animation properties accept comma-separated lists of parameters, to apply multiple animations on the same element.</li>
+		</details>
+	</article>
+
+	<article class="isolated demo slide" title="Animations 2" style="--division: 60">
+		<img data-edit="css html" src="img/poop.png" alt="💩" />
+		<style data-slide>
+			@keyframes dance {
+				from, 49% { transform-origin: -50% 100%; }
+				50%, 75%, to { transform-origin: 150% 100%; }
+				25% { transform: rotate(-10deg); }
+				50% { transform: rotate(0deg); }
+				75% { transform: rotate(10deg); }
+			}
+
+			img {
+				animation: 1s dance infinite;
+			}
+		</style>
+		<details class="notes">
+			<li>Keyframes can cascade</li>
+			<li><code>alternate</code> reverses every other iteration</li>
 		</details>
 	</article>
 
@@ -514,11 +730,19 @@
 			</li>
 		</ul>
 	</article>
+
+	<article class="slide" data-type="Resources">
+		<h1>CSS</h1>
+
+		<ul>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">CSS Reference</a></li>
+			<li><a href="http://htmldog.com/guides/css/">CSS Tutorials</a></li>
+		</ul>
+	</article>
 </section>
 
 <section>
-	<article class="demo slide" id="button">
-		<p class="hint">Theming by class, by style, box-shadow transition | default default values</p>
+	<article class="demo slide" id="button" style="--division: 60">
 		<div data-edit="contents css">
 			<button>Click me</button>
 			<button class="pink">Click me</button>
@@ -633,6 +857,18 @@
 
 	<article class="slide" data-import="svg-eyes"></article>
 </section>
+
+<article class="slide" data-type="Resources">
+	<h1>JavaScript</h1>
+
+	<ul>
+		<li><a href="http://htmldog.com/guides/javascript/">JavaScript Tutorials</a></li>
+		<li><a href=""></a></li>
+		<li><a href=""></a></li>
+		<li><a href=""></a></li>
+		<li><a href=""></a></li>
+	</ul>
+</article>
 
 <footer class="dark slide dont-resize">
 	<img src="../shared/img/mark.svg" class="logo" />

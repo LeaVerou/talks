@@ -11,6 +11,8 @@ class Demo {
 		this.html = this.css = "";
 		this.editors = {};
 
+		$$("details.notes", this.slide).every(details => details.classList.add("top-right"));
+
 		if (this.isolated) {
 			this.iframe = $.create("iframe", {
 				name: "iframe-" + slide.id,
@@ -26,6 +28,8 @@ class Demo {
 		});
 
 		var editHTML = this.edit.match(/\b(html|contents)\b/);
+
+		this.edit.split(/\s+/).forEach(p => this.editors[p == "html"? "contents" : p] = undefined);
 
 		if (editHTML) {
 			// HTML editor
@@ -156,16 +160,6 @@ class Demo {
 				}
 			});
 		}
-
-		// Next button
-		$.create("a", {
-			className: "button next",
-			textContent: "Next ▸",
-			inside: slide,
-			events: {
-				click: evt => slideshow.nextItem()
-			}
-		});
 	}
 
 	openEditor(id) {
@@ -180,7 +174,8 @@ class Demo {
 		code = Prism.plugins.NormalizeWhitespace.normalize(code);
 
 		if (lang == "html") {
-			code = code.replace(/=""(?=\s|>)/g, "");
+			code = code.replace(/=""(?=\s|>)/g, "")
+			           .replace(/&gt;/g, ">");
 		}
 
 		return code;

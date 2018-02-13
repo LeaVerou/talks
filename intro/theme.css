@@ -111,6 +111,14 @@ button {
 	cursor: pointer;
 }
 
+details.notes {
+	position: absolute;
+	left: 1em;
+	bottom: 1em;
+	font-weight: 300;
+	text-align: left;
+}
+
 	details.notes div > ul {
 		padding-left: 1em;
 	}
@@ -158,6 +166,12 @@ button {
 			margin: 0;
 		}
 
+		details.notes > div a {
+			--color: 200, 50%, 40%;
+			color: hsl(var(--color));
+			text-decoration-color: hsla(var(--color), .5);
+		}
+
 	details.notes[open]::before {
 		content: '';
 		position: absolute;
@@ -169,6 +183,35 @@ button {
 		background: var(--color-light-gray);
 		transform: rotate(45deg);
 	}
+
+details.notes.top-right {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	bottom: auto;
+	left: auto;
+}
+
+.button.next {
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
+}
+
+	details.notes.top-right > div {
+		bottom: auto;
+		top: 1.6em;
+		left: auto;
+		right: 0;
+		box-shadow: .05em .1em .4em rgba(0,0,0,.2);
+	}
+
+		details.notes.top-right[open]::before {
+			bottom: auto;
+			top: 1em;
+			left: auto;
+			right: 40%;
+		}
 
 .slide {
 	display: flex;
@@ -254,6 +297,7 @@ section > header.slide:target {
 ::selection {
 	background: hsl(335, 100%, 40%);
 	color: white;
+	text-shadow: none;
 }
 
 footer.ref a {

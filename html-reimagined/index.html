@@ -18,7 +18,7 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 </head>
 <body class="language-markup">
 
-<article class="slide" id="adjust-resolution" style="--vw: 1600; --vh: 900">
+<!-- <article class="slide" id="adjust-resolution" style="--vw: 1600; --vh: 900">
 	<h1>
 		1600 × 900
 		<span>This is a slide deck coded to a specific environment, not a web app for public consumption.
@@ -34,9 +34,112 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 		<small>for the Era of Web Apps</small>
 	</h1>
 	<p>Lea Verou, MIT <br>@leaverou</p>
-</header>
+</header>-->
 
-<section>
+<section id="temp">
+	<section id="hi" class="inverse slide dont-resize darker hi">
+		<figure class="delayed">
+			<img src="../shared/img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
+			<figcaption style="font-size: 240%">Hi, I’m Lea</figcaption>
+		</figure>
+	</section>
+	<section class="top-heavy image slide" id="mit">
+		<h1><strong>2014&thinsp;–</strong> Haystack Group, MIT CSAIL</h1>
+	</section>
+	<article class="single-sentence slide" id="research-question">
+		<h1>
+			<span class="label">My Research</span>
+			Can we make web programming<br> accessible to novices?
+		</h1>
+	</article>
+	<header class="slide" id="mavo">
+		<h1><img src="img/logo.svg" alt="Mavo"></h1>
+	</header>
+
+	<article class="looping video slide" data-video="videos/todo.mp4" style="--url: 'https://mavo.io/demos/todo'"></article>
+	<article class="slide" id="todo-code" data-steps="1">
+		<pre><code>
+			&lt;body <mark>mv-app="todo" mv-storage="local"</mark>>
+				&lt;h1>My tasks&lt;/h1>
+				&lt;p><mark>[count(done)]</mark> done of <mark>[count(task)]</mark> total&lt;/p>
+
+				&lt;ul>
+					&lt;li <mark>property="task" mv-multiple</mark>>
+						&lt;input <mark>property="done"</mark> type="checkbox" />
+						&lt;span <mark>property="taskTitle"</mark>>Do stuff&lt;/span>
+					&lt;/li>
+				&lt;/ul>
+			&lt;/body>
+		</code></pre>
+	</article>
+
+	<section class="top-heavy image slide" id="csswg" data-credits="Daniel Glazman" data-steps="1">
+		<h1 class="caption">
+			<span class="w3c"></span>
+			CSS Working Group member
+		</h1>
+		<svg viewBox="0 0 100 100" class="annotation">
+			<ellipse />
+		</svg>
+	</section>
+	<section class="inverse slide dont-resize darker hi" id="book">
+		<a href="http://shop.oreilly.com/product/0636920031123.do" class="delayed">
+			<img src="../shared/img/book.png" alt="CSS Secrets by O’Reilly" style="display:block" />
+			★★★★★ on Amazon
+		</a>
+		<div class="delayed" id="languages">
+			<h3>Also available in:</h3>
+			<ul>
+				<li>German</li>
+				<li>Polish</li>
+				<li>Russian</li>
+				<li>Japanese</li>
+				<li>Simplified Chinese</li>
+				<li>Traditional Chinese</li>
+				<li>Korean</li>
+				<li>Bulgarian</li>
+			</ul>
+		</div>
+		</ul>
+	</section>
+	<section class="top-heavy slide dont-resize" id="projects" data-type="I ❤ Open Source">
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+		<ul>
+			<li>
+				<a href="http://prismjs.com" style="background-image: url(../shared/img/project-prism.png)">PrismJS</a>
+				<a class="github-button" href="https://github.com/prismjs/prism" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
+			</li>
+			<li>
+				<a href="http://leaverou.github.io/prefixfree" style="background-image: url(../shared/img/project-prefixfree.png)">-prefix-free</a>
+				<a class="github-button" href="https://github.com/leaverou/prefixfree" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
+			</li>
+			<li>
+				<a href="http://blissfuljs.com" style="background-image: url(../shared/img/project-bliss.png)">Bliss</a>
+				<a class="github-button" href="https://github.com/leaverou/bliss" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
+			</li>
+			<li><a href="http://css3test.com" style="background-image: url(../shared/img/project-css3test.png)">css3test.com</a></li>
+			<li>
+				<a href="http://leaverou.github.io/awesomplete/" style="background-image: url(../shared/img/project-awesomplete.png)">Awesomplete</a>
+				<a class="github-button" href="https://github.com/leaverou/awesomplete" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
+			</li>
+			<li><a href="http://cubic-bezier.com/" style="background-image: url(../shared/img/project-cubicbezier.png)">cubic-bezier.com</a></li>
+			<li><a href="http://dabblet.com" style="background-image: url(../shared/img/project-dabblet.png)">dabblet.com</a></li>
+			<li><a href="http://leaverou.github.io/contrast-ratio/" style="background-image: url(../shared/img/project-contrastratio.png)">Contrast Ratio</a></li>
+			<li>
+				<a href="http://leaverou.github.io/animatable/" style="background-image: url(../shared/img/project-animatable.png)">Animatable</a>
+				<a class="github-button" href="https://github.com/leaverou/animatable" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
+			</li>
+		</ul>
+	</section>
+
+	<article class="slide" id="thankyou" title="Thank you!" data-credits="gifimage.net, giphy.com"></article>
+
+	<article class="slide">
+
+	</article>
+</section>
+
+<!-- <section>
 	<section id="hi" class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
 			<img src="../shared/img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
@@ -52,34 +155,10 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 			<p>…which technically makes me <strong>geographically Lesbian</strong></p>
 		</div>
 	</section>
-</section>
+</section>-->
 
 <section>
-	<!-- <article class="top-heavy image slide" id="vb6" style="background-image: url(img/vb6.gif);">
-		<h1>
-			<strong>1998&thinsp;–&thinsp;2005</strong> Visual Basic 6
-		</h1>
-	</article>
-
-	<article class="top-heavy image slide" style="background-image: url(img/e-steki.png);">
-		<h1>
-			<strong>2005&thinsp;–</strong> Web Development! 🦄🌈
-		</h1>
-	</article>
-
-	<article class="top-heavy image slide" style="background-image: url(img/vbulletinorg.png);">
-		<h1>
-			<strong>2005&thinsp;–&thinsp;2009</strong> vBulletin mods
-		</h1>
-	</article>
-
-	<article class="top-heavy image slide" style="background-image: url(img/blog.png);">
-		<h1>
-			<strong>2009&thinsp;–</strong> lea.verou.me
-		</h1>
-	</article> -->
-
-	<section class="top-heavy slide dont-resize" id="projects">
+	<!-- <section class="top-heavy slide dont-resize" id="projects">
 		<ul>
 			<li><a href="http://prismjs.com" style="background-image: url(../shared/img/project-prism.png)">PrismJS</a></li>
 			<li><a href="http://leaverou.github.io/prefixfree" style="background-image: url(../shared/img/project-prefixfree.png)">-prefix-free</a></li>
@@ -91,17 +170,17 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 			<li><a href="http://leaverou.github.io/contrast-ratio/" style="background-image: url(../shared/img/project-contrastratio.png)">Contrast Ratio</a></li>
 			<li><a href="http://leaverou.github.io/animatable/" style="background-image: url(../shared/img/project-animatable.png)">Animatable</a></li>
 		</ul>
-	</section>
+	</section> -->
 
-	<section class="top-heavy image slide" id="csswg" data-credits="Daniel Glazman" data-steps="1">
+	<!-- <section class="top-heavy image slide" id="csswg" data-credits="Daniel Glazman" data-steps="1">
 		<h1 class="caption">
-			<!-- <img src="../shared/img/w3c.svg" alt="W3C" class="inline"> -->
+			<img src="../shared/img/w3c.svg" alt="W3C" class="inline">
 			W3C CSS Working Group Invited Expert
 		</h1>
 		<svg viewBox="0 0 100 100" class="annotation">
 			<ellipse />
 		</svg>
-	</section>
+	</section> -->
 
 	<!-- <article class="top-heavy image slide" style="background-image: url(img/wizard.jpg);">
 		<h1>How Web developers see us</h1>
@@ -111,7 +190,7 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 		<h1>How standards really work</h1>
 	</article> -->
 
-	<section class="inverse slide dont-resize darker hi" id="book">
+	<!-- <section class="inverse slide dont-resize darker hi" id="book">
 		<a href="http://shop.oreilly.com/product/0636920031123.do" class="delayed">
 			<img src="../shared/img/book.png" alt="CSS Secrets by O’Reilly" style="display:block" />
 			★★★★★ on Amazon
@@ -120,7 +199,7 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 
 	<section class="top-heavy image slide" id="mit">
 		<h1><strong>2014&thinsp;–</strong> Haystack Group, MIT CSAIL</h1>
-	</section>
+	</section> -->
 
 	<!-- <article class="top-heavy image slide" id="karger">
 		<h1>
@@ -131,12 +210,12 @@ document.write(`<link rel="stylesheet" href="${mavoHost}/mavo.css" /><script src
 </section>
 
 <section class="show-next">
-	<article class="single-sentence slide" id="research-question">
+	<!-- <article class="single-sentence slide" id="research-question">
 		<h1>
 			<span class="label">Research Question</span>
 			Can we make web programming<br> accessible to novices?
 		</h1>
-	</article>
+	</article> -->
 
 	<article class="slide" id="the-problem" data-steps="2" data-credits="Mart Virkus @ toggl.com">
 		<ul>
@@ -238,9 +317,9 @@ Less Control">
 </section>
 
 <section>
-	<header class="slide" id="mavo">
+	<!-- <header class="slide" id="mavo">
 		<h1><img src="img/logo.svg" alt="Mavo"></h1>
-	</header>
+	</header> -->
 
 	<article class="slide" id="html">
 		<img src="img/html.svg" alt="">
@@ -301,7 +380,7 @@ Less Control">
 		<p class="delayed" style="font-size: 200%">or just visit <a style="font-weight: bold" href="https://play.mavo.io">play.mavo.io</a>!</p>
 	</article>
 
-	<article class="looping video slide" data-video="videos/todo.mp4" style="--url: 'https://mavo.io/demos/todo'"></article>
+	<!-- <article class="looping video slide" data-video="videos/todo.mp4" style="--url: 'https://mavo.io/demos/todo'"></article>
 
 	<article class="slide" id="todo-code" data-steps="1">
 		<pre><code>
@@ -317,7 +396,7 @@ Less Control">
 				&lt;/ul>
 			&lt;/body>
 		</code></pre>
-	</article>
+	</article> -->
 
 	<article class="slide">
 		<h1>Activate Mavo</h1>

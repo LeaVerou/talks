@@ -40,6 +40,12 @@ $$(".demo.slide").forEach(slide => {
 	slide.classList.add("dont-resize");
 });
 
+$$(".slide[title]:not([id])").forEach(slide => {
+	slide.id = slide.title.replace(/[^\w\s-]/g, "") // Remove non-ASCII characters
+			.trim().replace(/\s+/g, "-") // Convert whitespace to hyphens
+			.toLowerCase();
+});
+
 function createURL(html) {
 	html = html.replace(/&#x200b;/g, "");
 	var blob = new Blob([html], {type : "text/html"});
@@ -130,9 +136,26 @@ function calculateSpecificity(selector) {
 	];
 }
 
-$$("code.property").forEach(code => {
+$$("code.property, code.css, code.element, code.attribute").forEach(code => {
+	var text = code.textContent;
+	var path;
+
+	switch (code.className) {
+		case "property":
+		case "css":
+			path = "Web/CSS";
+			break;
+		case "element":
+			path = "Web/HTML/Element";
+			code.textContent = "<" + text + ">";
+			break;
+		case "attribute":
+			var category = code.dataset.category || "Global_attributes";
+			path = `Web/API/${category}`;
+	}
+
 	$.create("a", {
-		href: `https://developer.mozilla.org/en-US/docs/Web/CSS/${code.textContent}`,
+		href: `https://developer.mozilla.org/en-US/docs/${path}/${text}`,
 		around: code,
 		target: "_blank"
 	});
@@ -146,12 +169,30 @@ Prism.languages.insertBefore("css", "property", {
 	"variable": /\-\-(\b|\B)[\w-]+(?=\s*[:,)]|\s*$)/i
 });
 
-$$(".takeaway.slide").forEach((slide, i) => {
-	$.create("span", {
-		className: "label",
-		innerHTML: `Takeaway <span>#</span>${i + 1}`,
-		start: $("h1", slide)
+$$(".with-next.slide, .demo.slide").forEach(slide => {
+	// Next button
+	$.create("a", {
+		className: "button next",
+		textContent: "Next ▸",
+		inside: slide,
+		events: {
+			click: evt => slideshow.nextItem()
+		}
 	});
+});
+
+$$("#colors input").forEach(input => {
+	new Incrementable(input);
+
+	(input.oninput = evt => {
+		input.style.background = "";
+		var previous = input.style.backgroundColor;
+		input.style.backgroundColor = input.value;
+
+		var invalid = input.value  && !input.style.background;
+
+		input.setCustomValidity(invalid? "Invalid color" : "");
+	})();
 });
 
 // CSS Variables specific
