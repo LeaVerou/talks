@@ -470,6 +470,85 @@
 		</details>
 	</article>
 
+	<article class="isolated horizontal needs-base demo slide" title="Backgrounds & Images">
+		<div data-edit="css"></div>
+		<style data-slide>
+			html {
+				background-image: url(img/chocolate-mousse.png);
+				min-height: 100vh; /* Minimum height: 100% of viewport height */
+			}
+		</style>
+		<details class="notes">
+			<ul>
+				<li>The <code class="property">background-image</code> property sets the background to the specified image(s).</li>
+				<li>You can link to images via the <code class="function">url</code> function, or generate them via the several gradient functions:
+					<ul>
+						<li><code class="function">linear-gradient</code></li>
+						<li><code class="function">repeating-linear-gradient</code></li>
+						<li><code class="function">radial-gradient</code></li>
+						<li><code class="function">repeating-radial-gradient</code></li>
+					</ul>
+					Gradients can be very powerful, as illustrated by <a href="http://lea.verou.me/css3patterns/">this gallery</a>.
+				</li>
+				<li>
+					There is a bunch more background-related properties to control aspects of the background:
+					<ul>
+						<li><code class="property">background-color</code></li>
+						<li><code class="property">background-repeat</code></li>
+						<li><code class="property">background-size</code></li>
+						<li><code class="property">background-position</code></li>
+						<li><code class="property">background-clip</code></li>
+						<li><code class="property">background-origin</code></li>
+						<li><code class="property">background-attachment</code></li>
+					</ul>
+				</li>
+				<li>
+					You can also use the <code class="property">background</code> property to specify all these at once.
+					Because <code class="property">background</code> is a property that is defined in terms of other sub-properties,
+					we say it’s a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties"><em>shorthand</em></a> (and its properties are <em>longhands</em>).
+				</li>
+				<li>Caveat: Every time you use a shorthand, you’re setting <strong>all</strong> its longhands, whether you specified values for them or not!</li>
+				<li>Both <code class="property">background</code> and all its longhands (except <code>background-color</code>) accept <strong>multiple comma-separated values</strong>.
+					This is very useful for creating "layers" of backgrounds.</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="slide dont-resize" id="shorthands">
+		<h1>Shorthands</h1>
+		<ul class="tree">
+			<li>
+				border
+				<ul>
+					<li>border-width
+						<ul>
+							<li>border-top-width</li>
+							<li>border-right-width</li>
+							<li>border-bottom-width</li>
+							<li>border-left-width</li>
+						</ul>
+					</li>
+					<li>border-style
+						<ul>
+							<li>border-top-style</li>
+							<li>border-right-style</li>
+							<li>border-bottom-style</li>
+							<li>border-left-style</li>
+						</ul>
+					</li>
+					<li>border-color
+						<ul>
+							<li>border-top-color</li>
+							<li>border-right-color</li>
+							<li>border-bottom-color</li>
+							<li>border-left-color</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</article>
+
 	<article class="demo slide horizontal" id="box-model">
 		<style data-slide>
 			.box {
@@ -489,8 +568,29 @@
 		</details>
 	</article>
 
+	<article class="isolated horizontal demo slide" title="Media Queries">
+		<p data-edit="css html">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me?" he thought. It wasn't a dream. His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather.</p>
+		<style data-slide>
+			p {
+				font-size: 2rem;
+			}
+
+			@media (max-width: 800px) {
+				p {
+					font-size: 1rem;
+				}
+			}
+		</style>
+		<details class="notes">
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries">Media Queries</a> are like conditionals about the viewing conditions.</li>
+			<li>They support <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media#Media_features">a bunch of criteria</a>, but the most commonly used ones are the <code>width</code> and <code>height</code> of the viewport.</li>
+			<li>You can put any number of rules inside them.</li>
+			<li>You can use <code>and</code> and <code>not</code> operators, and commas for OR</li>
+		</details>
+	</article>
+
 	<article class="isolated horizontal demo slide" title="Transforms">
-		<img data-edit="css html" src="img/poop.png" alt="💩" />
+		<img data-edit="css html" src="img/chocolate-mousse.png" alt="💩" />
 		<style data-slide>
 			img {
 				transform: rotate(18deg);
@@ -510,7 +610,7 @@
 	</article>
 
 	<article class="isolated horizontal demo slide" title="Transitions">
-		<img data-edit="css html" src="img/poop.png" alt="💩" />
+		<img data-edit="css html" src="img/chocolate-mousse.png" alt="💩" />
 		<style data-slide>
 			img {
 				transition: 1s;
@@ -530,7 +630,7 @@
 	</article>
 
 	<article class="isolated demo slide" title="Animations" style="--division: 60">
-		<img data-edit="css html" src="img/poop.png" alt="💩" />
+		<img data-edit="css html" src="img/chocolate-mousse.png" alt="💩" />
 		<style data-slide>
 			@keyframes spin {
 				to {
@@ -543,28 +643,30 @@
 			}
 		</style>
 		<details class="notes">
-			<li>Animations are more complex than transitions but give us more control.</li>
-			<li>We define animations with the <code class="css">@keyframes</code> rule.</li>
-			<li>We apply animations to elements with the <code class="property">animation</code> property.</li>
-			<li>The <code class="property">animation</code> property is actually a shorthand for:
-				<ul>
-					<li><code class="property">animation-name</code>: Which animation to run?</li>
-					<li><code class="property">animation-duration</code>: How long should each iteration last?</li>
-					<li><code class="property">animation-delay</code>: Any delay before it starts?</li>
-					<li><code class="property">animation-iteration-count</code>: How many times should it play? (number or <code>infinite</code>)</li>
-					<li><code class="property">animation-timing-function</code>: How should it progress over time?</li>
-					<li><code class="property">animation-direction</code>Should any iterations be reversed?</li>
-					<li><code class="property">animation-fill-mode</code>How should it behave before and after it’s applied?</li>
-					<li><code class="property">animation-play-state</code>: Should it be paused?</li>
-				</ul>
-			</li>
-			<li>At a minimum, a name and duration is needed for an animation to play.</li>
-			<li>All animation properties accept comma-separated lists of parameters, to apply multiple animations on the same element.</li>
+			<ul>
+				<li>Animations are more complex than transitions but give us more control.</li>
+				<li>We define animations with the <code class="css">@keyframes</code> rule.</li>
+				<li>We apply animations to elements with the <code class="property">animation</code> property.</li>
+				<li>The <code class="property">animation</code> property is actually a shorthand for:
+					<ul>
+						<li><code class="property">animation-name</code>: Which animation to run?</li>
+						<li><code class="property">animation-duration</code>: How long should each iteration last?</li>
+						<li><code class="property">animation-delay</code>: Any delay before it starts?</li>
+						<li><code class="property">animation-iteration-count</code>: How many times should it play? (number or <code>infinite</code>)</li>
+						<li><code class="property">animation-timing-function</code>: How should it progress over time?</li>
+						<li><code class="property">animation-direction</code>: Should any iterations be reversed?</li>
+						<li><code class="property">animation-fill-mode</code>How should it behave before and after it’s applied?</li>
+						<li><code class="property">animation-play-state</code>: Should it be paused?</li>
+					</ul>
+				</li>
+				<li>At a minimum, a name and duration is needed for an animation to play.</li>
+				<li>All animation properties accept comma-separated lists of parameters, to apply multiple animations on the same element.</li>
+			</ul>
 		</details>
 	</article>
 
 	<article class="isolated demo slide" title="Animations 2" style="--division: 60">
-		<img data-edit="css html" src="img/poop.png" alt="💩" />
+		<img data-edit="css html" src="img/chocolate-mousse.png" alt="💩" />
 		<style data-slide>
 			@keyframes dance {
 				from, 49% { transform-origin: -50% 100%; }
@@ -581,6 +683,7 @@
 		<details class="notes">
 			<li>Keyframes can cascade</li>
 			<li><code>alternate</code> reverses every other iteration</li>
+			<li>Any animated properties that are not set in <code>from</code> and <code>to</code> get their values from the element’s current CSS.</li>
 		</details>
 	</article>
 

@@ -35,11 +35,27 @@ function scopeRule(rule, slide, scope) {
 	}
 }
 
-$$(".demo.slide").forEach(slide => {
-	// This is before editors have been created
-	slide.classList.add("dont-resize");
+// Create trees from nested <ul>s
+$$("ul.tree").forEach(ul => {
+	// Wrap each text node with a span
+	$$("li", ul).forEach(li => {
+		if (li.childNodes[0].nodeType == 3) {
+			$.create("span", {
+				around: li.childNodes[0]
+			});
+		}
+
+		li.index = (li.previousElementSibling.index || -1) + 1;
+		li.style.setProperty("--index", li.index);
+		var parentLi = li.parentNode.closest("li");
+
+		if (parentLi) {
+			li.style.setProperty("--parent-index", parentLi.index);
+		}
+	});
 });
 
+// If a slide has a title but not an id, get its id from that
 $$(".slide[title]:not([id])").forEach(slide => {
 	slide.id = slide.title.replace(/[^\w\s-]/g, "") // Remove non-ASCII characters
 			.trim().replace(/\s+/g, "-") // Convert whitespace to hyphens
@@ -136,11 +152,14 @@ function calculateSpecificity(selector) {
 	];
 }
 
-$$("code.property, code.css, code.element, code.attribute").forEach(code => {
+// Links to documentation
+$$("code.property, code.css, code.function, code.element, code.attribute").forEach(code => {
 	var text = code.textContent;
 	var path;
 
 	switch (code.className) {
+		case "function":
+			code.textContent += "()";
 		case "property":
 		case "css":
 			path = "Web/CSS";
@@ -159,6 +178,11 @@ $$("code.property, code.css, code.element, code.attribute").forEach(code => {
 		around: code,
 		target: "_blank"
 	});
+});
+
+$$(".demo.slide").forEach(slide => {
+	// This is before editors have been created
+	slide.classList.add("dont-resize");
 });
 
 document.addEventListener("DOMContentLoaded", function(evt) {

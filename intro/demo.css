@@ -174,8 +174,10 @@
 			cursor: pointer;
 			text-transform: uppercase;
 			font: bold 1.2rem/1.5 var(--font-heading);
+			opacity: .5;
 		}
 
 			.editor label:hover {
 				background: hsl(15, 100%, 45%);
+				opacity: 1;
 			}

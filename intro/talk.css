@@ -766,3 +766,52 @@ a[data-html] {
 		white-space: nowrap;
 		display: block;
 	}
+
+ul.tree {
+	font: bold 160%/1 var(--font-mono);
+	--dy: 5rem;
+}
+
+ul.tree, ul {
+	margin: 0;
+	padding: 0;
+}
+
+	ul.tree > li {
+		margin: 0;
+	}
+
+	ul li {
+		position: relative;
+		display: flex;
+		align-items: center;
+		margin: .4em var(--dy);
+		font-size: 75%;
+		border: 1px solid hsla(0,0%,100%,.1)
+	}
+
+	ul.tree span {
+		padding: .3em .5em .15em;
+		background: var(--color-green);
+		border-radius: .4rem;
+		text-shadow: 0 0 3px rgba(0,0,0,.4);
+	}
+
+		ul.tree li  li span::before {
+			content: "";
+			position: absolute;
+			top: 50%;
+			right: 100%;
+			width: var(--dy);
+			height: .3rem;
+			transform: translateY(-50%);
+			background: inherit;
+		}
+
+		ul.tree > li li span { /* Second+ level */
+			background: var(--color-magenta);
+		}
+
+		ul.tree > li li li span { /* Third+ level */
+			background: var(--color-aqua);
+		}

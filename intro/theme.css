@@ -150,7 +150,7 @@ details.notes {
 		width: 50vw;
 		min-width: 280px;
 		max-width: calc(100vw - 4em);
-		max-height: 70vh;
+		max-height: calc(100vh - 5em);
 		overflow: auto;
 		padding: .8em 1em;
 		border: 1px solid rgba(0,0,0,.3);

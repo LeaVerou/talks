@@ -120,22 +120,22 @@ class Demo {
 				this.style = $("style#live", this.iframe.contentDocument);
 			};
 
-			// Open in new Tab button
-			if (this.editors.contents) {
-				var a = $.create("a", {
-					className: "button new-tab",
-					textContent: "Open in new Tab",
-					inside: slide,
-					target: "_blank",
-					events: {
-						click: evt => {
-							var title = slide.title || slide.dataset.title || "Demo";
+			var needsBase = this.slide.classList.contains("needs-base");
 
-							a.href = createURL(Demo.getHTMLPage(this.html, this.css, title));
-						}
+			// Open in new Tab button
+			var a = $.create("a", {
+				className: "button new-tab",
+				textContent: "Open in new Tab",
+				inside: slide,
+				target: "_blank",
+				events: {
+					click: evt => {
+						var title = slide.title || slide.dataset.title || "Demo";
+
+						a.href = createURL(Demo.getHTMLPage(this.html, this.css, title, {needsBase}));
 					}
-				});
-			}
+				}
+			});
 		}
 
 		var editorKeys = Object.keys(this.editors);
@@ -198,7 +198,7 @@ class Demo {
 		return new Prism.Live(textarea);
 	}
 
-	static getHTMLPage(html, css="", title="Demo") {
+	static getHTMLPage(html, css="", title="Demo", {needsBase} = {}) {
 		if (Array.isArray(css)) {
 			css = css.join("</style><style>");
 		}
@@ -210,16 +210,16 @@ class Demo {
 		return `<!DOCTYPE html>
 <html lang="en">
 <head>
-
+${needsBase? `<base href="${location.href}" />` : ""}
 <meta charset="UTF-8">
 <title>${title}</title>
 <style>
 body {
-font-size: 200%;
+	font-size: 200%;
 }
 
 input, select, textarea, button {
-font: inherit;
+	font: inherit;
 }
 </style>
 ${css}
