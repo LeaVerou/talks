@@ -438,6 +438,49 @@
 		</details>
 	</article>
 
+	<article class="isolated demo slide" style="--collapsed-height: 3em">
+		<div data-edit="contents css">
+			<h1>My first CSS code</h1>
+			<p>One morning, when <a href="https://en.wikipedia.org/wiki/The_Metamorphosis">Gregor Samsa</a> woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.</p>
+			<p>He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.</p>
+			<p>The bedding was hardly able to cover it and seemed ready to slide off any moment.</p>
+			<p>His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me? " he thought. It wasn't a dream.</p>
+		</div>
+		<style data-slide>
+			h1 {
+				font-family: Helvetica, Segoe UI, sans-serif;
+				color: purple;
+			}
+
+			p {
+				hyphens: auto;
+			}
+
+			a {
+				text-decoration: none;
+			}
+		</style>
+		<details class="notes">
+			<ul>
+				<li>Here we can see our first few CSS properties:
+					<ul>
+						<li><code class="property">font-family</code>: Sets the font, in order of preference.
+							Because on the Web you don’t exactly know which fonts the user has installed, you provide a list of fonts with a generic fallback at the end.
+						</li>
+						<li><code class="property">color</code>: Sets the text color (which is also the default color for several other effects, such as borders and shadows)</li>
+						<li><code class="property">hyphens</code>: Enables hyphenation</li>
+						<li><code class="property">text-decoration</code>: Sets or (in this case) cancels text underline/overline.</li>
+					</ul>
+				</li>
+				<li>
+					We can also modify CSS via JavaScript! Open this page in a new tab, then select the <code class="element">a</code> element
+					and run <code>$0.style.backgroundColor = "slategray";</code>
+				</li>
+			</ul>
+
+		</details>
+	</article>
+
 	<article class="slide dont-resize" id="all-properties" data-type="Property Index">
 		<script>
 		for (let property in document.documentElement.style) {
