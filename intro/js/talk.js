@@ -1,4 +1,5 @@
 var $ = Bliss, $$ = Bliss.$;
+var onslide = new WeakMap();
 
 try {
 	var isSpeaker = new URL(location).searchParams.get("speaker") !== null;
@@ -8,6 +9,14 @@ catch (e) {}
 if (isSpeaker) {
 	document.documentElement.classList.add("speaker");
 }
+
+document.body.style.setProperty("--slide-count", `"${$$(".slide").length}"`);
+
+// Slide-specific listeners
+document.addEventListener("slidechange", evt => {
+	var callback = onslide.get(evt.target);
+	callback && callback(evt);
+});
 
 function scopeRule(rule, slide, scope) {
 	let selector = rule.selectorText;
@@ -37,21 +46,46 @@ function scopeRule(rule, slide, scope) {
 
 // Create trees from nested <ul>s
 $$("ul.tree").forEach(ul => {
+	var slide = ul.closest(".slide");
 	// Wrap each text node with a span
 	$$("li", ul).forEach(li => {
-		if (li.childNodes[0].nodeType == 3) {
-			$.create("span", {
-				around: li.childNodes[0]
+		var node = li.childNodes[0];
+
+		if (!node.matches || !node.matches(".node")) {
+			if (node.matches && node.matches("a")) {
+				a.classList.add("node");
+			}
+			else {
+				var a = $.create("a", {
+					className: "node",
+					target: "_blank",
+					around: node
+				});
+
+				if (!ul.classList.contains("no-link")) {
+					a.href = "https://developer.mozilla.org/en-US/docs/Web/CSS/" + node.textContent.trim();
+				}
+			}
+		}
+	});
+
+	onslide.set(slide, evt => {
+		$$("ul.tree li li > .node", slide).forEach(span => {
+			requestAnimationFrame(() => {
+				var li = span.closest("ul").parentNode;
+				var lineCS = getComputedStyle(span, "::before");
+
+				var top = span.parentNode.offsetTop + span.parentNode.offsetHeight / 2;
+				var parentTop = li.offsetHeight / 2;
+				var dy = top - parentTop;
+				var dx = parseInt(lineCS.width);
+
+				var angle = Math.atan2(dy, dx);
+				var θ = angle * 180 / Math.PI;
+				span.style.setProperty("--angle", θ);
+				span.style.setProperty("--cos-angle", Math.abs(Math.cos(angle)));
 			});
-		}
-
-		li.index = (li.previousElementSibling.index || -1) + 1;
-		li.style.setProperty("--index", li.index);
-		var parentLi = li.parentNode.closest("li");
-
-		if (parentLi) {
-			li.style.setProperty("--parent-index", parentLi.index);
-		}
+		});
 	});
 });
 
@@ -152,29 +186,34 @@ function calculateSpecificity(selector) {
 	];
 }
 
+$$('a[href^="http"]:not([target])').forEach(a => a.target = "_blank");
+
 // Links to documentation
-$$("code.property, code.css, code.function, code.element, code.attribute").forEach(code => {
+$$("code.property, code.css, code.function, code.element, code.attribute, [data-autolink] code").forEach(code => {
 	var text = code.textContent;
 	var path;
 
 	switch (code.className) {
 		case "function":
-			code.textContent += "()";
+			code.textContent += "()"; // pass-through
 		case "property":
 		case "css":
-			path = "Web/CSS";
+			path = "CSS";
 			break;
 		case "element":
-			path = "Web/HTML/Element";
+			path = "HTML/Element";
 			code.textContent = "<" + text + ">";
 			break;
 		case "attribute":
 			var category = code.dataset.category || "Global_attributes";
-			path = `Web/API/${category}`;
+			path = `API/${category}`;
+			break;
+		default:
+			path = code.closest("[data-autolink]").dataset.autolink;
 	}
 
 	$.create("a", {
-		href: `https://developer.mozilla.org/en-US/docs/${path}/${text}`,
+		href: `https://developer.mozilla.org/en-US/docs/Web/${path}/${text}`,
 		around: code,
 		target: "_blank"
 	});
@@ -220,43 +259,18 @@ $$("#colors input").forEach(input => {
 });
 
 // CSS Variables specific
-document.addEventListener("slidechange", evt => {
-	var slideId = evt.target.id;
 
-	var mousemove = evt => {
-		document.documentElement.style.setProperty("--mouse-x", evt.clientX / innerWidth);
-		document.documentElement.style.setProperty("--mouse-y", evt.clientY / innerHeight);
-	};
-
-	if (slideId == "mouse") {
-		document.addEventListener("mousemove", mousemove);
-	}
-	else {
-		document.removeEventListener("mousemove", mousemove);
-	}
-});
-
-for (input of document.querySelectorAll("input")) {
-	input.style.setProperty("--value", input.value);
-}
-
-document.addEventListener("input", evt => {
-	if (evt.target.matches(":target input")) {
-		evt.target.style.setProperty("--value", input.value);
-	}
-});
-
-var setLength = element => {
-	element.style.setProperty("--length", element.textContent.length);
-};
-
-for (let el of document.querySelectorAll(".scrolling")) {
-	el.addEventListener("scroll", evt => {
-		let maxScroll = el.scrollHeight - el.offsetHeight;
-		let scroll = el.scrollTop / maxScroll;
-		el.style.setProperty("--scroll", scroll);
-	});
-}
+// onslide.set($(".slide#mouse"), evt => {
+// 	var mousemove = evt => {
+// 		document.documentElement.style.setProperty("--mouse-x", evt.clientX / innerWidth);
+// 		document.documentElement.style.setProperty("--mouse-y", evt.clientY / innerHeight);
+// 	};
+//
+// 	document.addEventListener("mousemove", mousemove);
+// 	document.addEventListener("slidechange", evt => {
+// 		document.removeEventListener("mousemove", mousemove);
+// 	}, {once: true});
+// });
 
 // Remove spaces in syntax breakdown and add classes to the ones that are towards the end
 $$(".syntax-breakdown code").forEach(function(code) {

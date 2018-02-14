@@ -13,7 +13,7 @@
 
 html {
 	--font-mono: Consolas, Monaco, 'Andale Mono', monospace;
-	--font-body: 'Helvetica Neue', sans-serif;
+	--font-body: 'Helvetica Neue', Segoe UI, sans-serif;
 	--font-heading: var(--font-body);
 	--font-handwritten: 'Reenie Beanie', Marker Felt, cursive;
 
@@ -57,6 +57,12 @@ img {
 	max-width: 100%;
 	max-height: 100%;
 }
+
+	.slide > a:nth-last-child(-n+2):nth-child(-n+2) > img:only-child {
+		display: block;
+		margin-top: 1em;
+		max-height: calc(100vh - 1em)
+	}
 
 code, textarea, pre, div.editor {
 	margin: 0;
@@ -115,7 +121,8 @@ details.notes {
 	position: absolute;
 	left: 1em;
 	bottom: 1em;
-	font-weight: 300;
+	z-index: 1;
+	font-weight: 400;
 	text-align: left;
 }
 
@@ -145,7 +152,7 @@ details.notes {
 
 	details.notes > div {
 		position: absolute;
-		bottom: 1.6em;
+		bottom: 1.86em;
 		left: 0;
 		width: 50vw;
 		min-width: 280px;
@@ -158,7 +165,7 @@ details.notes {
 		background: var(--color-light-gray);
 		color: black;
 		text-shadow: 0 .1em .1em white;
-		font-size: 70%;
+		font-size: 60%;
 		box-shadow: .1em .2em 1em rgba(0,0,0,.5);
 	}
 
@@ -184,6 +191,11 @@ details.notes {
 		transform: rotate(45deg);
 	}
 
+	details.notes a,
+	details.notes code {
+		font-weight: bold;
+	}
+
 details.notes.top-right {
 	position: absolute;
 	top: 1em;
@@ -192,15 +204,9 @@ details.notes.top-right {
 	left: auto;
 }
 
-.button.next {
-	position: absolute;
-	bottom: 1em;
-	right: 1em;
-}
-
 	details.notes.top-right > div {
 		bottom: auto;
-		top: 1.6em;
+		top: 1.86em;
 		left: auto;
 		right: 0;
 		box-shadow: .05em .1em .4em rgba(0,0,0,.2);
@@ -212,6 +218,12 @@ details.notes.top-right {
 			left: auto;
 			right: 40%;
 		}
+
+.button.next {
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
+}
 
 .slide {
 	display: flex;
@@ -294,6 +306,12 @@ section > header.slide:target {
 	font-weight: 100;
 }
 
+	#indicator::after {
+		content: var(--slide-count);
+		display: block;
+		border-top: 1px solid;
+	}
+
 ::selection {
 	background: hsl(335, 100%, 40%);
 	color: white;
@@ -359,4 +377,78 @@ blockquote {
 
 		blockquote .cite a:not(:hover) {
 			text-decoration: none;
+		}
+
+ul.tree {
+	font: bold 160%/1 var(--font-mono);
+	--dx: 5rem;
+}
+
+ul.tree, ul.tree ul {
+	margin: 0;
+	padding: 0;
+}
+
+	ul.tree > li {
+		margin: 0;
+	}
+
+	ul.tree li {
+		position: relative;
+		display: flex;
+		align-items: center;
+		margin: .3em 0;
+		font-size: 75%;
+	}
+
+		ul.tree li li {
+			margin-left: var(--dx);
+		}
+
+	ul.tree .node {
+		padding: .3em .5em .15em;
+		background: var(--color-green);
+		border-radius: .2em;
+		text-shadow: 0 0 3px rgba(0,0,0,.4);
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+		ul.tree .node[href]:hover {
+			text-decoration: underline;
+			text-decoration-color: initial;
+		}
+
+		ul.tree li  li .node::before {
+			content: "";
+			position: absolute;
+			top: 50%;
+			right: 100%;
+			width: var(--dx);
+			height: .15em;
+			transform: translateY(-50%) skewY(calc(var(--angle, 0) * 1deg)) scaleY(calc(1 / var(--cos-angle, 1)));
+			transform-origin: right;
+			margin: 0;
+			border-radius: 0;
+			background: inherit;
+			background-image: linear-gradient(to right, var(--parent-color), transparent);
+		}
+
+		ul.tree > li li .node { /* 2+ level */
+			background: var(--color-magenta);
+			--parent-color: var(--color-green);
+		}
+
+		ul.tree > li li li .node { /* 3+ level */
+			background: var(--color-aqua);
+			--parent-color: var(--color-magenta);
+		}
+
+		ul.tree > li li li li .node { /* 4+ level */
+			background: var(--color-orange);
+			--parent-color: var(--color-aqua);
+		}
+
+		ul.tree > li li li li li .node { /* 5+ level */
+			--parent-color: var(--color-orange);
 		}

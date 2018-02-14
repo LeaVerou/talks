@@ -466,7 +466,6 @@ a[data-html] {
 		--color-content: hsla(0,0%,100%,.6);
 
 		background: linear-gradient(var(--color-content), var(--color-content)) content-box, hsla(280, 50%, 80%, .2) padding-box;
-		border: solid rgba(0,0,0,.5);
 	}
 
 #specificity-battle {
@@ -703,30 +702,34 @@ a[data-html] {
 	}
 
 	.slide[data-type="Resources"] a::before,
-	a[href^="https://developer.mozilla.org/en-US/docs/"]:only-child::before {
+	details.notes a[href^="https://developer.mozilla.org/en-US/docs/"]::before {
 		display: inline-block;
 		vertical-align: -.1em;
 		border-radius: 3px;
-		margin-right: .3em;
-		width: 1em;
-		height: 1em;
+		margin-right: .2em;
+		width: .8em;
+		height: .8em;
 		background: var(--image) bottom / contain no-repeat;
 		content: "";
 	}
 
-	a[href^="https://developer.mozilla.org/en-US/docs/"]:only-child::before {
+	a[href^="https://developer.mozilla.org/en-US/docs/"]::before {
 		--image: url("https://cdn.mdn.mozilla.net/static/img/favicon32.7f3da72dcea1.png");
 	}
 
-	a[href^="https://www.w3.org/"]:only-child::before {
+	a[href^="https://www.w3.org/"]::before {
 		--image: url("https://www.w3.org/favicon.ico");
 	}
 
-	a[href*=".whatwg.org"]:only-child::before {
+	a[href*="whatwg.org"]::before {
 		--image: url("https://resources.whatwg.org/logo.svg");
 	}
 
-	a[href*=".codecademy.com"]:only-child::before {
+	a[href*="htmldog.com"]::before {
+		--image: url("http://htmldog.com/favicon.ico");
+	}
+
+	a[href*=".codecademy.com"]::before {
 		--image: url("https://www.codecademy.com/favicon.ico");
 		filter: invert() hue-rotate(180deg);
 	}
@@ -752,9 +755,8 @@ a[data-html] {
 	}
 
 #all-properties {
-	font: 100%/1.5 var(--font-mono);
 	text-align: left;
-	column-width: 11em;
+	column-width: 4em;
 }
 
 #all-properties:target {
@@ -765,53 +767,30 @@ a[data-html] {
 	#all-properties a {
 		white-space: nowrap;
 		display: block;
+		font: 40%/1.5 var(--font-mono);
 	}
 
-ul.tree {
-	font: bold 160%/1 var(--font-mono);
-	--dy: 5rem;
+@supports (-webkit-background-clip: text) {
+	#shorthands h1 {
+		color: transparent;
+		background: linear-gradient(to right, var(--color-green), var(--color-magenta) 46%, white 0, white 56%, var(--color-magenta) 0, var(--color-aqua));
+		-webkit-background-clip: text;
+	}
 }
 
-ul.tree, ul {
-	margin: 0;
-	padding: 0;
+#dom-tree li li li li .node:only-child {
+	background: white;
+	color: black;
+	text-shadow: none;
 }
 
-	ul.tree > li {
-		margin: 0;
+#xkcd {
+	background-image: url(img/xkcd.png);
+	background-size: auto 70%;
+	background-color: white;
+}
+
+	#xkcd::after {
+		color: black;
+		text-shadow: none;
 	}
-
-	ul li {
-		position: relative;
-		display: flex;
-		align-items: center;
-		margin: .4em var(--dy);
-		font-size: 75%;
-		border: 1px solid hsla(0,0%,100%,.1)
-	}
-
-	ul.tree span {
-		padding: .3em .5em .15em;
-		background: var(--color-green);
-		border-radius: .4rem;
-		text-shadow: 0 0 3px rgba(0,0,0,.4);
-	}
-
-		ul.tree li  li span::before {
-			content: "";
-			position: absolute;
-			top: 50%;
-			right: 100%;
-			width: var(--dy);
-			height: .3rem;
-			transform: translateY(-50%);
-			background: inherit;
-		}
-
-		ul.tree > li li span { /* Second+ level */
-			background: var(--color-magenta);
-		}
-
-		ul.tree > li li li span { /* Third+ level */
-			background: var(--color-aqua);
-		}

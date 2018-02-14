@@ -175,7 +175,9 @@ class Demo {
 
 		if (lang == "html") {
 			code = code.replace(/=""(?=\s|>)/g, "")
-			           .replace(/&gt;/g, ">");
+			           .replace(/&gt;/g, ">")
+					   .replace(/><\/(circle|path|rect)>/, " />")
+					   ;
 		}
 
 		return code;

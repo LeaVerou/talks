@@ -51,7 +51,7 @@
 
 	<article class="slide syntax-breakdown">
 		<code>
-			Hello <span title="Start tag" contentEditable>&lt;em></span><span title="Element content" data-index="1" contentEditable>world</span><span title="End tag" contentEditable>&lt;/em></span>!
+			Hello <span title="Start em(phasis) tag" contentEditable>&lt;em></span><span title="Element content" data-index="1" contentEditable>world</span><span title="End tag" contentEditable>&lt;/em></span>!
 		</code>
 		<a data-html="code" target="_blank" class="delayed">Open page in new tab</a>
 	</article>
@@ -61,10 +61,62 @@
 		<details class="notes">
 			<ul>
 				<li>Even if we don’t add <code>&lt;html></code>, <code>&lt;head></code>, and <code>&lt;body></code> elements, the browser will do it for us.</li>
-				<li>The browser offers us Developer Tools that allow us to peek under the hood and inspect the current state of the page.</li>
-				<li>The HTML elements on the page form a tree called the DOM Tree, with the <code>&lt;html></code> element at its root.</li>
-				<li>How many nodes does the DOM tree of our little page have?</li>
+				<li>The browser offers us Developer Tools that allow us to peek under the hood and inspect the current state of the page and even modify it.</li>
 				<li>Note that some CSS is applied anyway, from the browser.</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="slide" id="dom-tree" title="DOM Tree">
+		<h1>Our <abbr title="Document Object Model">DOM</abbr> Tree</h1>
+
+		<ul class="tree no-link">
+			<li>
+				document
+				<ul>
+					<li>&lt;html>
+						<ul>
+							<li>&lt;head></li>
+							<li>&lt;body>
+								<ul>
+									<li>"Hello "</li>
+									<li>&lt;em>
+										<ul>
+											<li>"world"</li>
+										</ul>
+									</li>
+									<li>"!"</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+		<details class="notes">
+			<ul>
+				<li>The browser’s internal model of our HTML is called the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">DOM Tree</a></li>
+				<li>It’s a hierarchy of objects of different types, such as:
+					<ul>
+						<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document" target="_blank"><code>Document</code></a>:
+							This is the root node, and does not correspond to any HTML element.</li>
+						<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement" target="_blank"><code>HTMLElement</code></a>:
+							Every HTML element, such as <code class="element">html</code>, <code class="element">body</code>, or <code class="element">em</code>
+							is of this type. Usually, they merely inherit from <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement"><code>HTMLElement</code></a>,
+							and are an instance of a more specific type such as
+							<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLHtmlElement"><code>HTMLHtmlElement</code></a>,
+							<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement"><code>HTMLBodyElement</code></a> and so on.</li>
+						<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Text" target="_blank"><code>Text</code></a>:
+							Text nodes, such as <code>"Hello "</code>, <code>"world"</code>, and <code>"!"</code> in our example.
+							These never contain any other element, they are always leaves.
+						</li>
+						<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Comment" target="_blank"><code>Comment</code></a>:
+							HTML comments (<code>&lt;!-- like this --></code>) are represented by objects of this type.
+						</li>
+					</ul>
+				</li>
+				<li>We can interact with, and manipulate the DOM tree via JavaScript!</li>
 			</ul>
 		</details>
 	</article>
@@ -76,6 +128,15 @@
 				<li>The Console tab allows us to experiment with JavaScript.</li>
 				<li><code>$0</code> always refers to the currently selected element. <code>$1</code> to the previously selected element, <code>$2</code> to the one before it and so on.</li>
 				<li><code>element.textContent</code> gives us the content of an element as text. Try changing it!</li>
+				<li>Other useful properties you could play with:
+					<ul data-autolink="API/Node">
+						<li><code>parentNode</code></li>
+						<li><code>childNodes</code></li>
+						<li><code>children</code></li>
+						<li><code>previousSibling</code></li>
+						<li><code>nodeType</code></li>
+					</ul>
+				</li>
 			</ul>
 		</details>
 	</article>
@@ -144,8 +205,10 @@
 				<li><code class="element">a</code> elements let you link to other websites or even places in the current page.</li>
 				<li>The <code>href</code> attribute contains the <em>link target</em>, which is an absolute or relative (to the current page) URL</li>
 				<li>The content of the link is the text presented. Sadly there is no shortcut if you want to show the URL itself, you have to duplicate it (or automate this via CSS or JS).</li>
-				<li>To link to places in the current page, assign an <code class="attribute">id</code> attribute to the target element, then use <code>#id</code> as the link.</li>
-				<li>You can also use <code>#hashes</code> in absolute URLs</li>
+				<li>To link to a specific place in a page, you need to find an element with an <code class="attribute">id</code> attribute near that place.
+					Then, you can just add <code>#id</code> to the URL.
+				</li>
+				<li>You can link to specific places in the current page as well, if you just use <code>#yourId</code> as the URL.</li>
 			</ul>
 		</details>
 	</article>
@@ -310,6 +373,24 @@
 		</ul>
 	</article>
 
+	<article class="isolated horizontal demo slide" title="SVG">
+<svg data-edit="html" viewBox="0 0 100 100">
+	<circle cx="50" cy="50" r="40" fill="red" stroke="black" stroke-dasharray="10 5" />
+</svg>
+		<details class="notes">
+			<ul>
+				<li><abbr title="Scalable Vector Graphics">SVG</abbr> is a vector graphics format for the Web.</li>
+				<li>You can embed SVG in your HTML, or you can store it as a separate file.
+					The latter requires an <code>xmlns="http://www.w3.org/2000/svg"</code> attribute and has stricter syntax requirements.</li>
+				<li>Many graphics editors these days export SVG (e.g. Adobe Illustrator, Inkscape), but if you want dynamic graphics, you often have to get your hands dirty.</li>
+				<li data-autolink="SVG/Element">Its syntax is similar to HTML, but with different elements, such as <code>circle</code>,
+					<code>rect</code>, <code>path</code>, <code>polygon</code> and many more.
+				</li>
+				<li>Just like HTML, it can be styled with CSS, and supports a swath of CSS properties that uniquely apply to it.</li>
+			</ul>
+		</details>
+	</article>
+
 	<article class="slide syntax-breakdown vertical">
 		<code style="font-size: 180%;">
 			<span title="Selector">h1</span> {
@@ -357,7 +438,7 @@
 		</details>
 	</article>
 
-	<article class="slide dont-resize" id="all-properties">
+	<article class="slide dont-resize" id="all-properties" data-type="Property Index">
 		<script>
 		for (let property in document.documentElement.style) {
 			let value = document.documentElement.style[property];
@@ -378,6 +459,25 @@
 		<a href="http://cssdiner.com" target="_blank">
 			<img src="img/cssdiner.png" alt="">
 		</a>
+	</article>
+
+	<article class="slide">
+		<a href="https://mit.edu" target="_blank">
+			<img src="img/mitedu.png" alt="Screenshot of mit.edu">
+		</a>
+		<details class="notes">
+			<ul>
+				<li>Selectors are not only useful for styling, but also to get references to elements in the DOM tree.
+					Let’s put our knowledge to use by exploring an existing website!</li>
+				<li>JS has the function <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll"><code>document.querySelectorAll("selector")</code></a> to get all the elements in a document that match a given selector as an array!</li>
+				<li>Because that’s ridiculously long, the Console gives us a shortcut: <code>$$("selector")</code>. Try it on the MIT website:
+					Type <code>$$("h1")</code> in the console to find the website title!</li>
+				<li>This returned an <strong>array</strong> with one element. To actually get that element, we use the <strong>brackets notation</strong>: <code>$$("h1")[0]</code>.</li>
+				<li>Note that hovering over the element highlights it in the page. But what if we want to see it in the Elements panel?
+					Easy peasy, just use the <a href="https://developers.google.com/web/tools/chrome-devtools/console/command-line-reference#inspect"><code>inspect()</code></a> function: <code>inspect($$("h1")[0])</code></li>
+				<li>Count how many elements there are in an array with the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length"><code>length</code></a> property.</li>
+			</ul>
+		</details>
 	</article>
 
 	<article class="isolated demo slide" title="Conflicts" style="--collapsed-height: 50%">
@@ -515,13 +615,13 @@
 	</article>
 
 	<article class="slide dont-resize" id="shorthands">
-		<h1>Shorthands</h1>
+		<h1>Shorthands & Longhands</h1>
 		<ul class="tree">
 			<li>
 				border
 				<ul>
 					<li>border-width
-						<ul>
+						<ul class="delayed">
 							<li>border-top-width</li>
 							<li>border-right-width</li>
 							<li>border-bottom-width</li>
@@ -529,7 +629,7 @@
 						</ul>
 					</li>
 					<li>border-style
-						<ul>
+						<ul class="delayed">
 							<li>border-top-style</li>
 							<li>border-right-style</li>
 							<li>border-bottom-style</li>
@@ -537,7 +637,7 @@
 						</ul>
 					</li>
 					<li>border-color
-						<ul>
+						<ul class="delayed">
 							<li>border-top-color</li>
 							<li>border-right-color</li>
 							<li>border-bottom-color</li>
@@ -549,12 +649,83 @@
 		</ul>
 	</article>
 
+	<article class="slide dont-resize" id="border-longhands">
+		<ul class="tree">
+			<li>
+				border
+				<ul>
+					<li>border-top
+						<ul class="delayed">
+							<li>border-top-width</li>
+							<li>border-top-style</li>
+							<li>border-top-color</li>
+						</ul>
+					</li>
+					<li>border-right
+						<ul class="delayed">
+							<li>border-right-width</li>
+							<li>border-right-style</li>
+							<li>border-right-color</li>
+						</ul>
+					</li>
+					<li>border-bottom
+						<ul class="delayed">
+							<li>border-bottom-width</li>
+							<li>border-bottom-style</li>
+							<li>border-bottom-color</li>
+						</ul>
+					</li>
+					<li>border-left
+						<ul class="delayed">
+							<li>border-left-width</li>
+							<li>border-left-style</li>
+							<li>border-left-color</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</article>
+
+	<article class="slide dont-resize" id="background-shorthands">
+		<ul class="tree">
+			<li>
+				background
+				<ul>
+					<li>background-color</li>
+					<li>background-repeat</li>
+					<li>background-size</li>
+					<li>background-position</li>
+					<li>background-clip</li>
+					<li>background-origin</li>
+					<li>background-attachment</li>
+				</ul>
+			</li>
+		</ul>
+	</article>
+
+	<article class="slide dont-resize" id="font-longhands">
+		<ul class="tree">
+			<li>
+				font
+				<ul>
+					<li>font-style</li>
+					<li>font-variant</li>
+					<li>font-weight</li>
+					<li>font-size</li>
+					<li>line-height</li>
+					<li>font-family</li>
+				</ul>
+			</li>
+		</ul>
+	</article>
+
 	<article class="demo slide horizontal" id="box-model">
 		<style data-slide>
 			.box {
 				width: 400px;
 				padding: 40px;
-				border-width: 20px;
+				border: 20px solid rgba(0,0,0,.5);
 			}
 		</style>
 		<div class="box" data-edit="css html">Bacon ipsum dolor amet alcatra meatball burgdoggen,
@@ -562,14 +733,197 @@
 		<details class="notes">
 			<summary>The Box Model</summary>
 			<ul>
+				<li><code class="property">padding</code> controls the spacing from the element’s content to its edge.
+					<code class="property">margin</code> specifies the spacing from the element’s edge to the elements around it.
+					<code class="property">border</code> allows you to specify a visible border. It’s placed outside the padding.
+				</li>
 				<li>Padding & border widths are <strong>added</strong> to width and height, not subtracted from it.</li>
 				<li>You can change that with <code>box-sizing: border-box</code></li>
 			</ul>
 		</details>
 	</article>
 
+	<article class="slide dont-resize" id="margin-longhands">
+		<ul class="tree">
+			<li>
+				margin
+				<ul>
+					<li>margin-top</li>
+					<li>margin-right</li>
+					<li>margin-bottom</li>
+					<li>margin-left</li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="tree">
+			<li>
+				padding
+				<ul>
+					<li>padding-top</li>
+					<li>padding-right</li>
+					<li>padding-bottom</li>
+					<li>padding-left</li>
+				</ul>
+			</li>
+		</ul>
+	</article>
+
+	<article class="isolated demo slide" title="Lengths">
+		<button data-edit="css html">
+	Click meee
+</button>
+		<style data-slide>
+			button {
+				background: yellowgreen;
+				border: none;
+			}
+		</style>
+		<details class="notes">
+			<ul>
+				<li>There are more units besides <code>px</code> that you can use anywhere a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/length">length</a> is required!.
+					Some useful units are:
+					<ul>
+						<li><code>%</code> refers to a different thing depending on the property. Look it up on a case-by-case basis!</li>
+						<li><code>em</code> is relative the current font size</li>
+						<li><code>rem</code> is relative to the current font size of the <code class="element">html</code> element</li>
+						<li><code>ch</code> represents the width of the "0" glyph in the current font.
+							This is useful in monospaced fonts where every character has the same width.</li>
+						<li><code>vw</code> is a percentage of the viewport width (<code>100vw</code> = viewport width)</li>
+						<li><code>vh</code> is a percentage of the viewport height (<code>100vh</code> = viewport height)</li>
+					</ul>
+				</li>
+				<li>Font-relative units are useful in making components that scale by changing one property (the <code class="property">font-size</code>).</li>
+				<li>Viewport-relative units are useful in making layouts that scale nicely with the viewport size.</li>
+				<li>Use <code class="css">calc()</code> to perform calculations between different units.</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="slide">
+		<a href="http://www.bostonglobe.com/metro/2018/02/12/mit-reckoning-with-slavery/ycYjRNa3dgwOenvbDCCEsO/story.html" target="_blank">
+			<img src="img/bostonglobe.png" alt="Screenshot of the bostonglobe article this link points to, that shows its paywall">
+		</a>
+	</article>
+
+	<article class="image slide" id="xkcd" data-credits="xkcd.com/208"></article>
+
+	<article class="isolated demo slide" title="Positioning">
+		<div data-edit="css contents">
+			<h1>Basic document flow</h1>
+			<p>I am a basic block level element. My adjacent block level elements sit on new lines below me.</p>
+			<p>By default we span 100% of the width of our parent element, and we are as tall as our content.
+				Our total width and height is our content + padding + border width/height.</p>
+			<p>We are separated by our margins. Because of margin collapsing, we are separated by the width of one of our margins, not both.</p>
+			<p>Inline elements <strong>like this one</strong> and <mark>this one</mark> sit on the same line as one another,
+				and adjacent text nodes, if there is space on the same line.
+				 Overflowing inline elements will <mark>wrap onto a new line if possible (like this one containing text)</mark>,
+				 or just go on to a new line if not, much like this image will do: <img src="https://mdn.mozillademos.org/files/13360/long.jpg"></p>
+			<p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.</p>
+
+		</div>
+		<style data-slide>
+			p {
+				background: white;
+			}
+
+			p:first-of-type {
+				/*position: absolute;*/
+				background: hsla(40, 100%, 50%, .6);
+			}
+		</style>
+		<details class="notes">
+			<ul>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Positioning">Positioning</a> allows you to take elements out of the normal document layout flow, and make them behave differently,
+					for example sitting on top of one another, or always remaining in the same place regardless of scrolling.</li>
+				<li>The <code class="property">position</code> property controls which positioning scheme is used. Its initial value is <code>static</code>, which corresponds to the default document flow.</li>
+				<li>What do you notice when <code>position: absolute</code> is applied?</li>
+				<li>To control the element offsets, we use the <code class="property">top</code>, <code class="property">right</code>,
+					<code class="property">bottom</code>, <code class="property">left</code> properties.
+					These are relative to the element’s <em>containing block</em>, which is determined by the following algorithm:
+					<ol>
+						<li>Find the closest ancestor whose <code class="property">position</code> property is not <code>static</code> or who has a <code class="property">transform</code> or <code class="property">filter</code> property set.</li>
+						<li>If no such ancestor is found, then it’s the area of the <code class="element">html</code> element that intersects with the viewport.</li>
+					</ol>
+				</li>
+				<li><code>position: relative</code> does nothing by itself, but it has two consequences:
+					<ul>
+						<li>It makes this element the <em>containing block</em> of any positioned descendants.</li>
+						<li>The <code class="property">top</code>, <code class="property">right</code>,
+							<code class="property">bottom</code>, <code class="property">left</code> properties will actually move the element,
+							whereas they don’t do anything by default (i.e. under <code>position: static</code>).</li>
+					</ul>
+				</li>
+				<li><code>position: fixed</code> is just like <code>absolute</code> but the containing block is the viewport.
+					This has the effect of the element staying in the same place during scrolling.</li>
+				<li><code>position: sticky</code> is a hybrid of <code>relative</code> and <code>fixed</code>:
+					<ul>
+						<li>If the element is in view, it behaves like <code>relative</code>.</li>
+						<li>If the element is not in view (the user has scrolled), but its containing block is, it behaves like <code>fixed</code></li>
+						<li>If its containing block gets out of view as well, it behaves like <code>relative</code> again</li>
+					</ul>
+				</li>
+				<li><code class="property">z-index</code> controls which element is on top of what. Its initial value is <code>auto</code> which corresponds to source order.</li>
+				<li>When learning CSS, the precision of absolute positioning may be tempting, but avoid it: It will bite you back later, when you need to make changes!</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="isolated demo slide" title="Pseudo-elements and Generated Content">
+		<details class="notes">
+			<ul>
+				<li><em>Pseudo-elements</em> start with <code>::</code> and correspond to parts of elements or new content (<em>Generated Content</em>).</li>
+				<li>Some popular pseudo-elements are:
+					<ul>
+						<li>
+							<code class="css">::first-letter</code> Useful for creating drop caps
+							<code class="css">::first-line</code> Allows you to differentiate the first line of content
+							<code class="css">::before</code> Generate & insert new content before the element’s content
+							<code class="css">::after</code> Generate & insert new content after the element’s content
+						</li>
+					</ul>
+				</li>
+				<li><code class="css">::before</code> and <code class="css">::after</code> have no effect
+					without the <code class="property">content</code> property which specifies the content to insert.</li>
+				<li>This new content can be:
+					<ul>
+						<li>Strings</li>
+						<li>Images</li>
+						<li>The <code>attr()</code> function</li>
+						<li>The <code>counter()</code> function</li>
+						<li>Any space-separated combination of the above</li>
+					</ul>
+				</li>
+			</ul>
+		</details>
+		<div data-edit="css contents">
+			<script>
+				document.write(document.currentScript.closest(".slide").querySelector("details.notes ul").outerHTML);
+				document.currentScript.remove();
+			</script>
+		</div>
+		<style data-slide>
+			li {
+				list-style: none;
+			}
+
+			li::before {
+				content: "💩";
+			}
+
+			a[href^="https://developer.mozilla.org"]::before {
+				content: url("https://cdn.mdn.mozilla.net/static/img/favicon32.7f3da72dcea1.png");
+			}
+		</style>
+	</article>
+
 	<article class="isolated horizontal demo slide" title="Media Queries">
-		<p data-edit="css html">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me?" he thought. It wasn't a dream. His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather.</p>
+		<div data-edit="css contents">
+			<p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.</p>
+			<p>He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.</p>
+			<p>The bedding was hardly able to cover it and seemed ready to slide off any moment.</p>
+			<p>His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me? " he thought. It wasn't a dream.</p>
+			<p>His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed</p>
+		</div>
 		<style data-slide>
 			p {
 				font-size: 2rem;
@@ -582,10 +936,12 @@
 			}
 		</style>
 		<details class="notes">
-			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries">Media Queries</a> are like conditionals about the viewing conditions.</li>
-			<li>They support <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media#Media_features">a bunch of criteria</a>, but the most commonly used ones are the <code>width</code> and <code>height</code> of the viewport.</li>
-			<li>You can put any number of rules inside them.</li>
-			<li>You can use <code>and</code> and <code>not</code> operators, and commas for OR</li>
+			<ul>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries">Media Queries</a> are like conditionals about the viewing conditions.</li>
+				<li>They support <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media#Media_features">a bunch of criteria</a>, but the most commonly used ones are the <code>width</code> and <code>height</code> of the viewport.</li>
+				<li>You can put any number of rules inside them.</li>
+				<li>You can use <code>and</code> and <code>not</code> operators, and commas for OR</li>
+			</ul>
 		</details>
 	</article>
 
@@ -622,11 +978,25 @@
 		</style>
 		<details class="notes">
 			<li><code class="property">transition</code> makes style changes smooth, whenever possible.</li>
-			<li>It is actually a shorthand of <code class="property">transition-duration</code>, <code class="property">transition-delay</code>, <code class="property">property</code>, <code class="property">transition-timing-function</code></li>
+			<li>It is actually a shorthand of <code class="property">transition-duration</code>, <code class="property">transition-delay</code>, <code class="property">transition-property</code>, <code class="property">transition-timing-function</code></li>
 			<li>The minimum it needs is a duration, but it also accepts a property, delay, easing.</li>
 			<li>Both <code class="property">transition</code> and its longhands accept comma-separated lists, to create multiple transitions with different parameters for different properties.</li>
 			<li>Keyword changes cannot be interpolated, but lengths, numbers, colors, transforms etc can.</li>
 		</details>
+	</article>
+
+	<article class="slide dont-resize" id="transition-longhands">
+		<ul class="tree">
+			<li>
+				transition
+				<ul>
+					<li>transition-duration</li>
+					<li>transition-delay</li>
+					<li>transition-property</li>
+					<li>transition-timing-function</li>
+				</ul>
+			</li>
+		</ul>
 	</article>
 
 	<article class="isolated demo slide" title="Animations" style="--division: 60">
@@ -655,7 +1025,7 @@
 						<li><code class="property">animation-iteration-count</code>: How many times should it play? (number or <code>infinite</code>)</li>
 						<li><code class="property">animation-timing-function</code>: How should it progress over time?</li>
 						<li><code class="property">animation-direction</code>: Should any iterations be reversed?</li>
-						<li><code class="property">animation-fill-mode</code>How should it behave before and after it’s applied?</li>
+						<li><code class="property">animation-fill-mode</code>: How should it behave before and after it’s applied?</li>
 						<li><code class="property">animation-play-state</code>: Should it be paused?</li>
 					</ul>
 				</li>
@@ -663,6 +1033,24 @@
 				<li>All animation properties accept comma-separated lists of parameters, to apply multiple animations on the same element.</li>
 			</ul>
 		</details>
+	</article>
+
+	<article class="slide dont-resize" id="animation-longhands">
+		<ul class="tree">
+			<li>
+				animation
+				<ul>
+					<li>animation-name</li>
+					<li>animation-duration</li>
+					<li>animation-delay</li>
+					<li>animation-iteration-count</li>
+					<li>animation-timing-function</li>
+					<li>animation-direction</li>
+					<li>animation-fill-mode</li>
+					<li>animation-play-state</li>
+				</ul>
+			</li>
+		</ul>
 	</article>
 
 	<article class="isolated demo slide" title="Animations 2" style="--division: 60">
@@ -713,6 +1101,28 @@
 			<li><code><code class="property">flex-direction</code>: column</code> on the flex container makes the items flow from top to bottom</li>
 			<li><code class="property">align-items</code> and <code class="property">justify-content</code> on the flex container specify alignment in each direction. Which direction depends on the value of <code>flex-direction</code></li>
 		</details>
+	</article>
+
+	<article class="slide dont-resize" id="flex-longhands">
+		<ul class="tree">
+			<li>
+				flex
+				<ul>
+					<li>flex-grow</li>
+					<li>flex-shrink</li>
+					<li>flex-basis</li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="tree">
+			<li>
+				flex-flow
+				<ul>
+					<li>flex-direction</li>
+					<li>flex-wrap</li>
+				</ul>
+			</li>
+		</ul>
 	</article>
 
 	<article class="slide">
@@ -808,6 +1218,54 @@
 		</details>
 	</article>
 
+	<article class="slide dont-resize" id="grid-longhands">
+		<ul class="tree">
+			<li>
+				grid
+				<ul>
+					<li>
+						grid-template
+						<ul>
+							<li>grid-template-rows</li>
+							<li>grid-template-columns</li>
+							<li>grid-template-areas</li>
+						</ul>
+					</li>
+					<li>grid-auto-rows</li>
+					<li>grid-auto-columns</li>
+					<li>grid-auto-flow</li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="tree">
+			<li>grid-area
+				<ul>
+					<li>grid-row
+						<ul>
+							<li>grid-row-start</li>
+							<li>grid-row-end</li>
+						</ul>
+					</li>
+					<li>grid-column
+						<ul>
+							<li>grid-column-start</li>
+							<li>grid-column-end</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="tree">
+			<li>
+				grid-gap
+				<ul>
+					<li>grid-column-gap</li>
+					<li>grid-row-gap</li>
+				</ul>
+			</li>
+		</ul>
+	</article>
+
 	<article class="slide">
 		<a href="http://cssgridgarden.com/" target="_blank"><img src="img/gridgarden.png" alt=""></a>
 	</article>
@@ -845,7 +1303,7 @@
 </section>
 
 <section>
-	<article class="demo slide" id="button" style="--division: 60">
+	<article class="demo slide" title="CSS Variables" style="--division: 60">
 		<div data-edit="contents css">
 			<button>Click me</button>
 			<button class="pink">Click me</button>
@@ -882,7 +1340,17 @@
 				margin: .2em;
 			}
 		</style>
+		<details class="notes">
+			<ul>
+				<li>CSS variables (aka <em>Custom Properties</em>) start with <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*"><code>--</code></a> and behave like normal CSS properties.</li>
+				<li>We read their value via the <code class="css">var()</code> function and we can use that anywhere (including inside <code class="css">calc()</code>), except inside <code class="css">url()</code>.</li>
+				<li>They are dynamic, and can be set in the inline style or even via JavaScript!</li>
+				<li>They help <strong>reduce repetition</strong>, and thus make code more maintainable.
+					They also help <strong>encapsulation</strong>: Other people can use your components and style them via the variables you have exposed, without having to know and override the internal structure of your CSS.</li>
+			</ul>
+		</details>
 	</article>
+
 </section>
 
 <section>
@@ -908,12 +1376,8 @@
 			</svg>
 		</div>
 	</article>
-
-	<article class="takeaway slide">
-		<h1>CSS variables <span class="plus">+</span> SVG <span class="equals">=</span><span class="heart" style="font-size: 90px;">♥️</span></h1>
-	</article>
 </section>
-
+<!--
 <section>
 	<header class="slide">
 		<h1>CSS Variables & JavaScript</h1>
@@ -921,15 +1385,15 @@
 
 	<article class="slide language-javascript" style="align-items: flex-start; padding: 3em">
 		<pre><code>
-			// Get variable from inline style
+			// Get CSS variable value from style attribute
 			element.style.getPropertyValue("--foo");
 		</code></pre>
 		<pre class="delayed"><code>
-			// Get variable from wherever
+			// Get CSS variable value from wherever
 			getComputedStyle(element).getPropertyValue("--foo");
 		</code></pre>
 		<pre class="delayed"><code>
-			// Set variable on inline style
+			// Set CSS variable in style attribute
 			element.style.setProperty("--foo", 38 + 4);
 		</code></pre>
 	</article>
@@ -956,6 +1420,11 @@
 					transparent, black);
 			}
 		</style>
+		<details class="notes">
+			<ul>
+				<li>Let’s make the center of the gradient follow our mouse!</li>
+			</ul>
+		</details>
 	</article>
 
 	<article class="slide" data-import="svg-eyes"></article>
@@ -971,7 +1440,7 @@
 		<li><a href=""></a></li>
 		<li><a href=""></a></li>
 	</ul>
-</article>
+</article> -->
 
 <footer class="dark slide dont-resize">
 	<img src="../shared/img/mark.svg" class="logo" />
@@ -979,11 +1448,11 @@
 
 	<ul>
 		<li style="--icon: '🌍'"><a href="http://lea.verou.me">lea.verou.me</a></li>
-		<li style="--icon: '✉'"><a href="mailto:lea@verou.me">lea@verou.me</a></li>
+		<li style="--icon: '✉'"><a href="mailto:lea@verou.me">leaverou@mit.edus</a></li>
 		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
 	</ul>
 
-	<p>Slides: <a href="https://leaverou.github.io/talks/css-variables">leaverou.github.io/talks/intro</a></p>
+	<p>Slides: <a href="https://leaverou.github.io/talks/intro">leaverou.github.io/talks/intro</a></p>
 	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
 </footer>
 
