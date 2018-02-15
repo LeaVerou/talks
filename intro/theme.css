@@ -1,4 +1,9 @@
-/* @import url('https://fonts.googleapis.com/css?family=Reenie+Beanie'); */
+@font-face {
+  font-family: 'Reenie Beanie';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Reenie Beanie'), local('ReenieBeanie'), url(https://fonts.gstatic.com/s/reeniebeanie/v8/z7NSdR76eDkaJKZJFkkjuvWxXPq1q6Gjb_0.woff2) format('woff2');
+}
 
 @font-face {
 	font-family: 'Icons';
