@@ -69,7 +69,7 @@ class Demo {
 		if (this.edit.indexOf("css") > -1) {
 			this.style = $("style[data-slide]", slide) || $.create("style", {
 				"data-slide": "",
-				inside: slide
+				inside: this.slide
 			});
 
 			this.editors.css = Demo.createEditor(slide, "css", {
@@ -205,7 +205,7 @@ class Demo {
 			css = css.join("</style><style>");
 		}
 
-		if (css) {
+		if (css !== "undefined") {
 			css = `<style id=live>${css}</style>`;
 		}
 

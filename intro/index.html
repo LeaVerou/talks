@@ -261,7 +261,7 @@ function writeList(script) {
 	</article>
 
 	<article class="isolated demo slide" id="input-element" title="The &lt;input> & &lt;textarea> elements">
-		<div data-edit="contents">
+		<div data-edit="contents css">
 			<p>
 				<input placeholder="Type in me!" />
 			</p>
@@ -280,6 +280,7 @@ function writeList(script) {
 				<textarea>Hey</textarea>
 			</p>
 		</div>
+
 		<details class="notes">
 			<ul>
 				<li>The <code>&lt;input></code> element can generate a wide variety of form controls, differentiated by the <code>type</code> attribute.
@@ -550,6 +551,8 @@ function writeList(script) {
 		</details>
 	</article>
 
+	<article class="slide" data-import="input-element"></article>
+
 	<article class="slide" id="structural" title="Structural pseudo-classes">
 		<input type="text" value=":first-child">
 		<style></style>
@@ -721,7 +724,7 @@ function writeList(script) {
 
 	<article class="isolated demo slide" title="Conflicts" style="--collapsed-height: 50%">
 		<style data-slide>
-			#container article {
+			#container * {
 				background: salmon;
 			}
 
@@ -758,7 +761,7 @@ function writeList(script) {
 		<h1><span style="display: inline-block; transform: scaleX(-1)">🤺</span> Specificity battle! 🤺</h1>
 		<div>
 			<div>
-				<input value="#container article" id="selector1" />
+				<input value="#container *" id="selector1" />
 				<output for="selector1"></output>
 			</div>
 			<output for="selector1, selector2">></output>
