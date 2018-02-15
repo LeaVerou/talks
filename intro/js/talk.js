@@ -51,7 +51,7 @@ $$("ul.tree").forEach(ul => {
 	$$("li", ul).forEach(li => {
 		var node = li.childNodes[0];
 
-		if (!node.matches || !node.matches(".node")) {
+		if (node && (!node.matches || !node.matches(".node"))) {
 			if (node.matches && node.matches("a")) {
 				a.classList.add("node");
 			}
@@ -130,6 +130,23 @@ $$("details.notes").forEach(details => {
 	}
 
 	details.prepend(summary);
+});
+
+$$(".runnable.slide pre>code, .runnable.slide textarea").forEach(code => {
+	$.create("button", {
+		textContent: "Run",
+		className: "run",
+		events: {
+			click: evt => {
+				var ret = eval(code.value || code.textContent);
+
+				// if (ret !== undefined) {
+				// 	console.log(ret);
+				// }
+			}
+		},
+		after: code.closest("pre, textarea")
+	});
 });
 
 // Specificity battle slide
@@ -224,8 +241,24 @@ $$(".demo.slide").forEach(slide => {
 	slide.classList.add("dont-resize");
 });
 
+$$(".cheatsheet.slide fieldset code").forEach(code => {
+	var frequency = code.getAttribute("data-frequency");
+
+	$.create("a", {
+		href: `https://developer.mozilla.org/en-US/docs/Web/CSS/${code.getAttribute("data-href") || code.textContent}`,
+		around: code,
+		target: "_blank",
+		className: frequency >= 8? "popular" : "",
+		style: {
+			"--frequency": frequency
+		}
+	});
+});
+
 document.addEventListener("DOMContentLoaded", function(evt) {
-	$$(".demo.slide").forEach(slide => slide.demo = new Demo(slide));
+	$$(".demo.slide").forEach(slide => {
+		slide.demo = new Demo(slide);
+	});
 });
 
 Prism.languages.insertBefore("css", "property", {
@@ -294,3 +327,24 @@ $$(".syntax-breakdown code").forEach(function(code) {
 		}
 	});
 });
+
+$$("#js textarea.editor").forEach(textarea => {
+	textarea.classList.add("language-javascript", "adjust-width", "adjust-height");
+	textarea.addEventListener("input", evt => resizeTextarea(textarea));
+});
+
+{
+	let structural = $("#structural");
+	let style = $("style", structural);
+	let input = $("input", structural);
+
+	$$("ul.tree li a", structural).forEach(a => a.textContent = "<" + a.textContent.trim() + ">");
+
+	input.oninput = evt => {
+		style.textContent = `#structural ul.tree li${input.value} > a {
+			box-shadow: 0 0 0 .3em white;
+		}`;
+	};
+
+	input.oninput();
+}

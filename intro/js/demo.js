@@ -272,17 +272,21 @@ function resizeTextarea(textarea) {
 		textarea = $("textarea.editor", textarea);
 	}
 
-	if (textarea && textarea.matches(".demo.slide.horizontal div.editor > textarea.editor")) {
-		textarea.style.height = "0";
-		textarea.parentNode.style.fontSize = "";
+	if (textarea) {
+		var w = textarea.matches(".adjust-width");
+		var h = textarea.matches(".adjust-height, .horizontal.demo.slide textarea.editor");
 
-		textarea.style.height = textarea.scrollHeight + 16 + "px";
+		if (w) {
+			textarea.style.width = "0";
+		}
 
-		var cs = getComputedStyle(textarea);
+		if (h) {
+			textarea.style.height = "0";
+			textarea.style.height = textarea.scrollHeight + 16 + "px";
+		}
 
-		// if (cs.height == cs.maxHeight) {
-		// 	var ratio = Math.min(2, textarea.scrollHeight/textarea.offsetHeight) - 1;
-		// 	textarea.parentNode.style.fontSize = 100 - Math.round(50 * ratio) + "%";
-		// }
+		if (w) {
+			textarea.style.width = textarea.scrollWidth + 32 + "px";
+		}
 	}
 };

@@ -32,6 +32,7 @@
 			margin: 1.5em;
 			border-radius: 8px;
 			background: hsla(0,0%,100%,.8);
+			resize: both;
 		}
 
 		.isolated.horizontal.demo.slide > iframe {

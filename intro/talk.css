@@ -439,6 +439,11 @@ a[data-html] {
 	cursor: pointer;
 }
 
+button.run {
+	padding: 0 .5em;
+	margin-top: .5em;
+}
+
 a[data-html] {
 	margin-top: auto;
 	background: black;
@@ -793,4 +798,84 @@ a[data-html] {
 	#xkcd::after {
 		color: black;
 		text-shadow: none;
+	}
+
+#js textarea.editor {
+	background: none;
+}
+
+.cheatsheet.slide {
+	flex-flow: row wrap;
+	align-content: center;
+}
+
+	.cheatsheet.slide h1 {
+		width: 100%;
+	}
+
+	.cheatsheet.slide fieldset {
+		display: flex;
+		flex-flow: row wrap;
+		align-content: center;
+		line-height: 1;
+	}
+
+	.cheatsheet.slide fieldset a {
+		background: black;
+		margin: .1em;
+		padding: .2em .5em .1em;
+		border-radius: .2em;
+		cursor: pointer;
+	}
+
+	.cheatsheet.slide fieldset a.popular {
+		font-weight: bold;
+	}
+
+		.cheatsheet.slide fieldset a:not(:hover) {
+			text-decoration: none;
+			opacity: calc(var(--frequency) * .1);
+
+		}
+
+		.cheatsheet.slide fieldset a code {
+			font-weight: inherit;
+		}
+
+#structural {
+
+}
+
+	#structural input {
+		width: 100%;
+		text-align: center;
+	}
+
+#combinators table {
+	font-size: 70%;
+	font-weight: 300;
+	border-spacing: 0;
+}
+
+	#combinators td {
+		padding: 0 .2em;
+
+	}
+
+	#combinators tbody:nth-of-type(2) tr:nth-child(odd) td {
+		background: hsla(0,0%,100%,.1);
+	}
+
+	#combinators td:nth-child(1) {
+		width: 10em;
+		color: var(--color-green);
+	}
+
+	#combinators td:nth-child(2) {
+		font-family: var(--font-mono);
+		font-size: 150%;
+	}
+
+	#combinators td:nth-child(-n+2) {
+		font-weight: bold;
 	}
