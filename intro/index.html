@@ -722,7 +722,7 @@ function writeList(script) {
 	<article class="isolated demo slide" title="Conflicts" style="--collapsed-height: 50%">
 		<style data-slide>
 			#container article {
-				background: hsl(0, 60%, 50%);
+				background: salmon;
 			}
 
 			article.box {
@@ -782,7 +782,7 @@ function writeList(script) {
 				<li>This little piggy stayed home</li>
 				<li>This little piggy had roast beef</li>
 				<li>This little piggy had none</li>
-				<li>And this little piggy cried "wee wee wee" all the way home</li>
+				<li>And this little piggy cried <q>wee wee wee</q> all the way home</li>
 			</ul>
 		</div>
 		<details class="notes">
@@ -796,14 +796,15 @@ function writeList(script) {
 
 	<article class="with-next slide" id="colors" title="Colors in CSS">
 		<input value="#ff0467">
-		<input value="gray">
 		<input value="rgba(0, 180, 150, .8)">
-		<input value="hsla(30, 50%, 50%, 1)">
+		<input value="hsl(30, 100%, 50%)">
+		<input value="gray">
+
 		<details class="notes top-right">
 			<ul>
-				<li><a href="http://leaverou.github.io/chroma-zone/#rgb-2d" target="_blank">RGB</a> is modeled after 8 bit subpixel intensity, not human usability. It's very hard to adjust a color.</li>
+				<li><a href="http://leaverou.github.io/chroma-zone/#rgb-2d" target="_blank">RGB</a> is modeled after 8 bit subpixel voltage, not human usability. It's very hard to adjust a color.</li>
 				<li>Hex colors are the least intuitive format: It’s RGB that is additionally hex-encoded! Mainly useful for copying from a color picker.</li>
-				<li>Named colors are readable, but few, irregularly distributed and often internally inconsistent (e.g. <code>darkgray</code> is lighter than <code>gray</code>!)</li>
+				<li><a href="https://www.w3.org/TR/css-color-4/#named-colors">Named colors</a> are readable, but few, irregularly distributed and often internally inconsistent (e.g. <code>darkgray</code> is lighter than <code>gray</code>!)</li>
 				<li><a href="http://leaverou.github.io/chroma-zone/#hsl" target="_blank">HSL</a> is probably the most human-friendly out of the currently supported formats, but has its issues too (e.g. <code>hsl(60, 100%, 50%)</code> and <code>hsl(240, 100%, 50%)</code> have the same HSL lightness, but are they equally light?)</li>
 			</ul>
 		</details>
@@ -813,7 +814,7 @@ function writeList(script) {
 		<div data-edit="css"></div>
 		<style data-slide>
 			html {
-				background-image: url(img/chocolate-mousse.png);
+				background-image: url("img/chocolate-mousse.png");
 				min-height: 100vh; /* Minimum height: 100% of viewport height */
 			}
 		</style>
@@ -970,6 +971,7 @@ function writeList(script) {
 				width: 400px;
 				padding: 40px;
 				border: 20px solid rgba(0,0,0,.5);
+				margin: 100px;
 			}
 		</style>
 		<div class="box" data-edit="css html">Bacon ipsum dolor amet alcatra meatball burgdoggen,
@@ -983,6 +985,7 @@ function writeList(script) {
 				</li>
 				<li>Padding & border widths are <strong>added</strong> to width and height, not subtracted from it.</li>
 				<li>You can change that with <code>box-sizing: border-box</code></li>
+				<li>You can use the browser developer tools to inspect the box model, via the "Computed" tab in the Elements panel.</li>
 			</ul>
 		</details>
 	</article>
@@ -1041,6 +1044,10 @@ function writeList(script) {
 				<li>Font-relative units are useful in making components that scale by changing one property (the <code class="property">font-size</code>).</li>
 				<li>Viewport-relative units are useful in making layouts that scale nicely with the viewport size.</li>
 				<li>Use <code class="css">calc()</code> to perform calculations between different units.</li>
+				<li>We can use some JS to make the button happy after it’s clicked!
+					Open the page in a new tab, then inspect the element and type in the console:
+					<code>$0.addEventListener("click", function(event) { this.textContent = "Thank you! 😊"; })</code>
+				</li>
 			</ul>
 		</details>
 	</article>
@@ -1114,53 +1121,6 @@ function writeList(script) {
 
 	<article class="image slide" id="xkcd" data-credits="xkcd.com/208"></article>
 
-	<article class="isolated demo slide" title="Pseudo-elements and Generated Content">
-		<details class="notes">
-			<ul>
-				<li><em>Pseudo-elements</em> start with <code>::</code> and correspond to parts of elements or new content (<em>Generated Content</em>).</li>
-				<li>Some popular pseudo-elements are:
-					<ul>
-						<li>
-							<code class="css">::first-letter</code> Useful for creating drop caps
-							<code class="css">::first-line</code> Allows you to differentiate the first line of content
-							<code class="css">::before</code> Generate & insert new content before the element’s content
-							<code class="css">::after</code> Generate & insert new content after the element’s content
-						</li>
-					</ul>
-				</li>
-				<li><code class="css">::before</code> and <code class="css">::after</code> have no effect
-					without the <code class="property">content</code> property which specifies the content to insert.</li>
-				<li>This new content can be:
-					<ul>
-						<li>Strings</li>
-						<li>Images</li>
-						<li>The <code>attr()</code> function</li>
-						<li>The <code>counter()</code> function</li>
-						<li>Any space-separated combination of the above</li>
-					</ul>
-				</li>
-			</ul>
-		</details>
-		<div data-edit="css contents">
-			<script>
-				writeList(document.currentScript);
-			</script>
-		</div>
-		<style data-slide>
-			li {
-				list-style: none;
-			}
-
-			li::before {
-				content: "💩";
-			}
-
-			a[href^="https://developer.mozilla.org"]::before {
-				content: url("https://cdn.mdn.mozilla.net/static/img/favicon32.7f3da72dcea1.png");
-			}
-		</style>
-	</article>
-
 	<article class="isolated horizontal demo slide" title="Media Queries">
 		<div data-edit="css contents">
 			<p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.</p>
@@ -1170,15 +1130,14 @@ function writeList(script) {
 			<p>His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed</p>
 		</div>
 		<style data-slide>
-			p {
-				font-size: 2rem;
-			}
+		body { margin: 5em }
 
-			@media (max-width: 800px) {
-				p {
-					font-size: 1rem;
-				}
+		@media (max-width: 1000px) {
+			body {
+				margin: 1em;
+				background: yellow;
 			}
+		}
 		</style>
 		<details class="notes">
 			<ul>
@@ -1190,7 +1149,7 @@ function writeList(script) {
 		</details>
 	</article>
 
-	<article class="isolated horizontal demo slide" title="Transforms">
+	<article class="isolated horizontal demo slide needs-base" title="Transforms">
 		<img data-edit="css html" src="img/chocolate-mousse.png" alt="💩" />
 		<style data-slide>
 			img {
@@ -1210,7 +1169,7 @@ function writeList(script) {
 		</details>
 	</article>
 
-	<article class="isolated horizontal demo slide" title="Transitions">
+	<article class="isolated horizontal demo slide needs-base" title="Transitions">
 		<img data-edit="css html" src="img/chocolate-mousse.png" alt="💩" />
 		<style data-slide>
 			img {
@@ -1227,6 +1186,7 @@ function writeList(script) {
 			<li>The minimum it needs is a duration, but it also accepts a property, delay, easing.</li>
 			<li>Both <code class="property">transition</code> and its longhands accept comma-separated lists, to create multiple transitions with different parameters for different properties.</li>
 			<li>Keyword changes cannot be interpolated, but lengths, numbers, colors, transforms etc can.</li>
+			<li>For custom easing functions, you can use the <code class="css">cubic-bezier()</code> function. <a href="http://cubic-bezier.com">cubic-bezier.com</a> allows you to generate these visually.</li>
 		</details>
 	</article>
 
@@ -1244,7 +1204,7 @@ function writeList(script) {
 		</ul>
 	</article>
 
-	<article class="isolated demo slide" title="Animations" style="--division: 60">
+	<article class="isolated demo slide needs-base" title="Animations" style="--division: 60">
 		<img data-edit="css html" src="img/chocolate-mousse.png" alt="💩" />
 		<style data-slide>
 			@keyframes spin {
@@ -1276,6 +1236,7 @@ function writeList(script) {
 				</li>
 				<li>At a minimum, a name and duration is needed for an animation to play.</li>
 				<li>All animation properties accept comma-separated lists of parameters, to apply multiple animations on the same element.</li>
+				<li data-autolink="Events">We can monitor the progress of CSS animations via the <code>animationstart</code>, <code>animationiteration</code>, and <code>animationend</code> events.</li>
 			</ul>
 		</details>
 	</article>
@@ -1298,7 +1259,7 @@ function writeList(script) {
 		</ul>
 	</article>
 
-	<article class="isolated demo slide" title="Animations 2" style="--division: 60">
+	<article class="isolated demo slide needs-base" title="Animations 2" style="--division: 60">
 		<img data-edit="css html" src="img/chocolate-mousse.png" alt="💩" />
 		<style data-slide>
 			@keyframes dance {
@@ -1374,7 +1335,7 @@ function writeList(script) {
 		<a href="http://flexboxfroggy.com" target="_blank"><img src="img/flexboxfroggy.png" alt=""></a>
 	</article>
 
-	<article class="isolated demo slide">
+	<article class="isolated demo slide" title="Grid Layout">
 <dl data-edit="css html">
 	<dt>Name</dt>
 	<dd>Sir Adam Catlace</dd>
@@ -1391,11 +1352,15 @@ function writeList(script) {
 </dl>
 		<style data-slide>
 			dl {
-				display: grid;
+				/* display: grid; */
 			}
 
 			dt, dd {
 				border: 1px solid silver;
+			}
+
+			dt {
+				font-weight: bold;
 			}
 		</style>
 		<details class="notes">
@@ -1537,19 +1502,6 @@ function writeList(script) {
 		</ul>
 	</article>
 
-	<article class="slide" data-type="Resources">
-		<h1>CSS</h1>
-
-		<ul>
-			<li><a href="http://htmldog.com/guides/css/">CSS Tutorials</a></li>
-			<li><a href="https://cssreference.io/">Visual guides to CSS properties</a></li>
-			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">CSS Reference</a></li>
-			<li><a href="https://www.w3.org/standards/techs/css#w3c_all">Specifications</a></li>
-		</ul>
-	</article>
-</section>
-
-<section>
 	<article class="demo slide" title="CSS Variables" style="--division: 60">
 		<div data-edit="contents css">
 			<button>Click me</button>
@@ -1597,6 +1549,68 @@ function writeList(script) {
 			</ul>
 		</details>
 	</article>
+
+	<article class="isolated demo slide" title="Pseudo-elements and Generated Content">
+		<details class="notes">
+			<ul>
+				<li><em>Pseudo-elements</em> start with <code>::</code> and correspond to parts of elements or new content (<em>Generated Content</em>).</li>
+				<li>Some popular pseudo-elements are:
+					<ul>
+						<li>
+							<code class="css">::first-letter</code> Useful for creating drop caps
+							<code class="css">::first-line</code> Allows you to differentiate the first line of content
+							<code class="css">::before</code> Generate & insert new content before the element’s content
+							<code class="css">::after</code> Generate & insert new content after the element’s content
+						</li>
+					</ul>
+				</li>
+				<li><code class="css">::before</code> and <code class="css">::after</code> have no effect
+					without the <code class="property">content</code> property which specifies the content to insert.</li>
+				<li>This new content can be:
+					<ul>
+						<li>Strings</li>
+						<li>Images</li>
+						<li>The <code>attr()</code> function</li>
+						<li>The <code>counter()</code> function</li>
+						<li>Any space-separated combination of the above</li>
+					</ul>
+				</li>
+			</ul>
+		</details>
+		<div data-edit="css contents">
+			<script>
+				writeList(document.currentScript);
+			</script>
+		</div>
+		<style data-slide>
+			li {
+				list-style: none;
+			}
+
+			li::before {
+				content: "💩";
+			}
+
+			a[href^="https://developer.mozilla.org"]::before {
+				content: url("https://cdn.mdn.mozilla.net/static/img/favicon32.7f3da72dcea1.png");
+			}
+		</style>
+	</article>
+
+	<article class="slide" data-type="Resources">
+		<h1>CSS</h1>
+
+		<ul>
+			<li><a href="http://htmldog.com/guides/css/">CSS Tutorials</a></li>
+			<li><a href="https://cssreference.io/">Visual guides to CSS properties</a></li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">CSS Reference</a></li>
+			<li><a href="https://www.w3.org/standards/techs/css#w3c_all">Specifications</a></li>
+		</ul>
+	</article>
+</section>
+
+<section>
+
 	<article class="horizontal demo slide" id="svg-eyes">
 		<style data-slide>
 			.iris {
@@ -1617,7 +1631,7 @@ function writeList(script) {
 	</article>
 </section>
 
-<section id="js">
+<!-- <section id="js">
 	<header class="slide">
 		<h1>JavaScript</h1>
 	</header>
@@ -1694,7 +1708,7 @@ console.log(double);</textarea>
 			</ul>
 		</details>
 	</article>
-</section>
+</section> -->
 <!--
 <section>
 	<header class="slide">

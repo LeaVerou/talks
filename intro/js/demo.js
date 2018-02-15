@@ -167,7 +167,7 @@ class Demo {
 			this.editors[i].wrapper.classList.toggle("collapsed", i !== id);
 		}
 
-		resizeTextarea(this.editors[id].textarea);
+		requestAnimationFrame(() => resizeTextarea(this.editors[id].textarea));
 	}
 
 	static fixCode(code, lang) {

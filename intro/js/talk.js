@@ -339,7 +339,8 @@ $$("#js textarea.editor").forEach(textarea => {
 	let input = $("input", structural);
 
 	$$("ul.tree li a", structural).forEach(a => a.textContent = "<" + a.textContent.trim() + ">");
-
+	new Incrementable(input);
+	
 	input.oninput = evt => {
 		style.textContent = `#structural ul.tree li${input.value} > a {
 			box-shadow: 0 0 0 .3em white;
