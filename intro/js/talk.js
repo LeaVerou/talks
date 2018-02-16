@@ -154,14 +154,14 @@ $$(".runnable.slide pre>code, .runnable.slide textarea").forEach(code => {
 });
 
 // Specificity battle slide
-{
-	let slide = $("#specificity-battle");
-	let output = {
-		0: $("output[for=selector1]", slide),
-		1: $("output[for=selector2]", slide),
+(function() {
+	var slide = $("#specificity-battle");
+	var output = {
+		"0": $("output[for=selector1]", slide),
+		"1": $("output[for=selector2]", slide),
 		greater: $('output[for="selector1, selector2"]', slide)
 	};
-	let input = $$("input", slide);
+	var input = $$("input", slide);
 
 	function update() {
 		var specificity = [];
@@ -196,7 +196,7 @@ $$(".runnable.slide pre>code, .runnable.slide textarea").forEach(code => {
 
 	$$("input", slide).forEach(input => input.addEventListener("input", update));
 	update();
-}
+})();
 
 function calculateSpecificity(selector) {
 	selector = selector.replace(/("|').+?\1/g, "");
@@ -329,6 +329,25 @@ $$(".syntax-breakdown code").forEach(function(code) {
 			// FIXME will break when there are duplicates
 			span.classList.add("after-middle");
 		}
+	});
+});
+
+$$(".hover-explanations.slide").forEach(slide => {
+	var output = $.create("div", {
+		className: "explanation",
+		inside: slide
+	});
+
+	slide.addEventListener("mouseover", evt => {
+		var span = evt.target.closest(".code span[data-explanation]");
+		
+		if (span) {
+			output.textContent = span.dataset.explanation;
+		}
+	});
+
+	slide.addEventListener("mouseout", evt => {
+		output.textContent = "";
 	});
 });
 

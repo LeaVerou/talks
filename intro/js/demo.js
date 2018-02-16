@@ -129,8 +129,8 @@ class Demo {
 				inside: slide,
 				target: "_blank",
 				events: {
-					click: evt => {
-						var title = slide.title || slide.dataset.title || "Demo";
+					"click mouseenter": evt => {
+						var title = (slide.title || slide.dataset.title || "") + " Demo";
 
 						a.href = createURL(Demo.getHTMLPage(this.html, this.css, title, {needsBase}));
 					}
@@ -265,7 +265,7 @@ ${html}
 
 })();
 
-function resizeTextarea(textarea) {
+function resizeTextarea(textarea, secondAttempt) {
 	textarea = textarea.target || textarea;
 
 	if (textarea.nodeName != "TEXTAREA") {
@@ -273,6 +273,12 @@ function resizeTextarea(textarea) {
 	}
 
 	if (textarea) {
+		if (!textarea.offsetHeight && !secondAttempt) {
+			// Not visible yet, postpone
+			setTimeout(() => resizeTextarea(textarea, true), 50);
+			return;
+		}
+
 		var w = textarea.matches(".adjust-width");
 		var h = textarea.matches(".adjust-height, .horizontal.demo.slide textarea.editor");
 

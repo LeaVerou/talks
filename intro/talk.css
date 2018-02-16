@@ -81,8 +81,19 @@
 	align-items: flex-start;
 }
 
-	.syntax-breakdown > code {
+	#html-tags.syntax-breakdown .code,
+	#page-skeleton.syntax-breakdown .code,
+	 {
 		font-size: 250%;
+	}
+
+	#attributes.syntax-breakdown .code,
+	#css-rules.syntax-breakdown .code {
+		font-size: 180%;
+	}
+
+	.syntax-breakdown pre {
+		overflow: visible;
 	}
 
 	.syntax-breakdown.vertical > code {
@@ -91,7 +102,7 @@
 		--length: calc(80vw - 18em);
 	}
 
-	.syntax-breakdown > code span {
+	.syntax-breakdown .code span {
 		position: relative;
 		padding: .1em .1em 0;
 		opacity: 1;
@@ -104,7 +115,7 @@
 		padding: .1em 0 0;
 	}
 
-	.syntax-breakdown > code span.current {
+	.syntax-breakdown .code span.current {
 		background: var(--color1);
 		filter: drop-shadow(.1em .1em .4em black);
 		z-index: 1;
@@ -114,17 +125,17 @@
 		box-shadow: .2em 0 var(--color1), -.2em 0 var(--color1);
 	}
 
-		.syntax-breakdown > code span.current,
-		.syntax-breakdown > code span.current * {
+		.syntax-breakdown .code span.current,
+		.syntax-breakdown .code span.current * {
 			color: white !important;
 		}
 
-	.syntax-breakdown > code span.displayed {
+	.syntax-breakdown .code span.displayed {
 		opacity: 1;
 	}
 
-	.syntax-breakdown > code span[title].current::before,
-	.syntax-breakdown > code span[title].current::after {
+	.syntax-breakdown .code span[title].current::before,
+	.syntax-breakdown .code span[title].current::after {
 		position: absolute;
 		bottom: calc(-80vh + 4em);
 		left: 50%;
@@ -144,7 +155,7 @@
 	}
 
 	/* Line */
-	.syntax-breakdown > code span[title].current::before {
+	.syntax-breakdown .code span[title].current::before {
 		content: '';
 		top: 0;
 		z-index: -1;
@@ -162,7 +173,7 @@
 	}
 
 	/* Tooltip */
-	.syntax-breakdown > code span[title].current::after {
+	.syntax-breakdown .code span[title].current::after {
 		content: attr(title);
 		width: max-content;
 		max-width: 80vw;
@@ -171,7 +182,7 @@
 		color: black;
 	}
 
-	.syntax-breakdown > code span[title].current.after-middle::after {
+	.syntax-breakdown .code span[title].current.after-middle::after {
 		max-width: 40vw;
 	}
 
@@ -707,7 +718,8 @@ a[data-html] {
 	}
 
 	.slide[data-type="Resources"] a::before,
-	details.notes a[href^="https://developer.mozilla.org/en-US/docs/"]::before {
+	details.notes a[href^="https://developer.mozilla.org/en-US/docs/"]::before,
+	details.notes a[href^="https://www.w3.org/"]::before {
 		display: inline-block;
 		vertical-align: -.1em;
 		border-radius: 3px;
@@ -880,3 +892,65 @@ a[data-html] {
 	#combinators td:nth-child(-n+2) {
 		font-weight: bold;
 	}
+
+.slide[data-type="JS Nugget"] {
+
+}
+
+	.slide[data-type="JS Nugget"] h1::before {
+		content: url(img/js-nugget.svg);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 30vmin;
+		margin: 1em;
+	}
+
+@keyframes fade {
+	to {
+		background: transparent;
+	}
+}
+
+.hover-explanations.slide {}
+
+	.hover-explanations.slide .code span[data-explanation] {
+		background: hsla(0,0%,100%,.1);
+		padding: .1em;
+		border-radius: .2em;
+		cursor: help;
+	}
+
+	.hover-explanations.slide .code span[data-explanation]:not(:hover) {
+		animation: 5s fade infinite alternate;
+	}
+
+	.hover-explanations.slide .code span[data-explanation]:hover {
+		background: hsla(0,0%,100%,.15);
+	}
+
+	.hover-explanations.slide .explanation {
+		min-height: 3em;
+	}
+
+		.hover-explanations.slide .explanation::before {
+			content: "What it is";
+			display: block;
+			width: fit-content;
+			padding: 0 .5em;
+			border-radius: .2em;
+			margin: auto;
+			text-transform: uppercase;
+			font-size: 75%;
+			font-weight: bold;
+			background: white;
+			color: black;
+			mix-blend-mode: multiple;
+		}
+
+		.hover-explanations.slide .explanation:empty::after {
+			content: "(Hover over a part of the code to see what it does)";
+			display: block;
+			font-style: italic;
+			opacity: .5;
+		}

@@ -55,7 +55,7 @@ function writeList(script) {
 	</article>
 
 	<article class="slide syntax-breakdown" title="HTML tags">
-		<code>
+		<code class="code">
 			Hello <span title="Start em(phasis) tag" contentEditable>&lt;em></span><span title="Element content" data-index="1" contentEditable>world</span><span title="End tag" contentEditable>&lt;/em></span>!
 		</code>
 		<a data-html="code" target="_blank" class="delayed">Open page in new tab</a>
@@ -146,8 +146,8 @@ function writeList(script) {
 		</details>
 	</article>
 
-	<article class="slide syntax-breakdown vertical" title="Full HTML page skeleton">
-		<code style="--length: 10em" class="language-html">
+	<article class="slide syntax-breakdown vertical" id="page-skeleton" title="Full HTML page skeleton">
+		<code style="--length: 10em" class="code language-html">
 			<span title="Flag for modern rendering">&lt;!DOCTYPE html></span>
 			<span title="Root element">&lt;html lang="en"></span>
 			<span title="Contains metadata">&lt;head></span>
@@ -162,7 +162,7 @@ function writeList(script) {
 		<a data-html="code" target="_blank" class="delayed">Open page in new tab</a>
 	</article>
 
-	<article class="slide syntax-breakdown" title="Attributes">
+	<article class="slide syntax-breakdown code" title="Attributes">
 		<code style="font-size: 180%;" class="language-html">
 			Hello <br>&lt;a <span title="Attribute name">href</span>="<span title="Attribute value">http://ft.com/world</span>">&#x200b;world
 			&lt;/a>
@@ -395,8 +395,8 @@ function writeList(script) {
 		</details>
 	</article>
 
-	<article class="slide syntax-breakdown vertical" title="Anatomy of a CSS rule">
-		<code style="font-size: 180%;">
+	<article class="slide syntax-breakdown vertical" id="css-rules" title="Anatomy of a CSS rule">
+		<code class="code" style="font-size: 180%;">
 			<span title="Selector">h1</span> {
 				<span title="Property">color</span>: <span title="Property value">white</span>;
 				<span title="Declaration">background: black</span>;
@@ -475,10 +475,6 @@ function writeList(script) {
 						<li><code class="property">hyphens</code>: Enables hyphenation</li>
 						<li><code class="property">text-decoration</code>: Sets or (in this case) cancels text underline/overline.</li>
 					</ul>
-				</li>
-				<li>
-					We can also modify CSS via JavaScript! Open this page in a new tab, then inspect the <code class="element">a</code> element
-					and run <code>$0.style.backgroundColor = "gold";</code>
 				</li>
 				<li>We can also modify CSS via the Styles tab in the Elements panel of the dev tools. This also shows us what CSS applies each time.</li>
 			</ul>
@@ -751,6 +747,12 @@ function writeList(script) {
 					</ol>
 				</li>
 				<li>If specificity is the same, then the conflict is resolved based on source order.</li>
+				<li>
+					We can also modify CSS via JavaScript!
+					Open this page in a new tab, then inspect the <code class="element">article</code> element
+					and run <code>$0.style.backgroundColor = "gold";</code>
+					Note that this CSS has much higher priority than anything else!
+				</li>
 			</ul>
 		</details>
 	</article>
@@ -797,7 +799,7 @@ function writeList(script) {
 
 	<article class="with-next slide" id="colors" title="Colors in CSS">
 		<input value="#ff0467">
-		<input value="rgba(0, 180, 150, .8)">
+		<input value="rgb(0, 180, 150)">
 		<input value="hsl(30, 100%, 50%)">
 		<input value="gray">
 
@@ -807,6 +809,14 @@ function writeList(script) {
 				<li>Hex colors are the least intuitive format: It’s RGB that is additionally hex-encoded! Mainly useful for copying from a color picker.</li>
 				<li><a href="https://www.w3.org/TR/css-color-4/#named-colors">Named colors</a> are readable, but few, irregularly distributed and often internally inconsistent (e.g. <code>darkgray</code> is lighter than <code>gray</code>!)</li>
 				<li><a href="http://leaverou.github.io/chroma-zone/#hsl" target="_blank">HSL</a> is probably the most human-friendly out of the currently supported formats, but has its issues too (e.g. <code>hsl(60, 100%, 50%)</code> and <code>hsl(240, 100%, 50%)</code> have the same HSL lightness, but are they equally light?)</li>
+				<li><code class="css">rgba()</code> and <code class="css">hsla()</code> accept a 4th parameter for alpha (i.e. transparency.)</li>
+				<li>Resources:
+					<ul>
+						<li><a href="http://leaverou.github.io/css-colors/">Convert between formats</a></li>
+						<li><a href="https://www.w3.org/TR/css-color-4/">W3C CSS Color Module Level 4</a></li>
+						<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value">MDN Page on the CSS <code>&lt;color></code> type</a></li>
+					</ul>
+				</li>
 			</ul>
 		</details>
 	</article>
@@ -1053,6 +1063,28 @@ function writeList(script) {
 		</details>
 	</article>
 
+	<article class="slide hover-explanations" data-type="JS Nugget" title="Events" style="--length: 5em">
+		<h1>Events</h1>
+
+		<pre><code class="code language-javascript">
+			<span data-explanation="Reference to the element that will receive the event">$0</span>.addEventListener(<span data-explanation="Event name">"click"</span>, <span data-explanation="Code to be executed">function(<span data-explanation="Event argument. Contains information about the event.">event</span>) {
+				<span data-explanation="Reference to the element that we attached the listener to.">this</span>.<span data-explanation="Gets or sets the textual content of an element.">textContent</span> = "Thank you 😊";
+			}</span>);
+		</code></pre>
+
+		<details class="notes">
+			<ul>
+				<li>Events allow you to run code when something happens.</li>
+				<li>In JS, you attach event listeners with <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener"><code>element.addEventListener</code></a>, where element is a reference to your element in the DOM tree.</li>
+				<li>Its mandatory arguments are the name of the event as a string, and a function to be executed.</li>
+				<li>Yes, in JS functions are objects and can be passed around in arguments! 🤯</li>
+				<li>When the function is called, it will receive the <em>Event Object</em> as an argument, which contains information about what happened.</li>
+				<li><code>this</code> in that function will refer to the element that you attached the event to.</li>
+				<li>You can find a <a href="https://developer.mozilla.org/en-US/docs/Web/Events">list of available events on MDN</a></li>
+			</ul>
+		</details>
+	</article>
+
 	<article class="isolated demo slide" title="Positioning">
 		<div data-edit="css contents">
 			<h1>Basic document flow</h1>
@@ -1065,6 +1097,7 @@ function writeList(script) {
 				 Overflowing inline elements will <mark>wrap onto a new line if possible (like this one containing text)</mark>,
 				 or just go on to a new line if not, much like this image will do: <img src="https://mdn.mozillademos.org/files/13360/long.jpg"></p>
 			<p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.</p>
+			<p>He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.</p>
 
 		</div>
 		<style data-slide>
@@ -1088,8 +1121,12 @@ function writeList(script) {
 					These are relative to the element’s <em>containing block</em>, which is determined by the following algorithm:
 					<ol>
 						<li>Find the closest ancestor whose <code class="property">position</code> property is not <code>static</code> or who has a <code class="property">transform</code> or <code class="property">filter</code> property set.</li>
-						<li>If no such ancestor is found, then it’s the area of the <code class="element">html</code> element that intersects with the viewport.</li>
+						<li>If no such ancestor is found, we use the <strong><em>initial containing block</em></strong>,
+							which is a rectangle with the same dimensions as the viewport, anchored to the top of the document.
+						</li>
 					</ol>
+				</li>
+				<li>Let’s make the element follow our mouse pointer, by using JavaScript to adjust the offsets!
 				</li>
 				<li><code>position: relative</code> does nothing by itself, but it has two consequences:
 					<ul>
@@ -1282,7 +1319,7 @@ function writeList(script) {
 		</details>
 	</article>
 
-	<article class="isolated horizontal demo slide" id="flexbox">
+	<article class="isolated horizontal demo slide" title="Flexbox">
 <nav data-edit="css html">
 	<a href="index.html">Home</a>
 	<a href="about.html">About</a>
