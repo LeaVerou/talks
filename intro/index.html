@@ -31,7 +31,7 @@ function writeList(script) {
 <section id="html">
 	<!-- <header class="image slide" title="HTML" style="background-image: url(img/htmlwallpaper.jpg)"></header> -->
 
-	<article class="slide dont-resize" id="architecture" data-steps="1">
+	<article class="slide dont-resize" title="Architecture" data-steps="1">
 		<article id="html-box">
 			<h2>HTML</h2>
 			<h3>Structure</h3>
@@ -54,7 +54,7 @@ function writeList(script) {
 		</div>
 	</article>
 
-	<article class="slide syntax-breakdown">
+	<article class="slide syntax-breakdown" title="HTML tags">
 		<code>
 			Hello <span title="Start em(phasis) tag" contentEditable>&lt;em></span><span title="Element content" data-index="1" contentEditable>world</span><span title="End tag" contentEditable>&lt;/em></span>!
 		</code>
@@ -146,9 +146,7 @@ function writeList(script) {
 		</details>
 	</article>
 
-	<!-- TODO: Activity: Delete annoying overlays/ads from page -->
-
-	<article class="slide syntax-breakdown vertical">
+	<article class="slide syntax-breakdown vertical" title="Full HTML page skeleton">
 		<code style="--length: 10em" class="language-html">
 			<span title="Flag for modern rendering">&lt;!DOCTYPE html></span>
 			<span title="Root element">&lt;html lang="en"></span>
@@ -164,7 +162,7 @@ function writeList(script) {
 		<a data-html="code" target="_blank" class="delayed">Open page in new tab</a>
 	</article>
 
-	<article class="slide syntax-breakdown">
+	<article class="slide syntax-breakdown" title="Attributes">
 		<code style="font-size: 180%;" class="language-html">
 			Hello <br>&lt;a <span title="Attribute name">href</span>="<span title="Attribute value">http://ft.com/world</span>">&#x200b;world
 			&lt;/a>
@@ -197,7 +195,7 @@ function writeList(script) {
 	<article class="isolated demo horizontal slide" title="Links">
 		<div data-edit="contents">
 			<p>
-				<a href="http://haystack.mit.edu">Haystack Group</a>
+				<a href="http://haystack.csail.mit.edu">Haystack Group</a>
 			</p>
 			<p>
 				<a href="https://w3.org/TR/html/textlevel-semantics.html#the-a-element">
@@ -366,7 +364,7 @@ function writeList(script) {
 		</details>
 	</article>
 
-	<article class="slide" data-type="Resources">
+	<article class="slide" data-type="Resources" title="HTML Resources">
 		<h1>HTML</h1>
 
 		<ul>
@@ -397,7 +395,7 @@ function writeList(script) {
 		</details>
 	</article>
 
-	<article class="slide syntax-breakdown vertical">
+	<article class="slide syntax-breakdown vertical" title="Anatomy of a CSS rule">
 		<code style="font-size: 180%;">
 			<span title="Selector">h1</span> {
 				<span title="Property">color</span>: <span title="Property value">white</span>;
@@ -406,7 +404,6 @@ function writeList(script) {
 		</code>
 
 		<details class="notes">
-			<summary>Anatomy of a CSS rule</summary>
 			<ul>
 				<li>The <em><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Selectors" target="_blank">selector</a></em> tells the browser which elements the rule is about, in this case <code class="element">h1</code> headings.</li>
 				<li><em>Declarations</em> are property-value pairs. Each declaration controls a certain stylistic aspect.</li>
@@ -480,9 +477,10 @@ function writeList(script) {
 					</ul>
 				</li>
 				<li>
-					We can also modify CSS via JavaScript! Open this page in a new tab, then select the <code class="element">a</code> element
+					We can also modify CSS via JavaScript! Open this page in a new tab, then inspect the <code class="element">a</code> element
 					and run <code>$0.style.backgroundColor = "gold";</code>
 				</li>
+				<li>We can also modify CSS via the Styles tab in the Elements panel of the dev tools. This also shows us what CSS applies each time.</li>
 			</ul>
 
 		</details>

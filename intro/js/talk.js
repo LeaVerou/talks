@@ -91,9 +91,13 @@ $$("ul.tree").forEach(ul => {
 
 // If a slide has a title but not an id, get its id from that
 $$(".slide[title]:not([id])").forEach(slide => {
-	slide.id = slide.title.replace(/[^\w\s-]/g, "") // Remove non-ASCII characters
+	var id = slide.title.replace(/[^\w\s-]/g, "") // Remove non-ASCII characters
 			.trim().replace(/\s+/g, "-") // Convert whitespace to hyphens
 			.toLowerCase();
+
+	if (!window[id]) {
+		slide.id = id;
+	}
 });
 
 function createURL(html) {
@@ -340,7 +344,7 @@ $$("#js textarea.editor").forEach(textarea => {
 
 	$$("ul.tree li a", structural).forEach(a => a.textContent = "<" + a.textContent.trim() + ">");
 	new Incrementable(input);
-	
+
 	input.oninput = evt => {
 		style.textContent = `#structural ul.tree li${input.value} > a {
 			box-shadow: 0 0 0 .3em white;
