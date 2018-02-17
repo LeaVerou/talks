@@ -1600,6 +1600,13 @@ function writeList(script) {
 				<li>They are dynamic, and can be set in the inline style or even via JavaScript!</li>
 				<li>They help <strong>reduce repetition</strong>, and thus make code more maintainable.
 					They also help <strong>encapsulation</strong>: Other people can use your components and style them via the variables you have exposed, without having to know and override the internal structure of your CSS.</li>
+				<li>Notice the repetition here: We have to repeat the button color 3 times! And changing it requires repeating so much code. How can CSS variables help us reduce this repetition and create themes more easily?</li>
+				<li>Now let’s suppose we want to change the cover effect to use an <code>inset</code> <code class="property">box-shadow</code>
+					instead of a background, so that (in combination with <code class="property">transition</code>) the background "animates in"
+					instead of changing abruptly. How do CSS variables help encapsulation here?
+					Do any third parties using our widget need to know about this change?
+					Would they need to know otherwise?
+				</li>
 			</ul>
 		</details>
 	</article>
