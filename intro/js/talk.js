@@ -295,20 +295,6 @@ $$("#colors input").forEach(input => {
 	})();
 });
 
-// CSS Variables specific
-
-// onslide.set($(".slide#mouse"), evt => {
-// 	var mousemove = evt => {
-// 		document.documentElement.style.setProperty("--mouse-x", evt.clientX / innerWidth);
-// 		document.documentElement.style.setProperty("--mouse-y", evt.clientY / innerHeight);
-// 	};
-//
-// 	document.addEventListener("mousemove", mousemove);
-// 	document.addEventListener("slidechange", evt => {
-// 		document.removeEventListener("mousemove", mousemove);
-// 	}, {once: true});
-// });
-
 // Remove spaces in syntax breakdown and add classes to the ones that are towards the end
 $$(".syntax-breakdown code").forEach(function(code) {
 	var slide = code.closest(".slide");
@@ -340,7 +326,7 @@ $$(".hover-explanations.slide").forEach(slide => {
 
 	slide.addEventListener("mouseover", evt => {
 		var span = evt.target.closest(".code span[data-explanation]");
-		
+
 		if (span) {
 			output.textContent = span.dataset.explanation;
 		}

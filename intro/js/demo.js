@@ -51,7 +51,9 @@ class Demo {
 					var value = this.html = this.editors.contents.value;
 
 					if (this.isolated) {
-						this.iframe.contentDocument.body.innerHTML = value;
+						if (this.iframe.contentDocument.body) {
+							this.iframe.contentDocument.body.innerHTML = value;
+						}
 					}
 					else {
 						this.element.innerHTML = value;
@@ -273,12 +275,6 @@ function resizeTextarea(textarea, secondAttempt) {
 	}
 
 	if (textarea) {
-		if (!textarea.offsetHeight && !secondAttempt) {
-			// Not visible yet, postpone
-			setTimeout(() => resizeTextarea(textarea, true), 50);
-			return;
-		}
-
 		var w = textarea.matches(".adjust-width");
 		var h = textarea.matches(".adjust-height, .horizontal.demo.slide textarea.editor");
 

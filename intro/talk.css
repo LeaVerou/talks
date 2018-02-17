@@ -897,12 +897,12 @@ a[data-html] {
 
 }
 
-	.slide[data-type="JS Nugget"] h1::before {
+	.slide[data-type="JS Nugget"]::before {
 		content: url(img/js-nugget.svg);
-		position: absolute;
+		xposition: absolute;
 		top: 0;
 		left: 0;
-		width: 30vmin;
+		width: 25vmin;
 		margin: 1em;
 	}
 
@@ -930,7 +930,7 @@ a[data-html] {
 	}
 
 	.hover-explanations.slide .explanation {
-		min-height: 3em;
+		min-height: 5em;
 	}
 
 		.hover-explanations.slide .explanation::before {
@@ -954,3 +954,7 @@ a[data-html] {
 			font-style: italic;
 			opacity: .5;
 		}
+
+#mouse {
+	flex-flow: column-reverse;
+}

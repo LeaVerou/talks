@@ -132,6 +132,7 @@
 			display: block;
 			color: white;
 			height: 100%;
+			min-height: 1.6em;
 			-webkit-text-fill-color: transparent;
 			white-space: pre;
 			border: 0;

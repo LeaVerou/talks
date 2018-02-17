@@ -688,20 +688,25 @@ function writeList(script) {
 	</article>
 
 	<article class="slide">
-		<a href="https://mit.edu" target="_blank">
+		<a href="http://web.mit.edu" target="_blank">
 			<img src="img/mitedu.png" alt="Screenshot of mit.edu">
 		</a>
 		<details class="notes">
 			<ul>
 				<li>Selectors are not only useful for styling, but also to get references to elements in the DOM tree.
 					Let’s put our knowledge to use by exploring an existing website!</li>
-				<li>JS has the function <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll"><code>document.querySelectorAll("selector")</code></a> to get all the elements in a document that match a given selector as an array!</li>
-				<li>Because that’s ridiculously long, the Console gives us a shortcut: <code>$$("selector")</code>. Try it on the MIT website:
-					Type <code>$$("h1")</code> in the console to find the website title!</li>
-				<li>This returned an <strong>array</strong> with one element. To actually get that element, we use the <strong>brackets notation</strong>: <code>$$("h1")[0]</code>.</li>
+				<li>JS has the function <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll"><code>document.querySelectorAll("selector")</code></a> to get all the elements in a document that match a given selector!</li>
+				<li>There is also <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector"><code>document.querySelector("selector")</code></a> if we only need the first one (faster).</li>
+				<li>Because these are ridiculously long, the Console gives us shortcuts: <a href="https://developers.google.com/web/tools/chrome-devtools/console/command-line-reference#queryselectorall"><code>$$("selector")</code></a> for all matches and
+					<a href="https://developers.google.com/web/tools/chrome-devtools/console/command-line-reference#queryselector"><code>$("selector")</code></a> for the first one.
+					Try it on the MIT website: Type <code>$("h1")</code> in the console to find the website title!</li>
 				<li>Note that hovering over the element highlights it in the page. But what if we want to see it in the Elements panel?
-					Easy peasy, just use the <a href="https://developers.google.com/web/tools/chrome-devtools/console/command-line-reference#inspect"><code>inspect()</code></a> function: <code>inspect($$("h1")[0])</code></li>
-				<li>Count how many elements there are in an array with the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length"><code>length</code></a> property (<code>$$("h1").length</code>).</li>
+					Easy peasy, just use the <a href="https://developers.google.com/web/tools/chrome-devtools/console/command-line-reference#inspect"><code>inspect()</code></a> function: <code>inspect($("h1"))</code></li>
+				<li>Now try <code>$$("h2")</code> to get all second level headings.</li>
+				<li>This returned an <strong>array</strong> with 7 elements.
+					To actually get an element from it, we use the <strong>brackets notation</strong>, like <code>$$("h2")[0]</code> for the first one.</li>
+				<li>Count how many elements there are with the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length"><code>length</code></a>
+					property (e.g. <code>$$("h2").length</code>).</li>
 				<li>
 					Activities:
 					<ul>
@@ -1141,8 +1146,8 @@ function writeList(script) {
 				<li><code>position: sticky</code> is a hybrid of <code>relative</code> and <code>fixed</code>:
 					<ul>
 						<li>If the element is in view, it behaves like <code>relative</code>.</li>
-						<li>If the element is not in view (the user has scrolled), but its containing block is, it behaves like <code>fixed</code></li>
-						<li>If its containing block gets out of view as well, it behaves like <code>relative</code> again</li>
+						<li>If the element is not in view (the user has scrolled), but its parent is, it behaves like <code>fixed</code></li>
+						<li>If its parent gets out of view as well, it behaves like <code>relative</code> again</li>
 					</ul>
 				</li>
 				<li><code class="property">z-index</code> controls which element is on top of what. Its initial value is <code>auto</code> which corresponds to source order.</li>
@@ -1150,6 +1155,17 @@ function writeList(script) {
 			</ul>
 		</details>
 	</article>
+
+	<article class="slide hover-explanations" data-type="JS Nugget">
+		<pre><code class="code language-javascript">
+			<span data-explanation="Define variable firstParagraph">let firstParagraph</span> = <span data-explanation="Get the first paragraph">$("p:first-of-type")</span>;
+			<span data-explanation="Reference to the element that will receive the event, in this case the entire document">document</span>.addEventListener(<span data-explanation="Event name">"mousemove"</span>, <span data-explanation="Code to be executed">function(<span data-explanation="Event argument. Contains information about the event.">event</span>) {
+				firstParagraph.<span data-explanation="Object that corresponds to the style attribute">style</span>.<span data-explanation="Property we are setting">top</span> = event.<span data-explanation="Vertical coordinate in pixels, relative to the whole document">pageY</span> <span data-explanation='Concatenate with "px" to make a valid CSS value'>+ "px"</span>;
+			}</span>);
+		</code></pre>
+	</article>
+
+	<article class="slide" data-import="positioning"></article>
 
 	<article class="slide">
 		<a href="http://www.bostonglobe.com/metro/2018/02/12/mit-reckoning-with-slavery/ycYjRNa3dgwOenvbDCCEsO/story.html" target="_blank">
@@ -1588,6 +1604,53 @@ function writeList(script) {
 		</details>
 	</article>
 
+	<article class="runnable slide">
+		<pre><code class="language-javascript">
+			document.addEventListener("mousemove", function(event) {
+				let x = event.clientX / innerWidth;
+				let y = event.clientY / innerHeight;
+				let root = document.documentElement;
+
+				root.style.setProperty("--mouse-x", x);
+				root.style.setProperty("--mouse-y", y);
+			});
+		</code></pre>
+	</article>
+
+	<article class="horizontal demo slide" data-edit="css" id="mouse">
+		<style data-slide>
+			#mouse.slide {
+				background-image: radial-gradient(
+					at 50% 50%,
+					transparent, black);
+			}
+		</style>
+		<details class="notes">
+			<ul>
+				<li>Let’s make the center of the gradient follow our mouse!</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="horizontal demo slide" id="svg-eyes">
+		<style data-slide>
+			.iris {
+				cx: 50px;
+			}
+		</style>
+		<div data-edit="contents css">
+			<svg viewBox="0 0 250 100">
+				<clipPath id="white-clip">
+					<path id="white-path" d="M1,50 a65,80 0 0,1 100,0 a80,80 0 0,1 -100,0 Z" />
+				</clipPath>
+				<use id="eye-white" href="#white-path" />
+				<use href="#eye-white" x="148" />
+				<circle id="iris" class="iris" cx="50" cy="45" r="18" clip-path="url(#white-clip)" />
+				<use class="iris" href="#iris" x="148" />
+			</svg>
+		</div>
+	</article>
+
 	<article class="isolated demo slide" title="Pseudo-elements and Generated Content">
 		<details class="notes">
 			<ul>
@@ -1644,28 +1707,6 @@ function writeList(script) {
 			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">CSS Reference</a></li>
 			<li><a href="https://www.w3.org/standards/techs/css#w3c_all">Specifications</a></li>
 		</ul>
-	</article>
-</section>
-
-<section>
-
-	<article class="horizontal demo slide" id="svg-eyes">
-		<style data-slide>
-			.iris {
-				cx: 50px;
-			}
-		</style>
-		<div data-edit="contents css">
-			<svg viewBox="0 0 250 100">
-				<clipPath id="white-clip">
-					<path id="white-path" d="M1,50 a65,80 0 0,1 100,0 a80,80 0 0,1 -100,0 Z" />
-				</clipPath>
-				<use id="eye-white" href="#white-path" />
-				<use href="#eye-white" x="148" />
-				<circle id="iris" class="iris" cx="50" cy="45" r="18" clip-path="url(#white-clip)" />
-				<use class="iris" href="#iris" x="148" />
-			</svg>
-		</div>
 	</article>
 </section>
 
@@ -1768,35 +1809,6 @@ console.log(double);</textarea>
 		</code></pre>
 	</article>
 
-	<article class="slide">
-		<pre><code class="language-javascript">
-			var root = document.documentElement;
-
-			document.addEventListener("mousemove", evt => {
-				let x = evt.clientX / innerWidth;
-				let y = evt.clientY / innerHeight;
-
-				root.style.setProperty("--mouse-x", x);
-				root.style.setProperty("--mouse-y", y);
-			});
-		</code></pre>
-	</article>
-
-	<article class="horizontal demo slide" data-edit="css" id="mouse">
-		<style data-slide>
-			#mouse.slide {
-				background-image: radial-gradient(
-					at 50% 50%,
-					transparent, black);
-			}
-		</style>
-		<details class="notes">
-			<ul>
-				<li>Let’s make the center of the gradient follow our mouse!</li>
-			</ul>
-		</details>
-	</article>
-
 	<article class="slide" data-import="svg-eyes"></article>
 </section>
 
@@ -1818,7 +1830,7 @@ console.log(double);</textarea>
 
 	<ul>
 		<li style="--icon: '🌍'"><a href="http://lea.verou.me">lea.verou.me</a></li>
-		<li style="--icon: '✉'"><a href="mailto:lea@verou.me">leaverou@mit.edus</a></li>
+		<li style="--icon: '✉'"><a href="mailto:leaverou@mit.edu">leaverou@mit.edu</a></li>
 		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
 	</ul>
 
