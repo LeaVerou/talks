@@ -1611,6 +1611,30 @@ function writeList(script) {
 		</details>
 	</article>
 
+	<article class="slide language-javascript" style="align-items: flex-start; padding: 3em" title="CSS Variables & JS">
+		<pre><code>
+			// Get CSS variable value from style attribute
+			element.style.getPropertyValue("--foo");
+		</code></pre>
+		<pre class="delayed"><code>
+			// Get CSS variable value from wherever
+			getComputedStyle(element).getPropertyValue("--foo");
+		</code></pre>
+		<pre class="delayed"><code>
+			// Set CSS variable in style attribute
+			element.style.setProperty("--foo", 38 + 4);
+		</code></pre>
+
+		<details class="notes">
+			<ul>
+				<li>CSS Variables are dynamic, unlike most types of variables you have seen before.
+					You can update them with JS and they update everywhere they are used!</li>
+				<li>The methods shown in this slide are much older than CSS Variables. They were originally added so we can get/set CSS properties without a special camelCase syntax, but you can also use them for CSS Variables.</li>
+				<li>This allows a clean separation of behavior and styling: You can avoid setting specific CSS styles in JS and just pass any necessary values via CSS variables.</li>
+			</ul>
+		</details>
+	</article>
+
 	<article class="runnable slide">
 		<pre><code class="language-javascript">
 			document.addEventListener("mousemove", function(event) {
@@ -1656,6 +1680,12 @@ function writeList(script) {
 				<use class="iris" href="#iris" x="148" />
 			</svg>
 		</div>
+		<details class="notes">
+			<ul>
+				<li>CSS variables can be useful for SVG too! Let’s try to move the eyes with a CSS variable.</li>
+				<li>Remember the <code>--mouse-x</code> and <code>--mouse-y</code> CSS variables? They are still active! Let’s use <code>--mouse-x</code> to make the eyes follow the mouse cursor!</li>
+			</ul>
+		</details>
 	</article>
 
 	<article class="isolated demo slide" title="Pseudo-elements and Generated Content">
@@ -1717,7 +1747,7 @@ function writeList(script) {
 	</article>
 </section>
 
-<!-- <section id="js">
+<section id="js">
 	<header class="slide">
 		<h1>JavaScript</h1>
 	</header>
@@ -1730,6 +1760,7 @@ console.log(answer * 2);</textarea>
 			<ul>
 				<li>You can define variables with <code>let</code>.</li>
 				<li>You can output content to the console with <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/log"><code>console.log()</code></a>. This is very useful for debugging.</li>
+				<li>Open the console and click run to see the result.</li>
 			</ul>
 		</details>
 	</article>
@@ -1744,7 +1775,10 @@ console.log(a);
 console.log(b);
 </textarea>
 		<details class="notes" data-autolink="JavaScript/Reference/Statements">
-			<code>let</code> is block-scoped, <code>var</code> is function-scoped.
+			<ul>
+				<li><code>let</code> is block-scoped, <code>var</code> is function-scoped.</li>
+				<li>Move the second <code>console.log()</code> statement into the conditional block and try again.</li>
+			</ul>
 		</details>
 	</article>
 
@@ -1752,7 +1786,10 @@ console.log(b);
 		<textarea class="editor">console.log(a);
 var a = 1</textarea>
 		<details class="notes">
-			<code>var</code> can be referenced before it’s defined, <code>let</code> throws an error.
+			<ul>
+				<li><code>var</code> can be referenced before it’s defined, <code>let</code> throws an error.</li>
+				<li>Try it for yourself: Change the <code>var</code> to a <code>let</code> and run again!</li>
+			</ul>
 		</details>
 	</article>
 
@@ -1762,7 +1799,7 @@ console.log(numbers.map(x => x*2));</textarea>
 		<details class="notes">
 			<ul>
 				<li>Arrays are defined with brackets (<code>[]</code>)</li>
-				<li>Functions are defined in many ways. The shortest is the notation shown here
+				<li>Functions are defined in many ways. We have already seen <code>function(){ /* code */ }</code>. The shortest is the notation shown here
 					(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions"><em>arrow functions</em></a>).</li>
 				<li>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"><code>map()</code></a> method of arrays allows you to transform them into something else.</li>
 				<li><strong>Activity:</strong> Go to <a href="https://web.mit.edu">mit.edu</a> again, and create an array with the textual content of all headings.</li>
@@ -1781,11 +1818,46 @@ console.log(double);</textarea>
 				<li>In JavaScript everything is an object, even functions!</li>
 				<li>Functions in JS are just objects of type <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"><code>Function</code></a> that can also be called (via parentheses).</li>
 				<li>Important to distinguish <strong>reference to a function</strong> (no parentheses) from <strong>calling a function</strong> (with parentheses).</li>
-				<li>You can assign functions to variables. You can even have functions that return functions!</li>
+				<li>You can assign functions to variables.</li>
 			</ul>
 		</details>
 	</article>
 
+	<article class="runnable slide">
+		<textarea class="editor">let info = {
+	class: "6.813",
+	"😃": true
+};
+
+info.today = new Date();
+delete info["😃"];
+info["😞"] = false;
+console.log(info);</textarea>
+		<details class="notes">
+			<ul>
+				<li>Object literals are defined via braces (<code>{}</code>). They are similar to dictionaries or maps in other languages.</li>
+				<li>There are also constructors, just like other OOP languages. In fact, object literals are implicitly calling <code>new Object()</code> and the brackets notation for arrays is implicitly calling <code>new Array()</code>.</li>
+				<li>Property names can have any character. Property names that only consist of letters, numbers, $, _ don’t need quotes.</li>
+				<li>Property names can be added or deleted at any point. Take note of the notation to refer to property values.</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="runnable slide">
+		<textarea class="editor">var Person = function(first, last) {
+	this.first = first;
+	this.last = last;
+};
+
+console.log(new Person("Lea", "Verou"));
+console.log(Person("Lea", "Verou"));</textarea>
+		<details class="notes">
+			<ul>
+				<li>Functions can also be used as constructors, with the <code>new</code> operator.</li>
+			</ul>
+		</details>
+	</article>
+<!-- 
 	<article class="runnable slide">
 		<textarea class="editor"></textarea>
 		<details class="notes">
@@ -1794,29 +1866,7 @@ console.log(double);</textarea>
 			</ul>
 		</details>
 	</article>
-</section> -->
-<!--
-<section>
-	<header class="slide">
-		<h1>CSS Variables & JavaScript</h1>
-	</header>
-
-	<article class="slide language-javascript" style="align-items: flex-start; padding: 3em">
-		<pre><code>
-			// Get CSS variable value from style attribute
-			element.style.getPropertyValue("--foo");
-		</code></pre>
-		<pre class="delayed"><code>
-			// Get CSS variable value from wherever
-			getComputedStyle(element).getPropertyValue("--foo");
-		</code></pre>
-		<pre class="delayed"><code>
-			// Set CSS variable in style attribute
-			element.style.setProperty("--foo", 38 + 4);
-		</code></pre>
-	</article>
-
-	<article class="slide" data-import="svg-eyes"></article>
+	 -->
 </section>
 
 <article class="slide" data-type="Resources">
@@ -1824,12 +1874,12 @@ console.log(double);</textarea>
 
 	<ul>
 		<li><a href="http://htmldog.com/guides/javascript/">JavaScript Tutorials</a></li>
-		<li><a href=""></a></li>
+		<li><a href="http://eloquentjavascript.net/">Eloquent JavaScript (Free ebook)</a></li>
 		<li><a href=""></a></li>
 		<li><a href=""></a></li>
 		<li><a href=""></a></li>
 	</ul>
-</article> -->
+</article>
 
 <footer class="dark slide dont-resize">
 	<img src="../shared/img/mark.svg" class="logo" />
