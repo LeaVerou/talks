@@ -451,9 +451,16 @@ a[data-html] {
 }
 
 button.run {
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
 	padding: 0 .5em;
 	margin-top: .5em;
 }
+
+	button.run::before {
+		content: "▸ "
+	}
 
 a[data-html] {
 	margin-top: auto;

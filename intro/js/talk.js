@@ -136,20 +136,21 @@ $$("details.notes").forEach(details => {
 	details.prepend(summary);
 });
 
-$$(".runnable.slide pre>code, .runnable.slide textarea").forEach(code => {
+$$(".runnable.slide pre>code, .runnable.slide textarea").forEach(element => {
 	$.create("button", {
 		textContent: "Run",
 		className: "run",
 		events: {
 			click: evt => {
-				var ret = eval(code.value || code.textContent);
+				var code = element.value || element.textContent;
+				var ret = eval(code);
 
 				// if (ret !== undefined) {
 				// 	console.log(ret);
 				// }
 			}
 		},
-		after: code.closest("pre, textarea")
+		after: element.closest("pre, textarea")
 	});
 });
 
@@ -210,8 +211,8 @@ function calculateSpecificity(selector) {
 $$('a[href^="http"]:not([target])').forEach(a => a.target = "_blank");
 
 // Links to documentation
-$$("code.property, code.css, code.function, code.element, code.attribute, [data-autolink] code").forEach(code => {
-	var text = code.textContent;
+$$("code.property, code.css, code.function, code.element, code.attribute, [data-autolink] code, code[data-href]").forEach(code => {
+	var text = code.dataset.href? "" : code.textContent;
 	var path;
 
 	switch (code.className) {
@@ -230,7 +231,7 @@ $$("code.property, code.css, code.function, code.element, code.attribute, [data-
 			path = `API/${category}`;
 			break;
 		default:
-			path = code.closest("[data-autolink]").dataset.autolink;
+			path = code.dataset.href || code.closest("[data-autolink]").dataset.autolink;
 	}
 
 	$.create("a", {

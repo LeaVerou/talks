@@ -1749,10 +1749,34 @@ function writeList(script) {
 
 <section id="js">
 	<header class="slide">
-		<h1>JavaScript</h1>
+		<h1>JavaScript <div class="note">(Open your consoles!)</div></h1>
 	</header>
 
-	<article class="runnable slide">
+	<article class="slide" title="Adding JS">
+		<pre class="language-markup"><code>
+			&lt;!DOCTYPE html>
+			&lt;html>
+			&lt;head>
+				&lt;script src="code.js">&lt;/script>
+			&lt;/head>
+			&lt;body>
+				<span class="delayed">&lt;script>
+					console.log("hi");
+				&lt;/script></span>
+			&lt;/body>
+			&lt;/html>
+		</code></pre>
+		<details class="notes">
+			<p>2 ways to run JS in your page:</p>
+			<ul>
+				<li>Via an external file and the <code class="element">script</code> element. This is the recommended way.</li>
+				<li>By writing JS inside the <code class="element">script</code> element</li>
+				<li><code class="element">script</code> elements can go anywhere in your HTML, they are not restricted to the <code class="element">head</code>.</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="runnable slide" title="Defining Variables">
 		<textarea class="editor">let answer = 42;
 console.log(answer * 2);</textarea>
 
@@ -1765,7 +1789,7 @@ console.log(answer * 2);</textarea>
 		</details>
 	</article>
 
-	<article class="runnable slide">
+	<article class="runnable slide" title="var vs let">
 		<textarea class="editor">if (true) {
 	var a = 1;
 	let b = 2;
@@ -1782,7 +1806,7 @@ console.log(b);
 		</details>
 	</article>
 
-	<article class="runnable slide">
+	<article class="runnable slide" title="Variable hoisting">
 		<textarea class="editor">console.log(a);
 var a = 1</textarea>
 		<details class="notes">
@@ -1793,7 +1817,7 @@ var a = 1</textarea>
 		</details>
 	</article>
 
-	<article class="runnable slide">
+	<article class="runnable slide" id="arrays" title="Arrays & Arrow functions">
 		<textarea class="editor">let numbers = [1, 2, 3, 4, 5];
 console.log(numbers.map(x => x*2));</textarea>
 		<details class="notes">
@@ -1807,11 +1831,11 @@ console.log(numbers.map(x => x*2));</textarea>
 		</details>
 	</article>
 
-	<article class="runnable slide">
-		<textarea class="editor">let numbers = [1, 2, 3, 4, 5];
-let double = x => x*2;
-console.log(numbers.map(double));
+	<article class="runnable slide" title="Function invocation vs function reference">
+		<textarea class="editor">let double = x => x*2;
+
 console.log(double(42));
+console.log(double());
 console.log(double);</textarea>
 		<details class="notes">
 			<ul>
@@ -1823,7 +1847,7 @@ console.log(double);</textarea>
 		</details>
 	</article>
 
-	<article class="runnable slide">
+	<article class="runnable slide" title="Object literals">
 		<textarea class="editor">let info = {
 	class: "6.813",
 	"😃": true
@@ -1838,15 +1862,86 @@ console.log(info);</textarea>
 				<li>Object literals are defined via braces (<code>{}</code>). They are similar to dictionaries or maps in other languages.</li>
 				<li>There are also constructors, just like other OOP languages. In fact, object literals are implicitly calling <code>new Object()</code> and the brackets notation for arrays is implicitly calling <code>new Array()</code>.</li>
 				<li>Property names can have any character. Property names that only consist of letters, numbers, $, _ don’t need quotes.</li>
-				<li>Property names can be added or deleted at any point. Take note of the notation to refer to property values.</li>
+				<li>Property names can be added or deleted at any point.</li>
+				<li>Take note of the two different notations to refer to property values. The brackets notation can be used for computed properties too!</li>
 			</ul>
 		</details>
 	</article>
 
-	<article class="runnable slide">
+	<article class="runnable slide" title="Function context">
+		<textarea class="editor">let foo = {
+	name: "foo",
+	func: function(n) {
+		console.log(n, this);
+	}
+};
+
+foo.func(1);
+let func = foo.func;
+func(2);
+let bar = {name: "bar", func: foo.func};
+bar.func(3);</textarea>
+		<details class="notes">
+			<ul>
+				<li>The value of <code>this</code> inside a function is called <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#Function_context"><strong><em>Function context</em></strong></a></li>
+				<li><code>this</code> changes based on how the function is called.</li>
+				<li>Arrow functions do not have a <code>this</code>. When <code>this</code> is used inside them, it refers to whatever its value was outside the function.</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="runnable slide" title="Function context 2">
+		<textarea class="editor">var foo = {
+	name: "foo",
+	func: function() {
+		console.log(this);
+	}
+};
+
+setTimeout(foo.func, 10);
+document.body.addEventListener("mousemove", foo.func, {once:true})</textarea>
+		<details class="notes">
+			<ul>
+				<li>Sometimes you pass a function as an argument to another function.
+					When your function executes, it will likely be called with a different context.</li>
+				<li>What its context becomes depends on the function:
+					<ul>
+						<li>For <code data-href="API/WindowOrWorkerGlobalScope/setTimeout">setTimeout()</code> it’s the <code data-href="API/Window">window</code> object.</li>
+						<li>For <code data-href="API/EventTarget/addEventListener">addEventListener()</code> it’s the element the listener was bound on (which may be different than the actual event target, due to bubbling).</li>
+					</ul>
+				</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="runnable slide" title="Changing the context">
+		<textarea class="editor">let func = function(n) {
+	console.log(n, this);
+};
+
+func(1);
+func.call(document.head, 2);
+let func2 = func.bind(document.body);
+func2(3);
+func2.call(document.head, 4);</textarea>
+		<details class="notes">
+			<ul>
+				<li>We can change the context a function is run with!</li>
+				<li>For one-offs, we can use the <code data-href="JavaScript/Reference/Global_Objects/Function/call">Function#call()</code> method of Function objects.</li>
+				<li>To bind a function to a particular context and prevent anything from changing that, we can use <code data-href="JavaScript/Reference/Global_Objects/Function/bind">Function#bind()</code>
+					<ul>
+						<li><strong>Caveat:</strong> <code>foo.bind(bar)</code> is a different object than <code>foo</code>!</li>
+					</ul>
+				</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="runnable slide" title="Using functions as constructors">
 		<textarea class="editor">var Person = function(first, last) {
 	this.first = first;
 	this.last = last;
+	console.log("context:", this);
 };
 
 console.log(new Person("Lea", "Verou"));
@@ -1854,10 +1949,102 @@ console.log(Person("Lea", "Verou"));</textarea>
 		<details class="notes">
 			<ul>
 				<li>Functions can also be used as constructors, with the <code>new</code> operator.</li>
+				<li>That does not prevent them from being used as functions too!
+					<ul>
+						<li>In fact, JS’s own objects can often be used as both.</li>
+						<li><code>RegExp("a")</code> and <code>new RegExp("a")</code> are equivalent.</li>
+						<li><code>Date()</code> and <code>new Date()</code> are not. The former is a string.</li>
+					</ul>
+				</li>
+
 			</ul>
 		</details>
 	</article>
-<!-- 
+
+	<article class="runnable slide" title="Prototypal inheritance">
+		<textarea class="editor">var Person = function(first, last) {
+	this.first = first;
+	this.last = last;
+};
+Person.prototype.greet = function() {
+	return `Hi, I’m ${this.first}!`;
+};
+
+var lea = new Person("Lea", "Verou");
+console.log(lea.greet());
+</textarea>
+		<details class="notes">
+			<ul>
+				<li>JS different than other OO languages: it uses <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes">prototypal inheritance</a>.</li>
+				<li>While prototype-based languages as uncommon, the mechanism is strictly more powerful than classical OO because classical OO can be emulated through prototypes anyway.</li>
+				<li>Try creating the Person object before <code>greet()</code> is defined. What do you notice?</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="runnable slide" title="Classes">
+		<textarea class="editor"> class Person {
+	constructor (first, last) {
+		this.first = first;
+		this.last = last;
+	}
+	greet() {
+		return `Hi, I’m ${this.first}!`;
+	}
+}
+
+var lea = new Person("Lea", "Verou");
+console.log(lea.greet());</textarea>
+		<details class="notes">
+			<ul>
+				<li>ECMAScript 6 (ECMAScript is the standard behind the JS language) brought a class syntax that is more similar to other OOP languages.</li>
+				<li>However, this is merely syntactic sugar over the prototype-based patterns of the past.</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="runnable slide">
+		<textarea class="editor">setTimeout(() => {
+	console.log(1);
+
+	setTimeout(() => {
+		console.log(2);
+	}, 1000);
+}, 1000);</textarea>
+		<details class="notes">
+			<ul>
+				<li>Asynchronous code is often executed via <em>callbacks</em>, i.e. functions passed as parameters to other asynchronous functions.</li>
+				<li>This means that if you have asynchronous code that runs after other asynchronous code, you end up with nested callbacks.
+					When you have a lot of deeply nested callbacks, this is called <a href="http://callbackhell.com">callback hell</a></li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="runnable slide">
+		<textarea class="editor">function timeout(delay) {
+	return new Promise(resolve => {
+		setTimeout(resolve, delay)
+	});
+}
+
+timeout(1000).then(() => {
+		console.log(1);
+		return timeout(1000);
+	}).then(() => console.log(2));</textarea>
+		<details class="notes">
+			<ul>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promises</a> help mitigate this problem since you rarely need more than 1 level of nesting with them.</li>
+				<li>They are objects that you can use to schedule future actions.</li>
+				<li>Initially, a promise is pending. Once a promise is resolved or rejected, it can never change state. </li>
+				<li>You cannot directly inspect a promise’s status in your code.
+					You can only schedule code to be executed when the promise is resolved
+					(via <code data-href="JavaScript/Reference/Global_Objects/Promise/then">then()</code>) or rejected (via <code data-href="JavaScript/Reference/Global_Objects/Promise/catch">catch()</code>)
+				</li>
+			</ul>
+		</details>
+	</article>
+
+<!--
 	<article class="runnable slide">
 		<textarea class="editor"></textarea>
 		<details class="notes">
@@ -1875,9 +2062,9 @@ console.log(Person("Lea", "Verou"));</textarea>
 	<ul>
 		<li><a href="http://htmldog.com/guides/javascript/">JavaScript Tutorials</a></li>
 		<li><a href="http://eloquentjavascript.net/">Eloquent JavaScript (Free ebook)</a></li>
-		<li><a href=""></a></li>
-		<li><a href=""></a></li>
-		<li><a href=""></a></li>
+		<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">MDN Docs about JavaScript</a></li>
+		<!--<li><a href=""></a></li>
+		<li><a href=""></a></li> -->
 	</ul>
 </article>
 
