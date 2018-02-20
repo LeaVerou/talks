@@ -1937,6 +1937,70 @@ func2.call(document.head, 4);</textarea>
 		</details>
 	</article>
 
+	<article class="isolated horizontal demo slide" title="Events 2">
+		<div data-edit="contents js">
+			<input type="range">
+			<output></output>
+		</div>
+		<script type="text/plain">
+			let slider = document.querySelector("input[type=range]");
+			let output = document.querySelector("output");
+
+			slider.addEventListener("input", evt => {
+				output.textContent = slider.value;
+			});
+		</script>
+		<details class="notes">
+			<ul>
+				<li>Notice that we need to start interacting with the slider to get a value.
+					Fix this example so that it starts with the current value.</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="isolated horizontal demo slide" title="Event delegation">
+		<div data-edit="contents js">
+			<div>
+				<input type="range">
+				<output></output>
+			</div>
+			<div>
+				<input type="range">
+				<output></output>
+			</div>
+			<div>
+				<input type="range">
+				<output></output>
+			</div>
+		</div>
+		<script type="text/plain">
+			let slider = document.querySelector("input[type=range]");
+			let output = document.querySelector("output");
+			let update = evt => {
+				output.textContent = slider.value;
+			};
+
+			slider.addEventListener("input", update);
+			update();
+		</script>
+		<details class="notes">
+			<ul>
+				<li>Now we have 3 sliders! What to do?
+					<ul>
+						<li>We <em>could</em> attach three listeners in a loop.</li>
+						<li>Or, we could attach one, on a common ancestor and use <code>event.target</code> to figure out which slider moved.
+							This practice is called <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_delegation"><em>event delegation</em></a></li>
+					</ul>
+				</li>
+				<li>Most events <em>bubble</em> up the DOM tree.
+					There is also a capturing phase, where the event starts from the root and propagates down.
+					Bubbling and capturing is called <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events">Event propagation</a>.
+				</li>
+				<li>Some events don’t bubble, but all events have a capturing phase.</li>
+			</ul>
+		</details>
+	</article>
+
 	<article class="runnable slide" title="Using functions as constructors">
 		<textarea class="editor">var Person = function(first, last) {
 	this.first = first;
@@ -1982,6 +2046,20 @@ console.log(lea.greet());
 		</details>
 	</article>
 
+	<article class="runnable slide" title="Prototypes of host objects">
+		<textarea class="editor">Array.prototype.unique = function() {
+	return [...new Set(this)];
+};
+
+console.log([2, 2, 3, 2, 5].unique())</textarea>
+		<details class="notes">
+			<ul>
+				<li>The prototypes of native objects are also exposed and up for modification!</li>
+				<li>This is useful for <em>polyfilling</em>: implementing new language features when browsers don’t support them yet.</li>
+			</ul>
+		</details>
+	</article>
+
 	<article class="runnable slide" title="Classes">
 		<textarea class="editor"> class Person {
 	constructor (first, last) {
@@ -2020,7 +2098,7 @@ console.log(lea.greet());</textarea>
 		</details>
 	</article>
 
-	<article class="runnable slide">
+	<article class="runnable slide" title="Promises">
 		<textarea class="editor">function timeout(delay) {
 	return new Promise(resolve => {
 		setTimeout(resolve, delay)
@@ -2028,22 +2106,68 @@ console.log(lea.greet());</textarea>
 }
 
 timeout(1000).then(() => {
-		console.log(1);
-		return timeout(1000);
-	}).then(() => console.log(2));</textarea>
+	console.log(1);
+	return timeout(1000);
+}).then(() => console.log(2));</textarea>
 		<details class="notes">
 			<ul>
-				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promises</a> help mitigate this problem since you rarely need more than 1 level of nesting with them.</li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promises</a> help mitigate
+					the callback hell problem since you rarely need more than 1 level of nesting with them.</li>
 				<li>They are objects that you can use to schedule future actions.</li>
-				<li>Initially, a promise is pending. Once a promise is resolved or rejected, it can never change state. </li>
+				<li>Initially, a promise is pending. Once a promise is resolved or rejected, it can never change state again.</li>
 				<li>You cannot directly inspect a promise’s status in your code.
 					You can only schedule code to be executed when the promise is resolved
-					(via <code data-href="JavaScript/Reference/Global_Objects/Promise/then">then()</code>) or rejected (via <code data-href="JavaScript/Reference/Global_Objects/Promise/catch">catch()</code>)
+					via <code data-href="JavaScript/Reference/Global_Objects/Promise/then">then()</code>,
+					or when it’s rejected, via <code data-href="JavaScript/Reference/Global_Objects/Promise/catch">catch()</code>
 				</li>
 			</ul>
 		</details>
 	</article>
 
+	<article class="runnable slide" title="async / await">
+		<textarea class="editor">function timeout(delay) {
+	return new Promise(resolve => {
+		setTimeout(resolve, delay)
+	});
+}
+
+await timeout(1000);
+console.log(1);
+await timeout(1000);
+console.log(2);</textarea>
+		<details class="notes">
+			<ul>
+				<li>The keywords <code data-href="JavaScript/Reference/Statements/async_function">async</code>
+					and <code data-href="JavaScript/Reference/Operators/await">await</code> help with writing asynchronous code
+					that looks linear and is easier to write.</li>
+				<li>Sadly, <code>await</code> is only valid inside <code>async</code> functions,
+					but since you can define a function and execute it on the spot, you can work around it.</li>
+				<li>Try running this code: You will notice an error. How would you fix it?</li>
+			</ul>
+		</details>
+	</article>
+
+
+	<article class="isolated horizontal demo slide needs-base" title="Fetch"  data-edit="js">
+		<script type="text/plain">
+			fetch("http://leaverou.github.io/countries.json")
+				.then(r => r.json())
+				.then(data => {
+					for (let country of data.country) {
+						var div = document.createElement("div");
+						div.innerHTML = `<img src="img/flags/${country.code}.png" /> ${country.name}`;
+						document.body.appendChild(div);
+					}
+				});
+		</script>
+		<details class="notes">
+			<ul>
+				<li><code data-href="API/WindowOrWorkerGlobalScope/fetch">fetch()</code> allows us to send an HTTP request and fetch a remote resource.</li>
+				<li>To be able to fetch a resource via JavaScript it must be <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS-enabled</a>.</li>
+				<li><code data-href="API/WindowOrWorkerGlobalScope/fetch">fetch()</code> returns a <code data-href="JavaScript/Reference/Global_Objects/Promise">Promise</code> that resolves with the response.</li>
+			</ul>
+		</details>
+	</article>
 <!--
 	<article class="runnable slide">
 		<textarea class="editor"></textarea>

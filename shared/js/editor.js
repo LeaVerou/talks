@@ -504,6 +504,11 @@ var _ = Prism.Live = $.Class({
 						return true;
 					}
 				}
+			},
+			"js": {
+				snippets: {
+					log: "console.log()"
+				}
 			}
 		}
 	}

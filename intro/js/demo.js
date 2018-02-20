@@ -18,8 +18,6 @@ class Demo {
 				name: "iframe-" + slide.id,
 				inside: this.slide
 			});
-
-			this.loaded = new Promise (r => this.iframe.addEventListener("load", r, {once:true}));
 		}
 
 		this.editorContainer = $.create({
@@ -51,7 +49,11 @@ class Demo {
 					var value = this.html = this.editors.contents.value;
 
 					if (this.isolated) {
-						if (this.iframe.contentDocument.body) {
+						if (value.indexOf("<script") > -1) {
+
+							this.iframe.contentDocument.body.innerHTML = value;
+						}
+						else if (this.iframe.contentDocument.body) {
 							this.iframe.contentDocument.body.innerHTML = value;
 						}
 					}
@@ -109,6 +111,34 @@ class Demo {
 			});
 		}
 
+		if (this.edit.indexOf("js") > -1) {
+			this.script = $('script[type="text/plain"]', slide);
+
+			$.remove(this.script);
+
+			this.editors.js = Demo.createEditor(slide, "js", {
+				fromSource: () => Demo.fixCode(this.script? this.script.textContent : ""),
+				toSource: () => {
+					var value = this.js = this.editors.js.value;
+
+					// Throttle
+					clearTimeout(this.toUpdateJS);
+					this.toUpdateJS = setTimeout(() => {
+						this.loaded = this.updateIframe();
+					}, 1000);
+				},
+				container: this.editorContainer
+			});
+
+			this.css = $$("style[data-slide]", slide).map(s => {
+				if (this.isolated) {
+					s.remove();
+				}
+
+				return s.textContent;
+			});
+		}
+
 		this.slide.addEventListener("slidechange", evt => {
 			for (let id in this.editors) {
 				this.editors[id].textarea.dispatchEvent(new InputEvent("input"));
@@ -116,11 +146,7 @@ class Demo {
 		});
 
 		if (this.isolated) {
-			this.iframe.srcdoc = Demo.getHTMLPage(this.html, this.css, this.slide.title || "Demo");
-
-			this.iframe.onload = () => {
-				this.style = $("style#live", this.iframe.contentDocument);
-			};
+			this.loaded = this.updateIframe();
 
 			var needsBase = this.slide.classList.contains("needs-base");
 
@@ -134,7 +160,7 @@ class Demo {
 					"click mouseenter": evt => {
 						var title = (slide.title || slide.dataset.title || "") + " Demo";
 
-						a.href = createURL(Demo.getHTMLPage(this.html, this.css, title, {needsBase}));
+						a.href = createURL(Demo.getHTMLPage({html: this.html, css: this.css, js: this.js, title, needsBase}));
 					}
 				}
 			});
@@ -162,6 +188,22 @@ class Demo {
 				}
 			});
 		}
+	}
+
+	updateIframe() {
+		this.iframe.srcdoc = Demo.getHTMLPage({
+			html: this.html,
+			css: this.css,
+			js: this.js,
+			title: this.slide.title || "Demo"
+		});
+
+		return new Promise(resolve => {
+			this.iframe.onload = resolve;
+		}).then(evt => {
+			this.style = $("style#live", this.iframe.contentDocument);
+			return evt;
+		});
 	}
 
 	openEditor(id) {
@@ -202,7 +244,7 @@ class Demo {
 		return new Prism.Live(textarea);
 	}
 
-	static getHTMLPage(html, css="", title="Demo", {needsBase} = {}) {
+	static getHTMLPage({html="", css="", js="", title="Demo", needsBase} = {}) {
 		if (Array.isArray(css)) {
 			css = css.join("</style><style>");
 		}
@@ -230,6 +272,7 @@ ${css}
 </head>
 <body>
 ${html}
+${js? `<script>${js}</script>` : ""}
 </body>
 </html>`;
 	}
@@ -288,7 +331,7 @@ function resizeTextarea(textarea, secondAttempt) {
 		}
 
 		if (w) {
-			textarea.style.width = textarea.scrollWidth + 32 + "px";
+			textarea.style.width = textarea.scrollWidth + 48 + "px";
 		}
 	}
 };

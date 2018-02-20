@@ -82,8 +82,7 @@
 }
 
 	#html-tags.syntax-breakdown .code,
-	#page-skeleton.syntax-breakdown .code,
-	 {
+	#page-skeleton.syntax-breakdown .code {
 		font-size: 250%;
 	}
 
@@ -820,9 +819,14 @@ a[data-html] {
 		text-shadow: none;
 	}
 
-#js textarea.editor {
-	background: none;
+.runnable.slide div.editor {
+	max-height: -webkit-fill-available;
+	max-height: fill;
 }
+
+	.runnable.slide textarea.editor {
+		background: none;
+	}
 
 .cheatsheet.slide {
 	flex-flow: row wrap;

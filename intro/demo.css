@@ -53,7 +53,8 @@
 		}
 
 .demo.slide details.notes,
-.demo.slide .button {
+.demo.slide .button,
+.runnable.slide .button {
 	position: absolute;
 	top: .4em;
 	bottom: auto;
@@ -82,105 +83,107 @@
 	border-color: rgba(0,0,0,.2);
 }
 
-	textarea.editor,
-	div.editor > pre {
-		padding: .2rem 2rem;
-		line-height: inherit;
-		box-sizing: border-box;
+.editor-container {
+	display: flex;
+	flex-flow: column;
+}
+
+	.editor-container div.editor {
+		flex: 1;
 	}
 
-	div.editor {
-		position: relative;
+	.demo.slide div.editor.collapsed {
+		display: block;
+		max-height: var(--collapsed-height, 1.6em);
+		overflow: hidden;
+	}
+
+		.demo.slide div.editor.collapsed pre {
+			opacity: .2;
+		}
+
+		.demo.slide div.editor.collapsed textarea,
+		.demo.slide div.editor.collapsed pre {
+			overflow: hidden;
+		}
+
+.demo.slide:not(.horizontal) div.editor-container {
+	top: 0;
+	width: calc(var(--division, 60) * 1vw);
+}
+
+textarea.editor,
+div.editor > pre {
+	padding: .2rem 2rem;
+	line-height: inherit;
+	box-sizing: border-box;
+}
+
+div.editor {
+	position: relative;
+	color: white;
+	font-size: calc(var(--font-size-multiplier, 1) * 100%);
+	line-height: 1.5;
+	box-sizing: border-box;
+	max-height: 100vh;
+	transition: .2s;
+	transition-property: max-height, flex;
+}
+
+	textarea.editor {
+		display: block;
 		color: white;
-		font-size: calc(var(--font-size-multiplier, 1) * 100%);
-		line-height: 1.5;
-		box-sizing: border-box;
-		max-height: 100vh;
-		transition: .2s;
-		transition-property: max-height, flex;
+		max-width: 100vw;
+		height: 100%;
+		min-height: 1.6em;
+		max-height: inherit;
+		-webkit-text-fill-color: transparent;
+		white-space: pre;
+		border: 0;
+		outline: none;
+		width: 100%;
+		background: hsl(200, 10%, 20%) linear-gradient(rgba(0,0,0,.1) 50%, transparent 0);
+		background-origin: content-box;
+		background-size: auto 3em;
+		background-attachment: local;
 	}
 
-	.editor-container {
-		display: flex;
-		flex-flow: column;
+	.demo.slide:not(.horizontal) div.editor > textarea.editor {
+		box-shadow: -.1em 0 .2em rgba(0,0,0,.3) inset;
 	}
 
-		.editor-container div.editor {
-			flex: 1;
-		}
+	.demo.slide.horizontal div.editor > textarea.editor {
+		max-height: calc(var(--division, 50) * 1vh);
+		box-shadow: 0 .1em .2em rgba(0,0,0,.3) inset;
+	}
 
-		.demo.slide div.editor.collapsed {
-			display: block;
-			max-height: var(--collapsed-height, 1.6em);
-		}
-
-			.demo.slide div.editor.collapsed pre {
-				opacity: .2;
-			}
-
-			.demo.slide div.editor.collapsed textarea,
-			.demo.slide div.editor.collapsed pre {
-				overflow: hidden;
-			}
-
-	.demo.slide:not(.horizontal) div.editor-container {
+	div.editor > pre {
+		position: absolute;
 		top: 0;
-		width: calc(var(--division, 60) * 1vw);
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
+		margin: 0;
+		pointer-events: none;
 	}
 
-		textarea.editor {
-			display: block;
-			color: white;
-			max-width: calc(100vw - 2em);
-			height: 100%;
-			min-height: 1.6em;
-			-webkit-text-fill-color: transparent;
-			white-space: pre;
-			border: 0;
-			outline: none;
-			width: 100%;
-			background: hsl(200, 10%, 20%) linear-gradient(rgba(0,0,0,.1) 50%, transparent 0);
-			background-origin: content-box;
-			background-size: auto 3em;
-			background-attachment: local;
-		}
+	.editor label {
+		position: absolute;
+		top: .6rem;
+		right: 1rem;
+		z-index: 1;
+		padding: .1rem .5rem;
+		border-radius: .2em;
+		background: hsl(30, 100%, 50%);
+		color: white;
+		cursor: pointer;
+		text-transform: uppercase;
+		font: bold 1.2rem/1.5 var(--font-heading);
+		opacity: .5;
+	}
 
-		.demo.slide:not(.horizontal) div.editor > textarea.editor {
-			box-shadow: -.1em 0 .2em rgba(0,0,0,.3) inset;
+		.editor label:hover {
+			background: hsl(15, 100%, 45%);
+			opacity: 1;
 		}
-
-		.demo.slide.horizontal div.editor > textarea.editor {
-			max-height: calc(var(--division, 50) * 1vh);
-			box-shadow: 0 .1em .2em rgba(0,0,0,.3) inset;
-		}
-
-		div.editor > pre {
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			z-index: 1;
-			margin: 0;
-			pointer-events: none;
-		}
-
-		.editor label {
-			position: absolute;
-			top: .6rem;
-			right: 1rem;
-			z-index: 1;
-			padding: .1rem .5rem;
-			border-radius: .2em;
-			background: hsl(30, 100%, 50%);
-			color: white;
-			cursor: pointer;
-			text-transform: uppercase;
-			font: bold 1.2rem/1.5 var(--font-heading);
-			opacity: .5;
-		}
-
-			.editor label:hover {
-				background: hsl(15, 100%, 45%);
-				opacity: 1;
-			}

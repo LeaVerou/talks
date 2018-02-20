@@ -338,9 +338,30 @@ $$(".hover-explanations.slide").forEach(slide => {
 	});
 });
 
-$$("#js textarea.editor").forEach(textarea => {
+$$(".runnable.slide textarea.editor").forEach(textarea => {
 	textarea.classList.add("language-javascript", "adjust-width", "adjust-height");
 	textarea.addEventListener("input", evt => resizeTextarea(textarea));
+	var slide = textarea.closest(".slide");
+
+	var a = $.create("a", {
+		className: "button new-tab",
+		textContent: "Open in new Tab",
+		inside: slide,
+		target: "_blank",
+		events: {
+			"click mouseenter": evt => {
+				var title = (slide.title || slide.dataset.title || "") + " Demo";
+				var js = textarea.value;
+
+				a.href = createURL(Demo.getHTMLPage({
+					html: `<p>Open your console to see results and play! For reference, the code was:</p>
+<pre><code class="language-javascript">${textarea.value}</code></pre>`,
+					css: "body { tab-size: 4}",
+					js, title
+				}));
+			}
+		}
+	});
 });
 
 {
