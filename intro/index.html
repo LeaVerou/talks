@@ -20,6 +20,17 @@ function writeList(script) {
 </head>
 <body>
 
+<article class="slide">
+	<h1>Instructions</h1>
+	<ul>
+		<li>Use the keyboard <strong>arrow keys</strong> to navigate. You can jump to a given slide by using Ctrl + G.</li>
+		<li>If the “Open in new tab” button doesn’t work, <strong>disable AdBlock</strong></li>
+		<li>These slides should work in Firefox, Safari, and Chrome but were taught using <strong>Chrome 64+</strong> and tested there more.</li>
+		<li>Some demos will not make sense as they were live coded, but there are <strong>notes</strong> on the top right or bottom left corner about what was explained during each slide.
+		These notes also have links to resources and additional information, so I highly recommend looking at them.</li>
+	</ul>
+</article>
+
 <header id="intro" class="slide dont-resize" data-source="flickr.com/photos/billward/16601966117">
 	<h1>
 		An Introduction to Modern Web Technologies
@@ -2148,14 +2159,14 @@ console.log(2);</textarea>
 	</article>
 
 
-	<article class="isolated horizontal demo slide needs-base" title="Fetch"  data-edit="js">
+	<article class="isolated horizontal demo slide needs-base" id="fetch-api" title="Fetch" data-edit="js">
 		<script type="text/plain">
 			fetch("https://leaverou.github.io/countries.json")
-				.then(r => r.json())
+				.then(response => response.json())
 				.then(data => {
 					for (let country of data.country) {
 						var div = document.createElement("div");
-						div.innerHTML = `<img src="img/flags/${country.code}.png" /> ${country.name}`;
+						div.innerHTML = `${country.code} ${country.name}`;
 						document.body.appendChild(div);
 					}
 				});
@@ -2165,6 +2176,7 @@ console.log(2);</textarea>
 				<li><code data-href="API/WindowOrWorkerGlobalScope/fetch">fetch()</code> allows us to send an HTTP request and fetch a remote resource.</li>
 				<li>To be able to fetch a resource via JavaScript it must be <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS-enabled</a>.</li>
 				<li><code data-href="API/WindowOrWorkerGlobalScope/fetch">fetch()</code> returns a <code data-href="JavaScript/Reference/Global_Objects/Promise">Promise</code> that resolves with the response.</li>
+				<li>Activity: Change this to display a flag instead of the country code! There are flag images in <code>img/flags</code> in PNG format, with the country code as their filename.</li>
 			</ul>
 		</details>
 	</article>
@@ -2187,8 +2199,8 @@ console.log(2);</textarea>
 		<li><a href="http://htmldog.com/guides/javascript/">JavaScript Tutorials</a></li>
 		<li><a href="http://eloquentjavascript.net/">Eloquent JavaScript (Free ebook)</a></li>
 		<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">MDN Docs about JavaScript</a></li>
-		<!--<li><a href=""></a></li>
-		<li><a href=""></a></li> -->
+		<li><a href="https://www.ecma-international.org/ecma-262/8.0/index.html">ECMAScript 8 Standard</a></li>
+		<li><a href="https://dom.spec.whatwg.org/">DOM Specification</a></li>
 	</ul>
 </article>
 
