@@ -876,19 +876,26 @@ a[data-html] {
 		text-align: center;
 	}
 
-#combinators table {
-	font-size: 70%;
+table {
+	font-size: 90%;
 	font-weight: 300;
 	border-spacing: 0;
 }
 
-	#combinators td {
-		padding: 0 .2em;
-
+	td {
+		padding: .1em .2em;
 	}
 
-	#combinators tbody:nth-of-type(2) tr:nth-child(odd) td {
+	tr:nth-child(odd) td {
 		background: hsla(0,0%,100%,.1);
+	}
+
+#combinators table {
+	font-size: 70%;
+}
+
+	#combinators tbody:nth-of-type(1) tr:nth-child(odd) td {
+		background: none;
 	}
 
 	#combinators td:nth-child(1) {
@@ -969,4 +976,28 @@ a[data-html] {
 
 #mouse {
 	flex-flow: column-reverse;
+}
+
+#context-quiz {}
+
+	#context-quiz table {
+		font-size: 75%;
+	}
+
+	#context-quiz td {
+		padding: .3em .4em;
+	}
+
+	#context-quiz :valid {
+		--color: 80, 100%, 50%;
+		background: linear-gradient(hsla(var(--color), .25), hsla(var(--color), .4)) black border-box;
+	}
+
+	#context-quiz :invalid {
+		background: linear-gradient(rgba(255, 0, 0, .2), rgba(255, 0, 0, .3)) black border-box;
+	}
+
+.flipped-emoji {
+	display: inline-block;
+	transform: scaleX(-1);
 }

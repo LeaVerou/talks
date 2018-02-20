@@ -774,7 +774,7 @@ function writeList(script) {
 	</article>
 
 	<article class="slide" id="specificity-battle">
-		<h1><span style="display: inline-block; transform: scaleX(-1)">🤺</span> Specificity battle! 🤺</h1>
+		<h1><span class="flipped-emoji">🤺</span> Specificity battle! 🤺</h1>
 		<div>
 			<div>
 				<input value="#container *" id="selector1" />
@@ -1942,10 +1942,102 @@ func2.call(document.head, 4);</textarea>
 				<li>To bind a function to a particular context and prevent anything from changing that, we can use <code data-href="JavaScript/Reference/Global_Objects/Function/bind">Function#bind()</code>
 					<ul>
 						<li><strong>Caveat:</strong> <code>foo.bind(bar)</code> is a different object than <code>foo</code>!</li>
+						<li><code>bind()</code> <strong>returns a new function</strong> whose context is always the one you specified.
+						<code>call()</code> <strong>calls your original function</strong> with a specific context.</li>
 					</ul>
 				</li>
 			</ul>
 		</details>
+	</article>
+
+	<article class="slide language-javascript" title="Context Quiz!">
+		<h1><span class="flipped-emoji">📝</span> Context Quiz! 📝</h1>
+
+		<table>
+			<thead>
+				<th>Code</th>
+				<th><code>this</code> in <code>myFunc</code> is…</th>
+			</thead>
+			<tr>
+				<td>
+					<pre><code>foo.myFunc()</code></pre>
+				</td>
+				<td>
+					<input required pattern="foo" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<pre><code>element.addEventListener("click", foo.myFunc)</code></pre>
+				</td>
+				<td>
+					<input required pattern="element" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<pre><code>setTimeout(foo.myFunc, 100)</code></pre>
+				</td>
+				<td>
+					<input required pattern="window" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<pre><code>foo.myFunc.call(bar)</code></pre>
+				</td>
+				<td>
+					<input required pattern="bar" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<pre><code>let myFunc = foo.myFunc;
+myFunc();</code></pre>
+				</td>
+				<td>
+					<input required pattern="window" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<pre><code>let myFunc = foo.myFunc.bind(bar);
+myFunc();</code></pre>
+				</td>
+				<td>
+					<input required pattern="bar" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<pre><code>element.addEventListener("click", foo.myFunc.bind(bar));</code></pre>
+				</td>
+				<td>
+					<input required pattern="bar" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<pre><code>
+						element.addEventListener("click", function() {
+							foo.myFunc();
+						});
+					</code></pre>
+				</td>
+				<td>
+					<input required pattern="foo" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<pre><code>foo.myFunc.bind(bar).call(yolo)</code></pre>
+				</td>
+				<td>
+					<input required pattern="bar" />
+				</td>
+			</tr>
+		</table>
+
 	</article>
 
 	<article class="isolated horizontal demo slide" title="Events 2">
