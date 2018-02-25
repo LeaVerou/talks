@@ -332,9 +332,9 @@ footer.slide:target {
 		}
 
 #thankyou {
-	background: /*url(img/thankyou.gif) no-repeat,*/
-	            url(img/unicorn.gif) center no-repeat hsl(344, 88%, 73%);
-	background-blend-mode:  normal;
+	background: url(img/thankyou.gif) no-repeat,
+	            url(img/unicorn.gif) 100% 80% no-repeat hsl(344, 88%, 73%);
+	background-blend-mode: multiply, normal;
 }
 
 .annotation {
