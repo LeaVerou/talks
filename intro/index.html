@@ -674,13 +674,13 @@ function writeList(script) {
 					<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_selectors">Sibling combinator</a></td>
 					<td>E ~ F</td>
 					<td>F must be a sibling of E, somewhere after it.</td>
-					<td><code>h2 ~ p</code> will match all <code>&lt;p></code> elements that directly follow an <code>&lt;h2></code>.</td>
+					<td><code>h2 ~ p</code> will match all <code>&lt;p></code> elements that follow an <code>&lt;h2></code>.</td>
 				</tr>
 				<tr>
 					<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Adjacent_sibling_selectors">Adjacent Sibling Combinator</a></td>
 					<td>E + F</td>
 					<td>F must be a sibling of E, and must immediately follow it. Stricter form of the sibling combinator.</td>
-					<td><code>input[type="checkbox"]:checked + *</code>: Any element that follows a checked checkbox</td>
+					<td><code>input[type="checkbox"]:checked + *</code>: Any element that directly follows a checked checkbox</td>
 				</tr>
 				<tr>
 					<td>Selector List</td>
