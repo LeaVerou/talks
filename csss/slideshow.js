@@ -7,42 +7,39 @@
 /**
  * Make the environment a bit friendlier
  */
-function $(expr, con) { return typeof expr === 'string'? (con || document).querySelector(expr) : expr; }
-function $$(expr, con) { return [].slice.call((con || document).querySelectorAll(expr)); }
+function $(expr, con) {
+	return typeof expr === "string"? (con || document).querySelector(expr) : expr;
+}
+function $$(expr, con) {
+	return [].slice.call((con || document).querySelectorAll(expr));
+}
 
 (function(head, body, html){
-
-// Check for classList support and include the polyfill if it's not supported
-if(!('classList' in body)) {
-	var thisScript = $('script[src$="slideshow.js"]'),
-	    script = document.createElement('script');
-	    script.src = thisScript.src.replace(/\bslideshow\.js/, 'classList.js');
-	thisScript.parentNode.insertBefore(script, thisScript);
-}
 
 // http://ichuan.net/post/52/stable-sort-of-javascript-array/
 Array.prototype.stableSort = function (fn) {
   if (!fn) {
     return this.sort();
   }
-  var newArr = this.map(function (i, j) { return {i:i, j:j}; });
+
+  var newArr = this.map(function (i, j) {
+	  return {i:i, j:j};
+  });
+
   return newArr.sort(function (a, b) {
     result = fn(a.i, b.i);
-    if (result === 0) {
-      return a.j - b.j;
-    }
-    return result;
-  }).map(function (i) { return i.i; });
+    return result === 0? a.j - b.j : result;
+}).map(i => i.i );
 };
 
-// Cache <title> element, we may need it for slides that don't have titles
-var documentTitle = document.title + '';
+// Cache <title> element, we may need it for slides that don"t have titles
+var documentTitle = document.title + "";
 
 var _ = window.SlideShow = function() {
 	var me = this;
 
 	// Set instance
-	if(!window.slideshow) {
+	if (!window.slideshow) {
 		window.slideshow = this;
 	}
 
@@ -53,56 +50,56 @@ var _ = window.SlideShow = function() {
 	this.item = 0;
 
 	// Create timer, if needed
-	this.duration = body.getAttribute('data-duration');
+	this.duration = body.getAttribute("data-duration");
 
-	if(this.duration > 0) {
-		var timer = document.createElement('div');
+	if (this.duration > 0) {
+		var timer = document.createElement("div");
 
-		timer.id = 'timer';
-		timer.setAttribute('style', PrefixFree.prefixCSS('transition-duration: ' + this.duration * 60 + 's;'));
+		timer.id = "timer";
+		timer.setAttribute("style", PrefixFree.prefixCSS("transition-duration: " + this.duration * 60 + "s;"));
 		body.appendChild(timer);
 
-		addEventListener('load', function() {
-			timer.className = 'end';
+		addEventListener("load", function() {
+			timer.className = "end";
 
 			setTimeout(function() {
-				timer.classList.add('overtime');
+				timer.classList.add("overtime");
 			}, me.duration * 60000);
 		});
 	}
 
 	// Create slide indicator
-	this.indicator = document.createElement('div');
+	this.indicator = document.createElement("div");
 
-	this.indicator.id = 'indicator';
+	this.indicator.id = "indicator";
 	body.appendChild(this.indicator);
 
 	// Add on screen navigation
-	var onscreen = document.createElement('nav');
-	onscreen.id = 'onscreen-nav';
+	var onscreen = document.createElement("nav");
+	onscreen.id = "onscreen-nav";
 
-	var prev = document.createElement('button');
-	prev.className = 'onscreen-nav prev';
-	prev.textContent = '◀';
-	prev.type = 'button';
-	prev.onclick = function() { me.previous(); }
+	var prev = document.createElement("button");
+	prev.className = "onscreen-nav prev";
+	prev.textContent = "◀";
+	prev.type = "button";
+	prev.onclick = evt => me.previous();
 
-	var next = document.createElement('button');
-	next.className = 'onscreen-nav next';
-	next.textContent = 'Next ▶';
-	next.type = 'button';
-	next.onclick = function() { me.next(); }
+	var next = document.createElement("button");
+	next.className = "onscreen-nav next";
+	next.textContent = "Next ▶";
+	next.type = "button";
+	next.onclick = evt => me.next();
 
 	onscreen.appendChild(prev);
 	onscreen.appendChild(next);
-	onscreen.style.display = 'none';
+	onscreen.style.display = "none";
 	document.body.appendChild(onscreen);
 
 	// Expand multiple imported slides
-	$$('.slide[data-base][data-src*=" "]').forEach(function(slide) {
-		var hashes = slide.getAttribute('data-src').split(/\s+/).forEach(function (hash) {
+	$$(".slide[data-base][data-src*=\" \"]").forEach(function(slide) {
+		var hashes = slide.getAttribute("data-src").split(/\s+/).forEach(function (hash) {
 			var s = slide.cloneNode(true);
-			s.setAttribute('data-src', hash);
+			s.setAttribute("data-src", hash);
 			slide.parentNode.insertBefore(s, slide);
 		});
 
@@ -110,57 +107,57 @@ var _ = window.SlideShow = function() {
 	});
 
 	// Get the slide elements into an array
-	this.slides = $$('.slide', body);
+	this.slides = $$(".slide", body);
 
 	// Get the overview
 	this.overview = function(evt) {
-        if (body.classList.contains('show-thumbnails')) {
-            body.classList.remove('headers-only');
+        if (body.classList.contains("show-thumbnails")) {
+            body.classList.remove("headers-only");
         }
         else {
-            if(evt && (!evt.shiftKey || !evt.ctrlKey)) {
-                body.classList.add('headers-only');
+            if (evt && (!evt.shiftKey || !evt.ctrlKey)) {
+                body.classList.add("headers-only");
             }
 
-            body.addEventListener('click', function(evt) {
+            body.addEventListener("click", function(evt) {
                 var slide = evt.target.closest(".slide");
 
                 if (slide) {
                     me.goto(slide.id);
-                    setTimeout(function() { me.adjustFontSize(); }, 1000); // for Opera
+                    setTimeout(() => me.adjustFontSize(), 1000); // for Opera
                 }
 
-                body.classList.remove('show-thumbnails');
-                body.classList.remove('headers-only');
+                body.classList.remove("show-thumbnails");
+                body.classList.remove("headers-only");
 
-                body.removeEventListener('click', arguments.callee);
+                body.removeEventListener("click", arguments.callee);
             }, false);
         }
 
-		body.classList.toggle('show-thumbnails')
-    }
+		body.classList.toggle("show-thumbnails");
+    };
 
     // Process iframe slides
-	$$('.slide[data-src]:not([data-base]):empty').forEach(function(slide) {
-		var iframe = document.createElement('iframe');
+	$$(".slide[data-src]:not([data-base]):empty").forEach(function(slide) {
+		var iframe = document.createElement("iframe");
 
-		iframe.setAttribute('data-src', slide.getAttribute('data-src'));
-		slide.removeAttribute('data-src');
+		iframe.setAttribute("data-src", slide.getAttribute("data-src"));
+		slide.removeAttribute("data-src");
 
 		slide.appendChild(iframe);
 
-		var src = iframe.src || iframe.getAttribute('data-src');
+		var src = iframe.src || iframe.getAttribute("data-src");
 
-		slide.classList.add('iframe');
+		slide.classList.add("iframe");
 
-		if(!slide.classList.contains('notitle')) {
+		if (!slide.classList.contains("notitle")) {
 			addTitle(slide, src, iframe.title);
 		}
 
-		slide.classList.add('onscreen-nav');
+		slide.classList.add("onscreen-nav");
 	});
 
-	this.isIpad = navigator.userAgent.indexOf('iPad;') > -1;
+	this.isIpad = navigator.userAgent.indexOf("iPad;") > -1;
 
 	// Order of the slides
 	this.order = [];
@@ -168,49 +165,49 @@ var _ = window.SlideShow = function() {
 	for (var i=0; i<this.slides.length; i++) {
 		var slide = this.slides[i]; // to speed up references
 
-		// Asign ids to slides that don't have one
-		if(!slide.id) {
-			slide.id = 'slide' + (i+1);
+		// Asign ids to slides that don"t have one
+		if (!slide.id) {
+			slide.id = "slide" + (i+1);
 		}
 
 		// Set data-title attribute to the title of the slide
-		if(!slide.title) {
+		if (!slide.title) {
 			// no title attribute, fetch title from heading(s)
-			var heading = $('hgroup', slide) || $('h1,h2,h3,h4,h5,h6', slide);
+			var heading = $("hgroup", slide) || $("h1,h2,h3,h4,h5,h6", slide);
 
-			if(heading && heading.textContent.trim()) {
-				slide.setAttribute('data-title', heading.textContent);
+			if (heading && heading.textContent.trim()) {
+				slide.setAttribute("data-title", heading.textContent);
 			}
 		}
 		else {
 			// The title attribute is set, use that
-			slide.setAttribute('data-title', slide.title);
-			slide.removeAttribute('title');
+			slide.setAttribute("data-title", slide.title);
+			slide.removeAttribute("title");
 		}
 
-		slide.setAttribute('data-index', i);
+		slide.setAttribute("data-index", i);
 
-		var imp = slide.getAttribute('data-import'),
+		var imp = slide.getAttribute("data-import"),
 			imported = imp? this.getSlideById(imp) : null;
 
-		this.order.push(imported? +imported.getAttribute('data-index') : i);
+		this.order.push(imported? +imported.getAttribute("data-index") : i);
 
 		// [data-steps] can be used to define steps (applied through the data-step
 		// property), used in CSS to go through multiple states for an element
-		var stepped = $$('[data-steps]', slide);
+		var stepped = $$("[data-steps]", slide);
 
-		if (slide.hasAttribute('data-steps')) {
+		if (slide.hasAttribute("data-steps")) {
 			stepped.push(slide);
 		}
 
 		stepped.forEach(function(element) {
-			var steps = +element.getAttribute('data-steps');
-			element.removeAttribute('data-step');
+			var steps = +element.getAttribute("data-steps");
+			element.removeAttribute("data-step");
 
-			for(var i=0; i<steps; i++) {
-				var dummy = document.createElement('span');
-				dummy.style.display = 'none';
-				dummy.className = 'delayed dummy';
+			for (var i=0; i<steps; i++) {
+				var dummy = document.createElement("span");
+				dummy.style.display = "none";
+				dummy.className = "delayed dummy";
 				dummy.dummyFor = element;
 				dummy.dummyIndex = i+1;
 
@@ -224,25 +221,25 @@ var _ = window.SlideShow = function() {
 		});
 	}
 
-	if(window.name === 'projector' && window.opener && opener.slideshow) {
-		body.classList.add('projector');
+	if (window.name === "projector" && window.opener && opener.slideshow) {
+		body.classList.add("projector");
 		this.presenter = opener.slideshow;
 		this.presenter.projector = this;
 	}
 
 	// Adjust the font-size when the window is resized
-	addEventListener('resize', this, false);
+	addEventListener("resize", this, false);
 
 	// In some browsers DOMContentLoaded is too early, so try again onload
-	addEventListener('load', this, false);
+	addEventListener("load", this, false);
 
-	addEventListener('hashchange', this, false);
+	addEventListener("hashchange", this, false);
 
-	// If there's already a hash, update current slide number...
-	this.handleEvent({type: 'hashchange'});
+	// If there"s already a hash, update current slide number...
+	this.handleEvent({type: "hashchange"});
 
-	document.addEventListener('keyup', this, false);
-	document.addEventListener('keydown', this, false);
+	document.addEventListener("keyup", this, false);
+	document.addEventListener("keydown", this, false);
 
 	this.currentSlide.dispatchEvent(new CustomEvent("slidechange", {
 		"bubbles": true
@@ -252,41 +249,41 @@ var _ = window.SlideShow = function() {
 		var url = link.href;
 		var id = link.id;
 		var slides = $$('.slide[data-base="' + id + '"][data-src^="#"]');
-		var isSlideshow = link.rel.indexOf('slides') > -1;
+		var isSlideshow = link.rel.indexOf("slides") > -1;
 
 		if (slides.length) {
-			var iframe = document.createElement('iframe');
-			var hash = slides[0].getAttribute('data-src');
-			iframe.className = 'csss-import';
+			var iframe = document.createElement("iframe");
+			var hash = slides[0].getAttribute("data-src");
+			iframe.className = "csss-import";
 			iframe.src = url + hash;
 
 			document.body.insertBefore(iframe, document.body.firstChild);
 
 			// Process the rest of the slides, which should use the same iframe
 			slides.forEach(function (slide) {
-				var hash = slide.getAttribute('data-src');
+				var hash = slide.getAttribute("data-src");
 
-				slide.classList.add('dont-resize');
+				slide.classList.add("dont-resize");
 
 				this.onSlide(slide.id, function () {
-					onscreen.style.display = '';
+					onscreen.style.display = "";
 
 					iframe.src = iframe.src.replace(/#.+$/, hash);
-					iframe.className = 'csss-import show';
+					iframe.className = "csss-import show";
 				});
 			}, this);
 		}
 	}, this);
 
 	function addTitle(slide, url, title) {
-		var h = document.createElement('h1'),
-		    a = document.createElement('a');
+		var h = document.createElement("h1"),
+		    a = document.createElement("a");
 
-		title = title || slide.title || slide.getAttribute('data-title') ||
-		            url.replace(/\/#?$/, '').replace(/^\w+:\/\/(www\.)?/, '');
+		title = title || slide.title || slide.getAttribute("data-title") ||
+		            url.replace(/\/#?$/, "").replace(/^\w+:\/\/(www\.)?/, "");
 
 		a.href = url;
-		a.target = '_blank';
+		a.target = "_blank";
 		a.textContent = title;
 		h.appendChild(a);
 
@@ -307,7 +304,7 @@ _.prototype = {
 			return true;
 		}
 
-		switch(evt.type) {
+		switch (evt.type) {
 			/**
 				Keyboard navigation
 				Ctrl+G : Go to slide...
@@ -315,37 +312,37 @@ _.prototype = {
 				Ctrl+P : Presenter view
 				(Shift instead of Ctrl works too)
 			*/
-			case 'keyup':
-				if((evt.ctrlKey || evt.shiftKey) && !evt.altKey && !/^(?:input|textarea)$/i.test(document.activeElement.nodeName)) {
-					switch(evt.keyCode) {
+			case "keyup":
+				if ((evt.ctrlKey || evt.shiftKey) && !evt.altKey && !/^(?:input|textarea)$/i.test(document.activeElement.nodeName)) {
+					switch (evt.keyCode) {
 						case 71: // G
-							var slide = prompt('Which slide?');
+							var slide = prompt("Which slide?");
 							me.goto(+slide? slide - 1 : slide);
 							break;
 						case 72: // H
 						    me.overview(evt);
 							break;
 						case 74: // J
-							if(body.classList.contains('hide-elements')) {
-								body.classList.remove('hide-elements');
+							if (body.classList.contains("hide-elements")) {
+								body.classList.remove("hide-elements");
 							}
 							else {
-								body.classList.add('hide-elements');
+								body.classList.add("hide-elements");
 							}
 							break;
 						case 80: // P
 							// Open new window for attendee view
-							this.projector = open(location, 'projector');
+							this.projector = open(location, "projector");
 
 							// Get the focus back
 							window.focus();
 
 							// Switch this one to presenter view
-							body.classList.add('presenter');
+							body.classList.add("presenter");
 					}
 				}
 				break;
-			case 'keydown':
+			case "keydown":
 				/**
 					Keyboard navigation
 					Home : First slide
@@ -356,16 +353,16 @@ _.prototype = {
 					Ctrl + Down/Left arrow : Previous slide
 					(Shift instead of Ctrl works too)
 				*/
-				if(evt.target === body || evt.target === body.parentNode || evt.metaKey && evt.altKey) {
-					if(evt.keyCode >= 32 && evt.keyCode <= 40) {
+				if (evt.target === body || evt.target === body.parentNode || evt.metaKey && evt.altKey) {
+					if (evt.keyCode >= 32 && evt.keyCode <= 40) {
 						evt.preventDefault();
 					}
 
-					switch(evt.keyCode) {
-						case 33: //page up
+					switch (evt.keyCode) {
+						case 33: // page up
 							this.previous();
 							break;
-						case 34: //page down
+						case 34: // page down
 							this.next();
 							break;
 						case 35: // end
@@ -386,11 +383,11 @@ _.prototype = {
 					}
 				}
 				break;
-			case 'load':
-			case 'resize':
+			case "load":
+			case "resize":
 				this.adjustFontSize();
 				break;
-			case 'hashchange':
+			case "hashchange":
 				this.goto(location.hash.substr(1) || 0);
 		}
 	},
@@ -408,7 +405,7 @@ _.prototype = {
 			just the next step (which could very well be showing a list item)
 	 */
 	next: function(hard) {
-		if(!hard && this.items.length) {
+		if (!hard && this.items.length) {
 			this.nextItem();
 		}
 		else {
@@ -417,12 +414,12 @@ _.prototype = {
 			this.item = 0;
 
 			// Mark all items as not displayed, if there are any
-			if(this.items.length) {
+			if (this.items.length) {
 				for (var i=0; i<this.items.length; i++) {
 					var classes = this.items[i].classList;
-					if(classes) {
-						classes.remove('displayed');
-						classes.remove('current');
+					if (classes) {
+						classes.remove("displayed");
+						classes.remove("current");
 					}
 				}
 			}
@@ -430,7 +427,7 @@ _.prototype = {
 	},
 
 	nextItem: function() {
-		if(this.item < this.items.length) {
+		if (this.item < this.items.length) {
 			this.gotoItem(++this.item);
 		}
 		else {
@@ -440,7 +437,7 @@ _.prototype = {
 	},
 
 	previous: function(hard) {
-		if(!hard && this.item > 0) {
+		if (!hard && this.item > 0) {
 			this.previousItem();
 		}
 		else {
@@ -449,18 +446,18 @@ _.prototype = {
 			this.item = this.items.length;
 
 			// Mark all items as displayed, if there are any
-			if(this.items.length) {
+			if (this.items.length) {
 				for (var i=0; i<this.items.length; i++) {
-					if(this.items[i].classList) {
-						this.items[i].classList.add('displayed');
+					if (this.items[i].classList) {
+						this.items[i].classList.add("displayed");
 					}
 				}
 
 				// Mark the last one as current
 				var lastItem = this.items[this.items.length - 1];
 
-				lastItem.classList.remove('displayed');
-				lastItem.classList.add('current');
+				lastItem.classList.remove("displayed");
+				lastItem.classList.add("current");
 			}
 		}
 	},
@@ -470,7 +467,7 @@ _.prototype = {
 	},
 
 	getSlideById: function(id) {
-		return $('.slide#' + id);
+		return $(".slide#" + id);
 	},
 
 	/**
@@ -481,54 +478,54 @@ _.prototype = {
 		var slide;
 
 		// We have to remove it to prevent multiple calls to goto messing up
-		// our current item (and there's no point either, so we save on performance)
-		window.removeEventListener('hashchange', this, false);
+		// our current item (and there"s no point either, so we save on performance)
+		window.removeEventListener("hashchange", this, false);
 
 		var id;
 
 		if (which + 0 === which && which in this.slides) {
 			// Argument is a valid slide number
 			this.index = which;
-			this.slide = this.order[which]
+			this.slide = this.order[which];
 
 			slide = this.currentSlide;
 
-			location.hash = '#' + slide.id;
+			location.hash = "#" + slide.id;
 		}
-		else if (which + '' === which) { // Argument is a slide id
+		else if (which + "" === which) { // Argument is a slide id
 			slide = this.getSlideById(which);
 
-			if(slide) {
-				this.slide = this.index = +slide.getAttribute('data-index');
-				location.hash = '#' + which;
+			if (slide) {
+				this.slide = this.index = +slide.getAttribute("data-index");
+				location.hash = "#" + which;
 			}
 		}
 
 		if (slide) { // Slide actually changed, perform any other tasks needed
-			document.title = slide.getAttribute('data-title') || documentTitle;
+			document.title = slide.getAttribute("data-title") || documentTitle;
 
-			if (slide.classList.contains('iframe')) {
-				var iframe = $('iframe', slide), src;
+			if (slide.classList.contains("iframe")) {
+				var iframe = $("iframe", slide), src;
 
-				if(iframe && !iframe.hasAttribute('src') && (src = iframe.getAttribute('data-src'))) {
-					iframe.setAttribute('src', src);
+				if (iframe && !iframe.hasAttribute("src") && (src = iframe.getAttribute("data-src"))) {
+					iframe.setAttribute("src", src);
 				}
 			}
 			else {
 				this.adjustFontSize();
 			}
 
-			$('#onscreen-nav').style.display = this.isIpad || slide.classList.contains('onscreen-nav')? '' : 'none';
+			$("#onscreen-nav").style.display = this.isIpad || slide.classList.contains("onscreen-nav")? "" : "none";
 
 			// Hide iframes from CSSS imports
-			$$('iframe.csss-import').forEach(function (iframe) { iframe.classList.remove('show'); });
+			$$("iframe.csss-import").forEach(iframe => iframe.classList.remove("show"));
 
 			this.indicator.textContent = this.index + 1;
 
 			// Update items collection
-			this.items = $$('.delayed, .delayed-children > *', this.currentSlide);
-			this.items.stableSort(function(a, b){
-				return (a.getAttribute('data-index') || 0) - (b.getAttribute('data-index') || 0)
+			this.items = $$(".delayed, .delayed-children > *", this.currentSlide);
+			this.items.stableSort(function(a, b) {
+				return (a.getAttribute("data-index") || 0) - (b.getAttribute("data-index") || 0);
 			});
 			this.item = 0;
 
@@ -541,15 +538,15 @@ _.prototype = {
 			this.slides.previous = this.slides[this.order[this.index - 1]];
 			this.slides.next = this.slides[this.order[this.index + 1]];
 
-			this.slides.previous && this.slides.previous.classList.add('previous');
-			this.slides.next && this.slides.next.classList.add('next');
+			this.slides.previous && this.slides.previous.classList.add("previous");
+			this.slides.next && this.slides.next.classList.add("next");
 
 			if (previousPrevious && previousPrevious != this.slides.previous) {
-				previousPrevious.classList.remove('previous');
+				previousPrevious.classList.remove("previous");
 			}
 
 			if (previousNext && previousNext != this.slides.next) {
-				previousNext.classList.remove('next');
+				previousNext.classList.remove("next");
 			}
 
 			requestAnimationFrame(() => {
@@ -562,7 +559,7 @@ _.prototype = {
 		// If you attach the listener immediately again then it will catch the event
 		// We have to do it asynchronously
 		requestAnimationFrame(() => {
-			addEventListener('hashchange', this, false);
+			addEventListener("hashchange", this, false);
 		});
 	},
 
@@ -571,37 +568,37 @@ _.prototype = {
 
 		var items = this.items, classes;
 
-		for(var i=items.length; i-- > 0;) {
+		for (var i=items.length; i-- > 0;) {
 			classes = this.items[i].classList;
 
-			classes.remove('current');
-			classes.remove('displayed');
+			classes.remove("current");
+			classes.remove("displayed");
 
-			if (classes.contains('dummy') && items[i].dummyFor) {
-				items[i].dummyFor.removeAttribute('data-step');
+			if (classes.contains("dummy") && items[i].dummyFor) {
+				items[i].dummyFor.removeAttribute("data-step");
 			}
 		}
 
 		for (var i=this.item - 1; i-- > 0;) {
-			items[i].classList.add('displayed');
+			items[i].classList.add("displayed");
 		}
 
 		if (this.item > 0) { // this.item can be zero, at which point no items are current
 			var item = items[this.item - 1];
 
-			item.classList.add('current');
+			item.classList.add("current");
 
             // support for nested lists
             for (var i = this.item - 1, cur = items[i], j; i > 0; i--) {
               j = items[i - 1];
               if (j.contains(cur)) {
-                j.classList.remove('displayed');
-                j.classList.add('current');
+                j.classList.remove("displayed");
+                j.classList.add("current");
               }
             }
 
-			if (item.classList.contains('dummy') && item.dummyFor) {
-				item.dummyFor.setAttribute('data-step', item.dummyIndex);
+			if (item.classList.contains("dummy") && item.dummyFor) {
+				item.dummyFor.setAttribute("data-step", item.dummyIndex);
 			}
 		}
 
@@ -617,42 +614,42 @@ _.prototype = {
 			slide = this.currentSlide;
 
 		// Clear previous styles
-		htmlStyle.fontSize = '';
+		htmlStyle.fontSize = "";
 
-		if(body.classList.contains('show-thumbnails')
-			|| slide.classList.contains('dont-resize')) {
+		if (body.classList.contains("show-thumbnails")
+			|| slide.classList.contains("dont-resize")) {
 			return;
 		}
 
-		for(
+		for (
 			var percent = 100;
 			(scrollRoot.scrollHeight > innerHeight || scrollRoot.scrollWidth > innerWidth) && percent >= 35;
 			percent-=5
 		) {
-			htmlStyle.fontSize = percent + '%';
+			htmlStyle.fontSize = percent + "%";
 		}
 
 		// Individual slide
 
-		if(slide.clientHeight && slide.clientWidth) {
-			// Strange FF bug: scrollHeight doesn't work properly with overflow:hidden
-			var previousStyle = slide.getAttribute('style');
-			slide.style.overflow = 'auto';
+		if (slide.clientHeight && slide.clientWidth) {
+			// Strange FF bug: scrollHeight doesn"t work properly with overflow:hidden
+			var previousStyle = slide.getAttribute("style");
+			slide.style.overflow = "auto";
 
-			for(
+			for (
 				;
 				(slide.scrollHeight > slide.clientHeight || slide.scrollWidth > slide.clientWidth) && percent >= 35;
 				percent--
 			) {
-				htmlStyle.fontSize = percent + '%';
+				htmlStyle.fontSize = percent + "%";
 			}
 
-			slide.setAttribute('style', previousStyle);
+			slide.setAttribute("style", previousStyle);
 		}
 
-		if(percent <= 35) {
+		if (percent <= 35) {
 			// Something probably went wrong, so just give up altogether
-			htmlStyle.fontSize = '';
+			htmlStyle.fontSize = "";
 		}
 	},
 
@@ -666,7 +663,7 @@ _.prototype = {
 		var slide = _.getSlide(element);
 
 		if (slide) {
-			return '#' + slide.id === location.hash;
+			return "#" + slide.id === location.hash;
 		}
 
 		return false;
@@ -675,7 +672,7 @@ _.prototype = {
 	onSlide: function(id, callback, once) {
 		var me = this;
 
-		id = (id.indexOf('#') !== 0? '#' : '') + id;
+		id = (id.indexOf("#") !== 0? "#" : "") + id;
 
 		var fired = false;
 
@@ -685,13 +682,13 @@ _.prototype = {
 		}
 
 		if (!fired || !once) {
-			addEventListener('hashchange', function() {
+			addEventListener("hashchange", function() {
 				if (id == location.hash) {
 					callback.call(me.slides[me.slide]);
 					fired = true;
 
 					if (once) {
-						removeEventListener('hashchange', arguments.callee);
+						removeEventListener("hashchange", arguments.callee);
 					}
 				}
 
@@ -707,7 +704,7 @@ _.prototype = {
 // Helper method for plugins
 _.getSlide = function(element) {
 	return element.closest(".slide");
-}
+};
 
 // Account for slide-specific style
 document.documentElement.addEventListener("slidechange", function(evt) {
@@ -719,11 +716,11 @@ document.documentElement.addEventListener("slidechange", function(evt) {
 
 	$$("style[data-slide]", slide).forEach(function(style) {
 		style.disabled = false;
-	})
+	});
 });
 
 document.addEventListener("DOMContentLoaded", function(evt) {
 	new SlideShow();
 });
 
-})(document.head || document.getElementsByTagName('head')[0], document.body, document.documentElement);
+})(document.head || document.getElementsByTagName("head")[0], document.body, document.documentElement);
