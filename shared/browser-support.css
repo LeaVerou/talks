@@ -1,0 +1,88 @@
+
+.browser-support {
+	align-items: center;
+	justify-content: center;
+}
+
+	.browser-support table {
+		border-spacing: .1em;
+	}
+
+	.browser-support thead img {
+		height: 2em;
+	}
+
+		.browser-support thead img[alt="Firefox"] {
+			height: 2.2em;
+		}
+
+	.browser-support th,
+	.browser-support td {
+		vertical-align: middle;
+		text-align: center;
+		padding: .5em;
+		border: 1px solid hsla(0, 0%, 100%, 0);
+		font-weight: bold;
+	}
+
+	.browser-support th {
+		border: 0;
+	}
+
+	.browser-support tbody th {
+		text-align: right;
+		padding-left: 0;
+	}
+
+	.browser-support thead th {
+		vertical-align: top;
+		padding-bottom: 0;
+		padding-top: 0;
+	}
+
+	.browser-support td {
+		background: hsl(80, 80%, 40%);
+	}
+
+	.browser-support td.incomplete {
+		background: hsl(45, 100%, 50%);
+	}
+
+	.browser-support td:empty {
+		background: hsl(0, 100%, 55%);
+	}
+
+		@keyframes poop-dance {
+			from, 49% { transform-origin: -50% 100%; }
+			50%, 75%, to { transform-origin: 150% 100%; }
+			25% { transform: rotate(-10deg); }
+			50% { transform: rotate(0deg); }
+			75% { transform: rotate(10deg); }
+		}
+
+		.browser-support td:empty::before {
+			display: block;
+		}
+
+@keyframes pulse {
+	to { transform: scale(1.4); }
+}
+span.heart {
+	display: block;
+	font-size: 160px;
+	animation: pulse .2s infinite alternate;
+}
+
+span.poop,
+.browser-support td:empty::before {
+	animation: poop-dance .8s 2s infinite alternate ease-in-out;
+}
+
+span.poop {
+	display: inline-block;
+}
+
+	span.poop:empty::before,
+	.browser-support td:empty::before {
+		content: "💩";
+	}

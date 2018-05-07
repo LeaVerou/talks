@@ -44,13 +44,12 @@ class Demo {
 
 			this.editors.contents = Demo.createEditor(slide, "contents", {
 				lang: "html",
-				fromSource: () => Demo.fixCode(this.element.innerHTML, "html"),
+				fromSource: () => Demo.fixCodeFrom(this.element.innerHTML, "html"),
 				toSource: () => {
 					var value = this.html = this.editors.contents.value;
 
 					if (this.isolated) {
 						if (value.indexOf("<script") > -1) {
-
 							this.iframe.contentDocument.body.innerHTML = value;
 						}
 						else if (this.iframe.contentDocument.body) {
@@ -77,9 +76,9 @@ class Demo {
 			});
 
 			this.editors.css = Demo.createEditor(slide, "css", {
-				fromSource: () => Demo.fixCode(this.style.textContent),
+				fromSource: () => Demo.fixCodeFrom(this.style.textContent),
 				toSource: () => {
-					this.css[0] = this.style.textContent = this.editors.css.value;
+					this.css[0] = this.style.textContent = Demo.fixCodeTo(this.editors.css.value, "css");
 
 					if (!this.isolated) {
 						if (!this.style.sheet) {
@@ -117,7 +116,7 @@ class Demo {
 			$.remove(this.script);
 
 			this.editors.js = Demo.createEditor(slide, "js", {
-				fromSource: () => Demo.fixCode(this.script? this.script.textContent : ""),
+				fromSource: () => Demo.fixCodeFrom(this.script? this.script.textContent : ""),
 				toSource: () => {
 					var value = this.js = this.editors.js.value;
 
@@ -214,7 +213,7 @@ class Demo {
 		requestAnimationFrame(() => resizeTextarea(this.editors[id].textarea));
 	}
 
-	static fixCode(code, lang) {
+	static fixCodeFrom(code, lang) {
 		code = Prism.plugins.NormalizeWhitespace.normalize(code);
 
 		if (lang == "html") {
@@ -222,6 +221,18 @@ class Demo {
 			           .replace(/&gt;/g, ">")
 					   .replace(/><\/(circle|path|rect)>/, " />")
 					   ;
+		}
+
+		return code;
+	}
+
+	static fixCodeTo(code, lang) {
+		if (lang == "css") {
+			if (!/\{.+\}/s.test(code)) {
+				code = `.slide {
+	${code}
+}`;
+			}
 		}
 
 		return code;

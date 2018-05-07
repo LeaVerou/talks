@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title>Even More CSS Secrets</title>
+<link href="../csss/slideshow.css" rel="stylesheet" />
+<link href="../csss/reusable.css" rel="stylesheet" />
+<link href="../shared/intro-outro.css" rel="stylesheet" />
+<link href="../shared/prism.css" rel="stylesheet" />
+<link href="theme.css" rel="stylesheet" />
+<link href="../shared/demo.css" rel="stylesheet" />
+<link href="talk.css" rel="stylesheet" />
+
+</head>
+<body>
+
+
+<header id="intro" class="slide dont-resize intro" data-credits="Photo by London Scout on Unsplash">
+	<h1>
+		<span>Even</span>
+		<span>More</span>
+		<span>CSS</span>
+		<span>Secrets</span>
+	</h1>
+	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
+</header>
+
+<section id="introduction">
+	<section id="hi" class="inverse slide dont-resize darker hi">
+		<figure class="delayed">
+			<img src="../shared/img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
+			<figcaption style="font-size: 240%">Привет, я Лиа</figcaption>
+		</figure>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="lesbian" data-steps="2">
+		<div>
+			<p class="funfact">#funfact</p>
+			<p>I grew up in Lesbos, Greece</p>
+			<p>…which technically makes me <strong>geographically Lesbian</strong></p>
+		</div>
+	</section>
+
+	<section class="top-heavy slide dont-resize" id="projects" data-type="I ❤ Open Source">
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+		<ul>
+			<li>
+				<a href="http://mavo.io/" style="background-image: url(../shared/img/project-mavo.png)">Mavo</a>
+				<a class="github-button" href="https://github.com/mavoweb/mavo" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
+			</li>
+			<li>
+				<a href="http://prismjs.com" style="background-image: url(../shared/img/project-prism.png)">PrismJS</a>
+				<a class="github-button" href="https://github.com/prismjs/prism" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
+			</li>
+			<li>
+				<a href="http://leaverou.github.io/prefixfree" style="background-image: url(../shared/img/project-prefixfree.png)">-prefix-free</a>
+				<a class="github-button" href="https://github.com/leaverou/prefixfree" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
+			</li>
+			<li>
+				<a href="http://blissfuljs.com" style="background-image: url(../shared/img/project-bliss.png)">Bliss</a>
+				<a class="github-button" href="https://github.com/leaverou/bliss" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
+			</li>
+			<li><a href="http://css3test.com" style="background-image: url(../shared/img/project-css3test.png)">css3test.com</a></li>
+			<li>
+				<a href="http://leaverou.github.io/awesomplete/" style="background-image: url(../shared/img/project-awesomplete.png)">Awesomplete</a>
+				<a class="github-button" href="https://github.com/leaverou/awesomplete" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
+			</li>
+			<li><a href="http://cubic-bezier.com/" style="background-image: url(../shared/img/project-cubicbezier.png)">cubic-bezier.com</a></li>
+			<li><a href="http://dabblet.com" style="background-image: url(../shared/img/project-dabblet.png)">dabblet.com</a></li>
+			<li><a href="http://contrast-ratio.com/" style="background-image: url(../shared/img/project-contrastratio.png)">Contrast-Ratio.com</a></li>
+		</ul>
+	</section>
+
+	<section class="top-heavy image slide" id="csswg" data-credits="Daniel Glazman" data-steps="1">
+		<h1 class="caption">
+			<!-- <img src="../shared/img/w3c.svg" alt="W3C" class="inline"> -->
+			<span class="w3c"></span> CSS Working Group Invited Expert
+		</h1>
+		<svg viewBox="0 0 100 100" class="annotation">
+			<ellipse />
+		</svg>
+	</section>
+
+	<section class="inverse slide dont-resize darker hi" id="book">
+		<a href="http://www.amazon.com/CSS-Secrets-Lea-Verou/dp/1449372635?tag=leaverou-20">
+			<img src="../shared/img/book.png" alt="CSS Secrets by O’Reilly" style="display:block" />
+			<meter class="stars" min="1" max="5" value="4.7"></meter>
+			on Amazon
+		</a>
+		<div class="delayed" id="languages">
+			<h3>Also available in:</h3>
+			<ul>
+				<li>German</li>
+				<li>Polish</li>
+				<li>Russian</li>
+				<li>Japanese</li>
+				<li>Simplified Chinese</li>
+				<li>Traditional Chinese</li>
+				<li>Korean</li>
+				<li>Bulgarian</li>
+			</ul>
+		</div>
+	</section>
+
+	<article class="image slide" style="background: url(../shared/img/russian-csssecrets.jpg) center/contain no-repeat white">
+
+	</article>
+
+	<section class="top-heavy image slide" id="mit">
+		<h1><strong>2014&thinsp;–</strong> Haystack Group, MIT CSAIL</h1>
+	</section>
+</section>
+
+<section class="secret">
+	<article class="demo slide intro" id="transparent-text" data-credits="Photo by London Scout on Unsplash" data-edit="css" style="--division: 40">
+		<h1>
+			<span>Even</span>
+			<span>More</span>
+			<span>CSS</span>
+			<span>Secrets</span>
+		</h1>
+		<style data-slide>
+			h1 {
+				background: white;
+				color: black;
+			}
+		</style>
+	</article>
+	<article class="slide" id="blending-modes">
+		<form class="demo">
+			<button class="swap" type="button">🔄</button>
+			<div class="foreground">
+				<input placeholder="Foreground color" name="foregroundColor" value="rgb(100%, 100%, 0%)">
+			</div>
+			<div class="background">
+				<input placeholder="Background color" type="text" name="backgroundColor" value="rgb(100%, 0%, 50%)">
+				<div class="intersection">
+					<label><span>Blending mode:</span>
+						<select name="blendingMode">
+							<option>normal</option>
+							<option selected>multiply</option>
+							<option>screen</option>
+							<!-- overlay
+							darken
+							lighten
+							color-dodge
+							color-burn
+							hard-light
+							soft-light
+							difference
+							exclusion
+							hue
+							saturation
+							color
+							luminosity -->
+						</select>
+					</label>
+					<table class="math"></table>
+				</div>
+			</div>
+		</form>
+	</article>
+	<article class="slide" data-import="transparent-text"></article>
+</section>
+
+<section class="secret">
+	<article class="horizontal demo slide" data-edit="css" style="--division: 40">
+		<style data-slide>
+			background: url('data:image/svg+xml,\
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+				<circle r="50" />\
+			</svg>');
+		</style>
+	</article>
+</section>
+<!--
+<section>
+	<article class="demo slide" title="CSS Variables" style="--division: 60">
+		<div data-edit="contents css">
+			<button>Click me</button>
+			<button class="pink">Click me</button>
+		</div>
+
+		<style data-slide>
+			button {
+				border: .1em solid black;
+				background: transparent;
+				color: black;
+			}
+
+			button:hover {
+				background: black;
+				color: white;
+			}
+
+			button.pink {
+				border-color: #f06;
+				color: #f06;
+			}
+
+			button.pink:hover {
+				background: #f06;
+				color: white;
+			}
+		</style>
+		<style data-slide>
+			button {
+				border-radius: .3em;
+				padding: 0 .5em;
+				font-weight: bold;
+				font-size: 180%;
+				margin: .2em;
+			}
+		</style>
+	</article>
+
+	<article class="slide language-javascript" style="align-items: flex-start; padding: 3em" title="CSS Variables & JS">
+		<pre><code>
+			// Get CSS variable value from style attribute
+			element.style.getPropertyValue("--foo");
+		</code></pre>
+		<pre class="delayed"><code>
+			// Get CSS variable value from wherever
+			getComputedStyle(element).getPropertyValue("--foo");
+		</code></pre>
+		<pre class="delayed"><code>
+			// Set CSS variable in style attribute
+			element.style.setProperty("--foo", 38 + 4);
+		</code></pre>
+	</article>
+
+	<article class="runnable slide">
+		<pre><code class="language-javascript">
+			document.addEventListener("mousemove", function(event) {
+				let x = event.clientX / innerWidth;
+				let y = event.clientY / innerHeight;
+				let root = document.documentElement;
+
+				root.style.setProperty("--mouse-x", x);
+				root.style.setProperty("--mouse-y", y);
+			});
+		</code></pre>
+	</article>
+
+	<article class="horizontal demo slide" data-edit="css" id="mouse">
+		<style data-slide>
+			#mouse.slide {
+				background-image: radial-gradient(
+					at 50% 50%,
+					transparent, black);
+			}
+		</style>
+	</article>
+
+	<article class="horizontal demo slide" id="svg-eyes">
+		<style data-slide>
+			.iris {
+				cx: 50px;
+			}
+		</style>
+		<div data-edit="contents css">
+			<svg viewBox="0 0 250 100">
+				<clipPath id="white-clip">
+					<path id="white-path" d="M1,50 a65,80 0 0,1 100,0 a80,80 0 0,1 -100,0 Z" />
+				</clipPath>
+				<use id="eye-white" href="#white-path" />
+				<use href="#eye-white" x="148" />
+				<circle id="iris" class="iris" cx="50" cy="45" r="18" clip-path="url(#white-clip)" />
+				<use class="iris" href="#iris" x="148" />
+			</svg>
+		</div>
+	</article>
+</section> -->
+
+<footer class="dark slide dont-resize">
+	<img src="../shared/img/mark.svg" class="logo" />
+	<h1>Thank you!</h1>
+
+	<ul>
+		<li style="--icon: '🌍'"><a href="http://lea.verou.me">lea.verou.me</a></li>
+		<li style="--icon: '✉'"><a href="mailto:leaverou@mit.edu">leaverou@mit.edu</a></li>
+		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
+	</ul>
+
+	<p>Slides: <a href="https://leaverou.github.io/talks/even-more-css-secrets">leaverou.github.io/talks/even-more-css-secrets</a></p>
+	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
+</footer>
+
+<script src="../shared/js/bliss.min.js"></script>
+<script src="../csss/slideshow.js"></script>
+<script src="../shared/js/prism.js"></script>
+<script src="../incrementable/incrementable.js"></script>
+<script src="../shared/js/editor.js"></script>
+<script src="talk.js"></script>
+<script src="../shared/js/demo.js"></script>
+
+</body>
+</html>

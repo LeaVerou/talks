@@ -1,0 +1,302 @@
+#intro {
+	display: flex;
+	align-items: flex-start;
+}
+
+.slide.intro {
+	background: linear-gradient(to right, rgba(0,0,0,.5), transparent 50%),
+	            url(img/whisper.jpg) no-repeat left / cover;
+}
+
+	.slide.intro::after {
+		font-weight: 400;
+	}
+
+	.slide.intro h1 {
+		display: flex;
+		flex-flow: column;
+		padding: .5em;
+		margin: 0;
+		font-size: 350%;
+		line-height: .83;
+		letter-spacing: -.04em;
+		background: white;
+		color: black;
+		text-transform: uppercase;
+	}
+
+	.slide.intro:not(#intro) h1 {
+		align-self: center;
+	}
+
+	#intro h1 {
+		mix-blend-mode: screen;
+	}
+
+		.slide.intro h1 span:nth-child(1) {
+			font-size: 115%;
+		}
+
+		.slide.intro h1 span:nth-child(3) {
+			font-size: 155%;
+		}
+
+		.slide.intro h1 span:nth-child(4) {
+			font-size: 70%;
+			margin-top: .05em;
+		}
+
+	#intro .attribution {
+		position: absolute;
+		bottom: -.5em;
+		color: white;
+		font-size: 80%;
+		font-weight: 300;
+	}
+
+		#intro .attribution a {
+			text-decoration: none;
+		}
+/*
+.block,
+.blocks div {
+	display: flex;
+	padding: 1em;
+	margin-bottom: 1em;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	line-height: 1.1;
+	letter-spacing: -.05em;
+	background: white;
+}
+
+	.block .block,
+	.blocks div .block,
+	.blocks div div {
+		background: var(--color-magenta);
+		margin: 1em;
+	} */
+/*
+@keyframes fall {
+	from { transform: translateY(-160vh); }
+}
+
+@keyframes pos {
+	10% { left: 10vw }
+	20% { left: 80vw }
+	30% { left: 50vw }
+	40% { left: 30vw }
+	50% { left: 85vw }
+	60% { left: 20vw }
+	70% { left: 70vw }
+	80% { left: 0vw }
+	90% { left: 60vw }
+	to { left: 50vw }
+}
+
+.future.slide {
+	overflow-y: hidden;
+}
+
+.future.slide h1::before {
+	content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="140"><text style="font-size:90px" y="1em">🔮</text></svg>');
+	position: absolute;
+	bottom: -50vh;
+	animation: fall 3s infinite ease-in, pos 30s steps(1) infinite;
+	filter: drop-shadow(0 10px 10px rgba(0,0,0,.5));
+}
+
+.flipped-emoji {
+	display: inline-block;
+	transform: scaleX(-1);
+} */
+#svg-eyes {
+	background: hsl(20, 40%, 70%);
+	--font-size-multiplier: .8;
+}
+
+	#svg-eyes svg {
+		width: 90vw;
+	}
+
+	#svg-eyes #eye-white {
+		fill: white;
+	}
+
+	#svg-eyes #iris {
+		stroke: hsl(200, 50%, 50%);
+		stroke-width: 14;
+		fill: black;
+	}
+
+	#svg-eyes .second-eye {
+		x: 150px;
+	}
+
+meter.stars {
+	display: inline-block;
+	vertical-align: baseline;
+	width: 5em;
+	height: 1em;
+	--background-params: left / auto 100%;
+	background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white" fill-opacity=".2">\
+		<text style="font-size:90px" y="1em">★</text></svg>') var(--background-params);
+}
+
+	meter.stars::-webkit-meter-bar {
+		background: transparent;
+	}
+
+	meter.stars::-webkit-meter-optimum-value {
+		background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white">\
+			<text style="font-size:90px" y="1em">★</text></svg>') var(--background-params);
+	}
+
+#blending-modes {
+	flex-flow: row;
+	/* background: radial-gradient(hsl(200, 15%, 20%), hsl(200, 15%, 10%));
+	background-size: 53% 100%;
+	background-repeat: no-repeat;
+	background-color: transparent; */
+	background: none;
+	--text-color: white;
+}
+
+[id=blending-modes] * {
+	color: var(--text-color);
+}
+
+	#blending-modes .demo {
+		--height: 70vh;
+		--offset: .25;
+		--offset-width: calc(var(--offset) * var(--height));
+		--margin: calc(100vh - var(--offset-width) - var(--height));
+		--width: calc(100vw - var(--offset-width) - var(--margin));
+
+		position: relative;
+		margin: calc(-1 * var(--offset-width)) 0 0 calc(-1 * var(--offset-width));
+		font-size: 150%;
+	}
+
+	.light-background .background,
+	.light-foreground .foreground,
+	.light-result     .intersection {
+		--text-color: black;
+	}
+
+		#blending-modes input {
+			background: none;
+			border: 0;
+			color: var(--text-color);
+		}
+
+		#blending-modes .demo > div {
+			display: flex;
+			flex-flow: column;
+			justify-content: flex-start;
+			width: var(--width);
+			height: var(--height);
+		}
+
+		#blending-modes .demo button {
+			position: absolute;
+			top: 0;
+			right: calc(-1 * var(--offset-width));
+			padding: 0;
+			line-height: 1;
+			font-size: calc(.65 * var(--offset-width));
+			border: none;
+			background: none;
+		}
+
+			#blending-modes .demo button:not(:hover) {
+				filter: grayscale();
+			}
+
+		#blending-modes div.foreground {
+			position: absolute;
+			top: var(--offset-width);
+			left: var(--offset-width);
+			justify-content: flex-end;
+		}
+
+		#blending-modes div.background {
+
+		}
+
+		#blending-modes .demo .intersection {
+			position: relative;
+			z-index: 1;
+			display: flex;
+			flex-flow: row;
+			align-items: flex-start;
+			margin: auto 0 0 var(--offset-width);
+			width: calc(var(--width) - var(--offset-width));
+			height: calc(var(--height) - var(--offset-width));
+			box-sizing: border-box;
+			padding: .3em;
+		}
+
+			#blending-modes:not(.light-result) .demo .intersection {
+				--text-color: white;
+			}
+
+			.intersection select {
+				border: none;
+				color: var(--text-color);
+			}
+
+			.light-result .intersection select {
+				background: hsla(0,0%,100%,.5);
+			}
+
+			#blending-modes .demo label {
+				margin-right: auto;
+				color: var(--text-color);
+			}
+
+				#blending-modes .demo label span {
+					display: block;
+					font-size: 60%;
+					line-height: 1;
+					font-weight: bold;
+				}
+
+			#blending-modes .math {
+				font-size: 70%;
+			}
+
+					#blending-modes .math .num {
+						display: inline-block;
+						font-weight: bold;
+						min-width: 2.6em;
+					}
+
+					.math tr:nth-child(1) .num {
+						color: hsl(0, 100%, 80%);
+					}
+
+					.math tr:nth-child(2) .num {
+						color: hsl(90, 100%, 80%);
+					}
+
+					.math tr:nth-child(3) .num {
+						color: hsl(210, 100%, 80%);
+					}
+
+					.light-result .math tr:nth-child(1) .num {
+						color: hsl(0, 100%, 40%);
+					}
+
+					.light-result .math tr:nth-child(2) .num {
+						color: hsl(90, 100%, 30%);
+					}
+
+					.light-result .math tr:nth-child(3) .num {
+						color: hsl(210, 100%, 45%);
+					}
+
+				#blending-modes .math .result {
+
+				}
