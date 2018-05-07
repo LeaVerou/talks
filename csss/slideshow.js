@@ -708,6 +708,16 @@ document.documentElement.addEventListener("slidechange", function(evt) {
 	$$(".slide:not(:target) style[data-slide]").forEach(style => style.disabled = true);
 	$$("style[data-slide]", slide).forEach(style => style.disabled = false);
 
+	// Slide-specific script, run only when on that slide
+	$$("slide-script", slide).forEach(script => {
+		$.create("script", {
+			attributes: {
+				src: script.getAttribute("src"),
+				async: script.getAttribute("async")
+			},
+			after: script
+		});
+
 		script.remove();
 	});
 });
