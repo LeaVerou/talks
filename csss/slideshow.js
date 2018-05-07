@@ -7,296 +7,297 @@
 /**
  * Make the environment a bit friendlier
  */
-function $(expr, con) {
-	return typeof expr === "string"? (con || document).querySelector(expr) : expr;
-}
-function $$(expr, con) {
-	return [].slice.call((con || document).querySelectorAll(expr));
-}
-
-(function(head, body, html){
 
 // http://ichuan.net/post/52/stable-sort-of-javascript-array/
 Array.prototype.stableSort = function (fn) {
-  if (!fn) {
-    return this.sort();
-  }
+	if (!fn) {
+		return this.sort();
+	}
 
-  var newArr = this.map(function (i, j) {
-	  return {i:i, j:j};
-  });
+	var newArr = this.map(function (i, j) {
+		return {i:i, j:j};
+	});
 
-  return newArr.sort(function (a, b) {
-    result = fn(a.i, b.i);
-    return result === 0? a.j - b.j : result;
-}).map(i => i.i );
+	return newArr.sort(function (a, b) {
+		var result = fn(a.i, b.i);
+		return result === 0? a.j - b.j : result;
+	}).map(i => i.i );
 };
+
+(async function(head, body, html){
+
+if (!window.Bliss) {
+	// Load Bliss if not loaded
+	console.log("Bliss not loaded. Loading remotely from blissfuljs.com");
+
+	let bliss = document.createElement("script");
+	bliss.src = "//blissfuljs.com/bliss.shy.min.js";
+	head.appendChild(bliss);
+
+	await new Promise(resolve => bliss.onload = resolve);
+}
 
 // Cache <title> element, we may need it for slides that don"t have titles
 var documentTitle = document.title + "";
 
-var _ = window.SlideShow = function() {
-	var me = this;
+var _ = class SlideShow {
+	constructor() {
+		var me = this;
 
-	// Set instance
-	if (!window.slideshow) {
-		window.slideshow = this;
-	}
+		// Current slide
+		this.index = this.slide = 0;
 
-	// Current slide
-	this.index = this.slide = 0;
+		// Current .delayed item in the slide
+		this.item = 0;
 
-	// Current .delayed item in the slide
-	this.item = 0;
+		// Create timer, if needed
+		this.duration = body.getAttribute("data-duration");
 
-	// Create timer, if needed
-	this.duration = body.getAttribute("data-duration");
+		if (this.duration > 0) {
+			var timer = $.create({
+				id: "timer",
+				style: {
+					transitionDuration: this.duration * 60 + "s"
+				},
+				inside: body
+			});
 
-	if (this.duration > 0) {
-		var timer = document.createElement("div");
+			addEventListener("load", evt => {
+				timer.className = "end";
 
-		timer.id = "timer";
-		timer.setAttribute("style", PrefixFree.prefixCSS("transition-duration: " + this.duration * 60 + "s;"));
-		body.appendChild(timer);
+				setTimeout(() => timer.classList.add("overtime"), this.duration * 60000);
+			});
+		}
 
-		addEventListener("load", function() {
-			timer.className = "end";
-
-			setTimeout(function() {
-				timer.classList.add("overtime");
-			}, me.duration * 60000);
-		});
-	}
-
-	// Create slide indicator
-	this.indicator = document.createElement("div");
-
-	this.indicator.id = "indicator";
-	body.appendChild(this.indicator);
-
-	// Add on screen navigation
-	var onscreen = document.createElement("nav");
-	onscreen.id = "onscreen-nav";
-
-	var prev = document.createElement("button");
-	prev.className = "onscreen-nav prev";
-	prev.textContent = "◀";
-	prev.type = "button";
-	prev.onclick = evt => me.previous();
-
-	var next = document.createElement("button");
-	next.className = "onscreen-nav next";
-	next.textContent = "Next ▶";
-	next.type = "button";
-	next.onclick = evt => me.next();
-
-	onscreen.appendChild(prev);
-	onscreen.appendChild(next);
-	onscreen.style.display = "none";
-	document.body.appendChild(onscreen);
-
-	// Expand multiple imported slides
-	$$(".slide[data-base][data-src*=\" \"]").forEach(function(slide) {
-		var hashes = slide.getAttribute("data-src").split(/\s+/).forEach(function (hash) {
-			var s = slide.cloneNode(true);
-			s.setAttribute("data-src", hash);
-			slide.parentNode.insertBefore(s, slide);
+		// Create slide indicator
+		this.indicator = $.create({
+			id: "indicator",
+			inside: body
 		});
 
-		slide.parentNode.removeChild(slide);
-	});
-
-	// Get the slide elements into an array
-	this.slides = $$(".slide", body);
-
-	// Get the overview
-	this.overview = function(evt) {
-        if (body.classList.contains("show-thumbnails")) {
-            body.classList.remove("headers-only");
-        }
-        else {
-            if (evt && (!evt.shiftKey || !evt.ctrlKey)) {
-                body.classList.add("headers-only");
-            }
-
-            body.addEventListener("click", function(evt) {
-                var slide = evt.target.closest(".slide");
-
-                if (slide) {
-                    me.goto(slide.id);
-                    setTimeout(() => me.adjustFontSize(), 1000); // for Opera
-                }
-
-                body.classList.remove("show-thumbnails");
-                body.classList.remove("headers-only");
-
-                body.removeEventListener("click", arguments.callee);
-            }, false);
-        }
-
-		body.classList.toggle("show-thumbnails");
-    };
-
-    // Process iframe slides
-	$$(".slide[data-src]:not([data-base]):empty").forEach(function(slide) {
-		var iframe = document.createElement("iframe");
-
-		iframe.setAttribute("data-src", slide.getAttribute("data-src"));
-		slide.removeAttribute("data-src");
-
-		slide.appendChild(iframe);
-
-		var src = iframe.src || iframe.getAttribute("data-src");
-
-		slide.classList.add("iframe");
-
-		if (!slide.classList.contains("notitle")) {
-			addTitle(slide, src, iframe.title);
-		}
-
-		slide.classList.add("onscreen-nav");
-	});
-
-	this.isIpad = navigator.userAgent.indexOf("iPad;") > -1;
-
-	// Order of the slides
-	this.order = [];
-
-	for (var i=0; i<this.slides.length; i++) {
-		var slide = this.slides[i]; // to speed up references
-
-		// Asign ids to slides that don"t have one
-		if (!slide.id) {
-			slide.id = "slide" + (i+1);
-		}
-
-		// Set data-title attribute to the title of the slide
-		if (!slide.title) {
-			// no title attribute, fetch title from heading(s)
-			var heading = $("hgroup", slide) || $("h1,h2,h3,h4,h5,h6", slide);
-
-			if (heading && heading.textContent.trim()) {
-				slide.setAttribute("data-title", heading.textContent);
-			}
-		}
-		else {
-			// The title attribute is set, use that
-			slide.setAttribute("data-title", slide.title);
-			slide.removeAttribute("title");
-		}
-
-		slide.setAttribute("data-index", i);
-
-		var imp = slide.getAttribute("data-import"),
-			imported = imp? this.getSlideById(imp) : null;
-
-		this.order.push(imported? +imported.getAttribute("data-index") : i);
-
-		// [data-steps] can be used to define steps (applied through the data-step
-		// property), used in CSS to go through multiple states for an element
-		var stepped = $$("[data-steps]", slide);
-
-		if (slide.hasAttribute("data-steps")) {
-			stepped.push(slide);
-		}
-
-		stepped.forEach(function(element) {
-			var steps = +element.getAttribute("data-steps");
-			element.removeAttribute("data-step");
-
-			for (var i=0; i<steps; i++) {
-				var dummy = document.createElement("span");
-				dummy.style.display = "none";
-				dummy.className = "delayed dummy";
-				dummy.dummyFor = element;
-				dummy.dummyIndex = i+1;
-
-				if (element === slide) {
-					slide.appendChild(dummy);
+		// Add on screen navigation
+		var onscreen = $.create("nav", {
+			id: "onscreen-nav",
+			hidden: true,
+			inside: body,
+			contents: [
+				{
+					className: "onscreen-nav prev",
+					textContent: "◀",
+					type: "button",
+					onclick: evt => me.previous()
+				},
+				{
+					className: "onscreen-nav next",
+					textContent: "Next ▶",
+					type: "button",
+					onclick: evt => me.next()
 				}
-				else {
-					element.parentNode.insertBefore(dummy, element);
+			]
+		});
+
+		// Expand multiple imported slides
+		$$(".slide[data-base][data-src*=\" \"]").forEach(function(slide) {
+			var hashes = slide.getAttribute("data-src").split(/\s+/).forEach(function (hash) {
+				var s = slide.cloneNode(true);
+				s.setAttribute("data-src", hash);
+				slide.parentNode.insertBefore(s, slide);
+			});
+
+			slide.parentNode.removeChild(slide);
+		});
+
+		// Get the slide elements into an array
+		this.slides = $$(".slide", body);
+
+		// Get the overview
+		this.overview = function(evt) {
+			if (body.classList.contains("show-thumbnails")) {
+				body.classList.remove("headers-only");
+			}
+			else {
+				if (evt && (!evt.shiftKey || !evt.ctrlKey)) {
+					body.classList.add("headers-only");
+				}
+
+				body.addEventListener("click", function(evt) {
+					var slide = evt.target.closest(".slide");
+
+					if (slide) {
+						me.goto(slide.id);
+						setTimeout(() => me.adjustFontSize(), 1000); // for Opera
+					}
+
+					body.classList.remove("show-thumbnails");
+					body.classList.remove("headers-only");
+
+					body.removeEventListener("click", arguments.callee);
+				}, false);
+			}
+
+			body.classList.toggle("show-thumbnails");
+		};
+
+		// Process iframe slides
+		$$(".slide[data-src]:not([data-base]):empty").forEach(slide => {
+			var iframe = $.create("iframe", {
+				"data-src": slide.getAttribute("data-src"),
+				inside: slide
+			});
+
+
+			slide.removeAttribute("data-src");
+
+			var src = iframe.src || iframe.getAttribute("data-src");
+
+			slide.classList.add("iframe");
+
+			if (!slide.classList.contains("notitle")) {
+				addTitle(slide, src, iframe.title);
+			}
+
+			slide.classList.add("onscreen-nav");
+		});
+
+		this.isIpad = navigator.userAgent.indexOf("iPad;") > -1;
+
+		// Order of the slides
+		this.order = [];
+
+		for (var i=0; i<this.slides.length; i++) {
+			var slide = this.slides[i]; // to speed up references
+
+			// Asign ids to slides that don"t have one
+			if (!slide.id) {
+				slide.id = "slide" + (i+1);
+			}
+
+			// Set data-title attribute to the title of the slide
+			if (!slide.title) {
+				// no title attribute, fetch title from heading(s)
+				var heading = $("hgroup", slide) || $("h1,h2,h3,h4,h5,h6", slide);
+
+				if (heading && heading.textContent.trim()) {
+					slide.setAttribute("data-title", heading.textContent);
 				}
 			}
-		});
-	}
+			else {
+				// The title attribute is set, use that
+				slide.setAttribute("data-title", slide.title);
+				slide.removeAttribute("title");
+			}
 
-	if (window.name === "projector" && window.opener && opener.slideshow) {
-		body.classList.add("projector");
-		this.presenter = opener.slideshow;
-		this.presenter.projector = this;
-	}
+			slide.setAttribute("data-index", i);
 
-	// Adjust the font-size when the window is resized
-	addEventListener("resize", this, false);
+			var imp = slide.getAttribute("data-import"),
+				imported = imp? this.getSlideById(imp) : null;
 
-	// In some browsers DOMContentLoaded is too early, so try again onload
-	addEventListener("load", this, false);
+			this.order.push(imported? +imported.getAttribute("data-index") : i);
 
-	addEventListener("hashchange", this, false);
+			// [data-steps] can be used to define steps (applied through the data-step
+			// property), used in CSS to go through multiple states for an element
+			var stepped = $$("[data-steps]", slide);
 
-	// If there"s already a hash, update current slide number...
-	this.handleEvent({type: "hashchange"});
+			if (slide.hasAttribute("data-steps")) {
+				stepped.push(slide);
+			}
 
-	document.addEventListener("keyup", this, false);
-	document.addEventListener("keydown", this, false);
+			stepped.forEach(function(element) {
+				var steps = +element.getAttribute("data-steps");
+				element.removeAttribute("data-step");
 
-	this.currentSlide.dispatchEvent(new CustomEvent("slidechange", {
-		"bubbles": true
-	}));
+				for (var i=0; i<steps; i++) {
+					var dummy = document.createElement("span");
+					dummy.style.display = "none";
+					dummy.className = "delayed dummy";
+					dummy.dummyFor = element;
+					dummy.dummyIndex = i+1;
 
-	$$('link[rel~="csss-import"]').forEach(function (link) {
-		var url = link.href;
-		var id = link.id;
-		var slides = $$('.slide[data-base="' + id + '"][data-src^="#"]');
-		var isSlideshow = link.rel.indexOf("slides") > -1;
-
-		if (slides.length) {
-			var iframe = document.createElement("iframe");
-			var hash = slides[0].getAttribute("data-src");
-			iframe.className = "csss-import";
-			iframe.src = url + hash;
-
-			document.body.insertBefore(iframe, document.body.firstChild);
-
-			// Process the rest of the slides, which should use the same iframe
-			slides.forEach(function (slide) {
-				var hash = slide.getAttribute("data-src");
-
-				slide.classList.add("dont-resize");
-
-				this.onSlide(slide.id, function () {
-					onscreen.style.display = "";
-
-					iframe.src = iframe.src.replace(/#.+$/, hash);
-					iframe.className = "csss-import show";
-				});
-			}, this);
+					if (element === slide) {
+						slide.appendChild(dummy);
+					}
+					else {
+						element.parentNode.insertBefore(dummy, element);
+					}
+				}
+			});
 		}
-	}, this);
 
-	function addTitle(slide, url, title) {
-		var h = document.createElement("h1"),
-		    a = document.createElement("a");
+		if (window.name === "projector" && window.opener && opener.slideshow) {
+			body.classList.add("projector");
+			this.presenter = opener.slideshow;
+			this.presenter.projector = this;
+		}
 
-		title = title || slide.title || slide.getAttribute("data-title") ||
-		            url.replace(/\/#?$/, "").replace(/^\w+:\/\/(www\.)?/, "");
+		// Adjust the font-size when the window is resized
+		addEventListener("resize", this, false);
 
-		a.href = url;
-		a.target = "_blank";
-		a.textContent = title;
-		h.appendChild(a);
+		// In some browsers DOMContentLoaded is too early, so try again onload
+		addEventListener("load", this, false);
 
-		slide.appendChild(h);
+		addEventListener("hashchange", this, false);
+
+		// If there"s already a hash, update current slide number...
+		this.handleEvent({type: "hashchange"});
+
+		document.addEventListener("keyup", this, false);
+		document.addEventListener("keydown", this, false);
+
+		this.currentSlide.dispatchEvent(new CustomEvent("slidechange", {
+			"bubbles": true
+		}));
+
+		$$('link[rel~="csss-import"]').forEach(function (link) {
+			var url = link.href;
+			var id = link.id;
+			var slides = $$('.slide[data-base="' + id + '"][data-src^="#"]');
+			var isSlideshow = link.rel.indexOf("slides") > -1;
+
+			if (slides.length) {
+				var iframe = document.createElement("iframe");
+				var hash = slides[0].getAttribute("data-src");
+				iframe.className = "csss-import";
+				iframe.src = url + hash;
+
+				document.body.insertBefore(iframe, document.body.firstChild);
+
+				// Process the rest of the slides, which should use the same iframe
+				slides.forEach(function (slide) {
+					var hash = slide.getAttribute("data-src");
+
+					slide.classList.add("dont-resize");
+
+					this.onSlide(slide.id, function () {
+						onscreen.removeAttribute("hidden");
+
+						iframe.src = iframe.src.replace(/#.+$/, hash);
+						iframe.className = "csss-import show";
+					});
+				}, this);
+			}
+		}, this);
+
+		function addTitle(slide, url, title) {
+			var h = document.createElement("h1"),
+				a = document.createElement("a");
+
+			title = title || slide.title || slide.getAttribute("data-title") ||
+						url.replace(/\/#?$/, "").replace(/^\w+:\/\/(www\.)?/, "");
+
+			a.href = url;
+			a.target = "_blank";
+			a.textContent = title;
+			h.appendChild(a);
+
+			slide.appendChild(h);
+		}
+
+		document.body.dispatchEvent(new CustomEvent("slideshowinit", {
+			"bubbles": true
+		}));
 	}
 
-	document.body.dispatchEvent(new CustomEvent("slideshowinit", {
-		"bubbles": true
-	}));
-};
-
-_.prototype = {
-	handleEvent: function(evt) {
+	handleEvent(evt) {
 		var me = this;
 
 		// Prevent script from hijacking the user’s navigation
@@ -320,7 +321,7 @@ _.prototype = {
 							me.goto(+slide? slide - 1 : slide);
 							break;
 						case 72: // H
-						    me.overview(evt);
+							me.overview(evt);
 							break;
 						case 74: // J
 							if (body.classList.contains("hide-elements")) {
@@ -390,21 +391,21 @@ _.prototype = {
 			case "hashchange":
 				this.goto(location.hash.substr(1) || 0);
 		}
-	},
+	}
 
-	start: function() {
+	start() {
 		this.goto(0);
-	},
+	}
 
-	end: function() {
+	end() {
 		this.goto(this.slides.length - 1);
-	},
+	}
 
 	/**
 		@param hard {Boolean} Whether to advance to the next slide (true) or
 			just the next step (which could very well be showing a list item)
 	 */
-	next: function(hard) {
+	next(hard) {
 		if (!hard && this.items.length) {
 			this.nextItem();
 		}
@@ -424,9 +425,9 @@ _.prototype = {
 				}
 			}
 		}
-	},
+	}
 
-	nextItem: function() {
+	nextItem() {
 		if (this.item < this.items.length) {
 			this.gotoItem(++this.item);
 		}
@@ -434,9 +435,9 @@ _.prototype = {
 			this.item = 0;
 			this.next(true);
 		}
-	},
+	}
 
-	previous: function(hard) {
+	previous(hard) {
 		if (!hard && this.item > 0) {
 			this.previousItem();
 		}
@@ -460,21 +461,21 @@ _.prototype = {
 				lastItem.classList.add("current");
 			}
 		}
-	},
+	}
 
-	previousItem: function() {
+	previousItem() {
 		this.gotoItem(--this.item);
-	},
+	}
 
-	getSlideById: function(id) {
+	getSlideById(id) {
 		return $(".slide#" + id);
-	},
+	}
 
 	/**
 		Go to an aribtary slide
 		@param which {String|Integer} Which slide (identifier or slide number)
 	*/
-	goto: function(which) {
+	goto(which) {
 		var slide;
 
 		// We have to remove it to prevent multiple calls to goto messing up
@@ -515,7 +516,7 @@ _.prototype = {
 				this.adjustFontSize();
 			}
 
-			$("#onscreen-nav").style.display = this.isIpad || slide.classList.contains("onscreen-nav")? "" : "none";
+			$("#onscreen-nav")[this.isIpad || slide.classList.contains("onscreen-nav")? "removeAttribute" : "setAttribute"]("hidden", "");
 
 			// Hide iframes from CSSS imports
 			$$("iframe.csss-import").forEach(iframe => iframe.classList.remove("show"));
@@ -532,8 +533,8 @@ _.prototype = {
 			this.projector && this.projector.goto(which);
 
 			// Update next/previous
-			var previousPrevious = this.slides.previous,
-			    previousNext = this.slides.next;
+			var previousPrevious = this.slides.previous;
+			var previousNext = this.slides.next;
 
 			this.slides.previous = this.slides[this.order[this.index - 1]];
 			this.slides.next = this.slides[this.order[this.index + 1]];
@@ -558,12 +559,10 @@ _.prototype = {
 
 		// If you attach the listener immediately again then it will catch the event
 		// We have to do it asynchronously
-		requestAnimationFrame(() => {
-			addEventListener("hashchange", this, false);
-		});
-	},
+		requestAnimationFrame(() => addEventListener("hashchange", this, false));
+	}
 
-	gotoItem: function(which) {
+	gotoItem(which) {
 		this.item = which;
 
 		var items = this.items, classes;
@@ -588,14 +587,14 @@ _.prototype = {
 
 			item.classList.add("current");
 
-            // support for nested lists
-            for (var i = this.item - 1, cur = items[i], j; i > 0; i--) {
-              j = items[i - 1];
-              if (j.contains(cur)) {
-                j.classList.remove("displayed");
-                j.classList.add("current");
-              }
-            }
+			// support for nested lists
+			for (var i = this.item - 1, cur = items[i], j; i > 0; i--) {
+			  j = items[i - 1];
+			  if (j.contains(cur)) {
+				j.classList.remove("displayed");
+				j.classList.add("current");
+			  }
+			}
 
 			if (item.classList.contains("dummy") && item.dummyFor) {
 				item.dummyFor.setAttribute("data-step", item.dummyIndex);
@@ -603,18 +602,15 @@ _.prototype = {
 		}
 
 		this.projector && this.projector.gotoItem(which);
-	},
+	}
 
-	adjustFontSize: function() {
+	adjustFontSize() {
 		// Cache long lookup chains, for performance
-		var htmlStyle = html.style,
-			scrollRoot = html.scrollHeight? html : body,
-			innerHeight = window.innerHeight,
-			innerWidth = window.innerWidth,
-			slide = this.currentSlide;
+		var scrollRoot = html.scrollHeight? html : body;
+		var slide = this.currentSlide;
 
 		// Clear previous styles
-		htmlStyle.fontSize = "";
+		html.style.fontSize = "";
 
 		if (body.classList.contains("show-thumbnails")
 			|| slide.classList.contains("dont-resize")) {
@@ -626,7 +622,7 @@ _.prototype = {
 			(scrollRoot.scrollHeight > innerHeight || scrollRoot.scrollWidth > innerWidth) && percent >= 35;
 			percent-=5
 		) {
-			htmlStyle.fontSize = percent + "%";
+			html.style.fontSize = percent + "%";
 		}
 
 		// Individual slide
@@ -641,7 +637,7 @@ _.prototype = {
 				(slide.scrollHeight > slide.clientHeight || slide.scrollWidth > slide.clientWidth) && percent >= 35;
 				percent--
 			) {
-				htmlStyle.fontSize = percent + "%";
+				html.style.fontSize = percent + "%";
 			}
 
 			slide.setAttribute("style", previousStyle);
@@ -649,17 +645,17 @@ _.prototype = {
 
 		if (percent <= 35) {
 			// Something probably went wrong, so just give up altogether
-			htmlStyle.fontSize = "";
+			html.style.fontSize = "";
 		}
-	},
+	}
 
 	// Get current slide as an element
 	get currentSlide() {
 		return this.slides[this.slide];
-	},
+	}
 
 	// Is the element on the current slide?
-	onCurrent: function(element) {
+	onCurrent(element) {
 		var slide = _.getSlide(element);
 
 		if (slide) {
@@ -667,9 +663,9 @@ _.prototype = {
 		}
 
 		return false;
-	},
+	}
 
-	onSlide: function(id, callback, once) {
+	onSlide(id, callback, once) {
 		var me = this;
 
 		id = (id.indexOf("#") !== 0? "#" : "") + id;
@@ -695,32 +691,29 @@ _.prototype = {
 			});
 		}
 	}
+
+	static getSlide(element) {
+		return element.closest(".slide");
+	}
 };
 
 /**********************************************
  * Static methods
  **********************************************/
 
-// Helper method for plugins
-_.getSlide = function(element) {
-	return element.closest(".slide");
-};
-
 // Account for slide-specific style
 document.documentElement.addEventListener("slidechange", function(evt) {
 	var slide = evt.target;
 
-	$$(".slide:not(:target) style[data-slide]").forEach(function(style) {
-		style.disabled = true;
-	});
+	$$(".slide:not(:target) style[data-slide]").forEach(style => style.disabled = true);
+	$$("style[data-slide]", slide).forEach(style => style.disabled = false);
 
-	$$("style[data-slide]", slide).forEach(function(style) {
-		style.disabled = false;
+		script.remove();
 	});
 });
 
 document.addEventListener("DOMContentLoaded", function(evt) {
-	new SlideShow();
+	window.slideshow = new _();
 });
 
-})(document.head || document.getElementsByTagName("head")[0], document.body, document.documentElement);
+})(document.head, document.body, document.documentElement);
