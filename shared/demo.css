@@ -54,6 +54,11 @@
 			order: 9999;
 		}
 
+		.horizontal.demo.slide > div.editor-container:first-child,
+		.horizontal.demo.slide > style:first-child + div.editor-container {
+			margin-top: auto;
+		}
+
 .demo.slide details.notes,
 .demo.slide .button,
 .runnable.slide .button {
@@ -121,6 +126,7 @@
 	.demo.slide:not(.horizontal) div.editor-container {
 		width: calc(var(--division, 60) * 1vw);
 		order: -1;
+		margin-right: 1em;
 	}
 
 textarea.editor,

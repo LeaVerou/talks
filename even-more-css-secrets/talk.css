@@ -3,7 +3,8 @@
 	align-items: flex-start;
 }
 
-.slide.intro {
+.slide.intro,
+#cutout-text {
 	background: linear-gradient(to right, rgba(0,0,0,.5), transparent 50%),
 	            url(img/whisper.jpg) no-repeat left / cover;
 }
@@ -134,23 +135,26 @@
 		x: 150px;
 	}
 
-meter.stars {
+meter {
 	display: inline-block;
 	vertical-align: baseline;
+}
+
+	meter::-webkit-meter-bar {
+		background: transparent;
+	}
+
+meter.stars {
 	width: 5em;
 	height: 1em;
 	--background-params: left / auto 100%;
 	background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white" fill-opacity=".2">\
-		<text style="font-size:90px" y="1em">★</text></svg>') var(--background-params);
+		<text style="font-size:90px" y="1em">★</text></svg>') 0 / auto 100%;
 }
-
-	meter.stars::-webkit-meter-bar {
-		background: transparent;
-	}
 
 	meter.stars::-webkit-meter-optimum-value {
 		background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white">\
-			<text style="font-size:90px" y="1em">★</text></svg>') var(--background-params);
+			<text style="font-size:90px" y="1em">★</text></svg>') 0 / auto 100%;
 	}
 
 #blending-modes {
@@ -300,3 +304,301 @@ meter.stars {
 				#blending-modes .math .result {
 
 				}
+
+.takeaway.slide {
+
+}
+
+	.takeaway.slide h1,
+	.takeaway.slide ul {
+		font-weight: 300;
+		font-size: 200%;
+		line-height: 1.2;
+		list-style: none;
+		text-align: center;
+	}
+
+	.takeaway.slide ul li {
+		padding: .2em 0 0;
+	}
+
+	.takeaway.slide ul li + li::before {
+		content: "and";
+		display: block;
+		color: orange;
+		text-align: center;
+		font-weight: bold;
+		font-size: 40%;
+		background: linear-gradient(orange, orange) left, linear-gradient(orange, orange) right;
+		background-position-y: 55%;
+		background-repeat: no-repeat;
+		background-size: calc(50% - 3ch) 2px;
+		text-transform: uppercase;
+	}
+
+		.takeaway.slide .label {
+			display: block;
+			width: fit-content;
+			padding: .2em .5em;
+			margin: 0 auto .5em;
+			background: orange;
+			font-weight: bold;
+			text-transform: uppercase;
+			font-size: 60%;
+		}
+
+		.takeaway.slide .label span {
+			font-weight: 300;
+		}
+
+@keyframes pulse {
+	to { transform: scale(1.4); }
+}
+span.heart {
+	display: inline-block;
+	animation: pulse .2s infinite alternate;
+}
+
+table {
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+	td, th {
+		padding: 0 .3em;
+	}
+
+	td {
+		border: 1px solid rgba(0,0,0,.1);
+	}
+
+	td:not(:first-child) {
+		border-top: none;
+	}
+
+@media (max-width: 800px) {
+	tr, td, th, thead {
+		display: block;
+	}
+
+	table {
+		display: flex;
+		overflow: hidden;
+	}
+
+		tr {
+			margin: .2em 0;
+		}
+
+		thead {
+			--rows: 5;
+			--height: calc(1.67em * var(--rows));
+			text-shadow: 0 var(--height), 0 calc(var(--height) * 2), 0 calc(var(--height) * 3);
+		}
+
+		th {
+			text-align: left;
+		}
+}
+
+.🦄 {
+	font-size: 200%;
+}
+
+section.secret {
+	counter-increment: secret;
+}
+
+#cutout-text div {
+	display: flex;
+	flex-flow: row;
+	margin-right: auto;
+	font-size: calc(10vw + 100%);
+}
+
+	#cutout-text h1 {
+		position: relative;
+		width: 2.6em;
+		padding: .2em;
+		margin: 0;
+		text-transform: uppercase;
+		white-space: pre-line;
+		background: white;
+		color: black;
+		line-height: .9;
+		mix-blend-mode: screen;
+		font-size: 100%;
+	}
+
+		#cutout-text div::before {
+			content: counter(secret);
+			display: flex;
+			align-items: center;
+			padding: 0 .02em .03em .05em;
+			background: black;
+			color: white;
+			mix-blend-mode: multiply;
+			font-weight: bold;
+			font-size: 185%;
+			line-height: .5;
+		}
+
+		#cutout-text h1::first-line {
+			font-size: 60%;
+		}
+
+@keyframes rainbow-bg {
+	from, to {
+		background-color: hsl(0, 100%, 90%);
+	}
+
+	20% {
+		background-color: hsl(50, 100%, 80%);
+	}
+
+	40% {
+		background-color: hsl(80, 100%, 80%);
+	}
+
+	60% {
+		background-color: hsl(180, 80%, 80%);
+	}
+
+	80% {
+		background-color: hsl(320, 80%, 80%);
+	}
+}
+
+#character-images {
+	--tile: 300px;
+	--tile-y: calc(.7 * var(--tile));
+	--no2: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg">\
+		<text style="font: bold 90px/1 Helvetica Neue, sans-serif" y=".8em" fill-opacity=".5">№2</text></svg>');
+	background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg">\
+		<text font-size="100" x=".25em" y=".8em">💩</text></svg>') 0 0,
+		url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg">\
+			<text font-size="100" x=".25em" y=".8em">🦄</text></svg>')  calc(var(--tile) / 2) calc(var(--tile-y) / 2),
+		var(--no2) calc(var(--tile) / 2) 0,
+		var(--no2) 0 calc(var(--tile-y) / 2),
+		hsl(40, 100%, 80%);
+	background-size: var(--tile) var(--tile-y);
+	animation: rainbow-bg 6s linear infinite;
+}
+
+	#character-images h1 {
+		width: 6em;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+
+		#character-images h1::first-line {
+			font-size: 80%;
+		}
+
+#fancy-borders {}
+
+		#fancy-borders h1 {
+			width: 5.5em;
+			padding: .5em 0 .3em .5em;
+			color: black;
+			background: gold;
+			color: #0ac;
+			font-size: 400%;
+			text-transform: uppercase;
+			text-align: left;
+			text-indent: -.05em;
+		}
+
+		#fancy-borders:target h1 {
+			background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg">\
+				<style>\
+				@keyframes dashes {\
+					to {stroke-dasharray: 200 50}\
+				}\
+				@keyframes marching-ants {\
+					to { stroke-dashoffset: -250px; }\
+				}\
+				</style>\
+				<linearGradient id="g" gradientTransform="rotate(45)">\
+					<stop stop-color="gold" />\
+					<stop stop-color="#0ac" offset="1" />\
+				</linearGradient>\
+				<rect width="100%" height="100%" \
+				      stroke="url(#g)" stroke-width="100" stroke-dasharray="200 0" fill="none"\
+					  style="animation: dashes 3s 2s forwards, marching-ants 1s 2.1s linear infinite;" \
+					   />\
+			</svg>');
+		}
+
+			#fancy-borders h1::first-line {
+				/* rgb(255, 215, 0) rgb(0, 170, 204) */
+				color: rgb(128, 193, 102);
+				font-size: 152%;
+				line-height: .7;
+			}
+
+#line-headings {
+
+}
+
+@keyframes noflex {
+	from, 50% { flex: 1; }
+	to { flex: 0; }
+}
+
+	#line-headings h1,
+	#line-headings span {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		box-sizing: border-box;
+		text-transform: uppercase;
+		padding: 0;
+		background: none;
+		color: black;
+		margin: 0;
+	}
+
+	#line-headings span {
+		font-size: 800%;
+		line-height: 1;
+		font-weight: 100;
+		color: hsl(330, 100%, 30%);
+	}
+
+		#line-headings h1::before,
+		#line-headings h1::after,
+		#line-headings span::before,
+		#line-headings span::after {
+			content: "";
+			background: currentColor;
+			height: .1em;
+			flex: 1;
+			margin: 0 .2em;
+			animation: noflex 3s 0s ease-in-out infinite alternate;
+		}
+
+		#line-headings span::before,
+		#line-headings span::after {
+			--stripe: 3px;
+			height: .3em;
+			background: repeating-linear-gradient(-45deg, currentColor 0 var(--stripe), transparent 0 calc(2 * var(--stripe)));
+		}
+
+		#line-headings h1::before,
+		#line-headings span::before {
+			margin-left: 0;
+		}
+
+		#line-headings h1::after {
+			margin-right: 0;
+			animation-delay: 1.5s;
+		}
+
+		#line-headings span::before {
+			animation-delay: .5s;
+		}
+
+		#line-headings span::after {
+			animation-delay: 2s;
+		}

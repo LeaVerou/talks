@@ -34,10 +34,20 @@ class Demo {
 			if (editHTML[0] == "html") {
 				this.sourceElement.removeAttribute("data-edit");
 
+				var lastChild = this.sourceElement.lastChild;
+
+				if (lastChild instanceof Text) {
+					var indent = (lastChild.textContent.match(/\t+$/) || [""])[0];
+				}
+
 				this.element = this.sourceElement = $.create("div", {
 					around: this.sourceElement,
 					"data-edit": this.edit.replace("html", "contents")
 				});
+
+				if (indent) {
+					this.element.prepend(indent);
+				}
 			}
 
 			this.html = this.element.innerHTML;
@@ -159,7 +169,7 @@ class Demo {
 					"click mouseenter": evt => {
 						var title = (slide.title || slide.dataset.title || "") + " Demo";
 
-						a.href = createURL(Demo.getHTMLPage({html: this.html, css: this.css, js: this.js, title, needsBase}));
+						a.href = Demo.createURL(Demo.getHTMLPage({html: this.html, css: this.css, js: this.js, title, needsBase}));
 					}
 				}
 			});
@@ -228,7 +238,7 @@ class Demo {
 
 	static fixCodeTo(code, lang) {
 		if (lang == "css") {
-			if (!/\{.+\}/s.test(code)) {
+			if (!/\{[\S\s]+\}/.test(code)) {
 				code = `.slide {
 	${code}
 }`;
@@ -255,6 +265,13 @@ class Demo {
 		return new Prism.Live(textarea);
 	}
 
+	static createURL(html) {
+		html = html.replace(/&#x200b;/g, "");
+		var blob = new Blob([html], {type : "text/html"});
+
+		return URL.createObjectURL(blob);
+	}
+
 	static getHTMLPage({html="", css="", js="", title="Demo", needsBase} = {}) {
 		if (Array.isArray(css)) {
 			css = css.join("</style><style>");
@@ -272,7 +289,7 @@ ${needsBase? `<base href="${location.href}" />` : ""}
 <title>${title}</title>
 <style>
 body {
-	font-size: 200%;
+	font: 200% Helvetica Neue, sans-serif;
 }
 
 input, select, textarea, button {
@@ -283,7 +300,15 @@ ${css}
 </head>
 <body>
 ${html}
-${js? `<script>${js}</script>` : ""}
+<script>
+${js}
+
+document.addEventListener("click", evt => {
+	if (evt.target.matches('a[href^="#"]:not([target])')) {
+		evt.preventDefault();
+	}
+})
+</script>
 </body>
 </html>`;
 	}

@@ -64,15 +64,6 @@
 			display: block;
 		}
 
-@keyframes pulse {
-	to { transform: scale(1.4); }
-}
-span.heart {
-	display: block;
-	font-size: 160px;
-	animation: pulse .2s infinite alternate;
-}
-
 span.poop,
 .browser-support td:empty::before {
 	animation: poop-dance .8s 2s infinite alternate ease-in-out;

@@ -63,6 +63,14 @@ Prism.languages.insertBefore("css", "property", {
 	"variable": /\-\-(\b|\B)[\w-]+(?=\s*[:,)]|\s*$)/i
 });
 
+$$(".takeaway.slide").forEach((slide, i) => {
+	$.create("span", {
+		className: "label",
+		innerHTML: `Takeaway${$("li")? "s" : ""} <span>#</span>${i + 1}`,
+		start: $("h1, ul", slide)
+	});
+});
+
 // Blending mode testing slide
 (function(){
 

@@ -10,6 +10,7 @@
 <link href="../shared/prism.css" rel="stylesheet" />
 <link href="theme.css" rel="stylesheet" />
 <link href="../shared/demo.css" rel="stylesheet" />
+<link href="../shared/browser-support.css" rel="stylesheet" />
 <link href="talk.css" rel="stylesheet" />
 
 </head>
@@ -43,7 +44,7 @@
 	</section>
 
 	<section class="top-heavy slide dont-resize" id="projects" data-type="I ❤ Open Source">
-		<script async defer src="https://buttons.github.io/buttons.js"></script>
+		<slide-script async src="https://buttons.github.io/buttons.js"></slide-script>
 		<ul>
 			<li>
 				<a href="http://mavo.io/" style="background-image: url(../shared/img/project-mavo.png)">Mavo</a>
@@ -113,6 +114,11 @@
 </section>
 
 <section class="secret">
+	<header class="slide" id="cutout-text">
+		<div><h1>Cutout
+			Text</h1></div>
+	</header>
+
 	<article class="demo slide intro" id="transparent-text" data-credits="Photo by London Scout on Unsplash" data-edit="css" style="--division: 40">
 		<h1>
 			<span>Even</span>
@@ -162,18 +168,365 @@
 		</form>
 	</article>
 	<article class="slide" data-import="transparent-text"></article>
+
+	<!-- <article class="browser-support slide">
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th><img src="../shared/img/chrome-logo.svg" alt="Chrome"></th>
+					<th><img src="../shared/img/firefox-logo.svg" alt="Firefox"></th>
+					<th><img src="../shared/img/edge-logo.svg" alt="Edge"></th>
+					<th><img src="../shared/img/safari-logo.png" alt="Safari"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>mix-blend-mode</th>
+					<td>41</td>
+					<td>32</td>
+					<td></td>
+					<td>8</td>
+				</tr>
+			</tbody>
+		</table>
+	</article> -->
+
+	<article class="slide" data-src="https://caniuse.com/#feat=css-mixblendmode"></article>
+
+	<article class="takeaway slide">
+		<ul>
+			<li>Blending modes help us create cutout text that degrades gracefully</li>
+		</ul>
+	</article>
 </section>
 
 <section class="secret">
-	<article class="horizontal demo slide" data-edit="css" style="--division: 40">
+	<header class="slide" id="character-images">
+		<h1>Characters as images</h1>
+	</header>
+
+	<article class="horizontal demo slide" data-edit="css">
 		<style data-slide>
 			background: url('data:image/svg+xml,\
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
-				<circle r="50" />\
+				<circle r="20" cx="50" cy="50" fill="red" />\
 			</svg>');
 		</style>
 	</article>
+	<article class="horizontal demo slide" style="--division: 70">
+		<meter min="0" max="5" value="3.5" data-edit="html css"></meter>
+		<style data-slide>
+			meter {
+				width: 5em; height: 1em;
+				background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+					<text font-size="100" y=".8em" opacity=".2">★</text></svg>') 0 / auto 100%;
+			}
+			meter::-webkit-meter-optimum-value {
+				background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+					<text font-size="100" y=".8em">★</text></svg>') 0 / auto 100%;
+			}
+		</style>
+	</article>
+
+	<article class="takeaway slide">
+		<ul>
+			<li>You can turn glyphs into (animated!) images with SVG data URIs</li>
+			<li>You can style meters with discrete icons the same way</li>
+		</ul>
+	</article>
 </section>
+
+<section class="secret">
+	<header class="slide" id="fancy-borders">
+		<h1>Fancy borders</h1>
+	</header>
+
+	<article class="horizontal demo slide">
+		<svg data-edit="html">
+			<rect width="100%" height="100%" style="
+				stroke: black; stroke-width: 2px;
+				fill: none;
+				"  />
+		</svg>
+	</article>
+
+	<article class="horizontal demo slide">
+		<div class="🦄" data-edit="css html" contentEditable>Look at my awesome border!</div>
+		<style data-slide>
+		.🦄 {
+			background: url('data:image/svg+xml,\
+			<svg xmlns="http://www.w3.org/2000/svg">\
+				<style>\
+				@keyframes marching-ants {\
+					to { stroke-dashoffset: -8px; }\
+				}\
+				%3C/style>\
+				<rect width="100%" height="100%" style="\
+					stroke: black; stroke-width: 2px; stroke-dasharray: 5px 3px;\
+					animation: marching-ants .6s linear infinite;\
+					fill: none;" />\
+			</svg>');
+		}
+		</style>
+	</article>
+
+	<article class="horizontal demo slide">
+		<svg data-edit="html">
+			<rect width="100%" height="100%" style="
+				stroke: #0ac; stroke-width: 40px;
+				fill: none;
+				"  />
+		</svg>
+	</article>
+
+	<article class="horizontal demo slide">
+		<div class="🦄" data-edit="css html" contentEditable>Look at my awesome border!</div>
+		<style data-slide>
+		.🦄 {
+			background: url('data:image/svg+xml,\
+			<svg xmlns="http://www.w3.org/2000/svg" >\
+				<linearGradient id="g" gradientTransform="rotate(45)">\
+					<stop stop-color="gold" />\
+					<stop stop-color="#0ac" offset="1" />\
+				</linearGradient>\
+				<rect width="100%" height="100%" \
+				      stroke="url(#g)" stroke-width="40" fill="none" />\
+			</svg>');
+		}
+		</style>
+	</article>
+
+	<article class="horizontal demo slide">
+		<svg data-edit="html">
+			<rect width="100%" height="100%" style="
+				stroke: black; stroke-width: 2px;
+				fill: none;
+				"  />
+		</svg>
+	</article>
+</section>
+
+<section class="secret">
+	<header class="slide" id="line-headings">
+		<span>4</span>
+		<h1>Line Headings</h1>
+	</header>
+
+	<article class="demo slide" style="--division: 40">
+		<h1 data-edit="html css" contentEditable>
+	Heading
+</h1>
+		<style data-slide>
+			h1 {
+
+			}
+
+			h1::before,
+			h1::after {
+
+			}
+		</style>
+		<!--
+		h1 {
+			display: flex;
+			align-items: center;
+			width: 100%;
+		}
+
+		h1::before,
+		h1::after {
+			content: "";
+			background: white;
+			height: .3em;
+			flex: 1;
+			margin: .2em;
+		}
+		-->
+	</article>
+
+	<article class="takeaway slide">
+		<h1>Text nodes and pseudo-elements can be flex children</h1>
+	</article>
+</section>
+
+<section class="secret">
+	<header class="slide">
+		<h1>Accessible CSS Menus</h1>
+	</header>
+	<article class="isolated  demo slide">
+		<div data-edit="contents css">
+			<nav>
+				<ul>
+					<li>
+						<a href="#projects">Projects</a>
+						<ul>
+							<li><a href="#1">Project 1</a></li>
+							<li><a href="#2">Project 2</a></li>
+							<li><a href="#3">Project 3</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#blog">Blog</a>
+						<ul>
+							<li><a href="#1">Category 1</a></li>
+							<li><a href="#2">Category 2</a></li>
+							<li><a href="#3">Category 3</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#about">About</a>
+						<ul>
+							<li><a href="#1">Item1</a></li>
+							<li><a href="#2">Item2</a></li>
+							<li><a href="#3">Item3</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</div>
+
+		<style data-slide>
+			nav li ul {
+				display: none;
+			}
+
+			nav li:hover ul {
+				display: unset;
+			}
+		</style>
+		<style data-slide>
+			nav {
+
+
+			}
+
+			nav ul {
+				display: flex;
+				list-style: none;
+				padding: 0;
+			}
+
+			nav li {
+				flex: 1;
+				position: relative;
+			}
+
+			nav a {
+				display: block;
+				text-decoration: none;
+				background: orange;
+				font-weight: bold;
+				color: white;
+				padding: .3em;
+				text-align: center;
+			}
+
+			nav li li a {
+				background: hsl(40, 100%, 80%);
+				color: black;
+				font-weight: 300;
+			}
+
+			nav a:hover {
+				background: hsl(20, 100%, 50%);
+			}
+
+			nav a + ul {
+				position: absolute;
+				flex-flow: column;
+				width: 100%;
+			}
+		</style>
+	</article>
+
+	<article class="takeaway slide">
+		<ul>
+			<li><code>:focus-within</code> + accessibility = <span class="heart">❤️</span></li>
+			<li><code>:target-within</code> is coming!</li>
+		</ul>
+	</article>
+</section>
+
+<section class="secret">
+	<header class="slide">
+		<h1>Variable Fonts for non-variable strokes</h1>
+	</header>
+	<article class="demo slide">
+		<script id="WolframAlphaScripta96a9e81ac4bbb54f8002bb61b8d3472" src="//www.wolframalpha.com/widget/widget.jsp?id=a96a9e81ac4bbb54f8002bb61b8d3472&theme=green&output=iframeOpenExpand"></script>
+	</article>
+</section>
+
+<section class="secret">
+	<header class="slide"><h1>Pie charts</h1></header>
+	<article class="horizontal demo slide">
+		<div class="pie" data-edit="css html"></div>
+		<style data-slide>
+			.pie {
+				padding: 20vmin;
+				border-radius: 50%;
+				background: linear-gradient(red, yellow, lime, aqua, blue, fuchsia, red);
+			}
+		</style>
+	</article>
+
+	<article class="horizontal demo slide" data-edit="css">
+		<div class="pie" data-edit="css html"></div>
+		<style data-slide>
+			background: conic-gradient(white, black);
+		</style>
+	</article>
+
+	<article class="takeaway slide">
+		<ul>
+			<li>2 color stop positions create bands of color</li>
+			<li>Conic gradients are the easiest way to make pie charts and many other things</li>
+		</ul>
+	</article>
+</section>
+
+<!-- <section>
+	<article class="horizontal demo slide">
+		<table data-edit="css html">
+			<thead>
+				<th>Name</th>
+				<th>Age</th>
+				<th>Color</th>
+				<th>Sex</th>
+				<th>Alive?</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Adam Catlace</td>
+					<td>4</td>
+					<td>White & Orange</td>
+					<td>Male</td>
+					<td>Y</td>
+				</tr>
+				<tr>
+					<td>Vector</td>
+					<td>12</td>
+					<td>Blue</td>
+					<td>Male</td>
+					<td>N</td>
+				</tr>
+				<tr>
+					<td>Çiki</td>
+					<td>1</td>
+					<td>Gray</td>
+					<td>Female</td>
+					<td>Y</td>
+				</tr>
+			</tbody>
+		</table>
+		<style data-slide>
+
+		</style>
+		<style data-slide>
+
+		</style>
+	</article>
+</section> -->
 <!--
 <section>
 	<article class="demo slide" title="CSS Variables" style="--division: 60">
@@ -287,7 +640,7 @@
 	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
 </footer>
 
-<script src="../shared/js/bliss.min.js"></script>
+<script src="../shared/js/bliss.shy.min.js"></script>
 <script src="../csss/slideshow.js"></script>
 <script src="../shared/js/prism.js"></script>
 <script src="../incrementable/incrementable.js"></script>
