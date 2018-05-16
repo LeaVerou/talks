@@ -31,7 +31,7 @@ if (!window.Bliss) {
 	console.log("Bliss not loaded. Loading remotely from blissfuljs.com");
 
 	let bliss = document.createElement("script");
-	bliss.src = "//blissfuljs.com/bliss.shy.min.js";
+	bliss.src = "https://blissfuljs.com/bliss.shy.min.js";
 	head.appendChild(bliss);
 
 	await new Promise(resolve => bliss.onload = resolve);
@@ -130,9 +130,10 @@ var _ = class SlideShow {
 
 					body.classList.remove("show-thumbnails");
 					body.classList.remove("headers-only");
-
-					body.removeEventListener("click", arguments.callee);
-				}, false);
+				}, {
+					capture: false,
+					once: true
+				});
 			}
 
 			body.classList.toggle("show-thumbnails");
@@ -678,13 +679,13 @@ var _ = class SlideShow {
 		}
 
 		if (!fired || !once) {
-			addEventListener("hashchange", function() {
+			addEventListener("hashchange", function callee() {
 				if (id == location.hash) {
 					callback.call(me.slides[me.slide]);
 					fired = true;
 
 					if (once) {
-						removeEventListener("hashchange", arguments.callee);
+						removeEventListener("hashchange", callee);
 					}
 				}
 
