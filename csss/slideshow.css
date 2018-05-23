@@ -189,7 +189,8 @@ body:not(.show-thumbnails) .slide:not(.previous):not(:target):not(.next) {
 			text-shadow: 0 -.05em .05em black;
 		}
 
-	.slide > iframe:only-of-type,
+	.slide > iframe:only-child,
+	.iframe.slide > iframe,
 	iframe.csss-import {
 		position: absolute;
 		top: 0;

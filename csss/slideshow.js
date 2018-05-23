@@ -485,6 +485,21 @@ var _ = class SlideShow {
 
 		var id;
 
+		if (which + "" === which) { // Argument is a slide id
+			slide = this.getSlideById(which);
+
+			if (slide) {
+				this.slide = this.index = +slide.getAttribute("data-index");
+				location.hash = "#" + which;
+			}
+			else if (/^slide(\d+)$/.test(which)) { // No slide found with that id. Perhaps it's in the slideN format?
+				which = which.slice(5) - 1;
+			}
+			else {
+				// No slide found
+			}
+		}
+
 		if (which + 0 === which && which in this.slides) {
 			// Argument is a valid slide number
 			this.index = which;
@@ -493,14 +508,6 @@ var _ = class SlideShow {
 			slide = this.currentSlide;
 
 			location.hash = "#" + slide.id;
-		}
-		else if (which + "" === which) { // Argument is a slide id
-			slide = this.getSlideById(which);
-
-			if (slide) {
-				this.slide = this.index = +slide.getAttribute("data-index");
-				location.hash = "#" + which;
-			}
 		}
 
 		if (slide) { // Slide actually changed, perform any other tasks needed
@@ -517,7 +524,7 @@ var _ = class SlideShow {
 				this.adjustFontSize();
 			}
 
-			$("#onscreen-nav")[this.isIpad || slide.classList.contains("onscreen-nav")? "removeAttribute" : "setAttribute"]("hidden", "");
+			$.toggleAttribute($("#onscreen-nav"), "hidden", "", !this.isIpad && !slide.classList.contains("onscreen-nav"));
 
 			// Hide iframes from CSSS imports
 			$$("iframe.csss-import").forEach(iframe => iframe.classList.remove("show"));
@@ -726,5 +733,13 @@ document.documentElement.addEventListener("slidechange", function(evt) {
 document.addEventListener("DOMContentLoaded", function(evt) {
 	window.slideshow = new _();
 });
+
+function updateViewportVariables() {
+    html.style.setProperty("--100vw", innerWidth);
+    html.style.setProperty("--100vh", innerHeight);
+}
+
+updateViewportVariables();
+addEventListener("resize", updateViewportVariables);
 
 })(document.head, document.body, document.documentElement);
