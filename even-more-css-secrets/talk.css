@@ -1,3 +1,11 @@
+@font-face {
+	font-family: 'FF Meta VF';
+	src: url('https://variablefonts.monotype.com/MetaVariableDemo-Set.woff2') format('woff2');
+	font-display: swap;
+	font-style: normal italic;
+	font-weight: 100 900;
+}
+
 #intro {
 	display: flex;
 	align-items: flex-start;
@@ -601,4 +609,261 @@ section.secret {
 
 		#line-headings span::after {
 			animation-delay: 2s;
+		}
+
+#variable-fonts {
+	font-family: FF Meta VF, sans-serif;
+	justify-content: center;
+}
+
+	#variable-fonts div {
+		display: flex;
+		flex-flow: row;
+		font-size: 300%;
+		--width: 4.2em;
+		--number-width: 2em;
+		position: relative;
+		left: calc(-.5 * var(--width));
+	}
+
+	@keyframes fw {
+		from { font-weight: 100;}
+		to {font-weight: 900;}
+	}
+
+	#variable-fonts div::after {
+		content: counter(secret);
+		background: red;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 200%;
+		line-height: 1;
+		min-width: 1em;
+		text-align: center;
+		animation: 3s fw linear infinite alternate;
+	}
+
+	#variable-fonts h1 {
+		font: 200 100%/1.2 FF Meta VF, sans-serif;
+		text-transform: uppercase;
+		--offset: calc(var(--width) + var(--number-width));
+		box-shadow: var(--offset) 0 white;
+		text-shadow: var(--offset) 0 black;
+		margin: 0;
+		background: black;
+		padding: .4em;
+	}
+
+		#variable-fonts span {
+			display: block;
+			font-size: calc(var(--size, 1) * 100%);
+			line-height: calc(.9 + .5 * (1 - var(--size, 1)));
+			font-weight: calc(495.816 - 295.547 * var(--size, 1));
+			xanimation: fw 2s linear infinite alternate;
+		}
+
+		#variable-fonts span:nth-child(1) {
+			--size: .5;
+			/* font-weight: 350; */
+		}
+
+		#variable-fonts span:nth-child(2) {
+			--size: .42;
+			/* font-weight: 370; */
+		}
+
+#regression-calculator {
+	flex-flow: row;
+	align-items: flex-start;
+	justify-content: flex-start;
+	padding: 0 0 0 1em;
+	transform-origin: bottom right;
+}
+
+	#regression-calculator.next {
+		left: auto;
+		top: auto;
+		visibility: visible;
+		width: 100vw;
+		height: 100vh;
+		transform: scale(.5);
+		z-index: 100;
+		border-top-left-radius: .3em;
+		box-shadow: -.1em -.1em .4em rgba(0,0,0,.2);
+	}
+
+	#regression-calculator.next:not(:focus-within):not(:hover) {
+		width: 20em;
+		height: 3.8em;
+		opacity: .5;
+		transform: scale(.25);
+	}
+
+		#regression-calculator.next:not(:focus-within):not(:hover) iframe {
+			visibility: hidden;
+		}
+
+	#regression-calculator h1 {
+		text-transform: none;
+		text-align: left;
+		color: orange;
+		white-space: nowrap;
+	}
+
+	#regression-calculator form {
+		flex: 1;
+	}
+
+	#regression-calculator table input {
+		width: 5em;
+	}
+
+	#regression-calculator thead {
+		font: bold 100%/1 var(--font-mono);
+	}
+
+	#regression-calculator tbody {
+		font-size: 120%;
+	}
+
+	#regression-calculator td {
+		padding: .1em;
+	}
+
+	#regression-calculator .query {
+		margin-bottom: 0;
+	}
+
+		#regression-calculator .query a {
+			text-decoration: none;
+		}
+
+		#regression-calculator .query input {
+			display: block;
+			font-size: 60%;
+			width: 20em;
+			padding: 0 .3em .1em;
+			font-weight: 400;
+			border: none;
+		}
+
+		#regression-calculator .query img {
+			display: inline-block;
+			vertical-align: -.2em;
+			height: 1em;
+		}
+
+	#regression-calculator iframe {
+		--height: 640;
+		--scale: calc(var(--100vh) / var(--height));
+		height: calc(1px * var(--height));
+		min-width: calc((100% - 19em) / var(--scale));
+		transform: scale(var(--scale));
+		transform-origin: top right;
+		border: 0;
+	}
+
+	#regression-calculator .mv-add-values {
+		display: none;
+	}
+
+#responsive-flex {
+
+}
+
+	@keyframes resp-flex {
+		from { width: 20em }
+		to { width: 10em; }
+	}
+
+	#responsive-flex > div {
+		display: flex;
+		flex-wrap: wrap;
+		animation: resp-flex 4s linear infinite alternate;
+		font-size: 120%;
+	}
+
+	#responsive-flex > div::before {
+		content: counter(secret);
+		background: red;
+		font-size: 300%;
+		line-height: 1;
+		padding: .2em;
+		flex: 1;
+	}
+
+	#responsive-flex h1 {
+		padding: .5em;
+		margin: 0;
+		background: black;
+		flex: 9999;
+	}
+
+
+.credits {
+	display: flex;
+	--color: hsl(80, 80%, 40%);
+	background: var(--color);
+	font-weight: bold;
+	flex-shrink: 0;
+}
+
+	.credits::before {
+		content: "Credits";
+		display: flex;
+		align-items: center;
+		background: white;
+		color: var(--color);
+		padding: 0 .5em;
+		text-transform: uppercase;
+		font-size: 80%;
+	}
+
+	.credits p {
+		margin: 0;
+		padding: .1em .5em;
+		flex: 1;
+		align-self: center;
+	}
+
+#column-sorting {
+	background: white;
+	--division: 50;
+}
+
+	#column-sorting .creatures {
+		font-size: 120%;
+	}
+
+	#column-sorting article {
+		border: 1px solid;
+		border-color: hsl(var(--color), calc(var(--lightness, 90%) - 20%));
+		background: hsl(var(--color), var(--lightness, 90%));
+		padding: .2em .5em;
+	}
+
+	#column-sorting .cat.male {
+		--color: 200, 100%;
+	}
+
+	#column-sorting .cat.female {
+		--color: 350, 100%;
+	}
+
+		#column-sorting .cat::before {
+			content: "😻 "
+		}
+
+	#column-sorting .person {
+		--color: 80, 60%;
+		--lightness: 80%;
+	}
+
+		#column-sorting .person.male::before {
+			content: "👨🏼 ";
+		}
+
+		#column-sorting .person.female::before {
+			content: "👩🏽 "
 		}

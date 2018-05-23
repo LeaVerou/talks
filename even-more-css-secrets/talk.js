@@ -156,4 +156,10 @@ slide.addEventListener("input", function(evt) {
 
 slide.dispatchEvent(new InputEvent("input"));
 
+$.bind($('form[target="wolfram"]'), {
+	input: evt => {
+		evt.target.form.submit();
+	}
+});
+
 })();

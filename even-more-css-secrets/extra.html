@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title>Even More CSS Secrets</title>
+<link href="../csss/slideshow.css" rel="stylesheet" />
+<link href="../csss/reusable.css" rel="stylesheet" />
+<link href="../shared/intro-outro.css" rel="stylesheet" />
+<link href="../shared/prism.css" rel="stylesheet" />
+<link href="theme.css" rel="stylesheet" />
+<link href="../shared/demo.css" rel="stylesheet" />
+<link href="../shared/browser-support.css" rel="stylesheet" />
+<link href="talk.css" rel="stylesheet" />
+<link href="//dev.mavo.io/dist/mavo.css" rel="stylesheet" />
+
+</head>
+<body>
+
+<section class="secret">
+	<header class="slide"><h1>Pie charts</h1></header>
+	<article class="horizontal demo slide">
+		<div class="pie" data-edit="css html"></div>
+		<style data-slide>
+			.pie {
+				padding: 20vmin;
+				border-radius: 50%;
+				background: linear-gradient(red, yellow, lime, aqua, blue, fuchsia, red);
+			}
+		</style>
+	</article>
+
+	<article class="horizontal demo slide" data-edit="css">
+		<div class="pie" data-edit="css html"></div>
+		<style data-slide>
+			background: conic-gradient(white, black);
+		</style>
+	</article>
+
+	<article class="takeaway slide">
+		<ul>
+			<li>2 color stop positions create bands of color</li>
+			<li>Conic gradients are the easiest way to make pie charts and many other things</li>
+		</ul>
+	</article>
+</section>
+
+<section class="secrets">
+	<header class="slide">
+		<h1>Responsive Tables</h1>
+	</header>
+
+	<article class="horizontal demo slide">
+		<table data-edit="css html">
+			<thead>
+				<th>Name</th>
+				<th>Age</th>
+				<th>Color</th>
+				<th>Sex</th>
+				<th>Alive?</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Adam Catlace</td>
+					<td>4</td>
+					<td>White & Orange</td>
+					<td>Male</td>
+					<td>Y</td>
+				</tr>
+				<tr>
+					<td>Vector</td>
+					<td>12</td>
+					<td>Blue</td>
+					<td>Male</td>
+					<td>N</td>
+				</tr>
+				<tr>
+					<td>Çiki</td>
+					<td>1</td>
+					<td>Gray</td>
+					<td>Female</td>
+					<td>Y</td>
+				</tr>
+			</tbody>
+		</table>
+		<style data-slide>
+
+		</style>
+		<style data-slide>
+
+		</style>
+	</article>
+</section>
+<section>
+	<article class="demo slide" title="CSS Variables" style="--division: 60">
+		<div data-edit="contents css">
+			<button>Click me</button>
+			<button class="pink">Click me</button>
+		</div>
+
+		<style data-slide>
+			button {
+				border: .1em solid black;
+				background: transparent;
+				color: black;
+			}
+
+			button:hover {
+				background: black;
+				color: white;
+			}
+
+			button.pink {
+				border-color: #f06;
+				color: #f06;
+			}
+
+			button.pink:hover {
+				background: #f06;
+				color: white;
+			}
+		</style>
+		<style data-slide>
+			button {
+				border-radius: .3em;
+				padding: 0 .5em;
+				font-weight: bold;
+				font-size: 180%;
+				margin: .2em;
+			}
+		</style>
+	</article>
+
+	<article class="slide language-javascript" style="align-items: flex-start; padding: 3em" title="CSS Variables & JS">
+		<pre><code>
+			// Get CSS variable value from style attribute
+			element.style.getPropertyValue("--foo");
+		</code></pre>
+		<pre class="delayed"><code>
+			// Get CSS variable value from wherever
+			getComputedStyle(element).getPropertyValue("--foo");
+		</code></pre>
+		<pre class="delayed"><code>
+			// Set CSS variable in style attribute
+			element.style.setProperty("--foo", 38 + 4);
+		</code></pre>
+	</article>
+
+	<article class="runnable slide">
+		<pre><code class="language-javascript">
+			document.addEventListener("mousemove", function(event) {
+				let x = event.clientX / innerWidth;
+				let y = event.clientY / innerHeight;
+				let root = document.documentElement;
+
+				root.style.setProperty("--mouse-x", x);
+				root.style.setProperty("--mouse-y", y);
+			});
+		</code></pre>
+	</article>
+
+	<article class="horizontal demo slide" data-edit="css" id="mouse">
+		<style data-slide>
+			#mouse.slide {
+				background-image: radial-gradient(
+					at 50% 50%,
+					transparent, black);
+			}
+		</style>
+	</article>
+
+	<article class="horizontal demo slide" id="svg-eyes">
+		<style data-slide>
+			.iris {
+				cx: 50px;
+			}
+		</style>
+		<div data-edit="contents css">
+			<svg viewBox="0 0 250 100">
+				<clipPath id="white-clip">
+					<path id="white-path" d="M1,50 a65,80 0 0,1 100,0 a80,80 0 0,1 -100,0 Z" />
+				</clipPath>
+				<use id="eye-white" href="#white-path" />
+				<use href="#eye-white" x="148" />
+				<circle id="iris" class="iris" cx="50" cy="45" r="18" clip-path="url(#white-clip)" />
+				<use class="iris" href="#iris" x="148" />
+			</svg>
+		</div>
+	</article>
+</section>
+
+<script src="../shared/js/bliss.shy.min.js"></script>
+<script src="../csss/slideshow.js"></script>
+<script src="../shared/js/prism.js"></script>
+<script src="../incrementable/incrementable.js"></script>
+<script src="../shared/js/editor.js"></script>
+<script src="talk.js"></script>
+<script src="../shared/js/demo.js"></script>
+<script src="//dev.mavo.io/dist/mavo.js"></script>
+</body>
+</html>

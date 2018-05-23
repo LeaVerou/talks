@@ -353,7 +353,7 @@ function resizeTextarea(textarea, secondAttempt) {
 		textarea = $("textarea.editor", textarea);
 	}
 
-	if (textarea) {
+	if (textarea && textarea.matches) {
 		var w = textarea.matches(".adjust-width");
 		var h = textarea.matches(".adjust-height, .horizontal.demo.slide textarea.editor");
 
