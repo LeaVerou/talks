@@ -482,10 +482,12 @@ var _ = Prism.Live = $.Class({
 
 						if (!/^--/.test(property) && !(property in style)) {
 							// Nonexistent property, try as a shortcut
-							var properties = Object.keys(style)
-												.map(a => a.replace(/[A-Z]/g, $0 => "-" + $0.toLowerCase()))
-												.filter(a => a.indexOf(property) === 0)
-												.sort((a, b) => a.length - b.length);
+							var allProperties =  Object.keys(style)
+												.map(a => a.replace(/[A-Z]/g, $0 => "-" + $0.toLowerCase()));
+							var properties = allProperties.filter(p => {
+										return p.indexOf(property) === 0 // starts with
+											|| p.split("-").map(b => b[0]).join("") === property; // abbreviation
+									}).sort((a, b) => a.length - b.length);
 
 							if (properties.length) {
 								if (properties.length > 1) {
