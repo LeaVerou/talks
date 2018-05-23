@@ -162,4 +162,8 @@ $.bind($('form[target="wolfram"]'), {
 	}
 });
 
+$$(".separate-letters").forEach(element => {
+	element.innerHTML = element.innerHTML.split("").map((letter, i) => `<span data-letter="${letter}" style="--index: ${i}">${letter}</span>`).join("");
+});
+
 })();

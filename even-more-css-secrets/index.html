@@ -32,7 +32,8 @@
 	<section id="hi" class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
 			<img src="../shared/img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
-			<figcaption style="font-size: 240%">Привет, я Лиа</figcaption>
+			<figcaption style="font-size: 240%">Hi, I’m Lea</figcaption>
+			<!-- Привет, я Лиа -->
 		</figure>
 	</section>
 
@@ -105,9 +106,9 @@
 		</div>
 	</section>
 
-	<article class="image slide" style="background: url(../shared/img/russian-csssecrets.jpg) center/contain no-repeat white">
+	<!-- <article class="image slide" style="background: url(../shared/img/russian-csssecrets.jpg) center/contain no-repeat white">
 
-	</article>
+	</article> -->
 
 	<section class="top-heavy image slide" id="mit">
 		<h1><strong>2014&thinsp;–</strong> Haystack Group, MIT CSAIL</h1>
@@ -197,7 +198,8 @@
 
 	<article class="takeaway slide">
 		<ul>
-			<li>Blending modes help us create cutout text that degrades gracefully</li>
+			<li>With <code>multiply</code> blend mode, black is cutout and white is opaque</li>
+			<li>With <code>screen</code> blend mode, white is cutout and black is opaque</li>
 		</ul>
 	</article>
 </section>
@@ -232,8 +234,8 @@
 
 	<article class="takeaway slide">
 		<ul>
-			<li>You can turn glyphs into (animated!) images with SVG data URIs</li>
-			<li>You can style meters with discrete icons the same way</li>
+			<li>Turn glyphs into (animated!) images with SVG data URIs</li>
+			<li>Use this trick to style meters with discrete icons</li>
 		</ul>
 	</article>
 </section>
@@ -300,6 +302,13 @@
 				"  />
 		</svg>"
 	</article>
+
+	<article class="takeaway slide">
+		<ul>
+			<li>SVGs with no <code>viewBox</code> spread to cover the entire area. Strokes stay the same width.</li>
+			<li>We can use this to apply fancy SVG strokes to our HTML elements!</li>
+		</ul>
+	</article>
 </section>
 
 <section class="secret">
@@ -322,7 +331,11 @@
 
 			}
 		</style>
-		<!--
+		<style data-slide>
+		h1 {
+			font-size: 200%
+		}
+		/*
 		h1 {
 			display: flex;
 			align-items: center;
@@ -337,7 +350,8 @@
 			flex: 1;
 			margin: .2em;
 		}
-		-->
+		*/
+		</style>
 	</article>
 
 	<article class="takeaway slide">
@@ -346,8 +360,18 @@
 </section>
 
 <section class="secret">
-	<header class="slide">
-		<h1>Accessible CSS Menus</h1>
+	<header class="slide dont-resize" id="accessible-menus">
+		<h1>
+			<span style="--index: 0">Accessible</span>
+			<span style="--index: 1">CSS</span>
+			<div style="--index: 2"><span>Menus</span>
+				<ul>
+					<li style="--index: 3">Item 1</li>
+					<li style="--index: 4">Item 2</li>
+					<li style="--index: 5">Item 3</li>
+				</ul>
+			</div>
+		</h1>
 	</header>
 	<article class="isolated  demo slide">
 		<div data-edit="contents css">
@@ -372,9 +396,9 @@
 					<li>
 						<a href="#about">About</a>
 						<ul>
-							<li><a href="#1">Item1</a></li>
-							<li><a href="#2">Item2</a></li>
-							<li><a href="#3">Item3</a></li>
+							<li><a href="#1">Bio</a></li>
+							<li><a href="#2">Photos</a></li>
+							<li><a href="#3">Social</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -391,11 +415,6 @@
 			}
 		</style>
 		<style data-slide>
-			nav {
-
-
-			}
-
 			nav ul {
 				display: flex;
 				list-style: none;
@@ -538,6 +557,12 @@
 			sup { font-size: 50%;}
 		</style>
 	</article>
+	<article class="takeaway slide">
+		<ul>
+			<li>The weight axis in variable fonts allows us to synthesize small caps, superscripts, subscripts and to equalize strokes</li>
+			<li>We can use linear or quadratic regression to get an expression that gives us the weight for each font size, but it's not perfect.</li>
+		</ul>
+	</article>
 </section>
 
 <section class="secret">
@@ -612,20 +637,22 @@
 </section>
 
 <section class="secret">
-	<header class="slide" id="grid-auto-flow">
-		<h1>Auto-flowing grids
-		<div class="note">for fun and profit</div></h1>
+	<header class="dont-resize slide" id="grid-auto-flow">
+		<h1>
+			<div class="separate-letters">Auto-flowing grids</div>
+			<div class="note">for fun and profit</div>
+		</h1>
 	</header>
 	<article class="demo slide" id="column-sorting">
 		<div class="creatures" data-edit="html css">
-			<article class="cat male">Vector</article>
-			<article class="cat female">Çiki</article>
-			<article class="cat male">Sir Adam Catlace</article>
-			<article class="cat female">Joan</article>
-			<article class="person female">Lea Verou</article>
-			<article class="person male">Chris Lilley</article>
-			<article class="person male">David Karger</article>
-			<article class="person female">Sirma Orguç</article>
+			<article class="cat    male">Vector</article>
+			<article class="cat    female">Çiki</article>
+			<article class="cat    male">Sir Adam Catlace</article>
+			<article class="cat    female">Joan</article>
+			<article class="hooman female">Lea Verou</article>
+			<article class="hooman male">Chris Lilley</article>
+			<article class="hooman male">David Karger</article>
+			<article class="hooman female">Sirma Orguç</article>
 		</div>
 		<style data-slide>
 		.creatures {
@@ -656,6 +683,48 @@
 			margin: 0;
 		}
 		</style>
+	</article>
+
+	<article class="takeaway slide">
+		<ul>
+			<li><code>grid-auto-flow</code> defines the direction auto grids are laid out
+			<li>The <code>dense</code> keyword prevents gaps</li>
+			<li><code>object-fit: cover</code> prevents image distortion</li>
+		</ul>
+	</article>
+</section>
+
+<section class="secret">
+	<header class="slide">
+		<h1>Pie charts</h1>
+	</header>
+
+	<article class="horizontal demo slide" data-edit="css">
+		<style data-slide>
+			background: linear-gradient(white, black);
+		</style>
+	</article>
+
+
+	<article class="horizontal demo slide">
+		<div class="pie" data-edit="css html"></div>
+		<style data-slide>
+			.pie {
+				padding: 20vmin;
+				border-radius: 50%;
+				background: linear-gradient(red, yellow, lime, aqua, blue, fuchsia, red);
+			}
+		</style>
+	</article>
+
+	<article class="takeaway slide">
+		<ul>
+			<li>Conic gradients are coming!</li>
+			<li>A gradient color stop position of 0 creates hard lines regardless of the previous stop's position.</li>
+			<li>2 color stop positions create bands of color</li>
+			<li>The second argument of <code>var()</code> is a default value</li>
+			<li><code>CSS.registerProperty()</code> will allow us to animate custom properties!</li>
+		</ul>
 	</article>
 </section>
 

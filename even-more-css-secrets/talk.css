@@ -827,6 +827,108 @@ section.secret {
 		align-self: center;
 	}
 
+#grid-auto-flow {}
+
+	#grid-auto-flow h1 {
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(7, 1fr);
+		grid-template-rows: repeat(7, 1fr);
+		width: 100vmin;
+		height: 100vmin;
+		xgrid-auto-flow: row dense;
+		grid-gap: 1px;
+		font-weight: 300;
+	}
+
+		#grid-auto-flow h1::before {
+			content: "{" counter(secret) "}";
+			grid-column-end: span 3;
+			grid-row-end: span 2;
+			font-size: 250%;
+			padding-bottom: .1em;
+		}
+
+		#grid-auto-flow h1::before,
+		#grid-auto-flow [data-letter],
+		#grid-auto-flow .note,
+		#grid-auto-flow h1::after {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		#grid-auto-flow h1 .separate-letters {
+			display: contents;
+			text-transform: uppercase;
+			color: black
+		}
+
+			#grid-auto-flow [data-letter] {
+				background: var(--color-green);
+				font-weight: bold;
+			}
+
+			@supports (translate: 0) {
+				@keyframes tetris {
+					from { translate: 0 -100vh; }
+					to { translate: 0}
+				}
+
+				#grid-auto-flow:target [data-letter],
+				#grid-auto-flow:target .note,
+				#grid-auto-flow:target h1::after {
+					animation: tetris .4s calc(var(--index) * .3s) both;
+				}
+			}
+
+			#grid-auto-flow [data-letter]:nth-child(odd) {
+				background: var(--color-aqua);
+			}
+
+			#grid-auto-flow [data-letter]:nth-child(3n) {
+				background: var(--color-magenta);
+			}
+
+			#grid-auto-flow [data-letter]:nth-child(5n) {
+				background: var(--color-orange);
+			}
+
+			#grid-auto-flow [data-letter]:nth-child(7n) {
+				background: hsl(170, 50%, 50%);
+			}
+
+			#grid-auto-flow .separate-letters [data-letter="-"] {
+				grid-column-end: span 4;
+				text-align: center;
+				background: gold;
+			}
+
+			#grid-auto-flow [data-letter=" "] {
+				display: none;
+			}
+
+		#grid-auto-flow h1 .note {
+			grid-row-end: span 3;
+			grid-column-end: span 5;
+			padding: .3em .5em .2em;
+			background: linear-gradient(gray, gray),
+			 url(img/cat8.jpg) no-repeat center / cover;
+			background-blend-mode: screen, normal;
+			font-size: 150%;
+			line-height: .8;
+			color: black;
+			--index: 19;
+		}
+
+		#grid-auto-flow h1::after {
+			content: "";
+			background: url(img/cat3.jpg) no-repeat center / cover;
+			grid-column-end: span 2;
+			grid-row-end: span 4;
+			--index: 20;
+		}
+
 #column-sorting {
 	background: white;
 	--division: 50;
@@ -855,15 +957,96 @@ section.secret {
 			content: "😻 "
 		}
 
-	#column-sorting .person {
+	#column-sorting .hooman {
 		--color: 80, 60%;
 		--lightness: 80%;
 	}
 
-		#column-sorting .person.male::before {
+		#column-sorting .hooman.male::before {
 			content: "👨🏼 ";
 		}
 
-		#column-sorting .person.female::before {
+		#column-sorting .hooman.female::before {
 			content: "👩🏽 "
+		}
+
+#accessible-menus {
+	justify-content: flex-start;
+}
+
+	#accessible-menus h1 {
+		display: flex;
+		padding: 0;
+		line-height: 1.5;
+		transform: translateY(-2em);
+		letter-spacing: -.02em;
+	}
+
+		#accessible-menus h1::before {
+			content: counter(secret);
+			background: white;
+			color: black;
+			padding: 0 .5em;
+		}
+
+		#accessible-menus h1 div {
+			position: relative;
+		}
+
+		#accessible-menus h1 span {
+			display: block;
+			padding: 0 .4em;
+		}
+
+		@keyframes focus {
+			16% {
+				outline: auto 10px rgb(59, 153, 252);
+				background-color: hsla(0, 100%, 50%, .3);
+			}
+
+			32%, to {
+				outline: none;
+				background-color: transparent;
+			}
+		}
+
+		@keyframes show-menu {
+			from, 62% {
+				visibility: visible;
+			}
+			64%, to {
+				visibility: hidden;
+			}
+		}
+
+		#accessible-menus h1 span,
+		#accessible-menus h1 li {
+			xmix-blend-mode: luminosity;
+			--period: 1s;
+			animation: focus 6s calc(var(--index) * 1s) infinite step-start;
+		}
+
+		#accessible-menus h1 div:last-child {
+			background: hsl(350, 100%, 50%);
+		}
+
+		#accessible-menus h1 ul {
+			position: absolute;
+			z-index: -1;
+			display: flex;
+			flex-flow: column;
+			width: 100%;
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			background: var(--color-orange);
+			font-weight: 300;
+			visibility: hidden;
+			animation: show-menu 6s 2.25	s infinite step-start;
+			letter-spacing: normal;
+		}
+
+		#accessible-menus h1 li {
+			flex: 1;
+			position: relative;
 		}
