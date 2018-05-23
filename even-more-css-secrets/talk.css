@@ -1042,11 +1042,42 @@ section.secret {
 			background: var(--color-orange);
 			font-weight: 300;
 			visibility: hidden;
-			animation: show-menu 6s 2.25	s infinite step-start;
+			animation: show-menu 6s 2.25s infinite step-start;
 			letter-spacing: normal;
 		}
 
 		#accessible-menus h1 li {
 			flex: 1;
 			position: relative;
+		}
+
+#pie-charts {
+	background: url(img/pies.png);
+}
+
+	#pie-charts::before {
+		content: counter(secret);
+		position: absolute;
+		top: 20vh;
+		left: 20vw;
+		background: white;
+		color: black;
+		font-size: 300%;
+		border-radius: 50%;
+		padding: .1em .6em;
+		font-weight: bold;
+	}
+
+	#pie-charts h1 {
+		max-width: 4em;
+		padding: 1em 1.2em;
+		text-transform: uppercase;
+		border-radius: 50%;
+		font-size: 12vh;
+	}
+
+		#pie-charts h1::first-line {
+			font-size: 310%;
+			line-height: 1;
+			font-weight: 300;
 		}

@@ -688,14 +688,14 @@
 	<article class="takeaway slide">
 		<ul>
 			<li><code>grid-auto-flow</code> defines the direction auto grids are laid out
-			<li>The <code>dense</code> keyword prevents gaps</li>
+			<li>The <code>dense</code> keyword prevents holes</li>
 			<li><code>object-fit: cover</code> prevents image distortion</li>
 		</ul>
 	</article>
 </section>
 
 <section class="secret">
-	<header class="slide">
+	<header class="slide" id="pie-charts">
 		<h1>Pie charts</h1>
 	</header>
 
@@ -717,12 +717,13 @@
 		</style>
 	</article>
 
+	<article class="slide" data-src="https://caniuse.com/#feat=css-conic-gradients"></article>
+
 	<article class="takeaway slide">
 		<ul>
 			<li>Conic gradients are coming!</li>
-			<li>A gradient color stop position of 0 creates hard lines regardless of the previous stop's position.</li>
+			<li>A color stop position of 0 creates hard lines regardless of the previous position.</li>
 			<li>2 color stop positions create bands of color</li>
-			<li>The second argument of <code>var()</code> is a default value</li>
 			<li><code>CSS.registerProperty()</code> will allow us to animate custom properties!</li>
 		</ul>
 	</article>
