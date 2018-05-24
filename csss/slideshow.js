@@ -82,16 +82,22 @@ var _ = class SlideShow {
 			inside: body,
 			contents: [
 				{
+					tag: "button",
 					className: "onscreen-nav prev",
-					textContent: "◀",
+					textContent: "◂",
 					type: "button",
-					onclick: evt => me.previous()
+					events: {
+						click: evt => me.previous()
+					}
 				},
 				{
+					tag: "button",
 					className: "onscreen-nav next",
-					textContent: "Next ▶",
+					textContent: "Next ▸",
 					type: "button",
-					onclick: evt => me.next()
+					events: {
+						click: evt => me.next()
+					}
 				}
 			]
 		});
