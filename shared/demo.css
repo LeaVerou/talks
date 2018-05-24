@@ -137,6 +137,7 @@
 
 	.demo.slide:not(.horizontal) div.editor-container {
 		width: calc(var(--division, 60) * 1vw);
+		min-width: 15em;
 		order: -1;
 	}
 
@@ -149,6 +150,24 @@ div.editor > pre {
 	padding: .2rem 2rem;
 	line-height: inherit;
 	box-sizing: border-box;
+}
+
+div.editor ::-webkit-scrollbar {
+	width: 12px;
+}
+
+div.editor ::-webkit-scrollbar-track {
+	background: hsl(200, 10%, 30%);
+}
+
+div.editor ::-webkit-scrollbar-corner {
+	background: hsl(200, 10%, 25%);
+}
+
+div.editor ::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	width: 10px;
+	background: rgba(0,0,0,.5);
 }
 
 div.editor {

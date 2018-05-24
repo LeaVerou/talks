@@ -32,7 +32,7 @@
 	<section id="hi" class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
 			<img src="../shared/img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
-			<figcaption style="font-size: 240%">Hi, I’m Lea</figcaption>
+			<figcaption style="font-size: 240%">Привіт, я Лія</figcaption>
 			<!-- Привет, я Лиа -->
 		</figure>
 	</section>
@@ -115,6 +115,15 @@
 	</section>
 </section>
 
+<section class="history">
+	<header class="image slide" style="background-image: url(img/css-secrets.png)">
+		<h1>2011-2012</h1>
+	</header>
+	<header class="image slide" style="background-image: url(img/more-css-secrets.png)">
+		<h1>2012-2013</h1>
+	</header>
+</section>
+
 <section class="secret">
 	<header class="slide" id="cutout-text">
 		<div><h1>Cutout
@@ -130,8 +139,8 @@
 		</h1>
 		<style data-slide>
 			h1 {
-				background: white;
-				color: black;
+				background: black;
+				color: white;
 			}
 		</style>
 	</article>
@@ -210,6 +219,7 @@
 	</header>
 
 	<article class="horizontal demo slide" data-edit="css">
+		<!-- %7B for { -->
 		<style data-slide>
 			background: url('data:image/svg+xml,\
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
@@ -247,7 +257,7 @@
 
 	<article class="horizontal demo slide">
 		<svg data-edit="html">
-			<rect width="100%" height="100%" style="stroke: black; stroke-width: 2px; fill: none;"  />
+			<rect width="100%" height="100%" style="stroke: black; stroke-width: 4px; fill: none;"  />
 		</svg>
 	</article>
 
@@ -257,18 +267,20 @@
 		.🦄 {
 			background: url('data:image/svg+xml,\
 			<svg xmlns="http://www.w3.org/2000/svg">\
-				<style>\
-				@keyframes marching-ants {\
-					to { stroke-dashoffset: -8px; }\
-				}\
-				%3C/style>\
-				<rect width="100%" height="100%" style="\
-					stroke: black; stroke-width: 2px; stroke-dasharray: 5px 3px;\
-					animation: marching-ants .6s linear infinite;\
-					fill: none;" />\
+				\
 			</svg>');
 		}
 		</style>
+		<!--
+		@keyframes marching-ants {\
+			to { stroke-dashoffset: -8px; }\
+		}\
+		%3C/style>\
+		<rect width="100%" height="100%" style="\
+			stroke: black; stroke-width: 2px; stroke-dasharray: 5px 3px;\
+			animation: marching-ants .6s linear infinite;\
+			fill: none;" />\
+		 -->
 	</article>
 
 	<article class="horizontal demo slide">
@@ -283,24 +295,18 @@
 		.🦄 {
 			background: url('data:image/svg+xml,\
 			<svg xmlns="http://www.w3.org/2000/svg" >\
-				<linearGradient id="g" gradientTransform="rotate(45)">\
-					<stop stop-color="gold" />\
-					<stop stop-color="#0ac" offset="1" />\
-				</linearGradient>\
-				<rect width="100%" height="100%" \
-				      stroke="url(#g)" stroke-width="40" fill="none" />\
+				\
 			</svg>');
 		}
 		</style>
-	</article>
-
-	<article class="horizontal demo slide">
-		<svg data-edit="html">
-			<rect width="100%" height="100%" style="
-				stroke: black; stroke-width: 2px;
-				fill: none;
-				"  />
-		</svg>"
+		<!--
+		<linearGradient id="g" gradientTransform="rotate(45)">\
+			<stop stop-color="gold" />\
+			<stop stop-color="#0ac" offset="1" />\
+		</linearGradient>\
+		<rect width="100%" height="100%" \
+			  stroke="url(#g)" stroke-width="40" fill="none" />\
+		 -->
 	</article>
 
 	<article class="takeaway slide">
@@ -318,6 +324,7 @@
 	</header>
 
 	<article class="demo slide" style="--division: 40">
+		<p class="hint">width: 100% on h1, height on pseudo</p>
 		<h1 data-edit="html css" contentEditable>
 	Heading
 </h1>
@@ -373,7 +380,8 @@
 			</div>
 		</h1>
 	</header>
-	<article class="isolated  demo slide">
+	<article class="demo slide" style="--division: 50">
+		<p class="hint"></p>
 		<div data-edit="contents css">
 			<nav>
 				<ul>
@@ -411,10 +419,19 @@
 			}
 
 			nav li:hover ul {
-				display: unset;
+				display: initial;
+			}
+
+			a:focus {
+				background: black;
+				color: white
 			}
 		</style>
 		<style data-slide>
+			nav {
+				width: 100%;
+			}
+
 			nav ul {
 				display: flex;
 				list-style: none;
@@ -472,11 +489,14 @@
 			</h1>
 		</div>
 	</header>
+	<article class="slide" data-src="https://v-fonts.com"></article>
 	<article class="demo slide" style="--division: 50">
+		<!--  {0.6, 375}, {1, 300}, {1.5, 190}, {2.8, 140} -->
 		<h1 data-edit="html css">
-			<div>Awesomest</div>
-			<div>CSS</div>
-			<div>Secrets</div>
+			<div>Variable</div>
+			<div>Fonts</div>
+			<div>Are</div>
+			<div>Awesome</div>
 		</h1>
 		<style data-slide>
 			@font-face {
@@ -492,21 +512,17 @@
 			}
 
 			h1 div:nth-child(2) {
-				font-size: 4.2em;
+				font-size: 1.5em;
 			}
 
 			h1 div:nth-child(3) {
-				font-size: 1.6em;
+				font-size: 2.8em;
 			}
 		</style>
 		<style data-slide>
 		h1 {
 			text-transform: uppercase;
 			text-align: center;
-		}
-
-		h1 div:nth-child(2) {
-			text-indent: -.05em;
 		}
 		</style>
 	</article>
@@ -519,12 +535,12 @@
 					<option value="quadratic">Quadratic</option>
 					<option value="Cubic">Cubic</option>
 				</select>
-				Regression Calculator</h1>
+				Regression</h1>
 			<table>
 				<thead>
 					<tr>
-						<th>--size</th>
-						<th>font-weight</th>
+						<th>size</th>
+						<th>weight</th>
 					</tr>
 				</thead>
 				<tr mv-multiple="values" mv-initial-items="2">
@@ -550,17 +566,17 @@
 		</div>
 		<style data-slide>
 			p {
-				font: 200%/1 FF Meta VF, sans-serif;
+				font: 300 400%/1 FF Meta VF, sans-serif;
 			}
 
-			abbr { font-size: 74%; }
-			sup { font-size: 50%;}
+			abbr { font-size: .74em; }
+			sup { font-size: .5em;}
 		</style>
 	</article>
 	<article class="takeaway slide">
 		<ul>
-			<li>The weight axis in variable fonts allows us to synthesize small caps, superscripts, subscripts and to equalize strokes</li>
-			<li>We can use linear or quadratic regression to get an expression that gives us the weight for each font size, but it's not perfect.</li>
+			<li>The weight axis in variable fonts allows us to equalize strokes and synthesize small caps, superscripts, and subscripts</li>
+			<li>We can use linear or quadratic regression to avoid calculating the weight every time</li>
 		</ul>
 	</article>
 </section>
@@ -661,17 +677,18 @@
 		</style>
 	</article>
 	<article class="isolated demo slide" id="cat-collage">
+		<p class="hint">200px cells</p>
 		<div class="kittens" data-edit="contents css">
-			<img src="img/cat1.jpg" alt="">
-			<img src="img/cat2.jpg" alt="">
-			<img src="img/cat3.jpg" alt="">
-			<img src="img/cat4.jpg" alt="">
-			<img src="img/cat5.jpg" alt="">
-			<img src="img/cat6.jpg" alt="">
-			<img src="img/cat7.jpg" alt="">
-			<img src="img/cat8.jpg" alt="">
-			<img src="img/cat9.jpg" alt="">
-			<img src="img/cat10.jpg" alt="">
+			<img src="img/cat1.jpg" alt="Cat lying down">
+			<img src="img/cat2.jpg" alt="Kitten in bowl">
+			<img src="img/cat3.jpg" alt="Pensive kitten">
+			<img src="img/cat4.jpg" alt="Sleeping orange kitten">
+			<img src="img/cat5.jpg" alt="Blue Scottish fold kitten">
+			<img src="img/cat6.jpg" alt="Orange kitten in hand">
+			<img src="img/cat7.jpg" alt="Blue Scottish fold kitten in basket">
+			<img src="img/cat8.jpg" alt="White cat mother nursing her white kittens">
+			<img src="img/cat9.jpg" alt="White kitten wrapped in pink blanket">
+			<img src="img/cat10.jpg" alt="Two kittens wrapped in purple blanket">
 		</div>
 		<style data-slide>
 		body {
@@ -684,7 +701,8 @@
 		}
 		</style>
 	</article>
-
+	<article class="slide" data-src="https://caniuse.com/#feat=css-grid"></article>
+	
 	<article class="takeaway slide">
 		<ul>
 			<li><code>grid-auto-flow</code> defines the direction auto grids are laid out
@@ -705,7 +723,6 @@
 		</style>
 	</article>
 
-
 	<article class="horizontal demo slide">
 		<div class="pie" data-edit="css html"></div>
 		<style data-slide>
@@ -717,14 +734,89 @@
 		</style>
 	</article>
 
+	<article class="horizontal demo slide">
+		<div class="pie" data-edit="css html"></div>
+		<style data-slide>
+			.pie {
+				padding: 20vmin;
+				border-radius: 50%;
+				background: conic-gradient(#f06 var(--value, 0%), black 0);
+			}
+		</style>
+	</article>
+
+	<article class="runnable slide">
+		<pre><code class="language-javascript" contentEditable>
+			CSS.registerProperty({
+				name: "--value",
+				syntax: "&lt;percentage>",
+				initialValue: "0%",
+				inherits: false
+			});
+		</code></pre>
+	</article>
+
 	<article class="slide" data-src="https://caniuse.com/#feat=css-conic-gradients"></article>
+
+	<article class="browser-support slide">
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th><img src="../shared/img/chrome-logo.svg" alt="Chrome"></th>
+					<th><img src="../shared/img/firefox-logo.svg" alt="Firefox"></th>
+					<th><img src="../shared/img/edge-logo.svg" alt="Edge"></th>
+					<th><img src="../shared/img/safari-logo.png" alt="Safari"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>CSS.registerProperty()</th>
+					<td class="incomplete">⛳️</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
 
 	<article class="takeaway slide">
 		<ul>
-			<li>Conic gradients are coming!</li>
+			<li class="new">Conic gradients are coming!</li>
+			<li class="new">2 color stop positions for bands of color are coming!</li>
 			<li>A color stop position of 0 creates hard lines regardless of the previous position.</li>
-			<li>2 color stop positions create bands of color</li>
-			<li><code>CSS.registerProperty()</code> will allow us to animate custom properties!</li>
+			<li class="new"><code class="language-js">CSS.registerProperty()</code> will allow us to animate custom properties!</li>
+		</ul>
+	</article>
+</section>
+
+<section class="secret">
+	<header class="slide" id="display-contents">
+		<h1>Descendant Grid Items</h1>
+	</header>
+	<article class="horizontal demo slide" style="--division: 40">
+		<form data-edit="html css">
+			<label>Username: <input name="username"></label>
+			<label>Password: <input name="password"></label>
+		</form>
+		<style data-slide>
+		form {
+
+		}
+		</style>
+		<style data-slide>
+		form {
+			font-size: 150%;
+		}
+		</style>
+	</article>
+	<article class="light slide" style="background: url(img/display-contents.png) center / contain no-repeat #E5E5E5" data-credits="Image by Chris Coyier"></article>
+	<article class="slide" data-src="https://caniuse.com/#feat=css-display-contents"></article>
+	<article class="takeaway slide">
+		<ul>
+			<li><code class="language-css">display:contents</code> allows us to make descendants flex or grid children</li>
+			<li>Text nodes are flex/grid children too!</li>
 		</ul>
 	</article>
 </section>

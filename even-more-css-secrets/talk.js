@@ -30,7 +30,7 @@ function scopeRule(rule, slide, scope) {
 			rule.selectorText = `#${slide.id}`;
 		}
 		else if (shouldScope && selector.indexOf(scope) !== 0) {
-			rule.selectorText = scope + " " + selector;
+			rule.selectorText = selector.split(",").map(s => `${scope} ${s}`).join(", ");
 		}
 	}
 }
@@ -164,6 +164,33 @@ $.bind($('form[target="wolfram"]'), {
 
 $$(".separate-letters").forEach(element => {
 	element.innerHTML = element.innerHTML.split("").map((letter, i) => `<span data-letter="${letter}" style="--index: ${i}">${letter}</span>`).join("");
+});
+
+$$("#accessible-menus + .demo.slide").forEach(slide => {
+	slide.addEventListener("click", evt => {
+		if (evt.target.matches("a")) {
+			evt.preventDefault();
+			evt.target.focus();
+		}
+	});
+});
+
+$$(".runnable.slide pre>code, .runnable.slide textarea").forEach(element => {
+	$.create("button", {
+		textContent: "Run",
+		className: "run",
+		events: {
+			click: evt => {
+				var code = element.value || element.textContent;
+				var ret = eval(code);
+
+				// if (ret !== undefined) {
+				// 	console.log(ret);
+				// }
+			}
+		},
+		after: element.closest("pre, textarea")
+	});
 });
 
 })();

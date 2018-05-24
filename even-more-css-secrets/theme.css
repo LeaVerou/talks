@@ -107,7 +107,7 @@ select {
 		writing-mode: bt-lr;
 	}
 
-	input:not([type]),
+	.slide:not(.demo) input:not([type]),
 	input[type="text"],
 	input[type="number"],
 	input[type="email"],
@@ -482,4 +482,17 @@ ul.tree, ul.tree ul {
 [data-type].slide:not(.hide-ribbon):after {
 	background: hsl(85, 80%, 45%);
 	font-size: 80%;
+}
+
+.slide[data-credits]::after {
+	color: white;
+	text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 2px black;
+	font-weight: bold;
+	font-size: 50%;
+}
+
+.light.slide[data-credits]::after {
+	color: inherit;
+	text-shadow: none;
+	opacity: .75;
 }
