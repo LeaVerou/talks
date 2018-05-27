@@ -1,9 +1,15 @@
-@font-face {
+/* @font-face {
 	font-family: 'FF Meta VF';
 	src: url('https://variablefonts.monotype.com/MetaVariableDemo-Set.woff2') format('woff2');
 	font-display: swap;
 	font-style: normal italic;
 	font-weight: 100 900;
+} */
+@font-face {
+	/* Kindly provided by Black[Foundry] */
+	font-family: 'Drive';
+	src: url('DriveVariable.ttf');
+	font-weight: 1 999;
 }
 
 #intro {
@@ -612,7 +618,7 @@ section.secret {
 		}
 
 #variable-fonts {
-	font-family: FF Meta VF, sans-serif;
+	font-family: Drive, sans-serif;
 	justify-content: center;
 }
 
@@ -620,15 +626,15 @@ section.secret {
 		display: flex;
 		flex-flow: row;
 		font-size: 300%;
-		--width: 4.2em;
+		--width: 4.55em;
 		--number-width: 2em;
 		position: relative;
 		left: calc(-.5 * var(--width));
 	}
 
 	@keyframes fw {
-		from { font-weight: 100;}
-		to {font-weight: 900;}
+		from { font-weight: 1;}
+		to {font-weight: 999;}
 	}
 
 	#variable-fonts div::after {
@@ -645,7 +651,7 @@ section.secret {
 	}
 
 	#variable-fonts h1 {
-		font: 200 100%/1.2 FF Meta VF, sans-serif;
+		font: 200 100%/1.2 Drive, sans-serif;
 		text-transform: uppercase;
 		--offset: calc(var(--width) + var(--number-width));
 		box-shadow: var(--offset) 0 white;
@@ -660,16 +666,15 @@ section.secret {
 			font-size: calc(var(--size, 1) * 100%);
 			line-height: calc(.9 + .5 * (1 - var(--size, 1)));
 			font-weight: calc(495.816 - 295.547 * var(--size, 1));
-			xanimation: fw 2s linear infinite alternate;
 		}
 
 		#variable-fonts span:nth-child(1) {
-			--size: .5;
+			--size: .52;
 			/* font-weight: 350; */
 		}
 
 		#variable-fonts span:nth-child(2) {
-			--size: .42;
+			--size: .44;
 			/* font-weight: 370; */
 		}
 
@@ -1114,14 +1119,73 @@ section.secret {
 		background-image: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.2));
 	}
 
-section.history .image.slide h1:only-child {
-	background: black;
-	width: auto;
-	padding: .2em .5em;
-	margin: auto;
-	border-radius: .1em;
-	font-size: 300%;
-	background: var(--color-aqua);
-	font-weight: bold;
-	letter-spacing: -.03em;
+section.history .slide {
+	perspective: 100vw;
 }
+
+	.slide-info {
+		position: relative;
+		width: calc(100% - 1em);
+		height: calc(100% - 1em);
+		transform-style: preserve-3d;
+		transition: transform .8s ease-in-out;
+	}
+
+	[data-step] .slide-info {
+		transform: rotateY(180deg);
+	}
+
+	.slide-info > div {
+		backface-visibility: hidden;
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
+		position: absolute;
+		top: 0; left: 0;
+		border-radius: 8px;
+		filter: drop-shadow(.2em .2em .5em rgba(0,0,0,.6));
+	}
+
+	.slide-cover {
+		background: var(--image) bottom / cover;
+		display: flex;
+	}
+
+	.slide-content {
+		transform: rotateY(180deg);
+		background: var(--image) bottom / cover, hsl(0,0%,25%);
+		background-blend-mode: multiply;
+	}
+
+section.history {}
+
+	section.history h1:only-child {
+		background: black;
+		width: auto;
+		padding: .2em .5em;
+		margin: -.5em auto auto;
+		border-radius: .1em;
+		font-size: 200%;
+		background: var(--color-aqua);
+		font-weight: bold;
+		letter-spacing: -.03em;
+	}
+
+	section.history ol {
+		display: grid;
+		grid-template-columns: auto auto;
+		grid-gap: .4em;
+		margin: 0;
+		padding: 1em;
+		height: 100%;
+		box-sizing: border-box;
+		backdrop-filter: blur(10px);
+	}
+
+	section.history li {
+		margin-left: 1em;
+	}
+
+	section.history .note::before {
+		content: 'with ';
+	}

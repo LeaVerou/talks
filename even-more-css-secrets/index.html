@@ -116,11 +116,47 @@
 </section>
 
 <section class="history">
-	<header class="image slide" style="background-image: url(img/css-secrets.png)">
-		<h1>2011-2012</h1>
+	<header class="slide" id="css3-secrets" data-steps="1">
+		<div class="slide-info" style="--image: url(img/css-secrets.png)">
+			<div class="slide-cover">
+				<h1>2011-2012</h1>
+			</div>
+			<div class="slide-content">
+				<ol>
+					<li>Bouncing transitions <div class="note">cubic-bezier() values > 1</div></li>
+					<li>Flexible ellipses <div class="note">border-radius: 50%</div></li>
+					<li>Multiple outlines <div class="note">box-shadow spread</div></li>
+					<li>Ignore mouse events <div class="note">pointer-events: none</div></li>
+					<li>Custom code indents <div class="note">tab-size</div></li>
+					<li>Styling based on sibling count <div class="note">:first-child:nth-last-child(n + 8) ~ *</div></li>
+					<li>Custom checkboxes & radios <div class="note">:checked + label</div></li>
+					<li>Improving UX with cursors <div class="note">new L3 cursors like not-allowed</div></li>
+					<li>Background patterns with pure CSS <div class="note">layered gradient tricks</div></li>
+					<li>Background image with corner offsets <div class="note">4 value background-position</div></li>
+				</ol>
+			</div>
+		</div>
 	</header>
-	<header class="image slide" style="background-image: url(img/more-css-secrets.png)">
-		<h1>2012-2013</h1>
+	<header class="slide" data-steps="1">
+		<div class="slide-info" style="--image: url(img/more-css-secrets.png)">
+			<div class="slide-cover">
+				<h1>2012-2013</h1>
+			</div>
+			<div class="slide-content">
+				<ol>
+					<li>Shadows to indicate scrolling <div class="note">gradients & background-attachment: local</div></li>
+					<li>Fixed content width, fluid background <div class="note">calc(50% - content width / 2)</div></li>
+					<li>Lightbox effect <div class="note">stacking transitions via transition-delay</div></li>
+					<li>Text line background <div class="note">background-size, ems, and gradients</div></li>
+					<li>Diamond crop <div class="note">nested opposite rotate() transforms</div></li>
+					<li>Move element along a circle <div class="note">transform: rotate(-θ) translate(r) rotate(θ)</div></li>
+					<li>Shadows that follow transparency <div class="note">filter: drop-shadow()</div></li>
+					<li>Blurred element backdrop <div class="note">fixed positioning, pseudos, filter: blur()</div></li>
+					<li>Hyphenation <div class="note">hyphens: auto</div></li>
+					<li>Frame by frame animation <div class="note">animation-timing-function: steps()</div></li>
+				</ol>
+			</div>
+		</div>
 	</header>
 </section>
 
@@ -231,7 +267,7 @@
 		<meter min="0" max="5" value="3.5" data-edit="html css"></meter>
 		<style data-slide>
 			meter {
-				width: 5em; height: 1em;
+				width: 15em; height: 3em;
 				background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
 					<text font-size="100" y=".8em" opacity=".2">★</text></svg>') 0 / auto 100%;
 			}
@@ -470,7 +506,7 @@
 			}
 		</style>
 	</article>
-
+	<article class="slide" data-src="https://caniuse.com/#feat=css-focus-within"></article>
 	<article class="takeaway slide">
 		<ul>
 			<li><code>:focus-within</code> + accessibility = <span class="heart">❤️</span></li>
@@ -491,7 +527,8 @@
 	</header>
 	<article class="slide" data-src="https://v-fonts.com"></article>
 	<article class="demo slide" style="--division: 50">
-		<!--  {0.6, 375}, {1, 300}, {1.5, 190}, {2.8, 140} -->
+		<!--  FF Meta: {0.65, 350}, {1, 300}, {1.5, 190}, {2.8, 140}
+		      Drive: {1, 300}, {1.5, 190}, {2.8, 140} -->
 		<h1 data-edit="html css">
 			<div>Variable</div>
 			<div>Fonts</div>
@@ -500,15 +537,14 @@
 		</h1>
 		<style data-slide>
 			@font-face {
-				font-family: 'FF Meta VF';
-				src: url('https://variablefonts.monotype.com/MetaVariableDemo-Set.woff2') format('woff2');
-				font-display: swap;
-				font-style: normal italic;
-				font-weight: 100 900;
+				/* Kindly provided by Black[Foundry] */
+				font-family: 'Drive';
+				src: url('DriveVariable.ttf');
+				font-weight: 1 999;
 			}
 
 			h1 {
-				font: 300 200%/.9 FF Meta VF, sans-serif;
+				font: 300 200%/.9 Drive, sans-serif;
 			}
 
 			h1 div:nth-child(2) {
@@ -516,7 +552,7 @@
 			}
 
 			h1 div:nth-child(3) {
-				font-size: 2.8em;
+				font-size: 2.7em;
 			}
 		</style>
 		<style data-slide>
@@ -566,7 +602,7 @@
 		</div>
 		<style data-slide>
 			p {
-				font: 300 400%/1 FF Meta VF, sans-serif;
+				font: 300 400%/1 Drive, sans-serif;
 			}
 
 			abbr { font-size: .74em; }
