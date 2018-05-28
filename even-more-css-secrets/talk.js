@@ -193,4 +193,8 @@ $$(".runnable.slide pre>code, .runnable.slide textarea").forEach(element => {
 	});
 });
 
+$$("#regression path").forEach(shape => {
+	shape.style.setProperty("--length", shape.getTotalLength() + "px");
+});
+
 })();

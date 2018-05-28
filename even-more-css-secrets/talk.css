@@ -686,7 +686,8 @@ section.secret {
 	transform-origin: bottom right;
 }
 
-	#regression-calculator.next {
+	.next + #regression-calculator {
+		display: flex !important;
 		left: auto;
 		top: auto;
 		visibility: visible;
@@ -698,14 +699,14 @@ section.secret {
 		box-shadow: -.1em -.1em .4em rgba(0,0,0,.2);
 	}
 
-	#regression-calculator.next:not(:focus-within):not(:hover) {
+	.next + #regression-calculator:not(:focus-within):not(:hover) {
 		width: 20em;
 		height: 3.8em;
 		opacity: .5;
 		transform: scale(.25);
 	}
 
-		#regression-calculator.next:not(:focus-within):not(:hover) iframe {
+		.next + #regression-calculator:not(:focus-within):not(:hover) iframe {
 			visibility: hidden;
 		}
 
@@ -723,10 +724,6 @@ section.secret {
 	#regression-calculator table input {
 		width: 5em;
 	}
-
-	/* #regression-calculator thead {
-		font: bold 100%/1 var(--font-mono);
-	} */
 
 	#regression-calculator tbody {
 		font-size: 120%;
@@ -1189,3 +1186,72 @@ section.history {}
 	section.history .note::before {
 		content: 'with ';
 	}
+
+#variable-fonts-demo {
+	overflow: hidden;
+}
+
+#regression {
+	background: white;
+	overflow: hidden;
+	padding: 10vmin;
+}
+
+	#regression svg {
+		border: .1em solid black;
+		border-top-width: 0;
+		border-right-width: 0;
+		height: 100%;
+		fill: none;
+	}
+
+		#regression circle {
+			fill: red;
+			r: 5px;
+		}
+
+			@keyframes show-circle {
+				from {
+					r: 0;
+				}
+			}
+
+			#regression:target circle {
+				animation: show-circle .5s calc(var(--index, 0) * .5s) cubic-bezier(.17,.7,.5,2) both;
+			}
+
+		#regression path {
+			stroke: var(--color);
+			stroke-width: 4px;
+			opacity: 1;
+			stroke-dasharray: var(--length) var(--length);
+			stroke-dashoffset: var(--length);
+		}
+
+		#regression .linear {
+			--color: hsl(80, 80%, 40%);
+		}
+
+		#regression .quadratic {
+			--color: hsl(210, 90%, 50%);
+		}
+
+		#regression text {
+			fill: var(--color);
+			opacity: 0;
+		}
+
+		#regression tspan {
+			font-weight: normal;
+		}
+
+		#regression path.linear.current ~ text.linear,
+		#regression path.quadratic.current ~ text.quadratic {
+			transition: .5s .6s opacity;
+			opacity: 1;
+		}
+
+		#regression path.current {
+			stroke-dashoffset: 0;
+			transition: stroke-dashoffset .5s;
+		}

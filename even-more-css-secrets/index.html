@@ -526,7 +526,7 @@
 		</div>
 	</header>
 	<article class="slide" data-src="https://v-fonts.com"></article>
-	<article class="demo slide" style="--division: 50">
+		<article class="demo slide" style="--division: 50" id="variable-fonts-demo">
 		<!--  FF Meta: {0.65, 350}, {1, 300}, {1.5, 190}, {2.8, 140}
 		      Drive: {1, 300}, {1.5, 190}, {2.8, 140} -->
 		<h1 data-edit="html css">
@@ -561,6 +561,20 @@
 			text-align: center;
 		}
 		</style>
+	</article>
+	<article class="slide" id="regression">
+		<svg viewBox="0 0 610 435">
+			<path d="M-2.33 61.33 L 645.67 471.33" class="linear delayed" />
+			<path d="M-8-30c232,367,440,566,781,347" class="quadratic delayed" />
+
+			<circle cx="26.97"  cy="34.58" style="--index: 0"  />
+			<circle cx="116.83" cy="120.18" style="--index: 1" />
+			<circle cx="246.39" cy="309.49" style="--index: 2" />
+			<circle cx="579.39" cy="397.49" style="--index: 3" />
+
+			<text class="linear" x="50%" y="50%">-95<tspan>x</tspan>+386</text>
+			<text class="quadratic" x="50%" y="50%">65<tspan>x²</tspan>-326<tspan>x</tspan>+543</text>
+		</svg>
 	</article>
 	<article class="slide" id="regression-calculator">
 		<form action="https://www.wolframalpha.com/widget/input/" target="wolfram"
@@ -614,6 +628,9 @@
 			<li>The weight axis in variable fonts allows us to equalize strokes and synthesize small caps, superscripts, and subscripts</li>
 			<li>We can use linear or quadratic regression to avoid calculating the weight every time</li>
 		</ul>
+		<div class="credits">
+			<p>Thanks to Black[Foundry] for providing their font <em>Drive</em> for this demo!</p>
+		</div>
 	</article>
 </section>
 
