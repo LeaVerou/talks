@@ -32,8 +32,7 @@
 	<section id="hi" class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
 			<img src="../shared/img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
-			<figcaption style="font-size: 240%">Привіт, я Лія</figcaption>
-			<!-- Привет, я Лиа -->
+			<figcaption style="font-size: 240%">Привет, я Лиа</figcaption>
 		</figure>
 	</section>
 
@@ -106,16 +105,17 @@
 		</div>
 	</section>
 
-	<!-- <article class="image slide" style="background: url(../shared/img/russian-csssecrets.jpg) center/contain no-repeat white">
-
-	</article> -->
+	<article class="image slide" style="background: url(../shared/img/russian-csssecrets.jpg) center/contain no-repeat white"></article>
 
 	<section class="top-heavy image slide" id="mit">
 		<h1><strong>2014&thinsp;–</strong> Haystack Group, MIT CSAIL</h1>
 	</section>
+
+	<article class="slide" data-src="https://mavo.io"></article>
 </section>
 
 <section class="history">
+	<article class="slide" data-import="intro"></article>
 	<header class="slide" id="css3-secrets" data-steps="1">
 		<div class="slide-info" style="--image: url(img/css-secrets.png)">
 			<div class="slide-cover">
@@ -254,8 +254,7 @@
 		<h1>Characters as images</h1>
 	</header>
 
-	<article class="horizontal demo slide" data-edit="css">
-		<!-- %7B for { -->
+	<article class="horizontal demo slide" data-edit="css" id="demo-character-images">
 		<style data-slide>
 			background: url('data:image/svg+xml,\
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
@@ -263,6 +262,15 @@
 			</svg>');
 		</style>
 	</article>
+	<article class="slide" id="rfc-3986">
+		<h1>
+			<div>IETF</div>
+			<div>RFC</div>
+			<div>3986</div>
+		</h1>
+		<iframe src="https://tools.ietf.org/html/rfc3986/#page-13" scrolling="no"></iframe>
+	</article>
+	<article class="slide" data-import="demo-character-images"></article>
 	<article class="horizontal demo slide" style="--division: 70">
 		<meter min="0" max="5" value="3.5" data-edit="html css"></meter>
 		<style data-slide>
@@ -526,7 +534,7 @@
 		</div>
 	</header>
 	<article class="slide" data-src="https://v-fonts.com"></article>
-		<article class="demo slide" style="--division: 50" id="variable-fonts-demo">
+	<article class="demo slide" style="--division: 50" id="variable-fonts-demo">
 		<!--  FF Meta: {0.65, 350}, {1, 300}, {1.5, 190}, {2.8, 140}
 		      Drive: {1, 300}, {1.5, 190}, {2.8, 140} -->
 		<h1 data-edit="html css">
@@ -572,10 +580,17 @@
 			<circle cx="246.39" cy="309.49" style="--index: 2" />
 			<circle cx="579.39" cy="397.49" style="--index: 3" />
 
-			<text class="linear" x="50%" y="50%">-95<tspan>x</tspan>+386</text>
-			<text class="quadratic" x="50%" y="50%">65<tspan>x²</tspan>-326<tspan>x</tspan>+543</text>
+			<text class="linear" x="50%" y="45%">
+				<tspan class="label">Linear Regression</tspan>
+				<tspan x="50%" dy="1em">-95<tspan class="var">x</tspan>+386</tspan>
+			</text>
+			<text class="quadratic" x="50%" y="50%">
+				<tspan class="label">Quadratic Regression</tspan>
+				<tspan x="50%" dy="1em">65<tspan class="var">x²</tspan>-326<tspan class="var">x</tspan>+543</tspan>
+			</text>
 		</svg>
 	</article>
+	<article class="slide" data-import="variable-fonts-demo"></article>
 	<article class="slide" id="regression-calculator">
 		<form action="https://www.wolframalpha.com/widget/input/" target="wolfram"
 		      mv-app="regression" mv-mode="edit" mv-storage="local" mv-autosave="0">
@@ -625,7 +640,7 @@
 	</article>
 	<article class="takeaway slide">
 		<ul>
-			<li>The weight axis in variable fonts allows us to equalize strokes and synthesize small caps, superscripts, and subscripts</li>
+			<li>The weight axis in variable fonts allows us to equalize strokes across different font sizes</li>
 			<li>We can use linear or quadratic regression to avoid calculating the weight every time</li>
 		</ul>
 		<div class="credits">
@@ -755,6 +770,7 @@
 		</style>
 	</article>
 	<article class="slide" data-src="https://caniuse.com/#feat=css-grid"></article>
+	<article class="slide" data-src="https://caniuse.com/#feat=object-fit"></article>
 
 	<article class="takeaway slide">
 		<ul>
@@ -846,7 +862,11 @@
 
 <section class="secret">
 	<header class="slide" id="display-contents">
-		<h1>Descendant Grid Items</h1>
+		<h1>
+			<span class="separate-letters">Descendant</span>
+			<div>Grid</div>
+			<div>Items</div>
+		</h1>
 	</header>
 	<article class="horizontal demo slide" style="--division: 40">
 		<form data-edit="html css">
@@ -874,9 +894,17 @@
 	</article>
 </section>
 
+<header class="slide">
+	<h1><div class="note">One last thing...</div>
+		<div style="font-weight: 300">Please give me feedback at</div>
+		yellkey.com/entire</h1>
+</header>
+
 <footer class="dark slide dont-resize">
 	<img src="../shared/img/mark.svg" class="logo" />
-	<h1>Thank you!</h1>
+	<h1>Спасибо!</h1>
+	<img src="../shared/img/stickers.jpg" class="stickers delayed" alt="">
+	<p class="stickercaption delayed">Want one? Just ask! ---></p>
 
 	<ul>
 		<li style="--icon: '🌍'"><a href="http://lea.verou.me">lea.verou.me</a></li>

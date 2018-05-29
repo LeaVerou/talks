@@ -238,7 +238,7 @@ class Demo {
 
 	static fixCodeTo(code, lang) {
 		if (lang == "css") {
-			if (!/\{[\S\s]+\}/.test(code)) {
+			if (!/\{[\S\s]+\}/.test(code.replace(/'[\S\s]+'/g, ""))) {
 				code = `.slide {
 	${code}
 }`;

@@ -686,7 +686,7 @@ section.secret {
 	transform-origin: bottom right;
 }
 
-	.next + #regression-calculator {
+	#variable-fonts-demo:target ~ #regression-calculator {
 		display: flex !important;
 		left: auto;
 		top: auto;
@@ -699,14 +699,14 @@ section.secret {
 		box-shadow: -.1em -.1em .4em rgba(0,0,0,.2);
 	}
 
-	.next + #regression-calculator:not(:focus-within):not(:hover) {
+	#variable-fonts-demo:target ~ #regression-calculator:not(:focus-within):not(:hover) {
 		width: 20em;
 		height: 3.8em;
 		opacity: .5;
 		transform: scale(.25);
 	}
 
-		.next + #regression-calculator:not(:focus-within):not(:hover) iframe {
+		#variable-fonts-demo:target ~ #regression-calculator:not(:focus-within):not(:hover) iframe {
 			visibility: hidden;
 		}
 
@@ -1125,7 +1125,8 @@ section.history .slide {
 		width: calc(100% - 1em);
 		height: calc(100% - 1em);
 		transform-style: preserve-3d;
-		transition: transform .8s ease-in-out;
+		transition: transform 1s ease-in-out;
+		will-change: transform;
 	}
 
 	[data-step] .slide-info {
@@ -1241,7 +1242,13 @@ section.history {}
 			opacity: 0;
 		}
 
-		#regression tspan {
+		#regression .label {
+			font-size: 50%;
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+
+		#regression .var {
 			font-weight: normal;
 		}
 
@@ -1255,3 +1262,101 @@ section.history {}
 			stroke-dashoffset: 0;
 			transition: stroke-dashoffset .5s;
 		}
+
+#rfc-3986 {
+	background: white;
+	overflow: hidden;
+}
+
+	#rfc-3986 iframe {
+		position: absolute;
+		top: 0; left: 0; bottom: 0;
+		border: none;
+		width: 700px;
+		height: 100%;
+		overflow: hidden;
+		transform-origin: top left;
+	}
+
+	#rfc-3986:target iframe {
+		transition: 1s 1s transform;
+		transform: scale(2);
+	}
+
+	#rfc-3986::before {
+		content: "";
+		position: absolute;
+		top: 175px;
+		left: 152px;
+		width: 950px;
+		height: 190px;
+		background: yellow;
+		mix-blend-mode: multiply;
+		transition: 1s 2s opacity;
+	}
+
+	#rfc-3986:not(:target)::before {
+		opacity: 0;
+	}
+
+	#rfc-3986 h1 {
+		background: black;
+		margin-right: 1em;
+		margin-left: auto;
+		padding: .5em;
+		line-height: 1;
+	}
+
+		#rfc-3986 h1 div:nth-child(2) {
+			font-size: 109%;
+		}
+
+#display-contents h1 {
+	display: grid;
+	position: relative;
+	grid-template-columns: repeat(10, auto);
+	grid-template-rows: repeat(2, 1fr);
+	grid-gap: .5em;
+	text-transform: uppercase;
+}
+
+	#display-contents h1::before {
+		content: counter(secret);
+		position: absolute;
+		bottom: 100%;
+		color: black;
+		font-size: 300%;
+		left: 50%;
+		transform: translateX(-50%);
+		line-height: .7;
+		letter-spacing: -.05em;
+	}
+
+	#display-contents h1 .separate-letters {
+		display: contents;
+	}
+
+		#display-contents h1 .separate-letters::before {
+			content: "";
+			position: absolute;
+			top: .3em;
+			left: .4em;
+			right: .4em;
+			bottom: 1.95em;
+			background: url('data:image/svg+xml,\
+	<svg xmlns="http://www.w3.org/2000/svg">\
+		<style>@keyframes marching-ants { to { stroke-dashoffset: -15px}}</style>\
+	<rect width="100%" height="100%" style="stroke: gray; stroke-width: 4px; stroke-dasharray: 10px 5px; fill: none; animation: marching-ants 1s linear infinite" />\
+	</svg>');
+		}
+
+		#display-contents h1 .separate-letters span {
+			padding: 0 .2em;
+			background: white;
+			color: black;
+		}
+
+	#display-contents h1 div:nth-child(n + 2) {
+		grid-column-end: span 5;
+		background: var(--color-magenta);
+	}
