@@ -328,7 +328,9 @@ var _ = class SlideShow {
 							me.goto(+slide? slide - 1 : slide);
 							break;
 						case 72: // H
-							me.overview(evt);
+							if (evt.ctrlKey) {
+								me.overview(evt);
+							}
 							break;
 						case 74: // J
 							if (body.classList.contains("hide-elements")) {
