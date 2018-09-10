@@ -1,6 +1,11 @@
 var $ = Bliss, $$ = Bliss.$;
 var onslide = new WeakMap();
 
+// Remove these slides
+// $$(".takeaway.slide").forEach(slide => {
+// 	slide.remove();
+// });
+
 document.body.style.setProperty("--slide-count", `"${$$(".slide").length}"`);
 
 // Slide-specific listeners
@@ -166,14 +171,14 @@ $$(".separate-letters").forEach(element => {
 	element.innerHTML = element.innerHTML.split("").map((letter, i) => `<span data-letter="${letter}" style="--index: ${i}">${letter}</span>`).join("");
 });
 
-$$("#accessible-menus + .demo.slide").forEach(slide => {
-	slide.addEventListener("click", evt => {
-		if (evt.target.matches("a")) {
-			evt.preventDefault();
-			evt.target.focus();
-		}
-	});
-});
+// $$("#accessible-menus + .demo.slide").forEach(slide => {
+// 	slide.addEventListener("click", evt => {
+// 		if (evt.target.matches("a")) {
+// 			evt.preventDefault();
+// 			evt.target.focus();
+// 		}
+// 	});
+// });
 
 $$(".runnable.slide pre>code, .runnable.slide textarea").forEach(element => {
 	$.create("button", {

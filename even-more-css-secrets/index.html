@@ -31,8 +31,8 @@
 <section id="introduction">
 	<section id="hi" class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
-			<img src="../shared/img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
-			<figcaption style="font-size: 240%">Привет, я Лиа</figcaption>
+			<img src="img/me.jpg" alt="Picture of me" style="width: 550px" />
+			<figcaption>Hi, I’m Lea!</figcaption>
 		</figure>
 	</section>
 
@@ -76,7 +76,6 @@
 
 	<section class="top-heavy image slide" id="csswg" data-credits="Daniel Glazman" data-steps="1">
 		<h1 class="caption">
-			<!-- <img src="../shared/img/w3c.svg" alt="W3C" class="inline"> -->
 			<span class="w3c"></span> CSS Working Group Invited Expert
 		</h1>
 		<svg viewBox="0 0 100 100" class="annotation">
@@ -84,28 +83,9 @@
 		</svg>
 	</section>
 
-	<section class="inverse slide dont-resize darker hi" id="book">
-		<a href="http://www.amazon.com/CSS-Secrets-Lea-Verou/dp/1449372635?tag=leaverou-20">
-			<img src="../shared/img/book.png" alt="CSS Secrets by O’Reilly" style="display:block" />
-			<meter class="stars" min="1" max="5" value="4.7"></meter>
-			on Amazon
-		</a>
-		<div class="delayed" id="languages">
-			<h3>Also available in:</h3>
-			<ul>
-				<li>German</li>
-				<li>Polish</li>
-				<li>Russian</li>
-				<li>Japanese</li>
-				<li>Simplified Chinese</li>
-				<li>Traditional Chinese</li>
-				<li>Korean</li>
-				<li>Bulgarian</li>
-			</ul>
-		</div>
-	</section>
 
-	<article class="image slide" style="background: url(../shared/img/russian-csssecrets.jpg) center/contain no-repeat white"></article>
+
+	<!-- <article class="image slide" style="background: url(../shared/img/russian-csssecrets.jpg) center/contain no-repeat white"></article> -->
 
 	<section class="top-heavy image slide" id="mit">
 		<h1><strong>2014&thinsp;–</strong> Haystack Group, MIT CSAIL</h1>
@@ -158,6 +138,27 @@
 			</div>
 		</div>
 	</header>
+	<section class="inverse slide dont-resize darker hi" id="book">
+		<a href="http://www.amazon.com/CSS-Secrets-Lea-Verou/dp/1449372635?tag=leaverou-20">
+			<img src="../shared/img/book.png" alt="CSS Secrets by O’Reilly" style="display:block" />
+			<meter class="stars" min="1" max="5" value="4.7"></meter>
+			on Amazon
+		</a>
+		<div class="delayed" id="languages">
+			<h3>Also available in:</h3>
+			<ul>
+				<li>German</li>
+				<li>Polish</li>
+				<li>Russian</li>
+				<li>Japanese</li>
+				<li>Simplified Chinese</li>
+				<li>Traditional Chinese</li>
+				<li>Korean</li>
+				<li>Bulgarian</li>
+			</ul>
+		</div>
+	</section>
+	<header class="slide" data-import="intro">
 </section>
 
 <section class="secret">
@@ -175,8 +176,8 @@
 		</h1>
 		<style data-slide>
 			h1 {
-				background: black;
-				color: white;
+				background: #f06;
+				color: black;
 			}
 		</style>
 	</article>
@@ -184,10 +185,10 @@
 		<form class="demo">
 			<button class="swap" type="button">🔄</button>
 			<div class="foreground">
-				<input placeholder="Foreground color" name="foregroundColor" value="rgb(100%, 100%, 0%)">
+				<input placeholder="Foreground color" name="foregroundColor" value="rgb(100%, 100%, 0%)" autocomplete="off">
 			</div>
 			<div class="background">
-				<input placeholder="Background color" type="text" name="backgroundColor" value="rgb(100%, 0%, 50%)">
+				<input placeholder="Background color" type="text" name="backgroundColor" value="rgb(100%, 0%, 50%)" autocomplete="off">
 				<div class="intersection">
 					<label><span>Blending mode:</span>
 						<select name="blendingMode">
@@ -216,29 +217,6 @@
 	</article>
 	<article class="slide" data-import="transparent-text"></article>
 
-	<!-- <article class="browser-support slide">
-		<table>
-			<thead>
-				<tr>
-					<th></th>
-					<th><img src="../shared/img/chrome-logo.svg" alt="Chrome"></th>
-					<th><img src="../shared/img/firefox-logo.svg" alt="Firefox"></th>
-					<th><img src="../shared/img/edge-logo.svg" alt="Edge"></th>
-					<th><img src="../shared/img/safari-logo.png" alt="Safari"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>mix-blend-mode</th>
-					<td>41</td>
-					<td>32</td>
-					<td></td>
-					<td>8</td>
-				</tr>
-			</tbody>
-		</table>
-	</article> -->
-
 	<article class="slide" data-src="https://caniuse.com/#feat=css-mixblendmode"></article>
 
 	<article class="takeaway slide">
@@ -262,14 +240,14 @@
 			</svg>');
 		</style>
 	</article>
-	<article class="slide" id="rfc-3986">
+	<!-- <article class="slide" id="rfc-3986">
 		<h1>
 			<div>IETF</div>
 			<div>RFC</div>
 			<div>3986</div>
 		</h1>
 		<iframe src="https://tools.ietf.org/html/rfc3986/#page-13" scrolling="no"></iframe>
-	</article>
+	</article> -->
 	<article class="slide" data-import="demo-character-images"></article>
 	<article class="horizontal demo slide" style="--division: 70">
 		<meter min="0" max="5" value="3.5" data-edit="html css"></meter>
@@ -592,7 +570,7 @@
 	</article>
 	<article class="slide" data-import="variable-fonts-demo"></article>
 	<article class="slide" id="regression-calculator">
-		<form action="https://www.wolframalpha.com/widget/input/" target="wolfram"
+		<form action="http://www.wolframalpha.com/input/" target="wolfram"
 		      mv-app="regression" mv-mode="edit" mv-storage="local" mv-autosave="0">
 			<h1>
 				<select property name="model" class="mv-autosize">
@@ -613,17 +591,18 @@
 						<input type="number" value="1" property="size" min="0" step=".01">
 					</td>
 					<td>
-						<input type="number" min="100" max="999" value="100" property="fontWeight">
+						<input type="number" min="1" max="999" value="100" property="fontWeight">
 						<meta property="pair" content="{[size], [fontWeight]}" />
 					</td>
 				</tr>
 			</table>
 			<p class="query">
 				<label><a href="https://www.wolframalpha.com/input/?i=[input]" target="_blank"><img src="img/wolfram.svg" alt="Wolfram Alpha"> query:</a>
-				<input property name="input" value="[model] fit [pair]" class="mv-autosize" /></label>
-			<input type="hidden" name="id" value="a96a9e81ac4bbb54f8002bb61b8d3472" />
+				<input property name="i" value="[model] fit [pair]" class="mv-autosize" /></label>
+			<!-- <input type="hidden" name="id" value="a96a9e81ac4bbb54f8002bb61b8d3472" /> -->
 		</form>
-		<iframe name="wolfram" src="https://www.wolframalpha.com/widget/input/?id=a96a9e81ac4bbb54f8002bb61b8d3472&input=linear%20fit%20{1,%20100},{.2,%20200}"></iframe>
+		<!-- <iframe name="wolfram" src="https://www.wolframalpha.com/widget/input/?id=a96a9e81ac4bbb54f8002bb61b8d3472&input=linear%20fit%20{1,%20100},{.2,%20200}"></iframe> -->
+		<iframe name="wolfram" src="http://www.wolframalpha.com/input/" frameborder="0"></iframe>
 	</article>
 	<article class="horizontal demo slide" style="--division: 50">
 		<div data-edit="contents css">
@@ -671,6 +650,10 @@
 		<style data-slide>
 			article {
 				display: flex;
+			}
+
+			header {
+
 			}
 
 			.post {
@@ -742,6 +725,14 @@
 		.creatures {
 
 		}
+
+		.cat {
+
+		}
+
+		.hooman {
+
+		}
 		</style>
 	</article>
 	<article class="isolated demo slide" id="cat-collage">
@@ -762,10 +753,18 @@
 		body {
 			display: grid;
 		}
+
+		img {
+
+		}
 		</style>
 		<style data-slide>
 		body {
 			margin: 0;
+		}
+
+		img {
+
 		}
 		</style>
 	</article>
@@ -853,8 +852,9 @@
 	<article class="takeaway slide">
 		<ul>
 			<li class="new">Conic gradients are coming!</li>
-			<li class="new">2 color stop positions for bands of color are coming!</li>
-			<li>A color stop position of 0 creates hard lines regardless of the previous position.</li>
+			<!-- <li class="new">2 color stop positions for bands of color are coming!</li> -->
+			<li>A color stop at 0 creates hard lines regardless of the previous one’s position.</li>
+			<li>CSS variables help create flexible components.</li>
 			<li class="new"><code class="language-js">CSS.registerProperty()</code> will allow us to animate custom properties!</li>
 		</ul>
 	</article>
@@ -894,15 +894,15 @@
 	</article>
 </section>
 
-<header class="slide">
+<header class="slide" id="feedback">
 	<h1><div class="note">One last thing...</div>
 		<div style="font-weight: 300">Please give me feedback at</div>
-		yellkey.com/entire</h1>
+		yellkey.com/each</h1>
 </header>
 
-<footer class="dark slide dont-resize">
+<footer class="dark slide dont-resize" id="thankyou">
 	<img src="../shared/img/mark.svg" class="logo" />
-	<h1>Спасибо!</h1>
+	<!-- <h1>Thank you!</h1> -->
 	<img src="../shared/img/stickers.jpg" class="stickers delayed" alt="">
 	<p class="stickercaption delayed">Want one? Just ask! ---></p>
 
@@ -915,6 +915,9 @@
 	<p>Slides: <a href="https://leaverou.github.io/talks/even-more-css-secrets">leaverou.github.io/talks/even-more-css-secrets</a></p>
 	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
 </footer>
+
+<header class="slide" data-import="feedback"></header>
+<footer class="slide" data-import="thankyou"></footer>
 
 <script src="../shared/js/bliss.shy.min.js"></script>
 <script src="../csss/slideshow.js"></script>

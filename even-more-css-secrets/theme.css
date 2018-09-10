@@ -38,7 +38,7 @@ body {
 	            linear-gradient(45deg, var(--darker-color) 25%, transparent 25%, transparent 75%, var(--darker-color) 75%) 20px 20px;
 	background-color: hsl(0,0%,95%);
 	background-size: 40px 40px;
-	text-decoration-skip: ink;
+	overflow: hidden;
 }
 
 h1 {

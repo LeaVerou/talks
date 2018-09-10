@@ -80,49 +80,62 @@
 			letter-spacing: -.05em;
 		}
 
-		#lesbian {
-			background: url(../shared/img/greece.svg) no-repeat center / auto 90vh #f06;
-			background-origin: content-box;
-			overflow: hidden;
+#lesbian {
+	overflow: hidden;
+	background-color: hsl(200, 40%, 40%);
+}
+
+	#lesbian::before {
+		content: "";
+		position: absolute;
+		top: 0; right: 0; bottom: 0; left: 0;
+		background: url(../shared/img/greece.svg) no-repeat center / auto 90vh;
+		background-origin: content-box;
+		transition: inherit;
+		/* filter: drop-shadow(0 0 .1em rgba(0,0,0,.3)); */
+	}
+
+		#lesbian[data-step]::before {
+			background-size: auto 850%;
+			background-position: 67% 36%;
 		}
 
-			#lesbian[data-step] {
-				background-size: auto 850%;
-				background-position: 67% 36%;
+		#lesbian div {
+			position: absolute;
+			bottom: 1em;
+			left: 1em;
+			transition: .5s opacity;
+		}
+
+			#lesbian .funfact {
+				position: fixed;
+				top: 0;
+				font-weight: bold;
+				font-size: 300%;
 			}
 
-			#lesbian div {
-				position: absolute;
-				bottom: 1em;
-				left: 1em;
-				transition: .5s opacity;
+			#lesbian div p:nth-of-type(2) {
+				transition-delay: .6s;
 			}
 
-				#lesbian .funfact {
-					position: fixed;
-					top: 0;
-					font-weight: bold;
-					font-size: 300%;
-				}
+			#lesbian div p:last-of-type {
+				font-size: 120%
+			}
 
-				#lesbian div p:last-of-type {
-					font-size: 120%
-				}
+			#lesbian div p {
+				transition: inherit;
+				transition-property: height, opacity;
+				height: 1em;
+			}
 
-				#lesbian div p {
-					transition: inherit;
-					transition-property: height, opacity;
-					height: 1em;
-				}
+			#lesbian:not([data-step]) > div p + p {
+				opacity: 0
+			}
 
-				#lesbian:not([data-step]) > div p + p {
-					opacity: 0
+				#lesbian:not([data-step="2"]) div p:last-of-type {
+					height: 0;
+					overflow: hidden;
 				}
-
-					#lesbian:not([data-step="2"]) div p:last-of-type {
-						height: 0;
-						overflow: hidden;
-					}
 
 #book {
 
@@ -152,7 +165,7 @@
 		position: absolute;
 		right: 1em;
 		bottom: 1em;
-		font-size: 55%;
+		font-size: 75%;
 		font-weight: 500;
 	}
 
@@ -189,14 +202,19 @@
 				visibility: hidden;
 			}
 
-			#projects li iframe[src^="https://buttons.github.io/"] {
+			#projects li iframe[src^="https://buttons.github.io/"],
+			#projects li span {
 				position: absolute;
 				bottom: .5em;
 				right: .5em;
 				filter: drop-shadow(1px 1px 3px rgba(0,0,0,.5));
 			}
 
-			#projects li a {
+			#projects li span {
+				bottom: .1em;
+			}
+
+			#projects li a:first-of-type {
 				display: flex;
 				position: relative;
 				align-items: flex-end;
@@ -210,6 +228,10 @@
 				border: 1px solid white;
 				box-shadow: 0 -1.8em 0 rgba(0,0,0,.6) inset, 0 0 .5em rgba(0,0,0,.6);
 				text-shadow: 0 0 .3em black;
+			}
+
+			#projects li a.github-button {
+				display: none;
 			}
 
 			#projects li a:not(:hover) {
