@@ -1,0 +1,58 @@
+.example.slide {
+	padding: 0;
+	flex-flow: column-reverse;
+	align-items: stretch;
+}
+
+.vertical.example.slide {
+	flex-flow: row;
+}
+
+	.example.slide iframe {
+		flex: 1;
+		border: 0;
+		position: static;
+		width: auto;
+		margin: 1em;
+		margin-bottom: 0;
+		border-radius: 8px;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+
+	div.prism-live {
+		color: white;
+		font-size: calc(var(--font-size-multiplier, 1) * 80%);
+		line-height: 1.5;
+		right: 0;
+		box-shadow: 0 .1em .2em rgba(0,0,0,.3) inset;
+	}
+
+	@media (min-width: 1599px) {
+		div.prism-live {
+			font-size: calc(var(--font-size-multiplier, 1) * 100%);
+		}
+	}
+
+	.vertical.example.slide div.prism-live {
+		width: 40vw;
+	}
+
+		div.prism-live > textarea,
+		div.prism-live > pre {
+			padding: 1rem 2rem;
+			font-size: inherit !important;
+		}
+
+		div.prism-live > pre {
+			max-height: 50vh;
+			background: hsl(200, 10%, 20%) linear-gradient(rgba(0,0,0,.1) 50%, transparent 0);
+			background-origin: content-box;
+			background-size: auto 3em;
+			background-attachment: local;
+		}
+
+		.vertical div.prism-live > pre {
+			max-height: none;
+			height: 100vh;
+		}
