@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://dev.mavo.io/dist/mavo.css">
+<script src="https://dev.mavo.io/dist/mavo.js"></script>
+
+<link rel="stylesheet" href="examples.css">
+<meta name="viewport" content="width=device-width">
+<script>
+if (window.parent) {
+	document.addEventListener("DOMContentLoaded", function() {
+		var iframe = parent.document.getElementsByName(name)[0];
+		parent.Bliss.fire(iframe, "DOMFrameContentLoaded")
+	});
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>

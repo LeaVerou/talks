@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title>Mavo: Creating Interactive Data-Driven Web Applications by Authoring HTML</title>
+<link href="../csss/slideshow.css" rel="stylesheet" />
+<link href="../csss/reusable.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://dev.mavo.io/dist/mavo.css">
+<link href="../shared/intro-outro.css" rel="stylesheet" />
+<link href="../shared/prism.css" rel="stylesheet" />
+<link href="../../prismjs/live/prism-live.css" rel="stylesheet" />
+<link href="../shared/css/live-demo.css" rel="stylesheet" />
+<link href="../shared/css/media.css" rel="stylesheet" />
+<link href="theme.css" rel="stylesheet" />
+<link href="talk.css" rel="stylesheet" />
+
+</head>
+<body class="language-markup">
+
+<!-- <article class="slide" id="adjust-resolution" style="--vw: 1600; --vh: 900">
+	<h1>
+		1600 × 900
+		<span>This is a slide deck coded to a specific environment, not a web app for public consumption.
+			It works best in Chrome, with the Experimental Web Platform Features flag on.</span>
+	</h1>
+
+</article>
+
+<header class="slide" id="intro">
+	<h1>
+		<strong>HTML</strong>
+		<span>Re-imagined</span>
+		<small>for the Era of Web Apps</small>
+	</h1>
+	<p>Lea Verou, MIT <br>@leaverou</p>
+</header>-->
+
+<header class="looping video slide" id="intro" data-video="videos/words-title.mp4" style="--url: 'https://mavo.io/demos/words'">
+	<div class="authors">
+		<article>
+			<strong>Lea Verou</strong>
+			<a href="mailto:leaverou@mit.edu">leaverou@mit.edu</a>
+			<span class="affiliation">MIT CSAIL</span>
+		</article>
+		<article>
+			<strong>Tarfah Alrashed</strong>
+			<a href="tarfah@mit.edu">tarfah@mit.edu</a>
+			<span class="affiliation">MIT CSAIL</span>
+		</article>
+		<article>
+			<strong>David Karger</strong>
+			<a href="karger@mit.edu">karger@mit.edu</a>
+			<span class="affiliation">MIT CSAIL</span>
+		</article>
+	</div>
+</header>
+
+<article id="uist" class="slide" style="background: url(img/uist.png) center / 100% auto hsl(0, 0%, 87%)">
+	<img src="img/paper-static.png" alt="" class="delayed">
+</article>
+
+<header class="slide" id="mavo">
+	<h1><img src="img/logo.svg" alt="Mavo"></h1>
+</header>
+
+<article class="slide">
+	<div class="browser"><img src="img/todo-mockup.png" alt=""></div>
+</article>
+
+<article class="slide" id="todo-code" data-steps="1">
+	<pre><code>
+		&lt;body <mark>mv-app="todo" mv-storage="local"</mark>>
+			&lt;h1>My tasks&lt;/h1>
+			&lt;p><mark>[count(done)]</mark> done of <mark>[count(task)]</mark> total&lt;/p>
+
+			&lt;ul>
+				&lt;li <mark>property="task" mv-multiple</mark>>
+					&lt;input <mark>property="done"</mark> type="checkbox" />
+					&lt;span <mark>property="taskTitle"</mark>>Do stuff&lt;/span>
+				&lt;/li>
+			&lt;/ul>
+		&lt;/body>
+	</code></pre>
+</article>
+
+<article class="looping video slide" data-video="videos/todo.mp4" style="--url: 'https://mavo.io/demos/todo'"></article>
+
+<article class="slide">
+	<h1>Try Mavo out</h1>
+	<pre><code>
+		&lt;link rel="stylesheet" href="//get.mavo.io/mavo.css"/>
+		&lt;script src="//get.mavo.io/mavo.js">&lt;/script>
+	</code></pre>
+
+	<p class="delayed" style="font-size: 180%">or just visit <a style="font-weight: bold" href="https://play.mavo.io">play.mavo.io</a> and start coding!</p>
+</article>
+
+<article class="slide" id="todomvc" data-steps="1">
+	<table>
+		<caption>todomvc.com</caption>
+		<thead>
+			<tr>
+				<th>Framework</th>
+				<th>SLOC</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>React</td>
+				<td>421</td>
+			</tr>
+			<tr>
+				<td>Backbone</td>
+				<td>297</td>
+			</tr>
+			<tr>
+				<td>Angular</td>
+				<td>294</td>
+			</tr>
+			<tr>
+				<td>Polymer</td>
+				<td>246</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="annotation">
+		<img src="img/todomvc.png" />
+		<svg viewBox="0 0 100 100" preserveAspectRatio="none" style="width: 22%;
+		height: 11%;
+		top: 77%;
+		left: 73%;">
+			<ellipse />
+		</svg>
+	</div>
+</article>
+
+<article class="slide" id="mv-action">
+	<h1>Mavo Data Update Actions</h1>
+
+	<pre><code class="language-markup collapse-delayed">&lt;button mv-action="action1(params)<span class="delayed">,
+                   action2(params)</span><span class="delayed">;
+                   action3(params)</span><span class="delayed">
+                   ...</span>"></code></pre>
+	<!-- In most cases we examined, one or two actions were sufficient. -->
+</article>
+
+<article class="slide" id="functions">
+	<h1>Data mutation functions</h1>
+	<ul>
+		<li>
+			<pre><code class="language-js collapse-delayed"> set(reference, value)</code></pre>
+		</li>
+		<li class="delayed">
+			<pre><code class="language-js collapse-delayed">delete(ref1<span class="delayed">, ref2<span class="delayed">, ref3<span class="delayed">, ...</span></span></span>)</code></pre>
+		</li>
+		<li class="delayed fn-add collapse-delayed">
+			<pre><code class="language-js">add(collection<span class="delayed data">, data</span><span class="delayed">, index</span>)</code></pre>
+		</li>
+		<li class="delayed" hidden></li> <!-- Hack to show add(collection, position) -->
+		<li class="delayed">
+			<pre><code class="language-js collapse-delayed">move(from, to)</code></pre>
+		</li>
+	</ul>
+	<!--
+	The first three are analogous to the SQL primitives UPDATE, INSERT, DELETE, whereas the latter is a composite mutation (delete, then add).
+	These functions are only available in expressions specified with the mv-action attribute. Regular Mavo expressions remain side-effect free.
+	We kept these functions minimal, to delegate selection and filtering logic to Mavo expressions.
+	This maximizes the amount of computation specified in a reactive fashion.
+	-->
+</article>
+
+<article class=" example slide" id="people" data-steps="1"
+		 style="--font-size-multiplier: .9">
+		 <p class="hint">refresh, count(cat), count(age > 6), count(age), average(age)</p>
+
+		<textarea><div mv-app="people" mv-storage="people.json">
+	<article property="woman" mv-multiple>
+		<span property="emoji"></span>
+		<h2 property="name"></h2>
+		<p><span property="age"></span> years old</p>
+		<p>Hobbies: <span property="hobby" mv-multiple></span></p>
+	</article>
+
+	<article property="man" mv-multiple mv-like="woman"></article>
+</div>
+</textarea>
+
+</article>
+
+<section id="use-cases" class="language-clike">
+	<article class="video slide" data-video="videos/clear-completed.mp4" data-times="2" style="--url: 'https://mavo.io/demos/todo'">
+		<code class="annotation top-pointer on-pause" style="--top: 56%; --right: .5em; --pointer-left: 3em">delete(task where done)</code>
+	</article>
+
+	<article class="video slide" id="words-game" data-video="videos/words-title.mp4" style="--url: 'https://mavo.io/demos/words'">
+		<code class="annotation top-pointer" style="--top: 64%; --left: 7%;" data-time="5100 to 5500" data-pause="3000">add(orderedWord, word)</code>
+		<code class="annotation top-pointer" style="--top: 49%; --right: .5em; --pointer-left: 9em" data-time="7300 to 7900" data-pause="3000">delete(last(orderedWord))</code>
+		<code class="annotation bottom-pointer" style="--top: 27%; --right: .5em; --pointer-left: 9em" data-time="17500 to 17900" data-pause="3000">delete(orderedWord)</code>
+	</article>
+
+	<article class="video slide" data-video="../../mavo/mavo.io/demos/shopping/video.mp4" style="--url: 'https://mavo.io/demos/shopping'">
+		<code class="annotation bottom-pointer" style="--top: 57%; --left: calc(50% - .5em); --pointer-left: 6.5em">add(item, commonItem)</code>
+	</article>
+
+	<article class="video slide" data-video="../../mavo/mavo.io/demos/dice/video.mp4" style="--url: 'https://mavo.io/demos/dice'">
+		<code class="annotation bottom-pointer" style="--top: 57%; --left: calc(50% - .5em); --pointer-left: 6.5em">add(diceHistory, dice),
+set(dice, random(1, 6))</code>
+	</article>
+</section>
+
+<section id="evaluation">
+	<header class="image slide" style="background: url(img/science.png) white center / auto 80% no-repeat; filter: invert();" data-credits="xkcd"></header>
+
+	<article class="single-sentence slide">
+		<h1>
+			<span class="label">User Study</span>
+			Can novices use data actions?<br>
+			What is the most natural syntax for them?
+		</h1>
+	</article>
+
+	<article class="slide" id="study-design">
+		<h1>Study design</h1>
+		<div class="timeline">
+			<div style="--min: 5">
+				<time>5</time>
+				Mavo Tutorial
+			</div>
+			<div style="--min: 30;">
+				<time>30</time>
+				Free-form Elicitation
+				<div>What is the most natural syntax?</div>
+			</div>
+			<div style="--min: 5" class="orange">
+				<time>5</time>
+				Prototype Tutorial
+			</div>
+			<div style="--min: 30" class="aqua">
+				<time>30</time>
+				Prototype Testing
+				<div>Can novices formulate data action expressions?</div>
+			</div>
+			<div style="--min: 20" class="pink">
+				<time>20</time>
+				Hands-on tasks
+				<div>Can novices use data actions?</div>
+			</div>
+		</div>
+	</article>
+
+	<article class="slide" id="subjects" data-steps="4">
+		<h1>20 participants</h1>
+		<svg class="def">
+			<symbol id="person" viewBox="0 0 100 100">
+				<circle r="23" cx="50" cy="25" />
+				<circle r="45" cx="50" cy="100" />
+				<path d="M38,26 a12,12 0 0,0 24,0" />
+			</symbol>
+		</svg>
+		<script>
+			for (var i=0; i<20; i++) {
+				let className = i <= 12? "female" : i <= 18? "male" : "other";
+				className += i <= 12? " beginner" : " intermediate";
+				let contactManager = i <8? `<text class="contacts" x="40" y="80" font-size="50" transform="rotate(5)">📇</text>` : "";
+				document.write(`
+					<svg style="transition-delay: ${i * .1}s, 0s" class="${className}">
+						<use href="#person" />
+						${contactManager}
+					</svg>`
+				);
+			};
+		</script>
+
+		<div class="gender legend">
+			<div class="female">13</div> Female
+			<div class="male">6</div> Male
+			<div class="other">1</div> Other
+		</div>
+
+		<p class="age">
+			<strong>Age</strong> <i>μ</i> = 35.9, <i>σ</i> = 10.2
+		</p>
+
+		<div class="skill legend">
+			<div class="beginner">13</div> Beginner or worse programmers
+			<div class="intermediate">7</div> Intermediate
+		</div>
+	</article>
+
+</section>
+
+<!-- <article class="slide" id="thankyou" title="Thank you!" data-credits="gifimage.net, giphy.com"></article> -->
+
+<footer class="slide">
+	<div class="sections">
+		<section>
+			<img src="img/logo.svg" />
+
+			<ul>
+				<li style="--icon: '🌍'"><a href="http://mavo.io">mavo.io</a></li>
+				<li style="--icon: '🐱'"><a href="http://github.com/mavoweb">github.com/mavoweb</a></li>
+				<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@mavoweb</a></li>
+			</ul>
+		</section>
+		<section>
+			<img src="../shared/img/mark.svg" />
+
+			<ul>
+				<li style="--icon: '🌍'"><a href="http://mavo.io">lea.verou.me</a></li>
+				<li style="--icon: '✉'"><a href="mailto:lea@verou.me">lea@verou.me</a></li>
+				<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
+			</ul>
+		</section>
+	</div>
+
+	<p>Slides: <a href="https://leaverou.github.io/talks/html-reimagined">leaverou.github.io/talks/html-reimagined</a></p>
+	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
+</footer>
+
+<script src="https://dev.mavo.io/dist/mavo.js"></script>
+<script src="../csss/slideshow.js"></script>
+<script src="../shared/js/prism.js"></script>
+<script src="../incrementable/incrementable.js"></script>
+<script src="../../prismjs/live/src/prism-live.js?load=css,markup,javascript"></script>
+<script src="../shared/js/media.js"></script>
+<script src="../shared/js/live-demo.js"></script>
+<script src="js/talk.js"></script>
+
+</body>
+</html>

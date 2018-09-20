@@ -1,0 +1,36 @@
+{
+	"man": [
+		{
+			"name": "David Karger",
+			"age": "50",
+			"emoji": "👨🏻‍💻",
+			"hobby": [
+				"Dancing",
+				"Theory"
+			]
+		}
+	],
+	"woman": [
+		{
+			"name": "Lea Verou",
+			"age": "32",
+			"emoji": "👩🏻",
+			"hobby": [
+				"Coding",
+				"Design",
+				"Cooking",
+				"Dining"
+			]
+		},
+		{
+			"name": "Tarfah Alrashed",
+			"age": "30",
+			"emoji": "👩🏽",
+			"hobby": [
+				"Hiking",
+				"Scuba diving",
+				"Canyonyeering"
+			]
+		}
+	]
+}
