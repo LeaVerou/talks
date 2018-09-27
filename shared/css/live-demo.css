@@ -50,6 +50,7 @@
 			background-origin: content-box;
 			background-size: auto 3em;
 			background-attachment: local;
+			line-height: 1.5em;
 		}
 
 		.vertical div.prism-live > pre {

@@ -31,13 +31,20 @@ $.events(document, "slidechange", evt => {
 						var currentMs = video.currentTime * 1000;
 
 						for (let [annotation, times] of timedAnnotations.entries()) {
+							if (isNaN(times.end)) {
+								times.end = video.duration * 1000 + 1000; // ensure if never ends
+							}
+
 							if (currentMs >= times.start && currentMs < times.end && annotation.classList.contains("hidden")) {
 								// Show annotation
 								annotation.classList.remove("hidden");
 
 								if (annotation.dataset.pause) {
-									video.pause();
-									setTimeout(() => video.play(), annotation.dataset.pause);
+									if (!video.paused) {
+										// How can time change in a paused video? When we're scrubbing manually.
+										video.pause();
+										setTimeout(() => video.play(), annotation.dataset.pause);
+									}
 								}
 							}
 							else if (currentMs >= times.end && !annotation.classList.contains("hidden")) {
@@ -50,7 +57,9 @@ $.events(document, "slidechange", evt => {
 						evt.target.classList.toggle("paused", evt.type === "pause");
 					},
 					"ended": evt => {
-						if (++video.iterations < slide.dataset.times) {
+						video.iterations++;
+
+						if (slide.dataset.times > 0 && video.iterations < slide.dataset.times) {
 							video.currentTime = 0;
 							video.play();
 						}
@@ -64,6 +73,7 @@ $.events(document, "slidechange", evt => {
 				if (annotation.dataset.time) {
 					annotation.classList.add("hidden");
 					let times = annotation.dataset.time.split(/\s*to\s*/);
+
 					timedAnnotations.set(annotation, {start: +times[0], end: +times[1]});
 				}
 			}
