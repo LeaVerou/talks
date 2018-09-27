@@ -118,3 +118,90 @@ button, input, select {
 			line-height: 1;
 			font-weight: 300;
 		}
+
+[mv-app=dice] {
+	font-size: 200%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-flow: column;
+	padding: 0;
+	min-height: 100vh;
+}
+
+[mv-app=dice] button,
+[mv-app=dice] [property="dice"] {
+	border-radius: .7rem;
+}
+
+[mv-app=dice] button {
+	margin: .5em;
+	font-weight: bold;
+	background: hsl(220, 10%, 90%);
+	border: 1px solid rgba(0,0,0,.1);
+	padding: 0 .4em;
+	cursor: pointer;
+	outline: none;
+}
+
+	[mv-app=dice] button:focus-visible {
+		outline: 5px auto hsl(195, 90%, 50%);
+	}
+
+	[mv-app=dice] button:active {
+		background: hsl(220, 10%, 80%);
+	}
+
+.dice {
+	font-size: 500%;
+	width: 1em;
+	height: 1em;
+	padding: .15em;
+	box-sizing: border-box;
+	border: 1px solid rgba(0,0,0,.1);
+	--color: black;
+	--dot: radial-gradient(circle closest-side, var(--color) 95%, transparent 100%);
+	--dot-size: .19em;
+	background: no-repeat center / var(--dot-size) var(--dot-size) white content-box border-box;
+	color: transparent;
+}
+
+	.number-1 {
+		background-image: var(--dot);
+	}
+
+	.number-2 {
+		background-image: var(--dot), var(--dot);
+		background-position: 0 0, 100% 100%;
+	}
+
+	.number-3 {
+		background-image: var(--dot), var(--dot), var(--dot);
+		background-position: 0 0, 100% 100%, 50% 50%;
+	}
+
+	.number-4 {
+		background-image: var(--dot), var(--dot), var(--dot), var(--dot);
+		background-position: 0 0, 0 100%, 100% 0, 100% 100%;
+	}
+
+	.number-5 {
+		background-image: var(--dot), var(--dot), var(--dot), var(--dot), var(--dot);
+		background-position: 0 0, 0 100%, 100% 0, 100% 100%, 50% 50%;
+	}
+
+	.number-6 {
+		background-image: var(--dot), var(--dot), var(--dot), var(--dot), var(--dot), var(--dot);
+		background-position: 0 0, 0 100%, 100% 0, 100% 100%, 0 50%, 100% 50%;
+	}
+
+.history {
+	display: flex;
+	flex-wrap: wrap;
+	font-size: 20%;
+	margin-bottom: 1rem;
+}
+
+	.history > div {
+		margin: .1em;
+	}

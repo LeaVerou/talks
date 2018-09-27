@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>Mavo: Creating Interactive Data-Driven Web Applications by Authoring HTML</title>
+<title>Extending a Reactive Expression Language with Data Update Actions for End-User Application Authoring</title>
 <link href="../csss/slideshow.css" rel="stylesheet" />
 <link href="../csss/reusable.css" rel="stylesheet" />
 
@@ -37,8 +37,9 @@
 	<p>Lea Verou, MIT <br>@leaverou</p>
 </header>-->
 
-<header class="looping video slide" id="intro" data-video="videos/words-title.mp4" style="--url: 'https://mavo.io/demos/words'">
+<header class="dont-resize looping video slide" id="intro" data-video="videos/words-title.mp4" style="--url: 'https://mavo.io/demos/words'">
 	<div class="authors">
+		<h1>Extending a Reactive Expression Language with Data Update Actions for End-User Application Authoring</h1>
 		<article>
 			<strong>Lea Verou</strong>
 			<a href="mailto:leaverou@mit.edu">leaverou@mit.edu</a>
@@ -66,8 +67,26 @@
 </header>
 
 <article class="slide">
+	<pre><code>
+		&lt;body>
+			&lt;h1>My tasks&lt;/h1>
+			&lt;p>0 done of 1 total&lt;/p>
+
+			&lt;ul>
+				&lt;li>
+					&lt;input type="checkbox" />
+					&lt;span>Do stuff&lt;/span>
+				&lt;/li>
+			&lt;/ul>
+		&lt;/body>
+	</code></pre>
+</article>
+
+<article class="slide">
 	<div class="browser"><img src="img/todo-mockup.png" alt=""></div>
 </article>
+
+<article class="looping video slide" data-video="videos/todo.mp4" style="--url: 'https://mavo.io/demos/todo'"></article>
 
 <article class="slide" id="todo-code" data-steps="1">
 	<pre><code>
@@ -85,7 +104,7 @@
 	</code></pre>
 </article>
 
-<article class="looping video slide" data-video="videos/todo.mp4" style="--url: 'https://mavo.io/demos/todo'"></article>
+
 
 <article class="slide">
 	<h1>Try Mavo out</h1>
@@ -103,7 +122,7 @@
 		<thead>
 			<tr>
 				<th>Framework</th>
-				<th>SLOC</th>
+				<th>Lines of JS</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -122,6 +141,10 @@
 			<tr>
 				<td>Polymer</td>
 				<td>246</td>
+			</tr>
+			<tr class="delayed">
+				<td style="font-weight: bold">Mavo</td>
+				<td style="font-weight: bold">0 🎉</td>
 			</tr>
 		</tbody>
 	</table>
@@ -146,22 +169,24 @@
 	<!-- In most cases we examined, one or two actions were sufficient. -->
 </article>
 
-<article class="slide" id="functions">
+<article class="slide language-mavoscript" id="functions">
 	<h1>Data mutation functions</h1>
-	<ul>
+	<ul class="delayed-children">
 		<li>
-			<pre><code class="language-js collapse-delayed"> set(reference, value)</code></pre>
+			<pre><code class="collapse-delayed"> set(reference, value)</code></pre>
 		</li>
-		<li class="delayed">
-			<pre><code class="language-js collapse-delayed">delete(ref1<span class="delayed">, ref2<span class="delayed">, ref3<span class="delayed">, ...</span></span></span>)</code></pre>
+		<li>
+			<pre><code class="collapse-delayed">delete(ref1<span class="delayed">, ref2<span class="delayed">, ref3<span class="delayed">, ...</span></span></span>)</code></pre>
 		</li>
 		<li class="delayed fn-add collapse-delayed">
-			<pre><code class="language-js">add(collection<span class="delayed data">, data</span><span class="delayed">, index</span>)</code></pre>
+			<pre><code>add(collection<span class="delayed data">, data</span><span class="delayed">, index</span>)</code></pre>
 		</li>
-		<li class="delayed" hidden></li> <!-- Hack to show add(collection, position) -->
-		<li class="delayed">
-			<pre><code class="language-js collapse-delayed">move(from, to)</code></pre>
+		<li hidden></li> <!-- Hack to show add(collection, position) -->
+		<li>
+			<pre><code class="collapse-delayed">move(from<span class="data">, to</span><span class="delayed">, index</span>)</code></pre>
 		</li>
+		<li hidden></li> <!-- Hack to show move(collection, position) -->
+		<li><pre><code>person where age > 30 and name = "Lea"</code></pre></li>
 	</ul>
 	<!--
 	The first three are analogous to the SQL primitives UPDATE, INSERT, DELETE, whereas the latter is a composite mutation (delete, then add).
@@ -171,10 +196,7 @@
 	-->
 </article>
 
-<article class=" example slide" id="people" data-steps="1"
-		 style="--font-size-multiplier: .9">
-		 <p class="hint">refresh, count(cat), count(age > 6), count(age), average(age)</p>
-
+<article class=" example slide" id="people" style="--font-size-multiplier: .9">
 		<textarea><div mv-app="people" mv-storage="people.json">
 	<article property="woman" mv-multiple>
 		<span property="emoji"></span>
@@ -182,7 +204,6 @@
 		<p><span property="age"></span> years old</p>
 		<p>Hobbies: <span property="hobby" mv-multiple></span></p>
 	</article>
-
 	<article property="man" mv-multiple mv-like="woman"></article>
 </div>
 </textarea>
@@ -191,27 +212,36 @@
 
 <section id="use-cases" class="language-clike">
 	<article class="video slide" data-video="videos/clear-completed.mp4" data-times="2" style="--url: 'https://mavo.io/demos/todo'">
-		<code class="annotation top-pointer on-pause" style="--top: 56%; --right: .5em; --pointer-left: 3em">delete(task where done)</code>
+		<code class="annotation top-pointer on-pause" style="top: 49%; left: 59%; --pointer-left: 3em">delete(task where done)</code>
 	</article>
 
 	<article class="video slide" id="words-game" data-video="videos/words-title.mp4" style="--url: 'https://mavo.io/demos/words'">
-		<code class="annotation top-pointer" style="--top: 64%; --left: 7%;" data-time="5100 to 5500" data-pause="3000">add(orderedWord, word)</code>
-		<code class="annotation top-pointer" style="--top: 49%; --right: .5em; --pointer-left: 9em" data-time="7300 to 7900" data-pause="3000">delete(last(orderedWord))</code>
-		<code class="annotation bottom-pointer" style="--top: 27%; --right: .5em; --pointer-left: 9em" data-time="17500 to 17900" data-pause="3000">delete(orderedWord)</code>
+		<code class="annotation top-pointer" style="top: 57%; left: 8%;" data-time="5100 to 5500" data-pause="4000">add(orderedWord, word)</code>
+		<code class="annotation top-pointer" style="top: 43%; left: 81%; --pointer-left: 12em;" data-time="7300 to 7900" data-pause="3000">delete(last(orderedWord))</code>
+		<code class="annotation bottom-pointer" style="	top: 21%; left: 92.5%; --pointer-left: 10em;" data-time="17000">delete(orderedWord)</code>
 	</article>
 
-	<article class="video slide" data-video="../../mavo/mavo.io/demos/shopping/video.mp4" style="--url: 'https://mavo.io/demos/shopping'">
-		<code class="annotation bottom-pointer" style="--top: 57%; --left: calc(50% - .5em); --pointer-left: 6.5em">add(item, commonItem)</code>
+	<article class="video slide" id="shopping-list" data-video="../../mavo/mavo.io/demos/shopping/video.mp4" style="--url: 'https://mavo.io/demos/shopping'">
+		<code class="annotation top-pointer" style="top: 59%; left: 71%; --pointer-left: 5em" data-time="9500 to 10000" data-pause="2000">add(item, commonItem)</code>
+		<code class="annotation top-pointer" style="top: 24%; left: 32.5%;" data-time="13000" data-pause="2000">add(commonItem, item)</code>
 	</article>
 
-	<article class="video slide" data-video="../../mavo/mavo.io/demos/dice/video.mp4" style="--url: 'https://mavo.io/demos/dice'">
-		<code class="annotation bottom-pointer" style="--top: 57%; --left: calc(50% - .5em); --pointer-left: 6.5em">add(diceHistory, dice),
+	<article class="video slide" id="dice-roller" data-video="../../mavo/mavo.io/demos/dice/video.mp4" style="--url: 'https://mavo.io/demos/dice'">
+		<code class="annotation bottom-pointer" style="top: 53%; left: 50%; --pointer-left: 6.5em" data-time="6500">add(diceHistory, dice),
 set(dice, random(1, 6))</code>
+	</article>
+
+	<article class="video slide" id="eshop" data-video="../../mavo/mavo.io/demos/eshop/video.mp4" style="--url: 'https://mavo.io/demos/eshop'">
+		<code class="annotation top-pointer" style="top: 44%; left: 59.5%; --pointer-left: 4em;" data-time="3000 to 3500" data-pause="3000">add(cart.product, product)</code>
+		<code class="annotation top-pointer" style="top: 26%; left: 67.1%" data-time="5200 to 5700" data-pause="3000">delete(product)</code>
 	</article>
 </section>
 
+<article class="slide" data-src="https://codepen.io/mavo-actions"></article>
+<article id="spreadsheet-actions" class="slide" data-title="Actions are useful beyond Mavo" data-src="https://www.google.com/search?q=excel+button+to+change+value+site:stackoverflow.com"></article>
+
 <section id="evaluation">
-	<header class="image slide" style="background: url(img/science.png) white center / auto 80% no-repeat; filter: invert();" data-credits="xkcd"></header>
+	<header id="science" class="image slide" data-credits="xkcd"></header>
 
 	<article class="single-sentence slide">
 		<h1>
@@ -220,78 +250,528 @@ set(dice, random(1, 6))</code>
 			What is the most natural syntax for them?
 		</h1>
 	</article>
-
-	<article class="slide" id="study-design">
-		<h1>Study design</h1>
-		<div class="timeline">
-			<div style="--min: 5">
-				<time>5</time>
-				Mavo Tutorial
-			</div>
-			<div style="--min: 30;">
-				<time>30</time>
-				Free-form Elicitation
-				<div>What is the most natural syntax?</div>
-			</div>
-			<div style="--min: 5" class="orange">
-				<time>5</time>
-				Prototype Tutorial
-			</div>
-			<div style="--min: 30" class="aqua">
-				<time>30</time>
-				Prototype Testing
-				<div>Can novices formulate data action expressions?</div>
-			</div>
-			<div style="--min: 20" class="pink">
-				<time>20</time>
-				Hands-on tasks
-				<div>Can novices use data actions?</div>
-			</div>
-		</div>
-	</article>
-
-	<article class="slide" id="subjects" data-steps="4">
+	<svg class="def">
+		<symbol id="person" viewBox="0 0 100 100">
+			<circle r="23" cx="50" cy="25" />
+			<circle r="45" cx="50" cy="100" />
+			<path d="M38,26 a12,12 0 0,0 24,0" />
+		</symbol>
+	</svg>
+	<article class="slide" id="subjects" data-steps="3">
 		<h1>20 participants</h1>
-		<svg class="def">
-			<symbol id="person" viewBox="0 0 100 100">
-				<circle r="23" cx="50" cy="25" />
-				<circle r="45" cx="50" cy="100" />
-				<path d="M38,26 a12,12 0 0,0 24,0" />
-			</symbol>
-		</svg>
 		<script>
 			for (var i=0; i<20; i++) {
-				let className = i <= 12? "female" : i <= 18? "male" : "other";
+				let className = i <= 11? "female" : i <= 20? "male" : "other";
 				className += i <= 12? " beginner" : " intermediate";
-				let contactManager = i <8? `<text class="contacts" x="40" y="80" font-size="50" transform="rotate(5)">📇</text>` : "";
 				document.write(`
-					<svg style="transition-delay: ${i * .1}s, 0s" class="${className}">
+					<svg style="transition-delay: ${i * .1}s, 0s" class="person ${className}">
 						<use href="#person" />
-						${contactManager}
 					</svg>`
 				);
 			};
 		</script>
 
 		<div class="gender legend">
-			<div class="female">13</div> Female
-			<div class="male">6</div> Male
-			<div class="other">1</div> Other
+			<div class="female">12</div> Female
+			<div class="male">8</div> Male
 		</div>
 
 		<p class="age">
-			<strong>Age</strong> <i>μ</i> = 35.9, <i>σ</i> = 10.2
+			<strong>Age</strong> <i>μ</i> = 36.2, <i>σ</i> = 9.25
 		</p>
 
 		<div class="skill legend">
-			<div class="beginner">13</div> Beginner or worse programmers
-			<div class="intermediate">7</div> Intermediate
+			<div class="beginner">11</div> Beginner or worse programmers
+			<div class="intermediate">9</div> Intermediate
 		</div>
 	</article>
 
+	<article class="slide" id="study-design">
+		<h1>Study design</h1>
+
+		<div class="mavo-tutorial delayed">
+			Mavo Tutorial
+		</div>
+		<div class="baseline delayed">
+			Baseline Questions
+		</div>
+		<div class="elicitation delayed">
+			17 Unconstrained Elicitation Questions
+			<div>What is the most natural syntax?</div>
+		</div>
+		<div class="prototype-tutorial delayed">
+			Prototype Tutorial
+		</div>
+		<div class="prototype-testing delayed">
+			Prototype Testing
+			<div>Can novices formulate data action&nbsp;expressions?</div>
+		</div>
+		<div class="practice-tasks delayed">
+			Practice Tasks
+		</div>
+		<div class="hands-on delayed">
+			5 Hands-on Tasks on 2 Apps
+			<div>Can novices use data actions in practice?</div>
+		</div>
+	</article>
+
+	<article class="slide dont-resize" id="questions">
+		<table class="language-mavoscript">
+			<thead>
+				<tr>
+					<th>Question</th>
+					<th>Sample answer with our syntax prototype</th>
+				</tr>
+			</thead>
+			<tr>
+				<td>Delete all men</td>
+				<td><code>delete(man)</code></td>
+			</tr>
+			<tr>
+				<td>Add new man (with no info filled in)</td>
+				<td><code>add(man)</code></td>
+			</tr>
+			<tr>
+				<td>Delete all people</td>
+				<td><code>delete(man, woman)</code></td>
+			</tr>
+			<tr>
+				<td>Add a new man and a new woman</td>
+				<td><code>add(man), add(woman)</code></td>
+			</tr>
+			<tr>
+				<td>Delete current man</td>
+				<td><code>delete(man)</code></td>
+			</tr>
+			<tr>
+				<td>Make current man 1 year older</td>
+				<td><code>set(age, age + 1)</code></td>
+			</tr>
+			<tr>
+				<td>Make everyone 1 year older</td>
+				<td><code>set(age, age + 1)</code></td>
+			</tr>
+			<tr>
+				<td>Set everyone’s name to their age</td>
+				<td><code>set(name, age)</code></td>
+			</tr>
+			<tr>
+				<td>Delete women older than 30 years old</td>
+				<td><code>delete(woman where age > 30)</code></td>
+			</tr>
+			<tr>
+				<td>Move the current woman to the collection of men</td>
+				<td><code>move(woman, man)</code></td>
+			</tr>
+			<tr>
+				<td>Delete "Dining" as a hobby from everyone</td>
+				<td><code>delete(hobby where hobby = "Dining")</code></td>
+			</tr>
+			<tr>
+				<td>Add a woman with the name "Mary" and age of 30</td>
+				<td><code>add(woman, group(name: "Mary", age: 30))</code></td>
+			</tr>
+			<tr>
+				<td>Add a woman with the name "Mary" and age of 30 before the others</td>
+				<td><code>add(woman, group(name: "Mary", age: 30), 0)</code></td>
+			</tr>
+
+			<tr>
+				<td>Rename every man with age > 40 to "Chris"</td>
+				<td><code>set(man.name where age > 40, "Chris")</code></td>
+			</tr>
+			<tr>
+				<td>Move the current woman to the beginning</td>
+				<td><code>move(woman, 0)</code></td>
+			</tr>
+			<tr>
+				<td>Change the age of the woman named "Mary" to 50</td>
+				<td><code>set(woman.age where name = "Mary", 50)</code></td>
+			</tr>
+			<tr>
+				<td>Move all men to the collection of women</td>
+				<td><code>move(man, woman)</code></td>
+			</tr>
+		</table>
+	</article>
 </section>
 
-<!-- <article class="slide" id="thankyou" title="Thank you!" data-credits="gifimage.net, giphy.com"></article> -->
+<section>
+	<header class="slide">
+		<h1>Elicitation results</h1>
+	</header>
+
+	<article class="slide language-clike" id="referencing">
+		<h1>Referencing</h1>
+
+		<div class="bubble implicit-all">
+			Implicit all items
+			<p>E.g. <code>delete(woman)</code></p>
+
+			<div class="bubble implicit-current delayed">
+				Implicit current item
+				<p>E.g. <code>delete(man)</code></p>
+			</div>
+			<div class="bubble explicit-all delayed">
+				Explicit all items
+				<p>E.g. <code>delete(woman.all)</code></p>
+			</div>
+			<div class="bubble explicit-current delayed">
+				Explicit current item
+				<p>E.g. <code>delete(man.current)</code></p>
+			</div>
+		</div>
+	</article>
+
+	<article class="slide" id="underspecified">
+		<h1>Underspecified expressions</h1>
+		<h2>Faulty logic or clever heuristic?</h2>
+	</article>
+
+	<article class="slide language-mavoscript underspecified">
+		<h1>
+			<span class="subjects delayed">18</span>
+			<code>delete(<em>predicate</em>)</code>
+		</h1>
+
+		<ul>
+			<li><code contentEditable>delete(woman.age > 30)</code></li>
+			<li><code>delete(hobby = "Dining")</code></li>
+		</ul>
+
+		<div class="future-work delayed">Default to closest item if only predicate passed?</div>
+	</article>
+
+	<article class="slide language-mavoscript underspecified">
+		<h1>
+			<span class="subjects delayed">15</span>
+			<code>set(age + 1)</code> to increment
+		</h1>
+
+		<ul>
+			<li>No-one underspecified <code>set(name, age)</code>. Distaste for repetition?</li>
+		</ul>
+
+		<div class="future-work delayed">Default to first named token if only 1 argument passed?</div>
+	</article>
+
+	<article class="slide language-mavoscript underspecified">
+		<h1>
+			<span class="subjects delayed">5</span>
+			Name as implied primary&nbsp;key
+		</h1>
+
+		<ul>
+			<li><code>woman.Mary(age = 50)</code></li>
+			<li><code>set(Woman.Mary, {age: 50})</code></li>
+			<li><code>set(man age > 40) = Chris</code></li>
+		</ul>
+		<!-- woman.Mary(age = 50)
+		set(Woman.Mary, {age: 50})
+		set(mary) age=50
+		set(man age > 40) = Chris
+		set(woman[Mary] age=50)
+		add(woman, "Mary" and age, 30)
+		add(woman, "Mary" and age, 30 to top)
+		change(woman, "Mary", age to 50)
+		rename(man, age, > 40 to "Chris") -->
+	</article>
+
+	<article class="slide language-mavoscript underspecified">
+		<h1>
+			<span class="subjects delayed">4</span>
+			Using objects as numbers
+		</h1>
+
+		<ul>
+			<li><code>delete(woman > 30)</code></li>
+			<li><code>set(man + 1)</code></li>
+		</ul>
+	</article>
+
+	<article class="slide">
+		<h1><code class="de-emphasize">fn(</code>Argument<code class="de-emphasize">, </code>Separation<code class="de-emphasize">)</code></h1>
+
+		<div class="pie-container">
+			<div class="label delayed" style="left: 50%; top: 20%;"><span data-outof>7</span> No commas</div>
+			<div class="label delayed" style="top: 57%; left: 25%;"><span data-outof>5</span> Commas only for&nbsp;repetition</div>
+			<div class="label delayed" style="top: 30%; right: 65%;"><span data-outof>6</span> Mixed</div>
+			<div class="label vertical delayed"><span data-outof>2</span> Exclusively commas</div>
+			<div class="pie" style="--value1: 35%; --value2: 25%; --value3: 30%; --value4: 10%"></div>
+		</div>
+	</article>
+
+	<article class="slide language-mavoscript" id="separators">
+		<h1>
+			Separators
+			<div class="note">(used by at least two subjects)</div>
+		</h1>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Separator</th>
+					<th>Example</th>
+					<th>Subjects</th>
+				</tr>
+			</thead>
+			<tr>
+				<td>Equals (<code>=</code>)</td>
+				<td><code>set(name = age)</code></td>
+				<td>
+					<div class="bar" style="--n: 16"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Comma (<code>,</code>)</td>
+				<td><code>delete(man, woman)</code></td>
+				<td>
+					<div class="bar" style="--n: 13"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Keyword <code>to</code></td>
+				<td><code>move(man to woman)</code></td>
+				<td>
+					<div class="bar" style="--n: 9"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Space (<code> </code>)</td>
+				<td><code>move(woman first)</code></td>
+				<td>
+					<div class="bar" style="--n: 3"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Colon (<code>:</code>)</td>
+				<td><code>add(woman: name=Mary, age=30)</code></td>
+				<td>
+					<div class="bar" style="--n: 3"></div>
+				</td>
+			</tr>
+		</table>
+
+		<div class="future-work delayed"><span>Allow keyword <code>to</code>, special case equality operator in <code>set()</code>?</span></div>
+	</article>
+
+	<article class="slide" id="sequencing">
+		<h1>Sequencing function calls</h1>
+
+		<div class="pie-container">
+			<div class="label delayed" style="left: 50%;">
+				<span data-outof>8</span>
+				Used multiple function calls
+				<code>add(man), add(woman)</code>
+			</div>
+			<div class="label delayed" style="right: 50%;">
+				<span data-outof>12</span>
+				Tried to express compound actions via arguments
+				<code>add(man, woman)</code>
+			</div>
+			<div class="pie" style="--value1: 40%; --value2: 60%;"></div>
+		</div>
+
+		<!-- Only 8/20 participants used multiple function calls in an expression (such as <code>add(man) add(woman)</code>).
+		The rest tried to express compound actions via arguments of one function call (such as <code>add(man, woman)</code>,
+		even when this was inconsistent with their later responses. -->
+	</article>
+
+	<article class="slide">
+		<p class="hint">different symbols or removing redundant tokens</p>
+		<ul class="fancy">
+			<li><span data-outof="17">4.35</span> of freeform answers on average (σ = 2.16) were consistent with our prototype syntax.</li>
+			<li><span data-outof="17">8.6</span> (σ = 2.06) with minor changes.</li>
+		</ul>
+	</article>
+</section>
+
+<section id="prototype-syntax">
+	<header class="slide">
+		<h1>Prototype Syntax</h1>
+	</header>
+
+	<article class="slide" id="persisted">
+		<h1>Patterns that persisted</h1>
+
+		<table>
+			<thead>
+				<tr>
+					<th style="font-size: 90%">Pattern</th>
+					<th>
+						<div class="bar" style="--n: 8; font-size: 70%">Prototype</div>
+						<div class="bar" style="--n: 12; font-size: 70%">Elicitation</div>
+					</th>
+				</tr>
+			</thead>
+			<tr>
+				<td><code>delete(<em>predicate</em>)</code></td>
+				<td>
+					<div class="bar" style="--n: 8"></div>
+					<div class="bar" style="--n: 18"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Unable to sequence function calls</td>
+				<td>
+					<div class="bar" style="--n: 7"></div>
+					<div class="bar" style="--n: 12"></div>
+				</td>
+			</tr>
+			<tr>
+				<td><code>set(age + 1)</code></td>
+				<td>
+					<div class="bar" style="--n: 4"></div>
+					<div class="bar" style="--n: 15"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Objects as numbers</td>
+				<td>
+					<div class="bar" style="--n: 2"></div>
+					<div class="bar" style="--n: 5"></div>
+				</td>
+			</tr>
+		</table>
+	</article>
+
+	<article class="slide language-mavoscript" id="correctness">
+		<!-- Overall, 11 out of 17 questions had a correctness rate of 75% or above with 8 having 90% or above, i.e almost every participant got them right on first try. -->
+
+		<button>Sorted by order</button>
+
+		<div class="vertical-bar-chart">
+			<div style="--p: .95">1</div>
+			<div style="--p: 1">2</div>
+			<div style="--p: .95">3</div>
+			<div style="--p: .60">4</div>
+			<div style="--p: .9">5</div>
+			<div style="--p: .65">6</div>
+			<div style="--p: .65">7</div>
+			<div style="--p: .9">8</div>
+			<div style="--p: .9">9</div>
+			<div style="--p: .95">10</div>
+			<div style="--p: .45">11</div>
+			<div style="--p: .75">12</div>
+			<div style="--p: .75">13</div>
+			<div style="--p: .3889">14</div>
+			<div style="--p: .8421">15</div>
+			<div style="--p: .3889">16</div>
+			<div style="--p: 1">17</div>
+		</div>
+	</article>
+</section>
+
+<section id="hands-on-tasks">
+	<header class="slide">
+		<h1>Hands-on tasks</h1>
+	</header>
+
+	<article class="slide dont-resize" id="hands-on-success" data-steps="1">
+		<table>
+			<thead>
+				<tr>
+					<th>App</th>
+					<th>Tasks</th>
+					<th>Success</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td rowspan="3">
+						<span>Dice Roller</span>
+						<div class="small browser"><video src="../../mavo/mavo.io/demos/dice/video.mp4" autoplay muted loop></video></div>
+					</td>
+					<td>
+						Roll dice
+					</td>
+					<td><span data-outof="8">8</span></td>
+				</tr>
+				<tr>
+					<td>
+						Add previous dice to history
+					</td>
+					<td><span data-outof="8">8</span></td>
+				</tr>
+				<tr>
+					<td>
+						Prevent current dice from showing up in history
+					</td>
+					<td><span data-outof="8" class="bad">1</span></td>
+				</tr>
+			</tbody>
+			<tbody>
+				<tr>
+					<td rowspan="3">
+						<span>Words Game</span>
+						<div class="small browser"><video src="videos/words-title.mp4" autoplay muted loop></video></div>
+					</td>
+					<td>
+						Click to add word to sentence
+					</td>
+					<td><span data-outof="8">7</span></td>
+				</tr>
+				<tr>
+					<td>
+						Clear button
+					</td>
+					<td><span data-outof="8">7</span></td>
+				</tr>
+				<tr>
+					<td>
+						Undo button
+					</td>
+					<td><span data-outof="8">6</span></td>
+				</tr>
+			</tbody>
+			<tbody>
+				<tr>
+					<td rowspan="2">
+						<span>Shopping List</span>
+						<div class="small browser"><video src="../../mavo/mavo.io/demos/shopping/video.mp4" autoplay muted loop></video></div>
+					</td>
+					<td>
+						Add common item to shopping list
+					</td>
+					<td><span data-outof="7">6</span></td>
+				</tr>
+				<tr>
+					<td>
+						Add shopping list item to common items
+					</td>
+					<td><span data-outof="7">5</span></td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
+
+	<article class=" example slide" id="dice"style="--font-size-multiplier: .9">
+
+			<textarea><div mv-app="dice" mv-mode="read">
+	<div class="history">
+		<div property="diceHistory" class="dice number-[diceHistory]" mv-multiple mv-initial-items="0"></div>
+	</div>
+	<div property="dice" class="dice number-[dice]">6</div>
+	<button>Roll dice</button>
+</div></textarea>
+
+	</article>
+
+	<article class="slide">
+		<h1>Overall reactions</h1>
+		<blockquote>“so intuitive, I don’t even need to look at the docs!”</blockquote>
+		<blockquote>“very application-centered, a page that can actually do something!”</blockquote>
+		<blockquote>“definitely more accessible than having to program, pretty cool”</blockquote>
+	</article>
+	<article class="slide">
+		<h1>Overall reactions</h1>
+		<blockquote>“[Data actions] are very useful, easy, and approachable”</blockquote>
+		<blockquote>“easier and quicker to make things without worrying about technicality. Very easy to use”</blockquote>
+		<blockquote>“the where syntax is like natural language, I did not expect it to be there and written as if I am saying it”</blockquote>
+	</article>
+</section>
+
+<article class="slide" id="thankyou" title="Thank you!" data-credits="gifimage.net, giphy.com"></article>
 
 <footer class="slide">
 	<div class="sections">
@@ -309,13 +789,13 @@ set(dice, random(1, 6))</code>
 
 			<ul>
 				<li style="--icon: '🌍'"><a href="http://mavo.io">lea.verou.me</a></li>
-				<li style="--icon: '✉'"><a href="mailto:lea@verou.me">lea@verou.me</a></li>
+				<li style="--icon: '✉'"><a href="mailto:lea@verou.me">leaverou@mit.edu</a></li>
 				<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
 			</ul>
 		</section>
 	</div>
 
-	<p>Slides: <a href="https://leaverou.github.io/talks/html-reimagined">leaverou.github.io/talks/html-reimagined</a></p>
+	<p>Slides: <a href="https://leaverou.github.io/talks/html-reimagined">leaverou.github.io/talks/mavo-actions</a></p>
 	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
 </footer>
 

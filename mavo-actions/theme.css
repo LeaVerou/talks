@@ -13,14 +13,18 @@
 	--font-heading: var(--font-body);
 	--font-handwritten: 'Reenie Beanie', Marker Felt, var(--font-body);
 	--color1: hsl(40, 100%, 50%);
-	--color2: hsl(180, 100%, 40%);
+	--color2: hsl(178, 80%, 40%);
 	--color3: #f06;
 	--color4: yellowgreen;
 	--color5: yellow;
+	--color-orange: var(--color1);
+	--color-aqua: var(--color2);
+	--color-magenta: var(--color3);
+	--color-green: var(--color4);
 }
 
 body {
-	font: 100 100%/1.5 var(--font-body);
+	font: 300 100%/1.5 var(--font-body);
 	font-family: var(--font-body);
 	background: linear-gradient(45deg, silver 25%, transparent 25%, transparent 75%, silver 75%),
 	            linear-gradient(45deg, silver 25%, transparent 25%, transparent 75%, silver 75%) 20px 20px;
@@ -97,10 +101,20 @@ button {
 	font: inherit;
 }
 
+	button:focus:not(:focus-visible) {
+		outline: none;
+	}
+
 img {
 	max-width: 100%;
 	max-height: 100%;
 	object-fit: contain;
+}
+
+.note {
+	font-family: var(--font-handwritten);
+	color: orange;
+	font-weight: normal;
 }
 
 .slide {
@@ -180,7 +194,7 @@ section > header.slide:target {
 		background: black;
 		text-align: center;
 		line-height: 1.2;
-		font-weight: 100;
+		font-weight: 300;
 	}
 
 @keyframes scrollscreenshot {
@@ -201,7 +215,7 @@ section > header.slide:target {
 #indicator {
 	background: transparent;
 	text-shadow: none;
-	font-weight: 100;
+	font-weight: 300;
 }
 
 ::selection {
@@ -218,19 +232,19 @@ footer.ref a {
 
 /* Syntax highlighting */
 
-code.de-emphasize {
+code.de-emphasize,
+span.de-emphasize {
 	opacity: .4;
 }
 
 .hint {
 	position: absolute;
-	top: -5px;
-	left: 10px;
+	bottom: -5px;
+	right: 10px;
 	font-size: .8rem;
 	font-weight: bold;
 	line-height: 1;
-	color: rgba(0,0,0,.15);
-	mix-blend-mode: multiply;
+	opacity: .15;
 }
 
 blockquote {
@@ -276,9 +290,8 @@ blockquote {
 	th,
 	td {
 		vertical-align: middle;
-		text-align: center;
+		text-align: left;
 		padding: .5em;
-		font-weight: bold;
 	}
 
 	th {
@@ -294,6 +307,7 @@ blockquote {
 		vertical-align: top;
 		font-size: 75%;
 		background: orange;
+		padding: .3em .5em;
 	}
 
 	tbody tr > * {
@@ -301,7 +315,7 @@ blockquote {
 	}
 
 	td:first-child {
-		font-weight: 100;
+		font-weight: 300;
 	}
 
 	td:first-child,
