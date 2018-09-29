@@ -26,9 +26,14 @@ Array.prototype.stableSort = function (fn) {
 
 (async function(head, body, html){
 
+<<<<<<< HEAD
 if (!window.Bliss) {
 	// Load Bliss if not loaded
 	console.log("Bliss not loaded. Loading remotely from blissfuljs.com");
+=======
+var _ = window.SlideShow = function() {
+	var me = this;
+>>>>>>> c80cb8af869d98b9abd96e5c046fabf912b32e05
 
 	let bliss = document.createElement("script");
 	bliss.src = "https://blissfuljs.com/bliss.shy.min.js";
@@ -37,8 +42,13 @@ if (!window.Bliss) {
 	await new Promise(resolve => bliss.onload = resolve);
 }
 
+<<<<<<< HEAD
 // Cache <title> element, we may need it for slides that don"t have titles
 var documentTitle = document.title + "";
+=======
+	// Current slide
+	this.index = this.slide = 0;
+>>>>>>> c80cb8af869d98b9abd96e5c046fabf912b32e05
 
 var _ = class SlideShow {
 	constructor() {
@@ -179,20 +189,24 @@ var _ = class SlideShow {
 				slide.id = "slide" + (i+1);
 			}
 
-			// Set data-title attribute to the title of the slide
-			if (!slide.title) {
-				// no title attribute, fetch title from heading(s)
-				var heading = $("hgroup", slide) || $("h1,h2,h3,h4,h5,h6", slide);
+		// Set data-title attribute to the title of the slide
+		var title = slide.title || slide.getAttribute("data-title");
 
-				if (heading && heading.textContent.trim()) {
-					slide.setAttribute("data-title", heading.textContent);
-				}
+		if (title) {
+			slide.removeAttribute('title');
+		}
+		else {
+			// no title attribute, fetch title from heading(s)
+			var heading = $('hgroup', slide) || $('h1,h2,h3,h4,h5,h6', slide);
+
+			if(heading && heading.textContent.trim()) {
+				title = heading.textContent;
 			}
-			else {
-				// The title attribute is set, use that
-				slide.setAttribute("data-title", slide.title);
-				slide.removeAttribute("title");
-			}
+		}
+
+		if (title) {
+			slide.setAttribute('data-title', title);
+		}
 
 			slide.setAttribute("data-index", i);
 
@@ -363,8 +377,8 @@ var _ = class SlideShow {
 					Ctrl + Down/Left arrow : Previous slide
 					(Shift instead of Ctrl works too)
 				*/
-				if (evt.target === body || evt.target === body.parentNode || evt.metaKey && evt.altKey) {
-					if (evt.keyCode >= 32 && evt.keyCode <= 40) {
+				if(evt.target === body || evt.target === body.parentNode || evt.altKey) {
+					if(evt.keyCode >= 32 && evt.keyCode <= 40) {
 						evt.preventDefault();
 					}
 
