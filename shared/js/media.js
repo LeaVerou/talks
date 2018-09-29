@@ -39,11 +39,14 @@ $.events(document, "slidechange", evt => {
 								// Show annotation
 								annotation.classList.remove("hidden");
 
-								if (annotation.dataset.pause) {
+								if (annotation.dataset.pause !== null) {
 									if (!video.paused) {
 										// How can time change in a paused video? When we're scrubbing manually.
 										video.pause();
-										setTimeout(() => video.play(), annotation.dataset.pause);
+
+										if (annotation.dataset.pause) {
+											setTimeout(() => video.play(), annotation.dataset.pause);
+										}
 									}
 								}
 							}
