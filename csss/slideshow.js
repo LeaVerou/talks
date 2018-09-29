@@ -26,14 +26,9 @@ Array.prototype.stableSort = function (fn) {
 
 (async function(head, body, html){
 
-<<<<<<< HEAD
 if (!window.Bliss) {
 	// Load Bliss if not loaded
 	console.log("Bliss not loaded. Loading remotely from blissfuljs.com");
-=======
-var _ = window.SlideShow = function() {
-	var me = this;
->>>>>>> c80cb8af869d98b9abd96e5c046fabf912b32e05
 
 	let bliss = document.createElement("script");
 	bliss.src = "https://blissfuljs.com/bliss.shy.min.js";
@@ -42,13 +37,8 @@ var _ = window.SlideShow = function() {
 	await new Promise(resolve => bliss.onload = resolve);
 }
 
-<<<<<<< HEAD
 // Cache <title> element, we may need it for slides that don"t have titles
 var documentTitle = document.title + "";
-=======
-	// Current slide
-	this.index = this.slide = 0;
->>>>>>> c80cb8af869d98b9abd96e5c046fabf912b32e05
 
 var _ = class SlideShow {
 	constructor() {
