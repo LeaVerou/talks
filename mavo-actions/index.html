@@ -186,7 +186,6 @@
 			<pre><code class="collapse-delayed">move(from<span class="data">, to</span><span class="delayed">, index</span>)</code></pre>
 		</li>
 		<li hidden></li> <!-- Hack to show move(collection, position) -->
-		<li><pre><code>person where age > 30 and name = "Lea"</code></pre></li>
 	</ul>
 	<!--
 	The first three are analogous to the SQL primitives UPDATE, INSERT, DELETE, whereas the latter is a composite mutation (delete, then add).
@@ -194,6 +193,11 @@
 	We kept these functions minimal, to delegate selection and filtering logic to Mavo expressions.
 	This maximizes the amount of computation specified in a reactive fashion.
 	-->
+</article>
+
+<article class="slide language-mavoscript">
+	<h1>Where operator</h1>
+	<pre><code>person where age > 30 and name = "Lea"</code></pre>
 </article>
 
 <article class=" example slide" id="people" style="--font-size-multiplier: .9">
@@ -216,14 +220,14 @@
 	</article>
 
 	<article class="video slide" id="words-game" data-video="videos/words-title.mp4" style="--url: 'https://mavo.io/demos/words'">
-		<code class="annotation top-pointer" style="top: 57%; left: 8%;" data-time="5100 to 5500" data-pause="4000">add(orderedWord, word)</code>
-		<code class="annotation top-pointer" style="top: 43%; left: 81%; --pointer-left: 12em;" data-time="7300 to 7900" data-pause="3000">delete(last(orderedWord))</code>
+		<code class="annotation top-pointer" style="top: 57%; left: 8%;" data-time="5100 to 5500" data-pause>add(orderedWord, word)</code>
+		<code class="annotation top-pointer" style="top: 43%; left: 81%; --pointer-left: 12em;" data-time="7300 to 7900" data-pause>delete(last(orderedWord))</code>
 		<code class="annotation bottom-pointer" style="	top: 21%; left: 92.5%; --pointer-left: 10em;" data-time="17000">delete(orderedWord)</code>
 	</article>
 
 	<article class="video slide" id="shopping-list" data-video="../../mavo/mavo.io/demos/shopping/video.mp4" style="--url: 'https://mavo.io/demos/shopping'">
-		<code class="annotation top-pointer" style="top: 59%; left: 71%; --pointer-left: 5em" data-time="9500 to 10000" data-pause="2000">add(item, commonItem)</code>
-		<code class="annotation top-pointer" style="top: 24%; left: 32.5%;" data-time="13000" data-pause="2000">add(commonItem, item)</code>
+		<code class="annotation top-pointer" style="top: 59%; left: 71%; --pointer-left: 5em" data-time="9500 to 10000" data-pause>add(item, commonItem)</code>
+		<code class="annotation top-pointer" style="top: 24%; left: 32.5%;" data-time="13000" data-pause>add(commonItem, item)</code>
 	</article>
 
 	<article class="video slide" id="dice-roller" data-video="../../mavo/mavo.io/demos/dice/video.mp4" style="--url: 'https://mavo.io/demos/dice'">
@@ -232,12 +236,12 @@ set(dice, random(1, 6))</code>
 	</article>
 
 	<article class="video slide" id="eshop" data-video="../../mavo/mavo.io/demos/eshop/video.mp4" style="--url: 'https://mavo.io/demos/eshop'">
-		<code class="annotation top-pointer" style="top: 44%; left: 59.5%; --pointer-left: 4em;" data-time="3000 to 3500" data-pause="3000">add(cart.product, product)</code>
-		<code class="annotation top-pointer" style="top: 26%; left: 67.1%" data-time="5200 to 5700" data-pause="3000">delete(product)</code>
+		<code class="annotation top-pointer" style="top: 44%; left: 59.5%; --pointer-left: 4em;" data-time="3000 to 3500" data-pause>add(cart.product, product)</code>
+		<code class="annotation top-pointer" style="top: 26%; left: 67.1%" data-time="5200 to 5700" data-pause>delete(product)</code>
 	</article>
 </section>
 
-<article class="slide" data-src="https://codepen.io/mavo-actions"></article>
+<article class="slide" data-src="https://codepen.io/mavoweb"></article>
 <article id="spreadsheet-actions" class="slide" data-title="Actions are useful beyond Mavo" data-src="https://www.google.com/search?q=excel+button+to+change+value+site:stackoverflow.com"></article>
 
 <section id="evaluation">
