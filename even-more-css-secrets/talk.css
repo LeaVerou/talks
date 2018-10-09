@@ -17,7 +17,7 @@
 	align-items: flex-start;
 }
 
-.slide.intro,
+.slide.intro.intro,
 #cutout-text {
 	background: linear-gradient(to right, rgba(0,0,0,.5), transparent 50%),
 	            url(img/whisper.jpg) no-repeat left / cover;
@@ -32,6 +32,7 @@
 		flex-flow: column;
 		padding: .5em;
 		margin: 0;
+
 		font-size: 350%;
 		line-height: .83;
 		letter-spacing: -.04em;
@@ -41,7 +42,7 @@
 	}
 
 	.slide.intro:not(#intro) h1 {
-		align-self: center;
+		margin-left: auto;
 	}
 
 	#intro h1 {

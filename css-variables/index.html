@@ -5,12 +5,12 @@
 <meta charset="utf-8" />
 <title>CSS Variables: var(--subtitle);</title>
 <link href="../../inspire.js/inspire.css" rel="stylesheet" />
-<link href="../csss/reusable.css" rel="stylesheet" />
+<link href="../../inspire.js/theme.css" rel="stylesheet" />
 <link href="../shared/intro-outro.css" rel="stylesheet" />
 <link href="prism.css" rel="stylesheet" />
 <link href="theme.css" rel="stylesheet" />
 <link href="talk.css" rel="stylesheet" />
-
+<link href="../shared/browser-support.css" rel="stylesheet" />
 </head>
 <body class="language-css">
 
@@ -236,6 +236,16 @@
 		</code></pre>
 	</article>
 
+	<article class="slide" id="multiple-default-values" data-steps="1">
+		<div>
+			<pre><code>background: var(--nonexistent, none, yellowgreen);</code></pre>
+			<pre><code>
+				/* Equivalent to: */
+				background: none, yellowgreen;
+			</code></pre>
+		</div>
+	</article>
+
 	<article class="demo slide" id="cycles" style="--division: 50">
 		<textarea class="language-css">
 			div {
@@ -416,14 +426,14 @@
 
 	<article class="future slide" id="registerProperty">
 		<h1>🔮 Near Future 🔮</h1>
-		<pre><code class="language-javascript" id="registerPropertyCode" contentEditable style="outline: none">
+		<textarea class="language-javascript prism-live">
 			CSS.registerProperty({
 				name: "--color",
 				syntax: "&lt;color>",
 				initialValue: "black",
 				inherits: false
 			});
-		</code></pre>
+		</textarea>
 		<button onclick="eval(registerPropertyCode.textContent)" class="run delayed">Run!</button>
 	</article>
 
@@ -520,13 +530,13 @@
 		</style>
 	</article>
 
-	<article class="takeaway slide">
+	<article class="takeaway slide" id="button-takeaway">
 		<h1>CSS Variables enable theming<br> independent of CSS structure</h1>
 	</article>
 
 	<article class="slide" data-insert="button"></article>
 
-	<article class="takeaway slide">
+	<article class="takeaway slide" id="defaultdefault">
 		<h1>Default default values are possible</h1>
 		<pre><code>
 			--colorD: var(--color, black);
@@ -561,7 +571,7 @@
 		</textarea>
 	</article>
 
-	<article class="takeaway slide">
+	<article class="takeaway slide" id="responsive-takeaway">
 		<h1>CSS Variables make <br>responsive design easier</h1>
 	</article>
 </section>
@@ -719,7 +729,7 @@
 	</article>
 </section>
 
-<section>
+<section id="cssvars-js">
 	<header class="slide">
 		<h1>CSS Variables & JavaScript</h1>
 	</header>
@@ -739,8 +749,8 @@
 		</code></pre>
 	</article>
 
-	<article class="slide">
-		<pre><code class="language-javascript">
+	<article class="slide language-javascript">
+		<pre><code>
 			var root = document.documentElement;
 
 			document.addEventListener("mousemove", evt => {
@@ -753,8 +763,8 @@
 		</code></pre>
 	</article>
 
-	<article class="slide">
-		<p><img src="../html-reimagined/img/logo.svg" alt="Mavo" style="height: 4em"></p>
+	<article class="slide language-javascript">
+		<p><a href="https://mavo.io"><img src="../html-reimagined/img/logo.svg" alt="Mavo" style="height: 4em"></a></p>
 		<pre><code class="language-markup">&lt;html mv-app
       style="--mouse-x: [$mouse.x / innerWidth];
 	          --mouse-y: [$mouse.y / innerHeight];"></code></pre>
@@ -787,6 +797,7 @@
 	</article>
 
 	<article class="horizontal demo slide" id="slider">
+		<p class="hint">Show value indicator</p>
 		<textarea class="language-css">
 			input {
 				appearance: none;
@@ -929,7 +940,7 @@
 <script src="../shared/js/prism.js"></script>
 <script src="../incrementable/incrementable.js"></script>
 <script src="../../inspire.js/inspire.js"></script>
-<script src="js/talk.js"></script>
+<script src="talk.js"></script>
 
 </body>
 </html>

@@ -62,3 +62,7 @@
 		color: white;
 		mix-blend-mode: soft-light;
 	}
+
+html:not([data-profile="speaker"]) .hint {
+	display: none;
+}

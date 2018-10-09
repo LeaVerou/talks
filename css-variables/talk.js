@@ -24,7 +24,7 @@ for (input of document.querySelectorAll("input")) {
 
 document.addEventListener("input", evt => {
 	if (evt.target.matches(":target input")) {
-		evt.target.style.setProperty("--value", input.value);
+		evt.target.style.setProperty("--value", evt.target.value);
 	}
 });
 

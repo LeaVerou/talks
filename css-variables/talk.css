@@ -279,8 +279,8 @@ span.poop {
 	}
 
 
-.typing.slide {
-	background: black;
+.typing.demo.slide {
+	background: hsl(200, 10%, 25%);
 }
 
 	.typing.demo.slide .typing {
@@ -474,6 +474,22 @@ span.poop {
 
 	#default-value pre {
 		margin-bottom: 0;
+		margin-top: 2em;
+		overflow: visible;
+	}
+
+#multiple-default-values[data-step] {
+	background: yellowgreen;
+}
+
+	#multiple-default-values:not([data-step]) pre + pre {
+		opacity: 0;
+	}
+
+	#multiple-default-values[data-step] pre {
+		filter: invert(100%);
+		mix-blend-mode: multiply;
+		transition: .4s all, .4s 1s opacity;
 	}
 
 #purple-shadow .block {

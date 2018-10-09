@@ -9,6 +9,7 @@
 <link href="../shared/prism.css" rel="stylesheet" />
 <link href="theme.css" rel="stylesheet" />
 <link href="talk.css" rel="stylesheet" />
+<link href="../shared/browser-support.css" rel="stylesheet" />
 
 <link rel="inspire-import" href="../css-variables/index.html" id="vars">
 <link rel="inspire-import" href="../even-more-css-secrets/index.html" id="evenmore">
@@ -34,16 +35,56 @@
 	</h1>
 </header>
 
-<article class="slide" data-insert="vars#vars-intro"></article>
+<section class="language-css">
+	<article class="slide" data-insert="vars#vars-intro"></article>
+	<article class="slide" data-insert="vars#button"></article>
+	<article class="slide" data-insert="vars#button-takeaway"></article>
+	<article class="slide" data-insert="vars#button"></article>
+	<article class="slide" data-insert="vars#defaultdefault"></article>
+	<article class="slide" data-insert="vars#responsive"></article>
+	<article class="slide" data-insert="vars#responsive-takeaway"></article>
+	<article class="demo slide">
+		<textarea class="language-css">
+			.block {
+				background: hsl(260, 50%, 85%);
+				border: 10px solid hsl(260, 50%, 75%);
+				color: hsl(260, 50%, 30%);
+			}
+		</textarea>
+		<textarea class="language-html">
+			<div class="block">Colors & CSS Variables</div>
+		</textarea>
+	</article>
+	<article class="slide" data-insert="vars#cssvars-js"></article>
 
-<article class="slide" data-insert="evenmore#transparent-text"></article>
+	<!-- TODO: CSS Vars & JS -->
+</section>
 
-<article class="demo slide"></article>
+<!-- TODO: Chris' font talk -->
+
+<!-- TODO: SVG Basics -->
+<!-- TODO: CSS Vars & SVG -->
+
+<!-- TODO: SVG data URIs from evenmore -->
+
+<!-- TODO: Masking, blending, clip-path -->
+
+<!-- TODO: Flexbox from intro & evenmore -->
+
+<!-- TODO: Grid from intro & evenmore -->
+
+
+<!-- <article class="slide" data-insert="evenmore#transparent-text"></article> -->
+
+<footer class="slide">
+	<h1>Thank you!</h1>
+</footer>
 
 <script src="../shared/js/bliss.shy.min.js"></script>
 <script src="../shared/js/prism.js"></script>
 <script src="../incrementable/incrementable.js"></script>
 <script src="../../inspire.js/inspire.js"></script>
+<script src="talk.js"></script>
 
 </body>
 </html>
