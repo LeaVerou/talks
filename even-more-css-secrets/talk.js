@@ -1,83 +1,23 @@
 var $ = Bliss, $$ = Bliss.$;
-var onslide = new WeakMap();
-
-// Remove these slides
-// $$(".takeaway.slide").forEach(slide => {
-// 	slide.remove();
-// });
-
-document.body.style.setProperty("--slide-count", `"${$$(".slide").length}"`);
-
-// Slide-specific listeners
-document.addEventListener("slidechange", evt => {
-	var callback = onslide.get(evt.target);
-	callback && callback(evt);
-});
-
-function scopeRule(rule, slide, scope) {
-	let selector = rule.selectorText;
-
-	if (rule.cssRules) {
-		// If this rule contains rules, scope those too
-		// Mainly useful for @supports and @media
-		for (let innerRule of rule.cssRules) {
-			scopeRule(innerRule, slide, scope);
-		}
-	}
-
-	if (selector && rule instanceof CSSStyleRule) {
-		let shouldScope = !(
-			selector.includes("#")  // don't do anything if the selector already contains an id
-			|| selector == ":root"
-		);
-
-		if (selector == "article" || selector == ".slide") {
-			rule.selectorText = `#${slide.id}`;
-		}
-		else if (shouldScope && selector.indexOf(scope) !== 0) {
-			rule.selectorText = selector.split(",").map(s => `${scope} ${s}`).join(", ");
-		}
-	}
-}
-
-// If a slide has a title but not an id, get its id from that
-$$(".slide[title]:not([id])").forEach(slide => {
-	var id = slide.title.replace(/[^\w\s-]/g, "") // Remove non-ASCII characters
-			.trim().replace(/\s+/g, "-") // Convert whitespace to hyphens
-			.toLowerCase();
-
-	if (!window[id]) {
-		slide.id = id;
-	}
-});
-
-$$('a[href^="http"]:not([target])').forEach(a => a.target = "_blank");
-
-$$(".demo.slide").forEach(slide => {
-	// This is before editors have been created
-	slide.classList.add("dont-resize");
-});
-
-document.addEventListener("DOMContentLoaded", function(evt) {
-	$$(".demo.slide").forEach(slide => {
-		slide.demo = new Demo(slide);
-	});
-});
 
 Prism.languages.insertBefore("css", "property", {
 	"variable": /\-\-(\b|\B)[\w-]+(?=\s*[:,)]|\s*$)/i
 });
 
-$$(".takeaway.slide").forEach((slide, i) => {
-	$.create("span", {
-		className: "label",
-		innerHTML: `Takeaway${$("li")? "s" : ""} <span>#</span>${i + 1}`,
-		start: $("h1, ul", slide)
-	});
-});
+$$(".takeaway.slide").forEach((slide, i) => slide.style.setProperty("--takeaway", i+1));
 
 // Blending mode testing slide
-(function(){
+(function(slide){
+
+if (!slide) {
+	return;
+}
+
+var elements = $("form", slide).elements;
+var foreground = $(".foreground", slide);
+var background = $(".background", slide);
+var math = $(".math", slide);
+$$("input", slide).forEach(input => new Incrementable(input));
 
 function applyColorIfValid(element, color, property = "background") {
 	var isValid = CSS.supports(`background: ${color}`);
@@ -98,14 +38,6 @@ function luminance(rgb) {
 		 + rgb[1] * 0.7152  // green
 		 + rgb[2] * 0.0722; // blue
 }
-
-var slide = $("#blending-modes");
-var elements = $("form", slide).elements;
-var foreground = $(".foreground", slide);
-var background = $(".background", slide);
-var math = $(".math", slide);
-
-$$("input", slide).forEach(input => new Incrementable(input));
 
 $("button.swap", slide).addEventListener("click", evt => {
 	[elements.foregroundColor.value, elements.backgroundColor.value] = [elements.backgroundColor.value, elements.foregroundColor.value];
@@ -160,6 +92,7 @@ slide.addEventListener("input", function(evt) {
 });
 
 slide.dispatchEvent(new InputEvent("input"));
+})($("#blending-modes"));
 
 $.bind($('form[target="wolfram"]'), {
 	input: evt => {
@@ -201,5 +134,3 @@ $$(".runnable.slide pre>code, .runnable.slide textarea").forEach(element => {
 $$("#regression path").forEach(shape => {
 	shape.style.setProperty("--length", shape.getTotalLength() + "px");
 });
-
-})();

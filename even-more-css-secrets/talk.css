@@ -350,7 +350,9 @@ meter.stars {
 		text-transform: uppercase;
 	}
 
-		.takeaway.slide .label {
+		.takeaway.slide h1::before {
+			counter-reset: takeaway var(--takeaway);
+			content: "Takeaway #" counter(takeaway);
 			display: block;
 			width: fit-content;
 			padding: .2em .5em;
@@ -359,10 +361,6 @@ meter.stars {
 			font-weight: bold;
 			text-transform: uppercase;
 			font-size: 60%;
-		}
-
-		.takeaway.slide .label span {
-			font-weight: 300;
 		}
 
 @keyframes pulse {
@@ -521,6 +519,7 @@ section.secret {
 			text-transform: uppercase;
 			text-align: left;
 			text-indent: -.05em;
+			font-weight: bold;
 		}
 
 		#fancy-borders:target h1 {

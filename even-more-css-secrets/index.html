@@ -4,12 +4,11 @@
 
 <meta charset="utf-8" />
 <title>Even More CSS Secrets</title>
-<link href="../csss/slideshow.css" rel="stylesheet" />
-<link href="../csss/reusable.css" rel="stylesheet" />
+<link href="../../inspire.js/inspire.css" rel="stylesheet" />
+<link href="../../inspire.js/theme.css" rel="stylesheet" />
 <link href="../shared/intro-outro.css" rel="stylesheet" />
 <link href="../shared/prism.css" rel="stylesheet" />
 <link href="theme.css" rel="stylesheet" />
-<link href="../shared/demo.css" rel="stylesheet" />
 <link href="../shared/browser-support.css" rel="stylesheet" />
 <link href="talk.css" rel="stylesheet" />
 <link href="//dev.mavo.io/dist/mavo.css" rel="stylesheet" />
@@ -45,7 +44,7 @@
 	</section>
 
 	<section class="top-heavy slide dont-resize" id="projects" data-type="I ❤ Open Source">
-		<slide-script async src="https://buttons.github.io/buttons.js"></slide-script>
+		<script async data-src="https://buttons.github.io/buttons.js"></script>
 		<ul>
 			<li>
 				<a href="http://mavo.io/" style="background-image: url(../shared/img/project-mavo.png)">Mavo</a>
@@ -95,7 +94,7 @@
 </section>
 
 <section class="history">
-	<article class="slide" data-import="intro"></article>
+	<article class="slide" data-insert="intro"></article>
 	<header class="slide" id="css3-secrets" data-steps="1">
 		<div class="slide-info" style="--image: url(img/css-secrets.png)">
 			<div class="slide-cover">
@@ -158,7 +157,7 @@
 			</ul>
 		</div>
 	</section>
-	<header class="slide" data-import="intro">
+	<header class="slide" data-insert="intro">
 </section>
 
 <section class="secret">
@@ -174,12 +173,13 @@
 			<span>CSS</span>
 			<span>Secrets</span>
 		</h1>
-		<style data-slide>
+
+		<textarea class="language-css">
 			h1 {
 				background: #f06;
 				color: black;
 			}
-		</style>
+		</textarea>
 	</article>
 	<article class="slide" id="blending-modes">
 		<form class="demo">
@@ -215,7 +215,7 @@
 			</div>
 		</form>
 	</article>
-	<article class="slide" data-import="transparent-text"></article>
+	<article class="slide" data-insert="transparent-text"></article>
 
 	<article class="slide" data-src="https://caniuse.com/#feat=css-mixblendmode"></article>
 
@@ -233,12 +233,12 @@
 	</header>
 
 	<article class="horizontal demo slide" data-edit="css" id="demo-character-images">
-		<style data-slide>
+		<textarea class="language-css">
 			background: url('data:image/svg+xml,\
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
 				<circle r="20" cx="50" cy="50" fill="red" />\
 			</svg>');
-		</style>
+		</textarea>
 	</article>
 	<!-- <article class="slide" id="rfc-3986">
 		<h1>
@@ -248,10 +248,10 @@
 		</h1>
 		<iframe src="https://tools.ietf.org/html/rfc3986/#page-13" scrolling="no"></iframe>
 	</article> -->
-	<article class="slide" data-import="demo-character-images"></article>
+	<article class="slide" data-insert="demo-character-images"></article>
 	<article class="horizontal demo slide" style="--division: 70">
-		<meter min="0" max="5" value="3.5" data-edit="html css"></meter>
-		<style data-slide>
+		<textarea class="language-html"><meter min="0" max="5" value="3.5"></meter></textarea>
+		<textarea class="language-css">
 			meter {
 				width: 15em; height: 3em;
 				background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
@@ -261,7 +261,7 @@
 				background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
 					<text font-size="100" y=".8em">★</text></svg>') 0 / auto 100%;
 			}
-		</style>
+		</textarea>
 	</article>
 
 	<article class="takeaway slide">
@@ -278,21 +278,23 @@
 	</header>
 
 	<article class="horizontal demo slide">
-		<svg data-edit="html">
+		<textarea class="language-markup">
+		<svg>
 			<rect width="100%" height="100%" style="stroke: black; stroke-width: 4px; fill: none;"  />
 		</svg>
+		</textarea>
 	</article>
 
 	<article class="horizontal demo slide">
-		<div class="🦄" data-edit="css html" contentEditable>Look at my awesome border!</div>
-		<style data-slide>
-		.🦄 {
-			background: url('data:image/svg+xml,\
-			<svg xmlns="http://www.w3.org/2000/svg">\
-				\
-			</svg>');
-		}
-		</style>
+		<textarea class="language-html"><div class="🦄" contentEditable>Look at my awesome border!</div></textarea>
+		<textarea class="language-css">
+			.🦄 {
+				background: url('data:image/svg+xml,\
+				<svg xmlns="http://www.w3.org/2000/svg">\
+					\
+				</svg>');
+			}
+		</textarea>
 		<!--
 		@keyframes marching-ants {\
 			to { stroke-dashoffset: -8px; }\
@@ -306,21 +308,23 @@
 	</article>
 
 	<article class="horizontal demo slide">
-		<svg data-edit="html">
-			<rect width="100%" height="100%" style="stroke: #0ac; stroke-width: 40px; fill: none;"  />
-		</svg>
+		<textarea class="language-html">
+			<svg>
+				<rect width="100%" height="100%" style="stroke: #0ac; stroke-width: 40px; fill: none;"  />
+			</svg>
+		</textarea>
 	</article>
 
 	<article class="horizontal demo slide">
-		<div class="🦄" data-edit="css html" contentEditable>Look at my awesome border!</div>
-		<style data-slide>
+		<textarea class="language-html"><div class="🦄" contentEditable>Look at my awesome border!</div></textarea>
+		<textarea class="language-css">
 		.🦄 {
 			background: url('data:image/svg+xml,\
 			<svg xmlns="http://www.w3.org/2000/svg" >\
 				\
 			</svg>');
 		}
-		</style>
+		</textarea>
 		<!--
 		<linearGradient id="g" gradientTransform="rotate(45)">\
 			<stop stop-color="gold" />\
@@ -347,10 +351,12 @@
 
 	<article class="demo slide" style="--division: 40">
 		<p class="hint">width: 100% on h1, height on pseudo</p>
-		<h1 data-edit="html css" contentEditable>
-	Heading
-</h1>
-		<style data-slide>
+		<textarea class="language-html">
+		<h1 contentEditable>
+			Heading
+		</h1>
+		</textarea>
+		<textarea class="language-css">
 			h1 {
 
 			}
@@ -359,7 +365,7 @@
 			h1::after {
 
 			}
-		</style>
+		</textarea>
 		<style data-slide>
 		h1 {
 			font-size: 200%
@@ -403,8 +409,7 @@
 		</h1>
 	</header>
 	<article class="demo slide" style="--division: 50">
-		<p class="hint"></p>
-		<div data-edit="contents css">
+		<textarea class="language-html">
 			<nav>
 				<ul>
 					<li>
@@ -433,9 +438,9 @@
 					</li>
 				</ul>
 			</nav>
-		</div>
+		</textarea>
 
-		<style data-slide>
+		<textarea class="language-css">
 			nav li ul {
 				display: none;
 			}
@@ -448,10 +453,11 @@
 				background: black;
 				color: white
 			}
-		</style>
+		</textarea>
 		<style data-slide>
 			nav {
 				width: 100%;
+				margin-bottom: auto;
 			}
 
 			nav ul {
@@ -515,13 +521,15 @@
 	<article class="demo slide" style="--division: 50" id="variable-fonts-demo">
 		<!--  FF Meta: {0.65, 350}, {1, 300}, {1.5, 190}, {2.8, 140}
 		      Drive: {1, 300}, {1.5, 190}, {2.8, 140} -->
-		<h1 data-edit="html css">
-			<div>Variable</div>
-			<div>Fonts</div>
-			<div>Are</div>
-			<div>Awesome</div>
-		</h1>
-		<style data-slide>
+		<textarea class="language-html">
+			<h1>
+				<div>Variable</div>
+				<div>Fonts</div>
+				<div>Are</div>
+				<div>Awesome</div>
+			</h1>
+		</textarea>
+		<textarea class="language-css">
 			@font-face {
 				/* Kindly provided by Black[Foundry] */
 				font-family: 'Drive';
@@ -540,7 +548,7 @@
 			h1 div:nth-child(3) {
 				font-size: 2.7em;
 			}
-		</style>
+		</textarea>
 		<style data-slide>
 		h1 {
 			text-transform: uppercase;
@@ -568,8 +576,8 @@
 			</text>
 		</svg>
 	</article>
-	<article class="slide" data-import="variable-fonts-demo"></article>
-	<article class="slide" id="regression-calculator">
+	<article class="slide" data-insert="variable-fonts-demo"></article>
+	<!-- <article class="slide" id="regression-calculator">
 		<form action="http://www.wolframalpha.com/input/" target="wolfram"
 		      mv-app="regression" mv-mode="edit" mv-storage="local" mv-autosave="0">
 			<h1>
@@ -599,23 +607,21 @@
 			<p class="query">
 				<label><a href="https://www.wolframalpha.com/input/?i=[input]" target="_blank"><img src="img/wolfram.svg" alt="Wolfram Alpha"> query:</a>
 				<input property name="i" value="[model] fit [pair]" class="mv-autosize" /></label>
-			<!-- <input type="hidden" name="id" value="a96a9e81ac4bbb54f8002bb61b8d3472" /> -->
 		</form>
-		<!-- <iframe name="wolfram" src="https://www.wolframalpha.com/widget/input/?id=a96a9e81ac4bbb54f8002bb61b8d3472&input=linear%20fit%20{1,%20100},{.2,%20200}"></iframe> -->
-		<iframe name="wolfram" src="http://www.wolframalpha.com/input/" frameborder="0"></iframe>
-	</article>
+		<iframe name="wolfram" data-src="http://www.wolframalpha.com/input/" frameborder="0"></iframe>
+	</article> -->
 	<article class="horizontal demo slide" style="--division: 50">
-		<div data-edit="contents css">
+		<textarea class="language-html">
 			<p><abbr>SQL</abbr> is awesome <sup>[citation needed]</sup></p>
-		</div>
-		<style data-slide>
+		</textarea>
+		<textarea class="language-css">
 			p {
 				font: 300 400%/1 Drive, sans-serif;
 			}
 
 			abbr { font-size: .74em; }
 			sup { font-size: .5em;}
-		</style>
+		</textarea>
 	</article>
 	<article class="takeaway slide">
 		<ul>
@@ -637,17 +643,19 @@
 		</div>
 	</header>
 	<article class="isolated demo slide" style="--division: 40">
-		<article data-edit="html css">
-			<header>
-				<img src="img/gregor-samsa.jpg" alt="Kafka’s Avatar">
-				<h1>Kafka</h1>
-			</header>
-			<div class="post">
-				<p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.</p>
-				<p>The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me? " he thought. It wasn't a dream.</p>
-			</div>
-		</article>
-		<style data-slide>
+		<textarea class="language-html">
+			<article>
+				<header>
+					<img src="img/gregor-samsa.jpg" alt="Kafka’s Avatar">
+					<h1>Kafka</h1>
+				</header>
+				<div class="post">
+					<p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.</p>
+					<p>The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me? " he thought. It wasn't a dream.</p>
+				</div>
+			</article>
+		</textarea>
+		<textarea class="language-css">
 			article {
 				display: flex;
 			}
@@ -659,8 +667,8 @@
 			.post {
 				flex: 1;
 			}
-		</style>
-		<style data-slide>
+		</textarea>
+		<style class="demo">
 			article {
 				border: 1px solid rgba(0,0,0,.2);
 				background: white;
@@ -711,17 +719,19 @@
 		</h1>
 	</header>
 	<article class="demo slide" id="column-sorting">
-		<div class="creatures" data-edit="html css">
-			<article class="cat    male">Vector</article>
-			<article class="cat    female">Çiki</article>
-			<article class="cat    male">Sir Adam Catlace</article>
-			<article class="cat    female">Joan</article>
-			<article class="hooman female">Lea Verou</article>
-			<article class="hooman male">Chris Lilley</article>
-			<article class="hooman male">David Karger</article>
-			<article class="hooman female">Sirma Orguç</article>
-		</div>
-		<style data-slide>
+		<textarea class="language-html">
+			<div class="creatures">
+				<article class="cat    male">Vector</article>
+				<article class="cat    female">Çiki</article>
+				<article class="cat    male">Sir Adam Catlace</article>
+				<article class="cat    female">Joan</article>
+				<article class="hooman female">Lea Verou</article>
+				<article class="hooman male">Chris Lilley</article>
+				<article class="hooman male">David Karger</article>
+				<article class="hooman female">Sirma Orguç</article>
+			</div>
+		</textarea>
+		<textarea class="language-css">
 		.creatures {
 
 		}
@@ -733,11 +743,11 @@
 		.hooman {
 
 		}
-		</style>
+		</textarea>
 	</article>
 	<article class="isolated demo slide" id="cat-collage">
 		<p class="hint">200px cells</p>
-		<div class="kittens" data-edit="contents css">
+		<textarea class="language-html">
 			<img src="img/cat1.jpg" alt="Cat lying down">
 			<img src="img/cat2.jpg" alt="Kitten in bowl">
 			<img src="img/cat3.jpg" alt="Pensive kitten">
@@ -748,8 +758,8 @@
 			<img src="img/cat8.jpg" alt="White cat mother nursing her white kittens">
 			<img src="img/cat9.jpg" alt="White kitten wrapped in pink blanket">
 			<img src="img/cat10.jpg" alt="Two kittens wrapped in purple blanket">
-		</div>
-		<style data-slide>
+		</textarea>
+		<textarea class="language-css">
 		body {
 			display: grid;
 		}
@@ -757,7 +767,7 @@
 		img {
 
 		}
-		</style>
+		</textarea>
 		<style data-slide>
 		body {
 			margin: 0;
@@ -916,16 +926,15 @@
 	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
 </footer>
 
-<header class="slide" data-import="feedback"></header>
-<footer class="slide" data-import="thankyou"></footer>
+<header class="slide" data-insert="feedback"></header>
+<footer class="slide" data-insert="thankyou"></footer>
 
 <script src="../shared/js/bliss.shy.min.js"></script>
-<script src="../csss/slideshow.js"></script>
 <script src="../shared/js/prism.js"></script>
 <script src="../incrementable/incrementable.js"></script>
-<script src="../shared/js/editor.js"></script>
+<script src="../../inspire.js/inspire.js"></script>
 <script src="talk.js"></script>
-<script src="../shared/js/demo.js"></script>
+
 <script src="//dev.mavo.io/dist/mavo.js"></script>
 </body>
 </html>

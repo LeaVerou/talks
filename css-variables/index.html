@@ -4,7 +4,7 @@
 
 <meta charset="utf-8" />
 <title>CSS Variables: var(--subtitle);</title>
-<link href="../csss/slideshow.css" rel="stylesheet" />
+<link href="../../inspire.js/inspire.css" rel="stylesheet" />
 <link href="../csss/reusable.css" rel="stylesheet" />
 <link href="../shared/intro-outro.css" rel="stylesheet" />
 <link href="prism.css" rel="stylesheet" />
@@ -32,7 +32,7 @@
 	<section class="inverse slide dont-resize darker hi">
 		<figure class="delayed">
 			<img src="img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
-			<figcaption style="font-size: 240%">Hola, soy Lea</figcaption>
+			<figcaption style="font-size: 240%">Hi, I’m Lea</figcaption>
 		</figure>
 	</section>
 
@@ -82,9 +82,9 @@
 	</section>
 </section>
 
-<section>
+<section id="vars-intro" class="language-css">
 	<header class="slide">
-		<h1><span class="delayed">¿¡</span>CSS Variables<span class="delayed">?!</span></h1>
+		<h1>CSS Variables</h1>
 	</header>
 
 	<article class="slide language-js" id="preprocessors">
@@ -95,22 +95,23 @@
 
 	<article class="demo slide horizontal">
 		<p class="hint">--color, --corner, inline style, fallback</p>
-		<style data-slide>
+		<textarea class="language-css">
 			div.block {
 				background: radial-gradient(
 					transparent calc(100% - 20px),
 					currentColor 0);
 				color: #f06;
 			}
-		</style>
-		<style data-slide>
+		</textarea>
+		<style class="demo">
 			div.block {
 				font-size: 150%;
 				width: 4em;
 				height: 4em;
+				text-align: center;
 			}
 		</style>
-		<div class="block" data-edit="css html">CSS is awesome</div>
+		<textarea class="language-html"><div class="block">CSS is awesome</div></textarea>
 	</article>
 
 	<article class="takeaway slide">
@@ -119,7 +120,7 @@
 
 	<article class="demo slide" id="inheritance">
 		<p class="hint">inheritance, cancel inheritance, inherit keyword</p>
-		<style data-slide data-scope=".blocks">
+		<textarea class="language-css">
 			* {
 				outline: var(--outline);
 			}
@@ -127,48 +128,50 @@
 			.block1 {
 				--outline: .2em solid;
 			}
-		</style>
-		<div data-edit="contents css" class="blocks">
-			<div class="block1">
-				<div></div>
+		</textarea>
+		<textarea class="language-html">
+			<div class="blocks">
+				<div class="block1">
+					<div></div>
+				</div>
+				<div class="block2">
+					<div></div>
+				</div>
 			</div>
-			<div class="block2">
-				<div></div>
-			</div>
-		</div>
+		</textarea>
 	</article>
 
 	<article class="takeaway slide">
 		<h1>CSS Variables are <br>inherited properties<div class="delayed note">but you can change that</div></h1>
 	</article>
 
-	<article class="horizontal demo slide" data-edit="css" id="url">
-		<style data-slide>
+	<article class="horizontal demo slide" id="url">
+		<textarea class="language-css">
 			article {
-				background: url("img/sad.jpg") center / cover;
+				background: url("img/cat1.jpg") center / cover;
 			}
-		</style>
+		</textarea>
 	</article>
 
 	<article class="slide" id="url-cases">
 		<table>
 			<tr>
 				<td><pre><code>
-					--img: "sad.jpg";
+					--img: "cat1.jpg";
 					background: url("img/" var(--img));
 				</code></pre></td>
 				<td style="color: red">CSS limitation</td>
 			</tr>
 			<tr class="delayed">
 				<td><pre><code>
-					--img: "img/sad.jpg";
+					--img: "img/cat1.jpg";
 					background: url(var(--img));
 				</code></pre></td>
 				<td style="color: red">CSS bug</td>
 			</tr>
 			<tr class="delayed">
 				<td><pre><code>
-					--img: url("img/sad.jpg");
+					--img: url("img/cat1.jpg");
 					background: var(--img);
 				</code></pre></td>
 				<td style="color: yellowgreen">Works!</td>
@@ -233,22 +236,21 @@
 		</code></pre>
 	</article>
 
-	<article class="demo slide" id="cycles">
-		<style data-slide data-scope=".blocks">
+	<article class="demo slide" id="cycles" style="--division: 50">
+		<textarea class="language-css">
 			div {
-				--size: 8em;
-				height: var(--size);
+				--size: 6em;
+				width: var(--size);
 			}
 
 			.declarative {
-				filter: invert();
+				filter: invert(100%);
 			}
-		</style>
-
-		<div class="blocks" data-edit="css contents">
-			<div>CSS is awesome</div>
-			<div class="declarative">CSS is declarative</div>
-		</div>
+		</textarea>
+		<textarea class="language-html">
+			<div class="block">CSS is awesome</div>
+			<div class="block declarative">CSS is declarative</div>
+		</textarea>
 	</article>
 
 	<article class="takeaway slide">
@@ -262,7 +264,7 @@
 			}
 
 			article.slide[data-step] pre {
-				filter: invert();
+				filter: invert(100%);
 				mix-blend-mode: multiply;
 			}
 
@@ -314,8 +316,8 @@
 		<h1><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/status/csscustompropertiesakacssvariables">status.modern.ie</a></h1>
 	</article> -->
 
-	<article class="demo slide" data-edit="css" id="atsupports">
-		<style data-slide>
+	<article class="demo slide" id="atsupports">
+		<textarea class="language-css">
 			article {
 				background: red;
 			}
@@ -325,7 +327,7 @@
 					background: green;
 				}
 			}
-		</style>
+		</textarea>
 	</article>
 
 	<article class="browser-support slide">
@@ -360,13 +362,13 @@
 
 	<article class="horizontal demo slide">
 		<p class="hint">Show division not working</p>
-		<style data-slide>
+		<textarea class="language-css">
 			.block {
 				width: 33vw;
 				height: 33vh;
 			}
-		</style>
-		<h1 class="block" data-edit="css html">Variable values are token lists</h1>
+		</textarea>
+		<textarea class="language-html"><h1 class="block">Variable values are token lists</h1></textarea>
 	</article>
 
 	<article class="slide">
@@ -386,9 +388,9 @@
 		<h1>Use variables for pure data, <br>not CSS values</h1>
 	</article>
 
-	<article class="horizontal demo slide" id="animation" data-edit="css" style="--division: 70">
+	<article class="horizontal demo slide" id="animation" style="--division: 70">
 		<p class="hint">Try to animate --color | show that var() is ok</p>
-		<style data-slide>
+		<textarea class="language-css">
 			@keyframes bg {
 				from { background-color: yellow; }
 				to { background-color: #0ca; }
@@ -397,7 +399,7 @@
 			#animation.slide {
 				animation: 1s bg infinite alternate;
 			}
-		</style>
+		</textarea>
 		<h1>CSS Variables in @keyframes?</h1>
 	</article>
 
@@ -425,7 +427,7 @@
 		<button onclick="eval(registerPropertyCode.textContent)" class="run delayed">Run!</button>
 	</article>
 
-	<article class="slide" data-import="animation"></article>
+	<article class="slide" data-insert="animation"></article>
 
 	<article class="browser-support slide">
 		<table>
@@ -450,8 +452,8 @@
 		</table>
 	</article>
 
-	<!-- <article class="horizontal demo slide" id="transition" data-edit="css" style="--division: 70">
-		<style data-slide>
+	<!-- <article class="horizontal demo slide" id="transition" style="--division: 70">
+		<textarea class="language-css">
 			#transition.slide {
 				background: yellow;
 				transition: 1s;
@@ -460,7 +462,7 @@
 			#transition.slide:active {
 				background: #0ca;
 			}
-		</style>
+		</textarea>
 		<h1>CSS Variables + Transitions = ?</h1>
 	</article>
 
@@ -480,12 +482,12 @@
 
 	<article class="demo slide" id="button">
 		<p class="hint">Theming by class, by style, box-shadow transition | default default values</p>
-		<div data-edit="contents css">
+		<textarea class="language-html">
 			<button>Click me</button>
 			<button class="pink">Click me</button>
-		</div>
+		</textarea>
 
-		<style data-slide>
+		<textarea class="language-css">
 			button {
 				border: .1em solid black;
 				background: transparent;
@@ -506,8 +508,8 @@
 				background: #f06;
 				color: white;
 			}
-		</style>
-		<style data-slide>
+		</textarea>
+		<style class="demo">
 			button {
 				border-radius: .3em;
 				padding: 0 .5em;
@@ -522,7 +524,7 @@
 		<h1>CSS Variables enable theming<br> independent of CSS structure</h1>
 	</article>
 
-	<article class="slide" data-import="button"></article>
+	<article class="slide" data-insert="button"></article>
 
 	<article class="takeaway slide">
 		<h1>Default default values are possible</h1>
@@ -532,7 +534,7 @@
 		</code></pre>
 	</article>
 
-	<article class="slide demo" id="responsive" data-edit="css">
+	<article class="slide demo" id="responsive">
 		<section></section>
 		<section></section>
 		<section></section>
@@ -541,13 +543,14 @@
 
 		<section class="wide2"></section>
 		<section></section>
-		<style data-slide>
+		<textarea class="language-css">
 		:root {
-			--gutter: 2px;
+			--gutter: 5px;
 		}
 
 		section {
 			margin: var(--gutter);
+			padding: calc(var(--gutter) * 3);
 		}
 
 		@media (min-width: 1000px) {
@@ -555,7 +558,7 @@
 				--gutter: 10px;
 			}
 		}
-		</style>
+		</textarea>
 	</article>
 
 	<article class="takeaway slide">
@@ -569,21 +572,23 @@
 	</header>
 
 	<article class="demo slide" id="autoprefixing" style="--division: 70;">
-		<style data-slide data-scope=".blocks">
+		<textarea class="language-css">
 			* {
 				--clip-path: initial;
 				-webkit-clip-path: var(--clip-path);
 				clip-path: var(--clip-path);
 			}
-		</style>
-		<div data-edit="css contents" class="blocks">
-			<div class="block1">
-				<div></div>
+		</textarea>
+		<textarea class="language-html">
+			<div class="blocks">
+				<div class="block1">
+					<div></div>
+				</div>
+				<div class="block2">
+					<div></div>
+				</div>
 			</div>
-			<div class="block2">
-				<div></div>
-			</div>
-		</div>
+		</textarea>
 	</article>
 
 	<article class="takeaway slide">
@@ -591,7 +596,7 @@
 	</article>
 
 	<article class="horizontal demo slide" id="purple-shadow" style="--division: 70;">
-		<style data-slide>
+		<textarea class="language-css">
 			* {
 				--purple-shadow: initial;
 				box-shadow: var(--purple-shadow) rebeccapurple;
@@ -600,11 +605,13 @@
 			.block {
 				--purple-shadow: .1em .1em .5em;
 			}
-		</style>
+		</textarea>
 
-		<div class="block" data-edit="css html">
-			<div>🎶 Laughing in the purple rain 👬☔️</div>
-		</div>
+		<textarea class="language-html">
+			<div class="block">
+				<div>🎶 Laughing in the purple rain 👬☔️</div>
+			</div>
+		</textarea>
 	</article>
 
 	<article class="takeaway slide">
@@ -614,7 +621,7 @@
 
 	<article class="demo slide" id="box-shadow" style="--font-size-multiplier: .8; --division: 70;">
 		<p class="hint">No inherit from box-shadow, invalid at computed value time</p>
-		<style data-slide data-scope=".blocks">
+		<textarea class="language-css">
 			* {
 				--box-shadow-x: initial;
 				--box-shadow-y: initial;
@@ -634,15 +641,17 @@
 			.block1 {
 
 			}
-		</style>
-		<div data-edit="css contents" class="blocks">
-			<div class="block1">
-				<div></div>
+		</textarea>
+		<textarea class="language-html">
+			<div class="blocks">
+				<div class="block1">
+					<div></div>
+				</div>
+				<div class="block2">
+					<div></div>
+				</div>
 			</div>
-			<div class="block2">
-				<div></div>
-			</div>
-		</div>
+		</textarea>
 	</article>
 
 	<article class="takeaway slide">
@@ -651,7 +660,7 @@
 
 	<article class="demo slide" id="prepend">
 		<p class="hint">inline style too</p>
-		<style data-slide data-scope=".blocks">
+		<textarea class="language-css">
 			* {
 				--prepend: initial;
 			}
@@ -659,18 +668,20 @@
 			::before {
 				content: var(--prepend);
 			}
-		</style>
-		<div data-edit="css contents" class="blocks">
-			<div class="block1">
-				<div></div>
+		</textarea>
+		<textarea class="language-html">
+			<div class="blocks">
+				<div class="block1">
+					<div></div>
+				</div>
+				<div class="block2">
+					<div></div>
+				</div>
+				<div class="block3">
+					<div></div>
+				</div>
 			</div>
-			<div class="block2">
-				<div></div>
-			</div>
-			<div class="block3">
-				<div></div>
-			</div>
-		</div>
+		</textarea>
 	</article>
 
 	<article class="takeaway slide">
@@ -685,12 +696,12 @@
 	</header>
 
 	<article class="horizontal demo slide" id="svg-eyes">
-		<style data-slide>
+		<textarea class="language-css">
 			.iris {
 				cx: 50px;
 			}
-		</style>
-		<div data-edit="contents css">
+		</textarea>
+		<textarea class="language-html">
 			<svg viewBox="0 0 250 100">
 				<clipPath id="white-clip">
 					<path id="white-path" d="M1,50 a65,80 0 0,1 100,0 a80,80 0 0,1 -100,0 Z" />
@@ -700,7 +711,7 @@
 				<circle id="iris" class="iris" cx="50" cy="45" r="18" clip-path="url(#white-clip)" />
 				<use class="iris" href="#iris" x="148" />
 			</svg>
-		</div>
+		</textarea>
 	</article>
 
 	<article class="takeaway slide">
@@ -749,17 +760,17 @@
 	          --mouse-y: [$mouse.y / innerHeight];"></code></pre>
 	</article>
 
-	<article class="horizontal demo slide" data-edit="css" id="mouse">
-		<style data-slide>
+	<article class="horizontal demo slide" id="mouse">
+		<textarea class="language-css">
 			#mouse.slide {
 				background-image: radial-gradient(
 					at 50% 50%,
 					transparent, black);
 			}
-		</style>
+		</textarea>
 	</article>
 
-	<article class="slide" data-import="svg-eyes"></article>
+	<article class="slide" data-insert="svg-eyes"></article>
 
 	<article class="language-javascript slide">
 		<div><pre><code>
@@ -776,13 +787,13 @@
 	</article>
 
 	<article class="horizontal demo slide" id="slider">
-		<style data-slide>
+		<textarea class="language-css">
 			input {
 				appearance: none;
 				background: linear-gradient(to right, #f06 50%, white 0);
 			}
-		</style>
-		<style data-slide>
+		</textarea>
+		<style class="demo">
 			input {
 				width: 300px;
 				-webkit-appearance: none;
@@ -791,12 +802,12 @@
 				border-radius: .1em;
 			}
 		</style>
-		<input type="range" data-edit="html css">
+		<textarea class="language-html"><input type="range" /></textarea>
 	</article>
 
-	<!-- <article class="horizontal demo typing slide" id="typing" data-edit="css" style="--division: 70">
+	<article class="horizontal demo typing slide" id="typing" style="--division: 70">
 		<p class="typing" contentEditable>CSS variables are awesome</p>
-		<style data-slide>
+		<textarea class="language-css">
 			@keyframes typing { from { width: 0; } }
 			@keyframes caret { 50% { border-color: transparent; } }
 
@@ -806,7 +817,7 @@
 				overflow: hidden;
 				animation: caret .5s step-end infinite alternate;
 			}
-		</style>
+		</textarea>
 	</article>
 
 	<article class="language-javascript slide">
@@ -818,11 +829,11 @@
 		</code></pre>
 	</article>
 
-	<article class="slide" data-import="typing"></article>
+	<article class="slide" data-insert="typing"></article>
 
-	<article class="horizontal demo typing slide" id="typing2" data-edit="css">
+	<article class="horizontal demo typing slide" id="typing2">
 		<p class="typing" contentEditable>CSS variables are awesome</p>
-		<style data-slide>
+		<textarea class="language-css">
 			@keyframes typing { from { width: 0; } }
 			@keyframes caret { 50% { border-color: transparent; } }
 
@@ -833,8 +844,8 @@
 				animation: typing calc(var(--length) * .3s) steps(var(--length)),
 				           caret .5s step-end infinite alternate;
 			}
-		</style>
-	</article> -->
+		</textarea>
+	</article>
 
 	<article class="slide">
 		<pre><code class="language-javascript">
@@ -848,21 +859,23 @@
 		</code></pre>
 	</article>
 
-	<article class="horizontal demo slide">
-		<style data-slide>
+	<article class="horizontal demo slide" id="scrolling">
+		<textarea class="language-css">
 			.scrolling {
 				background-image: linear-gradient(to right,
 					white 20%, transparent 0)
 			}
-		</style>
-		<div class="scrolling" data-edit="css html">
-			<p>The allowed syntax for custom properties is extremely permissive. The &lt;declaration-value> production matches any sequence of one or more tokens, so long as the sequence does not contain &lt;bad-string-token>, &lt;bad-url-token>, unmatched &lt;)-token>, &lt;]-token>, or &lt;}-token>, or top-level &lt;semicolon-token> tokens or &lt;delim-token> tokens with a value of "!".</p>
-			<p>In addition, if the value of a custom property contains a var() reference, the var() reference must be valid according to the specified var() grammar. If not, the custom property is invalid and must be ignored.</p>
-			<p>The values of custom properties, and the values of var() functions substituted into custom properties, are case-sensitive, and must be preserved in their original author-given casing. (Many CSS values are ASCII case-insensitive, which user agents can take advantage of by "canonicalizing" them into a single casing, but that isn’t allowed for custom properties.)
-			<p>The initial value of a custom property is an empty value; that is, nothing at all. This initial value has a special interaction with the var() notation, which is explained in the section defining var().
-			<p>Custom properties are ordinary properties, so they can be declared on any element, are resolved with the normal inheritance and cascade rules, can be made conditional with @media and other conditional rules, can be used in HTML’s style attribute, can be read or set using the CSSOM, etc.
-			<p>Notably, they can even be transitioned or animated, but since the UA has no way to interpret their contents, they always use the "flips at 50%" behavior that is used for any other pair of values that can’t be intelligently interpolated. However, any custom property used in a @keyframes rule becomes animation-tainted, which affects how it is treated when referred to via the var() function in an animation property.</p>
-		</div>
+		</textarea>
+		<textarea class="language-html">
+			<div class="scrolling">
+				<p>The allowed syntax for custom properties is extremely permissive. The &lt;declaration-value> production matches any sequence of one or more tokens, so long as the sequence does not contain &lt;bad-string-token>, &lt;bad-url-token>, unmatched &lt;)-token>, &lt;]-token>, or &lt;}-token>, or top-level &lt;semicolon-token> tokens or &lt;delim-token> tokens with a value of "!".</p>
+				<p>In addition, if the value of a custom property contains a var() reference, the var() reference must be valid according to the specified var() grammar. If not, the custom property is invalid and must be ignored.</p>
+				<p>The values of custom properties, and the values of var() functions substituted into custom properties, are case-sensitive, and must be preserved in their original author-given casing. (Many CSS values are ASCII case-insensitive, which user agents can take advantage of by "canonicalizing" them into a single casing, but that isn’t allowed for custom properties.)
+				<p>The initial value of a custom property is an empty value; that is, nothing at all. This initial value has a special interaction with the var() notation, which is explained in the section defining var().
+				<p>Custom properties are ordinary properties, so they can be declared on any element, are resolved with the normal inheritance and cascade rules, can be made conditional with @media and other conditional rules, can be used in HTML’s style attribute, can be read or set using the CSSOM, etc.
+				<p>Notably, they can even be transitioned or animated, but since the UA has no way to interpret their contents, they always use the "flips at 50%" behavior that is used for any other pair of values that can’t be intelligently interpolated. However, any custom property used in a @keyframes rule becomes animation-tainted, which affects how it is treated when referred to via the var() function in an animation property.</p>
+			</div>
+		</textarea>
 	</article>
 
 	<article class="takeaway slide">
@@ -880,8 +893,8 @@
 		<h1>🔮 Future 🔮</h1>
 	</header>
 
-	<article class="demo slide" data-edit="css">
-		<style data-slide>
+	<article class="demo slide">
+		<textarea class="language-css">
 		:root {
 			--bg: {
 				background: yellowgreen;
@@ -892,14 +905,14 @@
 			background: red;
 			@apply --bg;
 		}
-		</style>
+		</textarea>
 		<div class="block">Native mixins are coming!</div>
 	</article>
 </section> -->
 
 <footer class="dark slide dont-resize">
 	<img src="img/mark.svg" class="logo" />
-	<h1>¡Gracias!</h1>
+	<h1>Thank you!</h1>
 	<img src="img/stickers.jpg" class="stickers delayed" alt="">
 	<p class="stickercaption delayed">Want one? Just ask! ---></p>
 	<ul>
@@ -912,11 +925,10 @@
 	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
 </footer>
 
-<script src="js/bliss.min.js"></script>
-<script src="../csss/slideshow.js"></script>
-<script src="js/prism.js"></script>
+<script src="../shared/js/bliss.shy.min.js"></script>
+<script src="../shared/js/prism.js"></script>
 <script src="../incrementable/incrementable.js"></script>
-<script src="../shared/js/editor.js"></script>
+<script src="../../inspire.js/inspire.js"></script>
 <script src="js/talk.js"></script>
 
 </body>

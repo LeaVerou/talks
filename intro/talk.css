@@ -754,7 +754,7 @@ a[data-html] {
 
 	a[href*=".codecademy.com"]::before {
 		--image: url("https://www.codecademy.com/favicon.ico");
-		filter: invert() hue-rotate(180deg);
+		filter: invert(100%) hue-rotate(180deg);
 	}
 
 #colors {

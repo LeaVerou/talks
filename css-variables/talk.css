@@ -253,7 +253,9 @@ span.poop {
 
 	@keyframes typing {
 		from { width: 0 }
-		to { width: calc(var(--lengthD) * 1ch); }
+		to {
+			width: calc(var(--lengthD) * 1ch);
+		}
 	}
 
 	@keyframes caret {
@@ -360,7 +362,9 @@ span.poop {
 		font-weight: 100;
 	}
 
-		.takeaway.slide .label {
+		.takeaway.slide h1::before {
+			counter-reset: takeaway var(--takeaway);
+			content: "Takeaway #" counter(takeaway);
 			display: block;
 			width: fit-content;
 			padding: .2em .5em;
@@ -370,13 +374,12 @@ span.poop {
 			text-transform: uppercase;
 			font-size: 60%;
 		}
-		.takeaway.slide .label span {
-			font-weight: 300;
-		}
 
-#responsive {
+#responsive .demo-target {
+	display: flex;
 	flex-flow: row wrap;
 	align-items: stretch;
+	padding: 1em;
 }
 
 	#responsive section {
@@ -400,58 +403,58 @@ span.poop {
 		background-color: orange;
 	}
 
-	.talking.housewife.slide {
-		display: block;
-		background: #978 url(img/housewife.png) no-repeat bottom right / 50vmin auto;
-		padding: 2em;
-		transition: 1s ease-in-out background-size;
-		color: black;
+.talking.housewife.slide {
+	display: block;
+	background: #978 url(img/housewife.png) no-repeat bottom right / 50vmin auto;
+	padding: 2em;
+	transition: 1s ease-in-out background-size;
+	color: black;
+}
+
+	.talking.housewife.slide:target {
+		background-size: 70vmin auto;
 	}
 
+	@media (min-aspect-ratio: 16/10) {
 		.talking.housewife.slide:target {
-			background-size: 70vmin auto;
+			background-size: 90vh auto;
+		}
+	}
+
+	.talking.slide > h1 {
+			position: relative;
+			padding: .5em .3em .5em .7em;
+			border: .2em solid black;
+			width: 9em;
+			background: white;
+			font-weight: bold;
+			font-size: 170%;
+			border-radius: .8em;
+			text-align: left;
 		}
 
-		@media (min-aspect-ratio: 16/10) {
-			.talking.housewife.slide:target {
-				background-size: 90vh auto;
-			}
+		.talking.slide > h1:before,
+		.talking.slide > h1:after {
+			content: '';
+			position: absolute;
+			right: -.99em;
+			bottom: 1em;
+			width: 0;
+			height: 1px;
+			border: solid transparent;
+			border-width: 0 .8em .8em 0;
 		}
 
-		.talking.slide > h1 {
-				position: relative;
-				padding: .5em .3em .5em .7em;
-				border: .2em solid black;
-				width: 9em;
-				background: white;
-				font-weight: bold;
-				font-size: 170%;
-				border-radius: .8em;
-				text-align: left;
-			}
+		.talking.slide > h1:before {
+			border-bottom-color: black;
+			z-index: -1;
+		}
 
-			.talking.slide > h1:before,
-			.talking.slide > h1:after {
-				content: '';
-				position: absolute;
-				right: -.99em;
-				bottom: 1em;
-				width: 0;
-				height: 1px;
-				border: solid transparent;
-				border-width: 0 .8em .8em 0;
-			}
-
-			.talking.slide > h1:before {
-				border-bottom-color: black;
-				z-index: -1;
-			}
-
-			.talking.slide > h1:after {
-				margin-right: .5em;
-				margin-bottom: .2em;
-				border-bottom-color: white;
-			}
+		.talking.slide > h1:after {
+			margin-right: .5em;
+			margin-bottom: .2em;
+			border-bottom-color: white;
+		}
 
 #default-values {}
 
@@ -477,6 +480,10 @@ span.poop {
 	width: 9.3em;
 	font-size: 120%;
 	color: rebeccapurple;
+}
+
+#scrolling .demo-target {
+	padding: 0 3rem 1rem;
 }
 
 .scrolling {

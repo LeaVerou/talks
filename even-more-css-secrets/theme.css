@@ -150,7 +150,7 @@ details.notes {
 		padding-left: 1em;
 	}
 
-	details.notes > summary,
+	/* details.notes > summary,
 	.button {
 		padding: 0 .4em;
 		border: 1px solid hsla(30,0%,100%, .3);
@@ -160,7 +160,7 @@ details.notes {
 		font-weight: bold;
 		letter-spacing: -.03em;
 		font-size: 60%;
-	}
+	} */
 
 	details.notes > summary::-webkit-details-marker {
 		display: none;
@@ -324,12 +324,6 @@ section > header.slide:target {
 	text-shadow: none;
 	font-weight: 100;
 }
-
-	#indicator::after {
-		content: var(--slide-count);
-		display: block;
-		border-top: 1px solid;
-	}
 
 ::selection {
 	background: hsl(335, 100%, 40%);

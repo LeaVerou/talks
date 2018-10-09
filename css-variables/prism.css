@@ -5,10 +5,6 @@
  * @author Lea Verou
  */
 
-.token.comment {
-	font: 150%/.8 var(--font-handwritten);
-}
-
 .token.comment,
 .token.prolog,
 .token.doctype,

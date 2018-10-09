@@ -341,7 +341,18 @@ document.addEventListener("click", evt => {
 
 	$.bind(document.documentElement, "slidechange input", resizeTextarea);
 	window.addEventListener("load", evt => {
-		requestAnimationFrame(() => resizeTextarea(slideshow.currentSlide));
+		requestAnimationFrame(() => resizeTextarea(inspire.currentSlide));
+	});
+
+	$$(".demo.slide").forEach(slide => {
+		// This is before editors have been created
+		slide.classList.add("dont-resize");
+	});
+
+	document.addEventListener("DOMContentLoaded", function(evt) {
+		$$(".demo.slide").forEach(slide => {
+			slide.demo = new Demo(slide);
+		});
 	});
 
 })();
@@ -371,3 +382,29 @@ function resizeTextarea(textarea, secondAttempt) {
 		}
 	}
 };
+
+function scopeRule(rule, slide, scope) {
+	let selector = rule.selectorText;
+
+	if (rule.cssRules) {
+		// If this rule contains rules, scope those too
+		// Mainly useful for @supports and @media
+		for (let innerRule of rule.cssRules) {
+			scopeRule(innerRule, slide, scope);
+		}
+	}
+
+	if (selector && rule instanceof CSSStyleRule) {
+		let shouldScope = !(
+			selector.includes("#")  // don't do anything if the selector already contains an id
+			|| selector == ":root"
+		);
+
+		if (selector == "article" || selector == ".slide") {
+			rule.selectorText = `#${slide.id}`;
+		}
+		else if (shouldScope && selector.indexOf(scope) !== 0) {
+			rule.selectorText = selector.split(",").map(s => `${scope} ${s}`).join(", ");
+		}
+	}
+}
