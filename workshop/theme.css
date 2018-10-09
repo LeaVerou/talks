@@ -1,0 +1,40 @@
+@font-face {
+	font-family: 'Reenie Beanie';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Reenie Beanie'), local('ReenieBeanie'), url(https://fonts.gstatic.com/s/reeniebeanie/v8/z7NSdR76eDkaJKZJFkkjuvWxXPq1q6Gjb_0.woff2) format('woff2');
+}
+
+:root {
+	--font-handwritten: 'Reenie Beanie', Marker Felt, cursive;
+}
+
+.light.slide,
+.demo.slide {
+	background: hsl(200, 40%, 80%);
+	color: black;
+}
+
+.delayed.displayed,
+.delayed-children > .displayed {
+	opacity: 1;
+}
+
+.hint {
+	position: absolute;
+	font-size: .8rem;
+	font-weight: bold;
+	line-height: 1;
+	color: rgba(0,0,0,.2);
+	mix-blend-mode: multiply;
+}
+
+	.slide:not(.horizontal) .hint {
+		bottom: -5px;
+		right: 10px;
+	}
+
+	.slide.horizontal .hint {
+		top: -5px;
+		left: 10px;
+	}

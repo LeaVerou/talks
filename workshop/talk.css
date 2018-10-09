@@ -1,0 +1,64 @@
+#cover {
+	padding: 0;
+}
+
+	#cover h1,
+	#cover h2 {
+		margin: 0;
+		filter: drop-shadow(.1rem .1rem .5rem rgba(0,0,0,.5));
+	}
+
+	#cover h1 {
+		padding: 0 .1em;
+		width: 4em;
+		color: var(--color-aqua);
+		letter-spacing: -.04em;
+		font-size: 30vh;
+		line-height: .8;
+	}
+
+	@supports (-webkit-background-clip: text) {
+		#cover h1 {
+			background: linear-gradient(to bottom right, var(--color1), var(--color2), var(--color3), var(--color2), var(--color1)) fixed;
+			-webkit-background-clip: text;
+			color: transparent;
+		}
+	}
+
+	#cover h1 > div {
+		position: relative;
+		display: inline-flex;
+		flex-flow: column;
+		justify-content: space-between;
+		vertical-align: bottom;
+		background: inherit;
+		background-clip: border-box;
+		width: 5em;
+		height: 5em;
+		padding: .6em;
+		margin-left: -1em;
+		color: black;
+		letter-spacing: -.02em;
+		text-align: center;
+		font-size: 11%;
+		line-height: 1.2;
+	}
+
+	#cover a {
+		display: block;
+		text-decoration: none;
+	}
+
+	#cover a[href^="https://twitter.com"] {
+		font-weight: 300;
+	}
+
+	#cover .amp {
+		position: absolute;
+		font: italic 600%/1 Baskerville, Palatino, serif;
+		top: 50%; left: 50%;
+		transform: translate(-50%, -50%);
+		opacity: .6;
+		color: white;
+		mix-blend-mode: soft-light;
+	}
