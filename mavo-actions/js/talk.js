@@ -93,7 +93,7 @@ document.addEventListener("slidechange", evt => {
 			rowIncrement = setTimeout(callee, last? 100 : 800);
 		})();
 	}
-	else if (evt.prevSlide.id === "click-to") {
+	else if (evt.prevSlide && evt.prevSlide.id === "click-to") {
 		clearInterval(rowIncrement);
 	}
 });
