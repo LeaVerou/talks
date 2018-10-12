@@ -41,6 +41,7 @@
 			font-weight: 300;
 			font-size: 130%;
 			letter-spacing: -.01em;
+			text-align: left;
 		}
 
 		#intro .authors > article {
@@ -1570,4 +1571,28 @@ ul.fancy li + li::before {
 	.future-work code {
 		mix-blend-mode: multiply;
 		font-weight: bold;
+	}
+
+#click-to {
+	flex-flow: row;
+	overflow: hidden;
+	font-size: 500%;
+	padding: 0;
+}
+
+	#click-to ul {
+		margin: 0;
+		margin-top: calc(50vh - .75em);
+		align-self: flex-start;
+		transform: translateY(calc(-1.5em * var(--n)));
+		transition: .4s transform;
+		padding-left: .4em;
+		list-style: none;
+		text-shadow: 0 calc(1.5em * var(--rows)), 0 calc(-1.5em * var(--rows)); /* make copies of text */
+	}
+
+	#click-to p,
+	#click-to li.active {
+		color: var(--color1);
+		transition: .2s .3s color;
 	}
