@@ -351,7 +351,8 @@ meter.stars {
 		text-transform: uppercase;
 	}
 
-		.takeaway.slide h1::before {
+		.takeaway.slide h1::before,
+		.takeaway.slide ul:first-child::before {
 			counter-reset: takeaway var(--takeaway);
 			content: "Takeaway #" counter(takeaway);
 			display: block;

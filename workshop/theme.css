@@ -7,11 +7,13 @@
 
 :root {
 	--font-handwritten: 'Reenie Beanie', Marker Felt, cursive;
+	--color-magenta: #f06;
+	--color-light-background: hsl(200, 40%, 80%);
 }
 
 .light.slide,
 .demo.slide {
-	background: hsl(200, 40%, 80%);
+	background: var(--color-light-background);
 	color: black;
 }
 
@@ -38,3 +40,16 @@
 		top: -5px;
 		left: 10px;
 	}
+
+.slide:not(.demo) input:not([type]),
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+textarea:not([class]),
+select {
+	background: transparent;
+	padding: 0 .3em;
+	box-sizing: border-box;
+	font-weight: bold;
+}

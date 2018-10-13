@@ -66,3 +66,153 @@
 html:not([data-profile="speaker"]) .hint {
 	display: none;
 }
+
+ul.tree {
+	font: bold 160%/1 var(--font-mono);
+	--dx: 5rem;
+}
+
+ul.tree, ul.tree ul {
+	margin: 0;
+	padding: 0;
+}
+
+	ul.tree > li {
+		margin: 0;
+	}
+
+	ul.tree li {
+		position: relative;
+		display: flex;
+		align-items: center;
+		margin: .3em 0;
+		font-size: 75%;
+	}
+
+		ul.tree li li {
+			margin-left: var(--dx);
+		}
+
+	ul.tree .node {
+		padding: .3em .5em .15em;
+		background: var(--color-green);
+		border-radius: .2em;
+		text-shadow: 0 0 3px rgba(0,0,0,.4);
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+		ul.tree .node[href]:hover {
+			text-decoration: underline;
+			text-decoration-color: initial;
+		}
+
+		ul.tree li  li .node::before {
+			content: "";
+			position: absolute;
+			top: 50%;
+			right: 100%;
+			width: var(--dx);
+			height: .15em;
+			transform: translateY(-50%) skewY(calc(var(--angle, 0) * 1deg)) scaleY(calc(1 / var(--cos-angle, 1)));
+			transform-origin: right;
+			margin: 0;
+			border-radius: 0;
+			background: inherit;
+			background-image: linear-gradient(to right, var(--parent-color), transparent);
+		}
+
+		ul.tree > li li .node { /* 2+ level */
+			background: var(--color-magenta);
+			--parent-color: var(--color-green);
+		}
+
+		ul.tree > li li li .node { /* 3+ level */
+			background: var(--color-aqua);
+			--parent-color: var(--color-magenta);
+		}
+
+		ul.tree > li li li li .node { /* 4+ level */
+			background: var(--color-orange);
+			--parent-color: var(--color-aqua);
+		}
+
+		ul.tree > li li li li li .node { /* 5+ level */
+			--parent-color: var(--color-orange);
+		}
+
+#flexbox-froggy img,
+#css-grid-garden img {
+	display: block;
+	margin-top: 1em;
+	max-height: calc(100vh - 1em);
+}
+
+#blend-playground {
+	flex-flow: row;
+	align-items: stretch;
+	justify-content: stretch;
+	padding: 0;
+	background: none;
+	--stops: black 0, black 10%,
+		white 0, white 20%,
+		gray 0, gray 30%,
+		red 0, red 40%,
+		lime 0, lime 50%,
+		blue 0, blue 60%,
+		yellow 0, yellow 70%,
+		aqua 0, aqua 80%,
+		fuchsia 0, fuchsia 90%,
+		yellowgreen 0;
+}
+
+	#blend-playground .square {
+		--size: 80vmin;
+		width: var(--size);
+		height: var(--size);
+	}
+
+	#blend-playground .backdrop {
+		padding-top: calc(var(--size) / 10);
+		margin-left: calc(var(--size) / 10);
+		margin-top: 1em;
+		background: linear-gradient(to right, var(--stops));
+	}
+
+	#blend-playground .foreground {
+		margin-left: calc(var(--size) / -10);
+		width: calc(11 * var(--size) / 10);
+		background: linear-gradient(var(--stops));
+	}
+
+	#blend-playground div.foreground {
+		mix-blend-mode: var(--blend-mode);
+	}
+
+	#blend-playground select {
+		display: block;
+		width: 100%;
+		height: calc(100vh - 5em);
+		background: hsla(0,0%,100%,.3);
+	}
+
+	#blend-playground .options {
+		padding: 1em;
+		margin-right: 2em;
+		background: var(--color-light-background);
+	}
+
+	#blend-playground h1 {
+		display: flex;
+		align-items: center;
+		margin-top: 0;
+	}
+
+	#blend-playground h1 .foreground,
+	#blend-playground h1 .backdrop {
+		display: inline-block;
+		width: 2em;
+		height: 2em;
+		margin: 0 .2em;
+		padding: 0;
+	}

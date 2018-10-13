@@ -35,6 +35,26 @@
 	</h1>
 </header>
 
+<section>
+	<header class="slide">
+		<h1>SVG Basics</h1>
+	</header>
+
+	<article class="horizontal demo slide">
+		<p class="hint">Percentages, viewBox</p>
+		<textarea class="language-html">
+			<svg style="background: yellow">
+				<rect width="100" height="100"  />
+			</svg>
+		</textarea>
+	</article>
+</section>
+
+<article class="slide" data-insert="evenmore#character-images-secret"></article>
+<article class="slide" data-insert="evenmore#fancy-borders-secret"></article>
+
+<!-- TODO: SVG data URIs from evenmore -->
+
 <section class="language-css">
 	<article class="slide" data-insert="vars#vars-intro"></article>
 	<article class="slide" data-insert="vars#button"></article>
@@ -55,26 +75,386 @@
 			<div class="block">Colors & CSS Variables</div>
 		</textarea>
 	</article>
+	<article class="slide" data-insert="vars#svg-eyes"></article>
 	<article class="slide" data-insert="vars#cssvars-js"></article>
-
-	<!-- TODO: CSS Vars & JS -->
 </section>
 
 <!-- TODO: Chris' font talk -->
 
-<!-- TODO: SVG Basics -->
-<!-- TODO: CSS Vars & SVG -->
+<section>
+	<header class="slide">
+		<h1>Clipping</h1>
+	</header>
 
-<!-- TODO: SVG data URIs from evenmore -->
+	<article class="demo slide">
+		<p class="hint">▼ 0 0, 50% 100%, 100% 0 ▲ 0 100%, 50% 0, 100% 100%</p>
+		<textarea class="language-css">
+			img {
 
-<!-- TODO: Masking, blending, clip-path -->
+			}
+		</textarea>
+		<textarea class="language-html">
+			<img src="img/cat1.jpg" alt="Kitten resting">
+		</textarea>
+		<details class="notes">
+			<ul>
+				<li><code class="property">clip-path</code> makes clipping to arbitrary shapes a piece of cake!</li>
+				<li>It supports any <code data-mdn="CSS/basic-shape">basic shape</code>, as well as SVG-based clip paths</li>
+				<li><code>polygon()</code> is especially useful, because it can use any CSS length, even <code class="function">calc</code> and can be animated!</li>
+				<li><code>0% 0%</code> is the top left corner and <code>100% 100%</code> the bottom right one.</li>
+			</ul>
+		</details>
+	</article>
 
-<!-- TODO: Flexbox from intro & evenmore -->
+	<article class="light slide">
+		<img src="img/cat1.jpg" alt="Kitten resting">
+		<style data-slide>
+			img {
+				clip-path: polygon(0 0,  50% 0,  100% 0, 50% 100%); /* ▼ */
+				animation: 1s kitten infinite alternate;
+			}
 
-<!-- TODO: Grid from intro & evenmore -->
+			@keyframes kitten {
+				to {
+					clip-path: polygon(0 100%, 50% 0, 100% 100%, 50% 100%); /* ▲ */
+				}
+			}
+		</style>
+	</article>
 
+	<article class="demo slide">
+		<textarea class="language-css">
+			.speech-bubble {
+				position: relative;
+				background: white;
+				padding: 1em;
+				border: 1px solid rgba(0,0,0,.3);
+				border-radius: .2em;
+			}
 
-<!-- <article class="slide" data-insert="evenmore#transparent-text"></article> -->
+			.speech-bubble::before {
+				content: "";
+				position: absolute;
+				--size: .8em;
+				width: var(--size);
+				height: var(--size);
+				background: inherit;
+				border: inherit;
+				box-sizing: border-box;
+			}
+		</textarea>
+		<textarea class="language-html">
+			<div class="speech-bubble">Does this look like a speech bubble?</div>
+		</textarea>
+	</article>
+
+	<article class="light slide">
+		<div style="margin-right: 5em; font-size: 115px;">😳</div>
+		<div class="speech-bubble">Does this look like a speech bubble?</div>
+		<style data-slide>
+		.speech-bubble {
+			position: relative;
+			background: white;
+			padding: 1em;
+			border: 1px solid rgba(0,0,0,.3);
+			border-radius: .2em;
+			filter: drop-shadow(0 .1em .3em rgba(0,0,0,.3));
+		}
+
+		.speech-bubble::before {
+			content: "";
+			background: inherit;
+			--size: .8em;
+			width: var(--size);
+			height: var(--size);
+			position: absolute;
+			bottom: calc(100% - .5 * var(--size));
+			border: inherit;
+			box-sizing: border-box;
+			clip-path: polygon(-1px 0, 100% 0, 100% calc(100% + 1px));
+			transform: rotate(-45deg);
+		}
+		</style>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>Blending</h1>
+	</header>
+
+	<article class="slide" data-insert="evenmore#transparent-text"></article>
+	<article class="light slide" id="blend-playground">
+		<div class="options">
+			<h1><span class="foreground"></span>
+				on <span class="backdrop"></span> </h1>
+			<select oninput="document.body.style.setProperty('--blend-mode', this.value)" size="12">
+				<option>normal</option>
+				<option>multiply</option>
+				<option>screen</option>
+				<option>overlay</option>
+				<option>darken</option>
+				<option>lighten</option>
+				<option>color-dodge</option>
+				<option>color-burn</option>
+				<option>hard-light</option>
+				<option>soft-light</option>
+				<option>difference</option>
+				<option>exclusion</option>
+				<option>hue</option>
+				<option>saturation</option>
+				<option>color</option>
+				<option>luminosity</option>
+			</select>
+		</div>
+		<div class="backdrop square">
+			<div class="foreground square"></div>
+		</div>
+	</article>
+	<article class="slide" data-insert="evenmore#blending-modes"></article>
+	<article class="slide" data-insert="evenmore#transparent-text"></article>
+
+	<article class="demo slide" style="--division: 50">
+		<textarea class="language-css">
+			.colorized {
+				background: hsl(180, 50%, 50%);
+			}
+
+			.colorized img {
+
+			}
+		</textarea>
+		<textarea class="language-html">
+			<div class="colorized"><img src="img/cat6.jpg" alt="Kitten held in hand"></div>
+		</textarea>
+		<style data-slide>
+			img {
+				display: block;
+			}
+		</style>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>Flexbox</h1>
+	</header>
+
+	<article class="isolated horizontal demo slide" title="Flexbox">
+		<textarea class="language-html">
+		<nav>
+			<a href="index.html">Home</a>
+			<a href="about.html">About</a>
+			<a href="publications.html">Publications</a>
+			<a href="talks.html">Talks</a>
+			<a href="http://twitter.com/leaverou">Twitter</a>
+		</nav>
+		</textarea>
+		<textarea class="language-css">
+			nav {
+				/* display: flex; */
+				border: 1px solid;
+			}
+
+			nav > a {
+				/* flex: 1; */
+				background: orange;
+			}
+		</textarea>
+		<details class="notes">
+			<li><code>display: flex</code> enables Flexbox layout on an element.
+				This element becomes the <em>Flex Container</em> and its children are called <em>Flex Items</em>.</li>
+			<li><code><code class="property">flex</code>: N</code> defines the proportion that a flex item spreads over.</li>
+			<li><code><code class="property">flex-direction</code>: column</code> on the flex container makes the items flow from top to bottom</li>
+			<li><code class="property">align-items</code> and <code class="property">justify-content</code> on the flex container specify alignment in each direction. Which direction depends on the value of <code>flex-direction</code></li>
+		</details>
+	</article>
+
+	<article class="slide dont-resize" id="flex-longhands">
+		<ul class="tree">
+			<li>
+				flex
+				<ul>
+					<li>flex-grow</li>
+					<li>flex-shrink</li>
+					<li>flex-basis</li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="tree">
+			<li>
+				flex-flow
+				<ul>
+					<li>flex-direction</li>
+					<li>flex-wrap</li>
+				</ul>
+			</li>
+		</ul>
+	</article>
+
+	<article class="slide" title="Flexbox Froggy">
+		<a href="http://flexboxfroggy.com" target="_blank"><img src="../intro/img/flexboxfroggy.png" alt=""></a>
+	</article>
+
+	<article class="slide" data-insert="evenmore#line-headings-secret"></article>
+	<article class="slide" data-insert="evenmore#responsive-flex-secret"></article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>Grid Layout</h1>
+	</header>
+
+	<article class="isolated demo slide" title="Grid Layout">
+		<textarea class="language-html">
+		<dl>
+			<dt>Name</dt>
+			<dd>Sir Adam Catlace</dd>
+			<dt>Species</dt>
+			<dd>Feline</dd>
+			<dt>Picture</dt>
+			<dd><img src="https://leaverou.github.io/talks/intro/img/adamcatlace.jpg" alt=""></dd>
+			<dt>Born</dt>
+			<dd>June 1st, 2014</dd>
+			<dt>Nationality</dt>
+			<dd>Greek</dd>
+			<dt>Country of Residence</dt>
+			<dd>United Kingdom</dd>
+		</dl>
+		</textarea>
+		<textarea class="language-css">
+			dl {
+				/* display: grid; */
+			}
+
+			dt, dd {
+				border: 1px solid silver;
+			}
+
+			dt {
+				font-weight: bold;
+			}
+		</textarea>
+		<details class="notes">
+			<summary>Grid Layout</summary>
+			<ul>
+				<li><code>display: grid</code> enables Grid layout on an element.
+					This element becomes the <em>Grid Container</em> and its children are called <em>Grid Items</em>.</li>
+				<li><code>display: grid</code> doesn’t do much on its own, you also have to define the <em>Grid template</em>.
+					There is a number of properties to do that, such as:
+					<ul>
+						<li><code class="property">grid-template-rows</code></li>
+						<li><code class="property">grid-template-columns</code></li>
+						<li><code class="property">grid-template</code></li>
+						<li>…and many more</li>
+					</ul>
+				</li>
+				<li>The <code>1fr</code> unit allows us to distribute the available space in fractions without having to do any math with percentages.</li>
+				<li>The <code class="property">grid-gap</code> property allows us to set spacing between the grid cells.</li>
+				<li>The <code class="property">grid-row</code> and <code class="property">grid-column</code> properties allow us to place items on specific rows and/or columns. Note that multiple items <em>can</em> be placed in the same cell, and then they will overlap!</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="isolated demo slide" style="--division: 50">
+		<textarea class="language-html">
+			<header><h1>My awesome website</h1></header>
+			<nav>Navigation</nav>
+			<main>Main area</main>
+			<footer>Footer</footer>
+		</textarea>
+		<textarea class="language-css">
+			body {
+				/* display: grid; */
+				/* grid-template-areas: "head head"
+				                     "nav  main"
+				                     "nav  foot"; */
+				/* grid-template-rows: auto 1fr 3em; */
+				/* grid-template-columns: 150px 1fr; */
+				min-height: 100vh;
+				margin: 0;
+			}
+
+			header {
+				background: gold;
+			}
+
+			nav {
+				background: yellowgreen;
+			}
+
+			main {
+				background: white;
+			}
+
+			footer {
+				background: slategray;
+			}
+		</textarea>
+		<details class="notes">
+			<ul>
+				<li><code>grid-template-areas</code> allows you to define named areas in your grid.</li>
+				<li><code>grid-area</code> allows you to assign an element to a named area.</li>
+				<li>You can use the browser developer tools to inspect your grid.</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="slide dont-resize" id="grid-longhands">
+		<ul class="tree">
+			<li>
+				grid
+				<ul>
+					<li>
+						grid-template
+						<ul>
+							<li>grid-template-rows</li>
+							<li>grid-template-columns</li>
+							<li>grid-template-areas</li>
+						</ul>
+					</li>
+					<li>grid-auto-rows</li>
+					<li>grid-auto-columns</li>
+					<li>grid-auto-flow</li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="tree">
+			<li>grid-area
+				<ul>
+					<li>grid-row
+						<ul>
+							<li>grid-row-start</li>
+							<li>grid-row-end</li>
+						</ul>
+					</li>
+					<li>grid-column
+						<ul>
+							<li>grid-column-start</li>
+							<li>grid-column-end</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="tree">
+			<li>
+				grid-gap
+				<ul>
+					<li>grid-column-gap</li>
+					<li>grid-row-gap</li>
+				</ul>
+			</li>
+		</ul>
+	</article>
+
+	<article class="slide" title="CSS Grid Garden">
+		<a href="http://cssgridgarden.com/" target="_blank"><img src="../intro/img/gridgarden.png" alt=""></a>
+	</article>
+
+	<article class="slide" data-insert="evenmore#grid-auto-flow-secret"></article>
+	<article class="slide" data-insert="evenmore#display-contents-secret"></article>
+</section>
 
 <footer class="slide">
 	<h1>Thank you!</h1>
