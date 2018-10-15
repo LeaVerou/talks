@@ -16,7 +16,7 @@
 <link href="talk.css" rel="stylesheet" />
 
 </head>
-<body class="language-markup">
+<body class="language-markup" data-resolution="">
 
 <!-- <article class="slide" id="adjust-resolution" style="--vw: 1600; --vh: 900">
 	<h1>
@@ -46,12 +46,12 @@
 		</article>
 		<article>
 			<strong>Tarfah Alrashed</strong>
-			<a href="tarfah@mit.edu">tarfah@mit.edu</a>
+			<a href="mailto:tarfah@mit.edu">tarfah@mit.edu</a>
 			<span class="affiliation">MIT CSAIL</span>
 		</article>
 		<article>
 			<strong>David Karger</strong>
-			<a href="karger@mit.edu">karger@mit.edu</a>
+			<a href="mailto:karger@mit.edu">karger@mit.edu</a>
 			<span class="affiliation">MIT CSAIL</span>
 		</article>
 	</div>
@@ -64,6 +64,12 @@
 <header class="slide" id="mavo">
 	<h1><img src="img/logo.svg" alt="Mavo"></h1>
 </header>
+
+<article class="slide">
+	<div class="media-frame"><img src="img/todo-mockup.png" alt=""></div>
+</article>
+
+<article class="looping video slide" data-video="videos/todo.mp4" style="--url: 'https://mavo.io/demos/todo'"></article>
 
 <article class="slide">
 	<pre><code>
@@ -81,12 +87,6 @@
 	</code></pre>
 </article>
 
-<article class="slide">
-	<div class="browser"><img src="img/todo-mockup.png" alt=""></div>
-</article>
-
-<article class="looping video slide" data-video="videos/todo.mp4" style="--url: 'https://mavo.io/demos/todo'"></article>
-
 <article class="slide" id="todo-code" data-steps="1">
 	<pre><code>
 		&lt;body <mark>mv-app="todo" mv-storage="local"</mark>>
@@ -103,8 +103,6 @@
 	</code></pre>
 </article>
 
-
-
 <article class="slide">
 	<h1>Try Mavo out</h1>
 	<pre><code>
@@ -114,6 +112,8 @@
 
 	<p class="delayed" style="font-size: 180%">or just visit <a style="font-weight: bold" href="https://play.mavo.io">play.mavo.io</a> and start coding!</p>
 </article>
+
+<article class="slide" data-src="http://todomvc.com"></article>
 
 <article class="slide" id="todomvc" data-steps="1">
 	<table>
@@ -703,7 +703,7 @@ set(dice, random(1, 6))</code>
 				<tr>
 					<td rowspan="3">
 						<span>Dice Roller</span>
-						<div class="small browser"><video src="../../mavo/mavo.io/demos/dice/video.mp4" autoplay muted loop></video></div>
+						<div class="small media-frame"><video src="../../mavo/mavo.io/demos/dice/video.mp4" autoplay muted loop></video></div>
 					</td>
 					<td>
 						Roll dice
@@ -727,7 +727,7 @@ set(dice, random(1, 6))</code>
 				<tr>
 					<td rowspan="3">
 						<span>Words Game</span>
-						<div class="small browser"><video src="videos/words-title.mp4" autoplay muted loop></video></div>
+						<div class="small media-frame"><video src="videos/words-title.mp4" autoplay muted loop></video></div>
 					</td>
 					<td>
 						Click to add word to sentence
@@ -751,7 +751,7 @@ set(dice, random(1, 6))</code>
 				<tr>
 					<td rowspan="2">
 						<span>Shopping List</span>
-						<div class="small browser"><video src="../../mavo/mavo.io/demos/shopping/video.mp4" autoplay muted loop></video></div>
+						<div class="small media-frame"><video src="../../mavo/mavo.io/demos/shopping/video.mp4" autoplay muted loop></video></div>
 					</td>
 					<td>
 						Add common item to shopping list
