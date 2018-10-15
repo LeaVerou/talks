@@ -12,11 +12,12 @@
 <link href="../shared/prism.css" rel="stylesheet" />
 <link href="https://live.prismjs.com/prism-live.css" rel="stylesheet"></link>
 <link href="../shared/css/live-demo.css" rel="stylesheet" />
+<link href="../shared/css/tree.css" rel="stylesheet" />
 <link href="theme.css" rel="stylesheet" />
 <link href="talk.css" rel="stylesheet" />
 
 </head>
-<body class="language-markup" data-resolution="">
+<body class="language-markup" xdata-resolution="1680 1050">
 
 <!-- <article class="slide" id="adjust-resolution" style="--vw: 1600; --vh: 900">
 	<h1>
@@ -181,10 +182,12 @@
 	</ul>
 </article>
 
+<article id="spreadsheet-actions" class="slide" data-title="This problem extends beyond Mavo" data-src="https://www.google.com/search?q=excel+button+to+change+value+site:stackoverflow.com"></article>
+
 <article class="slide" id="mv-action">
 	<h1>Mavo Data Update Actions</h1>
 
-	<pre><code class="language-markup collapse-delayed">&lt;button mv-action="action1(params)<span class="delayed">,
+	<pre><code class="language-markup collapse-delayed">&lt;button mv-action="<span class="delayed">action1(params)</span><span class="delayed">,
                    action2(params)</span><span class="delayed">;
                    action3(params)</span><span class="delayed">
                    ...</span>"></code></pre>
@@ -236,6 +239,36 @@
 
 </article>
 
+<article class="slide dont-resize" id="people-schema">
+	<ul class="tree no-link">
+		<li>
+			root
+			<ul>
+				<li class="multiple">
+					woman
+					<ul>
+						<li>name</li>
+						<li>age</li>
+						<li>emoji</li>
+						<li class="multiple">hobby</li>
+					</ul>
+				</li>
+				<li class="multiple">
+					man
+					<ul>
+						<li>name</li>
+						<li>age</li>
+						<li>emoji</li>
+						<li class="multiple">hobby</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</article>
+
+<article class="slide" data-insert="people"></article>
+
 <section id="use-cases" class="language-clike">
 	<article class="video slide" data-video="videos/clear-completed.mp4" data-times="2" style="--url: 'https://mavo.io/demos/todo'">
 		<code class="annotation top-pointer on-pause" style="top: 49%; left: 59%; --pointer-left: 3em">delete(task where done)</code>
@@ -262,14 +295,17 @@ set(dice, random(1, 6))</code>
 		<code class="annotation top-pointer" style="top: 45%; left: 31%" data-time="12500 to 13000" data-pause>delete(candidate, winner)</code>
 	</article>
 
+	<article class="video slide" id="map" data-video="videos/map.mp4" style="--url: 'https://codepen.io/mavoweb/pen/rKWLpy'">
+		<code class="annotation top-pointer" style="top: 52%; left: 63%; --pointer-left: 21em;" data-time="2500 to 3000" data-pause>add(event, group(lat: mouse.y / 2 - 90, lon: mouse.x / 2 - 180))</code>
+	</article>
+
 	<article class="video slide" id="eshop" data-video="../../mavo/mavo.io/demos/eshop/video.mp4" style="--url: 'https://mavo.io/demos/eshop'">
 		<code class="annotation top-pointer" style="top: 44%; left: 59.5%; --pointer-left: 4em;" data-time="3000 to 3500" data-pause>add(cart.product, product)</code>
-		<code class="annotation top-pointer" style="top: 26%; left: 67.1%" data-time="5200 to 5700" data-pause>delete(product)</code>
+		<code class="annotation top-pointer" style="top: 26%; left: 67.1%" data-time="5800 to 6500" data-pause>delete(product)</code>
 	</article>
 </section>
 
-<article class="slide" data-src="https://codepen.io/mavoweb"></article>
-<article id="spreadsheet-actions" class="slide" data-title="Actions are useful beyond Mavo" data-src="https://www.google.com/search?q=excel+button+to+change+value+site:stackoverflow.com"></article>
+<!-- <article class="slide" data-src="https://codepen.io/mavoweb"></article> -->
 
 <section id="evaluation">
 	<header id="science" class="image slide" data-credits="xkcd"></header>
@@ -694,7 +730,7 @@ set(dice, random(1, 6))</code>
 </section>
 
 <section id="hands-on-tasks">
-	<header class="slide">
+	<header class="slide" style="background: url(img/handson.jpg) center / cover no-repeat" data-credits="Photo by Lisa Fotios from Pexels">
 		<h1>Hands-on tasks</h1>
 	</header>
 
@@ -802,9 +838,21 @@ set(dice, random(1, 6))</code>
 	</article>
 </section>
 
+<article class="slide" id="conclusion">
+	<ul>
+		<span class="label">Conclusions</span>
+		<li>Novices seem to be able to formulate data actions and find them useful</li>
+		<li>Syntax rigidity is not natural. <span class="delayed">Yay sloppiness?</span></li>
+		<li>Repetition is not natural. <span class="delayed">Yay heuristics?</span></li>
+	</ul>
+</article>
+
 <article class="slide" id="thankyou" title="Thank you!" data-credits="gifimage.net, giphy.com"></article>
 
 <footer class="slide">
+	<img src="../shared/img/stickers.jpg" class="stickers delayed" alt="">
+	<p class="stickercaption delayed">We have stickers too, come get one! ---></p>
+	<h1>Bring on the questions!</h1>
 	<div class="sections">
 		<section>
 			<img src="img/logo.svg" />
@@ -824,6 +872,15 @@ set(dice, random(1, 6))</code>
 				<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
 			</ul>
 		</section>
+		<section>
+			<img src="http://haystack.csail.mit.edu/logo.svg" />
+
+			<ul>
+				<li style="--icon: '🌍'"><a href="http://haystack.csail.mit.edu">haystack.csail.mit.edu</a></li>
+				<li style="--icon: '✉'"><a href="mailto:karger@mit.edu">karger@mit.edu</a></li>
+				<li style="--icon: '🐦'"><a href="http://twitter.com/haystack_csail">@haystack_csail</a></li>
+			</ul>
+		</section>
 	</div>
 
 	<p>Slides: <a href="https://leaverou.github.io/talks/html-reimagined">leaverou.github.io/talks/mavo-actions</a></p>
@@ -834,9 +891,13 @@ set(dice, random(1, 6))</code>
 <script src="../../inspire.js/inspire.js"></script>
 <script src="../shared/js/prism.js"></script>
 <script src="https://live.prismjs.com/src/prism-live.js"></script>
+<script src="https://live.prismjs.com/src/prism-live-markup.js"></script>
 <script src="../incrementable/incrementable.js"></script>
 <script src="../shared/js/live-demo.js"></script>
 <script src="js/talk.js"></script>
+<script src="../shared/js/tree.js"></script>
+
+<time id="time" mv-app>[hour($now)]:[minute($now)]</time>
 
 </body>
 </html>
