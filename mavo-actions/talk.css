@@ -178,7 +178,7 @@ svg.person {
 
 #subjects {
 	display: block;
-	--padding: 5vw;
+	--padding: 4vw;
 	padding: var(--padding);
 	text-align: center;
 }

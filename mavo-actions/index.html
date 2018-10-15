@@ -62,6 +62,7 @@
 </article>
 
 <header class="slide" id="mavo">
+	<p class="hint">reactive HTML extension</p>
 	<h1><img src="img/logo.svg" alt="Mavo"></h1>
 </header>
 
@@ -88,6 +89,7 @@
 </article>
 
 <article class="slide" id="todo-code" data-steps="1">
+	<p class="hint">like spreadsheets, but with property names instead of grid cells.</p>
 	<pre><code>
 		&lt;body <mark>mv-app="todo" mv-storage="local"</mark>>
 			&lt;h1>My tasks&lt;/h1>
@@ -115,7 +117,8 @@
 
 <article class="slide" data-src="http://todomvc.com"></article>
 
-<article class="slide" id="todomvc" data-steps="1">
+<article class="light slide" id="todomvc" data-steps="1">
+	<p class="hint">manually CRUD individual items. Need more general data manipulations by programmatically invoking these actions</p>
 	<table>
 		<caption>todomvc.com</caption>
 		<thead>
@@ -143,7 +146,7 @@
 			</tr>
 			<tr class="delayed">
 				<td style="font-weight: bold">Mavo</td>
-				<td style="font-weight: bold">0 🎉</td>
+				<td style="font-weight: bold">0? 🎉</td>
 			</tr>
 		</tbody>
 	</table>
@@ -241,7 +244,7 @@
 	<article class="video slide" id="words-game" data-video="videos/words-title.mp4" style="--url: 'https://mavo.io/demos/words'">
 		<code class="annotation top-pointer" style="top: 57%; left: 8%;" data-time="5100 to 5500" data-pause>add(orderedWord, word)</code>
 		<code class="annotation top-pointer" style="top: 43%; left: 81%; --pointer-left: 12em;" data-time="7300 to 7900" data-pause>delete(last(orderedWord))</code>
-		<code class="annotation bottom-pointer" style="	top: 21%; left: 92.5%; --pointer-left: 10em;" data-time="17000">delete(orderedWord)</code>
+		<code class="annotation bottom-pointer" style="	top: 40%; left: 92.5%; --pointer-left: 10em;" data-time="17000">delete(orderedWord)</code>
 	</article>
 
 	<article class="video slide" id="shopping-list" data-video="../../mavo/mavo.io/demos/shopping/video.mp4" style="--url: 'https://mavo.io/demos/shopping'">
@@ -252,6 +255,11 @@
 	<article class="video slide" id="dice-roller" data-video="../../mavo/mavo.io/demos/dice/video.mp4" style="--url: 'https://mavo.io/demos/dice'">
 		<code class="annotation bottom-pointer" style="top: 53%; left: 50%; --pointer-left: 6.5em" data-time="6500">add(diceHistory, dice),
 set(dice, random(1, 6))</code>
+	</article>
+
+	<article class="video slide" id="lottery" data-video="../../mavo/mavo.io/demos/lottery/video.mp4" style="--url: 'https://mavo.io/demos/lottery'">
+		<code class="annotation bottom-pointer" style="top: 74%; left: 74.5%; --pointer-left: 21.7em;" data-time="9000 to 9500" data-pause>set(winner, first(winnerCount, shuffle(candidate)))</code>
+		<code class="annotation top-pointer" style="top: 45%; left: 31%" data-time="12500 to 13000" data-pause>delete(candidate, winner)</code>
 	</article>
 
 	<article class="video slide" id="eshop" data-video="../../mavo/mavo.io/demos/eshop/video.mp4" style="--url: 'https://mavo.io/demos/eshop'">
