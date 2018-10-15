@@ -3,9 +3,9 @@
 await Inspire.importsLoaded;
 
 if (Inspire.profile !== "speaker") {
-	var allowed = ["#cover", ".demo", ".takeaway", ".browser-support", "#registerProperty", ".language-javascript"];
+	var allowed = ["#cover", ".demo", ".takeaway", ".browser-support", "#registerProperty", ".language-javascript, [mv-app]"];
 
-	$$(".slide" + allowed.map(s => `:not(${s})`).join("")).forEach(slide => slide.remove());
+	$$(".slide" + allowed.map(s => `:not(${s}), .speaker-only`).join("")).forEach(slide => slide.remove());
 }
 
 // Create trees from nested <ul>s

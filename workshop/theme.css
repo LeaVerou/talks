@@ -8,12 +8,11 @@
 :root {
 	--font-handwritten: 'Reenie Beanie', Marker Felt, cursive;
 	--color-magenta: #f06;
-	--color-light-background: hsl(200, 40%, 80%);
 }
 
 .light.slide,
 .demo.slide {
-	background: var(--color-light-background);
+	background: var(--light1);
 	color: black;
 }
 
@@ -52,4 +51,15 @@ select {
 	padding: 0 .3em;
 	box-sizing: border-box;
 	font-weight: bold;
+}
+
+pre:not(.prism-live) .token.comment {
+	font-family: var(--font-handwritten);
+}
+
+.light.slide pre {
+	background: var(--dark1);
+	color: white;
+	padding: 1em;
+	align-self: stretch;
 }
