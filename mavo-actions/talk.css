@@ -1345,13 +1345,17 @@ ul.fancy li + li::before {
 		--value4: 0% !important;
 	}
 
-#separators td:first-child .token {
-	color: inherit;
+#separators {
+	overflow: hidden;	
 }
 
-	#separators h1 {
-		margin-bottom: 0;
+	#separators td:first-child .token {
+		color: inherit;
 	}
+
+		#separators h1 {
+			margin-bottom: 0;
+		}
 
 #sequencing .pie-container {
 

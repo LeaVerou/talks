@@ -63,7 +63,7 @@
 </article>
 
 <header class="slide" id="mavo">
-	<p class="hint">reactive HTML extension</p>
+	<p class="hint">HTML language extension that makes creating web applications as easy as writing HTML</p>
 	<h1><img src="img/logo.svg" alt="Mavo"></h1>
 </header>
 
@@ -196,6 +196,8 @@
 
 <article class="slide language-mavoscript" id="functions">
 	<h1>Data mutation functions</h1>
+	<p class="hint">We kept these functions minimal, to delegate selection and filtering logic to Mavo expressions.
+	This maximizes the amount of computation specified in a reactive fashion.</p>
 	<ul class="delayed-children">
 		<li>
 			<pre><code class="collapse-delayed"> set(reference, value)</code></pre>
@@ -215,8 +217,6 @@
 	<!--
 	The first three are analogous to the SQL primitives UPDATE, INSERT, DELETE, whereas the latter is a composite mutation (delete, then add).
 	These functions are only available in expressions specified with the mv-action attribute. Regular Mavo expressions remain side-effect free.
-	We kept these functions minimal, to delegate selection and filtering logic to Mavo expressions.
-	This maximizes the amount of computation specified in a reactive fashion.
 	-->
 </article>
 
@@ -762,7 +762,7 @@ set(dice, random(1, 6))</code>
 				</tr>
 				<tr>
 					<td>
-						Prevent current dice from showing up in history
+						Prevent current dice from showing in history
 					</td>
 					<td><span data-outof="8" class="bad">1</span></td>
 				</tr>
