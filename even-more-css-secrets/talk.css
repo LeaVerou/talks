@@ -509,7 +509,9 @@ section.secret {
 			font-size: 80%;
 		}
 
-#fancy-borders {}
+#fancy-borders {
+	background: transparent;
+}
 
 		#fancy-borders h1 {
 			width: 5.5em;

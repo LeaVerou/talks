@@ -166,7 +166,7 @@
 			Text</h1></div>
 	</header>
 
-	<article class="demo slide intro" id="transparent-text" data-credits="Photo by London Scout on Unsplash" data-edit="css" style="--division: 40">
+	<article class="demo slide intro" id="transparent-text" data-credits="Photo by London Scout on Unsplash" style="--division: 40">
 		<h1>
 			<span>Even</span>
 			<span>More</span>
@@ -232,7 +232,7 @@
 		<h1>Characters as images</h1>
 	</header>
 
-	<article class="horizontal demo slide" data-edit="css" id="demo-character-images">
+	<article class="horizontal demo slide" id="demo-character-images">
 		<textarea class="language-css">
 			background: url('data:image/svg+xml,\
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
@@ -795,32 +795,32 @@
 		<h1>Pie charts</h1>
 	</header>
 
-	<article class="horizontal demo slide" data-edit="css">
+	<article class="horizontal demo slide">
 		<style data-slide>
 			background: linear-gradient(white, black);
 		</style>
 	</article>
 
 	<article class="horizontal demo slide">
-		<div class="pie" data-edit="css html"></div>
-		<style data-slide>
+		<textarea class="language-html"><div class="pie"></div></textarea>
+		<textarea class="language-css">
 			.pie {
 				padding: 20vmin;
 				border-radius: 50%;
 				background: linear-gradient(red, yellow, lime, aqua, blue, fuchsia, red);
 			}
-		</style>
+		</textarea>
 	</article>
 
 	<article class="horizontal demo slide">
-		<div class="pie" data-edit="css html"></div>
-		<style data-slide>
+		<textarea class="language-html"><div class="pie"></div></textarea>
+		<textarea class="language-css">
 			.pie {
 				padding: 20vmin;
 				border-radius: 50%;
 				background: conic-gradient(#f06 var(--value, 0%), black 0);
 			}
-		</style>
+		</textarea>
 	</article>
 
 	<article class="runnable slide">
@@ -879,15 +879,18 @@
 		</h1>
 	</header>
 	<article class="horizontal demo slide" style="--division: 40">
-		<form data-edit="html css">
-			<label>Username: <input name="username"></label>
-			<label>Password: <input name="password"></label>
-		</form>
-		<style data-slide>
+		<textarea class="language-html">
+			<form>
+				<label>Username: <input name="username"></label>
+				<label>Password: <input name="password"></label>
+			</form>
+		</textarea>
+
+		<textarea class="language-css">
 		form {
 
 		}
-		</style>
+		</textarea>
 		<style data-slide>
 		form {
 			font-size: 150%;

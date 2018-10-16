@@ -10,6 +10,10 @@
 	--color-magenta: #f06;
 }
 
+section > header.slide > h1 {
+	font-size: 200%;
+}
+
 .light.slide,
 .demo.slide {
 	background: var(--light1);
@@ -40,14 +44,15 @@
 		left: 10px;
 	}
 
-.slide:not(.demo) input:not([type]),
+input:not([type]),
 input[type="text"],
 input[type="number"],
 input[type="email"],
 input[type="tel"],
 textarea:not([class]),
 select {
-	background: transparent;
+	background: hsla(0,0%,100%, .2);
+	border: .05em solid white;
 	padding: 0 .3em;
 	box-sizing: border-box;
 	font-weight: bold;
