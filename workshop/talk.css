@@ -142,3 +142,36 @@ html:not([data-profile="speaker"]) .hint {
 		margin: 0 .2em;
 		padding: 0;
 	}
+
+.vertical-bar-chart {
+	font-size: 60%;
+	background: linear-gradient(to bottom, hsla(0,0%,100%,.1) 50%, transparent 0) top / 100% 20%;
+	border: 2px solid white;
+	border-top: 0;
+	border-right: 0;
+	height: calc(100vmin - 12em);
+}
+
+.vertical-bar-chart > div {
+	background: var(--accent4);
+	box-sizing: border-box;
+	padding: .3em 0;
+	margin: 0 .9em;
+	font-weight: bold;
+	letter-spacing: -.04em;
+	word-wrap: break-word;
+	line-height: 1;
+}
+
+#bar-chart-solution .vertical-bar-chart {
+	display: flex;
+	align-items: flex-end;
+}
+
+#bar-chart-solution .vertical-bar-chart > div {
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	width: 2em;
+	height: calc(var(--p) * 100%);
+}
