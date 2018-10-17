@@ -5,6 +5,37 @@
 	src: local('Reenie Beanie'), local('ReenieBeanie'), url(https://fonts.gstatic.com/s/reeniebeanie/v8/z7NSdR76eDkaJKZJFkkjuvWxXPq1q6Gjb_0.woff2) format('woff2');
 }
 
+@font-face {
+  font-family: 'Arvo';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Arvo'), url(fonts/Arvo.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Arvo';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Arvo-Bold'), url(fonts/Arvo-Bold.woff2) format('woff2');
+}
+
+@font-face {
+	font-family: 'Free Sans';
+	src: url(fonts/FreeSans.woff);
+}
+@font-face {
+	font-family: 'Free Sans';
+	src: url(fonts/FreeSansBold.woff);
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: 'amp';
+	src: url(fonts/Rochester-Regular.otf);
+	unicode-range: U+26;
+	/* aargh the Firefox unicode-range bug strikes again ffs */
+}
+
 :root {
 	--font-handwritten: 'Reenie Beanie', Marker Felt, cursive;
 	--color-magenta: #f06;
