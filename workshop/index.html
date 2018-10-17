@@ -177,7 +177,7 @@
 
 <section>
 	<header class="slide">
-		<h1>Blending</h1>
+		<h1>Blending & Filters</h1>
 	</header>
 
 	<article class="slide" data-insert="evenmore#transparent-text"></article>
@@ -229,6 +229,47 @@
 				display: block;
 			}
 		</style>
+	</article>
+
+	<article class="demo slide">
+		<textarea class="language-html">
+			<span class="icon">💩</span>
+		</textarea>
+		<textarea class="language-css">
+			.icon {
+
+			}
+		</textarea>
+		<style data-slide>
+		.icon {
+			font-size: 150px;
+		}
+		</style>
+		<details class="notes">
+			<summary>Filters</summary>
+			<ul>
+				<li>We apply filters with the <code class="property">filter</code> property.</li>
+				<li>There are many useful filters, such as <code>grayscale()</code>, <code>saturate()</code>, <code>hue-rotate()</code>, <code>blur()</code>, <code>drop-shadow()</code> for shadows that actually follow the shape of the element and take transparency into account, and many others.</li>
+				<li>You can chain multiple filters and they are applied in order.</li>
+				<li>You can also link to SVG filters which are much more powerful, but also harder to define.</li>
+			</ul>
+		</details>
+	</article>
+
+	<article class="demo slide intro" id="translucent-background" data-credits="Photo by London Scout on Unsplash" style="--division: 50">
+		<h1 style="margin: auto;">
+			<span>Even</span>
+			<span>More</span>
+			<span>CSS</span>
+			<span>Secrets</span>
+		</h1>
+
+		<textarea class="language-css">
+			h1 {
+				background: rgba(0,0,0,.3);
+				color: white;
+			}
+		</textarea>
 	</article>
 </section>
 

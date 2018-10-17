@@ -28,6 +28,7 @@
 	.browser-support th {
 		border: 0;
 		font-size: 100%;
+		background: none;
 	}
 
 	.browser-support tbody th {

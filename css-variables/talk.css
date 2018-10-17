@@ -565,6 +565,7 @@ span.poop {
 	content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="140"><text style="font-size:90px" y="1em">🔮</text></svg>');
 	position: absolute;
 	bottom: -50vh;
+	z-index: 1;
 	animation: fall 3s infinite ease-in, pos 30s steps(1) infinite;
 	filter: drop-shadow(0 10px 10px rgba(0,0,0,.5));
 }
