@@ -12,7 +12,7 @@
 <link href="../shared/browser-support.css" rel="stylesheet" />
 <link href="talk.css" rel="stylesheet" />
 <link href="//dev.mavo.io/dist/mavo.css" rel="stylesheet" />
-
+<link rel="inspire-import" href="../reusable/index.html" id="reusable">
 </head>
 <body>
 
@@ -27,71 +27,7 @@
 	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
 </header>
 
-<section id="introduction">
-	<section id="hi" class="inverse slide dont-resize darker hi">
-		<figure class="delayed">
-			<img src="img/me.jpg" alt="Picture of me" style="width: 550px" />
-			<figcaption>Hi, I’m Lea!</figcaption>
-		</figure>
-	</section>
-
-	<section class="inverse slide dont-resize darker hi" id="lesbian" data-steps="2">
-		<div>
-			<p class="funfact">#funfact</p>
-			<p>I grew up in Lesbos, Greece</p>
-			<p>…which technically makes me <strong>geographically Lesbian</strong></p>
-		</div>
-	</section>
-
-	<section class="top-heavy slide dont-resize" id="projects" data-type="I ❤ Open Source">
-		<script async data-src="https://buttons.github.io/buttons.js"></script>
-		<ul>
-			<li>
-				<a href="http://mavo.io/" style="background-image: url(../shared/img/project-mavo.png)">Mavo</a>
-				<a class="github-button" href="https://github.com/mavoweb/mavo" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
-			</li>
-			<li>
-				<a href="http://prismjs.com" style="background-image: url(../shared/img/project-prism.png)">PrismJS</a>
-				<a class="github-button" href="https://github.com/prismjs/prism" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
-			</li>
-			<li>
-				<a href="http://leaverou.github.io/prefixfree" style="background-image: url(../shared/img/project-prefixfree.png)">-prefix-free</a>
-				<a class="github-button" href="https://github.com/leaverou/prefixfree" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
-			</li>
-			<li>
-				<a href="http://blissfuljs.com" style="background-image: url(../shared/img/project-bliss.png)">Bliss</a>
-				<a class="github-button" href="https://github.com/leaverou/bliss" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
-			</li>
-			<li><a href="http://css3test.com" style="background-image: url(../shared/img/project-css3test.png)">css3test.com</a></li>
-			<li>
-				<a href="http://leaverou.github.io/awesomplete/" style="background-image: url(../shared/img/project-awesomplete.png)">Awesomplete</a>
-				<a class="github-button" href="https://github.com/leaverou/awesomplete" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
-			</li>
-			<li><a href="http://cubic-bezier.com/" style="background-image: url(../shared/img/project-cubicbezier.png)">cubic-bezier.com</a></li>
-			<li><a href="http://dabblet.com" style="background-image: url(../shared/img/project-dabblet.png)">dabblet.com</a></li>
-			<li><a href="http://contrast-ratio.com/" style="background-image: url(../shared/img/project-contrastratio.png)">Contrast-Ratio.com</a></li>
-		</ul>
-	</section>
-
-	<section class="top-heavy image slide" id="csswg" data-credits="Daniel Glazman" data-steps="1">
-		<h1 class="caption">
-			<span class="w3c"></span> CSS Working Group Invited Expert
-		</h1>
-		<svg viewBox="0 0 100 100" class="annotation">
-			<ellipse />
-		</svg>
-	</section>
-
-
-
-	<!-- <article class="image slide" style="background: url(../shared/img/russian-csssecrets.jpg) center/contain no-repeat white"></article> -->
-
-	<section class="top-heavy image slide" id="mit">
-		<h1><strong>2014&thinsp;–</strong> Haystack Group, MIT CSAIL</h1>
-	</section>
-
-	<article class="slide" data-src="https://mavo.io"></article>
-</section>
+<article class="slide" data-insert="reusable#introduction"></article>
 
 <section class="history">
 	<article class="slide" data-insert="intro"></article>
@@ -1034,26 +970,9 @@
 	<h1><div class="note">One last thing...</div>
 		<div style="font-weight: 300">Please give me feedback at</div>
 		yellkey.com/each</h1>
-</header>
+</header> -->
 
-<footer class="dark slide dont-resize" id="thankyou">
-	<img src="../shared/img/mark.svg" class="logo" />
-	<!-- <h1>Thank you!</h1> -->
-	<img src="../shared/img/stickers.jpg" class="stickers delayed" alt="">
-	<p class="stickercaption delayed">Want one? Just ask! ---></p>
-
-	<ul>
-		<li style="--icon: '🌍'"><a href="http://lea.verou.me">lea.verou.me</a></li>
-		<li style="--icon: '✉'"><a href="mailto:lea@verou.me">lea@verou.me</a></li>
-		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
-	</ul>
-
-	<p>Slides: <a href="https://leaverou.github.io/talks/even-more-css-secrets">leaverou.github.io/talks/even-more-css-secrets</a></p>
-	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
-</footer>
-
-<header class="slide" data-insert="feedback"></header>
-<footer class="slide" data-insert="thankyou"></footer>
+<footer class="slide" data-insert="reusable#thankyou"></footer>
 
 <script src="../shared/js/bliss.shy.min.js"></script>
 <script src="../shared/js/prism.js"></script>
