@@ -1414,3 +1414,72 @@ section.history {}
 			background-position: top left, 200% 80%;
 		}
 	}
+
+#blend-playground {
+	flex-flow: row;
+	align-items: stretch;
+	justify-content: stretch;
+	padding: 0;
+	background: none;
+	--stops: black 0, black 10%,
+		white 0, white 20%,
+		gray 0, gray 30%,
+		red 0, red 40%,
+		lime 0, lime 50%,
+		blue 0, blue 60%,
+		yellow 0, yellow 70%,
+		aqua 0, aqua 80%,
+		fuchsia 0, fuchsia 90%,
+		yellowgreen 0;
+}
+
+	#blend-playground .square {
+		--size: 80vmin;
+		width: var(--size);
+		height: var(--size);
+	}
+
+	#blend-playground .backdrop {
+		padding-top: calc(var(--size) / 10);
+		margin-left: calc(var(--size) / 10);
+		margin-top: 1em;
+		background: linear-gradient(to right, var(--stops));
+	}
+
+	#blend-playground .foreground {
+		margin-left: calc(var(--size) / -10);
+		width: calc(11 * var(--size) / 10);
+		background: linear-gradient(var(--stops));
+	}
+
+	#blend-playground div.foreground {
+		mix-blend-mode: var(--blend-mode);
+	}
+
+	#blend-playground select {
+		display: block;
+		width: 100%;
+		height: calc(100vh - 5em);
+		background: hsla(0,0%,100%,.3);
+	}
+
+	#blend-playground .options {
+		padding: 1em;
+		margin-right: 2em;
+		background: var(--light1);
+	}
+
+	#blend-playground h1 {
+		display: flex;
+		align-items: center;
+		margin-top: 0;
+	}
+
+	#blend-playground h1 .foreground,
+	#blend-playground h1 .backdrop {
+		display: inline-block;
+		width: 2em;
+		height: 2em;
+		margin: 0 .2em;
+		padding: 0;
+	}

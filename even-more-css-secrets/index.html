@@ -217,7 +217,48 @@
 	</article>
 	<article class="slide" data-insert="transparent-text"></article>
 
-	<article class="slide" data-src="https://caniuse.com/#feat=css-mixblendmode"></article>
+	<article class="light slide" id="blend-playground">
+		<div class="options">
+			<h1><span class="foreground"></span>
+				on <span class="backdrop"></span> </h1>
+			<select oninput="document.body.style.setProperty('--blend-mode', this.value)" size="12">
+				<option>normal</option>
+				<option>multiply</option>
+				<option>screen</option>
+				<option>overlay</option>
+				<option>darken</option>
+				<option>lighten</option>
+				<option>color-dodge</option>
+				<option>color-burn</option>
+				<option>hard-light</option>
+				<option>soft-light</option>
+				<option>difference</option>
+				<option>exclusion</option>
+				<option>hue</option>
+				<option>saturation</option>
+				<option>color</option>
+				<option>luminosity</option>
+			</select>
+		</div>
+		<div class="backdrop square">
+			<div class="foreground square"></div>
+		</div>
+	</article>
+
+	<article class="browser-support slide">
+		<table>
+			<tbody>
+				<tr>
+					<th><a href="https://caniuse.com/#feat=css-mixblendmode">CSS blend modes</a></th>
+					<td>41</td>
+					<td>32</td>
+					<td></td>
+					<td>7.1</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="delayed market-share">85.69%</div>
+	</article>
 
 	<article class="takeaway slide">
 		<ul>
