@@ -54,7 +54,7 @@
 	}
 
 		.hi figure img {
-			max-width: 100%;
+			width: 100%;
 			object-fit: cover;
 		}
 
@@ -64,7 +64,7 @@
 			text-align: center;
 			color: black;
 			text-shadow: none;
-			font: 300%/.7 'Reenie Beanie', cursive;
+			font: 300%/.7 var(--font-handwritten, 'Reenie Beanie', Marker Felt, cursive);
 		}
 
 		.hi figure img {
@@ -180,23 +180,34 @@
 		}
 
 #projects {
-	padding: 0;
+	align-items: stretch;
+	justify-content: stretch;
 }
 
 	#projects ul {
 		padding: 0;
 		margin: 0;
-		display: flex;
-		flex-flow: row wrap;
+		height: 100%;
+		display: grid;
+		grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+		grid-gap: 4vmin;
 		align-items: center;
 		justify-content: center;
 	}
 
 		#projects li {
 			position: relative;
+			display: flex;
+			flex-flow: column;
+			align-items: stretch;
+			justify-content: stretch;
 			list-style: none;
-			margin: 2vmin;
+			height: 100%;
 		}
+
+			#projects li a {
+				flex: 1;
+			}
 
 			#projects li .github-button {
 				visibility: hidden;

@@ -79,3 +79,22 @@ span.poop {
 	.browser-support td:empty::before {
 		content: "💩";
 	}
+
+.market-share {
+	position: absolute;
+	top: 2rem;
+	right: 3rem;
+	font-size: 250%;
+	line-height: 1.1;
+}
+
+	.market-share::after {
+		content: "of users " var(--country, "globally");
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 7rem;
+		display: block;
+		font-size: 34%;
+		font-weight: bold;
+	}
