@@ -538,10 +538,10 @@ section.secret {
 				</style>\
 				<linearGradient id="g" gradientTransform="rotate(45)">\
 					<stop stop-color="gold" />\
-					<stop stop-color="#0ac" offset="1" />\
+					<stop stop-color="%230ac" offset="1" />\
 				</linearGradient>\
 				<rect width="100%" height="100%" \
-				      stroke="url(#g)" stroke-width="100" stroke-dasharray="200 0" fill="none"\
+				      stroke="url(%23g)" stroke-width="100" stroke-dasharray="200 0" fill="none"\
 					  style="animation: dashes 3s 2s forwards, marching-ants 1s 2.1s linear infinite;" \
 					   />\
 			</svg>');
@@ -683,14 +683,6 @@ section.secret {
 			/* font-weight: 370; */
 		}
 
-#regression-calculator {
-	flex-flow: row;
-	align-items: flex-start;
-	justify-content: flex-start;
-	padding: 0 0 0 1em;
-	transform-origin: bottom right;
-}
-
 #variable-fonts-demo {
 	overflow: hidden;
 }
@@ -719,6 +711,14 @@ section.secret {
 			visibility: hidden;
 		}
 
+#regression-calculator {
+	flex-flow: row;
+	align-items: stretch;
+	justify-content: stretch;
+	padding: 0 0 0 1em;
+	transform-origin: bottom right;
+}
+
 	#regression-calculator h1 {
 		text-transform: none;
 		text-align: left;
@@ -727,7 +727,7 @@ section.secret {
 	}
 
 	#regression-calculator form {
-		flex: 1;
+		padding-right: 1em;
 	}
 
 	#regression-calculator table input {
@@ -765,14 +765,30 @@ section.secret {
 			height: 1em;
 		}
 
+	#regression-calculator > div {
+		flex: 1;
+	}
+
 	#regression-calculator iframe {
-		--height: 640;
+		width: 62.5%;
+		height: 62.5%;
+		transform: scale(1.6);
+		transform-origin: 0 0;
+		/* --height: 640;
 		--scale: calc(var(--100vh) / var(--height));
 		height: calc(1px * var(--height));
 		min-width: calc((100% - 19em) / var(--scale));
 		transform: scale(var(--scale));
-		transform-origin: top right;
+		transform-origin: top right; */
 		border: 0;
+	}
+
+	@media (max-width: 1500px) {
+		#regression-calculator iframe {
+			width: 100%;
+			height: 100%;
+			transform: none;
+		}
 	}
 
 	#regression-calculator .mv-add-values {
@@ -818,6 +834,7 @@ section.secret {
 	background: var(--color);
 	font-weight: bold;
 	flex-shrink: 0;
+	font-size: 90%;
 }
 
 	.credits::before {
@@ -838,7 +855,9 @@ section.secret {
 		align-self: center;
 	}
 
-#grid-auto-flow {}
+#grid-auto-flow {
+	padding: 0;
+}
 
 	#grid-auto-flow h1 {
 		padding: 0;
@@ -846,8 +865,8 @@ section.secret {
 		grid-template-columns: repeat(7, 1fr);
 		grid-template-rows: repeat(7, 1fr);
 		grid-auto-flow: dense;
-		width: 100vmin;
-		height: 100vmin;
+		width: 99vmin;
+		height: 99vmin;
 		grid-gap: 1px;
 		font-weight: 300;
 	}
@@ -926,7 +945,7 @@ section.secret {
 			background: linear-gradient(gray, gray),
 			 url(img/cat8.jpg) no-repeat center / cover;
 			background-blend-mode: screen, normal;
-			font-size: 150%;
+			font-size: 120%;
 			line-height: .8;
 			color: black;
 			--index: 19;
@@ -934,7 +953,7 @@ section.secret {
 
 		#grid-auto-flow h1::after {
 			content: "";
-			background: url(img/bob.jpg) no-repeat 40% 50% / cover;
+			background: url(img/cat6.jpg) no-repeat 40% 50% / cover;
 			grid-column-end: span 2;
 			grid-row-end: span 4;
 			--index: 20;
@@ -1328,6 +1347,7 @@ section.history {}
 	grid-template-rows: repeat(2, 1fr);
 	grid-gap: .5em;
 	text-transform: uppercase;
+	font-size: 5vw;
 }
 
 	#display-contents h1::before {

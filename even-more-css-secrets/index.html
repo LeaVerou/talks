@@ -157,6 +157,7 @@
 			</ul>
 		</div>
 	</section>
+	<!-- <article class="image slide" style="background: url(../shared/img/russian-csssecrets.jpg) center/contain no-repeat white"></article> -->
 	<header class="slide" data-insert="intro">
 </section>
 
@@ -281,14 +282,6 @@
 			</svg>');
 		</textarea>
 	</article>
-	<!-- <article class="slide" id="rfc-3986">
-		<h1>
-			<div>IETF</div>
-			<div>RFC</div>
-			<div>3986</div>
-		</h1>
-		<iframe src="https://tools.ietf.org/html/rfc3986/#page-13" scrolling="no"></iframe>
-	</article> -->
 	<article class="slide" data-insert="demo-character-images"></article>
 	<article class="horizontal demo slide" style="--division: 70">
 		<textarea class="language-html"><meter min="0" max="5" value="3.5"></meter></textarea>
@@ -369,11 +362,20 @@
 		<!--
 		<linearGradient id="g" gradientTransform="rotate(45)">\
 			<stop stop-color="gold" />\
-			<stop stop-color="#0ac" offset="1" />\
+			<stop stop-color="%230ac" offset="1" />\
 		</linearGradient>\
 		<rect width="100%" height="100%" \
-			  stroke="url(#g)" stroke-width="40" fill="none" />\
+			  stroke="url(%23g)" stroke-width="40" fill="none" />\
 		 -->
+	</article>
+
+	<article class="slide" id="rfc-3986">
+		<h1>
+			<a href="https://www.ietf.org/rfc/rfc3986.txt"><div>IETF</div>
+			<div>RFC</div>
+			<div>3986</div></a>
+		</h1>
+		<iframe src="https://tools.ietf.org/html/rfc3986/#page-13" scrolling="no"></iframe>
 	</article>
 
 	<article class="takeaway slide">
@@ -390,7 +392,7 @@
 		<h1>Line Headings</h1>
 	</header>
 
-	<article class="demo slide" style="--division: 40">
+	<article class="demo slide" style="--division: 47">
 		<p class="hint">width: 100% on h1, height on pseudo</p>
 		<textarea class="language-html">
 		<h1 contentEditable>
@@ -431,7 +433,7 @@
 	</article>
 
 	<article class="takeaway slide">
-		<h1>Text nodes and pseudo-elements can be flex children</h1>
+		<h1>Text nodes and pseudo-elements can&nbsp;be&nbsp;flex&nbsp;children</h1>
 	</article>
 </section>
 
@@ -449,7 +451,7 @@
 			</div>
 		</h1>
 	</header>
-	<article class="demo slide" style="--division: 50">
+	<article class="demo slide" style="--division: 50" id="accessible-menus-demo">
 		<textarea class="language-html">
 			<nav>
 				<ul>
@@ -539,7 +541,20 @@
 			}
 		</style>
 	</article>
-	<article class="slide" data-src="https://caniuse.com/#feat=css-focus-within"></article>
+	<article class="browser-support slide">
+		<table>
+			<tbody>
+				<tr>
+					<th><a href="https://caniuse.com/#feat=css-focus-within">:focus-within</a></th>
+					<td>60</td>
+					<td>52</td>
+					<td></td>
+					<td>10.1</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="delayed market-share">79.1%</div>
+	</article>
 	<article class="takeaway slide">
 		<ul>
 			<li><code>:focus-within</code> + accessibility = <span class="heart">❤️</span></li>
@@ -559,6 +574,7 @@
 		</div>
 	</header>
 	<article class="slide" data-src="https://v-fonts.com"></article>
+	<article class="slide" data-src="https://v-fonts.com/fonts/variable-poo-demo"></article>
 	<article class="demo slide" style="--division: 50" id="variable-fonts-demo">
 		<!--  FF Meta: {0.65, 350}, {1, 300}, {1.5, 190}, {2.8, 140}
 		      Drive: {1, 300}, {1.5, 190}, {2.8, 140} -->
@@ -618,7 +634,7 @@
 		</svg>
 	</article>
 	<article class="slide" data-insert="variable-fonts-demo"></article>
-	<!-- <article class="slide" id="regression-calculator">
+	<article class="slide" id="regression-calculator">
 		<form action="http://www.wolframalpha.com/input/" target="wolfram"
 		      mv-app="regression" mv-mode="edit" mv-storage="local" mv-autosave="0">
 			<h1>
@@ -649,8 +665,8 @@
 				<label><a href="https://www.wolframalpha.com/input/?i=[input]" target="_blank"><img src="img/wolfram.svg" alt="Wolfram Alpha"> query:</a>
 				<input property name="i" value="[model] fit [pair]" class="mv-autosize" /></label>
 		</form>
-		<iframe name="wolfram" data-src="http://www.wolframalpha.com/input/" frameborder="0"></iframe>
-	</article> -->
+		<div><iframe name="wolfram" data-src="http://www.wolframalpha.com/input/" frameborder="0"></iframe></div>
+	</article>
 	<article class="horizontal demo slide" style="--division: 50">
 		<textarea class="language-html">
 			<p><abbr>SQL</abbr> is awesome <sup>[citation needed]</sup></p>
@@ -743,8 +759,8 @@
 	</article>
 	<article class="takeaway slide">
 		<ul>
-			<li><code>flex</code> sets <code>flex-grow</code> & <code>flex-shrink</code> & <code>flex-basis</code></li>
-			<li><code>flex-grow</code> defines how the <strong>remaining space</strong> is distributed. 0 = <strong>no</strong> expansion</li>
+			<li><code>flex-wrap</code> allows your layout to become vertical if there's no space</li>
+			<li><code>flex</code> is relative. Any positive <code>flex</code> value makes the element stretch</li>
 		</ul>
 		<div class="credits">
 			<p>Based on <a href="https://joren.co/flex-grow-9999-hack/"><q>Flex-grow 9999 Hack</q></a> by Joren Van Hee (<a href="https://twitter.com/jorenvanhee">@jorenvanhee</a>)</p>
@@ -819,8 +835,36 @@
 		}
 		</style>
 	</article>
-	<article class="slide" data-src="https://caniuse.com/#feat=css-grid"></article>
-	<article class="slide" data-src="https://caniuse.com/#feat=object-fit"></article>
+
+	<article class="browser-support slide">
+		<table>
+			<tbody>
+				<tr>
+					<th><a href="https://caniuse.com/#feat=css-grid">CSS Grid</a></th>
+					<td>57</td>
+					<td>52</td>
+					<td>10</td>
+					<td>10.1</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="delayed market-share">87.78%</div>
+	</article>
+
+	<article class="browser-support slide">
+		<table>
+			<tbody>
+				<tr>
+					<th><a href="https://caniuse.com/#feat=object-fit">object-fit</a></th>
+					<td>60</td>
+					<td>36</td>
+					<td>16</td>
+					<td>7.1</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="delayed market-share">90.62%</div>
+	</article>
 
 	<article class="takeaway slide">
 		<ul>
@@ -837,9 +881,9 @@
 	</header>
 
 	<article class="horizontal demo slide">
-		<style data-slide>
+		<textarea class="language-css">
 			background: linear-gradient(white, black);
-		</style>
+		</textarea>
 	</article>
 
 	<article class="horizontal demo slide">
@@ -853,7 +897,7 @@
 		</textarea>
 	</article>
 
-	<article class="horizontal demo slide">
+	<article class="horizontal demo slide" id="spinner">
 		<textarea class="language-html"><div class="pie"></div></textarea>
 		<textarea class="language-css">
 			.pie {
@@ -875,26 +919,47 @@
 		</code></pre>
 	</article>
 
-	<article class="slide" data-src="https://caniuse.com/#feat=css-conic-gradients"></article>
+	<article class="slide" data-insert="spinner"></article>
 
 	<article class="browser-support slide">
 		<table>
-			<thead>
-				<tr>
-					<th></th>
-					<th><img src="../shared/img/chrome-logo.svg" alt="Chrome"></th>
-					<th><img src="../shared/img/firefox-logo.svg" alt="Firefox"></th>
-					<th><img src="../shared/img/edge-logo.svg" alt="Edge"></th>
-					<th><img src="../shared/img/safari-logo.png" alt="Safari"></th>
-				</tr>
-			</thead>
 			<tbody>
 				<tr>
-					<th>CSS.registerProperty()</th>
+					<th><a href="https://caniuse.com/#feat=css-conic-gradients">conic-gradient()</a></th>
+					<td>69</td>
+					<td></td>
+					<td></td>
+					<td>12.1</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="delayed market-share">59.67%</div>
+	</article>
+
+	<article class="browser-support slide">
+		<table>
+			<tbody>
+				<tr>
+					<th><a href="https://caniuse.com/#feat=css-variables">CSS Variables</a></th>
+					<td>49</td>
+					<td>31</td>
+					<td>15</td>
+					<td>9.1</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="delayed market-share">86.85%</div>
+	</article>
+
+	<article class="browser-support slide">
+		<table>
+			<tbody>
+				<tr>
+					<th><a href="http://ishoudinireadyyet.com/">CSS.registerProperty()</a></th>
 					<td class="incomplete">⛳️</td>
 					<td></td>
 					<td></td>
-					<td></td>
+					<td class="incomplete">⛳️</td>
 				</tr>
 			</tbody>
 		</table>
@@ -905,6 +970,10 @@
 			<li class="new">Conic gradients are coming!</li>
 			<!-- <li class="new">2 color stop positions for bands of color are coming!</li> -->
 			<li>A color stop at 0 creates hard lines regardless of the previous one’s position.</li>
+		</ul>
+	</article>
+	<article class="takeaway slide">
+		<ul>
 			<li>CSS variables help create flexible components.</li>
 			<li class="new"><code class="language-js">CSS.registerProperty()</code> will allow us to animate custom properties!</li>
 		</ul>
@@ -939,7 +1008,20 @@
 		</style>
 	</article>
 	<article class="light slide" style="background: url(img/display-contents.png) center / contain no-repeat #E5E5E5" data-credits="Image by Chris Coyier"></article>
-	<article class="slide" data-src="https://caniuse.com/#feat=css-display-contents"></article>
+	<article class="browser-support slide">
+		<table>
+			<tbody>
+				<tr>
+					<th><a href="https://caniuse.com/#feat=css-display-contents">display: contents</a></th>
+					<td>65</td>
+					<td>37</td>
+					<td></td>
+					<td>11.1</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="delayed market-share">77.21%</div>
+	</article>
 	<article class="takeaway slide">
 		<ul>
 			<li><code class="language-css">display:contents</code> allows us to make descendants flex or grid children</li>
@@ -947,7 +1029,7 @@
 		</ul>
 	</article>
 </section>
-
+<!--
 <header class="slide" id="feedback">
 	<h1><div class="note">One last thing...</div>
 		<div style="font-weight: 300">Please give me feedback at</div>

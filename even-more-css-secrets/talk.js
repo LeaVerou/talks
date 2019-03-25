@@ -94,24 +94,34 @@ slide.addEventListener("input", function(evt) {
 slide.dispatchEvent(new InputEvent("input"));
 })($("#blending-modes"));
 
-$.bind($('form[target="wolfram"]'), {
-	input: evt => {
-		evt.target.form.submit();
-	}
+var throttleSubmit;
+$.ready().then(() => {
+	$.bind($('form[target="wolfram"]'), {
+		input: evt => {
+			clearTimeout(throttleSubmit);
+
+			if (document.readyState === "complete") {
+				throttleSubmit = setTimeout(() => {
+					evt.target.form.submit();
+				}, 1000);
+			}
+		}
+	});
 });
+
 
 $$(".separate-letters").forEach(element => {
 	element.innerHTML = element.innerHTML.split("").map((letter, i) => `<span data-letter="${letter}" style="--index: ${i}">${letter}</span>`).join("");
 });
 
-// $$("#accessible-menus + .demo.slide").forEach(slide => {
-// 	slide.addEventListener("click", evt => {
-// 		if (evt.target.matches("a")) {
-// 			evt.preventDefault();
-// 			evt.target.focus();
-// 		}
-// 	});
-// });
+$$("#accessible-menus + .demo.slide").forEach(slide => {
+	slide.addEventListener("click", evt => {
+		if (evt.target.matches("a")) {
+			evt.preventDefault();
+			evt.target.focus();
+		}
+	});
+});
 
 $$(".runnable.slide pre>code, .runnable.slide textarea").forEach(element => {
 	$.create("button", {
@@ -133,4 +143,16 @@ $$(".runnable.slide pre>code, .runnable.slide textarea").forEach(element => {
 
 $$("#regression path").forEach(shape => {
 	shape.style.setProperty("--length", shape.getTotalLength() + "px");
+});
+
+$$(".browser-support.slide > table > tbody:first-child").forEach(tbody => {
+	tbody.insertAdjacentHTML("beforebegin", `<thead>
+		<tr>
+			<th></th>
+			<th><img src="../shared/img/chrome-logo.svg" alt="Chrome"></th>
+			<th><img src="../shared/img/firefox-logo.svg" alt="Firefox"></th>
+			<th><img src="../shared/img/edge-logo.svg" alt="Edge"></th>
+			<th><img src="../shared/img/safari-logo.png" alt="Safari"></th>
+		</tr>
+	</thead>`);
 });
