@@ -1,15 +1,17 @@
 @font-face {
-  font-family: 'Reenie Beanie';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Reenie Beanie'), local('ReenieBeanie'), url(https://fonts.gstatic.com/s/reeniebeanie/v7/ljpKc6CdXusL1cnGUSamXwYWpCd0FFfjqwFBDnEN0bM.woff2) format('woff2');
+	font-family: 'Reenie Beanie';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Reenie Beanie'), local('ReenieBeanie'), url(https://fonts.gstatic.com/s/reeniebeanie/v7/ljpKc6CdXusL1cnGUSamXwYWpCd0FFfjqwFBDnEN0bM.woff2) format('woff2');
 }
 
-html {
+:root {
 	--font-mono: Consolas, Monaco, 'Andale Mono', monospace;
 	--font-body: 'Helvetica Neue', sans-serif;
 	--font-heading: var(--font-body);
 	--font-handwritten: 'Reenie Beanie', Marker Felt, cursive;
+	--accent1: yellowgreen;
+	--accent2: #f06;
 }
 
 body {
@@ -28,6 +30,7 @@ h1 {
 
 a {
 	color: inherit;
+	text-decoration-color: hsla(0, 0%, 100%, .5);
 }
 
 	a:empty::after {
@@ -163,14 +166,17 @@ div.editor > pre {
 	color: white;
 }
 
+	.slide:target {
+		overflow: hidden;
+	}
+
 @media (max-width: 1024px) {
 	.slide {
 		padding: 3vmin;
 	}
 }
 
-	.light.slide,
-	.demo.slide {
+	.light.slide {
 		background: hsl(200, 40%, 90%);
 		color: black;
 	}
@@ -243,6 +249,8 @@ code.de-emphasize {
 }
 
 dialog {
+	margin-top: -4em;
+	z-index: 2;
 	padding: 1em;
 	border: 1px solid rgba(0,0,0,.5);
 	box-shadow: .1em .1em .5em rgba(0,0,0,.5);

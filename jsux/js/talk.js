@@ -1,5 +1,3 @@
-var slideshow = new SlideShow();
-
 var $ = Bliss, $$ = $.$;
 
 $$(".whynot.slide").forEach(slide => {
@@ -43,113 +41,8 @@ $$(".language-console").forEach(div => {
 
 Prism.languages.markup.tag.alias = "grouptoken";
 
-(function($, $$){
+(async function($, $$){
 
-
-function createEditor(slide, label, o = {}) {
-	var lang = o.lang || label;
-
-	return $.create("textarea", {
-		id: `${slide.id}-${label}-editor`,
-		className: `language-${lang} editor`,
-		"data-lang": lang,
-		inside: slide,
-		value: o.fromSource(),
-		events: {
-			input: o.toSource
-		}
-	});
-}
-
-$$('[data-edit]').forEach(element => {
-	var edit = element.getAttribute("data-edit").split(/\s+/);
-	var slide = element.closest(".slide");
-	var editors = element._.data.editors = {};
-
-	if (edit.indexOf("html") > -1 || edit.indexOf("contents") > -1) {
-		if (edit.indexOf("html") > -1) {
-			element.removeAttribute("data-edit");
-
-			element = $.create("div", {
-				around: element,
-				"data-edit": edit.join(" ").replace("html", "contents")
-			});
-		}
-
-		editors.contents = createEditor(slide, "contents", {
-			lang: "html",
-			fromSource: () => Prism.plugins.NormalizeWhitespace.normalize(element.innerHTML.replace(/=""(?=\s|>)/g, "")),
-			toSource: function() {
-				element.innerHTML = this.value
-			}
-		});
-	}
-
-	if (edit.indexOf("css") > -1) {
-		var style = $("style[data-slide]", slide) || $.create("style", {
-			"data-slide": "",
-			inside: slide
-		});
-
-		editors.css = createEditor(slide, "css", {
-			fromSource: () => style.textContent,
-			toSource: function() {
-				style.textContent = this.value
-			}
-		});
-	}
-
-	if (edit.length > 1) {
-		// More than 1 editors, need the ability to toggle
-		var editorKeys = Object.keys(editors);
-
-		requestAnimationFrame(() => {
-			editorKeys.forEach((label, i) => {
-				var editor = editors[label];
-
-				editor.parentNode.hidden = i > 0;
-
-				$.create("label", {
-					htmlFor: editor.id,
-					after: editor,
-					textContent: editor.dataset.lang,
-					tabIndex: "0",
-					onclick: function() {
-						editor.parentNode.setAttribute("hidden", "");
-						(editors[editorKeys[i+1]] || editors[editorKeys[0]]).parentNode.removeAttribute("hidden");
-					}
-				});
-			});
-		});
-
-	}
-});
-
-(function() {
-	var resize = evt => {
-		var textarea = evt.type == "input"? evt.target : $("textarea.editor", evt.target);
-
-		if (textarea && textarea.matches("textarea.editor")) {
-			textarea.style.height = "0";
-			textarea.parentNode.style.fontSize = "";
-
-			textarea.style.height = textarea.scrollHeight + "px";
-
-			var cs = getComputedStyle(textarea);
-
-			if (cs.height == cs.maxHeight) {
-				var ratio = Math.min(2, textarea.scrollHeight/textarea.offsetHeight) - 1;
-				textarea.parentNode.style.fontSize = 100 - Math.round(50 * ratio) + "%";
-			}
-		}
-	};
-
-	$.events(document.documentElement, "slidechange input", resize);
-	window.addEventListener("load", evt => {
-		requestAnimationFrame(() => resize({target: slideshow.currentSlide}));
-	})
-
-})();
 /*
 $("#details-demo").addEventListener("toggle", function(evt) {
 
@@ -174,7 +67,7 @@ document.addEventListener("keyup", function(evt) {
 	var i = keyCodes.indexOf(code);
 
 	if (i > -1 && evt.target.nodeName != "TEXTAREA") {
-		var element = slideshow.currentSlide;
+		var element = Inspire.currentSlide;
 		var label = Object.keys(keys)[i];
 
 		if (element && element.matches(`[data-keys~=${label}]`)) {
@@ -206,4 +99,5 @@ document.body.addEventListener("toggle", evt => {
 	}
 }, true);
 */
+
 })(Bliss, Bliss.$);

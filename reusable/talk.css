@@ -1,0 +1,465 @@
+@font-face {
+	font-family: 'Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: url("../shared/fonts/slide-icons.woff2") format('woff2');
+}
+
+@font-face {
+  font-family: 'Reenie Beanie';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Reenie Beanie'), local('ReenieBeanie'), url(https://fonts.gstatic.com/s/reeniebeanie/v7/ljpKc6CdXusL1cnGUSamXwYWpCd0FFfjqwFBDnEN0bM.woff2) format('woff2');
+}
+
+
+#introduction .slide {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.hi {
+	padding: 1vmin;
+	font-size: 200%;
+}
+
+.hi:target {
+	overflow: hidden;
+}
+
+	.hi > .delayed:only-child:not(.current):not(.displayed) {
+		transform: translateY(-100vh);
+	}
+
+	.hi > .delayed:only-child {
+		margin: auto;
+	}
+
+	.hi p {
+		margin: 0;
+		padding-top: .5em;
+		font: 220%/1 'Reenie Beanie', sans-serif;
+	}
+
+	.hi figure {
+		margin: 2em auto 0;
+		width: fit-content;
+		max-height: 99vh;
+		background: white;
+		padding: 15px;
+		box-shadow: 2px 2px 30px black;
+		transform: rotate(-2deg);
+	}
+
+		.hi figure img {
+			width: 100%;
+			object-fit: cover;
+		}
+
+		.hi figure figcaption {
+			display: block;
+			padding-bottom: .1em;
+			text-align: center;
+			color: black;
+			text-shadow: none;
+			font: 300%/.7 var(--font-handwritten, 'Reenie Beanie', Marker Felt, cursive);
+		}
+
+		.hi figure img {
+			background: url(img/grass.svg), url(img/starburst.svg), linear-gradient(hsl(200, 84%, 85%), hsl(200, 84%, 90%));
+			background-position: 50% 200px, 0 -100px, 0 0;
+			background-repeat: repeat-x, no-repeat;
+			background-size: auto, 100% auto;
+		}
+
+		#why-html h1 {
+			font-size: 500%;
+			margin: auto;
+			letter-spacing: -.05em;
+		}
+
+#lesbian, #hi {
+	overflow: hidden;
+	background-color: hsl(200, 40%, 40%);
+}
+
+	#lesbian::before {
+		content: "";
+		position: absolute;
+		top: 0; right: 0; bottom: 0; left: 0;
+		background: url(../shared/img/greece.svg) no-repeat center / auto 90vh;
+		background-origin: content-box;
+		transition: inherit;
+		/* filter: drop-shadow(0 0 .1em rgba(0,0,0,.3)); */
+	}
+
+		#lesbian[data-step]::before {
+			background-size: auto 850%;
+			background-position: 67% 36%;
+		}
+
+		#lesbian div {
+			position: absolute;
+			bottom: 1em;
+			left: 1em;
+			transition: .5s opacity;
+		}
+
+			#lesbian .funfact {
+				position: fixed;
+				top: 0;
+				font-weight: bold;
+				font-size: 300%;
+			}
+
+			#lesbian div p:nth-of-type(2) {
+				transition-delay: .6s;
+			}
+
+			#lesbian div p:last-of-type {
+				font-size: 120%
+			}
+
+			#lesbian div p {
+				transition: inherit;
+				transition-property: height, opacity;
+				height: 1em;
+			}
+
+			#lesbian:not([data-step]) > div p + p {
+				opacity: 0
+			}
+
+				#lesbian:not([data-step="2"]) div p:last-of-type {
+					height: 0;
+					overflow: hidden;
+				}
+
+#book {
+
+}
+
+	#book > a {
+		text-decoration: none;
+		color: white;
+		font-size: 85%;
+		font-weight: bold;
+		transform: translateY(-100vh);
+		transition: .4s .2s transform;
+	}
+
+	#book:target > a {
+		transform: scale(1.2);
+	}
+
+		#book img {
+			display: block;
+			margin: 0 auto 1em;
+			box-shadow: 1px 1px #aab, 2px 2px #bbc, 3px 3px #99a, 4px 4px #aab, 5px 5px #889, 6px 6px #99a, 7px 7px #778, 8px 8px #889,
+			            8px 8px 10px rgba(0,0,0,.6);
+		}
+
+	#languages {
+		position: absolute;
+		right: 1em;
+		bottom: 1em;
+		font-size: 75%;
+		font-weight: 500;
+	}
+
+		#languages h3 {
+			margin: 0;
+			font-weight: 100;
+		}
+
+		#languages ul {
+			margin: 0;
+			padding-left: 1em;
+		}
+
+#projects {
+	align-items: stretch;
+	justify-content: stretch;
+}
+
+	#projects ul {
+		padding: 0;
+		margin: 0;
+		height: 100%;
+		display: grid;
+		grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+		grid-gap: 4vmin;
+		align-items: center;
+		justify-content: center;
+	}
+
+		#projects li {
+			position: relative;
+			display: flex;
+			flex-flow: column;
+			align-items: stretch;
+			justify-content: stretch;
+			list-style: none;
+			height: 100%;
+		}
+
+			#projects li a {
+				flex: 1;
+			}
+
+			#projects li .github-button {
+				visibility: hidden;
+			}
+
+			#projects li iframe[src^="https://buttons.github.io/"],
+			#projects li span {
+				position: absolute;
+				bottom: .5em;
+				right: .5em;
+				filter: drop-shadow(1px 1px 3px rgba(0,0,0,.5));
+			}
+
+			#projects li span {
+				bottom: .1em;
+			}
+
+			#projects li a:first-of-type {
+				display: flex;
+				position: relative;
+				align-items: flex-end;
+				justify-content: flex-start;
+				padding: .1em .4em;
+				width: 23vw;
+				height: 23vh;
+				background: url(img/project-prism.png) top / cover no-repeat;
+				font-weight: bold;
+				letter-spacing: -.05em;
+				border: 1px solid white;
+				box-shadow: 0 -1.8em 0 rgba(0,0,0,.6) inset, 0 0 .5em rgba(0,0,0,.6);
+				text-shadow: 0 0 .3em black;
+			}
+
+			#projects li a.github-button {
+				display: none;
+			}
+
+			#projects li a:not(:hover) {
+				text-decoration: none;
+			}
+
+#csswg {}
+
+	#csswg.image {
+		background-image: url(img/csswg.jpg);
+	}
+
+	#csswg strong {
+		display: block;
+		color: white;
+		font: bold 125% Helvetica Neue, sans-serif;
+	}
+
+	#csswg svg.annotation {
+		top: 4vh;
+		left: 22vw;
+		width: 29vw;
+		height: 25vh;
+	}
+
+	#csswg h1 img {
+		vertical-align: -.1em;
+	}
+
+	#csswg .w3c {
+		display: inline-block;
+		vertical-align: -.3em;
+		background: #005a9c;
+		width: 1em;
+		height: 1em;
+		padding: .15em;
+		border-radius: 50%;
+		background: url("../shared/img/w3c.svg") no-repeat center / contain content-box border-box, #005a9c;
+	}
+
+#mit {
+	padding: 0;
+}
+
+#mit.image {
+	background-image: url(img/haystack.png);
+}
+
+	#mit > p {
+		width: 6em;
+		padding: 1em;
+		margin: auto;
+		transform-origin: top;
+	}
+
+	#mit > p.displayed {
+		transform: scale(.5);
+	}
+
+		#mit > p img {
+			display: block;
+			width: 80%;
+			margin-bottom: .2em;
+		}
+
+	#mit > img {
+		width: 100%;
+		margin-bottom: -70vh;
+		transition-property: opacity, transform, margin;
+		transform: translateY(-35vh);
+	}
+
+		#mit > img:not(.current):not(.displayed) {
+			transform: translateY(90vh);
+			margin-bottom: -100vh;
+		}
+
+
+
+footer.slide {
+	text-align: center;
+	padding: 1em 0 0;
+}
+
+footer.slide:target {
+	overflow-x: hidden;
+}
+
+	footer.slide h1 {
+		margin-top: 0;
+	}
+
+	footer.slide > ul {
+		margin: 0 auto;
+		padding: 0 2em;
+		width: 100%;
+		box-sizing: border-box;
+		display: flex;
+		list-style: none;
+		background: #f06;
+		text-align: center;
+	}
+
+		footer.slide > ul li {
+			flex: 1
+		}
+
+		footer.slide > ul li::before {
+			content: var(--icon);
+			display: inline-block;
+			margin-right: .3em;
+			font-family: 'Icons';
+			font-weight: normal;
+			color: hsl(200, 15%, 20%);
+		}
+
+		footer.slide > ul a {
+			text-decoration: none;
+			font-weight: 500;
+		}
+
+#thankyou {
+	background: url(img/thankyou.gif) no-repeat,
+	            url(img/unicorn.gif) 100% 80% no-repeat hsl(344, 88%, 73%);
+	background-blend-mode: multiply, normal;
+}
+
+.annotation {
+	position: relative;
+	width: fit-content;
+}
+
+	.annotation svg,
+	svg.annotation {
+		position: absolute;
+		top: 0;
+		right: 0;
+		max-width: 100%;
+	}
+
+	.annotation svg ellipse,
+	svg.annotation ellipse {
+		stroke: red;
+		fill: none;
+		stroke-width: .5vmin;
+		stroke-linecap: round;
+		stroke-dasharray: 500 500;
+		stroke-dashoffset: -315;
+		transition: 1s stroke-dashoffset;
+		rx: calc(50px - .25vmin);
+		ry: calc(50px - .25vmin);
+		cx: 50px;
+		cy: 50px;
+	}
+
+	.slide[data-step] .annotation svg ellipse,
+	.slide[data-step] svg.annotation ellipse {
+		stroke-dashoffset: 0;
+	}
+
+.stickers {
+	position: absolute;
+	top: -2em;
+	right: -2em;
+	width: 11em;
+	height: 11em;
+	object-fit: cover;
+	border-radius: 50%;
+	transition: .5s cubic-bezier(.3, .2, .5, 1.6);
+}
+
+	.stickers.delayed:not(.current):not(.displayed) {
+		transform: scale(0);
+	}
+
+	.stickercaption {
+		font: 100%/1.5 var(--font-handwritten, 'Reenie Beanie', Marker Felt, cursive);
+		position: absolute;
+		top: -.5em;
+		right: 22rem;
+		color: #f06;
+	}
+
+		.stickercaption:not(.current):not(.displayed) {
+			transform: translateX(-150vw);
+		}
+
+#thankyou {
+	color: black;
+}
+
+#thankyou:target {
+	animation: unicorn-walk 6s infinite linear;
+}
+
+	#thankyou ul {
+		order: 9;
+		margin-top: 1em;
+		font-size: 150%;
+		color: white;
+		letter-spacing: -.05em;
+	}
+
+	#thankyou .logo {
+		height: 30vh;
+		margin-bottom: auto;
+	}
+
+	#thankyou .stickercaption {
+		color: inherit;
+	}
+
+	@keyframes unicorn-walk {
+		from {
+			background-position: top left, -200% 80%;
+		}
+		to {
+			background-position: top left, 200% 80%;
+		}
+	}

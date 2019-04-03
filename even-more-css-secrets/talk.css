@@ -1401,40 +1401,6 @@ section.history {}
 	background: rgba(200, 0, 0, .5);
 }
 
-#thankyou {
-	color: black;
-}
-
-#thankyou:target {
-	animation: unicorn-walk 6s infinite linear;
-}
-
-	#thankyou ul {
-		order: 9;
-		margin-top: 1em;
-		font-size: 150%;
-		color: white;
-		letter-spacing: -.05em;
-	}
-
-	#thankyou .logo {
-		height: 30vh;
-		margin-bottom: auto;
-	}
-
-	#thankyou .stickercaption {
-		color: inherit;
-	}
-
-	@keyframes unicorn-walk {
-		from {
-			background-position: top left, -200% 80%;
-		}
-		to {
-			background-position: top left, 200% 80%;
-		}
-	}
-
 #blend-playground {
 	flex-flow: row;
 	align-items: stretch;

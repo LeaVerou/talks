@@ -6,7 +6,6 @@
 }
 
 #intro {
-	background-image: ;
 	background-position: left;
 	background-size: cover;
 }
@@ -70,204 +69,7 @@
 			text-decoration: none;
 		}
 
-		.hi {
-			padding: 1vmin;
-			background: #f06;
-			font-size: 200%;
-		}
-
-			.hi > .delayed:only-child:not(.current):not(.displayed) {
-				transform: translateY(-100vh);
-			}
-
-			.hi > .delayed:only-child {
-				margin: auto;
-			}
-
-			.hi p {
-				margin: 0;
-				padding-top: .5em;
-				font: 220%/1 'Reenie Beanie', sans-serif;
-			}
-
-			.hi figure {
-				margin: 2em auto 0;
-				width: fit-content;
-				max-height: 99vh;
-				background: white;
-				padding: 15px;
-				box-shadow: 2px 2px 30px black;
-				transform: rotate(-2deg);
-			}
-
-				.hi figure img {
-					max-width: 100%;
-					object-fit: cover;
-				}
-
-				.hi figure figcaption {
-					display: block;
-					padding-bottom: .1em;
-					text-align: center;
-					color: black;
-					text-shadow: none;
-					font: 240%/.7 Marker Felt, 'Reenie Beanie', cursive;
-				}
-
-				.hi figure img {
-					background: url(img/grass.svg), url(img/starburst.svg), linear-gradient(hsl(200, 84%, 85%), hsl(200, 84%, 90%));
-					background-position: 50% 200px, 0 -100px, 0 0;
-					background-repeat: repeat-x, no-repeat;
-					background-size: auto, 100% auto;
-				}
-
-				#why-html h1 {
-					font-size: 500%;
-					margin: auto;
-					letter-spacing: -.05em;
-				}
-
-		#lesbian {
-			background: url(img/greece.svg) no-repeat center / auto 90vh #f06;
-			background-origin: content-box;
-		}
-
-			#lesbian[data-step] {
-				background-size: auto 850%;
-				background-position: 67% 36%;
-			}
-
-			#lesbian div {
-				position: absolute;
-				bottom: 1em;
-				left: 1em;
-				transition: .5s opacity;
-			}
-
-				#lesbian div p:first-of-type {
-					position: fixed;
-					top: 0;
-					font-weight: bold;
-					font-size: 300%;
-				}
-
-				#lesbian div p:last-of-type {
-					font-size: 120%
-				}
-
-				#lesbian div p {
-					transition: inherit;
-					transition-property: height;
-					height: 1em;
-				}
-
-				#lesbian:not([data-step="2"]):not([data-step="3"]) > div {
-					opacity: 0
-				}
-
-					#lesbian:not([data-step="3"]) div p:last-of-type {
-						height: 0;
-						overflow: hidden;
-					}
-
-		#book {
-
-		}
-
-			#book a {
-				text-decoration: none;
-				color: white;
-				font-size: 85%;
-				font-weight: bold;
-			}
-
-			#book img {
-				display: block;
-				margin-bottom: 1em;
-				box-shadow: 1px 1px #aab, 2px 2px #bbc, 3px 3px #99a, 4px 4px #aab, 5px 5px #889, 6px 6px #99a, 7px 7px #778, 8px 8px #889,
-				            8px 8px 10px rgba(0,0,0,.6);
-			}
-
-#projects {
-	padding: 0;
-}
-
-	#projects ul {
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-flow: row wrap;
-		align-items: center;
-		justify-content: center;
-	}
-
-		#projects li {
-			list-style: none;
-			margin: 2vmin;
-		}
-
-			#projects li a {
-				display: flex;
-				position: relative;
-				align-items: flex-end;
-				justify-content: center;
-				padding: .1em;
-				width: 23vw;
-				height: 23vh;
-				background: url(img/project-prism.png) top / cover no-repeat;
-				font-weight: bold;
-				letter-spacing: -.05em;
-				border: 1px solid white;
-				box-shadow: 0 -1.8em 0 rgba(0,0,0,.6) inset, 0 0 .5em rgba(0,0,0,.6);
-				text-shadow: 0 0 .3em black;
-			}
-
-			#projects li a:not(:hover) {
-				text-decoration: none;
-			}
-
-#csswg {}
-
-	#csswg strong {
-		display: block;
-		color: white;
-		font: bold 125% Helvetica Neue, sans-serif;
-	}
-
-#mit {
-	padding: 0;
-}
-
-	#mit > p {
-		width: 6em;
-		padding: 1em;
-		margin: auto;
-		transform-origin: top;
-	}
-
-	#mit > p.displayed {
-		transform: scale(.5);
-	}
-
-		#mit > p img {
-			display: block;
-			width: 80%;
-			margin-bottom: .2em;
-		}
-
-	#mit > img {
-		width: 100%;
-		margin-bottom: -70vh;
-		transition-property: opacity, transform, margin;
-		transform: translateY(-35vh);
-	}
-
-		#mit > img:not(.current):not(.displayed) {
-			transform: translateY(90vh);
-			margin-bottom: -100vh;
-		}
-
-footer.slide {
+/* footer.slide {
 	text-align: center;
 	padding: 1em 0 0;
 }
@@ -329,7 +131,7 @@ footer.slide {
 
 			.stickercaption:not(.current):not(.displayed) {
 				transform: translateX(-150vw);
-			}
+			} */
 
 #boots {
 	background: linear-gradient(to right, #e7ebef 35%, transparent 50%),
@@ -381,10 +183,21 @@ footer.slide {
 			line-height: 1.2;
 		}
 
+#faucet {
+	transition: .5s background;
+	background-size: 100% auto;
+}
+
+	#faucet[data-step="1"] {
+		background-position: 100% 70%;
+		background-size: 200%
+	}
+
 .hall.slide {
 	--background: hsl(0, 0%, 15%);
 	background: var(--background);
 	--background: #111;
+	overflow: hidden;
 }
 
 	.hall.slide > h1 {
@@ -525,11 +338,11 @@ footer.slide {
 }
 
 .sin.slide {
-	background: radial-gradient(rgba(0,0,0,.7) 20%, transparent 80%), url(img/hell.jpg) black center / cover;
+	background: radial-gradient(rgba(0,0,0,.85) 20%, transparent 60%), url(img/hell.jpg) black center / cover;
 }
 
 .commandment.slide {
-	background: radial-gradient(rgba(0,0,0,.7) 20%, transparent 80%), url(img/god.jpg) black center / cover;
+	background: radial-gradient(rgba(0,0,0,.8) 20%, transparent 60%), url(img/god.jpg) black center / cover;
 }
 
 	.sin.slide::before,
@@ -691,10 +504,11 @@ ul.good {
 		width: fill-available;
 	}
 
-	.language-console pre {
+	.language-console.language-console pre {
 		margin: 0;
 		padding: 0 .5em;
 		transition: none;
+		overflow: hidden;
 	}
 
 	.language-console pre.in {
@@ -827,7 +641,23 @@ input[type="range"].multirange.ghost {
 	background: black no-repeat bottom right / auto 2em content-box border-box;
 }
 
-.demo.slide {
+.demo.slide .editor-container {
+	order: 999;
+}
+
+.demo.slide textarea {
+	caret-color: white;
+}
+
+.demo.slide input {
+	color: black;
+	margin: 0 auto;
+	transform: scale(3);
+	transform-origin: top;
+	font-size: 33%;
+}
+
+/* .demo.slide {
 	text-align: center;
 	justify-content: flex-start;
 	background: hsl(200, 20%, 75%);
@@ -864,7 +694,7 @@ input[type="range"].multirange.ghost {
 		transform: scale(3);
 		transform-origin: top;
 		font-size: 33%;
-	}
+	} */
 
 #dialog p::before {
 	content: url(img/ceilingcat.png);
@@ -937,3 +767,7 @@ kbd {
 	#multirange:target h1 {
 		animation: multirange-h1 1s 9s both;
 	}
+
+#smashing-html-apis a {
+	font-size: 90%;
+}

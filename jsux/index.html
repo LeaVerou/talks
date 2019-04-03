@@ -4,17 +4,19 @@
 
 <meta charset="utf-8" />
 <title>JS UX</title>
-<link href="../csss/slideshow.css" rel="stylesheet" />
-<link href="../csss/reusable.css" rel="stylesheet" />
-<link href="prism.css" rel="stylesheet" />
-<link href="theme.css" rel="stylesheet" />
-<link href="../multirange/multirange.css" rel="stylesheet" />
-<link href="talk.css" rel="stylesheet" />
 
-<script src="../prefixfree/prefixfree.min.js"></script>
+<link href="../../inspire.js/inspire.css" rel="stylesheet" />
+<link href="../../inspire.js/extras.css" rel="stylesheet" />
+<link href="../shared/intro-outro.css" rel="stylesheet" />
+<link href="../shared/prism.css" rel="stylesheet" />
+<link href="theme.css" rel="stylesheet" />
+<link href="talk.css" rel="stylesheet" />
+<link href="prism.css" rel="stylesheet" />
+<link href="../../multirange/multirange.css" rel="stylesheet" />
+<link rel="inspire-import" href="../reusable/index.html" id="reusable">
 
 </head>
-<body class="language-javascript">
+<body class="language-javascript no-live-demo-css">
 
 <header id="intro" class="slide dont-resize">
 	<h1>
@@ -24,61 +26,11 @@
 	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
 </header>
 
-<section>
-	<section class="inverse slide dont-resize darker hi">
-		<figure class="delayed">
-			<img src="img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
-			<figcaption>Привет, я Лиа</figcaption>
-		</figure>
-	</section>
-
-	<section class="inverse slide dont-resize darker hi" id="lesbian" data-steps="3">
-		<div>
-		<p>#funfact</p>
-		<p>I grew up in Lesbos, Greece</p>
-		<p>…which technically makes me <strong>geographically Lesbian</strong></p>
-		</div>
-	</section>
-
-	<section class="inverse slide dont-resize darker hi" id="projects">
-		<p>I make stuff</p>
-		<ul>
-			<li><a href="http://mavo.io/" style="background-image: url(img/project-mavo.png)">Mavo</a></li>
-			<li><a href="http://prismjs.com" style="background-image: url(img/project-prism.png)">PrismJS</a></li>
-			<li><a href="http://leaverou.github.io/prefixfree" style="background-image: url(img/project-prefixfree.png)">-prefix-free</a></li>
-			<li><a href="http://blissfuljs.com" style="background-image: url(img/project-bliss.png)">Bliss</a></li>
-			<li><a href="http://css3test.com" style="background-image: url(img/project-css3test.png)">css3test.com</a></li>
-			<li><a href="http://leaverou.github.io/awesomplete/" style="background-image: url(img/project-awesomplete.png)">Awesomplete</a></li>
-			<li><a href="http://cubic-bezier.com/" style="background-image: url(img/project-cubicbezier.png)">cubic-bezier.com</a></li>
-			<li><a href="http://dabblet.com" style="background-image: url(img/project-dabblet.png)">dabblet.com</a></li>
-			<li><a href="http://leaverou.github.io/contrast-ratio/" style="background-image: url(img/project-contrastratio.png)">Contrast Ratio</a></li>
-		</ul>
-	</section>
-
-	<section class="inverse slide dont-resize darker hi" id="csswg">
-		<p class="delayed">
-			<strong>CSS WG</strong>
-			Invited Expert
-		</p>
-	</section>
-
-	<section class="inverse slide dont-resize darker hi" id="mit">
-		<p class="delayed">
-			<img src="img/mit.svg" alt="MIT" />
-			HCI researcher @ CSAIL
-		</p>
-		<img src="img/project-mavo.png" alt="" class="delayed">
-	</section>
-
-	<section class="inverse slide dont-resize darker hi" id="book">
-		<a href="http://shop.oreilly.com/product/0636920031123.do" class="delayed">
-			<img src="img/book.png" alt="CSS Secrets by O’Reilly" style="display:block" />
-			★★★★★ on Amazon
-		</a>
-	</section>
-</section>
+<article class="slide" data-insert="reusable#introduction"></article>
 
 <section>
+	<article class="slide" data-insert="#intro"></article>
+	
 	<header class="slide">
 		<h1>JS? UX? JSUX…?</h1>
 	</header>
@@ -119,8 +71,8 @@
 		</div></div></div></div></div></div></div></div></div></div></div></div></div></div></div>
 	</article>
 
-	<article class="image slide" style="background-image: url(img/faucet.jpg);">
-		<h1>A faucet is a UI</h1>
+	<article class="image slide" style="background-image: url(img/faucet.jpg);" id="faucet" data-steps="2">
+		<h1 class="caption">A tap is a UI</h1>
 	</article>
 
 	<article class="image slide" style="background-image: url(img/code.png);">
@@ -141,6 +93,10 @@
 
 	<article class="hall fame slide">
 		<pre><code>
+			!!(node.compareDocumentPosition(otherNode) &
+				Node.DOCUMENT_POSITION_PRECEDING);
+		</code></pre>
+		<pre class="delayed"><code>
 			!!(node.compareDocumentPosition(otherNode) &
 				Node.DOCUMENT_POSITION_CONTAINS);
 		</code></pre>
@@ -535,10 +491,35 @@
 		</code></pre>
 	</article>
 
+	<article class="hall fame slide">
+		<pre><code>
+			element.addEventListener("focus", callback, {capture: true});
+		</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>
+			element.addEventListener("focus", callback, {
+				capture: true,
+				once: true
+			});
+		</code></pre>
+	</article>
+
 	<article class="hall shame slide">
 		<pre><code>
+			var event = document.createEvent('KeyboardEvent');
 			event.initKeyEvent("keypress", true, true, null, null,
-			                   false, false, false, false, 9, 0);
+			                   true, false, true, false, 9, 0);
+		</code></pre>
+	</article>
+	<article class="hall fame slide">
+		<pre><code>
+			var event = new KeyboardEvent("keypress", {
+				ctrlKey: true,
+				shiftKey: true,
+				keyCode: 9
+			});
 		</code></pre>
 	</article>
 
@@ -546,6 +527,12 @@
 		<div>
 			<pre><code>oldChild.parentNode.replaceChild(newChild, oldChild)</code></pre>
 			<pre><code>oldChild.parentNode.replaceChild(oldChild, newChild)</code></pre>
+		</div>
+	</article>
+
+	<article class="hall fame slide" id="replaceWith">
+		<div>
+			<pre><code>oldChild.replaceWith(newChild)</code></pre>
 		</div>
 	</article>
 
@@ -565,7 +552,7 @@
 		<img src="img/worrydream3.png" alt="" style="transform: scale(1.8)">
 	</article>
 
-	<article class="slide" data-import="ellipse"></article>
+	<article class="slide" data-insert="#ellipse"></article>
 
 	<article class="whynot slide">
 		<pre><code>
@@ -615,15 +602,6 @@
 		</code></pre>
 	</article>
 
-	<article class="hall fame slide">
-		<pre><code>
-			element.addEventListener("focus", callback, {
-				capture: true,
-				once: true
-			});
-		</code></pre>
-	</article>
-
 	<article class="slide">
 		<h1>ES6 Default Parameters
 			<div style="font: 120%/1 'Reenie Beanie', sans-serif; color: yellowgreen;">+ destructuring!</div></h1>
@@ -657,9 +635,9 @@
 		<h1>Unnecessary error conditions</h1>
 	</header>
 
-	<article class="slide" data-import="url-error"></article>
+	<article class="slide" data-insert="#url-error"></article>
 
-	<article class="slide" data-import="set-constructor"></article>
+	<article class="slide" data-insert="#set-constructor"></article>
 
 	<article class="hall shame slide">
 		<div class="language-console">
@@ -777,7 +755,7 @@ element.cloneNode(true); // shallow</code></pre>
 		<h1>Thou shalt allow chaining</h1>
 	</header>
 
-	<article class="slide" data-import="setAttribute"></article>
+	<article class="slide" data-insert="#setAttribute"></article>
 
 	<article class="whynot slide">
 		<pre><code>
@@ -831,7 +809,7 @@ element.cloneNode(true); // shallow</code></pre>
 	</article>
 
 	<article class="slide">
-		<h1>Returning undefined is wasteful</h1>
+		<h1>Returning <code>undefined</code> is wasteful</h1>
 	</article>
 
 	<article class="slide">
@@ -949,7 +927,7 @@ element.cloneNode(true); // shallow</code></pre>
 	</header>
 
 	<article class="image slide" style="background-image: url(img/packery.png); background-position: top;">
-		<h1>packery.metafizzy.co</h1>
+		<h1><a href="https://packery.metafizzy.co/">packery.metafizzy.co</a></h1>
 	</article>
 
 	<article class="hall shame slide">
@@ -1048,7 +1026,9 @@ element.cloneNode(true); // shallow</code></pre>
 
 <section class="language-markup">
 	<header class="commandment slide" id="html-api">
-		<h1>Thou shalt also<br> have an <strong>HTML API</strong></h1>
+		<h1>Thou shalt also<br> have an <strong>HTML API</strong>
+			<div style="font-size: 50%; text-decoration: none; font-style: italic;">(If your library does UI stuff)</div></h1>
+		</h1>
 	</header>
 
 	<article class="slide">
@@ -1082,9 +1062,14 @@ element.cloneNode(true); // shallow</code></pre>
 
 	<article class="slide" data-src="https://aframe.io/"></article>
 	<article class="slide" data-src="http://localhost:8001" title="https://mavo.io"></article>
+	<article class="slide" data-src="https://codepen.io/leaverou/pen/RjMBwy" title="HTML APIs are composable"></article>
 
 	<article class="slide">
 		<h1>Good HTML APIs <br>are easier for developers too</h1>
+	</article>
+
+	<article class="top-heavy image slide" style="background-image: url(img/htmlapis.png)" id="smashing-html-apis">
+		<h1><a href="smashingmagazine.com/2017/02/designing-html-apis"></a></h1>
 	</article>
 
 	<article class="slide">
@@ -1115,25 +1100,24 @@ element.cloneNode(true); // shallow</code></pre>
 			[class*="language-"] code, code[class*="lang-"], [class*="lang-"]</code></p>
 	</article>
 
-	<article class="demo hall fame slide">
-		<div data-edit="contents">
+	<article class="horizontal demo hall fame slide">
+		<textarea class="language-html">
 			<input type="color" list="palette" />
 			<datalist id="palette">
 				<option>#FF0066</option>
 				<option>#00aacc</option>
 				<option>#99CC00</option>
 			</datalist>
-		</div>
+		</textarea>
 	</article>
 
-	<article class="demo slide dont-enlarge hall shame" id="dialog-demo" data-keys="Esc">
-
-		<div data-edit="contents">
+	<article class="horizontal demo slide dont-enlarge hall shame" id="dialog-demo" data-keys="Esc">
+		<textarea class="language-html">
 			<dialog id="dialog">
 				<h1>Ceiling cat is watching</h1>
 				<p>Greetings, hoomans.</p>
 			</dialog>
-		</div>
+		</textarea>
 	</article>
 <!--
 	<article class="slide">
@@ -1224,14 +1208,10 @@ element.cloneNode(true); // shallow</code></pre>
 		</script>
 	</article>
 
-	<article class="top-heavy image slide" style="background-image: url(img/htmlapis.png)">
-		<h1>smashingmagazine.com/2017/02/designing-html-apis</h1>
-	</article>
-
 	<!-- <article class="slide" data-src="http://leaverou.github.io/multirange" data-title="Soon: CSS API?"></article> -->
-	<article id="multirange" class="image slide">
+	<!-- <article id="multirange" class="image slide">
 		<h1>Soon: CSS API?</h1>
-	</article>
+	</article> -->
 </section>
 
 <section>
@@ -1248,28 +1228,14 @@ element.cloneNode(true); // shallow</code></pre>
 	</article>
 </section>
 
-<footer class="dark slide">
-	<img src="img/mark.svg" class="logo" />
-	<h1>спасибо!</h1>
-	<img src="img/stickers.jpg" class="stickers delayed" alt="">
-	<p class="stickercaption delayed">Want one? Just ask! ---></p>
-	<ul>
-		<li><a href="mailto:lea@w3.org">lea@verou.me</a></li>
-		<li><a href="http://lea.verou.me">lea.verou.me</a></li>
-		<li><a href="http://twitter.com/leaverou">@leaverou</a></li>
-	</ul>
+<footer class="slide" data-insert="reusable#thankyou"></footer>
 
-	<p>Slides: <a href="https://leaverou.github.io/jsux">leaverou.github.io/jsux</a></p>
-	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
-</footer>
-
-<script src="js/bliss.min.js"></script>
-<script src="../csss/slideshow.js"></script>
-<script src="js/prism.js"></script>
-
+<script src="../shared/js/bliss.shy.min.js"></script>
+<script src="../shared/js/prism.js"></script>
 <script src="../incrementable/incrementable.js"></script>
-<script src="js/editor.js"></script>
-<script src="../multirange/multirange.js"></script>
+<script src="../../inspire.js/inspire.js"></script>
+
+<script src="../../multirange/multirange.js"></script>
 <script src="js/talk.js"></script>
 
 </body>
