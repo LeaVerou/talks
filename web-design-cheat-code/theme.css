@@ -1,0 +1,37 @@
+@font-face {
+	font-family: 'Reenie Beanie';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Reenie Beanie'), local('ReenieBeanie'), url(https://fonts.gstatic.com/s/reeniebeanie/v8/z7NSdR76eDkaJKZJFkkjuvWxXPq1q6Gjb_0.woff2) format('woff2');
+}
+
+@font-face {
+	font-family: 'Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: url("../shared/fonts/slide-icons.woff2") format('woff2');
+}
+
+* {
+	text-decoration-color: inherit;
+}
+
+html {
+	--font-mono: Consolas, Monaco, 'Andale Mono', monospace;
+	--font-body: 'Helvetica Neue', Segoe UI, sans-serif;
+	--font-heading: var(--font-body);
+	--font-handwritten: 'Reenie Beanie', Marker Felt, cursive;
+
+	--color-magenta: #f06;
+	--color-orange: orange;
+	--color-green: yellowgreen;
+	--color-aqua: hsl(191, 100%, 40%);
+	--color-yellow: gold;
+	--color-light-gray: hsl(220, 10%, 95%);
+}
+
+.light.slide,
+.demo.slide {
+	background: hsl(200, 40%, 80%);
+	color: black;
+}

@@ -1,0 +1,9 @@
+#custom-bullets ul {
+	margin: .5em 0;
+	font-size: 300%;
+	line-height: 1;
+}
+
+#custom-bullets li {
+	margin: .3em 0;
+}

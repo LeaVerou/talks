@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title>The Web Design Cheat Code</title>
+<link href="../../inspire.js/inspire.css" rel="stylesheet" />
+<link href="../../inspire.js/theme.css" rel="stylesheet" />
+<link href="../shared/prism.css" rel="stylesheet" />
+<link href="theme.css" rel="stylesheet" />
+<link href="talk.css" rel="stylesheet" />
+<link rel="inspire-import" href="../reusable/index.html" id="reusable">
+<link rel="inspire-import" href="../even-more-css-secrets/index.html" id="emcs">
+</head>
+<body>
+
+
+<header id="intro" class="slide dont-resize intro">
+	<h1>The Web Design Cheat Code</h1>
+	<h2>Using SVG to bridge CSS’ gaps</h2>
+	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
+</header>
+
+<article class="slide" data-insert="reusable#introduction"></article>
+
+<section>
+	<header class="slide" data-insert="emcs#character-images"></header>
+	<article class="slide" data-insert="emcs#demo-character-images"></article>
+
+	<article class="horizontal demo slide" id="custom-bullets">
+		<textarea class="language-html">
+			<ul>
+				<li>One</li>
+				<li>Two</li>
+				<li>Three</li>
+			</ul>
+		</textarea>
+		<textarea class="language-css">
+			list-style-image: url('data:image/svg+xml,\
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+				\
+			</svg>');
+		</textarea>
+	</article>
+
+	<article class="slide" data-insert="emcs#star-rating"></article>
+</section>
+<section>
+	<header class="slide" data-insert="emcs#fancy-borders"></header>
+	<article class="slide" data-insert="emcs#ants-svg"></article>
+	<article class="slide" data-insert="emcs#ants-html"></article>
+	<article class="slide" data-insert="emcs#gradient-border-svg"></article>
+	<article class="slide" data-insert="emcs#gradient-border-html"></article>
+	<article class="slide" data-insert="emcs#rfc-3986"></article>
+
+</section>
+
+<footer class="slide" data-insert="reusable#thankyou"></footer>
+
+<script src="../shared/js/bliss.shy.min.js"></script>
+<script src="../shared/js/prism.js"></script>
+<script src="../incrementable/incrementable.js"></script>
+<script src="../../inspire.js/inspire.js"></script>
+<!-- <script src="talk.js"></script> -->
+
+</body>
+</html>
