@@ -94,20 +94,20 @@ slide.addEventListener("input", function(evt) {
 slide.dispatchEvent(new InputEvent("input"));
 })($("#blending-modes"));
 
-var throttleSubmit;
-$.ready().then(() => {
-	$.bind($('form[target="wolfram"]'), {
-		input: evt => {
-			clearTimeout(throttleSubmit);
-
-			if (document.readyState === "complete") {
-				throttleSubmit = setTimeout(() => {
-					evt.target.form.submit();
-				}, 1000);
-			}
-		}
-	});
-});
+// var throttleSubmit;
+// $.ready().then(() => {
+// 	$.bind($('form[target="wolfram"]'), {
+// 		input: evt => {
+// 			clearTimeout(throttleSubmit);
+//
+// 			if (document.readyState === "complete") {
+// 				throttleSubmit = setTimeout(() => {
+// 					evt.target.form.submit();
+// 				}, 1000);
+// 			}
+// 		}
+// 	});
+// });
 
 
 $$(".separate-letters").forEach(element => {
