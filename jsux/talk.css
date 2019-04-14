@@ -701,21 +701,6 @@ input[type="range"].multirange.ghost {
 	display: block;
 }
 
-kbd {
-	position: absolute;
-	bottom: 1em;
-	right: 1em;
-	z-index: 2;
-	padding: .1em .5em;
-	border: 1px solid rgba(0,0,0,.3);
-	border-radius: .3em;
-	background: linear-gradient(rgba(0,0,0,.2), transparent) #eee;
-	font-size: 120%;
-	font-weight: bold;
-	font-family: var(--font-body);
-	box-shadow: 3px 3px hsl(0,0%,40%), 3px 3px 10px rgba(0,0,0,.4);
-}
-
 @keyframes multirange {
 	from {
 		bottom: -669px;
