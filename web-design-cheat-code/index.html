@@ -15,17 +15,161 @@
 <body>
 
 
-<header id="intro" class="slide dont-resize intro">
-	<h1>The Web Design Cheat Code</h1>
-	<h2>Using SVG to bridge CSS’ gaps</h2>
+<header id="cover" class="slide dont-resize">
+	<h1>
+		<div>The Web Design</div>
+		<div>Cheat</div>
+		<div>Code</div>
+	</h1>
+	<svg width="100%" height="100%" viewBox="0 0 100 100">
+		<defs><path id="arc" d="M 20,50 a 30,30 0 1,1 0,.001" /></defs>
+		<text><textPath href="#arc">Using SVG to bridge CSS’ gaps •</textPath></text>
+	</svg>
 	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
 </header>
+<svg>
+	<filter id="squigglevision-filter">
+		<feTurbulence baseFrequency=".02" numOctaves="4">
+			<animate attributeName="seed" dur="1s" values="1;10" repeatCount="indefinite" />
+		</feTurbulence>
+		<feDisplacementMap in="SourceGraphic" scale="4"></feDisplacementMap>
+	</filter>
+</svg>
 
 <article class="slide" data-insert="reusable#introduction"></article>
 
+<article class="horizontal demo slide">
+	<div class="ribbon">SVG Primer<br>viewBox</div>
+
+	<textarea class="language-markup">
+	<svg width="300" height="200"
+	     style="background: yellow">
+		<rect width="100%" height="100%" fill="yellowgreen"  />
+		<rect width="100" height="100"  />
+	</svg>
+	</textarea>
+</article>
+
+<article class="takeaway slide">
+	<ul>
+		<li><code>viewBox</code> defines the coordinate system</li>
+		<li><code>viewBox</code> defines the aspect ratio, unless <code>preserveAspectRatio="none"</code></li>
+		<li><code>viewBox</code> with no <code>width</code> and <code>height</code> makes the SVG scale to fill the entire area</li>
+	</ul>
+</article>
+
 <section>
 	<header class="slide" data-insert="emcs#character-images"></header>
+
 	<article class="slide" data-insert="emcs#demo-character-images"></article>
+
+	<article class="takeaway slide">
+		<ul>
+			<li>You can embed SVG in your CSS with data URIs, and you don’t need to %encode most characters</li>
+			<li>You can have multiline data URIs by escaping each line with a <code>\</code></li>
+		</ul>
+	</article>
+
+	<article class="slide" data-insert="emcs#demo-character-images"></article>
+
+	<article class="takeaway slide">
+		<ul>
+			<li>You can use these data URIs to create images out of characters</li>
+			<li>You can even create animated backgrounds, with CSS animations <em>inside the embedded SVG</em>!</li>
+		</ul>
+	</article>
+
+	<article class="isolated horizontal demo slide">
+		<textarea class="language-html">
+			<blockquote>
+				<p><q>Lorem Ipsum Dolor Sit Amet</q>
+				<p>—Unknown
+			</blockquote>
+		</textarea>
+		<textarea class="language-css">
+			blockquote {
+				padding: 1em;
+				background: url('data:image/svg+xml,\
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+					<text y=".75em" style="font-size: 90; fill: hsl(200, 40%, 80%)">❝</text>\
+				</svg>') 0 0 / 5em no-repeat;
+			}
+		</textarea>
+		<style class="demo">
+			blockquote {
+				font: 200%/1.4 Adobe Caslon Pro, Garamond, serif;
+			}
+
+			q {
+				font-style: italic;
+			}
+
+			p {
+				margin: 0;
+			}
+		</style>
+	</article>
+
+	<article class="slide" data-insert="emcs#star-rating"></article>
+
+	<article class="worms slide">
+		<div>
+			<h1>Why can’t we use CSS variables in <code>url()</code>?</h1>
+			<ul class="sad emojilist">
+				<li>No concatenation in CSS</li>
+				<li>Special parsing rules to support unquoted URLs</li>
+				<li class="delayed happy">New functions to solve these are coming!</li>
+			</ul>
+		</div>
+		<img src="img/can-of-worms.png" alt="">
+	</article>
+
+	<article class="horizontal demo slide" id="letitsnow">
+		<textarea class="language-css">
+			#letitsnow .demo-target::after {
+				content: "";
+				position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+				--snow: url('data:image/svg+xml,\
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+					<text y=".9em" font-size="20">❄️</text>\
+				</svg>');
+				background: var(--snow) 0 0 / 5em;
+			}
+		</textarea>
+		<style data-slide>
+			.demo.slide {
+				background: linear-gradient(hsl(200, 40%, 15%), hsl(200, 40%, 45%));
+			}
+			.demo-target {
+				position: relative;
+			}
+		</style>
+	</article>
+
+	<!--
+	@keyframes snow {
+		50% { background-position-x: 0; }
+		to { background-position-y: 5em, 3em, 10em }
+	}
+
+	#letitsnow .demo-target::after {
+		content: "";
+		position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+		--snow: url('data:image/svg+xml,\
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+			<text y=".9em" font-size="20">❄️</text>\
+		</svg>');
+		background: var(--snow) 0 0 / 5em, var(--snow) 1em 0 / 3em, var(--snow) 2em 0 / 10em;
+		animation: snow 3s infinite linear;
+		pointer-events: none;
+	}
+	-->
+
+	<article class="takeaway slide">
+		<ul>
+			<li>You <em>can</em> use CSS variables for the entire URL</li>
+		</ul>
+	</article>
 
 	<article class="horizontal demo slide" id="custom-bullets">
 		<textarea class="language-html">
@@ -43,17 +187,227 @@
 		</textarea>
 	</article>
 
-	<article class="slide" data-insert="emcs#star-rating"></article>
+	<article class="takeaway slide">
+		<ul>
+			<li>SVG data URIs can help you create bulletproof custom list bullets</li>
+		</ul>
+		<div class="credits">
+			<p>Idea suggested by Amelia Bellamy-Royds
+		</div>
+	</article>
+
+	<article class="horizontal demo slide" id="custom-cursors">
+		<textarea class="language-css">
+			cursor: url('data:image/svg+xml,\
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+				\
+			</svg>'), auto;
+		</textarea>
+	</article>
+	<article class="worms slide">
+		<div>
+			<h1>SVG Cursors Caveats</h1>
+			<ul class="sad emojilist">
+				<li>Need explicit width and height</li>
+				<li>Ignored if >128px</li>
+				<li>Oddly pixelated on OSX</li>
+				<li>Animation only supported in Chrome, but VERY wonky</li>
+			</ul>
+			<div class="credits">
+				<p><code>image-set()</code> workaround by Martin Auswöger (@ausi)</p>
+			</div>
+		</div>
+		<img src="img/can-of-worms.png" alt="">
+	</article>
+	<article class="slide" data-insert="#custom-cursors"></article>
+	<article class="slide" data-src="https://caniuse.com/#feat=css-image-set" title="image-set() on caniuse.com"></article>
 </section>
 <section>
 	<header class="slide" data-insert="emcs#fancy-borders"></header>
 	<article class="slide" data-insert="emcs#ants-svg"></article>
 	<article class="slide" data-insert="emcs#ants-html"></article>
+
+	<article class="takeaway slide">
+		<ul>
+			<li>No <code>viewBox</code> or dimensions lets your SVG background occupy the entire element</li>
+			<li><code>stroke-dasharray</code> lets you create custom dashed borders</li>
+			<li><code>stroke-dashoffset</code> lets you move them and is animatable!</li>
+		</ul>
+	</article>
+
 	<article class="slide" data-insert="emcs#gradient-border-svg"></article>
 	<article class="slide" data-insert="emcs#gradient-border-html"></article>
-	<article class="slide" data-insert="emcs#rfc-3986"></article>
+	<article class="slide onscreen-nav" data-insert="emcs#rfc-3986"></article>
 
+	<article class="takeaway slide">
+		<ul>
+			<li>SVG supports gradient strokes, though with an unwieldy syntax</li>
+			<li>You can apply those to HTML elements via data URIs!</li>
+			<li>You need to escape <code>#</code> as <code>%23</code> because it's a reserved character in URLs</li>
+		</ul>
+	</article>
+
+	<article class="horizontal demo slide" id="scribble-svg">
+		<p class="hint">baseFrequency, numOctaves, seed, scale, attributeName, values, repeatCount</p>
+		<textarea class="language-markup">
+		<svg>
+			<rect width="100%" height="100%" style="stroke: black; stroke-width: 4px; fill: none;"  />
+		</svg>
+		</textarea>
+	</article>
+
+	<!--
+<svg>
+	<filter id="scribble">
+		<feTurbulence baseFrequency="0.02" numOctaves="3">
+			<animate attributeName="seed" dur="1s" values="1;10" repeatCount="indefinite" />
+		</feTurbulence>
+		<feDisplacementMap in="SourceGraphic" scale="3" />
+	</filter>
+	<style>@keyframes draw { from {stroke-dasharray: 0% 400%}}</style>
+	<rect x="3" y="3" width="calc(100% - 6px)" height="calc(100% - 6px)"
+	      style="filter: url(#scribble); stroke: black; stroke-width: 4px; fill: none;
+             stroke-dasharray: 400% 400%; animation: draw 2s"  />
+</svg>
+	 -->
+
+	<article class="slide language-html">
+		<h1>To support Firefox too:</h1>
+		<pre><code>
+			&lt;g style="filter: url(#scribble); stroke: black; stroke-width: 4px">
+				&lt;line x2="100%" transform="translate(0 3)" />
+				&lt;line y2="100%" transform="translate(3)" />
+				&lt;line x1="100%" x2="100%" y2="100%" transform="translate(-3)" />
+				&lt;line y1="100%" x2="100%" y2="100%" transform="translate(0 -3)" />
+			&lt;/g>
+		</code></pre>
+		<p class="emoji-on-top delayed">🤢🤮🤮</p>
+	</article>
+
+	<article class="slide" data-insert="#scribble-svg"></article>
+
+	 <article class="horizontal demo slide" style="font-family: Reenie Beanie, cursive;" id="scribble-html">
+ 		<textarea class="language-html"><div class="🦄" contentEditable>Look at my awesome border!</div></textarea>
+ 		<textarea class="language-css">
+ 			.🦄 {
+ 				background: url('data:image/svg+xml,\
+ 				<svg xmlns="http://www.w3.org/2000/svg">\
+ 					\
+ 				</svg>');
+ 			}
+ 		</textarea>
+ 	</article>
+
+	<article class="takeaway slide">
+		<ul>
+			<li>You can use <code>calc()</code> in geometry attributes, but no <img src="../shared/img/firefox-logo.svg" alt="Firefox" style="height: 1em; vertical-align: -.2em"> yet</li>
+			<li><code>&lt;feTurbulence></code> creates a pseudo-random texture</li>
+			<li><code>&lt;feDisplacementMap></code> shifts pixels around based on the pixel values of another image</li>
+			<li>Together they can be used to create a scribble effect!</li>
+		</ul>
+	</article>
+
+	<article class="slide" id="squigglevision">
+		<h1>Squigglevision</h1>
+	</article>
+
+	<article class="image slide" id="squigglevision-examples" data-credits="http://joshsand.com/weekly-85-squigglevision"></article>
+
+	<article class="slide" data-insert="#scribble-svg"></article>
+	<article class="slide" data-insert="#scribble-html"></article>
+
+	<article class="takeaway slide">
+		<ul>
+			<li>You cannot animate filter parameters with CSS animations, but you can use SMIL!</li>
+			<li>Animating the <code>seed</code> of an <code>&lt;feTurbulence></code> filter creates Squigglevision!</li>
+		</ul>
+	</article>
+
+	<article class="slide" data-insert="#scribble-html"></article>
+
+	<article class="worms slide">
+		<div>
+			<h1>SVG Filters on HTML Content</h1>
+			<ul class="sad emojilist">
+				<li>If you use a data URI in the <code>filter</code> property, animation is disabled</li>
+				<li class="happy">Including the filter in your HTML fixes that</li>
+			</ul>
+		</div>
+		<img src="img/can-of-worms.png" alt="">
+	</article>
+
+	<article class="horizontal demo slide">
+		<textarea class="language-html">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6">
+				<path fill="white" d="m 0,1 L 1,0 2,1 3,0 4,1 5,0 6,1 5,2 6,3 5,4 5,3 5,4 6,5
+					5,6 4,5 3,6 2,5 1,6 0,5 1,4 0,3 1,2 z" />
+			</svg>
+		</textarea>
+	</article>
+
+	<article class="horizontal demo slide">
+		<textarea class="language-html"><div class="🦄" contentEditable>Look at my awesome border!</div></textarea>
+		<textarea class="language-css">
+			.🦄 {
+				border-image: url('data:image/svg+xml,');
+			}
+		</textarea>
+	</article>
+
+	<article class="worms slide">
+		<div>
+			<h1>Caveat</h1>
+			<p>Safari and Firefox don’t support breaking the path <code>d</code> into multiple lines in a data URI
+		</div>
+		<img src="img/can-of-worms.png" alt="">
+	</article>
+
+	<article class="takeaway slide">
+		<ul>
+			<li>You can use <code>border-image</code> to 9-slice scale an SVG onto an actual HTML border</li>
+		</ul>
+	</article>
 </section>
+
+<!-- <section>
+	<header class="slide">
+		<h1>Type treatments</h1>
+	</header>
+
+	<article class="isolated demo slide">
+		<textarea class="language-html">
+			<svg viewBox="0 0 100 50" preserveAspectRatio="xMidYMin slice">
+			  <text x="50%" y="50%">FitText</text>
+			</svg>
+		</textarea>
+		<textarea class="language-css">
+			svg {
+				height: 1px;
+				overflow: visible;
+				width: 100%;
+			}
+
+			text {
+				text-anchor: middle;
+				font-size: 34px;
+			}
+		</textarea>
+	</article>
+
+	<article class="horizontal demo slide">
+		<textarea class="language-html">
+			<svg width="100%" height="100%" viewBox="0 0 100 100">
+				<path id="arc" d="M 0,50 a 30,30 0 1,1 0,.001" />
+				<text><textPath href="#arc">Hello Kharkiv</textPath></text>
+			</svg>
+		</textarea>
+		<textarea class="language-css">
+			text {
+				font-size: 1rem;
+			}
+		</textarea>
+	</article>
+</section> -->
 
 <footer class="slide" data-insert="reusable#thankyou"></footer>
 
@@ -61,7 +415,7 @@
 <script src="../shared/js/prism.js"></script>
 <script src="../incrementable/incrementable.js"></script>
 <script src="../../inspire.js/inspire.js"></script>
-<!-- <script src="talk.js"></script> -->
+<script src="talk.js"></script>
 
 </body>
 </html>

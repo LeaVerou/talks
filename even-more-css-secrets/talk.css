@@ -835,6 +835,9 @@ section.secret {
 	font-weight: bold;
 	flex-shrink: 0;
 	font-size: 90%;
+	line-height: 1;
+	color: white;
+	box-shadow: 0 .05em .2em rgba(0,0,0,.2);
 }
 
 	.credits::before {
@@ -850,7 +853,7 @@ section.secret {
 
 	.credits p {
 		margin: 0;
-		padding: .1em .5em;
+		padding: .4em .5em;
 		flex: 1;
 		align-self: center;
 	}

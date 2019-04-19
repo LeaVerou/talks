@@ -1,3 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Londrina+Solid');
+
+#cover {
+	font-family: var(--font-handwritten);
+}
+
+	#cover h1,
+	#cover .attribution {
+		/* filter: url(#squigglevision-filter); */
+	}
+
+	#cover h1 {
+		border: 3px solid;
+		padding: .15em .2em;
+		position: relative;
+		font: 400%/.9 Londrina Solid, var(--font-heading);
+		text-transform: uppercase;
+		color: hsla(0,0%,100%,.9);
+	}
+
+	#cover h1 div:first-child {
+		font-size: 38%;
+		line-height: 1.2;
+	}
+
+	#cover h1 div:nth-child(3) {
+		font-size: 120%;
+	}
+
+	@keyframes spin {
+		to { transform: rotate(1turn); }
+	}
+
+	#cover svg {
+		position: absolute;
+		width: 12em;
+		height: 12em;
+		margin-top: 1.5em;
+		margin-left: 5em;
+		animation: 25s spin infinite linear;
+	}
+
+	#cover textPath {
+		font: 16.5px var(--font-handwritten);
+		text-transform: none;
+		fill: var(--color-orange);
+		text-shadow: .1em .1em 1em rgba(0,0,0,.6);
+	}
+
+	#cover .attribution {
+		margin-top: 3em;
+		margin-bottom: 0;
+		font-size: 120%;
+		color: var(--color-aqua);
+		font: 110%/.9 Londrina Solid, var(--font-heading);
+
+	}
+
+		#cover .attribution a {
+			text-decoration: none;
+		}
+
 #custom-bullets ul {
 	margin: .5em 0;
 	font-size: 300%;
@@ -6,4 +68,93 @@
 
 #custom-bullets li {
 	margin: .3em 0;
+}
+
+.worms {
+	display: flex;
+	flex-flow: row;
+	background: white;
+	color: black;
+}
+
+	.worms > div {
+		font-size: 150%;
+		flex: 1;
+	}
+
+	.worms h1 {
+		text-align: left;
+	}
+
+		.worms h1 code {
+			font-weight: bold;
+		}
+
+ul.sad.emojilist,
+.emojilist .sad.li {
+	list-style-image: url('data:image/svg+xml,\
+	<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 100 100">\
+		<text y=".9em" font-size="100">☹️</text>\
+	</svg>');
+}
+
+ul.happy.emojilist,
+.emojilist li.happy {
+	list-style-image: url('data:image/svg+xml,\
+	<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 100 100">\
+		<text y=".9em" font-size="100">🤩</text>\
+	</svg>');
+}
+
+.slide .ribbon {
+	content: attr(data-type);
+	position: fixed;
+	top: 0;
+	right: 0;
+	padding: .2em;
+	color: white;
+	font-size: 150%;
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: bold;
+	background: hsl(40,100%,50%);
+	background-image: linear-gradient(rgba(255, 255, 255, .3), rgba(255, 255, 255, 0));
+	line-height: 1.2;
+	min-width: 20em;
+	box-shadow: 0 10px 5px -5px rgba(0,0,0,.2);
+	transform: rotate(45deg) translate(6.2em, -3.5em);
+	white-space: pre-line;
+	background-color: var(--color-magenta);
+}
+
+	.slide .ribbon::first-line {
+		font-size: 70%;
+	}
+
+.emoji-on-top {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 150px;
+	filter: drop-shadow(0 0 .5em black);
+}
+
+#squigglevision h1 {
+	filter: url(#squigglevision-filter);
+	font: 600% var(--font-handwritten)
+}
+
+#squigglevision svg {
+	display: none;
+}
+
+#squigglevision-examples {
+	background: /*url(img/squigglevision.gif) top left,*/
+	            url(img/squigglevision2.gif) right,
+	            url(img/squigglevision3.gif) left,
+	            /*url(img/squigglevision4.gif) bottom right*/
+				white;
+	background-repeat: no-repeat;
+	background-blend-mode: multiply;
+	xbackground-size: 50%;
 }

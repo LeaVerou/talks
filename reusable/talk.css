@@ -414,6 +414,10 @@ footer.slide:target {
 	transition: .5s cubic-bezier(.3, .2, .5, 1.6);
 }
 
+	.stickers.delayed.displayed {
+		opacity: 1;
+	}
+
 	.stickers.delayed:not(.current):not(.displayed) {
 		transform: scale(0);
 	}

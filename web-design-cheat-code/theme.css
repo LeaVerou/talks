@@ -35,3 +35,22 @@ html {
 	background: hsl(200, 40%, 80%);
 	color: black;
 }
+
+.hint {
+	position: absolute;
+	font-size: .8rem;
+	font-weight: bold;
+	line-height: 1;
+	color: rgba(0,0,0,.2);
+	mix-blend-mode: multiply;
+}
+
+	.slide:not(.horizontal) .hint {
+		bottom: -5px;
+		right: 10px;
+	}
+
+	.slide.horizontal .hint {
+		top: -5px;
+		left: 10px;
+	}
