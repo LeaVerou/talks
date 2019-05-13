@@ -20,7 +20,7 @@ html {
 	--font-mono: Consolas, Monaco, 'Andale Mono', monospace;
 	--font-body: 'Helvetica Neue', Segoe UI, sans-serif;
 	--font-heading: var(--font-body);
-	--font-handwritten: 'Reenie Beanie', Marker Felt, cursive;
+	--font-handwritten: 'Reenie Beanie', Caveat, Marker Felt, cursive;
 
 	--color-magenta: #f06;
 	--color-orange: orange;
@@ -53,4 +53,16 @@ html {
 	.slide.horizontal .hint {
 		top: -5px;
 		left: 10px;
+	}
+
+pre {
+	overflow: auto;
+}
+
+	pre > code.delayed.displayed {
+		opacity: 1;
+	}
+
+	pre > code {
+		font-size: inherit;
 	}

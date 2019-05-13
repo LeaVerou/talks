@@ -38,6 +38,8 @@
 
 <article class="slide" data-insert="reusable#introduction"></article>
 
+<header class="slide" data-insert="#cover"></header>
+
 <article class="horizontal demo slide">
 	<div class="ribbon">SVG Primer<br>viewBox</div>
 
@@ -61,12 +63,17 @@
 <section>
 	<header class="slide" data-insert="emcs#character-images"></header>
 
+	<article class="horizontal demo slide" id="demo-character-images-base64">
+		<textarea class="language-css">
+			background: url('data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4NCgk8Y2lyY2xlIHI9IjIwIiBjeD0iNTAiIGN5PSI1MCIgZmlsbD0icmVkIiAvPg0KPC9zdmc+');
+		</textarea>
+	</article>
 	<article class="slide" data-insert="emcs#demo-character-images"></article>
 
 	<article class="takeaway slide">
 		<ul>
-			<li>You can embed SVG in your CSS with data URIs, and you don’t need to %encode most characters</li>
 			<li>You can have multiline data URIs by escaping each line with a <code>\</code></li>
+			<li>You can embed SVG in your CSS with data URIs, and you don’t need to %encode most characters</li>
 		</ul>
 	</article>
 
@@ -82,8 +89,8 @@
 	<article class="isolated horizontal demo slide">
 		<textarea class="language-html">
 			<blockquote>
-				<p><q>Lorem Ipsum Dolor Sit Amet</q>
-				<p>—Unknown
+				<p><q>It's easier to ask forgiveness than it is to get permission.</q>
+				<p>—Grace Hopper
 			</blockquote>
 		</textarea>
 		<textarea class="language-css">
@@ -112,6 +119,25 @@
 
 	<article class="slide" data-insert="emcs#star-rating"></article>
 
+	<article class="slide">
+		<h1>CSS variables to reduce duplication?</h1>
+		<pre class="language-css"><code>
+			meter {
+				width: 15em; height: 3em;
+				--star-opacity: .2;
+				background: url('data:image/svg+xml,\
+					&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+					&lt;text font-size="100" y=".8em" opacity="' var(--star-opacity, 1) '">★</text></svg>') 0 / auto 100%;
+			}
+
+			meter::-webkit-meter-optimum-value { /* ::-moz-meter-bar for Gecko */
+				--star-opacity: 1;
+				background: inherit;
+			}
+		</code></pre>
+		<p class="emoji-on-top delayed">😢 Nope 😢</p>
+	</article>
+
 	<article class="worms slide">
 		<div>
 			<h1>Why can’t we use CSS variables in <code>url()</code>?</h1>
@@ -122,6 +148,40 @@
 			</ul>
 		</div>
 		<img src="img/can-of-worms.png" alt="">
+	</article>
+
+	<article class="slide">
+		<h1>Reduce duplication with preprocessors</h1>
+		<pre class="language-scss"><code>
+			@function inline-svg($content, $attr:'') {
+				@return url('data:image/svg+xml,\
+				&lt;svg xmlns="http://www.w3.org/2000/svg" #{$attr}>\
+				#{$content}&lt;/svg>');
+			}
+		</code>
+		<br><br>
+		<code class="delayed">
+			@function svg-emoji($char, $attr:'') {
+				@return inline-svg(
+				        '&lt;text font-size="100" y=".8em" #{$attr}>#{$char}&lt;/text>',
+				        'viewBox="0 0 100 100"');
+			}
+		</code>
+		</pre>
+	</article>
+
+	<article class="slide">
+		<pre class="language-scss">
+		<code>
+			meter {
+				width: 15em; height: 3em;
+				background: svg-emoji('★', 'opacity=".2"') 0 / auto 100%;
+			}
+
+			meter::-webkit-meter-optimum-value { /* ::-moz-meter-bar for Gecko */
+				background: svg-emoji('★') 0 / auto 100%;
+			}
+		</code></pre>
 	</article>
 
 	<article class="horizontal demo slide" id="letitsnow">
@@ -167,7 +227,7 @@
 
 	<article class="takeaway slide">
 		<ul>
-			<li>You <em>can</em> use CSS variables for the entire URL</li>
+			<li>You <em>can</em> use CSS variables <br>for the entire URL</li>
 		</ul>
 	</article>
 
@@ -336,7 +396,9 @@
 		<img src="img/can-of-worms.png" alt="">
 	</article>
 
-	<article class="horizontal demo slide">
+	<header class="slide" data-insert="#cover"></header>
+
+	<!-- <article class="horizontal demo slide">
 		<textarea class="language-html">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6">
 				<path fill="white" d="m 0,1 L 1,0 2,1 3,0 4,1 5,0 6,1 5,2 6,3 5,4 5,3 5,4 6,5
@@ -366,7 +428,7 @@
 		<ul>
 			<li>You can use <code>border-image</code> to 9-slice scale an SVG onto an actual HTML border</li>
 		</ul>
-	</article>
+	</article> -->
 </section>
 
 <!-- <section>

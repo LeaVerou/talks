@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Caveat:400,700&subset=cyrillic,latin-ext');
+
 @font-face {
 	font-family: 'Icons';
 	font-style: normal;
@@ -64,7 +66,8 @@
 			text-align: center;
 			color: black;
 			text-shadow: none;
-			font: 300%/.7 var(--font-handwritten, 'Reenie Beanie', Marker Felt, cursive);
+			font: 300%/.7 var(--font-handwritten, 'Reenie Beanie', Caveat, Marker Felt, cursive);
+			font-family: Caveat;
 		}
 
 		.hi figure img {

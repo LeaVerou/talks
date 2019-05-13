@@ -4,9 +4,8 @@
 	font-family: var(--font-handwritten);
 }
 
-	#cover h1,
-	#cover .attribution {
-		/* filter: url(#squigglevision-filter); */
+	#cover h1 {
+		filter: url(#squigglevision-filter);
 	}
 
 	#cover h1 {
@@ -64,6 +63,7 @@
 	margin: .5em 0;
 	font-size: 300%;
 	line-height: 1;
+	max-width: 10em;
 }
 
 #custom-bullets li {
