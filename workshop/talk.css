@@ -110,7 +110,7 @@ html:not([data-profile="speaker"]) .hint {
 }
 
 /* Chrome 74 bug */
-svg:not([width]):not([height]):only-child,
+svg[viewBox]:not([width]):not([height]),
 img[alt="flags explained"] {
 	align-self: flex-start;
 }

@@ -93,7 +93,7 @@
 		<strong class="delayed">NOPE.</strong>
 	</article>
 
-	<article class="demo slide horizontal">
+	<article class="demo slide horizontal" id="currentColor">
 		<p class="hint">--color, --corner, inline style, fallback</p>
 		<textarea class="language-css">
 			div.block {
@@ -114,7 +114,7 @@
 		<textarea class="language-html"><div class="block">CSS is awesome</div></textarea>
 	</article>
 
-	<article class="takeaway slide">
+	<article class="takeaway slide" id="takeaway-1">
 		<h1>CSS Variables work like<br>normal CSS properties</h1>
 	</article>
 
@@ -141,7 +141,7 @@
 		</textarea>
 	</article>
 
-	<article class="takeaway slide">
+	<article class="takeaway slide" id="takeaway-2">
 		<h1>CSS Variables are <br>inherited properties<div class="delayed note">but you can change that</div></h1>
 	</article>
 
@@ -197,290 +197,294 @@
 		<h1>CSS variables <span class="plus">+</span> url() <span class="equals">=</span><span class="poop"><img src="img/poop.png" alt="💩"></span></h1>
 	</article>
 
-	<article class="background slide" id="wtf" data-steps="1" data-credits="flickr.com/photos/mugley/3421060154">
-		<div class="caption">
-			<h1>WTFs</h1>
-			<ul class="delayed-children">
-				<li><code>--foo:;</code> is invalid</li>
-				<li><code>--foo: ;</code> is valid</li>
-				<li><code>--foo</code> ≠ <code>--FOO</code></li>
-			</ul>
-		</div>
-	</article>
+	<section id="post-url">
 
-	<article class="slide" id="default-values">
-		<div class="delayed-children">
-			<div style="background: red">No CSS variables support</div>
-			<div style="background: orange">No --accent-color set</div>
-			<div style="background: yellowgreen">--accent-color: yellowgreen</div>
-			<div style="background: transparent; border: 1px dashed gray">--accent-color: 42deg</div>
-		</div>
 
-		<pre style="margin-top: 2em; overflow: visible"><code>
-			background: red;
-			background: var(--accent-color, orange);
-		</code></pre>
-	</article>
+		<article class="background slide" id="wtf" data-steps="1" data-credits="flickr.com/photos/mugley/3421060154">
+			<div class="caption">
+				<h1>WTFs</h1>
+				<ul class="delayed-children">
+					<li><code>--foo:;</code> is invalid</li>
+					<li><code>--foo: ;</code> is valid</li>
+					<li><code>--foo</code> ≠ <code>--FOO</code></li>
+				</ul>
+			</div>
+		</article>
 
-	<article class="talking housewife slide" data-source="flickr.com/photos/x-ray_delta_one/4264423055/">
-		<h1>Invalid at computed-value time?!</h1>
-	</article>
+		<article class="slide" id="default-values">
+			<div class="delayed-children">
+				<div style="background: red">No CSS variables support</div>
+				<div style="background: orange">No --accent-color set</div>
+				<div style="background: yellowgreen">--accent-color: yellowgreen</div>
+				<div style="background: transparent; border: 1px dashed gray">--accent-color: 42deg</div>
+			</div>
 
-	<article class="takeaway slide">
-		<h1><em>Invalid at computed-value time</em> = initial</h1>
-	</article>
-
-	<article class="slide dont-resize" id="daisy-chain" data-source="Image source: https://www.flickr.com/photos/26235325@N05/5641177399">
-		<pre><code>
-			var(--color1<span class="delayed">, var(--color2<span class="delayed">, var(--color3<span class="delayed" style="--length: 5">, red</span>)</span>)</span>)
-		</code></pre>
-	</article>
-
-	<article class="slide" id="multiple-default-values" data-steps="1">
-		<div>
-			<pre><code>background: var(--nonexistent, none, yellowgreen);</code></pre>
-			<pre><code>
-				/* Equivalent to: */
-				background: none, yellowgreen;
-			</code></pre>
-		</div>
-	</article>
-
-	<article class="demo slide" id="cycles" style="--division: 50">
-		<textarea class="language-css">
-			div {
-				--size: 6em;
-				width: var(--size);
-			}
-
-			.declarative {
-				filter: invert(100%);
-			}
-		</textarea>
-		<textarea class="language-html">
-			<div class="block">CSS is awesome</div>
-			<div class="block declarative">CSS is declarative</div>
-		</textarea>
-	</article>
-
-	<article class="takeaway slide">
-		<h1>Cycles make variables invalid <br> at computed-value time</h1>
-	</article>
-
-	<article class="slide" data-steps="2">
-		<style data-slide>
-			article.slide[data-step] {
-				background: orange;
-			}
-
-			article.slide[data-step] pre {
-				filter: invert(100%);
-				mix-blend-mode: multiply;
-			}
-
-			article.slide[data-step="2"] {
-				background: none;
-			}
-
-			article.slide[data-step="2"] pre code .delete {
-				opacity: 0;
-			}
-		</style>
-
-		<pre><code>
-			--accent-color: 42deg;
-			<span class="delete">--accent-color: var(--accent-color);</span>
-			background: red;
-			background: var(--accent-color, orange);
-		</code></pre>
-	</article>
-
-	<article class="talking housewife slide" data-source="flickr.com/photos/x-ray_delta_one/4264423055/">
-		<h1>Won’t someone, please, think of browser support?!</h1>
-	</article>
-
-	<article class="browser-support slide">
-		<table>
-			<thead>
-				<tr>
-					<th></th>
-					<th><img src="img/chrome-logo.svg" alt="Chrome"></th>
-					<th><img src="img/firefox-logo.svg" alt="Firefox"></th>
-					<th><img src="img/edge-logo.svg" alt="Edge"></th>
-					<th><img src="img/safari-logo.png" alt="Safari"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>CSS Variables</th>
-					<td>49</td>
-					<td>31</td>
-					<td>15</td>
-					<td>9.1</td>
-				</tr>
-			</tbody>
-		</table>
-	</article>
-
-	<!-- <article class="image slide" id="edgestatus">
-		<h1><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/status/csscustompropertiesakacssvariables">status.modern.ie</a></h1>
-	</article> -->
-
-	<article class="demo slide" id="atsupports">
-		<textarea class="language-css">
-			article {
+			<pre style="margin-top: 2em; overflow: visible"><code>
 				background: red;
-			}
+				background: var(--accent-color, orange);
+			</code></pre>
+		</article>
 
-			@supports (--css: variables) {
-				article {
-					background: green;
+		<article class="talking housewife slide" data-source="flickr.com/photos/x-ray_delta_one/4264423055/" id="invalid-at-computed-value-time">
+			<h1>Invalid at computed-value time?!</h1>
+		</article>
+
+		<article class="takeaway slide" id="takeaway-4">
+			<h1><em>Invalid at computed-value time</em> = initial</h1>
+		</article>
+
+		<article class="slide dont-resize" id="daisy-chain" data-source="Image source: https://www.flickr.com/photos/26235325@N05/5641177399">
+			<pre><code>
+				var(--color1<span class="delayed">, var(--color2<span class="delayed">, var(--color3<span class="delayed" style="--length: 5">, red</span>)</span>)</span>)
+			</code></pre>
+		</article>
+
+		<article class="slide" id="multiple-default-values" data-steps="1">
+			<div>
+				<pre><code>background: var(--nonexistent, none, yellowgreen);</code></pre>
+				<pre><code>
+					/* Equivalent to: */
+					background: none, yellowgreen;
+				</code></pre>
+			</div>
+		</article>
+
+		<article class="demo slide" id="cycles" style="--division: 50">
+			<textarea class="language-css">
+				div {
+					--size: 6em;
+					width: var(--size);
 				}
-			}
-		</textarea>
-	</article>
 
-	<article class="browser-support slide">
-		<table>
-			<thead>
+				.declarative {
+					filter: invert(100%);
+				}
+			</textarea>
+			<textarea class="language-html">
+				<div class="block">CSS is awesome</div>
+				<div class="block declarative">CSS is declarative</div>
+			</textarea>
+		</article>
+
+		<article class="takeaway slide" id="takeaway-5">
+			<h1>Cycles make variables invalid <br> at computed-value time</h1>
+		</article>
+
+		<article class="slide" data-steps="2">
+			<style data-slide>
+				article.slide[data-step] {
+					background: orange;
+				}
+
+				article.slide[data-step] pre {
+					filter: invert(100%);
+					mix-blend-mode: multiply;
+				}
+
+				article.slide[data-step="2"] {
+					background: none;
+				}
+
+				article.slide[data-step="2"] pre code .delete {
+					opacity: 0;
+				}
+			</style>
+
+			<pre><code>
+				--accent-color: 42deg;
+				<span class="delete">--accent-color: var(--accent-color);</span>
+				background: red;
+				background: var(--accent-color, orange);
+			</code></pre>
+		</article>
+
+		<article class="talking housewife slide" data-source="flickr.com/photos/x-ray_delta_one/4264423055/">
+			<h1>Won’t someone, please, think of browser support?!</h1>
+		</article>
+
+		<article class="browser-support slide">
+			<table>
+				<thead>
+					<tr>
+						<th></th>
+						<th><img src="img/chrome-logo.svg" alt="Chrome"></th>
+						<th><img src="img/firefox-logo.svg" alt="Firefox"></th>
+						<th><img src="img/edge-logo.svg" alt="Edge"></th>
+						<th><img src="img/safari-logo.png" alt="Safari"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>CSS Variables</th>
+						<td>49</td>
+						<td>31</td>
+						<td>15</td>
+						<td>9.1</td>
+					</tr>
+				</tbody>
+			</table>
+		</article>
+
+		<!-- <article class="image slide" id="edgestatus">
+			<h1><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/status/csscustompropertiesakacssvariables">status.modern.ie</a></h1>
+		</article> -->
+
+		<article class="demo slide" id="atsupports">
+			<textarea class="language-css">
+				article {
+					background: red;
+				}
+
+				@supports (--css: variables) {
+					article {
+						background: green;
+					}
+				}
+			</textarea>
+		</article>
+
+		<article class="browser-support slide">
+			<table>
+				<thead>
+					<tr>
+						<th></th>
+						<th><img src="img/chrome-logo.svg" alt="Chrome"></th>
+						<th><img src="img/firefox-logo.svg" alt="Firefox"></th>
+						<th><img src="img/edge-logo.svg" alt="Edge"></th>
+						<th><img src="img/safari-logo.png" alt="Safari"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>CSS Variables</th>
+						<td>49</td>
+						<td>31</td>
+						<td>15</td>
+						<td>9.1</td>
+					</tr>
+					<tr>
+						<th>@supports</th>
+						<td>28</td>
+						<td>22</td>
+						<td>13</td>
+						<td>9</td>
+					</tr>
+				</tbody>
+			</table>
+		</article>
+
+		<article class="horizontal demo slide">
+			<p class="hint">Show division not working</p>
+			<textarea class="language-css">
+				.block {
+					width: 33vw;
+					height: 33vh;
+				}
+			</textarea>
+			<textarea class="language-html"><h1 class="block">Variable values are token lists</h1></textarea>
+		</article>
+
+		<article class="slide">
+			<table>
 				<tr>
-					<th></th>
-					<th><img src="img/chrome-logo.svg" alt="Chrome"></th>
-					<th><img src="img/firefox-logo.svg" alt="Firefox"></th>
-					<th><img src="img/edge-logo.svg" alt="Edge"></th>
-					<th><img src="img/safari-logo.png" alt="Safari"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>CSS Variables</th>
-					<td>49</td>
-					<td>31</td>
-					<td>15</td>
-					<td>9.1</td>
+					<td>Number → unit: </td>
+					<td><code class="language-css">calc(var(--foo) * 1px)</code></td>
 				</tr>
 				<tr>
-					<th>@supports</th>
-					<td>28</td>
-					<td>22</td>
-					<td>13</td>
-					<td>9</td>
+					<td>Unit → number:</td>
+					<td style="font-size: 100px"><span class="poop"></span><span class="poop"></span><span class="poop"></span></td>
 				</tr>
-			</tbody>
-		</table>
-	</article>
+			</table>
+		</article>
 
-	<article class="horizontal demo slide">
-		<p class="hint">Show division not working</p>
-		<textarea class="language-css">
-			.block {
-				width: 33vw;
-				height: 33vh;
-			}
-		</textarea>
-		<textarea class="language-html"><h1 class="block">Variable values are token lists</h1></textarea>
-	</article>
+		<article class="takeaway slide">
+			<h1>Use variables for pure data, <br>not CSS values</h1>
+		</article>
 
-	<article class="slide">
-		<table>
-			<tr>
-				<td>Number → unit: </td>
-				<td><code class="language-css">calc(var(--foo) * 1px)</code></td>
-			</tr>
-			<tr>
-				<td>Unit → number:</td>
-				<td style="font-size: 100px"><span class="poop"></span><span class="poop"></span><span class="poop"></span></td>
-			</tr>
-		</table>
-	</article>
+		<article class="horizontal demo slide" id="animation" style="--division: 70">
+			<p class="hint">Try to animate --color | show that var() is ok</p>
+			<textarea class="language-css">
+				@keyframes bg {
+					from { background-color: yellow; }
+					to { background-color: #0ca; }
+				}
 
-	<article class="takeaway slide">
-		<h1>Use variables for pure data, <br>not CSS values</h1>
-	</article>
+				#animation.slide {
+					animation: 1s bg infinite alternate;
+				}
+			</textarea>
+			<h1>CSS Variables in @keyframes?</h1>
+		</article>
 
-	<article class="horizontal demo slide" id="animation" style="--division: 70">
-		<p class="hint">Try to animate --color | show that var() is ok</p>
-		<textarea class="language-css">
-			@keyframes bg {
-				from { background-color: yellow; }
-				to { background-color: #0ca; }
-			}
+		<article class="slide">
+			<blockquote style="width: 21em">
+				<p>[CSS variables] can even be <strong>tran&shy;sitioned or ani&shy;mated</strong>, but since the UA has no way to interpret their con&shy;tents, <strong>they always use the "flips at 50%"</strong> behav&shy;ior that is used for any oth&shy;er pair of val&shy;ues that can’t be intelligently interpolated.</p>
+				<p class="cite">— <a href="https://w3.org/TR/css-variables-1/">CSS Custom Properties for Cascading Variables Module Level 1</a></p>
+			</blockquote>
+		</article>
 
-			#animation.slide {
-				animation: 1s bg infinite alternate;
-			}
-		</textarea>
-		<h1>CSS Variables in @keyframes?</h1>
-	</article>
+		<article class="takeaway slide poop" id="animation-poop">
+			<h1>CSS variables <span class="plus">+</span> animations <span class="equals">=</span><span class="poop"><img src="img/poop.png" alt="💩"></span></h1>
+		</article>
 
-	<article class="slide">
-		<blockquote style="width: 21em">
-			<p>[CSS variables] can even be <strong>tran&shy;sitioned or ani&shy;mated</strong>, but since the UA has no way to interpret their con&shy;tents, <strong>they always use the "flips at 50%"</strong> behav&shy;ior that is used for any oth&shy;er pair of val&shy;ues that can’t be intelligently interpolated.</p>
-			<p class="cite">— <a href="https://w3.org/TR/css-variables-1/">CSS Custom Properties for Cascading Variables Module Level 1</a></p>
-		</blockquote>
-	</article>
+		<article class="future slide" id="registerProperty">
+			<h1>🔮 Near Future 🔮</h1>
+			<textarea class="language-javascript prism-live">CSS.registerProperty({
+		name: "--color",
+		syntax: "&lt;color>",
+		initialValue: "black",
+		inherits: false
+	});</textarea>
+			<button onclick="eval(registerPropertyCode.textContent)" class="run delayed">Run!</button>
+		</article>
 
-	<article class="takeaway slide poop" id="animation-poop">
-		<h1>CSS variables <span class="plus">+</span> animations <span class="equals">=</span><span class="poop"><img src="img/poop.png" alt="💩"></span></h1>
-	</article>
+		<article class="slide" data-insert="animation"></article>
 
-	<article class="future slide" id="registerProperty">
-		<h1>🔮 Near Future 🔮</h1>
-		<textarea class="language-javascript prism-live">CSS.registerProperty({
-	name: "--color",
-	syntax: "&lt;color>",
-	initialValue: "black",
-	inherits: false
-});</textarea>
-		<button onclick="eval(registerPropertyCode.textContent)" class="run delayed">Run!</button>
-	</article>
+		<article class="browser-support slide">
+			<table>
+				<thead>
+					<tr>
+						<th></th>
+						<th><img src="img/chrome-logo.svg" alt="Chrome"></th>
+						<th><img src="img/firefox-logo.svg" alt="Firefox"></th>
+						<th><img src="img/edge-logo.svg" alt="Edge"></th>
+						<th><img src="img/safari-logo.png" alt="Safari"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>CSS.registerProperty()</th>
+						<td class="incomplete">⛳️</td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</article>
 
-	<article class="slide" data-insert="animation"></article>
+		<!-- <article class="horizontal demo slide" id="transition" style="--division: 70">
+			<textarea class="language-css">
+				#transition.slide {
+					background: yellow;
+					transition: 1s;
+				}
 
-	<article class="browser-support slide">
-		<table>
-			<thead>
-				<tr>
-					<th></th>
-					<th><img src="img/chrome-logo.svg" alt="Chrome"></th>
-					<th><img src="img/firefox-logo.svg" alt="Firefox"></th>
-					<th><img src="img/edge-logo.svg" alt="Edge"></th>
-					<th><img src="img/safari-logo.png" alt="Safari"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>CSS.registerProperty()</th>
-					<td class="incomplete">⛳️</td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
-	</article>
+				#transition.slide:active {
+					background: #0ca;
+				}
+			</textarea>
+			<h1>CSS Variables + Transitions = ?</h1>
+		</article>
 
-	<!-- <article class="horizontal demo slide" id="transition" style="--division: 70">
-		<textarea class="language-css">
-			#transition.slide {
-				background: yellow;
-				transition: 1s;
-			}
+		<article class="takeaway slide">
+			<h1>CSS Variables can still <br>trigger transitions</h1>
+		</article> -->
 
-			#transition.slide:active {
-				background: #0ca;
-			}
-		</textarea>
-		<h1>CSS Variables + Transitions = ?</h1>
-	</article>
-
-	<article class="takeaway slide">
-		<h1>CSS Variables can still <br>trigger transitions</h1>
-	</article> -->
-
-	<article class="takeaway slide">
-		<h1>CSS variables <span class="plus">+</span> animations <span class="equals">=</span>🔮<span class="heart" style="font-size: 90px;">♥️</span></h1>
-	</article>
+		<article class="takeaway slide">
+			<h1>CSS variables <span class="plus">+</span> animations <span class="equals">=</span>🔮<span class="heart" style="font-size: 90px;">❤️</span></h1>
+		</article>
+	</section>
 </section>
 
 <section>

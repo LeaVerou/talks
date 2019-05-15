@@ -13,7 +13,7 @@
 <link href="../shared/css/tree.css" rel="stylesheet" />
 
 <link rel="inspire-import" href="../css-variables/index.html" id="vars">
-<link rel="inspire-import" href="../even-more-css-secrets/index.html" id="evenmore">
+<link rel="inspire-import" href="../even-more-css-secrets/index.html" id="emcs">
 <link rel="inspire-import" href="../web-design-cheat-code/index.html" id="cheat">
 <link rel="inspire-import" href="https://svgees.us/font-level-up/index.html" id="fonts">
 <link rel="inspire-import" href="https://svgees.us/Talks/svg-basics/index.html" id="svg">
@@ -52,13 +52,55 @@
 	<article class="slide" data-insert="svg#fill-stroke"></article>
 </section>
 
-<article class="slide" data-insert="evenmore#character-images-secret"></article>
-<article class="slide" data-insert="evenmore#fancy-borders-secret"></article>
+<section>
+	<header class="slide" data-insert="emcs#character-images"></header>
+	<article class="slide" data-insert="cheat#demo-character-images-base64"></article>
+	<article class="slide" data-insert="emcs#demo-character-images"></article>
 
-<!-- TODO: SVG data URIs from evenmore -->
+	<article class="takeaway slide">
+		<ul>
+			<li>You can have multiline data URIs by escaping each line with a <code>\</code></li>
+			<li>You can embed SVG in your CSS with data URIs, and you don’t need to %encode most characters</li>
+		</ul>
+	</article>
+
+	<article class="slide" data-insert="emcs#demo-character-images"></article>
+
+	<article class="takeaway slide">
+		<ul>
+			<li>You can use these data URIs to create images out of characters</li>
+			<li>You can even create animated backgrounds, with CSS animations <em>inside the embedded SVG</em>!</li>
+		</ul>
+	</article>
+
+	<article class="slide" data-insert="cheat#blockquote"></article>
+
+	<article class="slide" data-insert="emcs#star-rating"></article>
+</section>
+
+<article class="slide" data-insert="emcs#fancy-borders-secret"></article>
+
+<!-- TODO: SVG data URIs from emcs -->
 
 <section class="language-css">
-	<article class="slide" data-insert="vars#vars-intro"></article>
+	<header class="slide">
+		<h1>CSS Variables</h1>
+	</header>
+	<article class="slide" data-insert="vars#preprocessors"></article>
+	<article class="slide" data-insert="vars#currentColor"></article>
+	<article class="slide" data-insert="vars#takeaway-1"></article>
+	<article class="slide" data-insert="vars#inheritance"></article>
+	<article class="slide" data-insert="vars#takeaway-2"></article>
+	<article class="slide" data-insert="vars#url"></article>
+	<article class="slide" data-insert="vars#url-cases"></article>
+	<article class="slide" data-insert="vars#url-poop"></article>
+	<article class="slide" data-insert="emcs#star-rating"></article>
+	<article class="slide" data-insert="cheat#reduce-duplication"></article>
+	<article class="slide" data-insert="cheat#reduce-duplication-preprocessors"></article>
+	<article class="slide" data-insert="cheat#reduce-duplication-preprocessors-2"></article>
+
+	<article class="slide" data-insert="vars#post-url"></article>
+
 	<article class="slide" data-insert="vars#button"></article>
 	<article class="slide" data-insert="vars#button-takeaway"></article>
 	<article class="slide" data-insert="vars#button"></article>
@@ -146,6 +188,13 @@
 		<textarea class="language-html">
 			<div class="speech-bubble">Does this look like a speech bubble?</div>
 		</textarea>
+		<!--
+		Objective is to transform this into a speech bubble
+		bottom: calc(-1 * var(--size) / 2);
+		transform: rotate(45deg);
+		clip-path: polygon(100% 0, 100% 100%, 0 100%);
+		maybe show drop-shadow() after
+		 -->
 	</article>
 
 	<article class="light slide">
@@ -183,10 +232,10 @@
 		<h1>Blending & Filters</h1>
 	</header>
 
-	<article class="slide" data-insert="evenmore#transparent-text"></article>
-	<article class="slide" data-insert="evenmore#blend-playground"></article>
-	<article class="slide" data-insert="evenmore#blending-modes"></article>
-	<article class="slide" data-insert="evenmore#transparent-text"></article>
+	<article class="slide" data-insert="emcs#transparent-text"></article>
+	<article class="slide" data-insert="emcs#blend-playground"></article>
+	<article class="slide" data-insert="emcs#blending-modes"></article>
+	<article class="slide" data-insert="emcs#transparent-text"></article>
 
 	<article class="demo slide" style="--division: 50">
 		<textarea class="language-css">
@@ -258,7 +307,7 @@
 	<article class="slide" data-insert="fonts#font-basics"></article>
 	<article class="slide" data-insert="fonts#opentype-features"></article>
 	<article class="slide" data-insert="fonts#variable-fonts-section"></article>
-	<article class="slide" data-insert="evenmore#variable-fonts-secret"></article>
+	<article class="slide" data-insert="emcs#variable-fonts-secret"></article>
 	<article class="slide" data-insert="fonts#poo"></article>
 </section>
 
@@ -356,8 +405,8 @@
 		</textarea>
 	</article>
 
-	<article class="slide" data-insert="evenmore#line-headings-secret"></article>
-	<article class="slide" data-insert="evenmore#responsive-flex-secret"></article>
+	<article class="slide" data-insert="emcs#line-headings-secret"></article>
+	<article class="slide" data-insert="emcs#responsive-flex-secret"></article>
 </section>
 
 <section>
@@ -512,8 +561,8 @@
 		<a href="http://cssgridgarden.com/" target="_blank"><img src="../intro/img/gridgarden.png" alt=""></a>
 	</article>
 
-	<article class="slide" data-insert="evenmore#grid-auto-flow-secret"></article>
-	<article class="slide" data-insert="evenmore#display-contents-secret"></article>
+	<article class="slide" data-insert="emcs#grid-auto-flow-secret"></article>
+	<article class="slide" data-insert="emcs#display-contents-secret"></article>
 </section>
 
 
