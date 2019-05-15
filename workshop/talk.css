@@ -108,3 +108,14 @@ html:not([data-profile="speaker"]) .hint {
 	width: 2em;
 	height: calc(var(--p) * 100%);
 }
+
+/* Chrome 74 bug */
+svg:not([width]):not([height]):only-child,
+img[alt="flags explained"] {
+	align-self: flex-start;
+}
+
+#param h1 {
+	background: rgba(0,0,0,.5);
+	padding: .1em .3em;
+}
