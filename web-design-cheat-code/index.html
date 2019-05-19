@@ -38,7 +38,7 @@
 
 <article class="slide" data-insert="reusable#introduction"></article>
 
-<header class="slide" data-insert="#cover"></header>
+<header class="slide" data-insert="#cover-cheat"></header>
 
 <article class="horizontal demo slide" id="viewbox">
 	<div class="ribbon">SVG Primer<br>viewBox</div>
@@ -256,7 +256,7 @@
 		</div>
 	</article>
 
-	<article class="horizontal demo slide" id="custom-cursors">
+	<!-- <article class="horizontal demo slide" id="custom-cursors">
 		<textarea class="language-css">
 			cursor: url('data:image/svg+xml,\
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
@@ -279,8 +279,17 @@
 		</div>
 		<img src="img/can-of-worms.png" alt="">
 	</article>
+	<article class="horizontal demo slide" id="custom-cursors-workaround">
+		<textarea class="language-css">
+			cursor: url('data:image/svg+xml,\
+			<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 100 100">\
+				<style>@keyframes dance{ to {transform: rotate(-10deg)}}</style>\
+				<text y="1em" style="font-size: 90px; animation: dance .4s infinite alternate">🦄</text>\
+			</svg>'), auto;
+		</textarea>
+	</article>
 	<article class="slide" data-insert="#custom-cursors"></article>
-	<article class="slide" data-src="https://caniuse.com/#feat=css-image-set" title="image-set() on caniuse.com"></article>
+	<article class="slide" data-src="https://caniuse.com/#feat=css-image-set" title="image-set() on caniuse.com"></article> -->
 </section>
 <section>
 	<header class="slide" data-insert="emcs#fancy-borders"></header>
@@ -396,7 +405,7 @@
 		<img src="img/can-of-worms.png" alt="">
 	</article>
 
-	<header class="slide" data-insert="#cover"></header>
+	<header class="slide" data-insert="#cover-cheat"></header>
 
 	<!-- <article class="horizontal demo slide">
 		<textarea class="language-html">

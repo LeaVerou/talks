@@ -18,13 +18,19 @@ document.addEventListener("slidechange", evt => {
 	}
 });
 
-for (input of document.querySelectorAll("input")) {
-	input.style.setProperty("--value", input.value);
-}
+Inspire.hooks.add("slidechange", env => {
+	if (Inspire.currentSlide.id === "slider") {
+		setTimeout(() => {
+			for (input of document.querySelectorAll("input")) {
+				input.style.setProperty("--value", input.value);
+			}
 
-document.addEventListener("input", evt => {
-	if (evt.target.matches(":target input")) {
-		evt.target.style.setProperty("--value", evt.target.value);
+			document.addEventListener("input", evt => {
+				if (evt.target.matches(":target input")) {
+					evt.target.style.setProperty("--value", evt.target.value);
+				}
+			});
+		}, 500);
 	}
 });
 
@@ -45,10 +51,13 @@ for (let element of document.querySelectorAll("p.typing")) {
 
 $$(".takeaway.slide").forEach((slide, i) => slide.style.setProperty("--takeaway", i+1));
 
-for (let el of document.querySelectorAll(".scrolling")) {
-	el.addEventListener("scroll", evt => {
-		let maxScroll = el.scrollHeight - el.offsetHeight;
-		let scroll = el.scrollTop / maxScroll;
-		el.style.setProperty("--scroll", scroll);
-	});
-}
+Inspire.hooks.add("slidechange", env => {
+	if (Inspire.currentSlide.id === "scrolling" && env.firstTime) {
+		Inspire.currentSlide.addEventListener("scroll", evt => {
+			var el = evt.target;
+			let maxScroll = el.scrollHeight - el.offsetHeight;
+			let scroll = el.scrollTop / maxScroll;
+			el.style.setProperty("--scroll", scroll);
+		}, true);
+	}
+});
