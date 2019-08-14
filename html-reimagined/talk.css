@@ -1063,36 +1063,36 @@ ul.blocks {
 	font-size: 120%;
 }
 
-ul.blocks li {
-	list-style: none;
-	margin: 1em;
-	text-align: center;
-}
+	ul.blocks li {
+		list-style: none;
+		margin: 1em;
+		text-align: center;
+	}
 
-ul.blocks li::before {
-	content: attr(data-icon);
-	font-family: 'webapps';
-	display: block;
-	font-weight: normal;
-	color: var(--color1);
-	font-size: 200%;
-}
+	ul.blocks li::before {
+		content: attr(data-icon);
+		font-family: 'webapps';
+		display: block;
+		font-weight: normal;
+		color: var(--color1);
+		font-size: 200%;
+	}
 
-ul.blocks li:nth-child(2)::before {
-	color: var(--color4);
-}
+	ul.blocks li:nth-child(2)::before {
+		color: var(--color4);
+	}
 
-ul.blocks li:nth-child(3)::before {
-	color: var(--color3);
-}
+	ul.blocks li:nth-child(3)::before {
+		color: var(--color3);
+	}
 
-ul.blocks li:nth-child(4)::before {
-	color: var(--color2);
-}
+	ul.blocks li:nth-child(4)::before {
+		color: var(--color2);
+	}
 
-ul.blocks li:nth-child(5)::before {
-	color: var(--color5);
-}
+	ul.blocks li:nth-child(5)::before {
+		color: var(--color5);
+	}
 
 #hard-conditionals h1,
 #hard-refs h1 {

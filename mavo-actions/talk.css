@@ -69,25 +69,25 @@ img.inline{
 	height: .9em;
 }
 
-#todomvc {
+#todomvcQ {
 	flex-flow: row;
 	padding: 3vw;
 	background: #F5F5F5;
 	color: black;
 }
 
-	#todomvc table {
+	#todomvcQ table {
 		width: 40vw;
 		margin: 0 3vw 0 0;
 	}
 
-	#todomvc caption {
+	#todomvcQ caption {
 		font-size: 250%;
 		line-height: .76;
 		color: var(--color-magenta);
 	}
 
-	#todomvc thead th {
+	#todomvcQ thead th {
 		padding-top: 0;
 		padding-bottom: 0;
 		font-size: 75%;
@@ -95,7 +95,7 @@ img.inline{
 		color: white;
 	}
 
-	#todomvc table + * {
+	#todomvcQ table + * {
 		float: right;
 		max-width: 51vw;
 	}
@@ -1346,7 +1346,7 @@ ul.fancy li + li::before {
 	}
 
 #separators {
-	overflow: hidden;	
+	overflow: hidden;
 }
 
 	#separators td:first-child .token {

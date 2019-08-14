@@ -1,3 +1,17 @@
+@font-face {
+	font-family: 'webapps';
+	font-style: normal;
+	font-weight: 400;
+	src: url("fonts/webapps.woff2") format('woff2');
+}
+
+@font-face {
+	font-family: 'Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: url("../shared/fonts/slide-icons.woff2") format('woff2');
+}
+
 #adjust-resolution h1 {
 	display: flex;
 	align-items: center;
@@ -17,31 +31,39 @@
 }
 
 #the-problem {
-	background: url(img/coding.png) center / cover black no-repeat;
-	transition: 1s background-image;
+	background: url(img/excited-coder.svg) left bottom / cover #d6e7eb no-repeat;
+	transition: .5s background-image;
+	color: black;
 }
 
 #the-problem[data-step="1"] {
-	background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"></svg>');
+	background-image: url(img/troubled-coder.svg);
 }
 
 #the-problem[data-step="2"] {
-	background-image: url(img/crying-baby.jpg);
+	background-image: url(img/frustrated-coder.svg);
+}
+
+#the-problem:after,
+#jslogos:after {
+	color: black;
+	text-shadow: none;
+	font-weight: 400;
 }
 
 	#the-problem ul {
 		position: absolute;
 		bottom: 0;
-		left: 1em;
+		right: 1em;
 		padding: 0;
 		list-style: none;
 	}
 
 		#the-problem li {
 			font-weight: bold;
-			font-size: 150%;
+			font-size: 100%;
 			line-height: 1;
-			transition: 1s 1.1s transform, 6s 2s font-size;
+			transition: 1s 1.1s transform, 4s 5s font-size;
 		}
 
 		#the-problem:not([data-step]) li:not(.special) {
@@ -49,20 +71,23 @@
 		}
 
 	#the-problem:not([data-step]) .special {
-		font-size: 300%;
+		font-size: 280%;
 	}
 
 	#the-problem .html {
 		color: hsl(10, 100%, 50%);
+		mix-blend-mode: multiply;
 	}
 
 	#the-problem .css {
 		color: hsl(210, 100%, 50%);
+		mix-blend-mode: multiply;
 	}
 
 @keyframes scrollbg {
-	to { background-position: 50% 305%; }
+	to { background-position-y: -977px; }
 }
+
 
 #jslogos {
 	background: url(img/jslogos.png) center / 65% auto white;
@@ -92,6 +117,99 @@
 	#todomvc img {
 		float: right;
 		max-width: 51vw;
+	}
+
+	.graph-1d {
+		position: relative;
+		width: 80%;
+		--thickness: 10px;
+		--text-distance: 4em;
+		--color1: hsl(40, 100%, 50%);
+		--color2: hsl(180, 100%, 40%);
+		height: var(--thickness);
+		margin: calc(1em + var(--text-distance));
+		background: linear-gradient(to right, var(--color1), var(--color2));
+		border-radius: .3em;
+	}
+
+		.graph-1d::before,
+		.graph-1d::after {
+			position: absolute;
+			white-space: pre;
+			font-weight: bold;
+			font-size: 40%;
+			margin-top: -1.2em;
+			text-transform: uppercase;
+		}
+
+		.graph-1d::before {
+			content: attr(data-label-before);
+			color: var(--color1);
+			right: 100%;
+			margin-right: 2em;
+			text-align: right;
+		}
+
+		.graph-1d::after {
+			content: attr(data-label-after);
+			color: var(--color2);
+			left: 100%;
+			margin-left: 2em;
+		}
+
+		.graph-1d > * {
+			position: absolute;
+			top: var(--text-distance);
+			left: calc(var(--x) * 100%);
+			font-size: 80%;
+			line-height: 1.2;
+			white-space: nowrap;
+			font-weight: bold;
+		}
+
+		.graph-1d > :nth-child(even) {
+			top: calc(-1 * var(--text-distance) - var(--thickness) * 1.5);
+		}
+
+			.graph-1d > ::before {
+				content: "";
+				position: absolute;
+				top: calc(-1 * var(--text-distance));
+				width: 0;
+				height: 0;
+				padding: calc(var(--thickness) * 1.5);
+				margin: calc(-1 * var(--thickness));
+				border-radius: 50%;
+				background: var(--color1);
+				box-shadow: 0 0 0 1em hsla(180, 100%, 40%, var(--x)) inset;
+			}
+
+			.graph-1d > :nth-child(even)::before {
+				top: calc(var(--text-distance) + var(--thickness) * 1.5);
+			}
+
+			.graph-1d > ::after {
+				content: "";
+				position: absolute;
+				left: calc(var(--thickness) * .5);
+				bottom: 1.5em;
+				border-left: 1px solid white;
+				height: calc(var(--text-distance) - 1.5em);
+				opacity: .3;
+			}
+
+			.graph-1d > :nth-child(even)::after {
+				top: 1.5em;
+				bottom: auto;
+			}
+
+	@keyframes qqq {
+		from { --x: .15; }
+		to { --x: .85; }
+	}
+
+	#landscape .qqq {
+		animation: qqq 5s infinite alternate linear;
 	}
 
 #research-question h1 {
@@ -129,6 +247,43 @@
 		background: transparent;
 		box-shadow: none;
 		text-shadow: none;
+	}
+
+ul.blocks {
+	display: flex;
+	align-items: center;
+	font-size: 120%;
+}
+
+	ul.blocks li {
+		list-style: none;
+		margin: 1em;
+		text-align: center;
+	}
+
+	ul.blocks li::before {
+		content: attr(data-icon);
+		font-family: 'webapps';
+		display: block;
+		font-weight: normal;
+		color: var(--color1);
+		font-size: 200%;
+	}
+
+	ul.blocks li:nth-child(2)::before {
+		color: var(--color4);
+	}
+
+	ul.blocks li:nth-child(3)::before {
+		color: var(--color3);
+	}
+
+	ul.blocks li:nth-child(4)::before {
+		color: var(--color2);
+	}
+
+	ul.blocks li:nth-child(5)::before {
+		color: var(--color5);
 	}
 
 #data-source video {
@@ -178,6 +333,8 @@
 	transform: scale(2.5);
 	transform-origin: left;
 	margin-right: 210px;
+	color: black;
+	font: 400 11px system-ui;
 }
 
 #form-elements input:not([type]) {
@@ -778,6 +935,7 @@ footer.slide {
 			content: var(--icon);
 			display: inline-block;
 			margin-right: .2em;
+			font-family: Icons;
 		}
 
 		footer.slide > ul a {
@@ -979,20 +1137,159 @@ footer.slide {
 	padding: .2em .5em;
 }
 
-#uist {
+.uist {
 
 }
 
-	#uist img {
+	.uist img {
 		opacity: 1;
 		transform: translateY(100vh);
 		box-shadow: 0 0 1em rgba(0,0,0,.5);
 	}
 
-	#uist .delayed.current {
+	.uist .delayed.current {
 		transform: translateY(10vh);
+	}
+
+	#uist2016 {
+		background: url(img/uist.png) center / 100% auto hsl(0, 0%, 87%);
+	}
+
+	#uist2018 {
+		background: url(img/uist2018-logo.png) center / 50%, linear-gradient(to right, rgba(35,7,77,0.7), rgba(204,83,51,0.7)), url(img/uist2018-bg.jpg) center / cover;
+		background-repeat: no-repeat;
 	}
 
 #form-elements .mv-bar {
 	display: none;
 }
+
+#iceberg {
+	background-image: url(img/iceberg.jpg);
+	font: 500%/1 var(--font-handwritten);
+	transition: 2s background-position-x;
+}
+
+	#iceberg:target {
+		background-position-x: left;
+	}
+
+	#iceberg p {
+		position: absolute;
+		right: 1em;
+		margin: 0;
+		transition: 2s right;
+		text-shadow: 0 0 .1em rgba(0,0,0,.8);
+	}
+
+	#iceberg:target p {
+		right: 4em;
+	}
+
+	#iceberg p:first-of-type {
+		top: 20vh;
+	}
+
+	#iceberg p:last-of-type {
+		bottom: 40vh;
+	}
+
+#access-control {
+
+}
+
+	#access-control div {
+		width: 35em;
+		font-size: 50%;
+		border: 1px solid hsla(0,0%,100%,.4);
+		border-radius: .3em;
+		margin-bottom: .5em;
+		padding: .8em;
+		background: hsla(0,0%,100%,.1);
+	}
+
+	#access-control p {
+		margin: 0;
+		margin-left: 7em;
+	}
+
+	#access-control p:first-of-type {
+		font-family: Blokk;
+	}
+
+	#access-control p:last-of-type {
+		font-weight: bold;
+		margin-top: .5em;
+	}
+
+		#access-control a {
+			text-decoration: none;
+			margin-right: 1em;
+			font-size: 120%;
+		}
+
+		#access-control a::before {
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: .3em;
+		}
+
+		#access-control .reply::before {
+			content: "↩";
+			transform: scaleY(-1);
+			color: hsl(200, 100%, 80%);
+			vertical-align: .1em;
+		}
+
+		#access-control .edit::before {
+			content: "✏️";
+		}
+
+		#access-control .delete::before {
+			content: "❌";
+			color: #f44;
+		}
+
+	#access-control img {
+		float: left;
+		width: 6em;
+		height: 6em;
+		border-radius: 50%;
+		margin: 0 1em 0 0;
+	}
+
+#realtime {
+	background: hsl(264, 55%, 56%);
+}
+
+.annotation {
+	position: relative;
+	width: fit-content;
+}
+
+	.annotation svg,
+	svg.annotation {
+		position: absolute;
+		top: 0;
+		right: 0;
+		max-width: 100%;
+	}
+
+	.annotation svg ellipse,
+	svg.annotation ellipse {
+		stroke: red;
+		fill: none;
+		stroke-width: .5vmin;
+		stroke-linecap: round;
+		stroke-dasharray: 500 500;
+		stroke-dashoffset: -315;
+		transition: 1s stroke-dashoffset;
+		rx: calc(50px - .25vmin);
+		ry: calc(50px - .25vmin);
+		cx: 50px;
+		cy: 50px;
+	}
+	.slide[data-step] .annotation svg ellipse,
+	.slide[data-step] svg.annotation ellipse {
+		stroke-dashoffset: 0;
+	}

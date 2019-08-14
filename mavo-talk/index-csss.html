@@ -4,25 +4,28 @@
 
 <meta charset="utf-8" />
 <title>Mavo: Creating Interactive Data-Driven Web Applications by Authoring HTML</title>
-<link href="../../inspire.js/inspire.css" rel="stylesheet" />
-<link href="../../inspire.js/theme.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://get.mavo.io/mavo.css">
+<link href="../csss/slideshow.css" rel="stylesheet" />
+<link href="../csss/reusable.css" rel="stylesheet" />
+<link rel="stylesheet" href="mavo/mavo.css">
 <link href="prism.css" rel="stylesheet" />
 <link href="theme.css" rel="stylesheet" />
 <link href="talk.css" rel="stylesheet" />
-<link rel="inspire-import" href="../mavo-actions/index.html" id="actions">
 <!-- <script src="../prefixfree/prefixfree.min.js"></script> -->
 
 </head>
 <body class="language-markup">
 
-<!-- <article class="slide" id="adjust-resolution" style="--vw: 1024; --vh: 768">
+<article class="slide" id="adjust-resolution" style="--vw: 1024; --vh: 768">
 	<h1>1024 × 768</h1>
-</article> -->
+</article>
 
 <header class="slide" data-video="videos/authors.mp4" id="intro"></header>
 
 <section>
+	<article id="uist" class="slide" style="background: url(img/uist.png) center / 100% auto hsl(0, 0%, 87%)">
+		<img src="img/paper.png" alt="" class="delayed">
+	</article>
+
 	<article class="slide" id="comic" data-credits="zenpencils.com/comic/98-alan-watts-what-if-money-was-no-object">
 		<img src="img/goals.gif" alt="">
 		<img class="delayed" src="img/everyoneknows.png" alt="">
@@ -82,8 +85,6 @@
 
 	<article class="slide" id="jslogos" data-credits="hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f"></article>
 
-	<article class="image slide" style="background-image: url(img/crying-baby.jpg)"></article>
-
 	<article class="slide" id="todomvc">
 		<table>
 			<caption>todomvc.com</caption>
@@ -115,19 +116,7 @@
 		<img src="img/todomvc.png" />
 	</article>
 
-	<article class="slide" id="landscape">
-		<h1>Creating on the Web</h1>
-
-		<div class="graph-1d" data-label-before="More Effort
-More Control" data-label-after="Less Effort
-Less Control">
-			<div style="--x: 0">Vanilla JS</div>
-			<div style="--x: .1">JS Frameworks</div>
-			<div style="--x: .5" class="qqq">???</div>
-			<div style="--x: .9">Prefab</div>
-			<div style="--x: 1">Services</div>
-		</div>
-	</article>
+	<!-- <article class="slide" data-src="http://www.simile-widgets.org/exhibit2" title="Exhibit: Data presentation with HTML"></article> -->
 
 	<article class="slide" id="research-question">
 		<h1>
@@ -144,7 +133,7 @@ Less Control">
 		</ul>
 	</article>
 
-	<!-- <article class="dont-resize slide" id="related-work">
+	<article class="dont-resize slide" id="related-work">
 		<article style="background-image: url(img/dido.png)" class="round-item delayed">
 			<div>
 				<h1>Dido <span class="ref">UIST 2009</span></h1>
@@ -175,9 +164,9 @@ Less Control">
 				</ul>
 			</div>
 		</article>
-	</article> -->
+	</article>
 
-	<article class="looping slide" data-video="videos/todo.mp4"></article>
+	<article class="looping video slide" data-video="videos/todo.mp4"></article>
 
 	<article class="slide" id="todo-code" data-steps="1">
 		<pre><code>
@@ -202,40 +191,9 @@ Less Control">
 	</header>
 
 	<article class="slide">
-		<h1>Try Mavo out</h1>
-		<pre><code>
-			&lt;link rel="stylesheet" href="//get.mavo.io/mavo.css"/>
-			&lt;script src="//get.mavo.io/mavo.js">&lt;/script>
-		</code></pre>
-
-		<p class="delayed" style="font-size: 200%">or just visit <a style="font-weight: bold" href="https://play.mavo.io">play.mavo.io</a>!</p>
-	</article>
-
-	<article class="slide">
-		<h1>Activate Mavo</h1>
-		<pre><code>
-			&lt;div <mark>mv-app="appName"</mark>>
-				&lt;!-- Mavo app -->
-			&lt;/div>
-		</code></pre>
-	</article>
-
-	<article class="slide" id="building-blocks">
-		<h1>Mavo Building Blocks</h1>
-
-		<ul class="blocks">
-			<li data-icon="✏">Editing</li>
-			<li data-icon="▦">Collections</li>
-			<li data-icon="⛁">Persistence</li>
-			<li data-icon="☁">Uploads</li>
-			<li data-icon="⇄">Data flow</li>
-		</ul>
-	</article>
-
-	<article class="slide">
 		<h1>Persistence</h1>
 		<pre><code>
-			&lt;div mv-app <mark>mv-storage="local"</mark>>
+			&lt;div <mark>mv-storage="local"</mark>>
 				&lt;!-- Mavo app -->
 			&lt;/div>
 		</code></pre>
@@ -244,7 +202,7 @@ Less Control">
 	<article class="slide" id="data-source">
 		<video src="videos/auth.mp4" style="height: 50vh; margin-bottom: 3vh" loop></video>
 		<pre><code>
-			&lt;div mv-app <mark>mv-storage="http://github.com/leaverou"</mark>>
+			&lt;div <mark>mv-storage="http://github.com/leaverou"</mark>>
 				&lt;!-- Mavo app -->
 			&lt;/div>
 		</code></pre>
@@ -261,9 +219,9 @@ Less Control">
 		</code></pre>
 	</article> -->
 
-	<article class="xvisible-storage example slide" id="form-elements">
+	<article class="visible-storage example slide" id="form-elements">
 		<pre><code>
-			&lt;div mv-app <mark>mv-storage="local"</mark> mv-autosave>
+			&lt;div <mark>mv-storage="local"</mark> class="mv-autosave">
 				&lt;input <mark>property="name"</mark> value="Lea Verou"/>
 				&lt;input <mark>property="strength"</mark> type="range" />
 				&lt;select <mark>property="country"</mark>>
@@ -277,7 +235,7 @@ Less Control">
 
 	<article class="visible-storage example slide">
 		<pre style="font-size: 80%;"><code>
-			&lt;div mv-app class="cat" <mark>mv-storage="local"</mark>>
+			&lt;div class="cat" <mark>mv-storage="local"</mark>>
 				&lt;img src="img/adamcatlace.png" <mark>property="photo"</mark>>
 				&lt;h1 <mark>property="name"</mark>>Adam Catlace&lt;/h1>
 				&lt;time <mark>property="birthday"</mark> datetime="2014-06-01">1 Jun 2014&lt;/time>
@@ -317,8 +275,6 @@ Less Control">
 		</code></pre>
 	</article>
 
-	<article class="looping slide" data-video="https://mavo.io/demos/homepage/video.mp4" style="--url: 'https://mavo.io/demos/homepage'"></article>
-	<article class="looping slide" data-video="https://mavo.io/demos/portfolio/video.mp4" style="--url: 'https://mavo.io/demos/portfolio'"></article>
 	<article class="looping slide" data-video="videos/talks.mp4"></article>
 	<article class="looping slide" data-video="videos/authors.mp4"></article>
 
@@ -346,7 +302,6 @@ Less Control">
 	<article class="looping slide" data-video="videos/color-picker.mp4"></article>
 	<article class="looping slide" data-video="videos/logo.mp4"></article>
 	<article class="looping slide" data-video="videos/mortgage.mp4"></article>
-	<article class="slide" data-src="https://codepen.io/leaverou/embed/RjMBwy/?height=265&theme-id=0&default-tab=html,result&embed-version=2" title="codepen.io/leaverou/pen/RjMBwy"></article>
 
 	<article class="vertical example slide lite-cats" id="aggregate-expressions" data-steps="1"
 	         data-credits="Cat’s Shrödinger by The Oatmeal, Cat on Laptop from flickr.com/photos/nwater/8130196854">
@@ -399,7 +354,7 @@ Less Control">
 	<article class="slide" data-src="http://mavo.io/demos"></article>
 </section>
 
-<!-- <article class="slide">
+<article class="slide">
 	<h1>Extensibility</h1>
 
 	<table>
@@ -426,16 +381,14 @@ Less Control">
 	</table>
 
 	<p class="delayed">Low level extensibility: <strong>Hooking</strong></p>
-</article> -->
-
-<article class="slide" data-src="https://plugins.mavo.io"></article>
+</article>
 
 <section id="evaluation">
 	<header class="slide">
 		<h1>Evaluation</h1>
 	</header>
 
-	<!-- <article class="slide" id="study-design">
+	<article class="slide" id="study-design">
 		<h1>Study design</h1>
 		<div class="timeline">
 			<div class="tutorial">Mavo Tutorial</div>
@@ -448,7 +401,7 @@ Less Control">
 				<div>Are Mavo’s capabilities sufficent?</div>
 			</div>
 		</div>
-	</article> -->
+	</article>
 
 	<article class="slide" id="subjects" data-steps="4">
 		<h1>20 participants</h1>
@@ -560,7 +513,7 @@ Less Control">
 		<strong>92.8%</strong> on basic expressions
 	</article>
 
-	<!-- <article class="slide" id="hard-refs">
+	<article class="slide" id="hard-refs">
 		<h1 class="label">What was hard</h1>
 		<p>Concatenation</p>
 		<table>
@@ -597,21 +550,21 @@ Less Control">
 				</tr>
 			</tbody>
 		</table>
-	</article> -->
+	</article>
 
 	<article class="stat slide">
 		<h1>Success</h1>
 		<strong>74.6%</strong> on complex expressions
 	</article>
 
-	<!-- <article class="slide" id="hard-conditionals">
+	<article class="slide" id="hard-conditionals">
 		<h1 class="label">What was hard</h1>
 		<p>Conditionals <br><code>if(score > 0, Yes, No)</code>
 		<p class="delayed">Especially nested <br><code>if(score > 0, Yes, if(score &lt; 0, No, Maybe))</code></code>
 		<blockquote class="delayed">Just seeing those if statements...I did a little bit of Java and I remember those always screwed me over in that class. No surprise that that also tripped me up here.</blockquote>
-	</article> -->
+	</article>
 
-	<!-- <article class="slide">
+	<article class="slide">
 		<h1>
 			<span class="label">Post study work</span>
 			Markup-based conditionals
@@ -621,14 +574,14 @@ Less Control">
 			&lt;div mv-if="score = 0">Maybe&lt;/div>
 			&lt;div mv-if="score < 0">No&lt;/div>
 		</code></pre>
-	</article> -->
+	</article>
 
 	<article class="stat slide">
 		<h1>Success</h1>
 		<strong>2<span class="down-arrow">⬇︎</span></strong> in perceived difficulty <br>on 5-point Likert scale
 	</article>
 
-	<!-- <article class="slide">
+	<article class="slide">
 		<table>
 			<thead>
 				<tr>
@@ -651,9 +604,9 @@ Less Control">
 				<td style="color: #fbb">⬇︎2.445</td>
 			</tr>
 		</table>
-	</article> -->
+	</article>
 
-	<!-- <article class="slide" id="stat-summary">
+	<article class="slide" id="stat-summary">
 		<article class="stat">
 			<strong>100%</strong> on CRUD tasks
 		</article>
@@ -669,7 +622,7 @@ Less Control">
 		<article class="stat">
 			<strong>2<span class="down-arrow">⬇︎</span></strong> in perceived difficulty <br>on 5-point Likert scale
 		</article>
-	</article> -->
+	</article>
 
 	<article class="slide" id="freestyle">
 		<h1>
@@ -718,69 +671,23 @@ Less Control">
 		<blockquote>When is this going to be available? This is terrific. This is exactly the stuff I have a hard time with.</blockquote>
 		<blockquote>I'm convinced it's magic to write templating logic and have it show up and be editable.</blockquote>
 	</article>
-
-	<article id="uist2016" class="uist slide">
-		<img src="img/paper.png" alt="" class="delayed">
-	</article>
 </section>
+
 <section>
-	<header class="slide">
-		<h1>Mavo Actions</h1>
+	<header class="future slide">
+		<h1>Future Work</h1>
 	</header>
 
-	<article id="uist2018" class="uist slide">
-		<img src="img/mavo-actions-paper.png" alt="" class="delayed">
+	<article class="slide">
+		<h1>Schema mutations</h1>
 	</article>
 
-	<article class="slide" data-insert="actions#todomvcQ"></article>
-	<!-- <article class="slide" data-insert="actions#click-to"></article> -->
-</section>
-<section>
-	<!-- <header class="future slide">
-		<h1>Future Work</h1>
-	</header> -->
-
-	<article class="image slide" id="iceberg">
-		<p>&lt;-- Mavo right now</p>
-		<p>&lt;-- Our vision</p>
+	<article class="slide">
+		<h1>Filtering & Sorting</h1>
 	</article>
 
-	<article class="slide" id="access-control">
+	<article class="slide">
 		<h1>Granular access control</h1>
-		<div>
-			<img src="http://people.csail.mit.edu/axz/img/pic2.jpg" alt="">
-			<p>Bacon ipsum dolor amet leberkas turducken ball tip strip steak. Venison burgdoggen leberkas doner beef ground round andouille turkey ham hock bresaola pork kevin biltong fatback. </p>
-			<p><a href="" class="reply">Reply</a></p>
-		</div>
-		<div>
-			<img src="../shared/img/mark.svg" alt="">
-			<p>Biltong tri-tip corned beef spare ribs tail capicola cow ground round kevin ham hock shoulder chuck jowl shank.</p>
-			<p><a href="" class="reply">Reply</a>
-			<a href="" class="edit">Edit</a>
-			<a href="" class="delete">Delete</a></p>
-		</div>
-		<div>
-			<img src="img/david-karger.jpg" alt="">
-			<p>Meatball ham hock andouille capicola, kielbasa ham doner shankle. Hamburger bacon frankfurter, leberkas pancetta brisket shoulder pork chop venison.</p>
-			<p><a href="" class="reply">Reply</a></p>
-		</div>
-
-	</article>
-
-	<article class="slide" id="realtime" data-credits="firebase.google.com">
-		<h1>Realtime apps</h1>
-		<img src="img/sync.png" alt="">
-	</article>
-
-	<article class="slide" id="data-exploration">
-		<h1>Data Exploration</h1>
-			<ul class="blocks">
-				<li data-icon="">Sorting</li>
-				<li data-icon="">Filtering</li>
-				<li data-icon="">Grouping</li>
-				<li data-icon="🔍">Searching</li>
-			</ul>
-		</h1>
 	</article>
 
 	<article class="slide" data-credits="Emoji provided free by http://emojione.com">
@@ -788,52 +695,47 @@ Less Control">
 		<img src="img/insideout.svg" alt="">
 	</article>
 
-	<!-- <article class="slide" data-credits="Emoji provided free by http://emojione.com">
-		<h1>Data pointers</h1>
+	<article class="slide" data-credits="Emoji provided free by http://emojione.com">
+		<h1>Graph schemas</h1>
 		<img src="img/graph.svg" alt="">
-	</article> -->
+	</article>
 
 	<article class="slide">
-		<h1>Beyond the browser</h1>
+		<h1>WYSIWYG</h1>
+	</article>
+
+	<article class="slide">
+		<h1>Mavo beyond the browser</h1>
 
 		<ul>
 			<li>Internet of Things</li>
 			<li>Mobile apps</li>
 		</ul>
 	</article>
-
-	<article class="slide">
-		<h1>GUIs</h1>
-
-		<ul>
-			<li>General Purpose</li>
-			<li>For specific apps</li>
-		</ul>
-	</article>
 </section>
 
 <footer class="slide">
 	<img src="img/logo.svg" />
-	<p class="authors">Lea Verou, Amy Zhang, Tarfah Alrashed, David Karger</p>
+	<p class="authors">Lea Verou, Amy Zhang, David Karger</p>
 	<p class="affiliation">Haystack Group, MIT CSAIL</p>
 
 	<ul>
 		<li style="--icon: '🌍'"><a href="http://mavo.io">mavo.io</a></li>
-		<li style="--icon: '✉'"><a href="mailto:leaverou@mit.edu">leaverou@mit.edu</a></li>
-		<li style="--icon: '🐦'"><a href="http://twitter.com/mavoweb">@mavoweb</a></li>
+		<li style="--icon: '📨'"><a href="mailto:leaverou@mit.edu">leaverou@mit.edu</a></li>
+		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
 	</ul>
 
 	<p>Slides: <a href="https://leaverou.github.io/mavo-talk">leaverou.github.io/mavo-talk</a></p>
-	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="https://inspirejs.org">inspirejs.org</a></p>
+	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></p>
 </footer>
 
-<script src="https://blissfuljs.com/bliss.min.js"></script>
-<script src="../../inspire.js/inspire.js"></script>
-<script src="../shared/js/prism.js"></script>
+<script src="js/bliss.min.js"></script>
+<script src="../csss/slideshow.js"></script>
+<script src="js/prism.js"></script>
 <script src="../incrementable/incrementable.js"></script>
 <script src="js/editor.js"></script>
 <script src="js/talk.js"></script>
-<script src="https://get.mavo.io/mavo.js"></script>
+<script src="mavo/mavo.js"></script>
 
 </body>
 </html>
