@@ -36,11 +36,20 @@
 	</filter>
 </svg>
 
-<article class="slide" data-insert="reusable#introduction"></article>
+<!-- <article class="slide" data-insert="reusable#introduction"></article> -->
+<article class="image slide" style="background-image: url(img/fronteers2010.jpg)" data-credits="flickr.com/photos/lejoe/5063631608/">
+	<h1>Fronteers 2010</h1>
+</article>
+<article class="image slide" style="background-image: url(img/fronteers11.jpg)">
+	<h1>Fronteers 2011</h1>
+</article>
+<article class="image slide" style="background-image: url(img/fronteers2012.jpg)" data-credits="https://www.flickr.com/photos/seddy/8071126096/">
+	<h1>Fronteers 2012</h1>
+</article>
 
 <header class="slide" data-insert="#cover-cheat"></header>
 
-<article class="horizontal demo slide" id="viewbox">
+<article class="horizontal demo slide long-version" id="viewbox">
 	<div class="ribbon">SVG Primer<br>viewBox</div>
 
 	<textarea class="language-markup">
@@ -52,7 +61,7 @@
 	</textarea>
 </article>
 
-<article class="takeaway slide" id="viewbox-takeaways">
+<article class="takeaway slide long-version" id="viewbox-takeaways">
 	<ul>
 		<li><code>viewBox</code> defines the coordinate system</li>
 		<li><code>viewBox</code> defines the aspect ratio, unless <code>preserveAspectRatio="none"</code></li>
@@ -61,7 +70,7 @@
 </article>
 
 <section>
-	<header class="slide" data-insert="emcs#character-images"></header>
+	<header class="slide long-version" data-insert="emcs#character-images"></header>
 
 	<article class="horizontal demo slide" id="demo-character-images-base64">
 		<textarea class="language-css">
@@ -119,7 +128,7 @@
 
 	<article class="slide" data-insert="emcs#star-rating"></article>
 
-	<article class="slide" id="reduce-duplication">
+	<article class="slide long-version" id="reduce-duplication">
 		<h1>CSS variables to reduce duplication?</h1>
 		<pre class="language-css"><code>
 			meter {
@@ -138,7 +147,7 @@
 		<p class="emoji-on-top delayed">😢 Nope 😢</p>
 	</article>
 
-	<article class="worms slide">
+	<article class="worms slide long-version">
 		<div>
 			<h1>Why can’t we use CSS variables in <code>url()</code>?</h1>
 			<ul class="sad emojilist">
@@ -150,7 +159,7 @@
 		<img src="img/can-of-worms.png" alt="">
 	</article>
 
-	<article class="slide" id="reduce-duplication-preprocessors">
+	<article class="slide long-version" id="reduce-duplication-preprocessors">
 		<h1>Reduce duplication with preprocessors</h1>
 		<pre class="language-scss"><code>
 			@function inline-svg($content, $attr:'') {
@@ -170,7 +179,7 @@
 		</pre>
 	</article>
 
-	<article class="slide" id="reduce-duplication-preprocessors-2">
+	<article class="slide long-version" id="reduce-duplication-preprocessors-2">
 		<pre class="language-scss">
 		<code>
 			meter {
@@ -184,7 +193,7 @@
 		</code></pre>
 	</article>
 
-	<article class="horizontal demo slide" id="letitsnow">
+	<article class="horizontal demo slide long-version" id="letitsnow">
 		<textarea class="language-css">
 			#letitsnow .demo-target::after {
 				content: "";
@@ -225,7 +234,7 @@
 	}
 	-->
 
-	<article class="takeaway slide">
+	<article class="takeaway slide long-version">
 		<ul>
 			<li>You <em>can</em> use CSS variables <br>for the entire URL</li>
 		</ul>
@@ -245,6 +254,31 @@
 				\
 			</svg>');
 		</textarea>
+	</article>
+	<article class="horizontal demo slide" id="smiley-bullets">
+		<textarea class="language-html">
+			<ul class="sad">
+				<li>I only have 30 minutes</li>
+				<li>…including intro and Q&A</li>
+				<li class="happy">but I'm at Fronteers, yay!</li>
+			</ul>
+		</textarea>
+
+		<textarea class="language-css">
+			.sad {
+				list-style-image: url('data:image/svg+xml,\
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+					<text y=".9em" font-size="100">😔</text>\
+				</svg>');
+			}
+			.happy {
+				list-style-image: url('data:image/svg+xml,\
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+					<text y=".9em" font-size="100">😀</text>\
+				</svg>');
+			}
+		</textarea>
+
 	</article>
 
 	<article class="takeaway slide">
@@ -296,19 +330,56 @@
 	<article class="slide" data-insert="emcs#ants-svg"></article>
 	<article class="slide" data-insert="emcs#ants-html"></article>
 
-	<article class="takeaway slide">
+	<article class="takeaway slide long-version">
 		<ul>
-			<li>No <code>viewBox</code> or dimensions lets your SVG background occupy the entire element</li>
 			<li><code>stroke-dasharray</code> lets you create custom dashed borders</li>
 			<li><code>stroke-dashoffset</code> lets you move them and is animatable!</li>
 		</ul>
 	</article>
 
-	<article class="slide" data-insert="emcs#gradient-border-svg"></article>
-	<article class="slide" data-insert="emcs#gradient-border-html"></article>
-	<article class="slide onscreen-nav" data-insert="emcs#rfc-3986"></article>
+	<article class="slide long-version" data-insert="emcs#gradient-border-svg"></article>
+	<article class="slide long-version" data-insert="emcs#gradient-border-html"></article>
+	<article class="takeaway slide">
+		<ul>
+			<li>No <code>viewBox</code> or dimensions lets your SVG background occupy the entire element</li>
+		</ul>
+	</article>
+
+	<article class="horizontal demo slide" id="draw-svg">
+		<p class="hint">stroke-dasharray: 0% 400% to 400% 400%</p>
+		<textarea class="language-markup">
+		<svg>
+			<style></style>
+			<rect width="100%" height="100%" style="stroke: black; stroke-width: 4px; fill: none;
+			stroke-dasharray: 10px 5px; "  />
+		</svg>
+		</textarea>
+	</article>
+
+	<article class="horizontal demo slide" id="draw-html">
+		<textarea class="language-html"><div class="🦄" contentEditable>Look at my awesome border!</div></textarea>
+		<textarea class="language-css">
+			.🦄 {
+				background: url('data:image/svg+xml,\
+				<svg xmlns="http://www.w3.org/2000/svg">\
+					\
+				</svg>');
+			}
+		</textarea>
+	</article>
 
 	<article class="takeaway slide">
+		<ul>
+			<li><code>stroke-dasharray</code> accepts percentages, relative to sqrt(d²/2)</li>
+			<li>Animating it from <code>0% 400%</code> to <code>400% 400%</code> makes the element draw progressively</li>
+		</ul>
+	</article>
+
+	<article class="slide" data-src="https://jakearchibald.com/2013/animated-line-drawing-svg"></article>
+
+	<article class="slide onscreen-nav long-version" data-insert="emcs#rfc-3986"></article>
+
+	<article class="takeaway slide long-version">
 		<ul>
 			<li>SVG supports gradient strokes, though with an unwieldy syntax</li>
 			<li>You can apply those to HTML elements via data URIs!</li>
@@ -317,13 +388,36 @@
 	</article>
 
 	<article class="horizontal demo slide" id="scribble-svg">
-		<p class="hint">baseFrequency, numOctaves, seed, scale, attributeName, values, repeatCount</p>
+		<p class="hint">baseFrequency, numOctaves, seed, scale, attributeName, dur, values, repeatCount</p>
 		<textarea class="language-markup">
 		<svg>
 			<rect width="100%" height="100%" style="stroke: black; stroke-width: 4px; fill: none;"  />
 		</svg>
 		</textarea>
 	</article>
+
+	<article class="horizontal demo slide" id="displacement-map">
+
+		<textarea class="language-css">
+			.rippled {
+				filter: url(#splash);
+			}
+		</textarea>
+		<textarea class="language-markup">
+			<svg width="100%" height="100%">
+				<filter id="splash">
+					<feImage class="ripple"></feImage>
+					<feDisplacementMap in="SourceGraphic" xChannelSelector="R" yChannelSelector="G" scale="100"></feDisplacementMap>
+				</filter>
+				<image class="ripple" width="50%" height="100%"   />
+				<foreignObject x="52%">
+					<div class="rippled"></div>
+				</foreignObject>
+			</svg>
+		</textarea>
+	</article>
+
+	<article class="slide" data-insert="#scribble-svg"></article>
 
 	<!--
 <svg>
