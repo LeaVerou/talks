@@ -396,8 +396,38 @@
 		</textarea>
 	</article>
 
-	<article class="horizontal demo slide" id="displacement-map">
+	<article class="horizontal displacement-map demo slide">
+		<textarea class="language-css">
+			.warped {
+				filter: url(#displace);
+			}
+		</textarea>
+		<textarea class="language-markup">
+			<svg width="100%" height="100%">
+				<filter id="displace" x="-150%" width="400%">
+					<feImage href='data:image/svg+xml;utf8,
+					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" overflow="visible">
+						<linearGradient id="td" gradientTransform="rotate(90)">
+							<stop stop-color="rgb(100%, 50%, 50%)" />
+							<stop stop-color="rgb(0%, 50%, 50%)" offset="1" />
+						</linearGradient>
+						<rect width="100" height="100" fill="url(%23td)" />
+					</svg>' result="map"></feImage>
+					<feDisplacementMap in="SourceGraphic" xChannelSelector="R" yChannelSelector="G" scale="100" result="mapped"></feDisplacementMap>
+					<feOffset in="map" result="showMap" dx="-860" />
+					<feMerge>
+						<feMergeNode in="showMap" />
+						<feMergeNode in="mapped" />
+					</feMerge>
+				</filter>
+				<foreignObject x="52%">
+					<div class="warped"></div>
+				</foreignObject>
+			</svg>
+		</textarea>
+	</article>
 
+	<article class="horizontal displacement-map demo slide" id="displacement-map">
 		<textarea class="language-css">
 			.rippled {
 				filter: url(#splash);
@@ -405,11 +435,25 @@
 		</textarea>
 		<textarea class="language-markup">
 			<svg width="100%" height="100%">
-				<filter id="splash">
-					<feImage class="ripple"></feImage>
-					<feDisplacementMap in="SourceGraphic" xChannelSelector="R" yChannelSelector="G" scale="100"></feDisplacementMap>
+				<filter id="splash" x="-150%" width="400%">
+					<feImage href='data:image/svg+xml;utf8,
+					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" overflow="visible">
+						<style>%23rg stop {stop-color: gray} %23rg stop:nth-child(even) {stop-opacity: 0}</style>
+						<radialGradient id="rg" r=".9">
+							...
+						</radialGradient>
+						<rect width="100" height="100" fill="url(%23rg)" />
+					</svg>' class="ripple" result="ripple"></feImage>
+					<feImage href="img/map.png"></feImage>
+					<feBlend in="ripple" result="map"/>
+					<feDisplacementMap in="SourceGraphic" xChannelSelector="R" yChannelSelector="G" scale="100" result="mapped"></feDisplacementMap>
+					<feOffset in="map" result="showMap" dx="-860" />
+					<feMerge>
+						<feMergeNode in="showMap" />
+						<feMergeNode in="mapped" />
+					</feMerge>
 				</filter>
-				<image class="ripple" width="50%" height="100%"   />
+				<image class="ripple" href="" width="50%" height="100%"   />
 				<foreignObject x="52%">
 					<div class="rippled"></div>
 				</foreignObject>
@@ -434,6 +478,11 @@
 </svg>
 	 -->
 
+	 <article class="takeaway slide">
+ 		<ul>
+ 			<li>You can use <code>calc()</code> in geometry attributes, but no <img src="../shared/img/firefox-logo.svg" alt="Firefox" style="height: 1em; vertical-align: -.2em"> yet</li>
+ 		</ul>
+ 	</article>
 	<article class="slide language-html">
 		<h1>To support Firefox too:</h1>
 		<pre><code>
@@ -463,7 +512,6 @@
 
 	<article class="takeaway slide">
 		<ul>
-			<li>You can use <code>calc()</code> in geometry attributes, but no <img src="../shared/img/firefox-logo.svg" alt="Firefox" style="height: 1em; vertical-align: -.2em"> yet</li>
 			<li><code>&lt;feTurbulence></code> creates a pseudo-random texture</li>
 			<li><code>&lt;feDisplacementMap></code> shifts pixels around based on the pixel values of another image</li>
 			<li>Together they can be used to create a scribble effect!</li>

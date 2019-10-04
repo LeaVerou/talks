@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.rippled {
+			filter: url(#splash);
+		}
+
+		foreignObject {
+			width: 100%;
+			height: 100%;
+			overflow: visible;
+		}
+
+			foreignObject div {
+				width: 0;
+				height: 0;
+				padding: 20vh;
+				background: linear-gradient(black 2px, transparent 0), linear-gradient(to right, black 2px, transparent 0),
+				            linear-gradient(#888 1px, transparent 0), linear-gradient(to right, #888 1px, transparent 0),
+							white;
+				background-size: 20% 20%, 20% 20%, 2% 2%, 2% 2%;
+			}
+
+	</style>
+</head>
+<body>
+	<svg width="100%" height="100%">
+		<filter id="splash">
+			<feImage href="img/map.png"></feImage>
+			<feDisplacementMap in="SourceGraphic" xChannelSelector="R" yChannelSelector="G" scale="10"></feDisplacementMap>
+		</filter>
+		<image class="ripple" href="img/map.png" width="50%" height="100%"   />
+		<foreignObject x="52%">
+			<div class="rippled"></div>
+		</foreignObject>
+	</svg>
+</body>
+</html>

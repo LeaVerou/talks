@@ -159,21 +159,20 @@ ul.happy.emojilist,
 				white;
 	background-repeat: no-repeat;
 	background-blend-mode: multiply;
-	xbackground-size: 50%;
 }
 
-#displacement-map foreignObject {
+.displacement-map foreignObject {
 	width: 100%;
 	height: 100%;
 	overflow: visible;
 }
 
-	#displacement-map foreignObject div {
+	.displacement-map foreignObject div {
 		width: 0;
 		height: 0;
 		padding: 20%;
 		background: linear-gradient(black 2px, transparent 0), linear-gradient(to right, black 2px, transparent 0),
 		            linear-gradient(#888 1px, transparent 0), linear-gradient(to right, #888 1px, transparent 0),
-					white;
+					hsla(0,0%,100%,.5);
 		background-size: 20% 20%, 20% 20%, 2% 2%, 2% 2%;
 	}
