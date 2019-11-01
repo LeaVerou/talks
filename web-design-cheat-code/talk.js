@@ -35,6 +35,13 @@ if (displacementDemo) {
 		if (location.hash === "#displacement-map") {
 			requestAnimationFrame(AnimateOffset);
 		}
+		else {
+			document.addEventListener("slidechange", evt => {
+				if (Inspire.currentSlide.id === "displacement-map") {
+					requestAnimationFrame(AnimateOffset);
+				}
+			});
+		}
 	}
 
 	requestAnimationFrame(AnimateOffset);

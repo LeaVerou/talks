@@ -32,7 +32,7 @@
 		<feTurbulence baseFrequency=".02" numOctaves="4">
 			<animate attributeName="seed" dur="1s" values="1;10" repeatCount="indefinite" />
 		</feTurbulence>
-		<feDisplacementMap in="SourceGraphic" scale="4"></feDisplacementMap>
+		<feDisplacementMap in="SourceGraphic" scale="6"></feDisplacementMap>
 	</filter>
 </svg>
 
@@ -46,6 +46,10 @@
 <article class="image slide" style="background-image: url(img/fronteers2012.jpg)" data-credits="https://www.flickr.com/photos/seddy/8071126096/">
 	<h1>Fronteers 2012</h1>
 </article>
+<article class="image slide" style="background-image: url(img/fronteers-onesies.jpg)">
+	<h1>Fronteers 2019</h1>
+</article>
+<article class="image slide" style="background-image: url(img/fronteers-onesie.jpg)"></article>
 
 <header class="slide" data-insert="#cover-cheat"></header>
 
@@ -251,13 +255,13 @@
 		<textarea class="language-css">
 			list-style-image: url('data:image/svg+xml,\
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
-				\
+				<circle r="30" cx="50" cy="40" />\
 			</svg>');
 		</textarea>
 	</article>
 	<article class="horizontal demo slide" id="smiley-bullets">
 		<textarea class="language-html">
-			<ul class="sad">
+			<ul class="scared">
 				<li>I only have 30 minutes</li>
 				<li>…including intro and Q&A</li>
 				<li class="happy">but I'm at Fronteers, yay!</li>
@@ -265,10 +269,10 @@
 		</textarea>
 
 		<textarea class="language-css">
-			.sad {
+			.scared {
 				list-style-image: url('data:image/svg+xml,\
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
-					<text y=".9em" font-size="100">😔</text>\
+					<text y=".9em" font-size="100">😰</text>\
 				</svg>');
 			}
 			.happy {
@@ -325,10 +329,13 @@
 	<article class="slide" data-insert="#custom-cursors"></article>
 	<article class="slide" data-src="https://caniuse.com/#feat=css-image-set" title="image-set() on caniuse.com"></article> -->
 </section>
-<section>
+<section id="fancy-borders-section">
 	<header class="slide" data-insert="emcs#fancy-borders"></header>
-	<article class="slide" data-insert="emcs#ants-svg"></article>
-	<article class="slide" data-insert="emcs#ants-html"></article>
+	<header class="slide" id="fancy-borders-2">
+		<h1>sketchy borders</h1>
+	</header>
+	<article class="slide long-version" data-insert="emcs#ants-svg"></article>
+	<article class="slide long-version" data-insert="emcs#ants-html"></article>
 
 	<article class="takeaway slide long-version">
 		<ul>
@@ -512,9 +519,9 @@
 
 	<article class="takeaway slide">
 		<ul>
-			<li><code>&lt;feTurbulence></code> creates a pseudo-random texture</li>
+			<li><code>&lt;feTurbulence></code> generates a pseudo-random image</li>
 			<li><code>&lt;feDisplacementMap></code> shifts pixels around based on the pixel values of another image</li>
-			<li>Together they can be used to create a scribble effect!</li>
+			<li>Together they can be used to create a hand-sketched effect!</li>
 		</ul>
 	</article>
 
@@ -547,7 +554,7 @@
 		<img src="img/can-of-worms.png" alt="">
 	</article>
 
-	<header class="slide" data-insert="#cover-cheat"></header>
+	<header class="slide" data-insert="#fancy-borders-2"></header>
 
 	<!-- <article class="horizontal demo slide">
 		<textarea class="language-html">

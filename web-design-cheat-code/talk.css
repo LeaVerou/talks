@@ -59,6 +59,35 @@
 			text-decoration: none;
 		}
 
+#fancy-borders-2 {
+	background: white;
+}
+
+		#fancy-borders-2 h1 {
+			width: 3em;
+			width: min-content;
+			padding: .3em .3em .1em;
+			color: black;
+			text-align: center;
+			font: 500%/1 var(--font-handwritten);
+			filter: url(#squigglevision-filter);
+			background: none;
+		}
+
+		#fancy-borders-2:target h1 {
+			background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg">\
+				<style>\
+				@keyframes draw {\
+					to {stroke-dasharray: 400% 400%}\
+				}\
+				</style>\
+				<rect width="100%" height="100%" \
+				      stroke="black" stroke-width="15" fill="none"\
+					  style="animation: draw 3s both; stroke-dasharray: 0 400%;" \
+					   />\
+			</svg>');
+		}
+
 #custom-bullets ul,
 #smiley-bullets ul {
 	margin: .5em 0;
@@ -159,6 +188,10 @@ ul.happy.emojilist,
 				white;
 	background-repeat: no-repeat;
 	background-blend-mode: multiply;
+}
+
+#fancy-borders-section .slide.demo:not(.displacement-map) svg {
+	transform: scale(2);
 }
 
 .displacement-map foreignObject {
