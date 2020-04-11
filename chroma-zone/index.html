@@ -4,20 +4,13 @@
 
 <meta charset="utf-8" />
 <title>The Chroma Zone: Engineering color on the Web</title>
-<link href="../csss/slideshow.css" rel="stylesheet" />
-<link href="../csss/reusable.css" rel="stylesheet" />
+
+<link href="../../inspire.js/inspire.css" rel="stylesheet" />
+<link href="../../inspire.js/theme.css" rel="stylesheet" />
+<link href="../shared/prism.css" rel="stylesheet" />
 <link href="theme.css" rel="stylesheet" />
 <link href="rgb-cube.css" rel="stylesheet" />
 <link href="talk.css" rel="stylesheet" />
-<script src="../prefixfree/prefixfree.min.js"></script>
-<script>
-if (PrefixFree.Prefix == 'Webkit') {
-	PrefixFree.properties.push('animation');
-	PrefixFree.atrules.push('keyframes');
-}
-
-PrefixFree.properties.push('filter');
-</script>
 
 </head>
 <body class="language-javascript">
@@ -314,12 +307,12 @@ Color.prototype.invert = function () {
 
 	<section class="slide" data-import="whathecolor"></section>
 
-	<section class="code slide" style="background: url(img/baby.jpg) bottom; background-size: cover;" id="filter">
-		<textarea>filter: hue-rotate(0deg);</textarea>
+	<section class="horizontal demo slide" style="background: url(img/baby.jpg) center / cover;" id="filter">
+		<textarea class="language-css">filter: hue-rotate(0deg);</textarea>
 	</section>
 
-	<section class="code slide" style="background: url(img/baby.jpg) bottom; background-size: cover;" id="blend-mode">
-		<textarea>background: url(img/baby.jpg),
+	<section class="horizontal demo slide" style="background: url(img/baby.jpg) center / cover;" id="blend-mode">
+		<textarea class="language-css">background: url(img/baby.jpg),
             hsl(335, 100%, 50%);
 background-blend-mode: multiply;</textarea>
 	</section>
@@ -543,9 +536,9 @@ rgba(0, 0, 0, 0)</pre>
 
 	<section class="slide" data-import="darkgray"></section>
 
-	<section class="code slide" id="currentColor-demo">
+	<section class="horizontal demo slide" id="currentColor-demo">
 	<div class="box">Some text</div>
-	<textarea>.box {
+	<textarea class="language-css">.box {
 	color: red;
 	border: 10px solid;
 }</textarea>
@@ -766,14 +759,12 @@ background: shade(red, 10%); /* &rarr; #e50000 */</code></pre>
 </section>
 -->
 
-<script src="../csss/slideshow.js"></script>
-<script src="../prism/prism.js"></script>
-<script src="../prism/components/prism-scss.js"></script>
-<script src="../csss/plugins/css-edit.js"></script>
-<script src="../csss/plugins/css-snippets.js"></script>
-<script src="../incrementable/incrementable.js"></script>
-<script src="color.js"></script>
 
+<script src="../shared/js/bliss.shy.min.js"></script>
+<script src="../shared/js/prism.js"></script>
+<script src="../incrementable/incrementable.js"></script>
+<script src="../../inspire.js/inspire.js"></script>
+<script src="color.js"></script>
 <script src="talk.js"></script>
 
 </body>
