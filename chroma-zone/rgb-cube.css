@@ -1,0 +1,96 @@
+/**
+ * 3D RGB cube
+ */
+@keyframes perspective {
+  from {
+    perspective: 300px; } }
+
+#rgb-cube {
+  background: black;
+  perspective: 700px;
+  perspective-origin: 50% 5%;
+  overflow: hidden;
+  font: bold 100% Helvetica Neue, sans-serif; }
+
+#rgb-cube:target, body#rgb-cube {
+  animation: perspective 1s; }
+
+.cube, .cube::before, .cube::after,
+.cube .sides,
+.cube .sides::before,
+.cube .sides::after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  transform-origin: 0 0;
+  transform-style: preserve-3d; }
+.cube::before,
+.cube .sides::before {
+  transform: rotateX(-90deg); }
+.cube::after,
+.cube .sides::after {
+  transform: rotateY(-90deg) translateX(-100%);
+  backface-visibility: hidden; }
+
+@keyframes cube-rotate {
+  from, 20% {
+    transform: rotateY(-310deg) rotateX(180deg) rotateZ(180deg); }
+
+  60% {
+    transform: rotateY(50deg) rotateX(180deg) rotateZ(180deg); } }
+
+.cube {
+  top: 200px;
+  left: 50%;
+  transform-origin: 0% 100% 0;
+  transform: rotateY(50deg) rotateX(-180deg) rotateZ(180deg);
+  animation: 10s cube-rotate linear infinite;
+  animation-play-state: paused; }
+
+body#rgb-cube .cube:not(:hover),
+.slide#rgb-cube .cube[data-step] {
+  animation-play-state: running; }
+
+.cube .sides {
+  transform-origin: 50% 100%;
+  transform: rotateX(90deg) rotateY(180deg); }
+
+.cube .axes {
+  color: white; }
+  .cube .axes::before, .cube .axes::after, .cube .axes .axe-z {
+    position: absolute;
+    bottom: 0;
+    width: 280px;
+    transform-origin: 0 0;
+    line-height: 2;
+    height: 2px;
+    text-align: right;
+    background: currentColor;
+    color: white; }
+  .cube .axes::before {
+    content: "Red (X)";
+    transform: rotateY(90deg); }
+  .cube .axes::after {
+    content: "Green (Y)";
+    transform: rotateY(180deg) translateX(-100%);
+    text-align: left; }
+  .cube .axes .axe-z {
+    transform: rotateZ(-90deg) rotateX(220deg); }
+    .cube .axes .axe-z::before {
+      content: "Blue (Z)"; }
+
+/* Backgrounds*/
+.cube {
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200px" height="200px"><linearGradient id="top" x1="0" x2="0" y1="0" y2="1"> <stop stop-color="blue" /> <stop offset="1" stop-color="black" /> </linearGradient><linearGradient id="bottom" x1="0" x2="0" y1="0" y2="1"> <stop stop-color="cyan" /> <stop offset="1" stop-color="lime" /> </linearGradient><linearGradient id="gradient" x1="0" x2="1" y1="0" y2="0"> <stop stop-color="white" /> <stop offset="1" stop-color="black" /> </linearGradient><mask id="gradient-mask"><rect x="0" y="0" width="100%" height="100%" fill="url(%23gradient)"/></mask><rect x="0" y="0" width="100%" height="100%" fill="url(%23bottom)"/><rect x="0" y="0" width="100%" height="100%" fill="url(%23top)" mask="url(%23gradient-mask)"/></svg>'); }
+  .cube::before {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200px" height="200px"><linearGradient id="top" x1="0" x2="0" y1="0" y2="1"> <stop stop-color="blue" /> <stop offset="1" stop-color="magenta" /> </linearGradient><linearGradient id="bottom" x1="0" x2="0" y1="0" y2="1"> <stop stop-color="cyan" /> <stop offset="1" stop-color="white" /> </linearGradient><linearGradient id="gradient" x1="0" x2="1" y1="0" y2="0"> <stop stop-color="white" /> <stop offset="1" stop-color="black" /> </linearGradient><mask id="gradient-mask"><rect x="0" y="0" width="100%" height="100%" fill="url(%23gradient)"/></mask><rect x="0" y="0" width="100%" height="100%" fill="url(%23bottom)"/><rect x="0" y="0" width="100%" height="100%" fill="url(%23top)" mask="url(%23gradient-mask)"/></svg>'); }
+  .cube::after {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200px" height="200px"><linearGradient id="top" x1="0" x2="0" y1="0" y2="1"> <stop stop-color="magenta" /> <stop offset="1" stop-color="red" /> </linearGradient><linearGradient id="bottom" x1="0" x2="0" y1="0" y2="1"> <stop stop-color="blue" /> <stop offset="1" stop-color="black" /> </linearGradient><linearGradient id="gradient" x1="0" x2="1" y1="0" y2="0"> <stop stop-color="white" /> <stop offset="1" stop-color="black" /> </linearGradient><mask id="gradient-mask"><rect x="0" y="0" width="100%" height="100%" fill="url(%23gradient)"/></mask><rect x="0" y="0" width="100%" height="100%" fill="url(%23bottom)"/><rect x="0" y="0" width="100%" height="100%" fill="url(%23top)" mask="url(%23gradient-mask)"/></svg>'); }
+
+.cube .sides {
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200px" height="200px"><linearGradient id="top" x1="0" x2="0" y1="0" y2="1"> <stop stop-color="yellow" /> <stop offset="1" stop-color="lime" /> </linearGradient><linearGradient id="bottom" x1="0" x2="0" y1="0" y2="1"> <stop stop-color="red" /> <stop offset="1" stop-color="black" /> </linearGradient><linearGradient id="gradient" x1="0" x2="1" y1="0" y2="0"> <stop stop-color="white" /> <stop offset="1" stop-color="black" /> </linearGradient><mask id="gradient-mask"><rect x="0" y="0" width="100%" height="100%" fill="url(%23gradient)"/></mask><rect x="0" y="0" width="100%" height="100%" fill="url(%23bottom)"/><rect x="0" y="0" width="100%" height="100%" fill="url(%23top)" mask="url(%23gradient-mask)"/></svg>'); }
+  .cube .sides::before {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200px" height="200px"><linearGradient id="top" x1="0" x2="0" y1="0" y2="1"> <stop stop-color="yellow" /> <stop offset="1" stop-color="white" /> </linearGradient><linearGradient id="bottom" x1="0" x2="0" y1="0" y2="1"> <stop stop-color="red" /> <stop offset="1" stop-color="magenta" /> </linearGradient><linearGradient id="gradient" x1="0" x2="1" y1="0" y2="0"> <stop stop-color="white" /> <stop offset="1" stop-color="black" /> </linearGradient><mask id="gradient-mask"><rect x="0" y="0" width="100%" height="100%" fill="url(%23gradient)"/></mask><rect x="0" y="0" width="100%" height="100%" fill="url(%23bottom)"/><rect x="0" y="0" width="100%" height="100%" fill="url(%23top)" mask="url(%23gradient-mask)"/></svg>'); }
+  .cube .sides::after {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200px" height="200px"><linearGradient id="top" x1="0" x2="0" y1="0" y2="1"> <stop stop-color="white" /> <stop offset="1" stop-color="cyan" /> </linearGradient><linearGradient id="bottom" x1="0" x2="0" y1="0" y2="1"> <stop stop-color="yellow" /> <stop offset="1" stop-color="lime" /> </linearGradient><linearGradient id="gradient" x1="0" x2="1" y1="0" y2="0"> <stop stop-color="white" /> <stop offset="1" stop-color="black" /> </linearGradient><mask id="gradient-mask"><rect x="0" y="0" width="100%" height="100%" fill="url(%23gradient)"/></mask><rect x="0" y="0" width="100%" height="100%" fill="url(%23bottom)"/><rect x="0" y="0" width="100%" height="100%" fill="url(%23top)" mask="url(%23gradient-mask)"/></svg>'); }

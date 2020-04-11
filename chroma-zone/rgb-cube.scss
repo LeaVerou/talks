@@ -1,0 +1,163 @@
+/**
+ * 3D RGB cube
+ */
+ 
+$side: 200px;
+
+@function inline-svg($content, $width: $side, $height: $side) {
+	@return url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="#{$width}" height="#{$height}">#{$content}</svg>');
+}
+
+@function svg-rect($fill, $width: '100%', $height: $width, $x: '0', $y: '0') {
+	@return unquote('<rect x="#{$x}" y="#{$y}" width="#{$width}" height="#{$height}" fill="#{$fill}"/>');
+}
+
+@function svg-gradient($id, $color1, $color2, $x1: 0, $x2: 0, $y1: 0, $y2: 1) {
+	@return unquote('<linearGradient id="#{$id}" x1="#{$x1}" x2="#{$x2}" y1="#{$y1}" y2="#{$y2}">
+	  <stop stop-color="#{$color1}" />
+	  <stop offset="1" stop-color="#{$color2}" />
+	</linearGradient>');
+}
+
+@function svg-mask($id, $content) {
+	@return unquote('<mask id="#{$id}">#{$content}</mask>');
+}
+
+@function rgb-plane($c1, $c2, $c3, $c4) {
+	@return inline-svg(
+		svg-gradient('top', $c1, $c2) +
+		svg-gradient('bottom', $c3, $c4) +
+		svg-gradient('gradient', white, black, 0, 1, 0, 0) +
+		svg-mask('gradient-mask', svg-rect('url(%23gradient)')) +
+		svg-rect('url(%23bottom)') +
+		svg-rect('url(%23top)" mask="url(%23gradient-mask)')
+	);
+}
+
+
+@keyframes perspective {
+	from {
+		perspective: 300px;
+	}
+}
+ 
+#rgb-cube {
+	background: black;
+	perspective: 700px;
+	perspective-origin: 50% 5%;
+	overflow: hidden;
+	font: bold 100% Helvetica Neue, sans-serif;
+}
+
+#rgb-cube:target, body#rgb-cube {
+	animation: perspective 1s;
+}
+
+.cube,
+.cube .sides {
+	&, &::before, &::after {
+		content: "";
+		position: absolute;
+		width: $side; height: $side;
+		transform-origin: 0 0;
+		transform-style: preserve-3d;
+	}
+	
+	&::before {
+		transform: rotateX(-90deg);
+	}
+	
+	&::after {
+		transform: rotateY(-90deg) translateX(-100%);
+		backface-visibility: hidden;
+	}
+}
+
+@keyframes cube-rotate {
+	from, 20% {
+		transform: rotateY(-310deg) rotateX(180deg) rotateZ(180deg);
+	}
+	
+	60%  {
+		transform: rotateY(50deg) rotateX(180deg) rotateZ(180deg);
+	}
+}
+
+.cube {
+	top: 200px; left: 50%;
+	transform-origin: 0% 100% 0;
+	transform: rotateY(50deg) rotateX(-180deg) rotateZ(180deg);
+	animation: 10s cube-rotate linear infinite;
+	animation-play-state: paused;
+}
+
+body#rgb-cube .cube:not(:hover),
+.slide#rgb-cube .cube[data-step] {
+	animation-play-state: running;
+}
+
+.cube .sides {
+	transform-origin: 50% 100%;
+	transform: rotateX(90deg) rotateY(180deg);
+}
+
+.cube .axes {
+	color: white;
+	
+	&::before, &::after, .axe-z {
+		position: absolute;
+		bottom: 0;
+		width: 1.4 * $side;
+		transform-origin: 0 0;
+		line-height: 2;
+		height: 2px;
+		text-align: right;
+		background: currentColor;
+		color: white;
+	}
+	
+	&::before {
+		content: "Red (X)";
+		transform: rotateY(90deg);
+	}
+	
+	&::after {
+		content: "Green (Y)";
+		transform: rotateY(180deg) translateX(-100%);
+		text-align: left;
+	}
+	
+	.axe-z {
+		transform: rotateZ(-90deg) rotateX(220deg);
+		
+		&::before {
+			content: 'Blue (Z)'
+		}
+	}
+}
+
+/* Backgrounds*/
+
+.cube {
+	background: rgb-plane(blue, black, aqua, lime);
+	
+	&::before {
+		background: rgb-plane(blue, fuchsia, aqua, white);
+	}
+	
+	&::after {
+		background: rgb-plane(fuchsia, red, blue, black);
+	}
+}
+
+.cube .sides {
+	background: rgb-plane(yellow, lime, red, black);
+	
+	&::before {
+		background: rgb-plane(yellow, white, red, fuchsia);
+	}
+	
+	&::after {
+		background: rgb-plane(white, aqua, yellow, lime);
+	}
+}
