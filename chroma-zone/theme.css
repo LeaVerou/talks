@@ -1,22 +1,7 @@
-body {
-	font: 100 100%/1.5 'Helvetica Neue', sans-serif;
-	background: linear-gradient(45deg, silver 25%, transparent 25%, transparent 75%, silver 75%),
-	            linear-gradient(45deg, silver 25%, transparent 25%, transparent 75%, silver 75%) 20px 20px;
-	background-color: #eee;
-	background-size: 40px 40px;
-}
 
 h1 {
 	font-weight: bold;
 	line-height: 1.2;
-}
-
-a {
-	color: inherit;
-}
-
-strong, b {
-	font-weight: bold; /* FF is weird */
 }
 
 code, textarea, pre {
@@ -59,7 +44,7 @@ textarea {
 		margin: 0 0 .6em;
 		font-size: 200%;
 	}
-	
+
 	.slide h2 {
 		color: yellowgreen;
 		font-size: 120%;

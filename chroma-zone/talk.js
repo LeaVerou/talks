@@ -7,7 +7,7 @@ function colorInput(display, input, colorStr) {
 	(input.oninput = function() {
 		var length = input.value.length;
 
-		input.style.fontSize = length >= 15? (length > 25? '150%' : '200%') : (length <= 10? '400%' : '');
+		input.style.fontSize = length >= 15? (length > 25? "150%" : "200%") : (length <= 10? "400%" : "");
 
 		var color = Color.fromString(input.value);
 
@@ -21,29 +21,29 @@ function colorInput(display, input, colorStr) {
 	})();
 }
 
-$$('.color.slide').forEach(function(slide) {
-	var input = document.createElement('input');
+$$(".color.slide").forEach(function(slide) {
+	var input = document.createElement("input");
 
 	slide.appendChild(input);
 
-	colorInput(slide, input, slide.getAttribute('data-color'));
+	colorInput(slide, input, slide.getAttribute("data-color"));
 });
 
-$$('textarea').forEach(function(textarea) {
-	textarea.setAttribute('data-raw', '');
+$$("textarea").forEach(function(textarea) {
+	textarea.setAttribute("data-raw", "");
 	new Incrementable(textarea);
 	// new CSSSnippet(textarea);
 });
 
-$$('#blending-modes article').forEach(function(div) {
-	// div.setAttribute('style', PrefixFree.prefixCSS('background-blend-mode:' + div.textContent))
+$$("#blending-modes article").forEach(function(div) {
+	div.setAttribute("style", "background-blend-mode:" + div.textContent);
 });
 
 // Decimal to hex converter
 (function() {
 
-var dc = $('#decimal-counter');
-var hc = $('#hex-counter');
+var dc = $("#decimal-counter");
+var hc = $("#hex-counter");
 
 dc && (dc.oninput = function () {
 	hc.textContent = (+dc.value).toString(16);
@@ -52,9 +52,9 @@ dc && (dc.oninput = function () {
 })();
 
 // RGB Color picker
-Inspire.on('rgb-2d').then(function() {
+Inspire.on("rgb-2d").then(function() {
 
-var plane = $('#rgb-xy');
+var plane = $("#rgb-xy");
 
 if (!plane.offsetWidth) {
 	setTimeout(arguments.callee, 10);
@@ -62,10 +62,10 @@ if (!plane.offsetWidth) {
 }
 
 var planeY = plane.firstChild;
-var z = $('#rgb-z');
-var axis = $('#rgb-axis');
-var planeThumb = $('button', plane);
-var selected = $('#rgb-2d output');
+var z = $("#rgb-z");
+var axis = $("#rgb-axis");
+var planeThumb = $("button", plane);
+var selected = $("#rgb-2d output");
 var ai = axis.selectedIndex;
 var planeRect = plane.getBoundingClientRect();
 
@@ -84,8 +84,8 @@ axis.onchange = function() {
 	z.value = previousRGB[ai];
 	previousRGB.splice(ai, 1);
 
-	planeThumb.style.left = plane.offsetWidth * previousRGB[0] / 255 + 'px';
-	planeThumb.style.top = plane.offsetHeight * (1 - previousRGB[1] / 255) + 'px';
+	planeThumb.style.left = plane.offsetWidth * previousRGB[0] / 255 + "px";
+	planeThumb.style.top = plane.offsetHeight * (1 - previousRGB[1] / 255) + "px";
 
 	updatePlane();
 	updateSlider();
@@ -93,11 +93,11 @@ axis.onchange = function() {
 };
 
 function setLabels() {
-	var labels = ['red', 'green', 'blue'];
+	var labels = ["red", "green", "blue"];
 	labels.splice(ai, 1);
 
-	plane.setAttribute('data-label-x', labels[0]);
-	plane.setAttribute('data-label-y', labels[1]);
+	plane.setAttribute("data-label-x", labels[0]);
+	plane.setAttribute("data-label-y", labels[1]);
 }
 
 function setColor(planeXY, slider) {
@@ -106,7 +106,7 @@ function setColor(planeXY, slider) {
 	color = Color(color);
 
 	planeThumb.style.background = selected.style.background = color;
-	selected.innerHTML = 'Red <b>' + color.red + '</b> Green <b>' + color.green + '</b> Blue <b>' + color.blue + '</b>';
+	selected.innerHTML = `Red <b>${color.red}</b> Green <b>${color.green}</b> Blue <b>${color.blue}</b>`;
 }
 
 function getXY() {
@@ -126,7 +126,7 @@ function updateSlider() {
 	xy[ai] = 0;
 	var color1 = Color(xy);
 
-	z.style.background = 'linear-gradient(-90deg,' + color0 + ', ' + color1 + ')';
+	z.style.background = `linear-gradient(-90deg,${color0}, ${color1})`;
 }
 
 function updatePlane() {
@@ -150,8 +150,8 @@ function dragThumb(evt) {
 		return;
 	}
 
-	planeThumb.style.left = x + 'px';
-	planeThumb.style.top = y + 'px';
+	planeThumb.style.left = x + "px";
+	planeThumb.style.top = y + "px";
 
 	setColor([x255, y255], +z.value);
 	updateSlider();
@@ -160,11 +160,11 @@ function dragThumb(evt) {
 plane.onmousedown = function (evt) {
 	dragThumb(evt);
 
-	document.addEventListener('mousemove', dragThumb);
+	document.addEventListener("mousemove", dragThumb);
 
-	document.addEventListener('mouseup', function() {
-		document.removeEventListener('mousemove', dragThumb);
-	});
+	document.addEventListener("mouseup", function() {
+		document.removeEventListener("mousemove", dragThumb);
+	}, {once: true});
 };
 
 updateSlider();
@@ -174,17 +174,17 @@ setColor(getXY(), +z.value);
 
 }, true);
 
-$$('.color-list.slide').forEach(function(slide) {
+$$(".color-list.slide").forEach(function(slide) {
 	var colors = slide.textContent.trim().split(/\n\s+/);
 
-	slide.textContent = '';
-	slide.style.background = 'transparent';
+	slide.textContent = "";
+	slide.style.background = "transparent";
 
 	colors.forEach(function(name) {
 		name = name.trim();
 
-		var article = document.createElement('article');
-		article.className = 'named-color';
+		var article = document.createElement("article");
+		article.className = "named-color";
 		article.textContent = name;
 		article.style.background = name;
 
@@ -192,18 +192,19 @@ $$('.color-list.slide').forEach(function(slide) {
 			var color = Color(name);
 
 			if (color.luminance < 50) {
-				article.className = 'dark';
+				article.className = "dark";
 			}
-		} catch(e) {}
+		}
+ 		catch (e) {}
 
 		slide.appendChild(article);
 	});
 });
 
 // HSL color picker
-Inspire.on('hsl').then(function() {
+Inspire.on("hsl").then(function() {
 
-var wheel = $('#hue-sat > div');
+var wheel = $("#hue-sat > div");
 
 if (!wheel.offsetWidth) {
 	setTimeout(arguments.callee, 10);
@@ -211,9 +212,9 @@ if (!wheel.offsetWidth) {
 }
 
 var wheelRect = wheel.getBoundingClientRect();
-var thumb = $('.plane-thumb', wheel.parentNode);
-var selected = $('#hsl output');
-var nextSlideInput = $('#hsl + .slide input');
+var thumb = $(".plane-thumb", wheel.parentNode);
+var selected = $("#hsl output");
+var nextSlideInput = $("#hsl + .slide input");
 
 lightness.oninput = function () {
 	updateWheel();
@@ -226,11 +227,11 @@ function updateWheel() {
 	var l = +lightness.value;
 
 	if (l <= 50) {
-		wheel.parentNode.style.background = 'transparent';
+		wheel.parentNode.style.background = "transparent";
 		wheel.style.opacity = l/50;
 	}
 	else {
-		wheel.parentNode.style.background = 'white';
+		wheel.parentNode.style.background = "white";
 		wheel.style.opacity = 1 - (l-50)/50;
 	}
 }
@@ -238,7 +239,7 @@ function updateWheel() {
 function updateSlider() {
 	var hs = getHueSat(getXY());
 
-	lightness.style.backgroundColor = 'hsl(' + hs.join(',') + '%, 50%)';
+	lightness.style.backgroundColor = "hsl(" + hs.join(",") + "%, 50%)";
 }
 
 function dragThumb(evt) {
@@ -254,18 +255,18 @@ function dragThumb(evt) {
 		return;
 	}
 
-	thumb.style.left = x + 'px';
-	thumb.style.top = y + 'px';
+	thumb.style.left = x + "px";
+	thumb.style.top = y + "px";
 
 	setColor(hue, saturation, +lightness.value);
 	updateSlider();
 }
 
 function setColor(hue, saturation, lightness) {
-	var color = 'hsl(' + hue + ', ' + saturation + '%, ' + lightness + '%)';
+	var color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 
 	thumb.style.background = selected.style.background = color;
-	selected.innerHTML = 'Hue <b>' + hue + '</b> Saturation <b>' + saturation + '</b> Lightness <b>' + lightness + '</b>';
+	selected.innerHTML = `Hue <b>${hue}</b> Saturation <b>${saturation}</b> Lightness <b>${lightness}</b>`;
 
 	nextSlideInput.value = color;
 	nextSlideInput.oninput();
@@ -301,10 +302,10 @@ function getHueSat(xy) {
 wheel.parentNode.onmousedown = function (evt) {
 	dragThumb(evt);
 
-	document.addEventListener('mousemove', dragThumb);
+	document.addEventListener("mousemove", dragThumb);
 
-	document.addEventListener('mouseup', function() {
-		document.removeEventListener('mousemove', dragThumb);
+	document.addEventListener("mouseup", function() {
+		document.removeEventListener("mousemove", dragThumb);
 	});
 };
 
@@ -316,25 +317,25 @@ lightness.oninput();
 // Luminance vs lightness demo
 (function() {
 
-var luminanceOut = $('#luminance-percentage');
-var lightnessOut = $('#lightness-percentage');
-var input = $('#luminance-vs-lightness input');
+var luminanceOut = $("#luminance-percentage");
+var lightnessOut = $("#lightness-percentage");
+var input = $("#luminance-vs-lightness input");
 
 function compare() {
 	var color = Color.fromString(input.value);
 	var luminance = color.luminance;
 	var lightness = color.lightness;
 
-	luminanceOut.textContent = luminance + '%';
-	lightnessOut.textContent = lightness + '%';
+	luminanceOut.textContent = luminance + "%";
+	lightnessOut.textContent = lightness + "%";
 
-	luminanceOut.style.color = luminance > 50? 'black' : 'white';
-	lightnessOut.style.color = lightness > 50? 'black' : 'white';
+	luminanceOut.style.color = luminance > 50? "black" : "white";
+	lightnessOut.style.color = lightness > 50? "black" : "white";
 
 }
 
 
-input.addEventListener('input', compare);
+input.addEventListener("input", compare);
 
 compare();
 
