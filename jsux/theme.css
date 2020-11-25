@@ -181,6 +181,11 @@ div.editor > pre {
 		color: black;
 	}
 
+	.white.slide {
+		background: white;
+		color: black;
+	}
+
 	.slide > h1 {
 		text-align: center;
 		margin: 0 0 .6em;
@@ -209,14 +214,12 @@ div.editor > pre {
 	opacity: 1;
 }
 
-section > header.slide > h1 {
-	max-width: 61vw;
-}
-
 #indicator {
 	background: transparent;
 	text-shadow: none;
 	font-weight: 100;
+	color: white;
+	opacity: .5;
 }
 
 ::selection {
@@ -273,8 +276,8 @@ dialog {
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	width: 1rem;
-	height: 1rem;
+	width: .3rem;
+	height: .3rem;
 	background: red;
 }
 

@@ -1,5 +1,12 @@
 var $ = Bliss, $$ = $.$;
 
+$$(".slide > h1").forEach(h1 => {
+	let slide = Inspire.getSlide(h1);
+	if (!h1.classList.contains("no-balance-lines") && !$(".balance-lines", slide)) {
+		h1.classList.add("balance-lines");
+	}
+});
+
 $$(".whynot.slide").forEach(slide => {
 	$.create("h1", {
 		textContent: "Why not…",

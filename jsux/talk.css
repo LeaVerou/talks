@@ -10,7 +10,23 @@
 	background-size: cover;
 }
 
+	#intro .q {
+		color: yellow;
+	}
+
+	#intro span.q {
+		position: absolute;
+		left: 100%;
+		font-weight: inherit;
+	}
+
+	#intro div.q {
+		font-weight: bold;
+		font-size: 300%;
+	}
+
 	#intro h1 {
+		position: relative;
 		width: 2em;
 		background: yellow;
 		margin: 0;
@@ -194,9 +210,9 @@
 	}
 
 .hall.slide {
-	--background: hsl(0, 0%, 15%);
 	background: var(--background);
 	--background: #111;
+	--h1-background: hsla(0,0%,100%,.7);
 	overflow: hidden;
 }
 
@@ -205,7 +221,7 @@
 		margin-bottom: auto;
 		max-width: 8.3em;
 		padding: .5em .6em .4em .3em;
-		background: hsla(0,0%,100%,.7);
+		background: var(--h1-background);
 		font-weight: 900;
 		color: var(--background);
 		font-size: 48px;
@@ -238,24 +254,24 @@
 		color: white;
 	}
 
-	.hall.shame.slide > h1 {
-		background: hsla(0,100%,70%,.7);
+	.hall.shame.slide {
+		--h1-background: hsla(0,100%,70%,.7);
 	}
 
-		.demo.hall.shame.slide > h1 {
-			background: hsl(0,100%,40%);
-		}
-
-	.hall.fame.slide > h1 {
-		background: hsla(80,100%,70%,.7);
+	.demo.hall.shame.slide {
+		--h1-background: hsl(0,100%,40%);
 	}
 
-		.demo.hall.fame.slide > h1 {
-			background: hsl(80,100%,30%);
-		}
+	.hall.fame.slide {
+		--h1-background: hsla(80,100%,70%,.7);
+	}
 
-	.hall.meh.slide > h1 {
-		background: hsla(50,100%,70%,.7);
+	.demo.hall.fame.slide {
+		--h1-background: hsl(80,100%,30%);
+	}
+
+	.hall.meh.slide {
+		--h1-background: hsla(50,100%,70%,.7);
 	}
 
 		@keyframes flip {
@@ -317,6 +333,11 @@
 			margin-bottom: auto;
 		}
 
+	.hall.slide > h1 + h2 {
+		margin: 0;
+		color: var(--h1-background);
+	}
+
 .ribbon {
 	position: absolute;
 	top: 0; left: 0;
@@ -349,7 +370,7 @@
 	.solution.slide::before,
 	.commandment.slide::before,
 	.caveat.slide::before {
-		content: "Deadly Sin";
+		content: "Deadly UX Sin";
 		padding: .2em 1em;
 		margin-bottom: .6em;
 		background: hsl(0, 100%, 40%);
@@ -362,12 +383,12 @@
 	}
 
 	.solution.slide::before {
-		content: "Solution";
+		content: "UX Tip";
 		background-color: hsl(80, 80%, 35%);
 	}
 
 	.commandment.slide::before {
-		content: "Commandment";
+		content: "UX Commandment";
 		background-color: hsl(200, 60%, 50%);
 	}
 
@@ -522,9 +543,15 @@ ul.good {
 
 	.language-console pre.error {
 		color: red;
+		white-space: normal;
 	}
 
-		.language-console pre.error code::before {
+		.language-console pre.error > code {
+			color: inherit;
+			white-space: normal;
+		}
+
+		.language-console pre.error > code::before {
 			content: "×";
 			display: inline-block;
 			width: 1.4ch;
@@ -534,10 +561,6 @@ ul.good {
 			background: red;
 			color: white;
 			border-radius: 50%;
-		}
-
-		.language-console pre.error code {
-			color: inherit;
 		}
 
 	.language-console pre.delayed:not(.current):not(.displayed) {
@@ -598,12 +621,12 @@ ul.good {
 
 .whynot.slide {
 	--q: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
-	<text style="fill: white; fill-opacity: .2; font: bold 80px/1 Times;" y=".8em">?</text></svg>');
+	<text style="fill: white; fill-opacity: .1; font: bold 80px/1 Times;" y=".8em">?</text></svg>');
 	--size: 30vmin;
 	background: var(--q) 0 0, var(--q) calc(var(--size) / 2) calc(var(--size) / 2);
 	background-size: var(--size) var(--size);
 	background-color: black;
-	animation: matrix 8s 5s infinite alternate ease-in;
+	animation: matrix 10s 5s infinite alternate ease-in;
 }
 
 .priorities.slide {
@@ -756,3 +779,172 @@ input[type="range"].multirange.ghost {
 #smashing-html-apis a {
 	font-size: 90%;
 }
+
+.guideline {
+	font-weight: bold;
+	letter-spacing: -.02em;
+}
+
+	.guideline::before,
+	.guideline::after {
+		display: inline-block;
+		vertical-align: -.28em;
+		font-size: 200%;
+	}
+
+	.guideline::before {
+		content: "👉🏼";
+		margin-right: .2em;
+	}
+
+	.guideline::after {
+		content: "👈🏼";
+		margin-left: .2em;
+	}
+
+h1 .cite {
+	font-size: 50%;
+	text-decoration: none;
+	font-style: italic;
+}
+
+.pros-cons {
+
+}
+
+	.pros-cons li {
+		padding-left: .3em;
+	}
+
+	.pros-cons li::marker {
+		font-size: 120%;
+	}
+
+	.pros-cons li.pro::marker {
+		content: "👍🏼";
+	}
+
+	.pros-cons li.con::marker {
+		content: "👎🏼"
+	}
+
+#format-errors {
+
+}
+
+	#format-errors img {
+		position: absolute;
+		box-shadow: .1em .1em .5em rgb(0 0 0 / .2);
+		transform: rotate(1deg);
+	}
+
+	#format-errors img:nth-child(odd) {
+		transform: rotate(-2deg);
+	}
+
+	@keyframes thumbs {
+		from {
+
+		}
+	}
+
+	#format-errors .big-emoji {
+		position: relative;
+		font-size: 500%;
+		transition: transform .4s cubic-bezier(.2,.5,.5,1.7);
+		transform: translateY(-1em) rotate(-15deg);
+		transform-origin: -20% 100%;
+	}
+
+	#format-errors .big-emoji.current {
+		transform: none;
+	}
+
+#github-profile {
+	background-image: url(img/github-profile.png);
+	background-position: 40% 0%;
+	background-size: 100% auto;
+}
+
+	#github-profile[data-step="1"] {
+		background-size: 300% auto;
+	}
+
+
+#slider {
+
+}
+
+	#slider input {
+		transform: scale(2);
+		width: 20vw;
+	}
+
+.full-slide {
+	width: 100vw;
+	height: 100vh;
+	object-fit: contain;
+}
+
+#parting {
+	background: url(img/bye.jpg) center / cover;
+}
+
+	#parting h1 {
+		margin: 1em 1em auto auto;
+		font-weight: bold;
+		letter-spacing: -.02em;
+		text-align: right;
+	}
+
+#summary {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	color: black;
+	font-size: 65%;
+	text-align: left;
+	max-width: 22em;
+	/* background: hsl(0 0% 100% / .5); */
+	padding: 1em;
+	border-radius: .2em;
+}
+
+	#thankyou #summary ul {
+		all: unset;
+		font-weight: 400;
+		margin: 0;
+	}
+
+	#summary h2 {
+		padding: .2em 1em;
+		width: fit-content;
+		margin: 0 0 .5em;
+		background: black;
+		text-transform: uppercase;
+		font-size: 36px;
+		letter-spacing: -.05em;
+		text-align: center;
+		color: hsl(344, 88%, 73%);
+	}
+
+	#summary li {
+		padding-left: .5em;
+	}
+
+	#summary li.sin {
+		list-style-type: "👿";
+	}
+
+		#summary li.sin::before {
+			content: "Avoid ";
+			font-weight: bold;
+		}
+
+	#summary li.commandment {
+		list-style-type: "😇";
+	}
+
+	#summary a:not(:hover) {
+		text-decoration: none;
+	}
