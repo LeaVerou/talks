@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>JS UX</title>
+<title>Writing code for humans</title>
 
 <link href="../../inspire.js/inspire.css" rel="stylesheet" />
 <link href="../../inspire.js/extras.css" rel="stylesheet" />
@@ -20,12 +20,22 @@
 </head>
 <body class="language-javascript no-live-demo-css">
 
-<header id="intro" class="slide dont-resize">
+<!-- <header id="intro" class="slide dont-resize">
 	<h1 class="no-balance-lines">
 		JS<span class="q delayed">?</span>
 		UX<span class="q delayed">?</span>
 	</h1>
 	<div class="delayed q">???</div>
+	<p class="attribution">By <a href="https://lea.verou.me">Lea Verou</a> (<a href="https://twitter.com/leaverou">@LeaVerou</a>)</p>
+</header> -->
+<header id="intro" class="slide dont-resize" data-credits="https://www.behance.net/gallery/52225069/Humans-A-Photographic-Font">
+	<h1 class="no-balance-lines">
+		Writing
+		<strong>code</strong>
+		for
+		<img src="img/humans.jpg" alt="HUMANS">
+	</h1>
+
 	<p class="attribution">By <a href="https://lea.verou.me">Lea Verou</a> (<a href="https://twitter.com/leaverou">@LeaVerou</a>)</p>
 </header>
 
@@ -33,34 +43,54 @@
 
 <section>
 
-	<header class="slide">
-		<h1>What does JS have to do with UX?</h1>
+	<header class="slide" id="nope" data-credits="https://giphy.com/gifs/no-nope-tracy-morgan-spfi6nabVuq5y">
+		<h1>…but isn’t code for machines?</h1>
+		<img class="delayed" src="img/nope.webp">
 	</header>
 
 	<article class="slide">
+		<h1>Code is…</h1>
+		<ul class="delayed-children">
+			<li style="list-style-type: '⌨️';">…written by humans</li>
+			<li style="list-style-type: '💭';">…read by humans</li>
+			<li style="list-style-type: '📲';">…called (as an API) by humans</li>
+		</ul>
+		<p class="delayed">So its User Experience (UX) matters. Its usability matters. Its UI matters.</p>
+	</article>
+
+	<article class="slide">
+		<h1><strong>UX? Usability? UI?</strong>
+			<div class="delayed">What are we now, designers?!
+				<div class="big-emoji">🙄</div>
+			</div>
+
+		</h1>
+	</article>
+
+	<article class="definition slide">
 		<blockquote style="max-width: 25em">
 			<p>“<em>User experience (UX)</em> refers to a person's total experience using a particular product, system or service.”</p>
 			<p class="cite"><a href="https://en.wikipedia.org/wiki/User_experience"></a></p>
 		</blockquote>
 	</article>
 
-	<article class="slide">
+	<article class="definition slide">
 		<blockquote>
 			<p>“<em>Usability</em> is the ease of use and learnability of a human-made object.”</p>
 			<p class="cite"><a href="https://en.wikipedia.org/wiki/Usability"></a></p>
 		</blockquote>
 	</article>
 
-	<article class="image slide" id="boots" data-credits="The Uncomfortable, Katerina Kamprani"></article>
-
-	<article class="image slide" style="background: url(img/gsheets.png) no-repeat center / contain;"></article>
-
-	<article class="slide">
+	<article class="definition slide">
 		<blockquote style="max-width: 24em">
 			<p>“The <em>User Interface (UI)</em> is everything designed into an information device with which a human being may interact”</p>
 			<p class="cite"><a href="https://books.google.co.il/books?id=Zmypu5-miawC&pg=PT256&lpg=PT256&dq=%22everything+designed+into+an+information+device+with+which+a+human+being+may+interact%22&source=bl&ots=mCh1jmmQ5b&sig=_GcD6kH-8wMVZU2a-uEbJhF1yYE&hl=en&sa=X&ved=0ahUKEwiTr_Ok58XNAhVMFMAKHXNDB0IQ6AEIJTAD#v=onepage&q=%22everything%20designed%20into%20an%20information%20device%20with%20which%20a%20human%20being%20may%20interact%22&f=false">Handbook of Research on Web Information Systems Quality</a></p>
 		</blockquote>
 	</article>
+
+	<article class="image slide" style="background: url(img/gsheets.png) no-repeat center / contain;"></article>
+
+	<article class="image slide" id="boots" data-credits="The Uncomfortable, Katerina Kamprani"></article>
 
 	<article class="image slide" style="background-image: url(img/book.jpg)">
 		<!-- <h1>A book is a UI</h1> -->
@@ -77,19 +107,147 @@
 		<!-- <h1 class="caption">A tap is a UI</h1> -->
 	</article>
 
-	<article class="image slide" style="background-image: url(img/code.png);">
-		<!-- <h1>Your code is a UI</h1> -->
+	<article class="image slide" style="background-image: url(img/doet.jpg)" data-credits="https://johannesippen.com/2017/good-reads"></article>
+
+	<article class="image slide" style="background-image: url(img/code.jpg);" data-credits="By Ferenc Almasi on Unsplash">
+		<h1 class="no-balance-lines caption">Your code is a UI</h1>
 	</article>
+
+	<article class="slide">
+		<h1>Remember the <strong>I</strong> in AP<strong>I</strong> stands for “<strong>I</strong>nterface”</h1>
+	</article>
+
+	<article class="image slide" style="background-image: url(img/uijoke.jpg)">
+		<details class="notes">
+			Some of you may be thinking, but code goes hand in hand with documentation.
+			Nobody uses an API without documentation, so surely we can just explain how things work there?
+			Yes, and no. Yes, you can rely on documentation *a little more* than with typical GUIs.
+			Yes, people will look at *some* documentation before using your API.
+			But think back to when you use an API for the first time.
+			Do you exhaustively read all the docs, and learn everything there is to know about this API?
+			No you don’t. You skim through the docs to find what you need to get started, then jump back to writing code.
+			Don’t expect users of your API to do anything more.
+		</details>
+		<h1 style="margin-top: 70vh" class="no-balance-lines caption">But what about documentation?</h1>
+		<!-- <h1 style="margin-top: 50vh" class="no-balance-lines">Documentation is a last resort.</h1> -->
+	</article>
+
+	<header class="slide" id="background">
+		<h1>
+			<img src="img/lea.jpg" alt="">
+			Where am I coming from?
+		</h1>
+	</header>
+
+	<article class="slide heading-2x1" id="research-teaching">
+		<h1>Day job: Usable Web Programming @ MIT</h1>
+		<div style="--image: url(img/paper.png)">
+			<h2 class="caption">Research</h2>
+		</div>
+		<div style="--image: url(img/teaching.png)">
+			<h2 class="caption">Teaching</h2>
+		</div>
+	</article>
+
+	<section class="image slide" id="csswg" data-credits="Daniel Glazman" data-steps="1">
+		<h1 class="caption">
+			<span class="w3c"></span> CSS Working Group Member since 2012
+		</h1>
+		<svg viewBox="0 0 100 100" class="annotation">
+			<ellipse />
+		</svg>
+	</section>
 
 	<article class="image slide" data-steps="2" id="github-profile"></article>
 
-	<article class="image slide" style="background-image: url(img/githubnotifications.png);"></article>
+	<article class="image slide" id="tag-member">
+		<h1>Elected W3C TAG member since Jan 2021 🥳</h1>
+	</article>
+
+	<article class="sausage slide" id="what-is-tag" data-credits="Sausage photo by Yasin Arıbuğa on Unsplash">
+		<h1>What is the W3C TAG?</h1>
+
+		<ul class="delayed-children">
+			<li>A special W3C Working Group that ensures new Web technologies are
+				<ul>
+					<li><a href="https://w3ctag.github.io/design-principles/">well-designed</li>
+					<li>consistent with the rest of the Web Platform</a></li>
+					<li>and <a href="https://w3ctag.github.io/ethical-web-principles/">do not expose Web users to harm</a></li>
+				</ul>
+			<li>TAG Members are elected by the W3C membership (or appointed by the director, Tim Berners-Lee)</li>
+			<li>Very small group: only <a href="https://www.w3.org/2001/tag/">11 members</a>!</li>
+		</ul>
+	</article>
+
+	<article class="sausage slide">
+		<h1>What does the TAG <em>do</em>?</h1>
+
+		<ul class="delayed-children">
+			<li>
+				<a href="https://github.com/w3ctag/design-reviews/">Design reviews</a> of new specifications
+				<ul class="delayed">
+					<li>Chrome will not implement a Web technology if it has not “passed” TAG review</li>
+					<li>A W3C spec cannot reach Candidate Recommendation status without TAG review</li>
+				</ul>
+			</li>
+			<li>This experience is distilled into:
+				<ul>
+					<li><a href="https://w3ctag.github.io/design-principles/">Web Platform Design Principles</a></li>
+					<li><a href="https://w3ctag.github.io/ethical-web-principles/">Ethical Web Principles</a></li>
+					<li><a href="https://tag.w3.org/findings/">Findings</a></li>
+				</ul>
+			</li>
+		</ul>
+	</article>
+
+	<!-- <article class="image slide" style="background-image: url(img/githubnotifications.png);"></article> -->
 </section>
 
-<article class="image slide" style="background-image: url(img/uijoke.jpg)">
-	<h1 style="margin-top: 70vh" class="no-balance-lines">But what about documentation?</h1>
-	<!-- <h1 style="margin-top: 50vh" class="no-balance-lines">Documentation is a last resort.</h1> -->
-</article>
+<header class="slide dont-resize" id="ten-commandments">
+	<h1 class="no-balance-lines">
+		<div class="number">10</div>
+		<div class="commandments">commandments</div>
+		<div class="last-line">of good API Design</div>
+	</h1>
+</header>
+
+<section>
+	<header class="slide commandment">
+		<h1 style="max-width: 80vw">
+			Start from <strong>use cases</strong>,
+			not functionality
+		</h1>
+	</header>
+
+	<article class="hall shame slide">
+		<pre class="delayed"><code>
+			let isBinA = !!(a.compareDocumentPosition(b) &
+				Node.DOCUMENT_POSITION_CONTAINS);
+		</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code>let isBinA = a.contains(b);</code></pre>
+	</article>
+
+	<article class="solution slide">
+		<details class="notes">
+			The very first step in all API design is to understand the use cases and user needs you are addressing.
+			For any API idea, sketch out example code first, before implementing anything.
+			How does it look? Does it read well? Does it make sense to someone that hasn't read any documentation?
+			Does it require tedious boilerplate?
+			If the answer to any of those is negative, go back to the drawing board.
+			Often with user-centered design, the API might end up being simpler than what you originally thought you needed.
+			This is because a lot of complexity is often only included for completeness, and not actually guided by real user needs.
+		</details>
+		<h1>Always start with a) use cases, and b) example code before committing to any API shape</h1>
+		<footer>Related TAG Design Principles:
+			<ul>
+				<li><a href="https://w3ctag.github.io/design-principles/#priority-of-constituencies">1.1. Put user needs first (Priority of Constituencies)</a></li>
+				<li><a href="https://w3ctag.github.io/design-principles/#simplicity">2.1. Prefer simple solutions</a></li>
+			</ul></footer>
+	</article>
+</section>
 
 <section>
 	<header class="slide commandment">
@@ -98,13 +256,6 @@
 			& the complex <strong>possible</strong>
 		</h1>
 	</header>
-
-	<article class="slide">
-		<h1>“Simple things should be <strong>simple</strong>,<br>
-			complex things should be <strong>possible</strong>.”
-			<div style="text-align: right"><a href="https://en.wikipedia.org/wiki/Alan_Kay" class="cite">― Alan Kay</a></div>
-		</h1>
-	</article>
 
 	<!-- <article class="slide commandment">
 		<h1>
@@ -146,7 +297,18 @@
 		<pre class="delayed"><code>node.contains(otherNode);</code></pre>
 	</article> -->
 
+	<article class="solution slide">
+		<h1>Three ways:</h1>
+
+		<ul class="checkmark-list">
+			<li>Shortcuts</li>
+			<li>Configurability</li>
+			<li>Polymorphism</li>
+		</ul>
+	</article>
+
 	<article class="hall fame slide">
+		<h2>Shortcuts</h2>
 		<div><pre><code>
 			// Complex/rare case
 			let evt = new KeyboardEvent("keyup", {
@@ -167,12 +329,12 @@
 
 		<ul class="pros-cons balance-lines" style="max-width: 25em">
 			<li class="pro"><strong>Optimized UX</strong> for the very common cases</li>
-			<li class="con"><strong>Steep learning curve</strong>; even slightly more complex cases need to go the complex route</li>
+			<li class="con"><strong>UX Cliff</strong>; even slightly more complex cases need to go the complex route</li>
 		</ul>
 	</article>
 
 	<article class="hall fame slide">
-		<h2 class="delayed" data-index="3">Optional arguments</h2>
+		<h2>Configurability</h2>
 		<div>
 			<pre><code>
 				// Common case: standard, minified JSON
@@ -193,11 +355,16 @@
 	</article>
 
 	<article class="hall fame slide">
-		<h2 class="delayed" data-index="3">Function arguments</h2>
+		<h2>Polymorphism</h2>
 		<div>
 			<pre><code>
-				// Common case: replace with string
-				text.replaceAll(/\s+/g, " ");
+				// Simplest case: replace string with string
+				text.replaceAll("    ", "\t");
+			</code></pre>
+
+			<pre class="delayed"><code>
+				// Common case: replace regex with string
+				text.replaceAll(/^\s+/mg, "\t");
 			</code></pre>
 
 			<pre class="delayed"><code>
@@ -291,6 +458,42 @@
 			</g>
 		</svg>
 	</article>
+
+	<article class="slide">
+		<h1>“Simple things should be <strong>simple</strong>,<br>
+			complex things should be <strong>possible</strong>.”
+			<div style="text-align: right"><a href="https://en.wikipedia.org/wiki/Alan_Kay" class="cite">― Alan Kay</a></div>
+		</h1>
+	</article>
+
+	<article class="hall fame slide">
+		<h2>Common !== Simple</h2>
+		<div>
+			<pre><code>
+				// Common case: get safe HTML from untrusted input
+				const sanitizer = new Sanitizer();
+				container.replaceChildren( sanitizer.sanitize(untrusted_input)) );
+			</code></pre>
+
+			<pre class="delayed"><code>
+				// Complex case: configure what’s allowed
+				const sanitizer = new Sanitizer({
+					allowElements: ['span', 'em', 'strong', 'b', 'i'],
+					allowAttributes: {'class': ['*']}
+				});
+				container.replaceChildren( sanitizer.sanitize(untrusted_input)) );
+			</code></pre>
+		</div>
+	</article>
+
+	<article class="slide">
+		<h1>“<del>Simple</del> <ins>Common</ins> things should be <strong>simple</strong>,<br>
+			complex things should be <strong>possible</strong>.”
+			<div style="text-align: right"><a href="https://en.wikipedia.org/wiki/Alan_Kay" class="cite">― Lea’s paraphrase of Alan Kay’s maxim</a></div>
+		</h1>
+	</article>
+
+
 </section>
 
 <section>
@@ -332,7 +535,6 @@
 
 	<article class="hall shame slide">
 		<div class="language-console">
-			<pre><code>> let div = document.createElement("div")</code></pre>
 			<pre><code>> document.body.removeChild(div)</code></pre>
 			<pre class="error"><code>Uncaught DOMException: Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node.</code></pre>
 		</div>
@@ -343,60 +545,177 @@
 	</article>
 
 	<article class="hall shame slide">
-		<pre><code>element.parentNode.insertBefore(newChild, element);</code></pre>
-
 		<div class="language-console">
-			<pre><code>> let div = document.createElement("div")</code></pre>
-			<pre><code>> document.documentElement.insertBefore(document.body, div)</code></pre>
+			<pre><code>> document.documentElement.insertBefore(ref, div)</code></pre>
 			<pre class="error"><code>Failed to execute 'insertBefore' on 'Node': The node before which the new node is to be inserted is not a child of this node.</code></pre>
 		</div>
 	</article>
 
-	<article class="hall fame slide">
-		<pre><code>element.before(newChild);</code></pre>
-	</article>
-
 	<article class="solution slide">
-		<h1>Strive for a single source of truth. <br>
-			Inputs should be independent.
-		</h1>
+		<h1>Strive for a single source of truth. Inputs should be independent.</h1>
 	</article>
-</section>
 
-<section>
-	<header class="commandment slide">
-		<h1 style="width: 7em">Be liberal in what you accept<br>
-			<a href="https://en.wikipedia.org/wiki/Robustness_principle" class="cite">(Robustness Principle)</a></h1>
-	</header>
-
-	<article class="light slide" id="format-errors" data-credits='"No Dashes Or Spaces" Hall of Shame, https://baymard.com/blog/adaptive-validation-error-messages'>
-		<img src="img/card1.png" alt=""  style="top: 2em; left: 2em; scale: 1.5; transform-origin: top left;">
-		<img src="img/card2.png" class="delayed" alt=""  style="top: 2em; right: 2em; scale: 1.5; transform-origin: top right;">
-		<img src="img/card3.png" class="delayed" alt=""  style="bottom: 2em; left: 2em; scale: 1.5; transform-origin: bottom left">
-		<img src="img/phone1.jpg" class="delayed" alt="" style="bottom: 2em; right: 2em">
+	<article class="light slide multiple-examples" id="ccui-picktype" data-credits='A UX analysis of 22 credit card UIs https://mikeknoop.com/ux-analysis-credit-card-form-ui-ideas'>
+		<img src="img/ccui-statefarm.png" alt="">
+		<img src="img/ccui-apple.png" class="delayed" alt="">
+		<img src="img/ccui-steam.png" class="delayed" alt="">
+		<img src="img/ccui-fastrak.png" class="delayed" alt="">
 		<span class="big-emoji delayed">👎🏽</span>
 	</article>
 
-	<article class="image slide" style="background-image: url(img/logout-error.jpg)" data-credits="https://www.reddit.com/r/softwaregore/comments/31g1u4/you_need_to_be_logged_in_to_log_out_please_log_in/"></article>
-
 	<article class="hall fame slide">
-		<div class="language-console">
-			<pre><code>> new URL("https://lea.verou.me")</code></pre>
-			<pre><code>< URL {href: "https://lea.verou.me", …}</code></pre>
-			<pre><code>> new URL(new URL("https://lea.verou.me"))</code></pre>
-			<pre><code>< URL {href: "https://lea.verou.me", …}</code></pre>
-			<pre><code>> new URL(location)</code></pre>
-			<pre><code>< URL {href: "https://projects.verou.me/jsux/index.html", …}</code></pre>
-		</div>
+		<pre><code>element.before(ref);</code></pre>
 	</article>
 
-	<article class="hall shame slide" id="set-constructor">
+	<article class="solution slide">
+		<h1>Preventing error conditions !== silent failure</h1>
+	</article>
+
+	<article class="hall shame slide">
 		<div class="language-console">
-			<pre><code>> new Set(42)</code></pre>
-			<pre class="error"><code>Uncaught TypeError: number 42 is not iterable (cannot read property Symbol(Symbol.iterator))</code></pre>
-			<pre><code>> new Set([42])</code></pre>
-			<pre><code>< Set {42}</code></pre>
+			<pre><code>> let ctx = canvas.getContext("2d", {alpha: false})</code></pre>
+			<pre><code>> let ctx2 = canvas.getContext("2d", {alpha: true});</code></pre>
+			<pre><code>> ctx === ctx2</code></pre>
+			<pre><code>< true</code></pre>
+			<pre><code>> ctx2.getContextAttributes().alpha</code></pre>
+			<pre><code>< false</code></pre>
 		</div>
+	</article>
+</section>
+
+<section id="consistency-section">
+	<header class="commandment slide">
+		<h1>Consistency</h1>
+	</header>
+
+	<article class="definition slide">
+		<h1><em>Internal consistency</em> refers to consistency with other elements in a system</h1>
+	</article>
+
+
+	<article class="slide" id="internal-consistency-example">
+		<h1>Internal consistency</h1>
+		<img src="img/google-docs.png" alt="">
+		<img src="img/google-sheets.png" alt="" class="delayed">
+		<img src="img/google-slides.png" alt="" class="delayed">
+	</article>
+
+	<article class="definition slide">
+		<h1><em>External Consistency</em> refers to consistency with other systems.</h1>
+	</article>
+
+	<article class="slide" id="external-consistency-example">
+		<h1>External consistency</h1>
+		<img src="img/google-docs.png" alt="">
+		<img src="img/ms-word.png" alt="" class="delayed">
+		<img src="img/textedit.png" alt="" class="delayed">
+	</article>
+
+	<article class="solution slide">
+		<h1>Consistency helps users transfer knowledge across different APIs</h1>
+		<footer>Related TAG Design Principle: <a href="https://w3ctag.github.io/design-principles/#consistency">2.3. Consistency</a></footer>
+	</article>
+
+	<article class="slide hall fame">
+		<pre><code>
+			let ctx = canvas.getContext("2d");
+			ctx.font = "bold 48px serif"; <span class="delayed">// Just like CSS’s font property</span>
+			ctx.fillStyle = "hsl(330 50% 50%)"; <span class="delayed">// Just like CSS &lt;color> values</span>
+			ctx.fillText("Consistency", 0, 0);
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<h1>Consistency…</h1>
+
+		<ul>
+			<li>…within the API itself</li>
+			<li>…within the language (e.g. JS)</li>
+			<li>…within the Web Platform</li>
+			<li>…with any external precedent</li>
+		</ul>
+	</article>
+
+	<article class="hall shame slide">
+		<details class="notes">Who remembers these? While this never became a standard (thank goodness!), before IE10, it was the only way to do gradients in CSS without images.
+			Before IE9 it was the only way to do semi-transparent colors in IE without images.
+			So millions of developers have written this.
+			Not only is this syntax incredibly verbose, full of bizarre abbreviations (progid? DX?), and even includes a company name (!),
+			it is also as non-idiomatic to CSS as it gets. Nowhere else does CSS use colons and periods to namespace functions,
+			equals signs within a function for key-value pairs, or quoted strings for colors.
+			While this is comically bad, we do get a lot of proposals for adding features to CSS or HTML with syntax that is utterly inconsistent with the rest of the language.
+		</details>
+		<pre><code class="language-css">
+			filter: progid:DXImageTransform.Microsoft.gradient(
+					startColorstr='#9acd32',
+					endColorstr='#80000000'
+				);
+		</code></pre>
+	</article>
+
+	<article class="solution slide">
+		<h1>When different types of consistency are at odds, err on the side of the narrower internal consistency</h1>
+		<footer class="delayed note">i.e. API > language > Web Platform > external precedent</footer>
+	</article>
+
+	<article class="hall fame slide">
+		<details class="notes">
+			Here is another example where different types of consistency may be at odds.
+			When we introduced Lab and LCH colors to CSS, originally L was a plain number from 0 to a 100.
+			However, this was inconsistent with CSS, where lightnesses are expressed in percentages.
+			Therefore, it was decided that we'd go with percentages, even though it was inconsistent with all usage of Lab colors everywhere else,
+			because consistency within CSS was more important than consistency with external precedent.
+		</details>
+		<pre><code class="language-css">
+			color: lab(50% 30 40);
+		</code></pre>
+	</article>
+
+	<article class="slide" data-label="Precedent" style="--label-bg: linear-gradient(to top right,
+	yellowgreen,
+	gold,
+	red,
+	rgb(0 0 0 / .5))">
+		<h1>Linear gradients in SVG</h1>
+
+		<pre><code class="language-markup">
+			&lt;!-- SVG Gradient: -->
+			&lt;linearGradient id="g" gradientTransform="rotate(-50 0 .7)">
+				&lt;stop position="0" stop-color="yellowgreen"></stop>
+				&lt;stop position=".3333" stop-color="gold"></stop>
+				&lt;stop position=".6666" stop-color="red"></stop>
+				&lt;stop position="1" stop-color="black" stop-opacity=".5"></stop>
+			&lt;/linearGradient>
+		</code></pre>
+	</article>
+
+	<article class="hall what slide">
+		<h2>Linear gradients in Canvas</h2>
+
+		<pre><code class="language-js">
+			let x1 = canvas.width, y0 = canvas.height;
+			let gradient = ctx.createLinearGradient(0, y0, x1, 0);
+			gradient.addColorStop(0, 'yellowgreen');
+			gradient.addColorStop(1 / 3, 'gold');
+			gradient.addColorStop(2 / 3, 'red');
+			gradient.addColorStop(1, 'rgb(0 0 0 / .5)');
+		</code></pre>
+	</article>
+
+	<article class="hall fame slide">
+		<pre><code class="language-css">
+			/* CSS linear gradient: */
+			background: linear-gradient(to top right,
+			                            yellowgreen,
+			                            gold,
+			                            red,
+			                            rgb(0 0 0 / .5));
+		</code></pre>
+	</article>
+
+	<article class="solution slide">
+		<details class="notes">There is often a tension between API ergonomics and internal consistency, when precedent is very clearly of poor usability. In some cases it makes sense to break consistency to improve usability, but the improvement in usability should be very significant to justify this.</details>
+		<h1>It may make sense to break consistency to improve usability, but the improvement must be significant</h1>
 	</article>
 </section>
 
@@ -420,6 +739,12 @@
 		</div>
 	</article>
 
+	<article class="solution slide">
+		<h1 style="max-width: 80%">Sensible defaults allow API complexity to be progressively revealed</h1>
+
+		<footer>Related TAG Design principle: <a href="https://w3ctag.github.io/design-principles/#optional-parameters">6.4. Make method arguments optional if possible</a></footer>
+	</article>
+
 	<article class="hall shame slide" id="css-registerproperty">
 		<div class="language-console">
 			<pre><code>> CSS.registerProperty({name: "--color", syntax: "&lt;color>"});</code></pre>
@@ -430,6 +755,10 @@
 	</article>
 
 	<article class="solution slide">
+		<h1>Sometimes other considerations can get in the way of optimal usability</h1>
+	</article>
+
+	<!-- <article class="solution slide" data-label="JS Tip">
 		<h1>Default Values</h1>
 		<pre><code>
 			function callback(
@@ -439,14 +768,6 @@
 				console.log(timestamp, future);
 			}
 		</code></pre>
-		<!-- <div class="language-console overlay">
-			<pre><code>> callback()</code></pre>
-			<pre><code>< 1472325217105 1472325220105</code></pre>
-			<pre><code>> callback(42)</code></pre>
-			<pre><code>< 42 3042</code></pre>
-			<pre><code>> callback(42, 1000000000000)</code></pre>
-			<pre><code>< 42 1000000000000</code></pre>
-		</div> -->
 	</article>
 
 	<article class="slide">
@@ -460,22 +781,22 @@
 				console.log(timestamp, future);
 			}
 		</code></pre>
-		<!-- <div class="language-console overlay">
-			<pre><code>> callback()</code></pre>
-			<pre><code>< 5 false</code></pre>
-			<pre><code>> callback({})</code></pre>
-			<pre><code>< 5 false</code></pre>
-			<pre><code>> callback({option1: 42})</code></pre>
-			<pre><code>< 42 false</code></pre>
-		</div> -->
-	</article>
+	</article> -->
 
 	<article class="solution slide">
-		<h1>Order parameters by importance</h1>
+		<h1>Order parameters by frequency of use</h1>
 
 		<div class="delayed-children">
 			<pre>👎 <code>history.pushState(null, "", "https://lea.verou.me"); // (actual)</code></pre>
 			<pre>👍 <code>history.pushState("https://lea.verou.me"); // (fictional)</code></pre>
+		</div>
+	</article>
+	<article class="solution slide">
+		<h1>Order parameters by frequency of use</h1>
+
+		<div class="delayed-children">
+			<pre>👎 <code>JSON.stringify(data, null, "\t"); // (actual)</code></pre>
+			<pre>👍 <code>JSON.stringify(data, "\t"); // (fictional)</code></pre>
 		</div>
 	</article>
 
@@ -612,6 +933,7 @@
 			<li>Any order</li>
 			<li>All optional</li>
 		</ul>
+		<footer>Related TAG Design Principle: “<a href="https://w3ctag.github.io/design-principles/#prefer-dict-to-bool">6.3. Prefer dictionary arguments over primitive arguments</a>”</footer>
 	</article>
 
 	<article class="hall fame slide">
@@ -690,12 +1012,42 @@
 </section>
 -->
 
-
-
-<section>
+<section id="Robustness-principle">
 	<header class="commandment slide">
-		<h1>Support bulk operations</h1>
+		<h1 style="width: 7em">Be liberal in what you accept<br>
+			<a href="https://en.wikipedia.org/wiki/Robustness_principle" class="cite">(Robustness Principle)</a></h1>
 	</header>
+
+	<article class="light slide multiple-examples" id="format-errors" data-credits='"No Dashes Or Spaces" Hall of Shame, https://baymard.com/blog/adaptive-validation-error-messages'>
+		<img src="img/card1.png" alt="">
+		<img src="img/card2.png" class="delayed" alt="">
+		<img src="img/card3.png" class="delayed" alt="">
+		<img src="img/phone1.jpg" class="delayed" alt="">
+		<span class="big-emoji delayed">👎🏽</span>
+	</article>
+
+	<article class="image slide" style="background-image: url(img/logout-error.jpg)" data-credits="https://www.reddit.com/r/softwaregore/comments/31g1u4/you_need_to_be_logged_in_to_log_out_please_log_in/"></article>
+
+	<article class="hall fame slide">
+		<div class="language-console">
+			<pre><code>> new URL("https://lea.verou.me")</code></pre>
+			<pre><code>< URL {href: "https://lea.verou.me", …}</code></pre>
+			<pre><code>> new URL(new URL("https://lea.verou.me"))</code></pre>
+			<pre><code>< URL {href: "https://lea.verou.me", …}</code></pre>
+			<pre><code>> new URL(location)</code></pre>
+			<pre><code>< URL {href: "https://projects.verou.me/jsux/index.html", …}</code></pre>
+		</div>
+	</article>
+
+	<article class="solution slide">
+		<h1>Ways to be liberal (in what you accept)</h1>
+
+		<ul>
+			<li>Accept various types of objects</li>
+			<li>Accept various different states</li>
+			<li>Accept both aggregate and singular operations</li>
+		</ul>
+	</article>
 
 	<article class="white slide" data-credits="https://uxdesign.cc/the-bulk-experience-7fcca8080f82">
 		<img src="img/bulk-delete.jpg" alt="">
@@ -745,6 +1097,15 @@
 			<pre><code>< Set {2, 3, 5}</code></pre>
 			<pre><code>> primes.add(7, 11, 13)</code></pre>
 			<pre><code>< Set {2, 3, 5, 7}</code></pre>
+		</div>
+	</article>
+
+	<article class="hall shame slide" id="set-constructor">
+		<div class="language-console">
+			<pre><code>> new Set(42)</code></pre>
+			<pre class="error"><code>Uncaught TypeError: number 42 is not iterable (cannot read property Symbol(Symbol.iterator))</code></pre>
+			<pre><code>> new Set([42])</code></pre>
+			<pre><code>< Set {42}</code></pre>
 		</div>
 	</article>
 

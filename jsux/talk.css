@@ -10,7 +10,23 @@
 	background-size: cover;
 }
 
-	#intro .q {
+	#intro h1 {
+		position: relative;
+		width: 3em;
+		color: hsl(45 40% 70%);
+		margin: 0;
+		padding: .4em;
+		font-size: 450%;
+		line-height: .8;
+		letter-spacing: -.05em;
+		font-weight: 300;
+	}
+
+	#intro h1 img {
+		max-width: 100%;
+	}
+
+	/* #intro .q {
 		color: yellow;
 	}
 
@@ -42,7 +58,7 @@
 
 		#intro h1::first-line {
 			font-weight: bold;
-		}
+		} */
 
 		#intro::before {
 			content: url(img/teapot.png);
@@ -84,6 +100,10 @@
 		#intro .attribution a {
 			text-decoration: none;
 		}
+
+#nope img {
+	width: 500px;
+}
 
 /* footer.slide {
 	text-align: center;
@@ -208,6 +228,122 @@
 		background-position: 100% 70%;
 		background-size: 200%
 	}
+
+#background {}
+
+	#background img {
+		display: block;
+		max-width: 600px;
+		max-height: 600px;
+		aspect-ratio: 1 / 1;
+		object-fit: cover;
+		margin: 0 auto .5em;
+		border-radius: 50%;
+	}
+
+#research-teaching {
+	justify-content: start;
+}
+
+	#research-teaching div {
+		background: var(--image) 0 0 / cover;
+	}
+
+	#research-teaching h2 {
+		color: white;
+		backdrop-filter: blur(5px);
+	}
+
+#tag-member {
+	background: url(img/tag.png) 0 0 / cover;
+}
+
+#csswg,
+#tag-member {
+	background-position: top;
+	padding: 1em;
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
+
+	:is(#csswg, #tag-member) h1 {
+		background: hsl(0 0% 0% / .9);
+		backdrop-filter: blur(10px);
+		max-width: 50%;
+		text-align: left;
+	}
+
+	#csswg h1 {
+		padding: .5em .5em;
+	}
+
+	#tag-member h1 {
+		padding: .2em .5em;
+	}
+
+.sausage {
+	background: linear-gradient(to right, #F38662 50%, transparent 70%), url(img/sausage.jpg) right / auto 100% no-repeat, #F38662;
+	padding-right: 40%;
+	color: black;
+	font-weight: bold;
+	letter-spacing: -.02em;
+}
+
+	.sausage ul ul li,
+	.checkmark-list > li {
+		list-style-type: "✅";
+		padding-left: .3em;
+		filter: hue-rotate(-35deg) grayscale(30%);
+	}
+
+	.sausage ul ul li::marker,
+	.checkmark-list > li::marker {
+		font-size: 80%;
+		line-height: 2;
+	}
+
+#ten-commandments {
+	background: url(img/moses.jpg) 50% 65% / cover;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
+
+	#ten-commandments h1 {
+		text-align: left;
+		font-weight: bold;
+		max-width: 80vw;
+		margin-right: .2em;
+		margin-bottom: 1.5em;
+	}
+
+		#ten-commandments h1 .number {
+			font-size: 1050%;
+			line-height: .1;
+			color:var(--accent2);
+			letter-spacing: -.1em;
+			text-indent: -.24em;
+		}
+
+		#ten-commandments h1 .last-line {
+			font-size: 96%;
+			font-weight: 300;
+		}
+
+del, ins {
+	font-family: var(--font-handwritten);
+	font-size: 150%;
+	line-height: .666;
+}
+
+ins {
+	color: yellowgreen;
+	text-decoration: none;
+}
+
+del {
+	color:hsl(344, 88%, 73%)
+}
 
 .hall.slide {
 	background: var(--background);
@@ -334,7 +470,7 @@
 		}
 
 	.hall.slide > h1 + h2 {
-		margin: 0;
+		margin: 0 0 auto;
 		color: var(--h1-background);
 	}
 
@@ -369,11 +505,13 @@
 	.sin.slide::before,
 	.solution.slide::before,
 	.commandment.slide::before,
-	.caveat.slide::before {
-		content: "Deadly UX Sin";
+	.caveat.slide::before,
+	.definition.slide::before,
+	.slide[data-label]::before {
+		content: var(--content, "Deadly UX Sin");
 		padding: .2em 1em;
 		margin-bottom: .6em;
-		background: hsl(0, 100%, 40%);
+		background: var(--label-bg,  hsl(0, 100%, 40%));
 		text-transform: uppercase;
 		box-shadow: 0 0.1em 0 0.1em rgba(0, 0, 0, 0.15);
 		font-size: 36px;
@@ -383,17 +521,54 @@
 	}
 
 	.solution.slide::before {
-		content: "UX Tip";
-		background-color: hsl(80, 80%, 35%);
+		--content: "UX Tip";
+		--label-bg: hsl(80, 80%, 35%);
+	}
+
+	.definition.slide::before {
+		--content: "Definition";
+		--label-bg: var(--accent2);
 	}
 
 	.commandment.slide::before {
-		content: "UX Commandment";
-		background-color: hsl(200, 60%, 50%);
+		--content: "UX Commandment";
+		--label-bg: hsl(200, 60%, 50%);
 	}
 
 	.caveat.slide::before {
-		content: "Caveat"
+		--content: "Caveat"
+	}
+
+	.slide[data-label]::before {
+		--content: attr(data-label);
+	}
+
+	.definition.slide > blockquote,
+	.definition.slide > blockquote > p:first-child {
+		margin-top: 0;
+	}
+
+	.slide:is(.solution, .definition, .caveat, .sin) > h1 {
+		max-width: 80vw;
+	}
+
+.slide[id$="consistency-example"] {
+
+}
+
+	.slide[id$="consistency-example"] img {
+		width: calc(90vw - 4em);
+		margin: 0;
+		transform: translate(0, -1em);
+	}
+
+	.slide[id$="consistency-example"] img + img {
+		position: absolute;
+		transform: translate(1em, 3em);
+	}
+
+	.slide[id$="consistency-example"] img + img + img {
+		transform: translate(2em, 6em);
 	}
 
 #microwave {
@@ -828,35 +1003,46 @@ h1 .cite {
 		content: "👎🏼"
 	}
 
-#format-errors {
+.multiple-examples {
 
 }
 
-	#format-errors img {
+	.multiple-examples img {
 		position: absolute;
 		box-shadow: .1em .1em .5em rgb(0 0 0 / .2);
 		transform: rotate(1deg);
 	}
 
-	#format-errors img:nth-child(odd) {
+	.multiple-examples img:nth-child(odd) {
 		transform: rotate(-2deg);
 	}
 
-	@keyframes thumbs {
-		from {
-
-		}
+	.multiple-examples img:nth-child(4n + 1) {
+		top: 2em; left: 2em; scale: 1.5; transform-origin: top left;
+	}
+	.multiple-examples img:nth-child(4n + 2) {
+		top: 2em; right: 2em; scale: 1.5; transform-origin: top right;
+	}
+	.multiple-examples img:nth-child(4n + 3) {
+		bottom: 2em; left: 2em; scale: 1.5; transform-origin: bottom left
+	}
+	.multiple-examples img:nth-child(4n + 4) {
+		bottom: 2em; right: 2em
 	}
 
-	#format-errors .big-emoji {
+	.big-emoji {
+		font-size: min(500%, 300px);
+	}
+
+	.multiple-examples .big-emoji {
 		position: relative;
-		font-size: 500%;
+
 		transition: transform .4s cubic-bezier(.2,.5,.5,1.7);
 		transform: translateY(-1em) rotate(-15deg);
 		transform-origin: -20% 100%;
 	}
 
-	#format-errors .big-emoji.current {
+	.multiple-examples .big-emoji.current {
 		transform: none;
 	}
 

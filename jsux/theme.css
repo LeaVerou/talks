@@ -281,6 +281,11 @@ dialog {
 	background: red;
 }
 
+.note {
+	font-family: var(--font-handwritten);
+	color: var(--accent1);
+}
+
 /*
 .slide:last-child:target {
 	transition: none;
