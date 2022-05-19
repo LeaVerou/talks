@@ -1,0 +1,23 @@
+#adding-color-spaces {
+
+}
+
+	#adding-color-spaces pre {
+		font-size: 50%;
+	}
+
+pre {
+	min-width: min-content;
+	max-width: 90vw;
+}
+
+
+.cn-wrapper .cn-results:not(:empty) > * {
+	max-width: 20em;
+}
+
+.vs-label {
+	width: min-content;
+	font-weight: bold;
+	background: hsl(0 90% 40%);
+}

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title>Towards a color space agnostic Color object for the Web Platform</title>
+<link href="../../inspire.js/inspire.css" rel="stylesheet" />
+<link href="../../inspire.js/theme.css" rel="stylesheet" />
+<link href="../shared/prism.css" rel="stylesheet" />
+<link href="../web-design-cheat-code/theme.css" rel="stylesheet" />
+<link rel="stylesheet" href="../../color.js/notebook/color-notebook.css">
+<link href="talk.css" rel="stylesheet" />
+
+</head>
+<body class="language-javascript cn-ignore">
+
+<header class="slide">
+	<h1>Towards a color space agnostic Color object for the Web Platform</h1>
+</header>
+
+<article class="slide">
+	<h1>Who are we?</h1>
+
+	<ul>
+		<li>
+			<strong>Lea Verou</strong>
+			CSS Color 5 editor
+			<div class="note">(me!)</div>
+		</li>
+		<li>
+			<strong>Chris Lilley</strong>
+			CSS Color editor since forever,
+			ICC member
+		</li>
+	</ul>
+</article>
+
+<article class="slide">
+	<h1>Color.js</h1>
+
+	<ul>
+		<li>JS library for color computations</li>
+		<li>API design practice for a <code>Color</code> object for the Web Platform</li>
+	</ul>
+
+	<details class="notes">
+		A library has different needs, constraints, and use cases compared to
+		a native <code>Color</code> object, but making the design decisions is
+		useful practice for the latter regardless.
+	</details>
+</article>
+
+<article class="slide">
+	<h1>Why?</h1>
+
+	<p>Lots of Web Platform APIs need a Color object:</p>
+	<ul>
+		<li>Canvas API</li>
+		<li>CSS OM</li>
+		<li>SVG DOM</li>
+		<li><code class="language-markup">&lt;input type="color"></code></li>
+		<li>Eyedropper API</li>
+	</ul>
+</article>
+
+<article class="slide">
+	<h1>Use cases</h1>
+
+	<ul>
+		<li>Color space conversion (e.g. LCH → P3)</li>
+		<li>Color manipulation (e.g. making a color darker)</li>
+		<li>Interpolation (e.g. mixing two colors)</li>
+		<li>String parsing (e.g. what color is <code>rebeccapurple</code>?)</li>
+	</ul>
+</article>
+
+<article class="slide">
+	<h1>Goals</h1>
+
+	<ul>
+		<li>Usability as a priority</li>
+		<li>Color-space agnostic</li>
+		<li>Extensible</li>
+		<li>Modular</li>
+	</ul>
+</article>
+
+<article class="slide">
+	<h1>Goals: Usability</h1>
+
+	<ul>
+		<li>Common things should be easy, complex things should be possible</li>
+		<li><strong>Learnability:</strong> don't require a ton of color science knowledge to use</li>
+		<li><strong>Efficiency:</strong> Avoid verbosity, sensible defaults</li>
+		<li><strong>Safety:</strong> Avoid error conditions if possible</li>
+		<li>Also important that it’s easy to extend</li>
+	</ul>
+</article>
+
+<article class="slide">
+	<h1>Goals: Color space agnostic</h1>
+
+	<ul>
+		<li>Not tied to sRGB</li>
+		<li>sRGB should not be privileged</li>
+		<li>Not tied to SDR</li>
+		<li>
+			No assumptions about number, names, or ranges of components
+			<ul>
+				<li>Ok to assume components will be numeric</li>
+			</ul>
+		</li>
+		<li>Anything color-space specific is defined by the color space</li>
+		<li>Anyone should be able to add new color spaces</li>
+	</ul>
+</article>
+
+<article class="slide">
+	<h1>Goals: Extensible</h1>
+
+	<ul>
+		<li>
+			Anyone should be able to add new…
+			<ul>
+				<li>…color spaces</li>
+				<li>…DeltaE algorithms</li>
+				<li>…Chromatic Adaptation Transforms (CATs)</li>
+			</ul>
+		</li>
+		<li>
+			Hooks for deep extensibility
+		</li>
+	</ul>
+</article>
+
+<article class="slide">
+	<h1>Goals: Modular</h1>
+
+	<ul>
+		<li>Use what you need architecture
+			<ul>
+				<li>Core <code>color.js</code> module with minimal functionality</li>
+				<li>color spaces are extra modules</li>
+				<li>non-essential functionality are extra modules</li>
+			</ul>
+		</li>
+		<li>A native object cannot be modular, this affects decisions on what to include</li>
+	</ul>
+</article>
+
+<article class="slide">
+	<h1>Prior art</h1>
+
+	<ul>
+		<li>
+			<strong><a href="https://gka.github.io/chroma.js/">chroma.js</a></strong>
+			Nice chainable API, very sRGB centric
+		</li>
+		<li>
+			<strong><a href="https://github.com/d3/d3-color">D3 Color</a></strong>
+			and <strong><a href="https://github.com/d3/d3-interpolate">D3 Interpolate</a></strong>
+		</li>
+		<li>
+			<strong><a href="https://github.com/nschloe/colorio">colorio</a> (Python)</strong>
+			Very extensive, used for research
+		</li>
+	</ul>
+</article>
+
+<section>
+	<header class="slide">
+		<h1>API Design Dilemmas</h1>
+	</header>
+
+	<article class="slide vs">
+		<h1>Procedural vs OOP</h1>
+		<pre><code>
+			// CSS Color 4 sample code
+			let RGB = [0, 1, 0];
+			Lab_to_LCH(XYZ_to_Lab(D65_to_D50(lin_sRGB_to_XYZ(lin_sRGB(RGB)))));
+		</code></pre>
+		<pre class="selected"><code>
+			let color = new Color("srgb", [0, 1, 0]);
+			color.to("lch").coords
+		</code></pre>
+		<details class="notes">
+			Not really a dilemma, OO is the obvious choice here.
+		</details>
+	</article>
+
+	<article class="slide vs">
+		<h1>One class or multiple?</h1>
+		<pre class="selected"><code>
+			let a = new Color("srgb", [0, 1, 0]);
+			let b = new Color("lch", [0, 0, 0]);
+		</code></pre>
+		<pre><code>
+			let a = new SRGBColor(0, 1, 0);
+			let b = new LCHColor(0, 0, 0);
+		</code></pre>
+		<details class="notes">
+			Big dilemma, no perfect solution.
+		</details>
+	</article>
+
+	<article class="slide" id="adding-color-spaces">
+		<h1>How to define color spaces, then?</h1>
+		<pre><code>
+			Color.defineSpace({
+				inherits: "srgb",
+				id: "p3",
+				name: "P3",
+				cssId: "display-p3",
+				toXYZ_M: [
+					[0.4865709486482162, 0.26566769316909306, 0.1982172852343625],
+					[0.2289745640697488, 0.6917385218365064,  0.079286914093745],
+					[0.0000000000000000, 0.04511338185890264, 1.043944368900976]
+				],
+				fromXYZ_M: [
+					[ 2.493496911941425,   -0.9313836179191239, -0.40271078445071684],
+					[-0.8294889695615747,   1.7626640603183463,  0.023624685841943577],
+					[ 0.03584583024378447, -0.07617238926804182, 0.9568845240076872]
+				]
+			});
+		</code></pre>
+		<!-- <p>Other option: <code>ColorSpace</code> class</p> -->
+	</article>
+
+	<article class="slide">
+		<h1>What about chromatic adaptation?</h1>
+
+		<ul>
+			<li>Color spaces declare their white point</li>
+			<li>Conversion code handles it automatically</li>
+			<li>Adaptation only needed if source and destination have different white points</li>
+			<li>Linear Bradford D50 ↔ D65 built-in</li>
+			<li>CAT plugin for more white points and transformation functions</li>
+		</ul>
+	</article>
+
+	<article class="slide">
+		<h1>But <em>what</em> is a color space?</h1>
+
+		<ul>
+			<li>Color spaces can be expressed in different forms:
+				<ul>
+					<li>sRGB: HSL, HWB, HSV, Hex…</li>
+					<li>Lab: LCH</li>
+				</ul>
+			</li>
+			<li>Coordinates need to be preserved</li>
+		</ul>
+	</article>
+
+	<article class="slide vs">
+		<h1>Mutable vs Immutable</h1>
+		<pre class="selected"><code>
+			// Mutable instances:
+			let c = new Color("lch", [0, 0, 0]);
+			c.lightness *= 1.2;
+			c.coords; // [0, 0, 0]
+		</code></pre>
+		<pre><code>
+			// Immutable instances:
+			let c = new Color("lch", [0, 0, 0]);
+			let c2 = c.set('lch.lightness', '*1.2');
+			c.coords; // [0, 0, 0]
+			c2.coords; // [0, 0, 0]
+		</code></pre>
+	</article>
+
+	<article class="slide no heading-2x1">
+		<div>
+			<h1>Mutable</h1>
+			<ul>
+				<li>Efficiency</li>
+				<li>Flexibility</li>
+			</ul>
+		</div>
+		<div>
+			<h1>Immutable</h1>
+			<ul>
+				<li>Simplicity</li>
+				<li>Safety</li>
+			</ul>
+		</div>
+	</article>
+
+	<article class="slide">
+		<h1>Hybrid approach</h1>
+
+		<ul>
+			<li>Properties mutate the current instance
+				<pre><code>color.lightness *= 1.2;</code></pre>
+			</li>
+			<li>Methods that return a <code>Color</code> return new instances:
+				<pre><code>color.to("lch")</code></pre>
+			</li>
+			<li>Some methods support both, if performance is crucial:
+				<pre><code>color.toGamut({inPlace: true})</code></pre>
+			</li>
+		</ul>
+	</article>
+
+	<article class="slide">
+		<h1>Constructor</h1>
+		<p>Robustness principle: <q>Be generous in what you accept</q></p>
+
+		<pre class="cn-render code"><code>
+			let purple = new Color("rebeccapurple");
+			new Color("p3", [1, 0, 0]);
+			new Color([1, 0, 0]);
+			new Color({space: "srgb", coords: [1, 0, 0]});
+			new Color(purple);
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<h1>How to get coordinates?</h1>
+
+		<ul>
+			<li>
+				Namespaced or not?
+				<code>color.lch.hue</code> vs <code>color.hue</code>
+			</li>
+			<li>
+				Words or letters?
+				<code>color.lch.l</code> vs <code>color.lch.lightness</code>
+			</li>
+		</ul>
+	</article>
+
+	<article class="slide">
+		<h1>Namespaced or not?</h1>
+
+		<ul>
+			<li>Namespacing is explicit, but tedious</li>
+			<li>Without namespacing, what is e.g. <code>color.hue</code>?
+				<ul>
+					<li>Does it depend on <code>color</code>’s color space?</li>
+				</ul>
+			</li>
+
+		</ul>
+	</article>
+
+	<article class="slide">
+		<h1>Reading coordinates</h1>
+
+		<ul>
+			<li><code>color.coords</code> is an array of coordinates regardless of color space</li>
+			<li>
+				Most named coordinates are namespaced
+				<code>color.srgb.red</code>, <code>color.p3.red</code>
+			</li>
+			<li>
+				<code>color.hue</code>, <code>color.chroma</code>, <code>color.lightness</code>
+				also present.
+				They point to LCH by default but this is customizable.
+			</li>
+			<li></li>
+			<li>Problem: <code>color.hue</code> on an HSL color still returns LCH hue</li>
+		</ul>
+	</article>
+</section>
+
+<section>
+	<!-- <header class="slide">
+		<h1>Color space agnostic</h1>
+	</header> -->
+
+	<article class="slide">
+		<h1>Color space agnostic?</h1>
+
+		<ul>
+			<li>No assumptions made about names, ranges, or number of components</li>
+			<li>No assumptions about which color spaces are available
+				<span class="delayed">(beyond relative XYZ)</span>
+			</li>
+			<li>Anything color space specific handled by the color space definition</li>
+			<li>
+				Gamut mapping via arbitrary coordinate reduction (LCH chroma by default):
+				<pre><code>color.toGamut({space: "p3", method: "oklch.chroma"})</code></pre>
+			</li>
+		</ul>
+	</article>
+
+	<article class="slide">
+		<h1>Color space definition handles…</h1>
+
+		<ul>
+			<li>Coordinate names and ranges</li>
+			<li>Gamut</li>
+			<li>Conversion to/from one or more connection spaces</li>
+			<li>Serialization</li>
+			<li>Parsing, if custom (<code>color()</code> handled automatically)</li>
+		</ul>
+	</article>
+
+	<article class="slide">
+		<h1>What about HDR?</h1>
+
+		<ul>
+			<li>
+				Most colorspaces are SDR
+				<ul>
+					<li>Need easy extension to HDR</li>
+					<li>Need SDR to HDR mapping</li>
+				</ul>
+			</li>
+			<li>Solution:
+				<ul>
+					<li>media-white relative SDR</li>
+					<li>Pin media white at 203cd/m² (PQ) or 0.75 code value (HLG)</li>
+				</ul>
+			</li>
+			<li>HDR to SDR requires tone mapping, more complex</li>
+		</ul>
+	</article>
+</section>
+
+<article class="slide">
+	<h1>Conversion</h1>
+
+	<pre class="cn-render"><code>
+		let lchGreen = new Color("lch", [50, 20, 70]);
+		lchGreen.srgb;
+		let srgbGreen = lchGreen.to("srgb");
+		srgbGreen.coords;
+	</code></pre>
+</article>
+
+<article class="slide">
+	<h1>Conversion needs to be lossless</h1>
+
+	<pre class="cn-render"><code>
+		let lchGreen = new Color("lch", [50, 60, 70]);
+		let srgbGreen = lchGreen.to("srgb");
+		srgbGreen.coords;
+		srgbGreen.inGamut();
+		srgbGreen.toGamut();
+	</code></pre>
+
+	<!--
+	Values can be out of bounds, <code>color.inGamut()</code> and <code>color.toGamut()</code> methods to map
+	-->
+</article>
+
+<article class="slide">
+	<h1>Interpolation</h1>
+
+	<ul>
+		<li>Separate module</li>
+		<li>Three spaces: interpolation space</li>
+	</ul>
+</article>
+
+<article class="slide">
+	<h1>Future work</h1>
+
+	<ul>
+		<li>ICC profiles</li>
+	</ul>
+</article>
+
+<script src="../shared/js/bliss.shy.min.js"></script>
+<script src="../shared/js/prism.js"></script>
+<script src="../incrementable/incrementable.js"></script>
+<script src="../../inspire.js/inspire.js"></script>
+<script src="talk.js" type="module"></script>
+
+</body>
+</html>
