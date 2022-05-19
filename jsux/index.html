@@ -36,7 +36,7 @@
 		<img src="img/humans.jpg" alt="HUMANS">
 	</h1>
 
-	<p class="attribution">By <a href="https://lea.verou.me">Lea Verou</a> (<a href="https://twitter.com/leaverou">@LeaVerou</a>)</p>
+	<p class="attribution">By <a href="https://lea.verou.me">Lea Verou</a> (<a href="https://twitter.com/leaverou">@LeaVerou</a>), MIT, W3C</p>
 </header>
 
 <!-- <article class="slide" data-insert="reusable#introduction"></article> -->
@@ -59,11 +59,16 @@
 	</article>
 
 	<article class="slide">
+		<details class="notes">
+			Many of you might hear these terms, UX, UIs, usability, and think they don’t apply to what you do.
+			That these are for designers to worry about.
+			However, in essence, these terms are not specific to the graphical user interfaces (GUIs) we've learned to associate them with.
+			Let’s take a look at some definitions.
+		</details>
 		<h1><strong>UX? Usability? UI?</strong>
 			<div class="delayed">What are we now, designers?!
 				<div class="big-emoji">🙄</div>
 			</div>
-
 		</h1>
 	</article>
 
@@ -90,9 +95,8 @@
 
 	<article class="image slide" style="background: url(img/gsheets.png) no-repeat center / contain;"></article>
 
-	<article class="image slide" id="boots" data-credits="The Uncomfortable, Katerina Kamprani"></article>
-
 	<article class="image slide" style="background-image: url(img/book.jpg)">
+		<details class="notes">A book is also a UI. It’s an information device with which a human being interacts.</details>
 		<!-- <h1>A book is a UI</h1> -->
 	</article>
 
@@ -101,6 +105,13 @@
 		<!-- <div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed"><div class="delayed">
 			<div class="delayed"><div class="delayed"><div class="delayed"></div></div></div>
 		</div></div></div></div></div></div></div></div></div></div></div></div></div></div></div> -->
+	</article>
+
+	<article class="image slide" id="boots" data-credits="The Uncomfortable, Katerina Kamprani">
+		<details class="notes">
+			In fact, even these definitions can be broadened.
+			I bet you all know what I mean if I say that these boots have poor usability, and they have nothing to do with technology or information at all!
+		</details>
 	</article>
 
 	<article class="image slide" style="background-image: url(img/faucet.jpg);" id="faucet" data-steps="2">
@@ -140,7 +151,7 @@
 	</header>
 
 	<article class="slide heading-2x1" id="research-teaching">
-		<h1>Day job: Usable Web Programming @ MIT</h1>
+		<h1>Day job: Usable Programming @ MIT</h1>
 		<div style="--image: url(img/paper.png)">
 			<h2 class="caption">Research</h2>
 		</div>
@@ -220,6 +231,15 @@
 	</header>
 
 	<article class="hall shame slide">
+		<details class="notes">
+			How many of you remember this?
+			It’s one of the older DOM APIs, and has existed in browsers for at least 20 years.
+			It allows you to check how the position of two DOM notes relates.
+			It returns a bitmask and to interpret the result, you need to do a bitwise AND with that result.
+			I’m sure this seemed very flexible at the time, but in practice the main use case it was used for
+			was to check if an element contains another. And it's an insanely complicated way to do that.
+			It can do a lot more, but developers didn’t need a lot more, they needed a way to check if A contains B!
+		</details>
 		<pre class="delayed"><code>
 			let isBinA = !!(a.compareDocumentPosition(b) &
 				Node.DOCUMENT_POSITION_CONTAINS);
@@ -240,7 +260,7 @@
 			Often with user-centered design, the API might end up being simpler than what you originally thought you needed.
 			This is because a lot of complexity is often only included for completeness, and not actually guided by real user needs.
 		</details>
-		<h1>Always start with a) use cases, and b) example code before committing to any API shape</h1>
+		<h1>Start with use cases, and example code <em>before</em> committing to any API shape</h1>
 		<footer>Related TAG Design Principles:
 			<ul>
 				<li><a href="https://w3ctag.github.io/design-principles/#priority-of-constituencies">1.1. Put user needs first (Priority of Constituencies)</a></li>
@@ -384,6 +404,17 @@
 	</article>
 
 	<article class="slide">
+		<details class="notes">
+			I mentioned the ease of use - power curve in the previous slide. What does this mean?
+			Every API call lies somewhere in these two axes. The vertical axis is how easy the API call was to make,
+			and the horizontal axis is how much power it gave you.
+			Now, let's look at a few examples.
+			An API that is super easy to use but only allows you to do basic things is suboptimal.
+			An API that gives you a lot of power, but is very complicated is also suboptimal.
+			Ideally you want a curve where basic use cases start easy, and as they become more complex you can trade off some of that ease for power.
+			This orange curve is not ideal either, note how fast it goes to low ease of use.
+			Ideally you want something that drops much slower, not demanding a huge tradeoff for slightly more complexity.
+		</details>
 		<svg version="1.1" viewBox="0 0 743.6185269778618 410.2363304612065" width="1487.2370539557237" height="820.472660922413">
 		  <!-- svg-source:excalidraw -->
 
@@ -1851,7 +1882,7 @@ element.cloneNode(true); // shallow</code></pre>
 	</ul>
 
 	<article id="summary" class="balance-lines">
-		<h2>UX Cheatsheet</h2>
+		<h2>The Commandments</h2>
 
 		<ul id="summary-list"></ul>
 		<script>
