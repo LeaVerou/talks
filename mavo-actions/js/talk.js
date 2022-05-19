@@ -31,7 +31,7 @@ CSS.registerProperty({
 	initialValue: "0"
 });
 
-$("#correctness button").onclick = evt => {
+($("#correctness button") || {}).onclick = evt => {
 	var slide = evt.target.closest(".slide");
 	var barChart = $(".vertical-bar-chart", slide);
 	var percentSorted = barChart.classList.contains("percent-sort");

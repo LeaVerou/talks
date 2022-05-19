@@ -1,3 +1,10 @@
+
+import Inspire from "https://inspirejs.org/inspire.mjs";
+import Incrementable from "https://incrementable.verou.me/incrementable.js";
+
+window.Incrementable = Incrementable;
+window.Inspire = Inspire;
+
 var $ = Bliss, $$ = $.$;
 
 
@@ -13,7 +20,7 @@ if (CSS.registerProperty) {
 document.addEventListener("DOMContentLoaded", evt => {
 	// Stuff to run after slideshow has been created
 
-	$$(".example.slide").forEach((slide, i) => {
+	$$(".example.slide").forEach(async (slide, i) => {
 		var code = $("pre > code", slide);
 
 		$.create("div", {
@@ -26,7 +33,8 @@ document.addEventListener("DOMContentLoaded", evt => {
 			after: code.parentNode
 		});
 
-		var data = $("script[type='application/json']", slide);
+		let dataId = "data-" + slide.id;
+		var data = $(`#${dataId}, script[type='application/json']`, slide);
 		var useStorage = true;
 
 		if (!data) {
@@ -36,19 +44,26 @@ document.addEventListener("DOMContentLoaded", evt => {
 			});
    		}
 
-		data.id = data.id || "data-" + slide.id;
+		data.id = data.id || dataId;
 
 		var mavoRoot = $("[mv-app], [mv-storage]", container) || container;
 
 		if (slide.classList.contains("visible-storage")) {
 			useStorage = true;
 			mavoRoot.classList.add("mv-debug-saving");
+
+			if (!data.isConnected) {
+				($("details.notes", slide) || slide).appendChild(data);
+			}
 		}
 
 		mavoRoot.setAttribute("mv-storage", useStorage? "#" + data.id : mavoRoot.getAttribute("mv-storage") || "none");
 
 		if (self.Mavo && Mavo.setAttributeShy) {
 			Mavo.setAttributeShy(mavoRoot, "mv-app", "");
+
+			await Mavo.ready;
+			new Mavo(mavoRoot);
 		}
 	});
 });

@@ -4,9 +4,11 @@
 
 <meta charset="utf-8" />
 <title>Mavo: Creating Interactive Data-Driven Web Applications by Authoring HTML</title>
-<link href="../../inspire.js/inspire.css" rel="stylesheet" />
-<link href="../../inspire.js/theme.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://get.mavo.io/mavo.css">
+<!-- <link href="../../inspire.js/inspire.css" rel="stylesheet" />
+<link href="../../inspire.js/theme.css" rel="stylesheet" /> -->
+<link href="https://inspirejs.org/inspire.css" rel="stylesheet" />
+<link href="https://inspirejs.org/theme.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
 <link href="prism.css" rel="stylesheet" />
 <link href="theme.css" rel="stylesheet" />
 <link href="talk.css" rel="stylesheet" />
@@ -177,6 +179,26 @@ Less Control">
 		</article>
 	</article> -->
 
+	<article class="slide">
+		<div class="media-frame"><img src="../mavo-actions/img/todo-mockup.png" style="width: 80vw; height: 80vh; object-fit: cover; object-position: top;" alt=""></div>
+	</article>
+
+	<article class="slide" id="todo-code" data-steps="1">
+		<pre><code>
+			&lt;body>
+				&lt;h1>My tasks&lt;/h1>
+				&lt;p>0 done of 1 total&lt;/p>
+
+				&lt;ul>
+					&lt;li>
+						&lt;input type="checkbox" />
+						&lt;span>Do stuff&lt;/span>
+					&lt;/li>
+				&lt;/ul>
+			&lt;/body>
+		</code></pre>
+	</article>
+
 	<article class="looping slide" data-video="videos/todo.mp4"></article>
 
 	<article class="slide" id="todo-code" data-steps="1">
@@ -204,8 +226,8 @@ Less Control">
 	<article class="slide">
 		<h1>Try Mavo out</h1>
 		<pre><code>
-			&lt;link rel="stylesheet" href="//get.mavo.io/mavo.css"/>
-			&lt;script src="//get.mavo.io/mavo.js">&lt;/script>
+			&lt;link rel="stylesheet" href="https://get.mavo.io/mavo.css"/>
+			&lt;script src="https://get.mavo.io/mavo.js">&lt;/script>
 		</code></pre>
 
 		<p class="delayed" style="font-size: 200%">or just visit <a style="font-weight: bold" href="https://play.mavo.io">play.mavo.io</a>!</p>
@@ -261,7 +283,7 @@ Less Control">
 		</code></pre>
 	</article> -->
 
-	<article class="xvisible-storage example slide" id="form-elements">
+	<article class="visible-storage example slide" id="form-elements">
 		<pre><code>
 			&lt;div mv-app <mark>mv-storage="local"</mark> mv-autosave>
 				&lt;input <mark>property="name"</mark> value="Lea Verou"/>
@@ -273,9 +295,12 @@ Less Control">
 				&lt;/select>
 			&lt;/div>
 		</code></pre>
+		<details class="notes">
+			<summary>Stored data</summary><pre id="data-form-elements"></pre>
+		</details>
 	</article>
 
-	<article class="visible-storage example slide">
+	<article class="visible-storage example slide" id="single-cat">
 		<pre style="font-size: 80%;"><code>
 			&lt;div mv-app class="cat" <mark>mv-storage="local"</mark>>
 				&lt;img src="img/adamcatlace.png" <mark>property="photo"</mark>>
@@ -284,6 +309,9 @@ Less Control">
 				Cuteness: &lt;meter <mark>property="rating"</mark> value="3" max="5">&lt;/meter>
 			&lt;/div>
 		</code></pre>
+		<details class="notes">
+			<summary>Stored data</summary><pre id="data-single-cat"></pre>
+		</details>
 	</article>
 <!--
 	<article class="example slide" id="multiple-properties">
@@ -297,16 +325,19 @@ Less Control">
 		</code></pre>
 	</article> -->
 
-	<article class="example slide">
+	<article class="visible-storage example slide" id="hobbies-collection">
 		<pre><code>
 			Hobbies:
 			&lt;ul>
 				&lt;li property="hobby" <mark>mv-multiple</mark>>Eating&lt;/li>
 			&lt;/ul>
 		</code></pre>
+		<details class="notes">
+			<summary>Stored data</summary><pre id="data-hobbies-collection"></pre>
+		</details>
 	</article>
 
-	<article class="example slide" id="objects">
+	<article class="visible-storage example slide" id="objects">
 		<pre style="font-size: 80%"><code>
 			&lt;article property="cat" mv-multiple>
 				&lt;img src="img/adamcatlace.png" property="photo">
@@ -315,6 +346,9 @@ Less Control">
 				&lt;p>Hobbies: &lt;span property="hobby" mv-multiple>Eating&lt;/span>
 			&lt;/article>
 		</code></pre>
+		<details class="notes">
+			<summary>Stored data</summary><pre id="data-objects"></pre>
+		</details>
 	</article>
 
 	<article class="looping slide" data-video="https://mavo.io/demos/homepage/video.mp4" style="--url: 'https://mavo.io/demos/homepage'"></article>
@@ -832,8 +866,8 @@ Less Control">
 <script src="../shared/js/prism.js"></script>
 <script src="../incrementable/incrementable.js"></script>
 <script src="js/editor.js"></script>
-<script src="js/talk.js"></script>
-<script src="https://get.mavo.io/mavo.js"></script>
+<script src="js/talk.js" type="module"></script>
+<script src="https://get.mavo.io/stable/mavo.js"></script>
 
 </body>
 </html>
