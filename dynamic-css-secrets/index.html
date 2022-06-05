@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title>Dynamic CSS Secrets</title>
+<link href="https://inspirejs.org/inspire.css" rel="stylesheet" />
+<link href="https://inspirejs.org/theme.css" rel="stylesheet" />
+<link href="../shared/intro-outro.css" rel="stylesheet" />
+<link href="css/prism.css" rel="stylesheet" />
+<link href="css/theme.css" rel="stylesheet" />
+<link href="css/talk.css" rel="stylesheet" />
+<link href="https://projects.verou.me/talks/shared/browser-support.css" rel="stylesheet" />
+</head>
+<body class="language-css"
+	data-markdown-elements="details.notes, .md, .takeaway.slide > h1, .credit"
+	data-balance-elements=".slide > h1:only-child, .takeaway.slide > h1, .speech.slide > h1">
+
+<header id="intro" class="slide dont-resize">
+	<h1>Dynamic CSS</h1>
+	<h2>Secrets</h2>
+	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
+</header>
+
+<article class="white slide heading-2x1">
+	<h1>Custom properties in 2021</h1>
+
+	<img src="img/cp-depth.png" alt="">
+	<pre><code>
+		:root {
+			/* depth = 0 */
+			--h: 335;
+
+			/* depth = 1 */
+			--hs: var(--h) 90%;
+
+			/* depth = 2 */
+			--color: hsl(var(--hs) 50%);
+		}
+	</code></pre>
+	<details class="notes md">
+		Source: [Web Almanac 2021](https://almanac.httparchive.org/en/2021/css#custom-properties)
+	</details>
+</article>
+
+<article class="white slide">
+	<h1>Custom properties in 2021</h1>
+
+	<h-chart type="pie">
+		<table id="simple-data">
+			<thead>
+				<tr>
+					<th>Element</th>
+					<th>Usage percentage</th>
+				</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>:root</td>
+				<td>60</td>
+			</tr>
+			<tr>
+				<td>body</td>
+				<td>5</td>
+			</tr>
+			<tr>
+				<td>Other elements</td>
+				<td>35</td>
+			</tr>
+			</tbody>
+		</table>
+	</h-chart>
+	<script data-src="https://projects.verou.me/h-chart/src/h-chart.js" type="module"></script>
+</article>
+
+<article class="slide" id="scratching-surface">
+	<h1 class="balance-lines">Why are we still merely scratching the surface?</h1>
+	<details class="notes">
+		Custom properties [reached full browser support 5 years ago](https://caniuse.com/css-variables). Yet, we are still primarily using them as dumb constants.
+	</details>
+</article>
+
+<section>
+	<header class="slide" style="--icon: 🔲; --icon-2: 🔳">
+		<h1>The Outlined Button</h1>
+	</header>
+
+	<article class="isolated demo slide" id="button-implementation" style="--division: 70">
+		<textarea class="language-html">
+			<button>Click me</button>
+			<button class="pink">Click me</button>
+		</textarea>
+
+		<textarea class="language-css">
+			button {
+				border: .1em solid black;
+				background: transparent;
+				color: black;
+			}
+
+			button:hover {
+				background: black;
+				color: white;
+			}
+
+			button.pink {
+				border-color: #f06;
+				color: #f06;
+			}
+
+			button.pink:hover {
+				background: #f06;
+				color: white;
+			}
+		</textarea>
+		<style class="demo" data-slide media="not all">
+			button {
+				border-radius: .3em;
+				padding: .1em .5em .15em;
+				font-size: 180%;
+				margin: .2em;
+				cursor: pointer;
+			}
+		</style>
+		<script class="demo-script" type="application/json">
+			[
+				{"type":"caret","start":63,"end":63,"editor":"css"},{"type":"insertText","text":"--","split":true},{"type":"caret","start":78,"end":78},{"type":"insertText","text":"\n\tcolor: var","split":true},"()",{"type":"caret","start":91,"end":91},{"type":"insertText","text":"--color","split":true},{"type":"caret","start":99,"end":99},";",{"type":"caret","start":29,"end":34},{"type":"insertText","text":"var","split":true},"()",{"type":"caret","start":33,"end":33},{"type":"insertText","text":"--color","split":true},{"type":"caret","start":139,"end":144},"var(--color)",
+				{"type":"pause","delay":5000},{"type":"caret","start":207,"end":207},{"type":"insertText","text":"--","split":true},{"type":"caret","start":185,"end":205},{"type":"deleteContentBackward","repeat":2},{"type":"caret","start":203,"end":259},{"type":"deleteContentBackward","repeat":2},
+
+				{"type":"pause"},{"type":"caret","start":7,"end":7,"editor":"html"},{"type":"insertText","text":" style=","split":true},"\"\"",{"type":"caret","start":15,"end":15},{"type":"insertText","text":"--color: blue","split":true},
+				{"type":"pause"},{"type":"caret","start":8,"end":29},{"type":"insertText","text":"onclick=","split":true},"\"\"",{"type":"caret","start":17,"end":17},{"type":"insertText","text":"this.style.setProperty","split":true},"()",{"type":"caret","start":40,"end":40},"''",{"type":"caret","start":41,"end":41},{"type":"insertText","text":"--color","split":true},{"type":"caret","start":49,"end":49},{"type":"insertText","text":",\n","split":true},"``",{"type":"caret","start":52,"end":52},{"type":"insertText","text":"hsl","split":true},"()",{"type":"caret","start":56,"end":56},"$","{}",{"type":"caret","start":58,"end":58},{"type":"insertText","text":"Math.random","split":true},"()",{"type":"caret","start":71,"end":71},{"type":"insertText","text":" * 360","split":true},{"type":"caret","start":78,"end":78},{"type":"insertText","text":" 90% 50%","split":true},
+				{"type":"pause"},{"type":"next_slide"},
+				{"type":"pause","delay":5000},{"type":"caret","start":40,"end":40,"editor":"css"},{"type":"insertText","text":", black","split":true},{"type":"caret","start":112,"end":112},{"type":"insertText","text":", black","split":true},{"type":"caret","start":164,"end":164},{"type":"insertText","text":", black","split":true},{"type":"caret","start":76,"end":92},{"type":"deleteContentBackward","repeat":2},
+				{"type":"pause","delay":5000},{"type":"caret","start":8,"end":8},{"type":"insertText","text":"\n\t--color-ii","split":true},{"type":"deleteContentBackward"},{"type":"insertText","text":"nitial: black;","split":true},{"type":"caret","start":67,"end":72},{"type":"insertText","text":"var","split":true},"()",{"type":"caret","start":71,"end":71},"--color-initial",{"type":"caret","start":137,"end":142},"var(--color-initial)",{"type":"caret","start":204,"end":209},"var(--color-initial)",
+				{"type":"pause","delay":5000},{"type":"caret","start":33,"end":33},{"type":"caret","start":12,"end":33},{"type":"insertText","text":"_color: a","split":true},{"type":"deleteContentBackward"},{"type":"insertText","text":"var","split":true},"()",{"type":"caret","start":24,"end":24},{"type":"insertText","text":"--color, black","split":true},{"type":"caret","start":39,"end":39},";",
+				{"type":"pause"},{"type":"caret","start":67,"end":67},"_",{"type":"caret","start":73,"end":95},{"type":"deleteContentBackward"},{"type":"caret","start":110,"end":144},"var(--_color)",{"type":"caret","start":156,"end":190},"var(--_color)",
+				{"type":"pause"},{"type":"next_slide"},
+				{"type":"pause"},{"type":"caret","start":124,"end":124},{"type":"insertText","text":"\n\ttransition: 1s;","split":true},{"type":"pause","delay":3810},{"type":"caret","start":161,"end":171},{"type":"insertText","text":"box-shadow","split":true},{"type":"caret","start":172,"end":172},{"type":"insertText","text":" 0 0 0 1em","split":true},{"type":"caret","start":196,"end":196},{"type":"insertText","text":" inset","split":true},
+
+				{"type":"pause"},{"type":"caret","start":196,"end":202,"editor":"css"},{"type":"deleteContentBackward"},{"type":"caret","start":173,"end":183},{"type":"deleteContentBackward"},{"type":"caret","start":161,"end":171},{"type":"insertText","text":"background","split":true},{"type":"caret","start":125,"end":141},{"type":"deleteContentBackward","repeat":2},
+				{"type":"pause","delay":5000},{"type":"caret","start":124,"end":128,"editor":"html"},{"type":"insertText","text":"rainbow","split":true},
+				{"type":"pause"},{"type":"caret","start":196,"end":200,"editor":"css"},{"type":"insertText","text":"rainbow","split":true},{"type":"caret","start":216,"end":220},{"type":"insertText","text":"hsl","split":true},{"type":"insertText","text":"()"},{"type":"caret","start":220,"end":220},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","start":224,"end":224},{"type":"insertText","text":"--color-hue","split":true},{"type":"caret","start":236,"end":236},{"type":"insertText","text":" 60% 50%","split":true},{"type":"caret","start":246,"end":246},
+				{"type":"pause"},{"type":"caret","start":187,"end":187},{"type":"insertText","text":"\n\n@keyframes color-hue ","split":true},{"type":"insertText","text":"{}"},{"type":"caret","start":211,"end":211},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","start":212,"end":212},{"type":"insertText","text":"\tfrom ","split":true},{"type":"insertText","text":"{}"},{"type":"caret","start":219,"end":219},{"type":"insertText","text":" --color-hue: 0; ","split":true},{"type":"caret","start":237,"end":237},{"type":"insertText","text":"\n\tto ","split":true},{"type":"insertText","text":"{}"},{"type":"caret","start":243,"end":243},{"type":"insertText","text":" --color-hue: 180; ","split":true},{"type":"caret","start":324,"end":324},{"type":"insertText","text":"\n\tanimation: 5s color-hue linear infinite;","split":true},
+				{"type":"pause"},{"type":"caret","start":187,"end":187},{"type":"insertText","text":"\n\n@property --color-hue ","split":true},{"type":"insertText","text":"{}"},{"type":"caret","start":212,"end":212},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","start":213,"end":213},{"type":"insertText","text":"\tsyntax: ","split":true},{"type":"insertText","text":"\"\""},{"type":"caret","start":223,"end":223},{"type":"insertText","text":"<number","split":true},{"type":"caret","start":230,"end":230},{"type":"insertText","text":">"},{"type":"caret","start":232,"end":232},{"type":"insertText","text":";\n\tinitial-value: 0;\n\tinherits: true;","split":true},
+				{"type":"pause","delay":5000},{"type":"caret","start":341,"end":344},{"type":"insertText","text":"360","split":true},{"type":"caret","start":421,"end":422},{"type":"insertText","text":"10","split":true},
+
+				{"type":"pause"},{"type":"next_slide"},
+				{"type":"pause"},{"type":"caret","start":188,"end":188,"editor":"css"},{"type":"insertText","text":"@property --color-hue {\n\tsyntax: \"<number>\";\n\tinitial-value: 0;\n\tinherits: true;\n}"},{"type":"insertText","text":"\n"},{"type":"caret","start":206,"end":209},{"type":"deleteContentBackward","repeat":2},{"type":"insertText","text":" "},{"type":"caret","start":220,"end":226},{"type":"insertText","text":"color","split":true},{"type":"caret","start":246,"end":246},{"type":"deleteContentBackward"},{"type":"insertText","text":"black","split":true},
+				{"type":"pause","delay":3447},{"type":"caret","start":117,"end":117},{"type":"deleteContentBackward"},{"type":"caret","start":68,"end":68},{"type":"deleteContentBackward"},{"type":"caret","start":10,"end":42},{"type":"deleteContentBackward"},{"type":"caret","start":129,"end":129},{"type":"deleteContentBackward"}
+			]
+		</script>
+		<details class="notes">
+			This is a simplified flat button whose text color becomes its background color on hover, a common effect.
+			Note the repetition required to specify a color variation. Let's use CSS variables to eliminate that!
+
+			After rewriting with CSS variables, only a single `--color` declaration is sufficient to create a color variation of the entire component.
+
+			However, the fallbacks are getting quite repetitive.
+
+			Although the syntax allows us to use a different fallback in every usage,
+			in most cases, we don't need that.
+			Repeating the fallback value over and over is not [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself).
+			What can we do to reduce that duplication?
+
+			Another benefit of custom properties is *encapsulation*.
+			We can change how styling works completely, and as long as we use the same custom properties
+			anyone using and styling our component doesn't need to change a thing.
+		</details>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>CSS variables are just regular properties</h1>
+		<details class="notes">
+			What does that mean?
+
+			- They are scoped on the element itself, not on curly braces (lexical vs dynamic scoping)
+			- Can be set via inline styles or even JS setting these inline styles
+			- As we will see later on, they are actually *inherited properties*
+		</details>
+	</article>
+
+	<article class="slide" data-insert="#button-implementation"></article>
+
+	<article class="slide takeaway">
+		<h1>Pseudo-private variables succinctly reduce fallback duplication</h1>
+		<details class="notes">
+			Pseudo-private variables are a convention: prefix custom properties by `_` to indicate they are for internal use.
+			Useful for baking in fallback values, but also other things.
+		</details>
+	</article>
+
+	<article class="slide" data-insert="#button-implementation"></article>
+
+	<article class="takeaway slide">
+		<h1>CSS Variables allow us to create a higher level styling API</h1>
+		<details class="notes">
+			Provide encapsulation by exposing a higher level styling API. We can change the underlying CSS and the API we've exposed will continue to work.
+			Theming becomes independent of CSS structure.
+		</details>
+	</article>
+
+	<article class="website slide" id="variables-as-api">
+		<h1>CSS variables as API <a class="go" href="https://shoelace.style/components/rating?id=css-custom-properties" target="shoelace_rating">➡️</a></h1>
+
+		<div class="browser"><iframe src="https://shoelace.style/components/rating" frameborder="0" name="shoelace_rating"></iframe></div>
+	</article>
+
+	<article class="slide" data-insert="#button-implementation"></article>
+
+	<article class="takeaway slide">
+		<h1>
+			CSS variables cannot be interpolated
+			<div class="delayed">…unless we register them with <code>@property</code></div>
+			<div class="delayed" style="font-size: 50%">(or <code class="language-js">CSS.registerProperty()</code>)</div>
+		</h1>
+		<details class="notes">
+			You may also remember a `CSS.registerProperty()` JS API.
+			This came earlier, but at this point support for `@property` is nearly identical.
+			The main reason to use `CSS.registerProperty()` these days is because of its richer error reporting.
+		</details>
+	</article>
+
+	<article class="slide" data-insert="#button-implementation"></article>
+
+	<article class="takeaway slide">
+		<h1>With <code>@property</code>, we don’t need fallbacks</h1>
+		<details class="notes">
+			And if you provide one, it will never get used.
+		</details>
+	</article>
+
+</section>
+
+<section>
+	<header class="slide" style="--icon: ✨; --icon-2: 🪩; background-color: var(--accent4);">
+		<h1>The Glossy Button</h1>
+	</header>
+
+	<article class="slide" data-insert="#variables-as-api"></article>
+
+	<article class="recording slide">
+		<div class="browser">
+			<video src="videos/tag-wc-guidelines.mp4"></video>
+		</div>
+	</article>
+
+	<article class="website slide">
+		<h1>CSS variables as API? <a href="https://shoelace.style/components/button?id=examples" target="shoelace_button" class="go">➡️</a></h1>
+
+		<div class="browser"><iframe src="https://shoelace.style/components/button" frameborder="0" name="shoelace_button"></iframe></div>
+	</article>
+
+	<article class="minimal demo slide no heading-2x1" id="button-glossy-api">
+		<textarea class="language-html">
+			<button>Click me</button>
+			<button>Click me</button>
+			<button>Click me</button>
+			<button>Click me</button>
+		</textarea>
+		<textarea class="language-css">
+			button:nth-child(even) {
+				--glossy: var(--ON);
+			}
+
+			button:nth-child(n + 3) {
+				--color: #f06;
+			}
+		</textarea>
+		<style class="demo" data-slide media="not all">
+			.slide {
+				--ON: initial;
+				--OFF: ;
+				--glossy: var(--OFF);
+			}
+
+			button {
+				--_color: var(--color, black);
+				border: var(--glossy, .05em solid var(--_color));
+				background: var(--glossy, linear-gradient(hsl(0 0% 100% / .4), transparent)) var(--_color);
+				box-shadow: var(--glossy, 0 .1em hsl(0 0% 100% / .4) inset);
+				line-height: calc(1.5 var(--glossy, - .4));
+			}
+
+			button:hover {
+				background-image: linear-gradient(
+					hsl(0 0% 100% / calc(.3 var(--glossy, + .3))),
+					hsl(0 0% 100% / calc(.3 var(--glossy, - .1)))
+				);
+			}
+
+			button {
+				border-radius: .3em;
+				padding: .1em .5em .15em;
+				font-size: 180%;
+				margin: .2em;
+				cursor: pointer;
+				font-weight: normal;
+				color: white;
+			}
+		</style>
+	</article>
+
+	<article class="minimal demo slide" id="space-toggle">
+		<h1>Space Toggle</h1>
+		<textarea class="language-css">
+			h1 {
+				--foo: ;
+				background: var(--foo, linear-gradient(white, transparent)) #f06;
+			}
+		</textarea>
+	</article>
+
+	<article class="isolated demo slide" id="button-glossy-implementation" style="--division: 78">
+		<textarea class="language-html">
+			<button>Click me</button>
+			<button>Click me</button>
+			<button>Click me</button>
+			<button>Click me</button>
+		</textarea>
+		<textarea class="language-css">
+			:root { --glossy: ; /* off */ }
+			button:nth-child(even) { --glossy: initial; /* on */ }
+			button:nth-child(n + 3) { --color: #f06; }
+
+			button {
+				--_color: var(--color, black);
+				border: none;
+				background: var(--_color);
+				line-height: 1.5;
+			}
+
+			button:nth-child(even) {
+				border: .05em solid var(--_color);
+				background: linear-gradient(hsl(0 0% 100% / .4), transparent) var(--_color);
+				box-shadow: 0 .1em hsl(0 0% 100% / .4) inset;
+				line-height: 1.1;
+			}
+
+			button:hover {
+				background-image: linear-gradient(
+					hsl(0 0% 100% / .3),
+					hsl(0 0% 100% / .3)
+				);
+			}
+
+			button:nth-child(even):hover {
+				background-image: linear-gradient(
+					hsl(0 0% 100% / .6),
+					hsl(0 0% 100% / .2)
+				);
+			}
+		</textarea>
+		<style class="demo" data-slide media="not all">
+			button {
+				border-radius: .3em;
+				padding: .1em .5em .15em;
+				font-size: 180%;
+				margin: .2em;
+				cursor: pointer;
+				font-weight: normal;
+				color: white;
+			}
+		</style>
+		<script class="demo-script" type="application/json">
+			[
+				{"type":"caret","start":311,"end":360,"editor":"css"},{"type":"pause","delay":2147},{"type":"caret","position":200},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":204},{"type":"insertText","text":"--glossy","split":true},{"type":"pause","delay":1076},{"type":"insertText","text":", ","split":true},{"type":"insertText","text":"linear-gradient(hsl(0 0% 100% / .4), transparent)"},{"type":"caret","position":264},{"type":"insertText","text":" "},
+				{"type":"pause","delay":2076},{"type":"caret","start":363,"end":440},{"type":"pause","delay":1047},{"type":"deleteContentBackward","repeat":2},
+
+				{"type":"pause"},{"type":"caret","start":364,"end":409,"editor":"css"},{"type":"pause","delay":2525},{"type":"caret","position":279},{"type":"insertText","text":"\n\t","split":true},{"type":"insertText","text":"box-shadow: 0 .1em hsl(0 0% 100% / .4) inset;"},{"type":"pause","delay":1738},{"type":"caret","position":293},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":297},{"type":"insertText","text":"--glossy, ","split":true},{"type":"caret","start":307,"end":308},{"type":"deleteContentBackward"},{"type":"caret","position":339},{"type":"insertText","text":")"},{"type":"pause","delay":2999},{"type":"caret","start":424,"end":471},{"type":"deleteContentBackward"},
+
+				{"type":"pause"},{"type":"caret","start":390,"end":424},{"type":"pause","delay":2390},{"type":"deleteByCut"},{"type":"caret","start":389,"end":390},{"type":"deleteContentBackward","repeat":2},{"type":"pause","delay":1251},{"type":"caret","start":173,"end":186},{"type":"pause","delay":1047},{"type":"insertText","text":"border: .05em solid var(--_color);"},{"type":"pause","delay":1587},{"type":"caret","start":181,"end":206},{"type":"insertText","text":"(.05em solid var(--_color))"},{"type":"caret","position":181},{"type":"pause","delay":1122},{"type":"caret","position":181},{"type":"insertText","text":"var","split":true},{"type":"caret","position":185},{"type":"insertText","text":"--glossy, ","split":true},
+
+				{"type":"pause"},{"type":"next_slide"},
+
+				{"type":"caret","start":392,"end":395,"editor":"css"},{"type":"insertText","text":"(1.5)"},{"type":"caret","position":392},{"type":"insertText","text":"calc","split":true},{"type":"caret","position":400},{"type":"pause","delay":1000},{"type":"insertText","text":" var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":405},{"type":"insertText","text":"--","split":true},{"type":"pause","delay":1061},{"type":"insertText","text":"go","split":true},{"type":"deleteContentBackward"},{"type":"insertText","text":"lossy, ","split":true},{"type":"pause","delay":1331},{"type":"insertText","text":"-"},{"type":"pause","delay":1108},{"type":"insertText","text":" .4","split":true},{"type":"pause","delay":2000},{"type":"caret","start":451,"end":469},{"type":"pause","delay":1000},{"type":"deleteContentBackward","repeat":2},{"type":"caret","start":424,"end":452},{"type":"pause","delay":1500},{"type":"deleteContentBackward"},
+
+				{"type":"pause"},{"type":"next_slide"},
+
+				{"type":"caret","editor":"css","position":495},{"type":"pause","delay":1474},{"type":"caret","start":495,"end":497},{"type":"pause","delay":2656},{"type":"caret","start":392,"end":421},{"type":"pause","delay":2468},{"type":"caret","position":495},{"type":"pause","delay":2071},{"type":"caret","start":495,"end":497},{"type":"insertText","text":"calc(1.5 var(--glossy, - .4))"},{"type":"caret","start":500,"end":503},{"type":"insertText","text":".3","split":true},{"type":"pause","delay":1329},{"type":"caret","start":517,"end":521},{"type":"insertText","text":"+ .3","split":true},{"type":"pause","delay":2000},{"type":"caret","start":495,"end":523},{"type":"pause","delay":1500},{"type":"caret","start":544,"end":546},{"type":"pause","delay":2000},{"type":"insertText","text":"calc(.3 var(--glossy, + .3))"},{"type":"pause","delay":1500},{"type":"caret","start":566,"end":567},{"type":"insertText","text":"-"},{"type":"caret","start":569,"end":570},{"type":"insertText","text":"1"},{"type":"pause","delay":1524},{"type":"caret","start":580,"end":698},{"type":"pause","delay":1040},{"type":"deleteContentBackward","repeat":2},
+
+				{"type":"pause"},{"type":"next_slide"},
+
+				{"type":"pause"},{"type":"caret","editor":"css","position":8},{"type":"insertText","text":"\n\t","split":true},{"type":"pause","delay":1851},{"type":"caret","position":32},{"type":"insertText","text":"\n\t","split":true},{"type":"pause","delay":2023},{"type":"caret","position":8},{"type":"insertText","text":"\n\t--ON: initial;\n\t--OFF: ;","split":true},{"type":"pause","delay":1594},{"type":"caret","position":46},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":50},{"type":"insertText","text":"--o","split":true},{"type":"deleteContentBackward"},{"type":"insertText","text":"OFF","split":true},{"type":"pause","delay":1341},{"type":"caret","start":107,"end":114},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":111},{"type":"insertText","text":"--ON","split":true}
+			]
+		</script>
+	</article>
+
+	<article class="slide heading-2x4" id="iacvt">
+		<h1>Invalid At Computed Value Time (IACVT)</h1>
+
+		<pre><code>
+			--foo: 42deg;
+			<span class="delayed iacvt">background: var(--foo);</span> <span class="delayed unset">background: unset;</span>
+		</code></pre>
+		<pre class="delayed"><code>
+			<span class="delayed iacvt">background: var(--foo);</span> <span class="delayed unset">background: unset;</span>
+		</code></pre>
+		<pre class="delayed"><code>
+			--foo: initial;
+			<span class="delayed iacvt">background: var(--foo);</span> <span class="delayed unset">background: unset;</span>
+		</code></pre>
+		<pre class="delayed"><code>
+			<span class="delayed iacvt">background: linear-gradient(white, var(--foo));</span><div class="delayed unset">background: unset;</div>
+		</code></pre>
+
+		<pre class="delayed"><code>
+			<span class="delayed iacvt">background: var(--foo, 42deg);</span> <div class="delayed unset">background: unset;</div>
+		</code></pre>
+		<pre class="delayed"><code>
+			--foo: ;
+			<span class="delayed iacvt">background: var(--foo);</span> <span class="delayed unset">background: unset;</span>
+		</code></pre>
+		<pre class="delayed"><code>
+			<span class="delayed iacvt">--foo: var(--bar);</span> <span class="delayed unset">--foo: unset;</span>
+			<span class="delayed iacvt">--bar: var(--foo);</span> <span class="delayed unset">--bar: unset;</span>
+		</code></pre>
+		<pre class="delayed"><code>
+			<span class="delayed iacvt">--foo: calc(var(--foo) + 1);</span> <span class="delayed unset">--foo: unset;</span>
+		</code></pre>
+	</article>
+
+	<article class="slide" data-insert="#button-glossy-implementation"></article>
+
+	<article class="slide">
+		<h1>Space Toggle for numerical values</h1>
+
+		<pre><code>
+			/* Fictional syntax: */
+			line-height: if(--glossy = initial, 1.1, 1.5);
+
+			/* Space toggle version: */
+			line-height: calc(1.5 var(--glossy, - .4));
+		</code></pre>
+	</article>
+
+	<article class="slide" data-insert="#button-glossy-implementation"></article>
+
+		<article class="slide" id="space-toggle-prod">
+			<h1>Space toggle in production</h1>
+
+			<div class="side-by-side">
+				<div class="file">
+					<span class="name">design-system.css</span>
+					<pre><code>
+						:root {
+							--ON: initial;
+							--OFF: ;
+						}
+					</code></pre>
+				</div>
+				<div class="file">
+					<span class="name">website.css</span>
+					<pre><code>
+						button.primary {
+							--glossy: var(--ON);
+						}
+					</code></pre>
+				</div>
+			</div>
+		</article>
+</section>
+
+<section>
+	<header class="slide" style="--icon: 📊;">
+		<h1>The Bar Chart</h1>
+	</header>
+
+	<article class="minimal demo slide no heading-2x1">
+		<style data-slide media="not all">
+			@import url("css/bar-chart.css");
+		</style>
+		<textarea class="language-html">
+			<div class="bar-chart">
+				<div style="--p: 95">A</div>
+				<div style="--p: 100">B</div>
+				<div style="--p: 95">C</div>
+				<div style="--p: 38">D</div>
+				<div style="--p: 84.21">E</div>
+				<div style="--p: 49">F</div>
+			</div>
+		</textarea>
+	</article>
+
+	<article class="isolated dark demo slide no heading-2x1" id="bar-chart-implementation">
+
+		<textarea class="language-html">
+			<div class="bar-chart">
+				<div style="--p: 95%">A</div>
+				<div style="--p: 100%">B</div>
+				<div style="--p: 95%">C</div>
+				<div style="--p: 38%">D</div>
+				<div style="--p: 84.21%">E</div>
+				<div style="--p: 49%">F</div>
+			</div>
+		</textarea>
+		<textarea class="language-css">
+			.bar-chart > div {
+				height: var(--p);
+			}
+		</textarea>
+		<style class="demo" data-slide media="not all">
+			@import url("css/bar-chart-base.css");
+		</style>
+		<script class="demo-script" type="application/json">
+			[
+				{"type":"caret","start":39,"end":39,"editor":"css"},{"type":"insertText","text":"\n\n.bar-chart > div ","split":true},{"type":"deleteContentBackward"},{"type":"insertText","text":"::before ","split":true},"{}",{"type":"caret","start":67,"end":67},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","start":68,"end":68},{"type":"insertText","text":"\tcontent: var","split":true},"()",{"type":"caret","start":82,"end":82},{"type":"insertText","text":"--p","split":true},{"type":"caret","start":86,"end":86},";",
+				{"type":"pause","delay":5000},{"type":"caret","start":45,"end":45,"editor":"html"},{"type":"deleteContentBackward"},{"type":"caret","start":76,"end":76},{"type":"deleteContentBackward"},{"type":"caret","start":106,"end":106},{"type":"deleteContentBackward"},{"type":"caret","start":136,"end":136},{"type":"deleteContentBackward"},{"type":"caret","start":169,"end":169},{"type":"deleteContentBackward"},{"type":"caret","start":199,"end":199},{"type":"deleteContentBackward"},
+				{"type":"pause","delay":5000},{"type":"caret","start":28,"end":36,"editor":"css"},"(var(--p))",{"type":"caret","start":28,"end":28},{"type":"insertText","text":"calc","split":true},{"type":"caret","start":41,"end":41},{"type":"insertText","text":" * 1%","split":true},
+				{"type":"pause"},{"type":"next_slide"},
+				{"type":"pause","delay":5000},{"type":"caret","start":78,"end":78},{"type":"insertText","text":"\n\tcounter-reset: p var","split":true},"()",{"type":"caret","start":101,"end":101},{"type":"insertText","text":"--p","split":true},{"type":"caret","start":105,"end":105},{"type":"insertText","text":";","split":true},
+				{"type":"caret","start":117,"end":125},{"type":"insertText","text":"counter","split":true},"()",{"type":"caret","start":125,"end":125},"p", {"type":"caret","start":127,"end":127}," ","\"\"",{"type":"caret","start":129,"end":129}," ",{"type":"deleteContentBackward"},"%",
+				{"type":"pause"},{"type":"next_slide"},
+				{"type":"pause"},{"type":"next_slide"},
+				{"type":"pause"},{"type":"caret","start":0,"end":0,"editor":"css"},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","start":0,"end":0},{"type":"insertText","text":"@property --integer ","split":true},"{}",{"type":"caret","start":21,"end":21},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","start":22,"end":22},{"type":"insertText","text":"\tsyntax","split":true},{"type":"insertText","text":": ","split":true},"\"\"",{"type":"caret","start":32,"end":32},{"type":"insertText","text":"<integer>","split":true},{"type":"caret","start":42,"end":42},{"type":"insertText","text":";\n\tinitial-value: 0;\n\tinherits: true;","split":true},
+				{"type":"pause"},{"type":"caret","start":161,"end":161,"editor":"css"},{"type":"insertText","text":"\n\t--integer: calc","split":true},"()",{"type":"caret","start":179,"end":179},{"type":"insertText","text":"var","split":true},"()",{"type":"caret","start":183,"end":183},{"type":"insertText","text":"--p","split":true},{"type":"caret","start":188,"end":188},";",{"type":"caret","start":215,"end":215},{"type":"deleteContentBackward"},{"type":"insertText","text":"integer","split":true}
+			]
+		</script>
+	</article>
+
+	<article class="slide">
+		<table>
+			<tr>
+				<td>Number → unit: </td>
+				<td><code class="language-css">calc(var(--foo) * 1px)</code></td>
+			</tr>
+			<tr>
+				<td>Unit → number:</td>
+				<td style="font-size: 100px"><span class="poop"></span><span class="poop"></span><span class="poop"></span></td>
+			</tr>
+		</table>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>Use variables for pure data, not CSS values</h1>
+		<details class="notes">
+			This is a good practice regardless of the conversion issues,
+			as it ensures better separation of concerns.
+		</details>
+	</article>
+
+	<article class="slide" data-insert="#bar-chart-implementation"></article>
+
+	<article class="takeaway slide">
+		<h1>`content` only accepts strings. You can convert numbers to strings via `counter-reset`.</h1>
+		<details class="notes">
+			For the same reason, `counter()` returns a string, and thus cannot be used in calculations.
+		</details>
+	</article>
+
+	<article class="slide" data-insert="#bar-chart-implementation"></article>
+
+	<article class="takeaway slide">
+		<h1>`content` only accepts strings. You can convert <del>numbers</del> <ins>integers</ins> to strings via `counter-reset`.</h1>
+		<details class="notes">
+			For the same reason, `counter()` returns a string, and thus cannot be used in calculations.
+		</details>
+	</article>
+
+	<article class="left speech slide" style="--character: '😞'">
+		<h1>The counter trick only works with integers. Sorry!</h1>
+	</article>
+
+	<article class="devil speech slide">
+		<h1>But what if we convert the number to an integer?</h1>
+	</article>
+
+	<article class="slide" data-insert="#bar-chart-implementation"></article>
+
+	<article class="takeaway slide">
+		<h1>Convert a number to an integer by assigning it to a property registered as `"&lt;integer>"` inside `calc()`</h1>
+	</article>
+
+	<article class="slide">
+		<pre><code>
+			/* Round: */
+			--integer: calc(var(--number));
+
+			/* Floor: */
+			--integer: calc(var(--number) - 0.5);
+
+			/* Ceil: */
+			--integer: calc(var(--number) + 0.5);
+		</code></pre>
+		<p class="credit">Credit to [Ana Tudor](https://twitter.com/anatudor/status/1399849494628425734) for discovering this trick.</p>
+		<details class="notes">
+			[CSS Values 4](https://www.w3.org/TR/css-values-4/) includes a
+			[`round()` function](https://www.w3.org/TR/css-values-4/#round-func) for this,
+			that can also do lengths etc and rounds by arbitrary steps,
+			but it is not currently implemented anywhere.
+		</details>
+	</article>
+
+	<article class="slide">
+		<h1>Future:</h1>
+
+		<pre><code>
+			/* Round: */
+			counter-reset: p round(var(--p), 1);
+
+			/* Floor: */
+			counter-reset: p round(down, var(--p), 1);
+
+			/* Ceil: */
+			counter-reset: p round(up, var(--p), 1);
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<h1>Farther future:</h1>
+
+		<pre><code>
+			content: text(var(--p)) "%";
+		</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="slide" style="--icon: 🗯; --icon-2: 💬">
+		<h1>The Speech Bubble</h1>
+	</header>
+
+	<article class="minimal demo slide" id="speech-bubble-api" xdata-type="The API">
+		<textarea class="language-html">
+			<blockquote class="devious speech-bubble">
+				But what if — just hear me out —
+				what if you <em>registered</em>
+				your custom property?
+			</blockquote>
+		</textarea>
+		<textarea class="language-css">
+			.speech-bubble {
+				--pointer-width: 1em;
+				--pointer-height: 1em;
+				--pointer-offset: 1.5em;
+			}
+
+			.devious.speech-bubble {
+				--character: '😈';
+				--character-size: 3em;
+			}
+		</textarea>
+		<style class="demo" data-slide media="not all">
+			@import url('css/speech-bubble.css');
+		</style>
+	</article>
+
+	<article class="isolated demo slide" style="--division: 60" id="speech">
+		<textarea class="language-css">
+			.speech-bubble {
+				--pointer-width: 1em;
+				--pointer-height: 1em;
+				--pointer-offset: 1.5em;
+			}
+
+			/* Pointer */
+			.speech-bubble::before {
+				width: var(--pointer-width);
+				height: var(--pointer-height);
+				right: var(--pointer-offset);
+			}
+
+			.speech-bubble::after {
+				content: var(--character, '🙂');
+				margin-top: var(--pointer-height);
+				font-size: var(--character-size);
+			}
+		</textarea>
+		<textarea class="language-html">
+			<div class="container">
+				<blockquote class="speech-bubble" style="--character: '😈'">
+					But what if — just hear me out — what if you
+					<em>registered</em> your custom property?
+				</blockquote>
+			</div>
+		</textarea>
+		<style data-slide media="not all" class="demo">
+			@import url('css/speech-bubble-base.css');
+		</style>
+		<details class="notes">
+			Here we have a child element (our generated content)
+			that needs to size its offset based on the parent font size.
+			However, just using the `em` unit doesn’t help: it refers to its own font size.
+
+			In this case we know how to reset it, but this solution is fragile.
+			In other cases we can't do this at all, e.g. if the current font size is set to `0`.
+			Can we use a variable set to `1em` on the parent? Let's see what happens.
+
+			The computed value of unregistered properties is the specified value
+			with any variables substituted.
+			This means that any relative units, such as `em` are resolved at the point of usage,
+			not the point of definition.
+			Registering the property changes this,
+			which means you can use it to grab relative values on any ancestor!
+			[Here is the solution](https://codepen.io/leaverou/pen/XWMZewB?editors=1100)
+			to this exercise.
+
+			Note that this approach doesn't work with `currentColor`,
+			which is resolved at used value time.
+		</details>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>
+			Relative values inherit as syntax tokens
+			*unless* the property is registered
+		</h1>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>
+			Registering a property as `&lt;length>` allows us to pass down
+			ancestor font sizes!
+		</h1>
+	</article>
+</section>
+
+<footer class="dark slide dont-resize">
+	<img src="img/mark.svg" class="logo" />
+	<h1>Thank you!</h1>
+	<img src="img/stickers.jpg" class="stickers delayed" alt="">
+	<p class="stickercaption delayed">Want one? Just ask! ---></p>
+	<ul>
+		<li style="--icon: '🌍'"><a href="http://mavo.io">lea.verou.me</a></li>
+		<li style="--icon: '✉'"><a href="mailto:lea@verou.me">lea@verou.me</a></li>
+		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
+	</ul>
+	<p>Slides: <a href="https://projects.verou.me/talks/dynamic-css-secrets">projects.verou.me/talks/dynamic-css-secrets</a></p>
+	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/inspire.js">inspirejs.org</a></p>
+</footer>
+
+<script src="https://projects.verou.me/talks/shared/js/bliss.shy.min.js"></script>
+<script src="https://projects.verou.me/talks/shared/js/prism.js"></script>
+<script src="https://projects.verou.me/incrementable/incrementable.js" type="module"></script>
+<script src="https://inspirejs.org/inspire.mjs" type="module"></script>
+<script src="talk.js" type="module"></script>
+
+</body>
+</html>

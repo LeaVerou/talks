@@ -1,0 +1,17 @@
+@import url("bar-chart-base.css");
+
+@property --integer {
+	syntax: "<integer>";
+	initial-value: 0;
+	inherits: true;
+}
+
+.bar-chart > div {
+	height: calc(var(--p) * 1%);
+}
+
+.bar-chart > div::before {
+	--integer: calc(var(--p));
+	counter-reset: p var(--integer);
+	content: counter(p) "%";
+}

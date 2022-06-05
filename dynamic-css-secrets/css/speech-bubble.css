@@ -1,0 +1,43 @@
+@import url("speech-bubble-base.css");
+
+@property --pointer-height {
+	syntax: "<length>";
+	initial-value: 0;
+	inherits: true;
+}
+
+@property --pointer-offset {
+	syntax: "<length>";
+	initial-value: 0;
+	inherits: true;
+}
+
+.speech-bubble {
+	position: relative;
+	background: hsl(220 10% 85%);
+	padding: .5em;
+	border-radius: .3em;
+	max-width: 30ch;
+	font-style: normal;
+}
+
+/* Pointer */
+.speech-bubble::before {
+	all: unset;
+	content: "";
+	position: absolute;
+	top: 100%;
+	right: var(--pointer-offset);
+	width: var(--pointer-width);
+	height: var(--pointer-height);
+	clip-path: polygon(0 0, 100% 100%, 80% 0);
+	background: inherit;
+}
+
+.speech-bubble::after {
+	content: var(--character, '🙂');
+	margin-top: var(--pointer-height);
+	font-size: var(--character-size);
+	right: var(--pointer-offset);
+	transform: translateX(50%);
+}

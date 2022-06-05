@@ -1,0 +1,23 @@
+.speech-bubble {
+	all: unset;
+	position: relative;
+	background: hsl(220 10% 85%);
+	padding: .5em;
+	border-radius: .3em;
+	max-width: 30ch;
+}
+
+/* Pointer */
+.speech-bubble::before {
+	all: unset;
+	content: "";
+	position: absolute;
+	top: 100%;
+	clip-path: polygon(0 0, 100% 100%, 80% 0);
+	background: inherit;
+}
+
+.speech-bubble::after {
+	position: absolute;
+	top: 100%;
+}

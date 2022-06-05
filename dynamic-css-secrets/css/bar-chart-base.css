@@ -1,0 +1,30 @@
+.bar-chart {
+	display: flex;
+	align-items: flex-end;
+	gap: 1.5em;
+	padding: 0 1.5em;
+	font-size: 60%;
+	background: linear-gradient(to bottom, hsla(0,0%,100%,.1) 50%, transparent 0) top / 100% 20%;
+	border: 2px solid white;
+	border-top: 0;
+	border-right: 0;
+	width: fit-content;
+	height: calc(100vmin - 12em);
+	margin: 2em auto;
+}
+
+.bar-chart > div {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 2.5em;
+	background: deeppink;
+	box-sizing: border-box;
+	padding: .3em 0;
+	font-weight: bold;
+	letter-spacing: -.04em;
+	word-wrap: break-word;
+	line-height: 1;
+	color: white;
+}

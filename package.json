@@ -1,0 +1,13 @@
+{
+	"scripts": {
+		"build:css": "npx postcss \"**/*.postcss\" --base . --dir . --ext .css",
+		"build": "npm run build:css",
+		"watch:css": "npx postcss \"**/*.postcss\" --base . --dir . --ext .css --watch",
+		"watch": "npm run watch:css"
+	},
+	"devDependencies": {
+		"postcss": "^8",
+		"postcss-cli": "^9",
+		"postcss-nesting": "^10"
+	}
+}

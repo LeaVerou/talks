@@ -1,0 +1,87 @@
+
+<article class="minimal demo slide no heading-2x1">
+	<div class="news-item">
+		CSS is <mark>awesome</mark>
+	</div>
+	<textarea class="language-css">
+		.news-item {
+			--corner-size: 10px;
+		}
+	</textarea>
+	<style class="demo" data-slide>
+		* {
+			--corner-size: initial;
+			--_a: var(--corner-size);
+			--_100-a: calc(100% - var(--_a));
+			clip-path: polygon(var(--_a) 0, var(--_100-a) 0, /* top */
+						100% var(--_a), 100% var(--_100-a), /* right */
+						var(--_100-a) 100%, var(--_a) 100%, /* bottom */
+						0 var(--_100-a), 0 var(--_a) /* left */
+					);
+		}
+
+		.news-item {
+			background: white;
+			color: black;
+			padding: 1em;
+			font-weight: normal;
+		}
+	</style>
+</article>
+
+<article class="isolated dark demo slide">
+	<textarea class="language-html">
+		<div class="news-item">
+			CSS is <mark>awesome</mark>
+		</div>
+		<div class="greeting">
+			Hi Lea 👋🏼
+		</div>
+	</textarea>
+	<textarea class="language-css">
+		/* Implementation: */
+		.news-item {
+			--_a: var(--corner-size);
+			--_100-a: calc(100% - var(--_a));
+			clip-path: polygon(var(--_a) 0, var(--_100-a) 0, /* top */
+						100% var(--_a), 100% var(--_100-a), /* right */
+						var(--_100-a) 100%, var(--_a) 100%, /* bottom */
+						0 var(--_100-a), 0 var(--_a) /* left */
+					);
+		}
+
+		/* Usage: */
+		.news-item {
+			--corner-size: 10px;
+		}
+	</textarea>
+	<script class="demo-script" type="application/json">
+		[{"type":"caret","start":329,"end":338,"editor":"css"},{"type":"insertText","text":"greeting","split":true},{"type":"pause","delay":3814},{"type":"caret","start":32,"end":32},{"type":"caret","start":22,"end":32},"*",{"type":"pause","delay":5000},{"type":"caret","start":320,"end":328},{"type":"insertText","text":"news-item","split":true},{"type":"pause","delay":5000},{"type":"caret","start":52,"end":52},{"type":"caret","start":87,"end":87},{"type":"insertText","text":"\n\t--corner-size: initial;","split":true},{"type":"pause","delay":5000},{"type":"caret","start":88,"end":112},{"type":"pause","delay":5000},{"type":"deleteContentBackward","repeat":2},{"type":"pause","delay":3558},{"type":"caret","start":22,"end":22},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","start":22,"end":22},{"type":"insertText","text":"@property ","split":true},"{}",{"type":"caret","start":33,"end":33},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","start":34,"end":34},{"type":"insertText","text":"\t--","split":true},{"type":"pause","delay":5000},{"type":"historyUndo","repeat":2},{"type":"caret","start":32,"end":32},{"type":"insertText","text":"--corner-size ","split":true},{"type":"caret","start":48,"end":48},{"type":"insertText","text":"\tsyntax ","split":true},{"type":"deleteContentBackward"},{"type":"insertText","text":": ","split":true},"\"\"",{"type":"caret","start":58,"end":58},{"type":"insertText","text":"<length>","split":true},{"type":"caret","start":67,"end":67},{"type":"insertText","text":";\n\tinherits: false;\n\tinitial-value: 0;","split":true}]
+	</script>
+	<style class="demo" data-slide>
+		.news-item, .greeting {
+			background: white;
+			color: black;
+			padding: 1em;
+			font-weight: normal;
+			margin-bottom: 1em;
+		}
+	</style>
+</article>
+
+<article class="recap slide">
+	<h1>CSS variable inheritance</h1>
+
+	<ul class="do delayed-children">
+		<li><code>var()</code> in low specificity rules &rarr; widely available effects</li>
+		<li>Inheritance can get in the way</li>
+		<li>Prevent inheritance with `--foo: initial` </li>
+	</ul>
+
+	<details class="notes">
+		- Regular properties: Are scoped on the element itself, can be set via CSS rules or inline styles or even with JS
+		- We can provide fallback values on a case by case basis but that's usually repetitive
+		- Pseudo-private variables are a convention: prefix custom properties by `_` to indicate they are for internal use. Useful for baking in fallback values, but also other things.
+		- Provide encapsulation by exposing a higher level styling API. We can change the underlying CSS and the API we've exposed will continue to work
+	</details>
+</article>
