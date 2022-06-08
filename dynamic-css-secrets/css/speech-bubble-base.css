@@ -1,5 +1,7 @@
 .speech-bubble {
 	all: unset;
+	display: block;
+	margin: auto;
 	position: relative;
 	background: hsl(220 10% 85%);
 	padding: .5em;

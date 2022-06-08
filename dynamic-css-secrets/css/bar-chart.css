@@ -8,6 +8,9 @@
 
 .bar-chart > div {
 	height: calc(var(--p) * 1%);
+	--h: calc( 50 + 140 * var(--p) / 100);
+	--l: calc(50% - 10% * var(--p) / 100);
+	background: hsl(var(--h) 100% var(--l));
 }
 
 .bar-chart > div::before {

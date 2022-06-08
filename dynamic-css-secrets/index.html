@@ -10,7 +10,7 @@
 <link href="css/prism.css" rel="stylesheet" />
 <link href="css/theme.css" rel="stylesheet" />
 <link href="css/talk.css" rel="stylesheet" />
-<link href="https://projects.verou.me/talks/shared/browser-support.css" rel="stylesheet" />
+<link href="../shared/browser-support.css" rel="stylesheet" />
 </head>
 <body class="language-css"
 	data-markdown-elements="details.notes, .md, .takeaway.slide > h1, .credit"
@@ -21,6 +21,22 @@
 	<h2>Secrets</h2>
 	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
 </header>
+
+<article class="slide" id="lea-verou">
+	<h1>Hi, I’m Lea! 👋🏼
+		<a href="https://twitter.com">@leaverou</a>
+	</h1>
+
+	<img src="../shared/img/lea.jpg" alt="">
+
+	<ul class="delayed-children">
+		<li><strong>CSS WG</strong> Invited Expert</li>
+		<li><a href="https://lea.verou.me/publications/#specifications">Co-editor of CSS Color, CSS Images, CSS Backgrounds & Borders specs</a></li>
+		<li><strong>W3C TAG</strong> Member</li>
+		<li>Usable Programming @ <strong>MIT</strong> (research & teaching)</li>
+		<li>Started <a href="https://github.com/leaverou">dozens of open source projects</a>, some used on <a href="https://www.npmjs.com/package/prismjs">millions of websites</a></li>
+	</ul>
+</article>
 
 <article class="white slide heading-2x1">
 	<h1>Custom properties in 2021</h1>
@@ -80,9 +96,19 @@
 	</details>
 </article>
 
+<article class="slide" id="parts">
+	<script type="module">
+		for (let slide of document.querySelectorAll("header.part.slide")) {
+			let article = document.createElement("article");
+			article.style.cssText = slide.style.cssText;
+			article.innerHTML = slide.innerHTML;
+		}
+	</script>
+</article>
+
 <section>
-	<header class="slide" style="--icon: 🔲; --icon-2: 🔳">
-		<h1>The Outlined Button</h1>
+	<header class="part slide" style="--icon: 🔲; --icon-2: 🔳">
+		<h1 data-group="Part I">The Outlined Button</h1>
 	</header>
 
 	<article class="isolated demo slide" id="button-implementation" style="--division: 70">
@@ -232,8 +258,8 @@
 </section>
 
 <section>
-	<header class="slide" style="--icon: ✨; --icon-2: 🪩; background-color: var(--accent4);">
-		<h1>The Glossy Button</h1>
+	<header class="part slide" style="--icon: ✨; --icon-2: 🪩; background-color: var(--accent4);">
+		<h1 data-group="Part II">The Glossy Button</h1>
 	</header>
 
 	<article class="slide" data-insert="#variables-as-api"></article>
@@ -250,7 +276,7 @@
 		<div class="browser"><iframe src="https://shoelace.style/components/button" frameborder="0" name="shoelace_button"></iframe></div>
 	</article>
 
-	<article class="minimal demo slide no heading-2x1" id="button-glossy-api">
+	<article class="minimal demo slide no heading-2x1" id="button-glossy-api" data-type="The API">
 		<textarea class="language-html">
 			<button>Click me</button>
 			<button>Click me</button>
@@ -421,11 +447,11 @@
 
 	<article class="slide" data-insert="#button-glossy-implementation"></article>
 
-	<article class="slide">
+	<article class="slide" id="st-numerical">
 		<h1>Space Toggle for numerical values</h1>
 
 		<pre><code>
-			/* Fictional syntax: */
+			/* Fictional (future?) syntax: */
 			line-height: if(--glossy = initial, 1.1, 1.5);
 
 			/* Space toggle version: */
@@ -435,43 +461,75 @@
 
 	<article class="slide" data-insert="#button-glossy-implementation"></article>
 
-		<article class="slide" id="space-toggle-prod">
-			<h1>Space toggle in production</h1>
+	<article class="slide" id="space-toggle-prod">
+		<h1>Space toggle in production</h1>
 
-			<div class="side-by-side">
-				<div class="file">
-					<span class="name">design-system.css</span>
-					<pre><code>
-						:root {
-							--ON: initial;
-							--OFF: ;
-						}
-					</code></pre>
-				</div>
-				<div class="file">
-					<span class="name">website.css</span>
-					<pre><code>
-						button.primary {
-							--glossy: var(--ON);
-						}
-					</code></pre>
-				</div>
+		<div class="side-by-side">
+			<div class="file">
+				<span class="name">design-system.css</span>
+				<pre><code>
+					:root {
+						--ON: initial;
+						--OFF: ;
+					}
+				</code></pre>
 			</div>
-		</article>
+			<div class="file">
+				<span class="name">website.css</span>
+				<pre><code>
+					button.primary {
+						--glossy: var(--ON);
+					}
+				</code></pre>
+			</div>
+		</div>
+	</article>
+
+	<article class="slide" id="gradient-interpolation">
+		<h1>Space Toggle for progressive enhancement</h1>
+		<pre><code>
+			:root { --in-oklab: ; }
+
+			@supports (
+				background:
+				linear-gradient(in oklab, red, tan)
+			) {
+				:root { --in-oklab: in oklab,; }
+			}
+
+			/* Usage: */
+			background: linear-gradient(var(--in-oklab) #f00, #0f0);
+		</code></pre>
+		<div class="gradient srgb">
+			<img src="../reusable/img/chrome-logo.svg" alt="">
+		</div>
+		<div class="gradient oklab">
+			<img src="../reusable/img/safari-logo.png" alt="">
+		</div>
+		<details class="notes">
+			[Tweet](https://twitter.com/LeaVerou/status/1532035426805878784)
+		</details>
+	</article>
+
+	<article class="slide">
+		<h1>Extreme Space Toggle</h1>
+		<a href="https://codetea.com/minesweeper-implemented-in-css-html-using-the-space-toggle-trick/"><img src="img/css-sweeper.png" alt=""></a>
+		<p class="credit">Made by [Jane Ori](https://twitter.com/Jane0ri)</p>
+	</article>
 </section>
 
 <section>
-	<header class="slide" style="--icon: 📊;">
-		<h1>The Bar Chart</h1>
+	<header class="part slide" style="--icon: 📊;">
+		<h1 data-group="Part III">The Bar Chart</h1>
 	</header>
 
-	<article class="minimal demo slide no heading-2x1">
+	<article class="minimal demo slide no heading-2x1" data-type="The API">
 		<style data-slide media="not all">
 			@import url("css/bar-chart.css");
 		</style>
 		<textarea class="language-html">
 			<div class="bar-chart">
-				<div style="--p: 95">A</div>
+				<div style="--p: 10">A</div>
 				<div style="--p: 100">B</div>
 				<div style="--p: 95">C</div>
 				<div style="--p: 38">D</div>
@@ -481,11 +539,10 @@
 		</textarea>
 	</article>
 
-	<article class="isolated dark demo slide no heading-2x1" id="bar-chart-implementation">
-
+	<article class="isolated dark demo slide no heading-2x1" id="bar-chart-implementation" style="--division: 60">
 		<textarea class="language-html">
 			<div class="bar-chart">
-				<div style="--p: 95%">A</div>
+				<div style="--p: 10%">A</div>
 				<div style="--p: 100%">B</div>
 				<div style="--p: 95%">C</div>
 				<div style="--p: 38%">D</div>
@@ -512,7 +569,11 @@
 				{"type":"pause"},{"type":"next_slide"},
 				{"type":"pause"},{"type":"next_slide"},
 				{"type":"pause"},{"type":"caret","start":0,"end":0,"editor":"css"},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","start":0,"end":0},{"type":"insertText","text":"@property --integer ","split":true},"{}",{"type":"caret","start":21,"end":21},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","start":22,"end":22},{"type":"insertText","text":"\tsyntax","split":true},{"type":"insertText","text":": ","split":true},"\"\"",{"type":"caret","start":32,"end":32},{"type":"insertText","text":"<integer>","split":true},{"type":"caret","start":42,"end":42},{"type":"insertText","text":";\n\tinitial-value: 0;\n\tinherits: true;","split":true},
-				{"type":"pause"},{"type":"caret","start":161,"end":161,"editor":"css"},{"type":"insertText","text":"\n\t--integer: calc","split":true},"()",{"type":"caret","start":179,"end":179},{"type":"insertText","text":"var","split":true},"()",{"type":"caret","start":183,"end":183},{"type":"insertText","text":"--p","split":true},{"type":"caret","start":188,"end":188},";",{"type":"caret","start":215,"end":215},{"type":"deleteContentBackward"},{"type":"insertText","text":"integer","split":true}
+				{"type":"pause"},{"type":"caret","start":161,"end":161,"editor":"css"},{"type":"insertText","text":"\n\t--integer: calc","split":true},"()",{"type":"caret","start":179,"end":179},{"type":"insertText","text":"var","split":true},"()",{"type":"caret","start":183,"end":183},{"type":"insertText","text":"--p","split":true},{"type":"caret","start":188,"end":188},";",{"type":"caret","start":215,"end":215},{"type":"deleteContentBackward"},{"type":"insertText","text":"integer","split":true},
+
+				{"type":"pause"},{"type":"next_slide"},
+
+				{"type":"caret","start":131,"end":131,"editor":"css"},{"type":"insertText","text":"\n\t","split":true},{"type":"insertText","text":"--h","split":true},{"type":"insertText","text":": ; /* ","split":true},{"type":"insertText","text":"50 to 190 */","split":true},{"type":"caret","position":138},{"type":"insertText","text":"calc","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":143},{"type":"pause","delay":1500},{"type":"insertText","text":"50 + ","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":149},{"type":"insertText","text":"190 - 50","split":true},{"type":"pause","delay":1222},{"type":"caret","position":158},{"type":"insertText","text":" * var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":165},{"type":"insertText","text":"--p","split":true},{"type":"caret","position":169},{"type":"insertText","text":" / 100","split":true},{"type":"pause","delay":2667},{"type":"caret","position":193},{"type":"pause","delay":1168},{"type":"insertText","text":"\n\t","split":true},{"type":"pause","delay":1587},{"type":"insertText","text":"--l: calc","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":205},{"type":"insertText","text":");","split":true},{"type":"deleteContentBackward","repeat":2},{"type":"caret","position":206},{"type":"insertText","text":"; /* ","split":true},{"type":"pause","delay":1265},{"type":"insertText","text":"50% to 40% */","split":true},{"type":"pause","delay":1651},{"type":"caret","position":205},{"type":"pause","delay":1160},{"type":"insertText","text":"50%","split":true},{"type":"pause","delay":1728},{"type":"insertText","text":" + ","split":true},{"type":"pause","delay":1624},{"type":"insertText","text":"()"},{"type":"caret","position":212},{"type":"pause","delay":1555},{"type":"insertText","text":"40% - 50%","split":true},{"type":"pause","delay":1197},{"type":"caret","position":222},{"type":"insertText","text":" * ","split":true},{"type":"pause","delay":2201},{"type":"caret","start":161,"end":175},{"type":"pause","delay":1033},{"type":"caret","position":225},{"type":"insertText","text":"var(--p) / 100"},{"type":"pause","delay":2512},{"type":"caret","position":258},{"type":"insertText","text":"\n\tbackground: hsl","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":276},{"type":"pause","delay":1165},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":280},{"type":"insertText","text":"--h","split":true},{"type":"pause","delay":1089},{"type":"caret","position":284},{"type":"insertText","text":" 100% var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":294},{"type":"insertText","text":"--l","split":true},{"type":"caret","position":299},{"type":"insertText","text":";"}
 			]
 		</script>
 	</article>
@@ -525,7 +586,12 @@
 			</tr>
 			<tr>
 				<td>Unit → number:</td>
-				<td style="font-size: 100px"><span class="poop"></span><span class="poop"></span><span class="poop"></span></td>
+				<td>
+					<span class="poop"></span><span class="poop"></span><span class="poop"></span>
+					<div class="delayed">
+						Future: <code>calc(var(--foo) / 1px)</code>
+					</div>
+				</td>
 			</tr>
 		</table>
 	</article>
@@ -612,14 +678,107 @@
 			content: text(var(--p)) "%";
 		</code></pre>
 	</article>
+
+	<article class="slide" id="bar-colors">
+		<div class="gradient"></div>
+		<div class="point fill-color" style="--p: 0">
+			<code>hsl(50 100% 50%)</code>
+		</div>
+		<div class="point animate delayed" style="--p: 50">
+			<code>hsl(<span class="hue"></span> 100% <span class="sat"></span>&shy;)</code>
+		</div>
+		<div class="point end fill-color" style="--p: 100">
+			<code>hsl(190 100% 40%)</code>
+		</div>
+		<pre class="delayed equations"><code>
+			<!-- --h: calc( 50 + 140 * var(--p) / 100);
+			--l: calc(50% - 10% * var(--p) / 100); -->
+		</code></pre>
+	</article>
+
+	<article class="slide" data-insert="#bar-chart-implementation"></article>
+
+	<article class="slide" id="linear-mapping">
+		<h1>Linear mapping</h1>
+
+		<div style="font-weight: 400"><code>--x</code> ∈ [<span class="x1">x1</span>, <span class="x2">x2</span> ] ⇒ <code>--y</code> ∈ [<span class="y1">y1</span>, <span class="y2">y2</span>]</div>
+		<pre class="delayed"><code>
+			--y: calc(( ( (var(--x) - <span class="x1">x1</span>) * (<span class="y2">y2</span> - <span class="y1">y1</span>) ) / (<span class="x2">x2</span> - <span class="x1">x1</span>) ) + <span class="y1">y1</span>);
+		</code></pre>
+	</article>
+
+	<article class="iframe slide" data-src="https://css.land/ranges"></article>
+
+	<article class="slide takeaway">
+		<h1>CSS Variable Conditionals</h1>
+		<pre><code>
+			--is-not-foo: calc(1 - var(--is-foo));
+			property: calc(
+				var(--is-foo)     * value_if_true +
+				var(--is-not-foo) * value_if_false
+			);
+		</code></pre>
+
+		<details class="notes">
+			You can use linear mapping to do conditionals in a more readable way than space toggle.
+			Essentially you're just mapping the 0 to 1 range
+			and ignoring all values that are not 0 or 1.
+		</details>
+	</article>
+
+	<article class="slide">
+		<h1>Linear mapping for conditionals</h1>
+
+		<pre><code>
+			/* Fictional (future?) syntax: */
+			line-height: if(--glossy = 1, 1.1, 1.5);
+
+			/* Space toggle version: */
+			line-height: calc(1.5 var(--glossy, - .4));
+
+			<span class="delayed">/* Linear mapping version: */
+			line-height: calc(
+				var(--glossy)       * 1.1 +
+				(1 - var(--glossy)) * 1.5
+			);</span>
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<h1>Logical operations</h1>
+
+		<div class="delayed-children">
+			<pre><code>--not-a: calc(1 - var(--a));</code></pre>
+			<pre><code>--a-and-b: calc(var(--a) * var(--b));</code></pre>
+			<pre><code>--a-or-b: min(var(--a) + var(--b), 1);</code></pre>
+		</div>
+
+
+		<details class="notes">
+			Interested in finding out more about ways to work around conditionals in CSS?
+
+			Here are a few good articles:
+			- [DRY Switching with CSS Variables: The Difference of One Declaration](https://css-tricks.com/dry-switching-with-css-variables-the-difference-of-one-declaration/) by Ana Tudor
+			- [DRY State Switching With CSS Variables: Fallbacks and Invalid Values](https://css-tricks.com/dry-state-switching-with-css-variables-fallbacks-and-invalid-values/) by Ana Tudor
+			- [Logical Operations with CSS Variables](https://css-tricks.com/logical-operations-with-css-variables/) by Ana Tudor
+			- [CSS Switch-Case Conditions](https://css-tricks.com/css-switch-case-conditions/) by Yair Even Or
+		</details>
+	</article>
+
+	<article class="slide takeaway">
+		<h1>Linear mapping allows the same variable to control multiple things, continously or discretely</h1>
+		<details class="notes">
+			Useful for exposing a nice API or simply for minimizing the number of properties you need to register
+		</details>
+	</article>
 </section>
 
 <section>
-	<header class="slide" style="--icon: 🗯; --icon-2: 💬">
-		<h1>The Speech Bubble</h1>
+	<header class="part slide" style="--icon: 🗯; --icon-2: 💬">
+		<h1 data-group="Part IV">The Speech Bubble</h1>
 	</header>
 
-	<article class="minimal demo slide" id="speech-bubble-api" xdata-type="The API">
+	<article class="api minimal demo slide" id="speech-bubble-api" data-type="The API">
 		<textarea class="language-html">
 			<blockquote class="devious speech-bubble">
 				But what if — just hear me out —
@@ -650,32 +809,43 @@
 				--pointer-width: 1em;
 				--pointer-height: 1em;
 				--pointer-offset: 1.5em;
+				--character: '😈';
+				--character-size: 3em;
 			}
 
-			/* Pointer */
-			.speech-bubble::before {
+			.speech-bubble::before { /* Pointer */
 				width: var(--pointer-width);
 				height: var(--pointer-height);
 				right: var(--pointer-offset);
 			}
 
-			.speech-bubble::after {
+			.speech-bubble::after { /* Character */
 				content: var(--character, '🙂');
 				margin-top: var(--pointer-height);
 				font-size: var(--character-size);
 			}
 		</textarea>
 		<textarea class="language-html">
-			<div class="container">
-				<blockquote class="speech-bubble" style="--character: '😈'">
-					But what if — just hear me out — what if you
-					<em>registered</em> your custom property?
-				</blockquote>
-			</div>
+			<blockquote class="speech-bubble">
+				But what if — just hear me out — what if you
+				<em>registered</em> your custom property?
+			</blockquote>
 		</textarea>
 		<style data-slide media="not all" class="demo">
 			@import url('css/speech-bubble-base.css');
 		</style>
+		<script class="demo-script" type="application/json">
+			[
+				{"type":"caret","start":129,"end":132,"animated_selection":false,"editor":"css"},{"type":"insertText","text":"2em"},
+				{"type":"caret","start":129,"end":132,"animated_selection":false},{"type":"insertText","text":"1em"},
+				{"type":"caret","start":129,"end":132,"animated_selection":false},{"type":"insertText","text":"2em"},
+				{"type":"caret","start":129,"end":132,"animated_selection":false},{"type":"insertText","text":"3em"},
+				{"type":"caret","start":129,"end":132,"animated_selection":false},{"type":"insertText","text":"4em"},
+				{"type":"caret","start":129,"end":132,"animated_selection":false},{"type":"pause","delay":1000},{"type":"insertText","text":"3em"},
+				{"type":"caret","start":129,"end":132,"animated_selection":false},
+				{"type":"pause"},{"type":"caret","position":0},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","position":0},{"type":"insertText","text":"@property --pointer-height ","split":true},{"type":"insertText","text":"{}"},{"type":"caret","position":28},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","position":29},{"type":"insertText","text":"\tsyntax: ","split":true},{"type":"insertText","text":"\"\""},{"type":"caret","position":39},{"type":"insertText","text":"<length>","split":true},{"type":"caret","position":48},{"type":"insertText","text":";\n\tinitial-value: 0;\n\tinherits: true;","split":true}
+				]
+		</script>
 		<details class="notes">
 			Here we have a child element (our generated content)
 			that needs to size its offset based on the parent font size.
@@ -712,6 +882,120 @@
 			ancestor font sizes!
 		</h1>
 	</article>
+
+	<article class="isolated demo slide" style="--division: 60" id="optgroup">
+		<textarea class="language-html">
+			<select size="5">
+				<option value="">None</option>
+				<optgroup>
+					<option value="avocado">🥑 Avocado</option>
+					<option value="sushi">🍣 Sushi</option>
+					<option value="steak">🥩 Steak</option>
+					<option value="garlic">🧄 Garlic</option>
+				</optgroup>
+			</select>
+		</textarea>
+		<textarea class="language-css">
+			@property --parent-em {
+				syntax: "<length>";
+				initial-value: 0;
+				inherits: true;
+			}
+
+			select {
+				--parent-em: 1em;
+			}
+
+			optgroup {
+				font-size: 0;
+			}
+
+			optgroup > * {
+				font-size: var(--parent-em);
+			}
+		</textarea>
+		<style data-slide media="not all" class="demo">
+			/* Remove Chrome gap */
+			:where(optgroup:not([label]) > option)::before {
+				content: "";
+			}
+
+			/* Remove Firefox gap */
+			:where(optgroup:not([label]) > option) {
+				padding-inline-start: 2px;
+			}
+		</style>
+	</article>
+
+	<article class="slide language-javascript">
+		<h1>Detect @property support</h1>
+		<pre><code>
+			if (window.CSSPropertyRule) {
+				let root = document.documentElement;
+				root.classList.add("supports-atproperty");
+			}
+		</code></pre>
+		<button class="run" onclick="eval(this.previousElementSibling.textContent)">Run</button>
+	</article>
+
+	<article class="slide" data-insert="#optgroup"></article>
+
+	<article class="slide">
+		<h1>Can we detect @property with CSS alone?</h1>
+	</article>
+
+	<article class="isolated demo slide" style="--division: 60" id="supports-atproperty">
+		<textarea class="language-css">
+			@property --color-test {
+				syntax: "<color>";
+				initial-value: transparent;
+				inherits: true;
+			}
+
+			@supports (--color-test: 0) {
+				/* Does not support @property? */
+				:root {
+					background: red;
+				}
+			}
+		</textarea>
+	</article>
+
+	<article class="takeway slide">
+		<h1>The syntax of registered properties is only checked at computed value time.</h1>
+		<details class="notes">
+			From the [spec](https://drafts.css-houdini.org/css-properties-values-api-1/#parsing-custom-properties):
+
+			When parsing a page’s CSS, UAs commonly make a number of optimizations to help with both speed and memory.
+
+			One of those optimizations is that they only store the properties that will actually have an effect; they throw away invalid properties, and if you write the same property multiple times in a single declaration block, all but the last valid one will be thrown away. (This is an important part of CSS’s error-recovery and forward-compatibility behavior.)
+
+			This works fine if the syntax of a property never changes over the lifetime of a page. If a custom property is registered, however, it can change its syntax, so that a property that was previously invalid suddenly becomes valid.
+
+			The only ways to handle this are to either store every declaration, even those that were initially invalid (increasing the memory cost of pages), or to re-parse the entire page’s CSS with the new syntax rules (increasing the processing cost of registering a custom property). Neither of these are very desirable.
+
+			Further, UA-defined properties have their syntax determined by the version of the UA the user is viewing the page with; this is out of the page author’s control, which is the entire reason for CSS’s error-recovery behavior and the practice of writing multiple declarations for varying levels of support. A custom property, on the other hand, has its syntax controlled by the page author, according to whatever stylesheet or script they’ve included in the page; there’s no unpredictability to be managed. Throwing away syntax-violating custom properties would thus only be, at best, a convenience for the page author, not a necessity like for UA-defined properties.
+		</details>
+	</article>
+
+	<article class="isolated demo slide" style="--division: 60" id="supports-atproperty">
+		<textarea class="language-css">
+			@property --no-atproperty-fallback {
+				syntax: "*";
+				inherits: false;
+			}
+
+			:root {
+				--no-atproperty-fallback: red;
+			}
+
+			body {
+				background: var(--no-atproperty-fallback, green)
+			}
+		</textarea>
+	</article>
+
+	<article class="slide" data-insert="#optgroup"></article>
 </section>
 
 <footer class="dark slide dont-resize">
@@ -724,12 +1008,12 @@
 		<li style="--icon: '✉'"><a href="mailto:lea@verou.me">lea@verou.me</a></li>
 		<li style="--icon: '🐦'"><a href="http://twitter.com/leaverou">@leaverou</a></li>
 	</ul>
-	<p>Slides: <a href="https://projects.verou.me/talks/dynamic-css-secrets">projects.verou.me/talks/dynamic-css-secrets</a></p>
+	<p>Slides: <a href="../dynamic-css-secrets">projects.verou.me/talks/dynamic-css-secrets</a></p>
 	<p style="font-size: 50%;">This slide deck was entirely built with open web technologies! Slideshow framework: <a href="http://github.com/LeaVerou/inspire.js">inspirejs.org</a></p>
 </footer>
 
-<script src="https://projects.verou.me/talks/shared/js/bliss.shy.min.js"></script>
-<script src="https://projects.verou.me/talks/shared/js/prism.js"></script>
+<script src="../shared/js/bliss.shy.min.js"></script>
+<script src="../shared/js/prism.js"></script>
 <script src="https://projects.verou.me/incrementable/incrementable.js" type="module"></script>
 <script src="https://inspirejs.org/inspire.mjs" type="module"></script>
 <script src="talk.js" type="module"></script>

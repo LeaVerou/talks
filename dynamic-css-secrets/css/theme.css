@@ -136,6 +136,7 @@ button {
 		text-align: center;
 		margin: 0 0 .6em;
 		font-size: 200%;
+		letter-spacing: -.03em;
 	}
 
 	.slide h2 {
@@ -184,6 +185,26 @@ section > header.slide:target {
 		text-align: center;
 		line-height: 1.2;
 		font-weight: 100;
+		letter-spacing: normal;
+	}
+
+	header.slide h1[data-group] {
+		--group-name: attr(data-group);
+	}
+
+	header.slide h1::before {
+		content: var(--group-name);
+		white-space: nowrap;
+		display: block;
+		width: min-content;
+		padding: .3em .5em;
+		border: .1em solid black;
+		border-radius: .15em;
+		margin: -1.5em auto .5em;
+		font-size: 50%;
+		font-weight: bold;
+		text-transform: uppercase;
+		background: var(--group-background, var(--accent2));
 	}
 
 #indicator {

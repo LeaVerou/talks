@@ -9,7 +9,7 @@
 	border-top: 0;
 	border-right: 0;
 	width: fit-content;
-	height: calc(100vmin - 12em);
+	height: 75vh;
 	margin: 2em auto;
 }
 
@@ -18,13 +18,13 @@
 	flex-flow: column;
 	align-items: center;
 	justify-content: space-between;
-	width: 2.5em;
-	background: deeppink;
+	width: 3em;
+	background: hsl(120 100% 45%);
 	box-sizing: border-box;
 	padding: .3em 0;
 	font-weight: bold;
 	letter-spacing: -.04em;
 	word-wrap: break-word;
 	line-height: 1;
-	color: white;
+	color: black;
 }

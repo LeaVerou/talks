@@ -51,12 +51,22 @@
 
 	& h1 {
 		text-align: left;
+		font-size: 400%;
+		font-weight: 300;
+		line-height: 1;
 
 		& a[href^="https://twitter.com"] {
 			display: block;
-			font-size: 60%;
+			font-size: 50%;
 			color: var(--color-aqua);
 			text-decoration: none;
+			font-weight: bold;
+			letter-spacing: -.03em;
+		}
+
+		& .hi {
+			font-weight: 300;
+			font-size: 60%;
 		}
 	}
 
@@ -65,6 +75,12 @@
 		top: 1em;
 		right: 1em;
 		border-radius: 50%;
+	}
+
+	& ul {
+		padding-left: 1.3em;
+		list-style-position: inside;
+		list-style: "✅ "
 	}
 }
 
@@ -225,6 +241,7 @@ span.poop,
 
 span.poop {
 	display: inline-block;
+	font-size: 100px;
 }
 
 	span.poop:empty::before,
@@ -372,6 +389,7 @@ h1[data-label]::before {
 .recap.slide h1,
 h1[data-label] {
 	font-weight: 100;
+	letter-spacing: normal;
 
 	&::before {
 		content: var(--content);
@@ -1177,9 +1195,211 @@ a.go {
 	grid-template: 1fr / 1.9fr 1fr;
 	align-items: stretch;
 	justify-content: stretch;
-	grid-gap: 0.5em /* no heading */;
+	grid-gap: 0.5em;
 
 	& .speech-bubble {
 		color: black;
+	}
+}
+
+.slide[data-type] {
+	overflow: hidden; /* prevent ribbon overflow */
+}
+
+.api.slide {
+	--ribbon-color: var(--accent4);
+	--ribbon-offset: -4em;
+}
+
+#gradient-interpolation {
+	display: grid;
+	grid-template: 1fr / auto 1fr 1fr;
+	align-items: stretch;
+	justify-content: stretch;
+	grid-gap: 0.5em;
+
+	& h1 {
+		grid-column-end: span 3;
+	}
+
+	& .gradient {
+		padding: .5em;
+		border-radius: .1em;
+
+		&.srgb {
+			background: linear-gradient(red, rgb(50% 50% 0%), lime);
+		}
+
+		&.oklab {
+			background: linear-gradient(red, rgb(81.53% 66.09% 0.12%), lime);
+		}
+
+		& img {
+			position: relative;
+			top: -3em;
+		}
+	}
+}
+
+@property --int-p {
+	syntax: "<integer>";
+	initial-value: 0;
+	inherits: true;
+}
+
+@keyframes bar-colors-p {
+	from { --int-p: var(--start); }
+	to { --int-p: var(--end); }
+}
+
+#bar-colors {
+	align-items: start;
+	justify-content: start;
+	--dont-resize: 1;
+
+	& .gradient {
+		width: 100%;
+		padding: 1em;
+		box-sizing: border-box;
+		border-radius: .1em;
+		background: linear-gradient(to right, hsl(50 100% 50%), hsl(85 100% 47.5%), hsl(120 100% 45%), hsl(155 100% 42.5%), hsl(190 100% 40%));
+	}
+
+	& .point {
+		position: absolute;
+		display: flex;
+		flex-flow: column;
+		justify-content: end;
+		padding: .2em .6em;
+		top: 2.2em;
+		--border-width: .1em;
+		border: var(--border-width) solid white;
+		border-top: 0;
+		height: calc(3em + (100vh - 7em) * var(--p) / 100);
+		--color: hsl(
+			calc(1.4 * var(--p) + 50)
+			100%
+			calc(-0.1% * var(--p) + 50%)
+		);
+		--circle-r: .3em;
+
+		&::before,
+		&::after {
+			position: absolute;
+			bottom: 100%;
+		}
+
+		&::before {
+			content: " ";
+			width: calc(2 * var(--circle-r));
+			height: calc(2 * var(--circle-r));
+			border-radius: 50%;
+			border: var(--border-width) solid white;
+		}
+
+		&::after {
+			counter-reset: p var(--p);
+			content: "--p:" counter(p);
+			color: black;
+			font: 100%/.8 var(--font-mono);
+		}
+
+		&.fill-color::before {
+			background: var(--color);
+		}
+
+		&:not(.end) {
+			border-right: 0;
+			margin-left: calc(var(--p) * 100%);
+
+			&::before {
+				left: calc(-1 * var(--circle-r) - 2 * var(--border-width));
+			}
+
+			&::after {
+				left: calc(var(--circle-r) + .2em);
+			}
+		}
+
+		&.end {
+			border-left: 0;
+			align-self: end;
+			margin-right: calc(100% - var(--p) * 1%);
+
+			&::before {
+				right: calc(-1 * var(--circle-r) - 2 * var(--border-width));
+			}
+
+			&::after {
+				right: calc(var(--circle-r) + .2em);
+			}
+		}
+
+		&.animate {
+			--start: 40;
+			--end: 60;
+			margin-left: calc(var(--int-p) * 1%);
+			animation: bar-colors-p 10s infinite linear alternate;
+			animation-delay: -5s;
+			animation-play-state: paused;
+
+			&.displayed {
+				animation-play-state: running;
+			}
+
+			&::after {
+				counter-reset: p var(--int-p);
+			}
+
+			& .hue::before {
+				counter-reset: p calc(1.4 * var(--int-p) + 50);
+				content: counter(p);
+			}
+
+			& .sat::before {
+				counter-reset: p calc(-0.1 * var(--int-p) + 50);
+				content: counter(p) "%";
+			}
+		}
+	}
+
+	& .equations {
+		position: absolute;
+		left: 1.3em;
+		bottom: 1em;
+	}
+}
+
+#linear-mapping {
+	& .x1,
+	& .x2,
+	& .y1,
+	& .y2 {
+		font: bold italic 100% var(--font-body);
+	}
+
+	& .x1 {
+		color: hsl(30 90% 50%);
+	}
+
+	& .x2 {
+		color: hsl(30 90% 70%);
+	}
+
+	& .y1 {
+		color: hsl(330 80% 50%);
+	}
+
+	& .y2 {
+		color: hsl(330 80% 70%);
+	}
+	& pre {
+		margin-top: 2em;
+	}
+}
+
+#logical-operations {
+	& pre {
+		margin: .5em 0;
 	}
 }
