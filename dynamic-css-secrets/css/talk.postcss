@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap');
+
 @property --division {
 	syntax: "<number>";
 	inherits: true;
@@ -1401,5 +1403,74 @@ a.go {
 #logical-operations {
 	& pre {
 		margin: .5em 0;
+	}
+}
+
+#web-almanac {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	padding: 0;
+	background: white;
+	color: black;
+
+	& * {
+		font-family: Poppins, var(--font-body);
+	}
+
+	& img {
+		mix-blend-mode: multiply;
+		flex: 1;
+		margin-top: -2em;
+	}
+
+	& header {
+		align-self: stretch;
+		display: flex;
+		flex-flow: column;
+		justify-content: center;
+		align-items: start;
+		padding: 1em;
+		padding-right: 4em;
+		background: #5c687d;
+		clip-path: polygon(0 0, 100% 0, calc(100% - 3em) 100%, 0 100%);
+		color: white;
+	}
+
+	& .url {
+		text-decoration: none;
+		font-weight: bold;
+		opacity: .5;
+		font-size: 75%;
+	}
+
+	& h1,
+	& h2 {
+		width: fit-content;
+		white-space: nowrap;
+		line-height: 1;
+		color: inherit;
+		text-align: left;
+	}
+
+	& h1 {
+		font-size: 200%;
+		margin: .2em 0 .5em;
+		margin-top: auto;
+
+		&::before {
+			display: block;
+			content: '';
+			margin-bottom: 15px;
+			border-bottom: solid .03em #f7f779;
+			width: 1.66667em;
+		}
+	}
+
+	& h2 {
+		margin: 0 0 .5em;
+		margin-bottom: auto;
+		font-size: calc(200% / 1.6);
+		font-weight: 300;
+		line-height: 1.2em;
 	}
 }
