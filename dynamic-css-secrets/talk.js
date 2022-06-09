@@ -51,7 +51,7 @@ $$("ol.math > li, .math:not(ol)").forEach(eq => {
 			;
 });
 
-$$("header.slide[style*='--icon']").forEach(slide => {
+$$("[style*='--icon']").forEach(slide => {
 	let icon = slide.style.getPropertyValue("--icon").trim();
 	let icon2 = slide.style.getPropertyValue("--icon-2").trim() || icon;
 	let style = "font-size: 30px;";

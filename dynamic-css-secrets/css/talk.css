@@ -8,40 +8,29 @@
 
 #intro {
 	display: flex;
-	align-items: center;
+	align-items: start;
 	justify-content: center;
+	background: url(../img/secret.avif) no-repeat center / cover;
 }
 
 	#intro h1 {
 		margin: 0;
 		text-align: left;
-		max-width: 20ch;
 		font-size: 12vw;
-		line-height: .8;
-		letter-spacing: -.06ch;
+		line-height: 1;
+		letter-spacing: -.06ch
 	}
 
-	#intro h2 {
-		width: 8em;
-		margin: .4em 0 0;
-		font-size: 8vh;
-		line-height: 1;
-		color: var(--accent1);
-		letter-spacing: -.05em;
-		position: absolute;
-		right: 0;
-		bottom: .8em;
-		transform-origin: bottom right;
-		transform: rotate(90deg) translateY(2.5em);
-		text-align: right;
-	}
+	#intro h1 .secrets {
+			mix-blend-mode: difference;
+		}
 
 	#intro .attribution {
 		position: absolute;
 		bottom: -.5em;
-		color: white;
-		font-size: 80%;
-		mix-blend-mode: difference;
+		color: var(--accent4);
+		font-size: 100%;
+		font-weight: bold;
 	}
 
 		#intro .attribution a {
@@ -981,12 +970,17 @@ details.notes a[href^="https://codepen.io"]::before {
 	}
 
 #scratching-surface {
-	background: url(../img/iceberg.jpeg) center / cover;
-	align-items: end
+	background: url(../img/iceberg.jpeg) 20% 0% / auto 110%;
+	align-items: end;
+	justify-content: start;
+	padding-left: 0%
 }
 
 #scratching-surface h1 {
+		margin: 0;
+		font-size: 170%;
 		text-align: right;
+		text-shadow: 0 0 .1em rgb(0 0 0 /.4);
 	}
 
 .website.slide {
@@ -1441,3 +1435,48 @@ a.go:active {
 		font-weight: 300;
 		line-height: 1.2em;
 	}
+
+#topics {
+	padding: 0;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	gap: 2px
+}
+
+#topics > h1 {
+		position: absolute;
+		z-index: -1;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+#conclusion {
+	justify-content: start;
+	background: url(../img/the-end.avif) no-repeat center / cover
+}
+
+#conclusion h1 {
+		margin-top: .4em;
+		font-size: 500%;
+		color: #325974;
+	}
+
+#pile-of-hacks del {
+		display: inline-block;
+		background: linear-gradient(transparent 30%, currentColor 0 78%, transparent 0);
+	}
+
+#pile-of-hacks .pile-of-poop {
+		line-height: 1;
+		text-align: center;
+		font-size: 120%;
+	}
+
+#tradeoffs {
+	justify-content: start;
+	background: url("../img/tough-decisions-2.jpg") top / auto 130%;
+	color: black;
+}

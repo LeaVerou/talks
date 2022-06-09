@@ -17,8 +17,9 @@
 	data-balance-elements=".slide > h1:only-child, .takeaway.slide > h1, .speech.slide > h1">
 
 <header id="intro" class="slide dont-resize">
-	<h1>Dynamic CSS</h1>
-	<h2>Secrets</h2>
+	<h1>Dynamic CSS
+		<div class="secrets">Secrets</div>
+	</h1>
 	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
 </header>
 
@@ -100,25 +101,33 @@
 </article>
 
 <article class="slide" id="scratching-surface">
-	<h1 class="balance-lines">Why are we still merely scratching the surface?</h1>
-	<details class="notes">
-		Custom properties [reached full browser support 5 years ago](https://caniuse.com/css-variables). Yet, we are still primarily using them as dumb constants.
+	<h1>
+		We got kickass reactive variables<br>
+		and we are still treating them<br>
+		as glorified constants
+	</h1>
+	<details class="notes bottom-right">
+		Custom properties [reached full browser support 5 years ago](https://caniuse.com/css-variables).
+		Why are we still merely scratching the surface?
 	</details>
 </article>
 
-<article class="slide" id="parts">
+<article class="slide" id="topics">
+	<h1>Today’s talk:<br>A story in four acts</h1>
 	<script type="module">
 		for (let slide of document.querySelectorAll("header.part.slide")) {
 			let article = document.createElement("article");
+			article.className = "header thumbnail delayed";
 			article.style.cssText = slide.style.cssText;
 			article.innerHTML = slide.innerHTML;
+			topics.append(article);
 		}
 	</script>
 </article>
 
 <section>
-	<header class="part slide" style="--icon: 🔲; --icon-2: 🔳">
-		<h1 data-group="Part I">The Outlined Button</h1>
+	<header class="part slide" style="--icon: 🔲; --icon-2: 🔳; background-color: var(--color-green); --group-background: var(--color-aqua)">
+		<h1 data-group="Act I">The Outlined Button</h1>
 	</header>
 
 	<article class="isolated demo slide" id="button-implementation" style="--division: 70">
@@ -268,8 +277,8 @@
 </section>
 
 <section>
-	<header class="part slide" style="--icon: ✨; --icon-2: 🪩; background-color: var(--accent4);">
-		<h1 data-group="Part II">The Glossy Button</h1>
+	<header class="part slide" style="--icon: ✨; --icon-2: 🪩; background-color: var(--color-aqua);">
+		<h1 data-group="Act II">The Glossy Button</h1>
 	</header>
 
 	<article class="slide" data-insert="#variables-as-api"></article>
@@ -529,8 +538,8 @@
 </section>
 
 <section>
-	<header class="part slide" style="--icon: 📊;">
-		<h1 data-group="Part III">The Bar Chart</h1>
+	<header class="part slide" style="--icon: 📊; background-color: var(--color-yellow);  --group-background: var(--accent4)">
+		<h1 data-group="Act III">The Bar Chart</h1>
 	</header>
 
 	<article class="minimal demo slide no heading-2x1" data-type="The API">
@@ -784,8 +793,8 @@
 </section>
 
 <section>
-	<header class="part slide" style="--icon: 🗯; --icon-2: 💬">
-		<h1 data-group="Part IV">The Speech Bubble</h1>
+	<header class="part slide" style="--icon: 🗯; --icon-2: 💬; background-color: var(--accent4);">
+		<h1 data-group="Act IV">The Speech Bubble</h1>
 	</header>
 
 	<article class="api minimal demo slide" id="speech-bubble-api" data-type="The API">
@@ -906,23 +915,7 @@
 			</select>
 		</textarea>
 		<textarea class="language-css">
-			@property --parent-em {
-				syntax: "<length>";
-				initial-value: 0;
-				inherits: true;
-			}
 
-			select {
-				--parent-em: 1em;
-			}
-
-			optgroup {
-				font-size: 0;
-			}
-
-			optgroup > * {
-				font-size: var(--parent-em);
-			}
 		</textarea>
 		<style data-slide media="not all" class="demo">
 			/* Remove Chrome gap */
@@ -935,6 +928,54 @@
 				padding-inline-start: 2px;
 			}
 		</style>
+		<script class="demo-script" type="application/json">
+			[
+				{"type":"caret","start":0,"end":0,"editor":"css"},{"type":"insertText","text":"optgroup ","split":true},{"type":"insertText","text":"{}"},{"type":"caret","position":10},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","position":11},{"type":"insertText","text":"\tfont-size: 0;","split":true},{"type":"caret","position":27},{"type":"insertText","text":"\n\noptgroup > * ","split":true},{"type":"insertText","text":"{}"},{"type":"caret","position":43},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","position":44},{"type":"insertText","text":"\tfont-size: 1rem;","split":true},
+				{"type":"pause","delay":5000},{"type":"caret","position":0},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","position":0},{"type":"insertText","text":"select ","split":true},{"type":"insertText","text":"{}"},{"type":"caret","position":8},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","position":9},{"type":"insertText","text":"\t"},{"type":"insertText","text":"--parent-em: 1em;","split":true},{"type":"pause","delay":1301},{"type":"caret","start":87,"end":91},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":91},{"type":"insertText","text":"--parent-em","split":true},{"type":"pause","delay":5000},{"type":"caret","position":0},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","position":0},{"type":"insertText","text":"@property --parent-em ","split":true},{"type":"insertText","text":"{}"},{"type":"caret","position":23},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","position":24},{"type":"insertText","text":"\tsyntax: ","split":true},{"type":"insertText","text":"\"\""},{"type":"caret","position":34},{"type":"insertText","text":"<length>","split":true},{"type":"caret","position":43},{"type":"insertText","text":";\n\tinitial-value: 0;\n\tinherits: tre","split":true},{"type":"deleteContentBackward"},{"type":"insertText","text":"ue;","split":true},
+
+				{"type":"pause"},{"type":"caret","start":0,"end":83,"editor":"css"},{"type":"deleteContentBackward"},{"type":"pause","delay":2999},{"type":"historyUndo"},
+				{"type":"pause"},{"type":"next_slide"},
+
+				{"type":"caret","editor":"css","position":82},{"type":"insertText","text":"\n"},{"type":"insertText","text":"\n@property --no-atproperty-fallback ","split":true},{"type":"insertText","text":"{}"},{"type":"caret","position":120},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","position":121},{"type":"insertText","text":"\tsyntax: ","split":true},{"type":"insertText","text":"\"\""},{"type":"caret","position":131},{"type":"pause","delay":600},{"type":"insertText","text":"*"},{"type":"caret","position":133},{"type":"insertText","text":";\n\tinherits: false;","split":true},{"type":"pause","delay":2000},{"type":"caret","position":183},{"type":"insertText","text":"\n\t--no-atproperty-fallback: 1em;","split":true},{"type":"pause","delay":2000},{"type":"caret","position":242},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":246},{"type":"insertText","text":"--no-at","split":true},{"type":"insertText","text":"property","split":true},{"type":"insertText","text":"-fallback","split":true},{"type":"pause","delay":2000},{"type":"caret","start":271,"end":272},{"type":"deleteContentBackward"},{"type":"caret","position":270},{"type":"insertText","text":", 0","split":true}
+			]
+		</script>
+	</article>
+
+	<article class="browser-support slide">
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th><img src="../shared/img/chrome-logo.svg" alt="Chrome"></th>
+					<th><img src="../shared/img/firefox-logo.svg" alt="Firefox"></th>
+					<th><img src="../shared/img/edge-logo.svg" alt="Edge"></th>
+					<th><img src="../shared/img/safari-logo.png" alt="Safari"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th><a href="https://caniuse.com/css-variables" target="_blank">CSS Variables</a></th>
+					<td>49</td>
+					<td>31</td>
+					<td>15</td>
+					<td>9.1</td>
+				</tr>
+				<tr>
+					<th><a href="https://caniuse.com/mdn-css_at-rules_property">@property</a></th>
+					<td>85</td>
+					<td></td>
+					<td>85</td>
+					<td></td>
+				</tr>
+				<tr>
+					<th><a href="https://caniuse.com/mdn-api_css_registerproperty">CSS.registerProperty()</a></th>
+					<td>79</td>
+					<td></td>
+					<td>79</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
 	</article>
 
 	<article class="slide language-javascript">
@@ -948,10 +989,24 @@
 		<button class="run" onclick="eval(this.previousElementSibling.textContent)">Run</button>
 	</article>
 
-	<article class="slide" data-insert="#optgroup"></article>
+	<article class="slide">
+		<h1>Usage</h1>
+		<pre><code>
+			.supports-atproperty optgroup {
+				font-size: 0;
+			}
+		</code></pre>
+	</article>
 
 	<article class="slide">
 		<h1>Can we detect @property with CSS alone?</h1>
+		<pre><code>
+			@supports ( ??? ) {
+				optgroup {
+					font-size: 0;
+				}
+			}
+		</code></pre>
 	</article>
 
 	<article class="isolated demo slide" style="--division: 60" id="supports-atproperty">
@@ -963,7 +1018,7 @@
 			}
 
 			@supports (--color-test: 0) {
-				/* Does not support @property? */
+				/* Does not support @property */
 				:root {
 					background: red;
 				}
@@ -996,6 +1051,7 @@
 			}
 
 			:root {
+				/* Will only inherit if @property is ignored */
 				--no-atproperty-fallback: red;
 			}
 
@@ -1008,11 +1064,47 @@
 	<article class="slide" data-insert="#optgroup"></article>
 </section>
 
+<article class="slide">
+	<h1>Conclusion</h1>
+</article>
+
+<article class="slide" id="pile-of-hacks">
+	<div class="pile-of-poop">
+		<span class="poop"></span><br>
+		<span class="poop"></span><span class="poop"></span><br>
+		<span class="poop"></span><span class="poop"></span><span class="poop"></span><br>
+		<span class="poop"></span><span class="poop"></span><span class="poop"></span><span class="poop"></span>
+	</div>
+	<h1>Is it all a steaming pile of <del>shit</del> hacks?</h1>
+</article>
+
+<article class="slide" id="tradeoffs">
+	<h1>
+		<span class="operand api">API simplicity</span>
+		<span class="gt">></span>
+		<span class="operand implementation">Implementation simplicity</span>
+	</h1>
+	<details class="notes">
+		Yes, a lot of these are hacks. However, that doesn't mean they are always a bad idea.
+		It is often preferable to trade higher implementation complexity to gain lower API complexity.
+		Implementation can always change; it is much harder to change an API.
+		Overly complex APIs cause a lot more pain than overly complex implementations.
+		So do what you gotta do to expose a nice API.
+		Write components whose CSS properties are independent and each control one conceptual thing.
+		Write components that can work with whatever CSS you throw at them.
+		Write components whose CSS properties can be modified at any point without breakage.
+		And if you need to employ hacks to do these things, so be it.
+
+		Note that this is not a license to write crappy code.
+		This is about the many cases where you need to make a tradeoff between the two.
+	</details>
+</article>
+
 <footer class="dark slide dont-resize">
 	<img src="img/mark.svg" class="logo" />
 	<h1>Thank you!</h1>
 	<img src="img/stickers.jpg" class="stickers delayed" alt="">
-	<p class="stickercaption delayed">Want one? Just ask! ---></p>
+	<p class="stickercaption delayed">Stickers! ---></p>
 	<ul>
 		<li style="--icon: '🌍'"><a href="http://mavo.io">lea.verou.me</a></li>
 		<li style="--icon: '✉'"><a href="mailto:lea@verou.me">lea@verou.me</a></li>

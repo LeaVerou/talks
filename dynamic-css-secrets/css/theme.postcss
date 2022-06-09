@@ -175,14 +175,13 @@ section > header.slide,
 	--background-size: 5em;
 	background: var(--icon-svg) 0 0 / var(--background-size) var(--background-size),
 	var(--icon-svg-2) calc(var(--background-size) / 2) calc(var(--background-size) / 2) / var(--background-size) var(--background-size) var(--accent1);
-	color: white
-}
+	color: white;
 
-:is(section > header.slide,.header.thumbnail):target {
+	&:target {
 		display: flex;
 	}
 
-:is(section > header.slide,.header.thumbnail) > h1 {
+	& > h1 {
 		margin: auto;
 		padding: .5em .7em;
 		background: black;
@@ -192,11 +191,11 @@ section > header.slide,
 		letter-spacing: normal;
 	}
 
-:is(section > header.slide,.header.thumbnail) h1[data-group] {
+	& h1[data-group] {
 		--group-name: attr(data-group);
 	}
 
-:is(section > header.slide,.header.thumbnail) h1::before {
+	& h1::before {
 		content: var(--group-name);
 		white-space: nowrap;
 		display: block;
@@ -210,6 +209,7 @@ section > header.slide,
 		text-transform: uppercase;
 		background: var(--group-background, var(--accent2));
 	}
+}
 
 .header.thumbnail {
 	width: 100%;
