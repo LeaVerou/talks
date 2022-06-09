@@ -70,7 +70,7 @@
 	</details>
 </article>
 
-<article class="white slide">
+<article class="white slide heading-1x1">
 	<h1>Custom properties in 2021</h1>
 
 	<h-chart type="pie">
@@ -182,6 +182,8 @@
 				{"type":"pause"},{"type":"next_slide"},
 				{"type":"pause"},{"type":"caret","start":124,"end":124},{"type":"insertText","text":"\n\ttransition: 1s;","split":true},{"type":"pause","delay":3810},{"type":"caret","start":161,"end":171},{"type":"insertText","text":"box-shadow","split":true},{"type":"caret","start":172,"end":172},{"type":"insertText","text":" 0 0 0 1em","split":true},{"type":"caret","start":196,"end":196},{"type":"insertText","text":" inset","split":true},
 
+				{"type":"pause"},{"type":"next_slide"},
+
 				{"type":"pause"},{"type":"caret","start":196,"end":202,"editor":"css"},{"type":"deleteContentBackward"},{"type":"caret","start":173,"end":183},{"type":"deleteContentBackward"},{"type":"caret","start":161,"end":171},{"type":"insertText","text":"background","split":true},{"type":"caret","start":125,"end":141},{"type":"deleteContentBackward","repeat":2},
 				{"type":"pause","delay":5000},{"type":"caret","start":124,"end":128,"editor":"html"},{"type":"insertText","text":"rainbow","split":true},
 				{"type":"pause"},{"type":"caret","start":196,"end":200,"editor":"css"},{"type":"insertText","text":"rainbow","split":true},{"type":"caret","start":216,"end":220},{"type":"insertText","text":"hsl","split":true},{"type":"insertText","text":"()"},{"type":"caret","start":220,"end":220},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","start":224,"end":224},{"type":"insertText","text":"--color-hue","split":true},{"type":"caret","start":236,"end":236},{"type":"insertText","text":" 60% 50%","split":true},{"type":"caret","start":246,"end":246},
@@ -268,7 +270,8 @@
 	<article class="slide" data-insert="#button-implementation"></article>
 
 	<article class="takeaway slide">
-		<h1>With <code>@property</code>, we don’t need fallbacks</h1>
+		<h1 class="md">`@property`-defined initial values take precedence over `var()` fallback</h1>
+
 		<details class="notes">
 			And if you provide one, it will never get used.
 		</details>
@@ -293,6 +296,18 @@
 		<h1>CSS variables as API? <a href="https://shoelace.style/components/button?id=examples" target="shoelace_button" class="go">➡️</a></h1>
 
 		<div class="browser"><iframe src="https://shoelace.style/components/button" frameborder="0" name="shoelace_button"></iframe></div>
+	</article>
+
+	<article class="slide">
+		<h1>Future: Style container queries</h1>
+		<pre><code>
+			@container style(--glossy: on) {
+				button {
+					box-shadow: 0 .1em hsl(0 0% 100% / .4) inset;
+					/* ... */
+				}
+			}
+		</code></pre>
 	</article>
 
 	<article class="minimal demo slide no heading-2x1" id="button-glossy-api" data-type="The API">
@@ -417,15 +432,19 @@
 
 				{"type":"pause"},{"type":"next_slide"},
 
-				{"type":"caret","start":392,"end":395,"editor":"css"},{"type":"insertText","text":"(1.5)"},{"type":"caret","position":392},{"type":"insertText","text":"calc","split":true},{"type":"caret","position":400},{"type":"pause","delay":1000},{"type":"insertText","text":" var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":405},{"type":"insertText","text":"--","split":true},{"type":"pause","delay":1061},{"type":"insertText","text":"go","split":true},{"type":"deleteContentBackward"},{"type":"insertText","text":"lossy, ","split":true},{"type":"pause","delay":1331},{"type":"insertText","text":"-"},{"type":"pause","delay":1108},{"type":"insertText","text":" .4","split":true},{"type":"pause","delay":2000},{"type":"caret","start":451,"end":469},{"type":"pause","delay":1000},{"type":"deleteContentBackward","repeat":2},{"type":"caret","start":424,"end":452},{"type":"pause","delay":1500},{"type":"deleteContentBackward"},
+				{"type":"pause"},{"type":"caret","start":392,"end":395,"editor":"css"},{"type":"insertText","text":"(1.5)"},{"type":"caret","position":392},{"type":"insertText","text":"calc","split":true},{"type":"caret","position":400},{"type":"pause","delay":1000},{"type":"insertText","text":" var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":405},{"type":"insertText","text":"--","split":true},{"type":"pause","delay":1061},{"type":"insertText","text":"go","split":true},{"type":"deleteContentBackward"},{"type":"insertText","text":"lossy, ","split":true},{"type":"pause","delay":1331},{"type":"insertText","text":"-"},{"type":"pause","delay":1108},{"type":"insertText","text":" .4","split":true},{"type":"pause","delay":2000},{"type":"caret","start":451,"end":469},{"type":"pause","delay":1000},{"type":"deleteContentBackward","repeat":2},{"type":"caret","start":424,"end":452},{"type":"pause","delay":1500},{"type":"deleteContentBackward"},
 
 				{"type":"pause"},{"type":"next_slide"},
 
-				{"type":"caret","editor":"css","position":495},{"type":"pause","delay":1474},{"type":"caret","start":495,"end":497},{"type":"pause","delay":2656},{"type":"caret","start":392,"end":421},{"type":"pause","delay":2468},{"type":"caret","position":495},{"type":"pause","delay":2071},{"type":"caret","start":495,"end":497},{"type":"insertText","text":"calc(1.5 var(--glossy, - .4))"},{"type":"caret","start":500,"end":503},{"type":"insertText","text":".3","split":true},{"type":"pause","delay":1329},{"type":"caret","start":517,"end":521},{"type":"insertText","text":"+ .3","split":true},{"type":"pause","delay":2000},{"type":"caret","start":495,"end":523},{"type":"pause","delay":1500},{"type":"caret","start":544,"end":546},{"type":"pause","delay":2000},{"type":"insertText","text":"calc(.3 var(--glossy, + .3))"},{"type":"pause","delay":1500},{"type":"caret","start":566,"end":567},{"type":"insertText","text":"-"},{"type":"caret","start":569,"end":570},{"type":"insertText","text":"1"},{"type":"pause","delay":1524},{"type":"caret","start":580,"end":698},{"type":"pause","delay":1040},{"type":"deleteContentBackward","repeat":2},
+				{"type":"pause"},{"type":"caret","editor":"css","position":495},{"type":"pause","delay":1474},{"type":"caret","start":495,"end":497},{"type":"pause","delay":2656},{"type":"caret","start":392,"end":421},{"type":"pause","delay":2468},{"type":"caret","position":495},{"type":"pause","delay":2071},{"type":"caret","start":495,"end":497},{"type":"insertText","text":"calc(1.5 var(--glossy, - .4))"},{"type":"caret","start":500,"end":503},{"type":"insertText","text":".3","split":true},{"type":"pause","delay":1329},{"type":"caret","start":517,"end":521},{"type":"insertText","text":"+ .3","split":true},{"type":"pause","delay":2000},{"type":"caret","start":495,"end":523},{"type":"pause","delay":1500},{"type":"caret","start":544,"end":546},{"type":"pause","delay":2000},{"type":"insertText","text":"calc(.3 var(--glossy, + .3))"},{"type":"pause","delay":1500},{"type":"caret","start":566,"end":567},{"type":"insertText","text":"-"},{"type":"caret","start":569,"end":570},{"type":"insertText","text":"1"},{"type":"pause","delay":1524},{"type":"caret","start":580,"end":698},{"type":"pause","delay":1040},{"type":"deleteContentBackward","repeat":2},
 
 				{"type":"pause"},{"type":"next_slide"},
 
-				{"type":"pause"},{"type":"caret","editor":"css","position":8},{"type":"insertText","text":"\n\t","split":true},{"type":"pause","delay":1851},{"type":"caret","position":32},{"type":"insertText","text":"\n\t","split":true},{"type":"pause","delay":2023},{"type":"caret","position":8},{"type":"insertText","text":"\n\t--ON: initial;\n\t--OFF: ;","split":true},{"type":"pause","delay":1594},{"type":"caret","position":46},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":50},{"type":"insertText","text":"--o","split":true},{"type":"deleteContentBackward"},{"type":"insertText","text":"OFF","split":true},{"type":"pause","delay":1341},{"type":"caret","start":107,"end":114},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":111},{"type":"insertText","text":"--ON","split":true}
+				{"type":"pause"},{"type":"caret","editor":"css","position":8},{"type":"insertText","text":"\n\t","split":true},{"type":"pause","delay":1851},{"type":"caret","position":32},{"type":"insertText","text":"\n\t","split":true},{"type":"pause","delay":2023},{"type":"caret","position":8},{"type":"insertText","text":"\n\t--ON: initial;\n\t--OFF: ;","split":true},{"type":"pause","delay":1594},{"type":"caret","position":46},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":50},{"type":"insertText","text":"--o","split":true},{"type":"deleteContentBackward"},{"type":"insertText","text":"OFF","split":true},{"type":"pause","delay":1341},{"type":"caret","start":107,"end":114},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":111},{"type":"insertText","text":"--ON","split":true},
+
+				{"type":"pause"},{"type":"next_slide"},
+
+				{"type":"pause"},{"type":"caret","editor":"css","position":8},{"type":"insertText","text":"\n\t","split":true},{"type":"pause","delay":1936},{"type":"caret","position":32},{"type":"insertText","text":"\n\t","split":true},{"type":"deleteContentBackward"},{"type":"caret","position":8},{"type":"insertText","text":"\n\t--ON: initial;\n\t--OFF: ;","split":true},{"type":"pause","delay":1687},{"type":"caret","position":46},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":50},{"type":"insertText","text":"--OFF","split":true},{"type":"caret","start":57,"end":68},{"type":"deleteContentBackward"},{"type":"pause","delay":1665},{"type":"caret","start":95,"end":102},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":99},{"type":"insertText","text":"--ON","split":true},{"type":"caret","start":105,"end":114},{"type":"deleteContentBackward"}
 			]
 		</script>
 	</article>
@@ -503,6 +522,8 @@
 			</div>
 		</div>
 	</article>
+
+	<article class="slide" data-insert="#button-glossy-implementation"></article>
 
 	<article class="slide" id="gradient-interpolation">
 		<h1>Space Toggle for progressive enhancement</h1>
@@ -592,7 +613,7 @@
 
 				{"type":"pause"},{"type":"next_slide"},
 
-				{"type":"caret","start":131,"end":131,"editor":"css"},{"type":"insertText","text":"\n\t","split":true},{"type":"insertText","text":"--h","split":true},{"type":"insertText","text":": ; /* ","split":true},{"type":"insertText","text":"50 to 190 */","split":true},{"type":"caret","position":138},{"type":"insertText","text":"calc","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":143},{"type":"pause","delay":1500},{"type":"insertText","text":"50 + ","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":149},{"type":"insertText","text":"190 - 50","split":true},{"type":"pause","delay":1222},{"type":"caret","position":158},{"type":"insertText","text":" * var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":165},{"type":"insertText","text":"--p","split":true},{"type":"caret","position":169},{"type":"insertText","text":" / 100","split":true},{"type":"pause","delay":2667},{"type":"caret","position":193},{"type":"pause","delay":1168},{"type":"insertText","text":"\n\t","split":true},{"type":"pause","delay":1587},{"type":"insertText","text":"--l: calc","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":205},{"type":"insertText","text":");","split":true},{"type":"deleteContentBackward","repeat":2},{"type":"caret","position":206},{"type":"insertText","text":"; /* ","split":true},{"type":"pause","delay":1265},{"type":"insertText","text":"50% to 40% */","split":true},{"type":"pause","delay":1651},{"type":"caret","position":205},{"type":"pause","delay":1160},{"type":"insertText","text":"50%","split":true},{"type":"pause","delay":1728},{"type":"insertText","text":" + ","split":true},{"type":"pause","delay":1624},{"type":"insertText","text":"()"},{"type":"caret","position":212},{"type":"pause","delay":1555},{"type":"insertText","text":"40% - 50%","split":true},{"type":"pause","delay":1197},{"type":"caret","position":222},{"type":"insertText","text":" * ","split":true},{"type":"pause","delay":2201},{"type":"caret","start":161,"end":175},{"type":"pause","delay":1033},{"type":"caret","position":225},{"type":"insertText","text":"var(--p) / 100"},{"type":"pause","delay":2512},{"type":"caret","position":258},{"type":"insertText","text":"\n\tbackground: hsl","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":276},{"type":"pause","delay":1165},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":280},{"type":"insertText","text":"--h","split":true},{"type":"pause","delay":1089},{"type":"caret","position":284},{"type":"insertText","text":" 100% var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":294},{"type":"insertText","text":"--l","split":true},{"type":"caret","position":299},{"type":"insertText","text":";"}
+				{"type":"pause"},{"type":"caret","start":131,"end":131,"editor":"css"},{"type":"insertText","text":"\n\t","split":true},{"type":"insertText","text":"--h","split":true},{"type":"insertText","text":": ; /* ","split":true},{"type":"insertText","text":"50 to 190 */","split":true},{"type":"caret","position":138},{"type":"insertText","text":"calc","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":143},{"type":"pause","delay":1500},{"type":"insertText","text":"50 + ","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":149},{"type":"insertText","text":"190 - 50","split":true},{"type":"pause","delay":1222},{"type":"caret","position":158},{"type":"insertText","text":" * var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":165},{"type":"insertText","text":"--p","split":true},{"type":"caret","position":169},{"type":"insertText","text":" / 100","split":true},{"type":"pause","delay":2667},{"type":"caret","position":193},{"type":"pause","delay":1168},{"type":"insertText","text":"\n\t","split":true},{"type":"pause","delay":1587},{"type":"insertText","text":"--l: calc","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":205},{"type":"insertText","text":");","split":true},{"type":"deleteContentBackward","repeat":2},{"type":"caret","position":206},{"type":"insertText","text":"; /* ","split":true},{"type":"pause","delay":1265},{"type":"insertText","text":"50% to 40% */","split":true},{"type":"pause","delay":1651},{"type":"caret","position":205},{"type":"pause","delay":1160},{"type":"insertText","text":"50%","split":true},{"type":"pause","delay":1728},{"type":"insertText","text":" + ","split":true},{"type":"pause","delay":1624},{"type":"insertText","text":"()"},{"type":"caret","position":212},{"type":"pause","delay":1555},{"type":"insertText","text":"40% - 50%","split":true},{"type":"pause","delay":1197},{"type":"caret","position":222},{"type":"insertText","text":" * ","split":true},{"type":"pause","delay":2201},{"type":"caret","start":161,"end":175},{"type":"pause","delay":1033},{"type":"caret","position":225},{"type":"insertText","text":"var(--p) / 100"},{"type":"pause","delay":2512},{"type":"caret","position":258},{"type":"insertText","text":"\n\tbackground: hsl","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":276},{"type":"pause","delay":1165},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":280},{"type":"insertText","text":"--h","split":true},{"type":"pause","delay":1089},{"type":"caret","position":284},{"type":"insertText","text":" 100% var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":294},{"type":"insertText","text":"--l","split":true},{"type":"caret","position":299},{"type":"insertText","text":";"}
 			]
 		</script>
 	</article>
@@ -601,14 +622,14 @@
 		<table>
 			<tr>
 				<td>Number → unit: </td>
-				<td><code class="language-css">calc(var(--foo) * 1px)</code></td>
+				<td><code class="language-css">calc(var(--foo) * 1%)</code></td>
 			</tr>
 			<tr>
 				<td>Unit → number:</td>
 				<td>
 					<span class="poop"></span><span class="poop"></span><span class="poop"></span>
 					<div class="delayed">
-						Future: <code>calc(var(--foo) / 1px)</code>
+						Future: <code>calc(var(--foo) / 1%)</code>
 					</div>
 				</td>
 			</tr>
@@ -789,6 +810,70 @@
 		<details class="notes">
 			Useful for exposing a nice API or simply for minimizing the number of properties you need to register
 		</details>
+	</article>
+
+	<article class="isolated horizontal demo slide" id="svg-eyes">
+		<textarea class="language-css">
+			.iris {
+				cx: 50px;
+			}
+		</textarea>
+		<textarea class="language-html">
+			<svg viewBox="0 0 250 100">
+				<clipPath id="white-clip">
+					<path id="white-path" d="M1,50 a65,80 0 0,1 100,0 a80,80 0 0,1 -100,0 Z" />
+				</clipPath>
+				<use id="eye-white" href="#white-path" />
+				<use href="#eye-white" x="148" />
+				<circle id="iris" class="iris" cx="50" cy="45" r="18" clip-path="url(#white-clip)" />
+				<use class="iris" href="#iris" x="148" />
+			</svg>
+		</textarea>
+		<textarea class="language-js">
+
+		</textarea>
+		<style data-slide media="not all" class="demo">
+			:root {
+				background: hsl(20, 40%, 70%);
+			}
+
+			svg {
+				width: 90vw;
+			}
+
+			#eye-white {
+				fill: white;
+			}
+
+			.iris {
+				stroke: hsl(200, 50%, 50%);
+				stroke-width: 14;
+				fill: black;
+			}
+
+			.second-eye {
+				x: 150px;
+			}
+		</style>
+		<script class="demo-script" type="application/json">
+			[{"type":"caret","editor":"css","position":7},{"type":"insertText","text":"\n\t--look: .5;","split":true},{"type":"pause","delay":1182},{"type":"caret","start":26,"end":30},{"type":"insertText","text":"(50px)"},{"type":"caret","position":26},{"type":"insertText","text":"calc","split":true},{"type":"caret","position":31},{"type":"insertText","text":"25px + ","split":true},{"type":"caret","position":42},{"type":"insertText","text":" * var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":49},{"type":"insertText","text":"--look","split":true},{"type":"pause","delay":3941},{"type":"caret","position":18},{"type":"pause","delay":1197},{"type":"caret","start":18,"end":19},{"type":"insertText","text":"1"},{"type":"pause","delay":1422},{"type":"caret","start":17,"end":19},{"type":"insertText","text":"0"},{"type":"pause","delay":1380},{"type":"caret","start":17,"end":18},{"type":"insertText","text":"1"},{"type":"caret","start":17,"end":18},{"type":"insertText","text":".5","split":true},
+
+			{"type": "pause"},
+			{"type":"caret","start":0,"end":0,"editor":"js"},{"type":"insertText","text":"let root = document.documentElement;\n\ndocument.addEventListener","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":64},{"type":"insertText","text":"\"\""},{"type":"caret","position":65},{"type":"insertText","text":"pointermove","split":true},{"type":"caret","position":77},{"type":"insertText","text":", evt => ","split":true},{"type":"insertText","text":"{}"},{"type":"caret","position":87},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","position":91},{"type":"insertText","text":";"},{"type":"caret","position":88},{"type":"insertText","text":"\troot.style.a","split":true},{"type":"deleteContentBackward"},{"type":"insertText","text":"setProperty","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":112},{"type":"insertText","text":"\"\""},{"type":"caret","position":113},{"type":"insertText","text":"--mouse-x","split":true},{"type":"caret","position":123},{"type":"insertText","text":", evt.clientX / evt","split":true},{"type":"deleteContentBackward","repeat":3},{"type":"insertText","text":"innerWidth","split":true},{"type":"caret","position":150},{"type":"insertText","text":";"},{"type":"pause","delay":1016},{"type":"caret","position":151},{"type":"insertText","text":"\n\t","split":true},{"type":"insertText","text":"root.style.setProperty(\"--mouse-x\", evt.clientX / innerWidth);"},{"type":"pause","delay":1260},{"type":"caret","start":185,"end":186},{"type":"insertText","text":"y"},{"type":"caret","start":199,"end":200},{"type":"insertText","text":"Y"},{"type":"pause","delay":1266},{"type":"caret","start":208,"end":213},{"type":"insertText","text":"Height","split":true},{"type":"pause","delay":2203},{"type":"key","event":"keydown","key":"Enter","code":"Enter","altKey":false,"shiftKey":false,"ctrlKey":false,"metaKey":true},{"type":"pause","delay":2000},{"type":"caret","editor":"css","position":55},{"type":"pause","delay":1750},{"type":"caret","start":17,"end":19},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":21},{"type":"insertText","text":"--mouse-x","split":true}
+			]
+		</script>
+		<details class="notes">
+			Using variables for data also helps make code more readable.
+			It makes much more sense to change a `--look` variable from
+			`0` to `1` than from `25px` to `75px`,
+			and affords more flexibility for redesigns.
+			However, this means we need to map that number to the value we need
+			at the point of usage. How can we do that?
+		</details>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>Range mapping allows you to decouple input from output</h1>
 	</article>
 </section>
 

@@ -1,9 +1,9 @@
 import Incrementable from "https://projects.verou.me/incrementable/incrementable.mjs";
 import Replayer from "https://rety.verou.me/src/replayer.js";
 
-// Replayer.customActions.next_slide = function({replayer, editor, action}) {
-// 	Inspire.next();
-// }
+Replayer.customActions.next_slide = function({replayer, editor, action}) {
+	Inspire.next();
+}
 
 self.Incrementable = Incrementable;
 
