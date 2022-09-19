@@ -1,4 +1,4 @@
-import Incrementable from "https://projects.verou.me/incrementable/incrementable.mjs";
+import Incrementable from "https://incrementable.verou.me/incrementable.mjs";
 import Replayer from "https://rety.verou.me/src/replayer.js";
 
 Replayer.customActions.next_slide = function({replayer, editor, action}) {

@@ -18,7 +18,7 @@
 
 <header id="intro" class="slide dont-resize">
 	<h1>Dynamic CSS
-		<div class="secrets">Secrets</div>
+		<div class="secrets"><span>Secrets</span><span class="note">(abridged)</span></div>
 	</h1>
 	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
 </header>
@@ -33,8 +33,8 @@
 	<ul class="delayed-children">
 		<li><strong>CSS WG</strong> Invited Expert</li>
 		<li><a href="https://lea.verou.me/publications/#specifications">Co-editor of CSS Color, CSS Images, CSS Backgrounds & Borders specs</a></li>
-		<li><strong>W3C TAG</strong> Member</li>
-		<li>Usable Programming @ <strong>MIT</strong> (research & teaching)</li>
+		<li><strong>W3C Technical Architecture Group (TAG)</strong> Member</li>
+		<li>Usability researcher @ <strong>MIT</strong> (research & teaching)</li>
 		<li>Started <a href="https://github.com/leaverou">dozens of open source projects</a>, some used on <a href="https://www.npmjs.com/package/prismjs">millions of websites</a></li>
 	</ul>
 </article>
@@ -113,11 +113,14 @@
 </article>
 
 <article class="slide" id="topics">
-	<h1>Today’s talk:<br>A story in four acts</h1>
+	<h1>Today’s talk:<br>A story in three acts</h1>
 	<script type="module">
-		for (let slide of document.querySelectorAll("header.part.slide")) {
+		for (let slide of document.querySelectorAll("header.part.slide, #conclusion.slide")) {
 			let article = document.createElement("article");
-			article.className = "header thumbnail delayed";
+			article.className = (slide.matches("header") ? "header " : "") +  "thumbnail delayed";
+			if (slide.id) {
+				article.dataset.id = slide.id;
+			}
 			article.style.cssText = slide.style.cssText;
 			article.innerHTML = slide.innerHTML;
 			topics.append(article);
@@ -269,14 +272,62 @@
 
 	<article class="slide" data-insert="#button-implementation"></article>
 
-	<article class="takeaway slide">
+	<!-- <article class="takeaway slide">
 		<h1 class="md">`@property`-defined initial values take precedence over `var()` fallback</h1>
+
+		<details class="notes">
+			And if you provide one, it will never get used.
+		</details>
+	</article> -->
+
+	<article class="takeaway slide">
+		<h1 class="md">`@property` is global
+			<div class="delayed note">(except in Shadow trees)</div>
+		</h1>
+
 
 		<details class="notes">
 			And if you provide one, it will never get used.
 		</details>
 	</article>
 
+
+	<article class="browser-support slide">
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th><img src="../shared/img/chrome-logo.svg" alt="Chrome"></th>
+					<th><img src="../shared/img/firefox-logo.svg" alt="Firefox"></th>
+					<th><img src="../shared/img/edge-logo.svg" alt="Edge"></th>
+					<th><img src="../shared/img/safari-logo.png" alt="Safari"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th><a href="https://caniuse.com/css-variables" target="_blank">CSS Variables</a></th>
+					<td>49</td>
+					<td>31</td>
+					<td>15</td>
+					<td>9.1</td>
+				</tr>
+				<tr>
+					<th><a href="https://caniuse.com/mdn-css_at-rules_property">@property</a></th>
+					<td>85</td>
+					<td></td>
+					<td>85</td>
+					<td></td>
+				</tr>
+				<tr>
+					<th><a href="https://caniuse.com/mdn-api_css_registerproperty">CSS.registerProperty()</a></th>
+					<td>79</td>
+					<td></td>
+					<td>79</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
 </section>
 
 <section>
@@ -293,7 +344,7 @@
 	</article>
 
 	<article class="website slide">
-		<h1>CSS variables as API? <a href="https://shoelace.style/components/button?id=examples" target="shoelace_button" class="go">➡️</a></h1>
+		<h1>CSS variables as API? <a href="https://shoelace.style/components/button?id=sizes" target="shoelace_button" class="go">➡️</a></h1>
 
 		<div class="browser"><iframe src="https://shoelace.style/components/button" frameborder="0" name="shoelace_button"></iframe></div>
 	</article>
@@ -361,15 +412,30 @@
 	</article>
 
 	<article class="minimal demo slide" id="space-toggle">
-		<h1>Space Toggle</h1>
+		<button>Space Toggle</button>
 		<textarea class="language-css">
-			h1 {
-				--foo: ;
-				background: var(--foo, linear-gradient(white, transparent)) #f06;
+			button {
+				--glossy: ;
+				background: var(--glossy, linear-gradient(#fff9, #0000)) #f06;
 			}
 		</textarea>
 	</article>
 
+	<article class="minimal demo slide" id="space-toggle-math">
+		<button>Space Toggle</button>
+		<textarea class="language-css">
+			button {
+				--glossy: ;
+				line-height: calc(1.5 var(--glossy, - .4));
+			}
+		</textarea>
+		<style class="demo">
+			button {
+				background: #f06;
+			}
+		</style>
+	</article>
+<!--
 	<article class="isolated demo slide" id="button-glossy-implementation" style="--division: 78">
 		<textarea class="language-html">
 			<button>Click me</button>
@@ -490,7 +556,7 @@
 
 		<pre><code>
 			/* Fictional (future?) syntax: */
-			line-height: if(--glossy = initial, 1.1, 1.5);
+			line-height: if(--glossy = on, 1.1, 1.5);
 
 			/* Space toggle version: */
 			line-height: calc(1.5 var(--glossy, - .4));
@@ -498,6 +564,14 @@
 	</article>
 
 	<article class="slide" data-insert="#button-glossy-implementation"></article>
+ -->
+	<article class="slide">
+		<h1>Extreme Space Toggle</h1>
+		<a href="https://codetea.com/minesweeper-implemented-in-css-html-using-the-space-toggle-trick/"><img src="img/css-sweeper.png" alt=""></a>
+		<p class="credit">Made by [Jane Ori](https://twitter.com/Jane0ri)</p>
+	</article>
+
+	<!-- <article class="slide" data-insert="#button-glossy-implementation"></article> -->
 
 	<article class="slide" id="space-toggle-prod">
 		<h1>Space toggle in production</h1>
@@ -523,22 +597,43 @@
 		</div>
 	</article>
 
-	<article class="slide" data-insert="#button-glossy-implementation"></article>
-
 	<article class="slide" id="gradient-interpolation">
-		<h1>Space Toggle for progressive enhancement</h1>
+		<h1>Gradient interpolation in color space</h1>
 		<pre><code>
-			:root { --in-oklab: ; }
-
-			@supports (
-				background:
-				linear-gradient(in oklab, red, tan)
-			) {
-				:root { --in-oklab: in oklab,; }
+			.foo {
+				background: linear-gradient(#f00, #0f0);
 			}
 
-			/* Usage: */
-			background: linear-gradient(var(--in-oklab) #f00, #0f0);
+			@supports (background: linear-gradient(in lab, red, tan)) {
+				.foo {
+					background: linear-gradient(in lab, #f00, #0f0);
+				}
+			}
+		</code></pre>
+		<div class="gradient srgb">
+			<img src="../reusable/img/chrome-logo.svg" alt="">
+		</div>
+		<div class="gradient oklab">
+			<img src="../reusable/img/safari-logo.png" alt="">
+		</div>
+	</article>
+
+	<article class="slide" id="gradient-interpolation-st">
+		<h1>Space Toggle for progressive enhancement</h1>
+		<pre><code>
+			:root {
+				--in-lab: ;
+			}
+
+			@supports (background: linear-gradient(in lab, red, tan)) {
+				:root {
+					--in-lab: in lab, ;
+				}
+			}
+
+			.foo {
+				background: linear-gradient(var(--in-lab) #f00, #0f0);
+			}
 		</code></pre>
 		<div class="gradient srgb">
 			<img src="../reusable/img/chrome-logo.svg" alt="">
@@ -551,11 +646,7 @@
 		</details>
 	</article>
 
-	<article class="slide">
-		<h1>Extreme Space Toggle</h1>
-		<a href="https://codetea.com/minesweeper-implemented-in-css-html-using-the-space-toggle-trick/"><img src="img/css-sweeper.png" alt=""></a>
-		<p class="credit">Made by [Jane Ori](https://twitter.com/Jane0ri)</p>
-	</article>
+
 </section>
 
 <section>
@@ -602,7 +693,7 @@
 			[
 				{"type":"caret","start":39,"end":39,"editor":"css"},{"type":"insertText","text":"\n\n.bar-chart > div ","split":true},{"type":"deleteContentBackward"},{"type":"insertText","text":"::before ","split":true},"{}",{"type":"caret","start":67,"end":67},{"type":"insertText","text":"\n\n","split":true},{"type":"caret","start":68,"end":68},{"type":"insertText","text":"\tcontent: var","split":true},"()",{"type":"caret","start":82,"end":82},{"type":"insertText","text":"--p","split":true},{"type":"caret","start":86,"end":86},";",
 				{"type":"pause","delay":5000},{"type":"caret","start":45,"end":45,"editor":"html"},{"type":"deleteContentBackward"},{"type":"caret","start":76,"end":76},{"type":"deleteContentBackward"},{"type":"caret","start":106,"end":106},{"type":"deleteContentBackward"},{"type":"caret","start":136,"end":136},{"type":"deleteContentBackward"},{"type":"caret","start":169,"end":169},{"type":"deleteContentBackward"},{"type":"caret","start":199,"end":199},{"type":"deleteContentBackward"},
-				{"type":"pause","delay":5000},{"type":"caret","start":28,"end":36,"editor":"css"},"(var(--p))",{"type":"caret","start":28,"end":28},{"type":"insertText","text":"calc","split":true},{"type":"caret","start":41,"end":41},{"type":"insertText","text":" * 1%","split":true},
+				{"type":"caret","start":28,"end":36,"editor":"css"},"(var(--p))",{"type":"caret","start":28,"end":28},{"type":"insertText","text":"calc","split":true},{"type":"caret","start":41,"end":41},{"type":"insertText","text":" * 1%","split":true},
 				{"type":"pause"},{"type":"next_slide"},
 				{"type":"pause","delay":5000},{"type":"caret","start":78,"end":78},{"type":"insertText","text":"\n\tcounter-reset: p var","split":true},"()",{"type":"caret","start":101,"end":101},{"type":"insertText","text":"--p","split":true},{"type":"caret","start":105,"end":105},{"type":"insertText","text":";","split":true},
 				{"type":"caret","start":117,"end":125},{"type":"insertText","text":"counter","split":true},"()",{"type":"caret","start":125,"end":125},"p", {"type":"caret","start":127,"end":127}," ","\"\"",{"type":"caret","start":129,"end":129}," ",{"type":"deleteContentBackward"},"%",
@@ -777,9 +868,10 @@
 			line-height: calc(1.5 var(--glossy, - .4));
 
 			<span class="delayed">/* Linear mapping version: */
+			--not-glossy: calc(1 - var(--glossy));
 			line-height: calc(
 				var(--glossy)       * 1.1 +
-				(1 - var(--glossy)) * 1.5
+				var(--not-glossy)   * 1.5
 			);</span>
 		</code></pre>
 	</article>
@@ -876,7 +968,7 @@
 		<h1>Range mapping allows you to decouple input from output</h1>
 	</article>
 </section>
-
+<!--
 <section>
 	<header class="part slide" style="--icon: 🗯; --icon-2: 💬; background-color: var(--accent4);">
 		<h1 data-group="Act IV">The Speech Bubble</h1>
@@ -1026,43 +1118,6 @@
 		</script>
 	</article>
 
-	<article class="browser-support slide">
-		<table>
-			<thead>
-				<tr>
-					<th></th>
-					<th><img src="../shared/img/chrome-logo.svg" alt="Chrome"></th>
-					<th><img src="../shared/img/firefox-logo.svg" alt="Firefox"></th>
-					<th><img src="../shared/img/edge-logo.svg" alt="Edge"></th>
-					<th><img src="../shared/img/safari-logo.png" alt="Safari"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th><a href="https://caniuse.com/css-variables" target="_blank">CSS Variables</a></th>
-					<td>49</td>
-					<td>31</td>
-					<td>15</td>
-					<td>9.1</td>
-				</tr>
-				<tr>
-					<th><a href="https://caniuse.com/mdn-css_at-rules_property">@property</a></th>
-					<td>85</td>
-					<td></td>
-					<td>85</td>
-					<td></td>
-				</tr>
-				<tr>
-					<th><a href="https://caniuse.com/mdn-api_css_registerproperty">CSS.registerProperty()</a></th>
-					<td>79</td>
-					<td></td>
-					<td>79</td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
-	</article>
-
 	<article class="slide language-javascript">
 		<h1>Detect @property support</h1>
 		<pre><code>
@@ -1148,8 +1203,8 @@
 
 	<article class="slide" data-insert="#optgroup"></article>
 </section>
-
-<article class="slide">
+-->
+<article class="slide" id="conclusion">
 	<h1>Conclusion</h1>
 </article>
 
@@ -1180,8 +1235,10 @@
 		Write components whose CSS properties can be modified at any point without breakage.
 		And if you need to employ hacks to do these things, so be it.
 
-		Note that this is not a license to write crappy code.
+		This is not a license to write crappy code.
 		This is about the many cases where you need to make a tradeoff between the two.
+
+		But ultimately, every case is different, and the final decision is yours.
 	</details>
 </article>
 
@@ -1201,7 +1258,7 @@
 
 <script src="../shared/js/bliss.shy.min.js"></script>
 <script src="../shared/js/prism.js"></script>
-<script src="https://projects.verou.me/incrementable/incrementable.js" type="module"></script>
+<script src="https://incrementable.verou.me/incrementable.js" type="module"></script>
 <script src="https://inspirejs.org/inspire.mjs" type="module"></script>
 <script src="talk.js" type="module"></script>
 

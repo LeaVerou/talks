@@ -21,8 +21,17 @@
 		letter-spacing: -.06ch
 	}
 
-	#intro h1 .secrets {
+	#intro h1 .secrets > span:first-child {
 			mix-blend-mode: difference;
+		}
+
+	#intro h1 .note {
+			font-weight: normal;
+			font-size: 50%;
+			color: var(--accent4);
+			mix-blend-mode: multiply;
+			vertical-align: super;
+			margin-left: .2em;
 		}
 
 	#intro .attribution {
@@ -1056,17 +1065,20 @@ a.go:active {
 		background: white;
 	}
 
-#space-toggle .editor-container {
+[id^="space-toggle"] .editor-container {
 		width: 68ch;
 		height: 6.5em;
+		margin-top: 3em;
 		order: 2;
 	}
 
-#space-toggle h1 {
-		padding: 1em;
+[id^="space-toggle"] button {
+		padding: .8em 1em;
 		border-radius: .1em;
 		font-size: 200%;
-		letter-spacing: -.02em;;
+		letter-spacing: -.02em;
+		border: none;
+		font-weight: bold;
 	}
 
 #iacvt {
@@ -1177,35 +1189,42 @@ a.go:active {
 	--ribbon-offset: -4em;
 }
 
-#gradient-interpolation {
+[id^="gradient-interpolation"] {
 	display: grid;
-	grid-template: 1fr / auto 1fr 1fr;
+	grid-template-rows: auto 1fr;
+	grid-template-columns: auto 1fr 1fr;
 	align-items: stretch;
 	justify-content: stretch;
-	grid-gap: 0.5em
+	grid-gap: 2em 1em
 }
 
-#gradient-interpolation h1 {
+[id^="gradient-interpolation"] h1 {
 		grid-column-end: span 3;
 	}
 
-#gradient-interpolation .gradient {
+[id^="gradient-interpolation"] .gradient {
 		padding: .5em;
 		border-radius: .1em
 	}
 
-#gradient-interpolation .gradient.srgb {
+[id^="gradient-interpolation"] .gradient.srgb {
 			background: linear-gradient(red, rgb(50% 50% 0%), lime);
 		}
 
-#gradient-interpolation .gradient.oklab {
+[id^="gradient-interpolation"] .gradient.oklab {
 			background: linear-gradient(red, rgb(81.53% 66.09% 0.12%), lime);
 		}
 
-#gradient-interpolation .gradient img {
+[id^="gradient-interpolation"] .gradient img {
 			position: relative;
 			top: -3em;
 		}
+
+[id^="gradient-interpolation"] pre {
+		font-size: 80%;
+		align-self: center;
+		margin-left: 1em;
+	}
 
 @property --int-p {
 	syntax: "<integer>";
@@ -1453,15 +1472,24 @@ a.go:active {
 		justify-content: center;
 	}
 
-#conclusion {
+#topics > article {
+		width: 100%;
+		height: 100%;
+	}
+
+#conclusion, [data-id=conclusion] {
 	justify-content: start;
 	background: url(../img/the-end.avif) no-repeat center / cover
 }
 
-#conclusion h1 {
+:is(#conclusion,[data-id=conclusion]) h1 {
 		margin-top: .4em;
-		font-size: 500%;
+		font-size: 280%;
 		color: #325974;
+	}
+
+#conclusion:is(#conclusion,[data-id=conclusion]) h1 {
+		font-size: 500%;
 	}
 
 #pile-of-hacks del {
