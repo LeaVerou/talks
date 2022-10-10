@@ -18,7 +18,7 @@
 
 <header id="intro" class="slide dont-resize">
 	<h1>Dynamic CSS
-		<div class="secrets"><span>Secrets</span><span class="note">(abridged)</span></div>
+		<div class="secrets"><span>Secrets</span></div>
 	</h1>
 	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
 </header>
@@ -70,10 +70,10 @@
 	</details>
 </article>
 
-<article class="white slide heading-1x1">
+<article class="white slide heading-1x1" style="overflow: hidden">
 	<h1>Custom properties in 2021</h1>
 
-	<h-chart type="pie">
+	<h-chart type="pie" style="transform-origin: top; transform: scale(.9); font-weight: normal">
 		<table id="simple-data">
 			<thead>
 				<tr>
@@ -1225,10 +1225,11 @@
 		<span class="operand implementation">Implementation simplicity</span>
 	</h1>
 	<details class="notes">
-		Yes, a lot of these are hacks. However, that doesn't mean they are always a bad idea.
+		Yes, a lot of these were hacks. That doesn't mean they are always a bad idea.
 		It is often preferable to trade higher implementation complexity to gain lower API complexity.
 		Implementation can always change; it is much harder to change an API.
-		Overly complex APIs cause a lot more pain than overly complex implementations.
+		Overcomplicated APIs cause a lot more collective pain than overcomplicated implementations,
+		because there are always more API users than API developers.
 		So do what you gotta do to expose a nice API.
 		Write components whose CSS properties are independent and each control one conceptual thing.
 		Write components that can work with whatever CSS you throw at them.
