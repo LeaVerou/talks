@@ -321,6 +321,43 @@ span.poop {
 		           caret .9s step-start calc(var(--lengthD) * .2 / .9);
 	}
 
+#stateofcss {
+	padding: 0;
+	background: #3E3036;
+	cursor: pointer;
+	overflow: hidden;
+
+	& > a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		& img {
+			display: flex;
+			max-width: 100vw;
+			max-height: 100vh;
+		}
+	}
+
+	& h1 {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: rgb(0 0 0 / .4);
+		backdrop-filter: blur(5px);
+		padding: .3em .8em;
+		border-radius: .1em;
+		font-weight: 300;
+		font-size: 200%;
+
+		& strong {
+			display: block;
+			font-size: 200%;
+		}
+	}
+}
+
 .background.slide {
 	background: center / cover;
 }
@@ -1089,6 +1126,37 @@ a.go {
 	}
 }
 
+.delayed.strike {
+	opacity: 1;
+
+	&.current, &.displayed {
+		text-decoration: line-through;
+		font-style: italic;
+
+		&.displayed {
+			opacity: .5;
+		}
+	}
+}
+
+.fallbacks.slide {
+	& pre {
+		overflow: visible;
+	}
+
+	& .result {
+		position: absolute;
+		inset: 0;
+		left: auto;
+		width: 10em;
+		transition: width .2s;
+
+		&.delayed:not(.current, .displayed) {
+			width: 0;
+		}
+	}
+}
+
 [id^="space-toggle"] {
 	& .editor-container {
 		width: 68ch;
@@ -1119,54 +1187,54 @@ a.go {
 		overflow: visible;
 		white-space: pre-wrap;
 	}
+}
 
-	& .delayed.iacvt {
-		&:not(.displayed) {
-			opacity: 1;
+.delayed.iacvt {
+	&:not(.displayed) {
+		opacity: 1;
+	}
+
+	&.current {
+		position: relative;
+		color: red;
+		outline: .1em solid;
+		outline-offset: .2em;
+		border-radius: .000001em;
+
+		&::after {
+			content: "IACVT";
+			position: absolute;
+			right: 0;
+			bottom: calc(100% + .3em);
+			font: bold 100% var(--font-body);
+			text-shadow: 0 0 .4em black;
 		}
 
-		&.current {
-			position: relative;
-			color: red;
-			outline: .1em solid;
-			outline-offset: .2em;
-			border-radius: .000001em;
-
-			&::after {
-				content: "IACVT";
-				position: absolute;
-				right: 0;
-				bottom: calc(100% + .3em);
-				font: bold 100% var(--font-body);
-			}
-
-			& * {
-				color: inherit;
-			}
+		&.lengthy::after {
+			content: "Invalid At Computed Value Time (IACVT)";
 		}
 
-		&.displayed {
-			color: red;
-			text-decoration: line-through;
-			font-style: italic;
-
-			& * {
-				color: inherit;
-			}
+		& * {
+			color: inherit;
 		}
 	}
 
-	& .delayed.unset {
+	&.displayed {
+		color: red;
+		text-decoration: line-through;
 		font-style: italic;
 
-		&:not(.current, .displayed) {
-			display: none;
+		& * {
+			color: inherit;
 		}
+	}
+}
 
-		&.current,
-		&.displayed {
-			opacity: 1;
-		}
+.delayed.unset {
+	font-style: italic;
+
+	&.displayed {
+		opacity: 1;
 	}
 }
 
@@ -1267,6 +1335,17 @@ a.go {
 	to { --int-p: var(--end); }
 }
 
+#bar-colors .gradient,
+.bar-colors-gradient {
+	background: linear-gradient(to right, hsl(50 100% 50%), hsl(85 100% 47.5%), hsl(120 100% 45%), hsl(155 100% 42.5%), hsl(190 100% 40%));
+}
+
+.bar-colors-gradient {
+	position: absolute;
+	inset: 0; bottom: auto;
+	height: 1em;
+}
+
 #bar-colors {
 	align-items: start;
 	justify-content: start;
@@ -1277,7 +1356,6 @@ a.go {
 		padding: 1em;
 		box-sizing: border-box;
 		border-radius: .1em;
-		background: linear-gradient(to right, hsl(50 100% 50%), hsl(85 100% 47.5%), hsl(120 100% 45%), hsl(155 100% 42.5%), hsl(190 100% 40%));
 	}
 
 	& .point {

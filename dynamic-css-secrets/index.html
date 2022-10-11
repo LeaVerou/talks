@@ -34,7 +34,7 @@
 		<li><strong>CSS WG</strong> Invited Expert</li>
 		<li><a href="https://lea.verou.me/publications/#specifications">Co-editor of CSS Color, CSS Images, CSS Backgrounds & Borders specs</a></li>
 		<li><strong>W3C Technical Architecture Group (TAG)</strong> Member</li>
-		<li>Usability researcher @ <strong>MIT</strong> (research & teaching)</li>
+		<li>Human-Computer Interaction researcher @ <strong>MIT</strong> (research & teaching)</li>
 		<li>Started <a href="https://github.com/leaverou">dozens of open source projects</a>, some used on <a href="https://www.npmjs.com/package/prismjs">millions of websites</a></li>
 	</ul>
 </article>
@@ -361,6 +361,22 @@
 		</code></pre>
 	</article>
 
+	<article class="slide show-next" id="stateofcss">
+		<a href="https://stateofcss.com">
+			<img src="img/stateofcss.png" alt="">
+			<h1 class="delayed">
+				<strong>stateofcss.com</strong>
+				Make your voice heard!
+			</h1>
+		</a>
+
+		<details class="notes">
+			Want browsers to prioritize implementing that and other things you care about?
+			Make sure to fill the State of CSS survey — browsers are funding it and looking at its results to decide what to work on.
+			Spending a few minutes to fill it out thoughtfully could save you hours of work down the line.
+		</details>
+	</article>
+
 	<article class="minimal demo slide no heading-2x1" id="button-glossy-api" data-type="The API">
 		<textarea class="language-html">
 			<button>Click me</button>
@@ -435,8 +451,167 @@
 			}
 		</style>
 	</article>
-<!--
-	<article class="isolated demo slide" id="button-glossy-implementation" style="--division: 78">
+
+	<article class="slide" id="st-numerical">
+		<h1>Space Toggle for numerical values</h1>
+
+		<pre><code>
+			/* Fictional (future?) syntax: */
+			line-height: if(--glossy = on, 1.1, 1.5);
+
+			/* Space toggle version: */
+			line-height: calc(1.5 var(--glossy, - .4));
+		</code></pre>
+	</article>
+
+	<article class="minimal demo slide" id="space-toggle-iacvt">
+		<button>Space Toggle</button>
+		<textarea class="language-css">
+			button {
+				--glossy: ;
+				border: var(--glossy, .1em solid white);
+			}
+		</textarea>
+		<style class="demo">
+			[id^="space-toggle"] button {
+				background: #f06;
+				border: revert;
+			}
+		</style>
+	</article>
+
+	<article class="fallbacks slide">
+		<h1>Fallbacks without variables</h1>
+
+		<pre style="mix-blend-mode: screen;"><code>
+			background: hsl(177.3 100% 30.66%);
+			background: lch(60% 60 190);
+		</code></pre>
+
+		<div class="delayed result" style="background: hsl(177.3 100% 30.66%); background: lch(60% 60 190);"></div>
+
+		<details class="notes">
+			To fully understand how this works, we need to understand the concept of Invalid At Computed Value Time (IACVT).
+			In pre-variables CSS, When the parser encounters a value it doesn't understand, it can just throw it away.
+			This is how we usually get fallbacks: we write two declarations, one with the newer value, and one with older CSS,
+			older browsers ignore the newer CSS, newer browsers override the first declaration with the second.
+		</details>
+	</article>
+
+	<article class="fallbacks slide">
+		<h1>Fallbacks with variables?</h1>
+
+		<div class="delayed result transparency" style="background: lch(60% 60 190);"></div>
+
+		<pre><code>
+			--color-fallback: hsl(177.3 100% 30.66%);
+			--color: lch(60% 60 190);
+			<span class="delayed strike">background: var(--color-fallback);</span>
+			<span class="delayed iacvt lengthy">background: var(--color);</span> <span class="delayed unset">background: unset;</span>
+		</code></pre>
+
+		<details class="notes">
+			Can we do the same thing with variables?
+			The thing is, variables are resolved later, at computed value time.
+			Until then, the browser needs to assume any declaration that includes a variable anywhere could potentially be valid.
+			So, here, the first background declaration would just be thrown away.
+		</details>
+	</article>
+
+	<article class="slide heading-2x4" id="iacvt">
+		<h1>Invalid At Computed Value Time (IACVT)</h1>
+
+		<pre><code>
+			--foo: 42deg;
+			<span class="delayed iacvt">background: var(--foo);</span> <span class="delayed unset">background: unset;</span>
+		</code></pre>
+		<pre class="delayed"><code>
+			--foo: ;
+			<span class="delayed iacvt">background: var(--foo);</span> <span class="delayed unset">background: unset;</span>
+		</code></pre>
+		<pre class="delayed"><code>
+			<span class="delayed iacvt">background: var(--foo);</span> <span class="delayed unset">background: unset;</span>
+		</code></pre>
+		<pre class="delayed"><code>
+			--foo: initial;
+			<span class="delayed iacvt">background: var(--foo);</span> <span class="delayed unset">background: unset;</span>
+		</code></pre>
+		<pre class="delayed"><code>
+			<span class="delayed iacvt">background: red var(--foo);</span><div class="delayed unset">background: unset;</div>
+		</code></pre>
+
+		<pre class="delayed"><code>
+			<span class="delayed iacvt">--foo: var(--bar);</span> <span class="delayed unset">--foo: unset;</span>
+			<span class="delayed iacvt">--bar: var(--foo);</span> <span class="delayed unset">--bar: unset;</span>
+		</code></pre>
+		<pre class="delayed"><code>
+			<span class="delayed iacvt">--foo: calc(var(--foo) + 1);</span> <span class="delayed unset">--foo: unset;</span>
+		</code></pre>
+
+		<pre class="delayed"><code>
+			<span class="delayed iacvt">background: var(--foo, 42deg);</span> <div class="delayed unset">background: unset;</div>
+		</code></pre>
+
+
+		<details class="notes">
+			IACVT comes into play not just when the browser doesn't understand a property value after substitution,
+			but also when the property value is blank, when one or more variable values are missing,
+			or when there are cycles. Also, the fallback can make a declaration IACVT as well.
+		</details>
+	</article>
+
+	<article class="fallbacks slide">
+		<h1>Fallbacks with variables</h1>
+
+		<div class="delayed result" style="background: hsl(177.3 100% 30.66%); background: lch(60% 60 190);"></div>
+
+		<pre><code>
+			--color: hsl(177.3 100% 30.66%);
+
+			@supports (background: lch(0% 0 0 )) {
+				--color: lch(60% 60 190);
+			}
+
+			background: var(--color);
+		</code></pre>
+
+		<details class="notes">
+			Can we do the same thing with variables?
+			The thing is, variables are resolved later, at computed value time.
+			Until then, the browser needs to assume any declaration that includes a variable anywhere could potentially be valid.
+			So, here, the first background declaration would just be thrown away.
+		</details>
+	</article>
+
+	<article class="slide" id="space-toggle-prod">
+		<h1>Space toggle in production</h1>
+
+		<div class="side-by-side">
+			<div class="file">
+				<span class="name">design-system.css</span>
+				<pre><code>
+					:root {
+						--ON: initial;
+						--OFF: ;
+					}
+				</code></pre>
+			</div>
+			<div class="file">
+				<span class="name">website.css</span>
+				<pre><code>
+					button.primary {
+						--glossy: var(--ON);
+					}
+				</code></pre>
+			</div>
+		</div>
+	</article>
+
+
+
+
+
+	<!-- <article class="isolated demo slide" id="button-glossy-implementation" style="--division: 78" data-replayer-delay="1" xdata-replayer-pauses="ignore">
 		<textarea class="language-html">
 			<button>Click me</button>
 			<button>Click me</button>
@@ -496,106 +671,16 @@
 
 				{"type":"pause"},{"type":"caret","start":390,"end":424},{"type":"pause","delay":2390},{"type":"deleteByCut"},{"type":"caret","start":389,"end":390},{"type":"deleteContentBackward","repeat":2},{"type":"pause","delay":1251},{"type":"caret","start":173,"end":186},{"type":"pause","delay":1047},{"type":"insertText","text":"border: .05em solid var(--_color);"},{"type":"pause","delay":1587},{"type":"caret","start":181,"end":206},{"type":"insertText","text":"(.05em solid var(--_color))"},{"type":"caret","position":181},{"type":"pause","delay":1122},{"type":"caret","position":181},{"type":"insertText","text":"var","split":true},{"type":"caret","position":185},{"type":"insertText","text":"--glossy, ","split":true},
 
-				{"type":"pause"},{"type":"next_slide"},
-
 				{"type":"pause"},{"type":"caret","start":392,"end":395,"editor":"css"},{"type":"insertText","text":"(1.5)"},{"type":"caret","position":392},{"type":"insertText","text":"calc","split":true},{"type":"caret","position":400},{"type":"pause","delay":1000},{"type":"insertText","text":" var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":405},{"type":"insertText","text":"--","split":true},{"type":"pause","delay":1061},{"type":"insertText","text":"go","split":true},{"type":"deleteContentBackward"},{"type":"insertText","text":"lossy, ","split":true},{"type":"pause","delay":1331},{"type":"insertText","text":"-"},{"type":"pause","delay":1108},{"type":"insertText","text":" .4","split":true},{"type":"pause","delay":2000},{"type":"caret","start":451,"end":469},{"type":"pause","delay":1000},{"type":"deleteContentBackward","repeat":2},{"type":"caret","start":424,"end":452},{"type":"pause","delay":1500},{"type":"deleteContentBackward"},
-
-				{"type":"pause"},{"type":"next_slide"},
 
 				{"type":"pause"},{"type":"caret","editor":"css","position":495},{"type":"pause","delay":1474},{"type":"caret","start":495,"end":497},{"type":"pause","delay":2656},{"type":"caret","start":392,"end":421},{"type":"pause","delay":2468},{"type":"caret","position":495},{"type":"pause","delay":2071},{"type":"caret","start":495,"end":497},{"type":"insertText","text":"calc(1.5 var(--glossy, - .4))"},{"type":"caret","start":500,"end":503},{"type":"insertText","text":".3","split":true},{"type":"pause","delay":1329},{"type":"caret","start":517,"end":521},{"type":"insertText","text":"+ .3","split":true},{"type":"pause","delay":2000},{"type":"caret","start":495,"end":523},{"type":"pause","delay":1500},{"type":"caret","start":544,"end":546},{"type":"pause","delay":2000},{"type":"insertText","text":"calc(.3 var(--glossy, + .3))"},{"type":"pause","delay":1500},{"type":"caret","start":566,"end":567},{"type":"insertText","text":"-"},{"type":"caret","start":569,"end":570},{"type":"insertText","text":"1"},{"type":"pause","delay":1524},{"type":"caret","start":580,"end":698},{"type":"pause","delay":1040},{"type":"deleteContentBackward","repeat":2},
 
-				{"type":"pause"},{"type":"next_slide"},
-
 				{"type":"pause"},{"type":"caret","editor":"css","position":8},{"type":"insertText","text":"\n\t","split":true},{"type":"pause","delay":1851},{"type":"caret","position":32},{"type":"insertText","text":"\n\t","split":true},{"type":"pause","delay":2023},{"type":"caret","position":8},{"type":"insertText","text":"\n\t--ON: initial;\n\t--OFF: ;","split":true},{"type":"pause","delay":1594},{"type":"caret","position":46},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":50},{"type":"insertText","text":"--o","split":true},{"type":"deleteContentBackward"},{"type":"insertText","text":"OFF","split":true},{"type":"pause","delay":1341},{"type":"caret","start":107,"end":114},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":111},{"type":"insertText","text":"--ON","split":true},
-
-				{"type":"pause"},{"type":"next_slide"},
 
 				{"type":"pause"},{"type":"caret","editor":"css","position":8},{"type":"insertText","text":"\n\t","split":true},{"type":"pause","delay":1936},{"type":"caret","position":32},{"type":"insertText","text":"\n\t","split":true},{"type":"deleteContentBackward"},{"type":"caret","position":8},{"type":"insertText","text":"\n\t--ON: initial;\n\t--OFF: ;","split":true},{"type":"pause","delay":1687},{"type":"caret","position":46},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":50},{"type":"insertText","text":"--OFF","split":true},{"type":"caret","start":57,"end":68},{"type":"deleteContentBackward"},{"type":"pause","delay":1665},{"type":"caret","start":95,"end":102},{"type":"insertText","text":"var","split":true},{"type":"insertText","text":"()"},{"type":"caret","position":99},{"type":"insertText","text":"--ON","split":true},{"type":"caret","start":105,"end":114},{"type":"deleteContentBackward"}
 			]
 		</script>
-	</article>
-
-	<article class="slide heading-2x4" id="iacvt">
-		<h1>Invalid At Computed Value Time (IACVT)</h1>
-
-		<pre><code>
-			--foo: 42deg;
-			<span class="delayed iacvt">background: var(--foo);</span> <span class="delayed unset">background: unset;</span>
-		</code></pre>
-		<pre class="delayed"><code>
-			<span class="delayed iacvt">background: var(--foo);</span> <span class="delayed unset">background: unset;</span>
-		</code></pre>
-		<pre class="delayed"><code>
-			--foo: initial;
-			<span class="delayed iacvt">background: var(--foo);</span> <span class="delayed unset">background: unset;</span>
-		</code></pre>
-		<pre class="delayed"><code>
-			<span class="delayed iacvt">background: linear-gradient(white, var(--foo));</span><div class="delayed unset">background: unset;</div>
-		</code></pre>
-
-		<pre class="delayed"><code>
-			<span class="delayed iacvt">background: var(--foo, 42deg);</span> <div class="delayed unset">background: unset;</div>
-		</code></pre>
-		<pre class="delayed"><code>
-			--foo: ;
-			<span class="delayed iacvt">background: var(--foo);</span> <span class="delayed unset">background: unset;</span>
-		</code></pre>
-		<pre class="delayed"><code>
-			<span class="delayed iacvt">--foo: var(--bar);</span> <span class="delayed unset">--foo: unset;</span>
-			<span class="delayed iacvt">--bar: var(--foo);</span> <span class="delayed unset">--bar: unset;</span>
-		</code></pre>
-		<pre class="delayed"><code>
-			<span class="delayed iacvt">--foo: calc(var(--foo) + 1);</span> <span class="delayed unset">--foo: unset;</span>
-		</code></pre>
-	</article>
-
-	<article class="slide" data-insert="#button-glossy-implementation"></article>
-
-	<article class="slide" id="st-numerical">
-		<h1>Space Toggle for numerical values</h1>
-
-		<pre><code>
-			/* Fictional (future?) syntax: */
-			line-height: if(--glossy = on, 1.1, 1.5);
-
-			/* Space toggle version: */
-			line-height: calc(1.5 var(--glossy, - .4));
-		</code></pre>
-	</article>
-
-	<article class="slide" data-insert="#button-glossy-implementation"></article>
- -->
-	<article class="slide">
-		<h1>Extreme Space Toggle</h1>
-		<a href="https://codetea.com/minesweeper-implemented-in-css-html-using-the-space-toggle-trick/"><img src="img/css-sweeper.png" alt=""></a>
-		<p class="credit">Made by [Jane Ori](https://twitter.com/Jane0ri)</p>
-	</article>
-
-	<!-- <article class="slide" data-insert="#button-glossy-implementation"></article> -->
-
-	<article class="slide" id="space-toggle-prod">
-		<h1>Space toggle in production</h1>
-
-		<div class="side-by-side">
-			<div class="file">
-				<span class="name">design-system.css</span>
-				<pre><code>
-					:root {
-						--ON: initial;
-						--OFF: ;
-					}
-				</code></pre>
-			</div>
-			<div class="file">
-				<span class="name">website.css</span>
-				<pre><code>
-					button.primary {
-						--glossy: var(--ON);
-					}
-				</code></pre>
-			</div>
-		</div>
-	</article>
+	</article> -->
 
 	<article class="slide" id="gradient-interpolation">
 		<h1>Gradient interpolation in color space</h1>
@@ -646,7 +731,11 @@
 		</details>
 	</article>
 
-
+	<article class="slide">
+		<h1>Extreme Space Toggle</h1>
+		<a href="https://codetea.com/minesweeper-implemented-in-css-html-using-the-space-toggle-trick/"><img src="img/css-sweeper.png" alt=""></a>
+		<p class="credit">Made by [Jane Ori](https://twitter.com/Jane0ri)</p>
+	</article>
 </section>
 
 <section>
@@ -839,6 +928,27 @@
 	</article>
 
 	<article class="iframe slide" data-src="https://css.land/ranges"></article>
+
+	<article class="slide">
+		<div class="bar-colors-gradient"></div>
+		<h1>Color interpolation</h1>
+
+		<div>
+			<pre><code>
+				/* Now: */
+				--h: calc(50 + (190 - 50) * var(--p) / 100); /* 50 to 190 */
+				--l: calc(50% + (40% - 50%) * var(--p) / 100); /* 50% to 40% */
+				background: hsl(var(--h) 100% var(--l));
+			</code></pre>
+			<pre class="delayed"><code>
+				/* Near future: */
+				background: color-mix(in hsl,
+					hsl(50 100% 50%),
+					hsl(190 100% 40%) calc(var(--p) * 1%)
+				);
+			</code></pre>
+		</div>
+	</article>
 
 	<article class="slide takeaway">
 		<h1>CSS Variable Conditionals</h1>

@@ -319,6 +319,43 @@ span.poop {
 		           caret .9s step-start calc(var(--lengthD) * .2 / .9);
 	}
 
+#stateofcss {
+	padding: 0;
+	background: #3E3036;
+	cursor: pointer;
+	overflow: hidden
+}
+
+#stateofcss > a {
+		display: flex;
+		align-items: center;
+		justify-content: center
+	}
+
+#stateofcss > a img {
+			display: flex;
+			max-width: 100vw;
+			max-height: 100vh;
+		}
+
+#stateofcss h1 {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: rgb(0 0 0 / .4);
+		backdrop-filter: blur(5px);
+		padding: .3em .8em;
+		border-radius: .1em;
+		font-weight: 300;
+		font-size: 200%
+	}
+
+#stateofcss h1 strong {
+			display: block;
+			font-size: 200%;
+		}
+
 .background.slide {
 	background: center / cover;
 }
@@ -1065,6 +1102,35 @@ a.go:active {
 		background: white;
 	}
 
+.delayed.strike {
+	opacity: 1
+}
+
+.delayed.strike.current, .delayed.strike.displayed {
+		text-decoration: line-through;
+		font-style: italic
+	}
+
+.delayed.strike.current.displayed, .delayed.strike.displayed.displayed {
+			opacity: .5;
+		}
+
+.fallbacks.slide pre {
+		overflow: visible;
+	}
+
+.fallbacks.slide .result {
+		position: absolute;
+		inset: 0;
+		left: auto;
+		width: 10em;
+		transition: width .2s
+	}
+
+.fallbacks.slide .result.delayed:not(.current, .displayed) {
+			width: 0;
+		}
+
 [id^="space-toggle"] .editor-container {
 		width: 68ch;
 		height: 6.5em;
@@ -1095,52 +1161,52 @@ a.go:active {
 		white-space: pre-wrap;
 	}
 
-#iacvt .delayed.iacvt:not(.displayed) {
-			opacity: 1;
+.delayed.iacvt:not(.displayed) {
+		opacity: 1;
+	}
+
+.delayed.iacvt.current {
+		position: relative;
+		color: red;
+		outline: .1em solid;
+		outline-offset: .2em;
+		border-radius: .000001em
+	}
+
+.delayed.iacvt.current::after {
+			content: "IACVT";
+			position: absolute;
+			right: 0;
+			bottom: calc(100% + .3em);
+			font: bold 100% var(--font-body);
+			text-shadow: 0 0 .4em black;
 		}
 
-#iacvt .delayed.iacvt.current {
-			position: relative;
-			color: red;
-			outline: .1em solid;
-			outline-offset: .2em;
-			border-radius: .000001em
+.delayed.iacvt.current.lengthy::after {
+			content: "Invalid At Computed Value Time (IACVT)";
 		}
 
-#iacvt .delayed.iacvt.current::after {
-				content: "IACVT";
-				position: absolute;
-				right: 0;
-				bottom: calc(100% + .3em);
-				font: bold 100% var(--font-body);
-			}
-
-#iacvt .delayed.iacvt.current * {
-				color: inherit;
-			}
-
-#iacvt .delayed.iacvt.displayed {
-			color: red;
-			text-decoration: line-through;
-			font-style: italic
+.delayed.iacvt.current * {
+			color: inherit;
 		}
 
-#iacvt .delayed.iacvt.displayed * {
-				color: inherit;
-			}
-
-#iacvt .delayed.unset {
+.delayed.iacvt.displayed {
+		color: red;
+		text-decoration: line-through;
 		font-style: italic
 	}
 
-#iacvt .delayed.unset:not(.current, .displayed) {
-			display: none;
+.delayed.iacvt.displayed * {
+			color: inherit;
 		}
 
-#iacvt .delayed.unset.current,
-		#iacvt .delayed.unset.displayed {
-			opacity: 1;
-		}
+.delayed.unset {
+	font-style: italic
+}
+
+.delayed.unset.displayed {
+		opacity: 1;
+	}
 
 #space-toggle-prod .file {
 		display: flex;
@@ -1237,6 +1303,17 @@ a.go:active {
 	to { --int-p: var(--end); }
 }
 
+#bar-colors .gradient,
+.bar-colors-gradient {
+	background: linear-gradient(to right, hsl(50 100% 50%), hsl(85 100% 47.5%), hsl(120 100% 45%), hsl(155 100% 42.5%), hsl(190 100% 40%));
+}
+
+.bar-colors-gradient {
+	position: absolute;
+	inset: 0; bottom: auto;
+	height: 1em;
+}
+
 #bar-colors {
 	align-items: start;
 	justify-content: start;
@@ -1248,7 +1325,6 @@ a.go:active {
 		padding: 1em;
 		box-sizing: border-box;
 		border-radius: .1em;
-		background: linear-gradient(to right, hsl(50 100% 50%), hsl(85 100% 47.5%), hsl(120 100% 45%), hsl(155 100% 42.5%), hsl(190 100% 40%));
 	}
 
 #bar-colors .point {
