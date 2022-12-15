@@ -361,22 +361,6 @@
 		</code></pre>
 	</article>
 
-	<article class="slide show-next" id="stateofcss">
-		<a href="https://stateofcss.com">
-			<img src="img/stateofcss.png" alt="">
-			<h1 class="delayed">
-				<strong>stateofcss.com</strong>
-				Make your voice heard!
-			</h1>
-		</a>
-
-		<details class="notes">
-			Want browsers to prioritize implementing that and other things you care about?
-			Make sure to fill the State of CSS survey — browsers are funding it and looking at its results to decide what to work on.
-			Spending a few minutes to fill it out thoughtfully could save you hours of work down the line.
-		</details>
-	</article>
-
 	<article class="minimal demo slide no heading-2x1" id="button-glossy-api" data-type="The API">
 		<textarea class="language-html">
 			<button>Click me</button>
@@ -457,7 +441,7 @@
 
 		<pre><code>
 			/* Fictional (future?) syntax: */
-			line-height: if(--glossy = on, 1.1, 1.5);
+			line-height: if(--glossy: on; 1.1; 1.5);
 
 			/* Space toggle version: */
 			line-height: calc(1.5 var(--glossy, - .4));
@@ -972,7 +956,7 @@
 
 		<pre><code>
 			/* Fictional (future?) syntax: */
-			line-height: if(--glossy = 1, 1.1, 1.5);
+			line-height: if(--glossy: 1; 1.1; 1.5);
 
 			/* Space toggle version: */
 			line-height: calc(1.5 var(--glossy, - .4));
