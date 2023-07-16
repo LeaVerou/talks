@@ -57,9 +57,12 @@
 		line-height: 1
 	}
 
-#lea-verou h1 a[href^="https://twitter.com"] {
-			display: block;
-			font-size: 50%;
+#lea-verou h1 div.social {
+			font-size: 40%;
+			margin-top: .6em;
+		}
+
+#lea-verou h1 a.social {
 			color: var(--color-aqua);
 			text-decoration: none;
 			font-weight: bold;
