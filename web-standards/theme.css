@@ -1,0 +1,109 @@
+/* Palette: "Seaf wine labelling" from Kuler
+
+Beige: #D9C99A
+Light green: #7EA629
+Dark green: #353B1A
+Red: #D93030 hsl(0, 69%, 52%)
+Dark red: #730710
+
+Extra: Blue hsl(200, 40%, 55%)
+
+*/
+
+body {
+	font-family: Helvetica Neue;
+	font-weight: 200;
+}
+	
+pre, code {
+	font-family: Consolas, Monaco, monospace;
+}
+
+a {
+	color: #353B1A;
+}
+
+.slide {
+	padding: 20px;
+	background: #D9C99A;
+	text-shadow: 0 1px 1px hsla(0,0%,100%,.5);
+}
+
+	.slide h1 {
+		margin-top: 0;
+		text-align: center;
+		font: 200%/1.1 'Gloucester MT Extra Condensed', Cambria, serif;
+	}
+	
+	.image.slide h1:only-child {
+		padding-left: .5em;
+		padding-right: .5em;
+		font-weight: 200;
+		font-size: 180%;
+		letter-spacing: inherit;
+		background-color: black;
+		background-image: inherit;
+		background-repeat: no-repeat;
+		background-position: -9999px -9999px;
+	}
+	
+	.image.slide h1:before {
+		content: '';
+		position: absolute;
+		top: -10px; right: 0; bottom: -10px; left: 0;
+		z-index: -1;
+		background: center fixed no-repeat;
+		background-size: cover;
+		background-image: inherit;
+		-webkit-filter: blur(3px);
+		opacity: .8;
+	}
+	
+	.light.image.slide h1 {
+		overflow: hidden;
+		background-color: slategray;
+		color: black;
+		text-shadow: 0 2px 2px white;
+		font-weight: 900;
+		letter-spacing: -.05em;
+		font-size: 150%;
+	}
+
+	.slide li em {
+		font-family: Reenie Beanie, Helvetica Neue, sans-serif;
+		color: #730710;
+	}
+	
+	.slide li em.displayed {
+		opacity: 1;
+	}
+	
+		.slide li em code {
+			font-size: 70%;
+		}
+	
+	.slide ol {
+		padding-left: 2em;
+		margin: 0;
+	}
+	
+.question.slide {
+	padding: 0;
+	background: black;
+	color: white;
+	text-shadow: none;
+}
+
+	.question.slide h1 {
+		margin-top: 50vh;
+		transform: translateY(-70%);
+	}
+	
+li[data-bullet]:before {
+	content: attr(data-bullet);
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: .2em;
+	color: #D93030;
+	font: 200% Entypo, Entypo Social;
+}

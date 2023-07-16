@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title>Everything you always wanted to know about web standards (but were afraid to ask)</title>
+<link href="../csss/slideshow.css" rel="stylesheet" />
+<link href="../csss/reusable.css" rel="stylesheet" />
+<link href="theme.css" rel="stylesheet" />
+<link href="talk.css" rel="stylesheet" />
+<script src="../csss/prefixfree.min.js"></script>
+
+</head>
+<body>
+
+<header class="slide dont-resize" id="intro">
+	<h1>
+		Everything you always<br> wanted to know about <br><strong>web standards</strong><span class="asterisk">∗</span>
+	</h1>
+	<p class="author">Explained by<br>Lea Verou,W3C</p>
+	<p><span class="asterisk">∗</span>But were afraid to ask</p>
+</header>
+
+<section class="slide" id="questions">
+	<h1>Questions I’ll try to <strong>answer</strong> <span class="asterisk">∗</span></h1>
+	
+	<ol></ol>
+	
+	<p><span class="asterisk">∗</span> Have more? Find me in one of the breaks &amp; ask away!</p>
+</section>
+
+<section>
+	<header class="question slide">
+		<h1>Are all web standards made in W3C?</h1>
+	</header>
+	
+	<section class="slide" id="standards-bodies">
+		<dl>
+			<dt>TCP/IP</dt>
+			<dd title="IETF" class="delayed">?</dd>
+			
+			<dt>HTTP</dt>
+			<dd title="IETF" class="delayed">?</dd>
+			
+			<dt>HTML</dt>
+			<dd title="W3C" class="delayed">?</dd>
+			
+			<dt>CSS</dt>
+			<dd title="W3C" class="delayed">?</dd>
+			
+			<dt>PNG</dt>
+			<dd title="W3C" class="delayed">?</dd>
+			
+			<dt>SVG</dt>
+			<dd title="W3C" class="delayed">?</dd>
+			
+			<dt>JavaScript Core (ECMAScript)</dt>
+			<dd title="ECMA" class="delayed">?</dd>
+			
+			<dt>DOM APIs</dt>
+			<dd title="W3C" class="delayed">?</dd>
+		</dl>
+	</section>
+</section>
+
+<section>
+	<header class="question slide">
+		<h1>What exactly does W3C do?</h1>
+	</header>
+	
+	<section class="myth slide dont-resize">
+		<h1 class="delayed">Myth</h1>
+		<blockquote>“All W3C specifications are written by W3C staff. All W3C staff writes specifications, full-time.”</blockquote>
+	</section>
+	
+	<section class="image slide" style="background-image: url(img/sausage-making.jpg)" data-source="“Sausage Making” — Painting by David Teniers The Younger, Kunsthistorisches Museum, Vienna, Austria">
+		<h1>It’s Working Groups who write specs</h1>
+	</section>
+	
+	<section class="image slide" style="background-image: url(img/rule.jpg);" data-source="http://www.flickr.com/photos/gord99/315490873/">
+		<h1>W3C just sets the rules</h1>
+	</section>
+	
+	<section class="slide" data-src="http://www.w3.org/Consortium/Process/"></section>
+	
+	<section class="image slide" style="background-image: url(img/conductor.jpg);" data-source="http://www.flickr.com/photos/stephen-oung/5732917385">
+		<h1>…and coordinates the process</h1>
+	</section>
+	
+	<section class="image slide" id="tools-education" data-source="W3Conf 2013 logo, Lea Verou">
+		<h1>Also: tools &amp; education</h1>
+	</section>
+</section>
+
+<section>
+	<header class="question slide">
+		<h1>What is a W3C Working Group?</h1>
+	</header>
+	
+	
+	<section class="slide" id="wg-composition">
+		<div>
+			<h1>A W3C Working Group</h1>
+			<ul>
+				<li>Member companies
+					<ul class="delayed">
+						<li>Browser vendors <em>Microsoft, Google, Mozilla, Opera, Apple…</em></li>
+						<li>Big websites <em>Facebook, Twitter…</em></li>
+						<li>Others <em>Adobe, Intel, IBM, HP, Nokia, CERN…</em></li>
+					</ul>
+				</li>
+				<li>Invited Experts</li>
+				<li>W3C staff
+					<ul>
+						<li class="delayed">Team contact</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h1>CSS Working Group</h1>
+		
+		<div class="wg" data-members="94" data-ies="5" data-w3c="6"></div>
+	</section>
+	
+	<section class="slide">
+		<h1>SVG Working Group</h1>
+		
+		<div class="wg" data-members="44" data-ies="1" data-w3c="2"></div>
+	</section>
+	
+	<section class="slide">
+		<h1>WebApps Working Group</h1>
+		
+		<div class="wg" data-members="171" data-ies="2" data-w3c="6"></div>
+	</section>
+	
+	<section class="slide">
+		<h1>i18n Working Group</h1>
+		
+		<div class="wg" data-members="30" data-ies="9" data-w3c="2"></div>
+	</section>
+	
+	<section class="slide">
+		<h1>HTML Working Group</h1>
+		
+		<div class="wg" data-members="494" data-ies="200" data-w3c="12"></div>
+	</section>
+	
+	<section class="myth slide dont-resize">
+		<h1 class="delayed">Myth</h1>
+		<blockquote>“W3C creates standards that browsers have to implement without having any say in it”</blockquote>
+	</section>
+</section>
+
+<section>
+	<header class="question slide">
+		<h1>How do Working Groups make specs?</h1>
+	</header>
+	
+	<section class="slide dont-resize" id="collaboration" data-source="Entypo pictograms by Daniel Bruce — www.entypo.com">
+		<h1>Collaboration</h1>
+
+		<article>
+			<h1>Day-to-day</h1>
+			<ul>
+				<li>Mailing lists</li>
+				<li>IRC</li>
+				<li>Wiki</li>
+				<li>W3C bug tracker</li>
+			</ul>
+		</article>
+		<article>
+			<h1>Weekly</h1>
+			<ul>
+				<li>Telcons</li>
+			</ul>
+		</article>
+		<article>
+			<h1>Quaterly</h1>
+			<ul>
+				<li>F2F meetings</li>
+			</ul>
+		</article>
+	</section>
+	
+	<section class="image slide" style="background-image: url(img/chairs.jpg);" data-source="http://www.flickr.com/photos/prettywarstl/91640932/">
+		<h1>The Chair(s)</h1>
+	</section>
+	
+	<section class="top-heavy image slide" style="background-image: url(img/editor.jpg);" data-source="http://www.flickr.com/photos/thirdangel/2463537045/">
+		<h1>The Spec Editors</h1>
+	</section>
+</section>
+
+<section>
+	<header class="question slide">
+		<h1>What do the spec maturity levels mean?</h1>
+	</header>
+	
+	<section class="image slide" style="background-image: url(img/lamp.jpg);" data-source="http://www.sxc.hu/photo/741712">
+		<h1>It all starts from an idea</h1>
+	</section>
+	
+	<section class="top-heavy image slide" style="background-image: url(img/hippofight.jpg);" data-source="http://www.flickr.com/photos/nilsrinaldi/5158417206/">
+		<h1>There’s a healthy debate</h1>
+	</section>
+	
+	<section class="image slide" style="background-image: url(img/war-peace.jpg);" data-source="http://www.flickr.com/photos/psd/3330907621"></section>
+	
+	<section class="slide dont-resize" id="idea-outcomes" data-source="flickr.com/photos/seandreilinger/796331708
+	flickr.com/photos/wisamallami/1090098438/
+	flickr.com/photos/hamed/3065779167">
+		<h1>Possible outcomes</h1>
+		<ul class="delayed-children">
+			<li style="background-image: url(img/happy.jpg);">Accepted</li>
+			<li style="background-image: url(img/sad.jpg);">Rejected</li>
+			<li style="background-image: url(img/sleeping.jpg);">Forgotten</li>
+		</ul>
+	</section>
+	
+	<section class="light image slide" style="background-image: url(img/ed.png);">
+		<h1>Editor’s Draft (ED)</h1>
+	</section>
+	
+	<section class="light image slide" style="background-image: url(img/fpwd.png);">
+		<h1>First Public Working Draft (FPWD)</h1>
+	</section>
+	
+	<section class="light image slide" style="background-image: url(img/wd.png);">
+		<h1>Working Draft (WD)</h1>
+	</section>
+	
+	<section class="light image slide" style="background-image: url(img/lcwd.png);">
+		<h1>Last Call Working Draft (LCWD)</h1>
+	</section>
+	
+	<section class="light image slide" style="background-image: url(img/cr.png);">
+		<h1>Candidate Recommendation (CR)</h1>
+	</section>
+	
+	<section class="light image slide" style="background-image: url(img/pr.png);">
+		<h1>Proposed Recommendation (PR)</h1>
+	</section>
+	
+	<section class="light image slide" style="background-image: url(img/rec.png);">
+		<h1>Recommendation (REC)</h1>
+	</section>
+</section>
+
+<section>
+	<header class="question slide">
+		<h1>How can I keep up?</h1>
+	</header>
+	
+	<section class="image slide" id="transparency">
+		<h1><code>W3C == 'rgba(0,0,0,0)'</code></h1>
+	</section>
+	
+	<section class="slide">	
+		<h1>W3C transparency</h1>
+		<ul class="delayed-children">
+			<li>Mailing lists are <strong>public</strong></li>
+			<li>W3C specifications are <strong>free</strong> and <strong>public</strong></li>
+			<li>Telcon &amp; F2F Minutes are <strong>public</strong></li>
+			<li>F2F meetings are often <strong>open to auditing</strong></li>
+		</ul>
+	</section>
+	
+	<section class="slide" data-src="http://www.w3.org/TR"></section>
+	
+	<section class="slide" data-src="http://webplatform.org"></section>
+	
+	<section class="slide" data-src="http://uptodate.frontendrescue.org/"></section>
+</section>
+
+<section>
+	<header class="question slide">
+		<h1>Can I contribute?</h1>
+	</header>
+	
+	<section class="slide" data-src="http://lists.w3.org/Archives/Public/"></section>
+	
+	<section class="slide">
+		<h1>Posting feedback &amp; ideas</h1>
+		
+		<ol class="delayed-children">
+			<li>Find the right mailing list &amp; subscribe</li>
+			<li>Send a new email <em>Tip: Prepend the subject with <code>[spec shortname]</code> (e.g. <code>[css-background-4]</code>)</em></li>
+			<li>Archive Approval system <em>&lt;—— only once for all lists</em></li>
+			<li>Prove it’s needed <em>use cases, author questions etc</em></li>
+			<li>Be patient! :-)</li>
+		</ol>
+	</section>
+	
+	<section class="myth slide dont-resize">
+		<h1 class="delayed">Myth</h1>
+		<blockquote>“You have to be working for a big company to influence web standards”</blockquote>
+	</section>
+	
+	<section class="image slide" style="background-image: url(img/tests.jpg);" data-source="http://www.flickr.com/photos/sidelong/246816211/">
+		<h1>W3C badly needs <strong>tests</strong> too!</h1>
+	</section>
+	
+	<section class="slide" data-src="http://testthewebforward.org/"></section>
+</section>
+
+<footer class="slide">
+	<h1>Thank you!</h1>
+	<ul>
+		<li data-bullet="✉"><a href="mailto:lea@w3.org">lea@w3.org</a></li>
+		<li data-bullet="🔗"><a href="http://lea.verou.me">lea.verou.me</a></li>
+		<li data-bullet=""><a href="http://twitter.com/leaverou">@leaverou</a></li>
+	</ul>
+	<p>Slides: <a href="http://lea.verou.me/web-standards">lea.verou.me/web-standards</a></p>
+</footer>
+
+<script src="../csss/slideshow.js"></script>
+
+<script src="talk.js"></script>
+
+</body>
+</html>
