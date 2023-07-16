@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>CSS3 presentation</title>
+
+<link href="../csss/slideshow.css" rel="stylesheet" type="text/css" />
+<link href="theme-funky-wood.css" rel="stylesheet" type="text/css" />
+<link href="pragmatic.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+<header id="intro" class="slide">
+	<hgroup>
+		<h1>CSS<span class="version">3</span></h1>
+		<h2>A practical introduction</h2>
+	</hgroup>
+	<p class="attribution">By Lea Verou</p>
+</header>
+
+<div class="slide">
+	<h5>Disclaimer</h5>
+	<div id="disclaimer">
+		This slideshow was originally coded to run in <strong>Mozilla Firefox 4 beta</strong> or <strong>Minefield</strong>.
+		Some features may not show properly in other browsers, such as CSS gradients or anything that depends on them.
+		
+	</div>
+</div>
+
+<div class="slide" id="about-me">
+	<h5>about:me</h5>
+	<ul>
+		<li><a href="http://twitter.com/leaverou">@LeaVerou</a> on twitter</li>
+		<li><a href="http://leaverou.me">http://leaverou․me</a></li>
+	</ul>
+	<image src="pics/map-europe.png" alt="A map of Europe, with Greece highlighted" />
+	<image src="pics/fresset.png" alt="My company (fresset)" style="margin-top:5em" />
+</div>
+
+<div class="slide">
+	<h5>Isn’t CSS2.1 sufficient?</h5>
+	<p><strong>Question:</strong> What bugs you the most when coding CSS (2.1) today?</p>
+	<p class="delayed">IMHO:</p>
+	<ul>
+		<li class="delayed">Decorative images</li>
+		<li class="delayed">Markup clutter</li>
+		<li class="delayed">JavaScript for presentational stuff</li>
+	</ul>
+	<p class="delayed emphasis">CSS3 attempts to solve these problems</p>
+</div>
+
+<section id="problem1">
+	<hgroup class="slide" id="problem1-images">
+		<h3>Problem #1</h3>
+		<h4>Needing decorative images</h4>
+	</hgroup>
+	
+	<div class="slide">
+		<h5>Why is it a problem?</h5>
+		<ul>
+			<li class="delayed">Maintenance hell</li>
+			<li class="delayed">Consumes more bandwidth</li>
+			<li class="delayed">More http requests &#x21D2; slower</li>
+			<li class="delayed">Style harder to understand</li>
+			<li class="delayed">Users get to see the page without them</li>
+		</ul>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Translucent colors</h5>
+			<h6>The old way</h6>
+		</hgroup>
+		<ul>
+			<li>1x1 png background images, if needed as a background
+				<pre>background: url('/colors/black-0.75.png');</pre>
+			</li>
+			<li>
+				1x1 png background images + extra markup, if needed for a solid border
+			</li>
+			<li>
+				No known workarounds for many other cases
+			</li>
+		</ul>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Translucent colors</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<ul>
+			<li class="delayed">RGBA and HSLA</li>
+			<li class="delayed">Can be used just like any other color, anywhere</li>
+			<li class="delayed">RGBA = RGB + Alpha, HSLA = HSL + Alpha</li>
+			<li class="delayed">Alpha = How transparent? (0-1)</li>
+			<li class="delayed">
+				HSL is a more intuitive way to describe RGB<br />
+				<image src="pics/hsl-picker1.png" alt="An HSL color picker example" />
+				<image src="pics/hsl-picker2.png" alt="Another HSL color picker example" />	
+			</li>
+		</ul>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Translucent colors</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<style scoped contentEditable="true" class="example">#alpha-example {
+background: hsla(324, 100%, 50%, .5);
+border: 1em solid rgba(0, 0, 0, .3);
+color: rgba(255, 255, 255, .8);
+}</style>
+		<div id="alpha-example">
+			And this is some text
+		</div>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>RGBA, HSL, HSLA</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Opera</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="full-support">Full<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Rounded corners</h5>
+			<h6>The old way</h6>
+		</hgroup>
+		<pre class="long" lang="html">&lt;div class="foo"&gt;
+&lt;div class="inner"&gt;
+	&lt;div class="inner2"&gt;
+		&lt;div class="inner3"&gt;&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</pre>
+		<pre class="long" lang="css">.foo {
+background: url(img/corner_tr.png) top right no-repeat;
+}
+.foo .inner {
+background: url(img/corner_br.png) bottom right no-repeat;
+}
+.foo .inner2 {
+background: url(img/corner_tl.png) top left no-repeat;
+}
+.foo .inner3 {
+background: url(img/corner_bl.png) bottom left no-repeat;
+}</pre>
+		<ul>
+			<li>3 extra container elements</li>
+			<li>4 background images, one for each corner, or one huge image</li>
+		</ul>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Rounded corners</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>border-radius:</code>
+			<code title="Radius for all corners" class="short">20px</code>
+		</p>
+		<p class="demo-box" style="-moz-border-radius:20px; border-radius:20px"></p>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Rounded corners</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>border-radius:</code>
+			<code title="Horizontal radius for all corners" class="short">40px</code>
+			<code>/</code>
+			<code title="Vertical radius for all corners" class="short">20px</code>
+		</p>
+		<div class="demo-box" style="-moz-border-radius:40px / 20px; border-radius:40px / 20px"></div>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Rounded corners</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>border-radius:</code>
+			<code title="Τop left &amp; bottom right corner" class="short">40px</code>
+			<code title="Τop right &amp; bottom left corner" class="short">10px</code>
+		</p>
+		<div class="demo-box" style="-moz-border-radius:40px 10px; border-radius:40px 10px"></div>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Rounded corners</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>border-radius:</code>
+			<code title="Τop left">40px</code>
+			<code title="Τop right &amp; bottom left corner" class="short">50%</code>
+			<code title="Βottom right">0</code>
+		</p>
+		<div class="demo-box" style="-moz-border-radius:40px 50% 0; border-radius:40px 50% 0"></div>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Rounded corners</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>border-radius:</code>
+			<code title="Τop left">40px</code>
+			<code title="Τop right">50%</code>
+			<code title="Βottom right" class="short">0</code>
+			<code title="Βottom left">10px</code>
+		</p>
+		<div class="demo-box" style="-moz-border-radius:40px 50% 0 10px; border-radius:40px 50% 0 10px"></div>
+		<p class="note"><strong>Note:</strong> There are also individual properties for that, e.g. <code>border-top-left-radius</code></p>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>border-radius</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="with-prefix">With<br />-moz-</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Opera</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="full-support">Full<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Drop shadows</h5>
+			<h6>The old way</h6>
+		</hgroup>
+		<pre lang="html" style="font-size:40%">&lt;div class=&quot;wrap1&quot;&gt;&lt;div class=&quot;wrap2&quot;&gt;
+  &lt;div class=&quot;wrap3&quot;&gt;&lt;img src=&quot;object.gif&quot; alt=&quot;The object casting a shadow&quot; /&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</pre>
+		<pre lang="css" style="font-size:40%">.wrap1, .wrap2, .wrap3 {
+display:inline-table;
+/* \*/display:block;/**/
+}
+.wrap1 {
+float:left;
+background:url(shadow.gif) right bottom no-repeat;
+}
+.wrap2 { background:url(corner_bl.gif) left bottom no-repeat; }
+.wrap3 {
+padding:0 4px 4px 0;
+background:url(corner_tr.gif) right top no-repeat;
+}</pre>
+	<p class="attribution">
+		From <a href="http://www.alistapart.com/articles/onionskin/"><q>Onion Skinned Drop Shadows</q> by Brian Williams on ALA</a>
+	</p>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Drop shadows</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>box-shadow:</code>
+			<code title="Horizontal offset" class="short">10px</code>
+			<code title="Vertical offset" class="short">5px</code>
+			<code title="Blur radius">15px</code>
+			<code title="Shadow color">rgba(0,0,0,.5)</code>
+		</p>
+		<div class="demo-box" style="
+			-moz-box-shadow:10px 5px 15px rgba(0,0,0,.5); 
+			-webkit-box-shadow:10px 5px 15px rgba(0,0,0,.5); 
+			box-shadow:10px 5px 15px rgba(0,0,0,.5); 
+			margin-right:1em"></div>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Drop shadows</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>box-shadow:</code>
+			<code title="Horizontal offset" class="short">10px</code>
+			<code title="Vertical offset" class="short">5px</code>
+			<code title="Blur radius">15px</code>
+			<code title="Shadow color">black</code>
+			<code title="Drawn inside? (optional)" class="highlight short">inset</code>
+		</p>
+		<div class="demo-box" style="
+			-moz-box-shadow:10px 5px 15px black inset;
+			-webkit-box-shadow:10px 5px 15px black inset;
+			box-shadow:10px 5px 15px black inset;
+		"></div>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Drop shadows</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>box-shadow:</code>
+			<code title="Horizontal offset" class="short">20px</code>
+			<code title="Vertical offset" class="short">20px</code>
+			<code title="Blur radius">15px</code>
+			<code title="Spread distance" class="highlight short">-15px</code>
+			<code title="Shadow color">#f09</code>
+		</p>
+		<div class="demo-box" style="
+			-moz-box-shadow:20px 20px 15px -15px #FF0099;
+			-webkit-box-shadow:20px 20px 15px -15px #FF0099;
+			box-shadow:20px 20px 15px -15px #FF0099;
+		"></div>
+	</div>
+	
+	<div class="colored slide">
+		<hgroup>
+			<h5>Drop shadows</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p>Multiple shadows, for complex effects:</p>
+		<pre class="glass"><strong>box-shadow:</strong> 0 2px 6px rgba(0,0,0, .5),
+0 1px rgba(255,255,255, .3) inset,
+0 10px rgba(255,255,255, .2) inset,
+0 10px 20px rgba(255,255,255, .25) inset,
+0 -15px 30px rgba(0,0,0, .3);</pre>
+			<small class="attribution"><a href="http://dev.opera.com/articles/view/beautiful-ui-styling-with-css3-text-shadow-box-shadow-and-border-radius/">Example originally conceived by Jan Henrik Helmers</a></small>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>box-shadow</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="with-prefix">With<br />-moz-</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="with-prefix">With<br />-webkit-</dd>
+			
+			<dt>Opera</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="with-prefix">With<br />-webkit-</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="full-support">Full<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Text shadows</h5>
+			<h6>The old way</h6>
+		</hgroup>
+		<pre lang="html">&lt;h1&gt;&lt;img src="heading.png" alt="Heading text" 
+     width="300" height="50" /&gt;&lt;/h1&gt;</pre>
+		<p>or, the slightly better:</p>
+		<pre lang="html">&lt;h1&gt;Heading text&lt;/h1&gt;</pre>
+		<pre lang="css">h1 {
+background: url(heading.png) no-repeat;
+width: 300px;
+height: 50px;
+text-indent:-9999px;
+}</pre>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Text shadows</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>text-shadow:</code>
+			<code title="Horizontal offset" class="short">1px</code>
+			<code title="Vertical offset" class="short">.1em</code>
+			<code title="Blur radius">.3em</code>
+			<code title="Shadow color">black</code>
+		</p>
+		<ul>
+			<li class="delayed non-dismissable">Supports multiple shadows too</li>
+			<li class="delayed non-dismissable">No spread distance</li>
+			<li class="delayed non-dismissable">No inset shadows</li>
+		</ul>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Text shadows</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<style scoped contentEditable="true" class="example">#glow-example {
+text-shadow: 0 0 .2em white,
+             0 0 .5em white;
+}</style>
+		<p id="glow-example" class="text-shadow-example">I'm glowing</p>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Text shadows</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<style scoped contentEditable="true" class="example">#outline-example {
+color:#222;
+text-shadow:0 1px 1px white, 1px 0 1px white,
+            -1px 0 1px white, 0 -1px 1px white,
+            1px 1px 1px white, -1px 1px 1px white,
+            -1px 1px 1px white, -1px -1px 1px white;
+}</style>
+		<p id="outline-example" class="text-shadow-example">I have a rudimentary outline</p>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Text shadows</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<style scoped contentEditable="true" class="example">#blurry-example {
+color:transparent;
+text-shadow:0 0 .2em white;
+}</style>
+		<p id="blurry-example" class="text-shadow-example">You drank too much</p>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Text shadows</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<style scoped contentEditable="true" class="example">#flames-example {
+text-shadow: 0 0 4px white,
+             0 -5px 4px #FFFF33,
+             2px -10px 6px #FFDD33,
+             -2px -15px 11px #FF8800,
+             2px -25px 18px #FF2200;
+}</style>
+		<p id="flames-example" class="text-shadow-example">Burning hot</p>
+	</div>
+	
+	
+	<div class="slide">
+		<hgroup>
+			<h5>text-shadow</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Opera</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="no-support">No<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Gradients</h5>
+			<h6>The old way</h6>
+		</hgroup>
+		<ul>
+			<li>
+				1px &times; Npx graphics repeated on one axis
+				<pre>background: #f09 url(linear-gradient.png)
+        top repeat-x;</pre>
+			</li>
+			<li>Fixed width or height
+				<ul>
+					<li>Or both, for radial and angle gradients</li>
+				</ul>
+				<pre>background: #f09 url(radial-gradient.png)
+        top left no-repeat;</pre>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Gradients</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>background:</code>
+			<code>linear-gradient(</code>
+			<code title="First color">#f09</code>
+			<code>,</code>
+			<code title="Second color">black</code>
+			<code>)</code>
+		</p>
+		<div class="demo-box" style="
+			background:-moz-linear-gradient(#f09, black);
+			background:-o-linear-gradient(#f09, black);
+			background:-webkit-linear-gradient(#f09, black);
+			background:linear-gradient(#f09, black)
+		"></div>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Gradients</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>linear-gradient(</code>
+			<code title="Angle (in degrees)" class="highlight">-45deg</code>
+			<code>,</code>
+			<code title="First color">#f09</code>
+			<code>,</code>
+			<code title="Second color">black</code>
+			<code>)</code>
+		</p>
+		<div class="demo-box" style="
+			background:-moz-linear-gradient(-45deg, #f09, black);
+			background:-o-linear-gradient(-45deg, #f09, black);
+			background:-webkit-linear-gradient(-45deg, #f09, black);
+			background:linear-gradient(-45deg, #f09, black);
+		"></div>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Gradients</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>linear-gradient(</code>
+			<code title="First color">white</code>
+			<code>,</code>
+			<code title="Color stop" class="highlight">#f09</code>
+			<code>,</code>
+			<code title="Second color">black</code>
+			<code>)</code>
+		</p>
+		<div class="demo-box" style="
+			background:-moz-linear-gradient(white, #f09, black);
+			background:-o-linear-gradient(white, #f09, black);
+			background:-webkit-linear-gradient(white, #f09, black);
+			background:linear-gradient(white, #f09, black);
+		"></div>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Gradients</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>linear-gradient(</code>
+			<code title="First color">white</code>
+			<code>,</code>
+			<code title="Color stop at 20%" class="highlight">#f09 20%</code>
+			<code>,</code>
+			<code title="Second color">black</code>
+			<code>)</code>
+		</p>
+		<div class="demo-box" style="
+			background:-moz-linear-gradient(white, #f09 20%, black);
+			background:-o-linear-gradient(white, #f09 20%, black);
+			background:-webkit-linear-gradient(white, #f09 20%, black);
+			background:linear-gradient(white, #f09 20%, black);
+		"></div>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Gradients</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code class="highlight">radial-gradient(</code>
+			<code title="First color">#f09</code>
+			<code>,</code>
+			<code title="Second color">transparent</code>
+			<code>)</code>
+		</p>
+		<div class="demo-box" style="
+			background:-moz-radial-gradient(#f09, transparent);
+			background:-o-radial-gradient(#f09, transparent);
+			background:-webkit-radial-gradient(#f09, transparent);
+			background:radial-gradient(#f09, transparent);
+		"></div>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>CSS gradients</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="with-prefix">With<br />-moz-</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="alternative">Al&shy;ter&shy;na&shy;tive impl.</dd>
+			
+			<dt>Opera</dt>
+			<dd class="no-support">No<br />support</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="alternative">Al&shy;ter&shy;na&shy;tive impl.</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="no-support">No<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Rotation and skew</h5>
+			<h6>The old way</h6>
+		</hgroup>
+		<ul>
+			<li>
+				The whole thing as an image
+				<pre lang="html">&lt;img src="rotated-with-text.png" alt="&hellip;" /&gt;</pre>
+			</li>
+			<li>
+				The box as an image, with non-rotated, non-skewed text:
+				<pre lang="css">.foo {
+background: url(rotated-box.png) no-repeat;
+width:200px;
+height:200px;
+padding:20px;
+overflow:auto;
+}</pre>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Rotation</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>transform:</code>
+			<code title="Transform type">rotate(</code>
+			<code title="Angle (in degrees)">-30deg</code>
+			<code>)</code>
+		</p>
+		<div class="demo-box" style="
+			-moz-transform: rotate(-30deg);
+			-webkit-transform: rotate(-30deg);
+			-o-transform: rotate(-30deg);
+			transform: rotate(-30deg);
+			margin-top:-3em;
+			margin-right:1.5em;
+		">Some text</div>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Rotation</h5>
+			<h6>Example use case</h6>
+		</hgroup>
+		<p>From <a href="http://media.24ways.org/2009/14/5/index.html">http://media.24ways.org/2009/14/5/index.html</a></p>
+		<div class="demo"><image src="demos/rotation.png" alt="Screenshot of a polaroid-style photo gallery using CSS rotate() transform" /></div>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Skew</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>transform:</code>
+			<code title="Transform type">skew(</code>
+			<code title="Horizontal angle">30deg</code>
+			<code>,</code>
+			<code title="Vertical angle">-10deg</code>
+			<code>)</code>
+		</p>
+		<div class="demo-box" style="
+			-moz-transform: skew(30deg, -10deg);
+			-o-transform: skew(30deg, -10deg);
+			-webkit-transform: skew(30deg, -10deg);
+			transform: skew(30deg, -10deg);
+			margin-top:1em;
+			margin-right:2em;
+		">Some text</div>
+	</div>
+	
+	<div class="slide">
+		<h5>More about CSS 2D transforms</h5>
+		<p>More than just rotate and skew:</p>
+		<ul>
+			<li>matrix</li>
+			<li>translate (and translateX/translateY)</li>
+			<li>scale (and scaleX/scaleY)</li>
+		</ul>
+	</div>
+	
+	<div class="slide">
+		<h5>More about CSS 2D transforms</h5>
+		<p class="syntax-description">
+			<code>transform:</code>
+			<code title="First transformation">rotate(30deg)</code>
+			<code title="Second transformation">skewX(30deg)</code>
+		</p>
+		<div class="demo-box" style="
+			-moz-transform: rotate(-30deg) skewX(30deg) translate(-2em, -1em);
+			-o-transform: rotate(-30deg) skewX(30deg) translate(-2em, -1em);
+			-webkit-transform: rotate(-30deg) skewX(30deg) translate(-2em, -1em);
+			transform: rotate(-30deg) skewX(30deg) translate(-2em, -1em);
+		">Some text</div>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>CSS 2D transforms</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="with-prefix">With<br />-moz-</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="with-prefix">With<br />-webkit-</dd>
+			
+			<dt>Opera</dt>
+			<dd class="with-prefix">With<br />-o-</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="with-prefix">With<br />-webkit-</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="no-support">No<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+</section>	
+
+<section id="problem2">
+	<hgroup class="slide" id="problem2-clutter">
+		<h3>Problem #2</h3>
+		<h4>Markup &amp; CSS clutter</h4>
+	</hgroup>
+	
+	<div class="slide">
+		<h5>Why is it a problem?</h5>
+		<ul>
+			<li>Breaks separation of structure, presentation and behavior</li>
+			<li>Larger filesize &#x21D2; slower download</li>
+			<li>Makes the code harder to understand</li>
+			<li>&hellip;and slower to parse</li>
+		</ul>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Multiple backgrounds</h5>
+			<h6>The old way</h6>
+		</hgroup>
+		<p>Multiple containers, 1 for each background image</p>
+		<pre lang="html">&lt;div class="foo"&gt;
+&lt;div class="inner"&gt;
+	&lt;div class="inner2"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</pre>
+		<pre lang="css">.foo { background: url(first_image.png); }
+.foo .inner { background: url(second_image.png); }
+.foo .inner2 { background: url(third_image.png); }</pre>
+	</div>
+	
+	<div class="slide" id="multiple-backgrounds">
+		<hgroup>
+			<h5>Multiple backgrounds</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<style scoped contentEditable="true" class="example">.slide#multiple-backgrounds {
+background: url(pics/stars.png) top repeat-x,
+url(pics/village-skyline.png) bottom no-repeat,
+-moz-linear-gradient(black, #333),
+#222
+}</style>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Multiple backgrounds</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Opera</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="full-support">Full<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Fancy borders</h5>
+			<h6>The old way</h6>
+		</hgroup>
+		<p>3 containers for fixed width or height, 4+ for fluid boxes</p>
+<pre lang="html">&lt;div class="foo"&gt;
+&lt;div class="inner"&gt;
+	&lt;div class="inner2"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</pre>
+<pre lang="css">.foo {
+background: url(img/border_top.png) top no-repeat;
+padding-top:10px;
+}
+.foo .inner {
+background: url(img/border_bottom.png) bottom no-repeat;
+padding-bottom:10px;
+}
+.foo .inner2 {
+background: url(img/border_middle.png) repeat-y;
+}</pre>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Fancy borders</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>border-image:</code>
+			<code title="Path to the image to use">url(border-image.png)</code>
+			<code title="Where to slice (px or %)">14</code>
+			<code title="How to apply">repeat</code>
+		</p>
+		<p class="medium transparent demo-box" style="
+			border:14px dotted white; 
+			-moz-border-image:url(pics/border-image.png) 14 repeat;
+			-webkit-border-image:url(pics/border-image.png) 14 repeat;
+			border-image:url(pics/border-image.png) 14 repeat;
+		">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+		</p>
+		<figure>
+			<image src="pics/border-image-sliced.png" alt="The border-image used above, sliced" />
+			<figcaption>border-image.png</figcaption>
+		</figure>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>border-image</h5>
+			<h6>Real life use case</h6>
+		</hgroup>
+		<p>From <a href="http://gopinkboots.com/">http://gopinkboots.com/</a></p>
+		<div class="demo"><img src="demos/border-image.png" alt="Border image use case" /></div>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>border-image</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="with-prefix">With<br />-moz-</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="with-prefix">With<br />-webkit-</dd>
+			
+			<dt>Opera</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="with-prefix">With<br />-webkit-</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="no-support">No<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Alternating styling <br />for every n items</h5>
+			<h6>The old way</h6>
+		</hgroup>
+		<p>Using server side code or JavaScript to end up with something like that:</p>
+		<pre>&lt;ul&gt;
+&lt;li class=&quot;odd&quot;&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li class=&quot;odd div3&quot;&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li class=&quot;odd&quot;&gt;&lt;/li&gt;
+&lt;li class=&quot;div3&quot;&gt;&lt;/li&gt;
+&lt;/ul&gt;</pre>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Alternating styling <br />for every n items</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code title="New pseudo-class">:nth-child</code>
+			<code>(</code>
+			<code title="= Match every odd child" class="short">odd</code>
+			<code>)</code>
+		</p>
+		<ul class="nth-example" id="nth-example-odd">
+			<li></li><li></li><li></li><li></li><li></li><li></li>
+			<li></li><li></li><li></li><li></li><li></li><li></li>
+		</ul>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Alternating styling <br />for every n items</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>:nth-child</code>
+			<code>(</code>
+			<code title="= Every third child" class="short">3n</code>
+			<code>)</code>
+		</p>
+		<ul class="nth-example" id="nth-example-3n">
+			<li></li><li></li><li></li><li></li><li></li><li></li>
+			<li></li><li></li><li></li><li></li><li></li><li></li>
+		</ul>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Alternating styling <br />for every n items</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>:nth-child</code>
+			<code>(</code>
+			<code title="= Every 2nd item in every set of 3" class="short">3n+2</code>
+			<code>)</code>
+		</p>
+		<p class="note" style="margin-bottom:3.5em">
+			<strong>Note:</strong> Actually <code>even</code> == <code>2n</code> and <code>odd</code> == <code>2n+1</code>
+		</p>
+		<ul class="nth-example" id="nth-example-3n2">
+			<li></li><li></li><li></li><li></li><li></li><li></li>
+			<li></li><li></li><li></li><li></li><li></li><li></li>
+		</ul>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Alternating styling <br />for every n items</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<style scoped contentEditable="true" class="example">#nth-child-example :nth-child(3n+2) {
+outline: .2em solid #70e800;
+}</style>
+		<ul class="nth-example" id="nth-child-example">
+			<li></li><li></li><li></li><li></li><li></li><li></li>
+			<li></li><li></li><li></li><li></li><li></li><li></li>
+		</ul>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Alternating styling <br />for every n items</h5>
+			<h6>More</h6>
+		</hgroup>
+		<ul>
+			<li class="delayed"><code>:nth-last-child()</code>: Starts counting from the end</li>
+			<li class="delayed"><code>:nth-of-type()</code>: Counts elements of the same tag name separately</li>
+			<li class="delayed">
+				<code>:first-child</code> == <code>:nth-child(1)</code> and
+				<code>:last-child</code> == <code>:nth-last-child(1)</code>
+			</li>
+			<li class="delayed"><code>:only-child</code> == <code>:first-child:last-child</code></li>
+		</ul>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>:nth-something selectors</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Opera</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="full-support">Full<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Selector negation</h5>
+			<h6>The old way</h6>
+		</hgroup>
+		<p>Writing 2 CSS rules for every negation we wanted
+		<pre>.post {
+font-size:75%;
+}
+
+.post:first-child {
+font-size: inherit;
+}</pre>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Selector negation</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>.post</code>
+			<code title="New pseudo-class">:not</code>
+			<code>(</code>
+			<code title="Simple selector to negate">:first-child</code>
+			<code>)</code>
+			<code>{ font-size: 75%; }</code>
+		</p>
+		<ul style="font-size:85%; margin-top:2.5em">
+			<li class="delayed"><strong>Only negates simple selectors</strong>, so things like <code>p:not(h1 + p)</code> or even <code>p:not([class][title])</code> are not possible yet</li>
+			<li class="delayed">Specificity gotcha: Its argument contributes to overall specificity, the <code>:not()</code> pseudo-class doesn't</li>
+		</ul>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>:not() pseudo-class</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Opera</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="full-support">Full<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Image replacement</h5>
+			<h6>The old way</h6>
+		</hgroup>
+		<pre>.icon {
+background: url('some-icon.png');
+width: 32px;
+height: 32px;
+text-indent: -9999px;
+}</pre>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Image replacement</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<pre>.icon {
+<strong>content:</strong> url('some-icon.png');
+}</pre>
+	</div>
+			
+	<div class="light slide">
+		<hgroup>
+			<h5>content on every element</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="no-support">No<br />support</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="no-support">No<br />support</dd>
+			
+			<dt>Opera</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="no-support">No<br />support</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="no-support">No<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+</section>
+
+<section id="problem3">
+	<hgroup class="slide" id="problem3-js">
+		<h3>Problem #3</h3>
+		<h4>Needing present&shy;ational JavaScript</h4>
+	</hgroup>
+	
+	<div class="light slide">
+		<h5>Why is it a problem?</h5>
+		<ul>
+			<li>Larger file size</li>
+			<li>Slower</li>
+			<li>Applied after the DOM loads</li>
+			<li>Breaks separation of structure, presentation and behavior</li>
+			<li>Double maintenance</li>
+		</ul>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Transitions</h5>
+			<h6>The old way</h6>
+		</hgroup>
+		<ul>
+			<li>Loading at least 4KB of a JS library or writing several lines of complex custom code</li>
+			<li>Slower</li>
+			<li>Property changes had to be done in JavaScript</li>
+		</ul>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Transitions</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>transition:</code>
+			<code title="Duration">1.5s</code>
+			<code title="Property or &quot;all&quot;">opacity</code>
+			<code title="Timing function">ease-out</code>
+		</p>
+		<div class="transition-example-1 demo-box" style="
+			-moz-transition:1.5s opacity ease-out;
+			-o-transition:1.5s opacity ease-out;
+			-webkit-transition:1.5s opacity ease-out;
+			transition:1.5s opacity ease-out;
+		">
+			mouseover this
+		</div>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Transitions</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>transition:</code>
+			<code title="First transition" class="long">2s opacity</code>
+			<code>,</code>
+			<code title="Second transition" class="long">.5s height ease-in</code>
+		</p>
+		<div class="transition-example-1 transition-example-2 demo-box" style="
+			-moz-transition:2s opacity ease-out, .5s height ease-in;
+			-o-transition:2s opacity ease-out, .5s height ease-in;
+			-webkit-transition:2s opacity ease-out, .5s height ease-in;
+			transition:2s opacity ease-out, .5s height ease-in;
+		">
+			mouseover this
+		</div>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Transitions</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>transition:</code>
+			<code title="First transition" class="long">.5s height</code>
+			<code>,</code>
+			<code title="Duration">.5s</code>
+			<code title="Delay" class="highlight">.5s</code>
+			<code title="Property or &quot;all&quot;">width</code>
+		</p>
+		<p class="note">Also available as a separate property (<code>transition-delay</code>)</p>
+		<div class="transition-example-2 transition-example-3 demo-box" style="
+			-moz-transition:.5s height, .5s .5s width;
+			-o-transition:.5s height, .5s .5s width;
+			-webkit-transition:.5s height, .5s .5s width;
+			transition:.5s height, .5s .5s width;
+		">
+			
+		</div>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>CSS Transitions</h5>
+			<h6>Downsides</h6>
+		</hgroup>
+		<ul>
+			<li class="delayed">Little control or feedback over playback</li>
+			<li class="delayed">Not all values are transition-able (e.g. height:0 &rarr; height:auto)</li>
+			<li class="delayed">Most commonly needed transition is impossible: from display:none to display:block via opacity or height</li>
+		</ul>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>CSS transitions</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="with-prefix">With<br />-moz-</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="with-prefix">With<br />-webkit-</dd>
+			
+			<dt>Opera</dt>
+			<dd class="with-prefix">With<br />-o-</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="with-prefix">With<br />-webkit-</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="no-support">No<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Style changes according to the URL #hash</h5>
+			<h6>The old way</h6>
+		</hgroup>
+		<p>Check every few ms if the hash changed (no <code>hashchange</code> event in those days) and do stuff, like:</p>
+		<pre style="font-size:60%">var oldHash = location.hash;
+setInterval(function(){
+if(location.hash != oldHash) {
+    oldHash = location.hash;
+    var targetHeading = document.getElementById(location.hash.substr(1));
+    if(targetHeading) {
+        targetHeading.className = 'target';
+    }
+}
+}, 500);</pre>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Style changes according to the URL #hash</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<ul>
+			<li><code>:target</code> pseudo-class</li>
+			<li class="delayed non-dismissable">Obvious use case: Highlighting current section</li>
+			<li class="delayed">Not so obvious use case: Keeping state
+				<ul>
+					<li>Current page</li>
+					<li>Current photo in a lightbox</li>
+					<li>Current slide ;-)</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Style changes according to the URL #hash</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p>This very slide is visible due to <code>:target</code>:</p>
+		<pre>.slide {
+z-index:1; opacity:0;
+}
+
+.slide<strong>:target</strong> {
+z-index:100; opacity:1;
+}</pre>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>:target</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Opera</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="full-support">Full<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Style reacting <br />to checkbox state</h5>
+			<h6>The old way</h6>
+		</hgroup>
+		<pre>checkbox.addEventListener('change', function(){
+var classes = this.nextElementSibling.classList;
+if(this.checked) {
+    classes.add('checkboxChecked');
+} else {
+    classes.remove('checkboxChecked');
+}
+});</pre>
+		<p>Even worse in actual situations, where older browsers matter</p>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Style reacting to <br />checkbox state</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<style scoped contentEditable="true" class="example">#checked-example :checked + label {
+text-shadow: 0 0 .5em white;
+}</style>
+		<div class="example" id="checked-example">
+			<input type="checkbox" id="example-checkbox" />
+			<label for="example-checkbox">Checkbox label</label>
+			<br />
+			<input type="radio" id="example-radio1" name="example-radio" />
+			<label for="example-radio1">1st radio label</label>
+			<input type="radio" id="example-radio2" name="example-radio" />
+			<label for="example-radio2">2nd radio label</label>
+		</div>
+	</div>
+	
+	
+	<div class="slide">
+		<hgroup>
+			<h5>:checked</h5>
+			<h6>Real-world use case</h6>
+		</hgroup>
+		<p>
+			<a href="http://www.thecssninja.com/demo/css_custom-forms/" target="_blank">Custom radios &amp; checkboxes</a> 
+			by <a href="http://www.thecssninja.com/">Ryan Seddon</a>
+		</p>
+		<iframe class="demo" src="http://www.thecssninja.com/demo/css_custom-forms/"></iframe>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>:checked</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Opera</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="full-support">Full<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>CSS values that depend on HTML attributes</h5>
+			<h6>The old way</h6>
+		</hgroup>
+		<ul>
+			<li>
+				Using JavaScript to do something like:
+				<pre>element.style.width = 
+   element.getAttribute('data-percent') + '%';</pre>
+			</li>
+			<li>Not much code, but clearly presentational</li>
+		</ul>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>CSS values that depend on HTML attributes</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>width:</code>
+			<code title="attr() can now do so much more!" class="short">attr</code>
+			<code>(</code>
+			<code title="HTML attribute" class="long">data-percent</code>
+			<code>,</code>
+			<code title="Type">%</code>
+			<code>,</code>
+			<code title="Fallback">0</code>
+			<code>)</code>
+		</p>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>attr() in all properties</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="no-support">No<br />support</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="no-support">No<br />support</dd>
+			
+			<dt>Opera</dt>
+			<dd class="no-support">No<br />support</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="no-support">No<br />support</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="no-support">No<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Calculations <br />with different units</h5>
+			<h6>The old way</h6>
+		</hgroup>
+		<p>Setting the CSS property through JavaScript, performing the calculations on the computed styles, like:</p>
+		<pre>var element = $(&hellip;);
+element.css('width', .5 * $(element).parent().css('width') 
+- element.css('borderLeftWidth') 
+- element.css('borderRightWidth') 
+- element.css('paddingLeft')
+- element.css('paddingRight')
+);</pre>
+		<p>or just giving up altogether and using a very rough estimate (e.g. 48%)</p>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Calculations <br />with different units</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<pre>padding: .5em;
+border: 1px solid;
+width: <strong>calc(50% - 2*.5em - 2*1px);</strong></pre>
+		<ul>
+			<li class="delayed non-dismissable">Supports +, -, *, /, mod</li>
+			<li class="delayed">Doesn't accept <code>attr()</code> values for calculations</li>
+		</ul>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>calc()</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="with-prefix">With<br />-moz-</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="no-support">No<br />support</dd>
+			
+			<dt>Opera</dt>
+			<dd class="no-support">No<br />support</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="no-support">No<br />support</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="full-support">Full<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Sizing elements relative to viewport dimensions</h5>
+			<h6>The old way</h6>
+		</hgroup>
+		<pre>var innerWidth = window.innerWidth 
+|| (document.documentElement?
+      document.documentElement.clientWidth 
+      : 0
+    ) 
+|| document.body.clientWidth;
+
+element.style.width = .5 * innerWidth + 'px';</pre>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>Sizing elements relative to viewport dimensions</h5>
+			<h6>The CSS3 way</h6>
+		</hgroup>
+		<p class="syntax-description">
+			<code>width:</code>
+			<code>.5</code>
+			<code title="New unit: Viewport width" class="short">vw</code>
+		</p>
+		<ul class="delayed">
+			<li>Also: 
+				<ul>
+					<li><code>vh</code>: viewport height</li>
+					<li><code>vm</code>: minimum of the two</li>
+					<li><code>rem</code>: Root element's em font size</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>vw, vh, vm units</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="no-support">No<br />support</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="no-support">No<br />support</dd>
+			
+			<dt>Opera</dt>
+			<dd class="no-support">No<br />support</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="no-support">No<br />support</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="full-support">Full<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+	
+	<div class="light slide">
+		<hgroup>
+			<h5>rem unit</h5>
+			<h6>Browser support*</h6>
+		</hgroup>
+		<dl class="browser-support">
+			<dt>Firefox</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Google Chrome</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Opera</dt>
+			<dd class="no-support">No<br />support</dd>
+			
+			<dt>Apple Safari</dt>
+			<dd class="full-support">Full<br />support</dd>
+			
+			<dt>Internet Explorer</dt>
+			<dd class="full-support">Full<br />support</dd>
+		</dl>
+		<p class="note">* Assumes latest beta</p>
+	</div>
+</section>
+
+<section id="compatibility">
+	<hgroup class="slide" id="appendix-compatibility">
+		<h3>Appendix</h3>
+		<h4>Dealing with all these browsers</h4>
+	</hgroup>
+	
+	<div class="light slide">
+		<h5>Why bother?</h5>
+		<ul>
+			<li class="delayed">By all means don’t, if it’s a personal fun project! &#x263A;</li>
+			<li class="delayed">Clients care though</li>
+			<li class="delayed">Sad but true: A large percentage of internet users use crappy browsers, we can’t ignore them just yet</li>
+			<li class="delayed">Even if you choose not to, let users know</li>
+		</ul>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Graceful degradation</h5>
+			<h6>in a nutshell</h6>
+		</hgroup>
+		<p class="emphasis">Browsers ignore stuff they don’t understand</p>
+		<p>That includes:</p>
+		<ul>
+			<li>Unknown CSS properties and values</li>
+			<li>CSS rules with a selector they can’t parse</li>
+		</ul>
+		<p class="emphasis">If a CSS property is defined twice in the same rule, only the last one counts</p>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Graceful degradation</h5>
+			<h6>in CSS values</h6>
+		</hgroup>
+		<pre>background: black;
+background: rgba(0, 0, 0, .75);</pre>
+		<ul>
+			<li>If RGBA is supported, the second declaration overrides the first</li>
+			<li>Otherwise, it’s ignored and the first one is applied</li>
+		</ul>
+	</div>
+	
+	<div class="light slide">
+		<h5>Dealing with<br />-vendor-prefixes</h5>
+		<p>Just include all of them, browsers will pick the one they understand</p>
+		<pre>-moz-transition: 1s ease-in;
+-webkit-transition: 1s ease-in;
+-o-transition: 1s ease-in;
+transition: 1s ease-in;</pre>
+		<p class="emphasis">Put the prefix-less version last</p>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Detecting CSS <br />property support</h5>
+			<h6>in JavaScript</h6>
+		</hgroup>
+		<pre>function isPropertySupported(property) {
+if(property in document.body.style) return true;
+    
+var prefixes = ['Moz', 'Webkit', 'O', 'ms', 'Khtml'],
+	prefProperty = property.charAt(0).toUpperCase() + property.substr(1);
+	
+for(var i=0; i&lt;prefixes.length; i++) {
+	if((prefixes[i] + prefProperty) in document.body.style) return true;
+}
+
+return false;
+}</pre>
+	</div>
+	
+
+	<div class="slide">
+		<hgroup>
+			<h5>Detecting CSS <br />value support</h5>
+			<h6>in JavaScript</h6>
+		</hgroup>
+		<pre>function isRGBASupported() {
+var element = document.createElement('div');
+    
+try { element.style.color = 'rgba(0,0,0,.5)'; }
+catch(e) { return false; }
+
+return !!element.style.color;
+}</pre>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Detecting CSS3 <br />selector support</h5>
+			<h6>in JavaScript</h6>
+		</hgroup>
+		<pre>function isSelectorSupported(selector) {
+try {
+   document.querySelector(selector);
+   return true;
+} catch(e) { return false; }
+}</pre>
+		<ul>
+			<li>Assumes Selectors API support, so it’s only useful for CSS3 selector detection</li>
+			<li>Doesn't test for buggy support, just whether the browser recognizes the selector</li>
+		</ul>
+	</div>
+	
+	<div class="slide">
+		<hgroup>
+			<h5>Detecting multiple features at once</h5>
+			<h6>a.k.a. Modernizr</h6>
+		</hgroup>
+		<a href="http://www.modernizr.com.">http://www.modernizr.com</a>
+		<div class="demo"><image src="demos/modernizr.png" alt="Screenshot of Modernizr's website" /></div>
+	</div>
+</section>
+
+<div class="slide">
+	<h5>Last but not least...</h5>
+	<ul>
+		<li class="emphasis">
+			Don't believe the hype,<br />
+			study the specifications yourself
+		</li>
+		<li>
+			Every CSS3 feature presented, belongs to one of the following specs:
+			<ul>
+				<li><a href="http://www.w3.org/TR/css3-selectors/">Selectors Level 3</a></li>
+				<li><a href="http://www.w3.org/TR/css3-background/">Backgrounds and Borders Module Level 3</a></li>
+				<li><a href="http://www.w3.org/TR/css3-2d-transforms/">CSS 2D Transforms Module Level 3</a></li>
+				<li><a href="http://www.w3.org/TR/css3-transitions/">CSS Transitions Module Level 3</a></li>
+				<li><a href="http://www.w3.org/TR/css3-content/">CSS3 Generated and Replaced Content Module</a></li>
+			</ul>
+		</li>
+		<li style="font-size:80%">Find them all at <a href="http://www.w3.org/Style/CSS/current-work.html">http://www.w3.org/Style/CSS/current-work.html</a></li>
+	</ul>
+</div>
+
+<div class="colored slide">
+	<h5>Thank you!</h5>
+	<p>Credits:</p>
+	<ul>
+		<li>Dark wood background by Paul Ensane (http://paulensane.deviantart.com/art/Darker-Wood-66066645). Light wood background derived from that.</li>
+		<li>Colored wood background by Luke Roberts (http://lukeroberts.us/2008/12/wallpaper-colourful-wood/)</li>
+		<li>Flames text-shadow effect from CSS3.info (http://www.css3.info/preview/text-shadow/)</li>
+	</ul>
+</div>
+
+<script src="../csss/classList.js"></script>
+<script src="../csss/slideshow.js"></script>
+<script>
+var slideshow = new SlideShow();
+</script>
+<script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-597483-5");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+/**
+	Funky Wood slideshow theme
+	@author Lea Verou
+	@version 1.0
+*/
+
+@font-face {
+  font-family: 'Reenie Beanie';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Reenie Beanie'), url('ReenieBeanie.ttf') format('truetype');
+}
+
+* {
+	padding:0;	
+	margin:0;
+	font:inherit;
+	color:inherit;
+}
+
+body {
+	font-family:Helvetica, Arial, sans-serif;
+	background:black;	
+}
+
+button {
+	padding:.2em .5em;
+}
+
+h1, h3, h5 {
+	font-size:1in;
+	letter-spacing:-.1em;
+	line-height: .8;
+	margin: .3em 0;
+	font-weight: bold;
+}
+
+h2, h6 {
+	font-family:'Reenie Beanie','Segoe Print', inherit;
+	text-align:center;
+}
+
+h1 {
+	font-size: 2in;
+	text-align: center;
+}
+
+h2 {
+	font-size: 200%;
+	margin-top: -1.2em;
+}
+
+h3 {
+	position: absolute;
+	left: 0;
+	top: 0;
+	
+	font-weight: 100;
+	font-size: 1in;
+	font-family: 'Helvetica Neue', sans-serif;
+	letter-spacing: normal;
+	
+	-moz-transform: rotate(-90deg) translate(-40%, -1.3em);
+	-webkit-transform: rotate(-90deg) translate(-40%, -1.3em);
+	-o-transform: rotate(-90deg) translate(-40%, -1.3em);
+	transform: rotate(-90deg) translate(-40%, -1.3em);
+}
+
+h4 {
+	width: 80%;
+	float: right;
+	text-align: right;
+	line-height: .8;
+	letter-spacing: -.08em;
+	font-size: 1.8in;
+	font-weight: bold;
+	position: absolute;
+	bottom: .2em;
+	right: .3em;
+}
+
+h5 {
+	color: #1af;
+}
+
+h6 {
+	font-size:1in;
+	margin-top:-1em;
+}
+
+a:hover {
+	text-shadow: 0 0 .5em white, 0 0 1em white;
+}
+
+code, pre, style {
+	font-family: Consolas, 'Andale Mono', 'Courier New', monospace;	
+	background:rgba(0,0,0,.4);
+}
+
+.light.slide pre,
+.light.slide style {
+	background: rgba(0,0,0,.6);
+}
+
+code {
+	padding:.2em .2em .1em;
+	white-space: nowrap;
+	
+	-moz-border-radius:.2em;
+	-webkit-border-radius:.2em;
+	border-radius:.2em;
+	
+	-moz-box-shadow:.05em .05em .3em black;
+	-webkit-box-shadow:.05em .05em .3em black;
+	box-shadow:.05em .05em .3em black;
+	
+	border: 1px solid rgba(0,0,0,0.5);
+	background: rgba(0,0,0,0.25);
+		
+	-webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 12px rgba(255,255,255,0.15), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 12px rgba(255,255,255,0.15), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+	box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 12px rgba(255,255,255,0.15), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+}
+
+pre, style {
+	padding:.3em .5em;
+	margin-left: -.1em;
+	border:2px solid rgba(255, 255, 255, .1);
+		
+	-webkit-box-shadow:.1em .1em .5em black inset;
+	-moz-box-shadow:.1em .1em .5em black inset;
+	box-shadow:.1em .1em .5em black inset;
+}
+
+.light.slide pre,
+.light.slide style,
+.light.slide code {
+	color: white;
+	text-shadow: .05em .05em .1em rgba(0,0,0,.4);
+}
+
+strong, b {
+	font-weight:bold;	
+}
+
+	pre strong {
+		text-shadow: 0 0 .6em white;
+	}
+
+.slide {
+	min-width:920px;
+	padding:0 2.5% 1%;
+
+	text-shadow:.05em .05em .1em rgba(0,0,0,.4);
+}
+
+.slide:target::before {
+	color: white;
+	background: rgba(0,0,0,.25);
+	font-weight: bold;
+	text-shadow: .05em .05em .1em black;
+	padding: .1em .3em 0;
+	
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+}
+
+div.slide:target::before {
+	top: -.28in;
+}
+
+hgroup.slide,
+header.slide {
+	background:#1af;
+	color:white;
+}
+
+div.slide {
+	background: #333 url('img/darker_wood.jpg') center;
+	color:white;
+	text-shadow: .05em .05em .1em black;
+	border-top:30px solid #1af;
+}
+
+.light.slide {
+	background:white url('img/lighter_wood.jpg') center;
+	color:black;
+	text-shadow: .05em .05em .1em white;
+}
+
+.colored.slide,
+#intro {
+	background: url(../csss/img/rainbow-wood.jpg) center;
+	
+	-moz-box-shadow:0 10em 6em -9em black inset;
+	-webkit-box-shadow:0 10em 6em -9em black inset;
+	box-shadow:0 10em 6em -9em black inset;
+}
+		
+.slide > ul {
+	list-style:none;	
+}
+
+.slide ol {
+	margin-left:2em;	
+}
+	
+	.slide > ul ul {
+		margin-left:2em;	
+		list-style: none;
+	}
+	
+		.slide li li {
+			font-size:80%;
+		}
+	
+	.slide > ul > li:before {
+		content:'\2714';
+		color: #7d0;
+		padding-right: .2em;
+	}
+	
+		.slide li li:before {
+			content: '\279C';
+			color: #1af;
+			padding-right: .2em;
+		}
+	
+	
+	
+/** 
+	Section colors 
+*/
+
+section:nth-of-type(3n+1) hgroup.slide {
+	background: #f09;
+}
+
+section:nth-of-type(3n+1) div.slide {
+	border-color: #f09;
+}
+
+	section:nth-of-type(3n+1) div.slide h5 {
+		color:  #f09;
+	}
+	
+section:nth-of-type(3n+2) hgroup.slide {
+	background: #7d0;
+}
+
+section:nth-of-type(3n+2) div.slide {
+	border-color: #7d0;
+}
+
+	section:nth-of-type(3n+2) div.slide h5 {
+		color:  #7d0;
+	}
+
+section:nth-of-type(3n) hgroup.slide {
+	background: #fa0;
+}
+
+section:nth-of-type(3n) div.slide {
+	border-color: #fa0;
+}
+
+	section:nth-of-type(3) div.slide h5 {
+		color:  #fa0;
+	}
+	
+section:last-of-type hgroup.slide {
+	background: #888;
+}
+
+section:last-of-type div.slide {
+	border-color: #888;
+}
+
+	section:last-of-type div.slide h5 {
+		color:  #888;
+	}
+
+.slide .emphasis {
+	padding: .4em .5em .3em;
+	margin: .3em 0;
+	background: #f80;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fa0), to(#f80));
+	background: -moz-linear-gradient(#fa0, #f80);
+	color: white;
+	font-weight: bold;
+	letter-spacing: -.05em;
+	line-height: .85;
+	text-shadow: .05em .05em .1em rgba(0,0,0,.4);
+	
+	-moz-border-radius: .3em;
+	-webkit-border-radius: .3em;
+	border-radius: .3em;
+	
+	-moz-box-shadow:.1em .1em .5em black;
+	-webkit-box-shadow:.1em .1em .5em black;
+	box-shadow:.1em .1em .5em black;
+}
+
+.light.slide .emphasis {
+	-moz-box-shadow:.1em .1em .5em rgba(0,0,0,.4);
+	-webkit-box-shadow:.1em .1em .5em rgba(0,0,0,.4);
+	box-shadow:.1em .1em .5em rgba(0,0,0,.4);
+}
+
+.slide .emphasis::before {
+	content: '\279C';
+	color: rgba(255,255,255,.5);
+	float: left;	
+	width: .75em;
+	height: 0;
+	padding: .45em 0 .3em;
+	margin: -.2em .2em 0 -.25em;
+	border: .12em solid;
+	text-align: center;
+	line-height: 0;
+	font-size: 120%;
+	font-family: inherit;
+	text-shadow: none;
+	
+	-moz-border-radius:50%;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+	
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.attribution {
+	background: rgba(0,0,0,.8);
+	color: white;
+	display: block;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 1em;
+	padding: .5em 1em;
+	font-size: 30%;
+	text-shadow: .05em .05em .1em black;
+}
+
+	.attribution a {
+		text-decoration: none;
+	}
+	
+	.attribution a::after {
+		content:  ' (' attr(href) ')';
+	}
+	
+/**
+	Cover (first slide)
+*/
+
+#intro {
+	overflow: hidden;
+}
+
+	#intro h1 {
+		font-size:2in;	
+		color: black;
+		text-shadow: .005em .01em .05em rgba(255, 255, 255, .8);
+		margin-bottom: -1.5in;
+		text-align: center;
+	}	
+		
+	#intro hgroup {
+		position: absolute;
+		top: 50%;
+		margin-top: -2.5in;
+		width: 95%;
+	}	
+		
+	#intro .attribution {
+		font-size: 85%;
+		text-align: center;
+		padding: .2em 0;
+		font-family: 'Helvetica Neue', Helvetica, sans-serif;
+		font-weight: 100;
+	}
