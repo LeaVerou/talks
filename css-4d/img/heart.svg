@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 500 450">
+
+<defs>
+	<radialGradient id="gradient" cx="35%" cy="30%">
+		<stop stop-color="red" />
+		<stop stop-color="#900" offset="100%" />
+	</radialGradient>
+	<radialGradient id="glow">
+		<stop stop-color="white" stop-opacity=".8" offset="60%" />
+		<stop stop-color="white" stop-opacity="0" offset="100%" />
+	</radialGradient>
+</defs>
+
+<path d="m140,0 c-137.446907,-2.4711 -264.638405,212.481001 105.92601,435.341002c0.405975,-0.730988 1.968994,-0.730988 2.375,0c382.517975,-230.048996 234.665009,-451.640422 92.625977,-434.390902c-55.372986,6.724501 -81.503998,37.456499 -93.813995,63.888002c-12.30899,-26.431503 -38.440002,-57.163502 -93.812988,-63.888002c-4.438004,-0.539301 -8.866013,-0.870199 -13.300003,-0.949999l0,-0.000101z" id="path2361" fill="url(#gradient)"/>
+<circle r="10%" cx="25%" cy="25%" fill="url(#glow)" />
+
+</svg>

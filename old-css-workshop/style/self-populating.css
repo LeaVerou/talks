@@ -1,0 +1,99 @@
+.self-populating {
+	counter-reset: item item-b item-i;
+}
+
+	.self-populating > b,
+	.self-populating > i {
+		position: relative;
+		float: left;
+		padding: .6em;
+		margin: .6em .6em 0 0;
+		
+		font-size: 50%;
+		border-radius: .6em;
+	}
+	
+	.self-populating > b {
+		counter-increment: item item-b;
+		background: slategray;
+	}
+	
+	.self-populating > i {
+		counter-increment: item item-i;
+		background: #908070;
+	}
+	
+	.self-populating > b:before,
+	.self-populating > i:before,
+	.self-populating > b:after,
+	.self-populating > i:after  {
+		position: absolute;
+		top: -.4em;
+		min-width: 1.5em;
+		color: white;
+		line-height: 1.5;
+		text-align: center;
+		border-radius: 999px;
+	}
+	
+	.self-populating > b:before,
+	.self-populating > i:before {
+		content: counter(item);
+		left: -.4em;
+		background: black;
+	}
+	
+	.self-populating > b:after,
+	.self-populating > i:after {
+		right: -.4em;
+		font-size: 70%;
+		background: inherit;
+	}
+	
+	.self-populating:not([data-single]) > b:after {
+		content: counter(item-b);
+	}
+	
+	.self-populating:not([data-single]) > i:after {
+		content: counter(item-i);
+	}
+	
+		.self-populating button {
+			border: 0;
+			padding: .4em .5em;
+			background: rgba(255,255,255,.3);
+			line-height: 1;
+			cursor: pointer;
+			border-radius: .2em;
+		}
+		
+		.self-populating[data-single] button {
+			padding: .4em 1.5em;
+		}
+		
+		.self-populating > *:hover > button {
+			background: rgba(255,255,255,.6);
+		}
+		
+		.self-populating > b > button {
+			color: slategray;
+		}
+		
+		.self-populating > i > button {
+			color: #908070;
+		}
+		
+		.self-populating button:hover {
+			background: #7c0;
+			color: white;
+		}
+		
+		.self-populating button.delete {
+			display: block;
+			width: 100%;
+			margin-top: .3em;
+		}
+		
+		.self-populating button.delete:hover {
+			background: #c22;
+		}

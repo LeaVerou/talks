@@ -1,0 +1,246 @@
+@font-face {
+	font-family: LeaVerou;
+	src: url(img/leaverou.otf);
+}
+
+img.all-the-things {
+	position: absolute;
+	bottom: 0;
+	left: 0; right: 0;
+	margin: auto;
+}
+
+#intro {
+	padding: 0;
+	background: white;
+	color: black;
+	text-shadow: none;
+}
+
+	#intro > div {
+		padding: 1em;
+		background: black;
+		color: white;
+	}
+
+	#intro h1 {
+		position: relative;
+		font-size: 270%;
+		line-height: 1.7;
+	}
+
+		#intro del {
+			position: relative;
+			text-decoration: none;
+			color: #666;
+		}
+		
+			#intro del:before {
+				content: '';
+				position: absolute;
+				top: .75em;
+				left: 0; right: 0;
+				height: .05em;
+				background: currentColor;
+			}
+		
+		#intro ins {
+			position: absolute;
+			top: -.4em;
+			margin-left: -2.2em;
+			text-decoration: none;
+		}
+		
+	#intro .attribution {
+		margin-top: 1em;
+		text-align: center;
+		font: italic 100% Baskerville, Palatino Linotype, Palatino, serif;
+	}
+
+.lea {
+	background: url(img/lea.png) bottom left no-repeat,
+		 hsl(200, 30%, 15%) radial-gradient(10% 60%, hsl(200, 30%, 15%) 10%, black);
+}
+
+	.lea > h1 {
+		position: absolute;
+		max-width: 4em;
+		padding: 1em;
+		margin-left: .5em;
+		background: white;
+		color: hsl(200, 30%, 15%);
+		text-shadow: none;
+		font-size: 80%;
+		line-height: 1;
+		font-weight: normal;
+		text-align: center;
+		text-transform: uppercase;
+		outline: 2px dotted;
+		outline-offset: -.5em;
+	}
+	
+		.lea > h1 > .symbol {
+			font-family: LeaVerou;
+			font-size: 400%;
+		}
+		
+		.lea > h1 > .first-name {
+			font-size: 200%;
+		}
+
+	.lea > ul {
+		margin: -.5em 0 -.5em 260px;
+		font-size: 70%;
+		line-height: 1.5;
+	}
+	
+.server-client {
+	
+}
+
+	.server-client article {
+		float: left;
+		width: 7em;
+		min-height: 7.2em;
+		padding: .6em .8em .4em;
+		border: 1px solid;
+		border-radius: .5em;
+	}
+
+	.server-client article:nth-of-type(n+2) {
+		margin-left: 1em;
+	}
+	
+		.server-client article h1 {
+			text-align: inherit;
+			font: italic 200%/1 Baskerville, 'Palatino Linotype', Palatino, Georgia, serif;
+		}
+		
+		.server-client article ul {
+			margin: 0;
+			padding-left: 0;
+		}
+		
+#lean-server {
+	background-image: url(img/lean-server.png), 
+		radial-gradient(20% 50%, 40% 150%, white 10%, hsl(45, 20%, 70%)); 
+	background-color: hsl(45, 17%, 95%);
+	background-position: 7.5% 50%, 0 0; 
+	background-size: auto 100%, auto;	
+}
+
+	#lean-server .server-client {
+		position: absolute;
+		top: 1em;
+		right: 1em;
+		color: black;
+		text-shadow: 0 .05em .05em white;
+	}
+	
+ul.links a:after {
+	content: ' ' attr(href);
+	font: italic 100% Baskerville;
+	opacity: .5;
+}
+
+#dork {
+	background: white url('img/dork.jpg') top right no-repeat;
+	background-size: contain;
+}
+
+	@keyframes blink {
+		to {
+			background: red;
+		}
+	}
+
+	#dork h1 {
+		position: relative;
+		float: left;
+		max-width: 7.5em;
+		white-space: normal;
+		padding: .6em 1em;
+		border-radius: .5em;
+		margin: .5em .5em 2em;
+		background: black;
+		color: white;
+		text-shadow: 0 -.02em .05em black;
+		text-indent: -.6em;
+		text-align: left;
+		font-size: 240%;
+		animation: blink .5s infinite alternate linear;
+	}
+	
+		#dork h1:after {
+			content: '';
+			position: absolute;
+			top: 25%;
+			right: -.3em;
+			width: .6em;
+			height: .6em;
+			transform: rotate(45deg);
+			background: inherit;
+		}
+
+#urls {
+	background-color: transparent;
+}
+	
+	#urls .urls {
+		position: absolute;
+		left: 0; right: 0;
+		top: 0;	bottom: 0;
+		padding: .5em;
+	}
+		
+		#urls pre {
+			margin: .5em;
+			font-size: 90%;
+			white-space: normal;
+			word-break: all;
+			word-wrap: break-word;
+		}
+		
+#all-the-things-sad {
+	background: white;
+}
+
+	#all-the-things-sad img {
+		xwidth: 500px;
+	}
+		
+#thanks {
+	text-align: center;
+}
+
+	#thanks h1 {
+		position: absolute;
+		top: 1em;
+		left: 0; right: 0;
+		font: italic 500% Baskerville;
+		text-transform: lowercase;
+		color: hsl(30,20%,19%);
+		text-shadow: 0 .1rem hsla(0,0%,100%,.3);
+		word-spacing: 2em;
+		text-indent: -.3em;
+		white-space: nowrap;
+	}
+	
+	#contact {
+		font-size: 140%;
+	}
+
+		#contact:before {
+			content: '☠';
+			font: 600% LeaVerou;
+		}
+	
+		#contact > .url {
+			text-indent: .55em;
+		}
+		
+	
+		#contact strong,
+		#contact:before {
+			color: hsl(75, 70%, 60%);
+		}

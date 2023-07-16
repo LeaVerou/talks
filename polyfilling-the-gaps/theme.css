@@ -1,0 +1,269 @@
+@import url(http://fonts.googleapis.com/css?family=Leckerli+One);
+
+@font-face {
+	font-family: 'Beteckna';
+	src: url(Beteckna.otf);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: Futura, Beteckna, sans-serif;
+}
+
+h1, h2, h3 {
+	font-family: 'Leckerli One', cursive;
+}
+
+mark, code {
+	background: transparent;
+	text-shadow: 
+		.1em .1em yellow, 
+		-.1em .1em yellow, 
+		-.1em -.1em yellow, 
+		.1em -.1em yellow, 
+		.1em 0 yellow, 
+		0 .1em yellow,
+		-.1em 0 yellow, 
+		0 -.1em yellow;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	text-shadow: .1em .1em 0 yellow;
+}
+
+a:hover, a:focus, a:active {
+	color: deeppink;
+}
+
+blockquote {
+	margin-top: .5em;
+	quotes: "“" "”";
+}
+
+	blockquote:before {
+		content: open-quote;
+	}
+	
+	blockquote:after {
+		content: close-quote;
+	}
+
+blockquote + .cite {
+	text-align: right;
+	margin-bottom: .8em;
+}
+
+blockquote + .cite:before {
+	content: '—\200A';
+}
+
+pre, code {
+	font: 80% Monaco, Consolas, monospace;
+}
+
+pre {
+	margin: 1em 0 1em -.2em;
+	padding: 14px 10px;
+	line-height: 1.8;
+	background: repeating-linear-gradient(-45deg, transparent, transparent 8px, rgba(0,0,0,.2) 8px, rgba(0,0,0,.2) 16px);
+	tab-size: 4;
+}
+
+pre code {
+	padding: .4em 0;
+	background: black;
+	color: white;
+	text-shadow: none;
+	font: inherit;
+	box-decoration-break: clone;
+}
+
+pre > code.delayed:not(.displayed):not(.current),
+pre > code.delayed:not(.displayed):not(.current) > .token {
+	opacity: 1;
+	color: transparent;
+}
+
+	pre > code.delayed > .token {
+		transition: inherit;
+	}
+
+ol {
+	counter-reset: ol;
+	padding-left: 1em;
+}
+
+	ol > li {
+		clear: both;
+		list-style: none;
+		counter-increment: ol;
+	}
+	
+	ol > li:before {
+		content: counter(ol);
+		float: left;
+		width: 1.6em;
+		margin: 0 .3em 0 -1.9em;
+		text-align: center;
+		font-family: 'Leckerli One', cursive;
+		font-size: 90%;
+		background: #0cf;
+		color: white;
+		border-radius: 50%;
+	}
+	
+ul {
+	
+}
+
+	ul > li {
+		list-style: none;
+		text-indent: -.8em;
+	}
+	
+	ul > li:before {
+		content: '•';
+		color: deeppink;
+		text-shadow: .1em .1em 0 yellow;
+	}
+	
+	li ul > li {
+		margin-left: 2em;
+	}
+	
+	ul > li ul > li:before {
+		color: #0cf;
+	}
+
+.slide {
+	padding: .5in 1in;
+	font-size: 300%;
+}
+
+	
+	.slide h1,
+	.slide hgroup {
+		text-align: center;
+	}
+	
+	.slide h1 {
+		font-size: 1.3in;
+		line-height: 1;
+		margin-bottom:.5em;
+	}
+	
+	.slide hgroup h2 {
+		font-size: .5in;
+		
+	}
+	
+	.slide hgroup h1 + h2 {
+		margin: -1.5em 0 .5em;
+	}
+	
+	.slide hgroup h2 + h1 {
+		margin: -.3em 0 .5em;
+	}
+	
+	.slide .delayed.displayed {
+		opacity: 1;
+	}
+	
+	.slide > img:only-child {
+		display: block;
+		margin: auto;
+		height: 100%;
+		border-radius: 10px;
+		
+		-webkit-box-reflect: below 0 -webkit-gradient(linear, 0 100%, 0 0, from(rgba(0,0,0,.4)), color-stop(10%, transparent));
+	}
+	
+.image.slide > .caption h1 + a:hover {
+	color: yellow;
+}
+
+/* Steps */
+
+.step {
+	display: block;
+	float: left;
+	width: 1em;
+	padding: .3em .6em;
+	margin: 0 .3em;
+	background: deeppink;
+	color: white;
+	text-align: center;
+	font-family: 'Leckerli One', cursive;
+	font-size: 80%;
+	line-height: 1;
+	border-radius: 50%;
+}
+
+.step::first-line {
+	font-size: 50%;
+}
+
+ol.steps {
+	counter-reset: steps;
+	font-size: 200%;
+}
+
+	ol.steps > li {
+		list-style: none;
+		counter-increment: step;
+		margin: .5em 0;
+	}
+	
+	ol.steps > li:before {
+		content: none;
+	}
+		
+h1 > .step {
+	float: none;
+	margin: auto;
+	font-size: 200%;
+}
+
+/* END Steps */
+
+/* Syntax highlighting */
+
+.comment {
+	color: #999;
+}
+
+.string {
+	color: yellow;
+}
+
+.keyword {
+	font-weight: bold;
+	color: deeppink;
+}
+
+.number, .boolean {
+	color: #0cf;
+}
+
+.regex {
+	color: orange;
+}
+
+/* END Syntax highlighting */
+
+
+@media screen and (max-width:1025px) {
+	.slide {
+		font-size: 250%;
+	}
+	
+		.slide h1 {
+			font-size: 1.1in;
+		}
+}

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Polyfilling the gaps</title>
+	
+	<link href="../csss/slideshow.css" rel="stylesheet" />
+	<link href="../csss/reusable.css" rel="stylesheet" />
+	<link href="theme.css" rel="stylesheet" />
+	<link href="talk.css" rel="stylesheet" />
+</head>
+<body>
+
+<header class="slide dont-resize" id="cover">
+	<h1><img src="img/title.svg" /></h1>
+</header>
+
+<section class="slide" id="leaverou">
+	<img src="img/logo.svg" />
+	<pre>   leaverou<span class="delayed">.me</span>
+  <span class="delayed">@</span>leaverou   
+<span class="delayed">me@</span>leaverou<span class="delayed">.me</span></pre>
+</section>
+
+<section class="slide" id="definitions">
+	<h1>
+		<strong>pol&bull;y&bull;ﬁll</strong>
+		<span class="phonic">|ˈpälēﬁl|</span>
+	</h1>
+	<blockquote cite="http://remysharp.com/2010/10/08/what-is-a-polyfill/">
+		A polyfill is a piece of code (or plugin) that provides the technology that you, the developer, expect the browser to provide natively.
+	</blockquote>
+	<p class="cite">Remy Sharp</p>
+	<blockquote cite="http://paulirish.com/i/7570.png">
+		A shim that mimics a future API providing fallback functionality to older browsers.
+	</blockquote>
+	<p class="cite">Paul Irish</p>
+</section>
+
+<section class="slide" title="Example">
+	<pre><code lang="javascript">if (!String.prototype.trim) {
+  String.prototype.trim = function() {
+    return this.replace(/^\s+|\s+$/g,'');
+  };
+}</code></pre>
+	<pre class="delayed"><code lang="javascript">'  JSConf EU     '.trim(); // 'JSConf EU'</code></pre>
+</section>
+
+<section class="bottom-heavy partial image slide" style="background-image:url(pics/learn.jpg)">
+	<p class="caption">No new API to learn</p>
+</section>
+
+<section class="image slide" style="background-image:url(pics/delete.jpg)">
+	<p class="caption">Can be removed later</p>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>Making your&nbsp;own</h1>
+		<ol class="steps">
+			<li><span class="step">Step 1</span> Feature detection</li>
+			<li><span class="step">Step 2</span> Implementation</li>
+			<li><span class="step">Step 3</span> Distribution</li>
+		</ol>
+	</header>
+	
+	<section>
+		<header class="slide">
+			<h1><span class="step">Step 1</span> Feature detection</h1>
+		</header>
+		
+		<section class="slide">
+			<h1>Core ideas:</h1>
+			<ol class="delayed-children">
+				<li>Check if something exists
+					<ul>
+						<li>Better for performance</li>
+						<li>Less, simpler code</li>
+					</ul>
+				</li>
+				<li>Try something, check if it worked
+					<ul>
+						<li>More reliable</li>
+					</ul>
+				</li>	
+				<li><mark>Combination:</mark> Try something, check if something else got created</li>
+			</ol>
+		</section>
+		
+		<section class="slide">
+			<h1>JavaScript APIs</h1>
+			<pre><code lang="javascript">var supports = { 
+  localStorage: 'localStorage' in window, 
+  geolocation: 'geolocation' in navigator, 
+  querySelector: 'querySelector' in document,
+  HistoryAPI: 'pushState' in history,
+  /* etc */ 
+}; </code></pre>
+		</section>
+		
+		<section class="slide">
+			<h1>CSS properties</h1>
+			<pre><code lang="javascript">supports.property = function(property){
+  var dummy = document.createElement('_');
+  return property in dummy.style;
+};</code></pre>
+			<pre><code lang="javascript">// Test it:
+supports.property('textShadow');</code></pre>
+    	</section>
+    	
+    	<section class="slide">
+    		<h1>CSS3 properties</h1>
+     		<pre><code lang="javascript">var prefixes = ['', '-moz-', '-ms-', '-o-', '-webkit-'];
+supports.property = function(property) {</code>
+<code lang="javascript" class="delayed">  for (var i=0; i&lt;prefixes.length; i++) {
+    var prefixed = prefixes[i] + property;
+<code lang="javascript" class="delayed">    dummy.style.cssText = prefixed + ':inherit;';
+    if (dummy.style.getPropertyValue(prefixed))
+      return property;
+</code>  }</code><code lang="javascript">};</code></pre>
+		</section>
+		
+		<section class="slide">
+			<h1>CSS values</h1>
+			<pre><code lang="javascript">supports.RGBA = (function(){</code>
+<code lang="javascript" class="delayed">    var elem = document.createElement('_'),
+        style = elem.style;</code>
+<code lang="javascript" class="delayed">    try { style.color = 'rgba(0,0,0,.5)'; }</code>
+<code lang="javascript" class="delayed">    catch(e) { return false; }
+    return style.color.indexOf('rgba') > -1;</code>
+<code lang="javascript">})();</code></pre>
+		</section>
+		
+		<section class="slide">
+			<h1>CSS selectors</h1>
+			<pre><code lang="javascript">supports.selector = function(selector) {
+    var style = document.createElement('style');</code>
+<code lang="javascript" class="delayed">    style.innerHTML = selector + '{}';
+    document.body.appendChild(style);</code>
+<code lang="javascript" class="delayed">    var ret = !!style.sheet.cssRules[0];</code>
+<code lang="javascript" class="delayed">    document.body.removeChild(style);
+    return ret;</code>
+<code lang="javascript">};</code></pre>
+		</section>
+		
+		<section class="slide">
+			<h1>HTML elements</h1>
+			<p>Optimistic thought:</p>
+			<pre><code lang="javascript">supports.element = function(tag) {
+    var el = document.createElement(tag);
+    return el instanceof HTMLUnknownElement;
+};</code></pre>
+		</section>
+		
+		<section class="slide" title="fuuu">
+			<img src="pics/fuuu.jpg" alt="FFFFFFUUUUUUUUUU" />
+		</section>
+		
+		<section class="slide">
+			<h1>HTML elements</h1>
+			<p>More pragmatic:</p>
+			<pre><code lang="javascript">var supports = {
+  canvas: 'getContext' in document.createElement('canvas'),
+  video: 'play' in document.createElement('video'),
+  progress: 'position' in document.createElement('progress')
+};</code></pre>
+		</section>
+		
+		<section class="slide">
+			<h1>HTML attributes</h1>
+			<pre><code lang="javascript">var input = document.createElement('input');
+supports.placeholder = 'placeholder' in input;</code></pre>
+<pre><code lang="javascript">input.type = 'file';
+supports.multipleUpload = 'multiple' in input;</code></pre>
+		</section>
+		
+		<section class="slide">
+			<h1>Attribute values</h1>
+			<pre><code lang="javascript">var input = document.createElement('input');
+input.setAttribute('type', 'number');
+supports.spinner = input.type === 'number';</code></pre>
+		</section>
+		
+		<section class="slide">
+			<h1>Events</h1>
+			<pre><code lang="javascript">supports.mouseenter = (function() {
+  var el = document.createElement('_');
+  el.setAttribute('onmouseenter', 'return;');
+  return typeof el.onmouseenter === 'function';
+})();</code></pre>
+			<p class="attribution"><a href="http://perfectionkills.com/detecting-event-support-without-browser-sniffing/">http://perfectionkills.com/detecting-event-support-without-browser-sniffing/</a></p>
+		</section>
+		
+		<section class="image slide" style="background-image:url(pics/bugs.jpg)">
+			<p class="caption">Not always that simple</p>
+		</section>
+		
+		<section class="image slide" style="background-image:url(pics/modernizr.png); background-position:top left;">
+			<div class="caption">
+				<h1>Modernizr</h1>
+				<a href="http://www.modernizr.com/downloads/modernizr-2.0.6.js">http://www.modernizr.com/downloads/modernizr-2.0.6.js</a>
+			</div>
+		</section>
+		
+		<section class="top-heavy image slide" style="background-image:url(pics/camouflage.jpg)">
+			<div class="caption">
+				<h1>The undetectables</h1>
+				<a href="https://github.com/Modernizr/Modernizr/wiki/Undetectables">https://github.com/Modernizr/Modernizr/wiki/Undetectables</a>
+			</div>
+		</section>
+	<section>
+		<header class="slide">
+			<h1><span class="step">Step 2</span> Implementation</h1>
+		</header>
+		
+		<section>
+			<header class="image slide" style="background-image:url(pics/follow.png);">
+				<h1>Follow the spec</h1>
+			</header>
+		</section>
+		
+		<section>
+			<header class="image slide" style="background-image:url(pics/stop.jpg);">
+				<h1>…but know when to stop</h1>
+			</header>
+			
+			<section class="scrolling image slide" style="background-image:url(pics/progress.png)">
+				
+			</section>
+			
+			<section class="slide">
+				<p>A polyfill for document.head:</p>
+				<pre><code lang="javascript">if(!document.head) {
+  document.head = document.getElementsByTagName('head')[0];
+}</code></pre>
+				<div class="delayed">
+					<p>And then…</p>
+					<pre><code lang="javascript">myIframe.contentDocument.head.appendChild(script);</code></pre>
+					<p class="error">TypeError: Cannot call method 'appendChild' of undefined</p>
+				</div>
+			</section>
+		</section>
+		<section>
+			<header class="bottom-heavy image slide" style="background-image:url(pics/intrusive.jpg);">
+				<h1>Don't be intrusive</h1>
+			</header>
+			
+			<section class="slide">
+				<p>Don’t:</p>
+				<ul class="delayed-children">
+					<li>Replace the target element with another</li>
+					<li>Manipulate unrelated elements (e.g. body)</li>
+					<li>Add extra elements</li>
+					<li>Manipulate existing attributes</li>
+					<li>Create more than one global variable</li>
+					<li>Add leaky CSS</li>
+				</ul>
+				<p class="punchline">
+					Unless…
+					<strong class="delayed">You really have to</strong>
+				</p>
+			</section>
+		</section>
+		
+		<section>
+			<header class="image slide" style="background-image:url(pics/strings.jpg);">
+				<h1>No strings attached</h1>
+			</header>
+			
+			<section class="slide">
+				<p>Code like this:</p>
+				<pre><code lang="javascript">if(!('open' in document.createElement('details')) {
+  var details = document.getElementsByTagName('details');
+  for(var i=details.length; i--;) {
+    Details.init(details[i]);
+  }
+}</code></pre>
+				<p class="delayed">belongs to your polyfill, NOT the user’s code</p>
+			</section>
+		</section>
+		
+		<section>
+			<header class="top-heavy image slide" style="background-image:url(pics/flexibility.jpg);">
+				<h1>Be flexible</h1>
+			</header>
+					
+			<section class="slide">
+				<ul class="delayed-children">
+					<li>Attributes &amp; properties might change</li>
+					<li>New elements might get added</li>
+					<li>CSS can be very different</li>
+					<li>There might not be a DOM</li>
+					<li>It might not be HTML</li>
+				</ul>
+				<p class="punchline">In cases like that… <strong class="delayed">Don't break!</strong>
+			</section>
+			
+			<section class="slide">
+				<hgroup>
+					<h2>Adapting to change</h2>
+					<h1>attributes</h1>
+				</hgroup>
+				<p>Our only tools:</p>
+				<ul>
+					<li class="delayed">Mutation events
+						<ul class="delayed"><li>Deprecated :-(</li></ul>
+					</li>
+					<li class="delayed"><a href="http://msdn.microsoft.com/en-us/library/ms536956(VS.85).aspx" target="_blank">propertychange event</a>
+						<ul class="delayed"><li>Microsoft proprietary :-(</li></ul>
+					</li>
+				</ul>
+			</section>
+			
+			<section class="slide">
+				<h1>Mutation events</h1>
+				<p>They bubble, so we can use event delegation!</p>
+				<pre><code lang="javascript">document.addEventListener('DOMAttrModified', function(e) {
+    var node = e.target, attr = e.attrName;
+    if(/^input$/i.test(node.nodeName) &amp;&amp;
+      (attr === 'placeholder' || attr === 'value'))
+        Placeholder.update(node);
+  }, false);</code></pre>
+			</section>
+			
+			<section class="slide">
+				<hgroup>
+					<h2>Adapting to change</h2>
+					<h1>properties</h1>
+				</hgroup>
+				<ul>
+					<li>Accessors (getters and setters)</li>
+					<li><code>onpropertychange</code> for IE &lt; 7</li>
+					<li><code>Object#watch()</code> for Firefox</li>
+				</ul>
+			</section>
+			
+			<section class="slide">
+				<hgroup>
+					<h1>Accessors</h1>
+					<h2>The standard ES5 way</h2>
+				</hgroup>
+				<p></p>
+				<pre><code lang="javascript">Object.defineProperty(obj, 'placeholder', {
+  get: function() { return obj.getAttribute('placeholder') },
+  set: function(value) { Placeholder.update(obj, value); },
+  enumerable: true,
+  configurable: true
+});</code></pre>
+				<p>Support: IE8, FF4, Chrome, Safari 5, Opera 12</p>
+			</section>
+			
+			<section class="slide">
+				<hgroup>
+					<h1>Accessors</h1>
+					<h2>The early nonstandard way</h2>
+				</hgroup>
+				<pre><code lang="javascript">obj.__defineGetter__('placeholder', function() {
+		return obj.getAttribute('placeholder') 
+	});
+obj.__defineSetter__('placeholder', function(value) {
+		Placeholder.update(obj, value);
+	});</code></pre>
+				<p>Support: FF3.5, Chrome, Safari 4, Opera 10.10</p>
+				<p>Combine them: <a href="https://github.com/eligrey/Xccessors">github.com/eligrey/Xccessors</a></p>
+			</section>
+			
+			<section class="slide" style="background: url(pics/scared.jpg) no-repeat right; background-size:cover; padding-right: 520px;">
+				<hgroup>
+					<h1>Accessors</h1>
+					<h2>IE8 horror stories</h2>
+				</hgroup>
+				<p>IE &lt; 9 thinks that attributes are properties, so:
+				<p style="margin-top:1em">the previous getter would result in <mark>infinite recursion</mark></p>
+				
+			</section>
+			
+			<section class="slide">
+				<hgroup>
+					<h1>Accessors</h1>
+					<h2>IE8 horror stories</h2>
+				</hgroup>
+				<p>When <code>enumerable: true</code> IE8 throws an exception. Catch it with:
+				<pre><code lang="javascript">try { /* ... */ } catch(e) {
+  if(e.number === -0x7FF5EC54) {
+    /* ... */
+  }
+}</code></pre>
+			</section>
+			
+			<section class="slide">
+				<hgroup>
+					<h2>Adapting to change</h2>
+					<h1>new elements</h1>
+				</hgroup>
+				<ul>
+					<li><code>Element.prototype</code> is not evil in this case</li>
+					<li>If you can’t, use <code lang="javascript">DOMNodeInserted</code> to cater for new elements</li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<header class="top-heavy image slide" style="background-image:url(pics/dependencies.jpg);">
+				<p class="caption">Minimize dependencies</p>
+			</header>
+		</section>
+		
+		<section>
+			<header class="bottom-heavy image slide" style="background-image:url(pics/kangaroo.jpg)">
+				<p class="caption">Use built-in functionality</p>
+			</header>
+			
+			<section class="slide">
+				<h1>matchMedia</h1>
+				<pre><code lang="javascript">window.matchMedia || (window.matchMedia = (function(){</code>
+<code lang="javascript" class="delayed">  var div = document.createElement('div');</code>
+<code lang="javascript" class="delayed">  div.id = 'mq-test-1';
+  div.style.cssText = 'position:absolute;top:-100em';</code>
+<code lang="javascript">  return function(q){</code>
+<code lang="javascript" class="delayed">    div.innerHTML = '&lt;style media="'+q+'">#mq-test-1{ width:42px; }&lt;/style>';
+    document.body.appendChild(div);</code>
+<code lang="javascript" class="delayed">    var ret = div.offsetWidth == 42;</code>
+<code lang="javascript" class="delayed">     document.body.removeChild(div);
+    return { matches: ret, media: q };</code>
+<code lang="javascript">   };
+})());</code></pre>
+				<p>Simplified version of <a href="https://github.com/paulirish/matchMedia.js">https://github.com/paulirish/matchMedia.js</a>
+				
+			</section>
+			
+			<section class="slide">
+				<hgroup>
+					<h1>outerHTML</h1>
+				</hgroup>
+				<pre><code lang="javascript">if(!('outerHTML' in document.createElement('_'))
+Object.defineProperty(Element.prototype, 'outerHTML', {get: function(){</code>
+<code lang="javascript" class="delayed">  if (doc.xmlVersion) {
+    return (new XMLSerializer).serializeToString(node);
+  } </code><code lang="javascript" class="delayed">else {
+    var x = document.createElement('_');
+    x.appendChild(this.cloneNode(false));
+    return x.innerHTML.replace('&gt;&lt;', '&gt;' + this.innerHTML + '&lt;');
+  }</code>
+<code lang="javascript">}, enumerable: true});</code></pre>
+				<p>Simplified version of <a href="https://gist.github.com/1044128">https://gist.github.com/1044128</a> by Eli Grey</p>
+			</section>
+		</section>
+		
+		<section>
+			<header class="top-heavy image slide" style="background-image:url(pics/a11y.jpg)">
+				<h1>Don’t forget accessibility!</h1>
+			</header>
+			
+			<div class="slide">
+				<h1>Accessibility</h1>
+				<ul>
+					<li><a href="http://www.w3.org/TR/wai-aria/">WAI-ARIA</a></li>
+					<li>Make it keyboard accessible
+						<ul>
+							<li>Focusable with <code>tabindex="0"</code></li>
+							<li>Support expected keyboard shortcuts</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</section>
+		
+		<section>
+			<header class="bottom-heavy image slide" style="background-image:url(pics/ass.jpg); background-position: top center;">
+				<p class="caption">CSS polyfills:<br>A pain in the ass</p>
+			</header>
+			
+			<section class="slide">
+				<h1>CSS polyfills</h1>
+				<p><strong>Everything</strong> is hard!</p>
+				<ul>
+					<li>Parsing</li>
+					<li>Implementation</li>
+					<li>Reacting to changes</li>
+					<li>Unavoidable obtrusiveness</li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<header class="slide">
+				<h1><span class="step">Step 3</span> Distribution</h1>
+			</header>
+			
+			<section class="top-heavy image slide" style="background-image:url(pics/closure-compiler.png);">
+				<div class="caption">
+					<h1>Minify</h1>
+					<a href="http://closure-compiler.appspot.com/home">closure-compiler.appspot.com/home</a>
+				</div>
+			</section>
+			
+			<section class="top-heavy image slide" style="background-image:url(pics/github.jpg); background-position: top right;">
+				<div class="caption">
+					<h1>Upload to github</h1>
+					<a href="https://github.com/repositories/new">github.com/repositories/new</a>
+				</div>
+			</section>
+			
+			<section class="top-heavy image slide" style="background-image:url(pics/polyfills.png); background-position: top;">
+				<div class="caption">
+					<h1>Add to the Polyfills list</h1>
+					<a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-Browser-Polyfills">github.com/Modernizr/Modernizr/wiki/HTML5-Cross-Browser-Polyfills</a>
+				</div>
+			</section>
+		</section>
+	</section>
+</section>
+
+<section>
+	<header class="top-heavy image slide" style="background-image:url(pics/people.jpg)">
+		<h1>The people</h1>
+	</header>
+	
+	<section class="image slide" style="background-image:url(pics/remysharp.png)">
+		<div class="caption">
+			<h1>Remy Sharp</h1>
+			<a href="http://remysharp.com/">remysharp.com</a>
+		</div>
+	</section>
+	
+	<section class="image slide" style="background-image:url(pics/paulirish.png)">
+		<div class="caption">
+			<h1>Paul Irish</h1>
+			<a href="http://paulirish.com/">paulirish.com</a>
+		</div>
+	</section>
+	
+	<section class="image slide" style="background-image:url(pics/eligrey.png)">
+		<div class="caption">
+			<h1>Eli Grey</h1>
+			<a href="http://eligrey.com/blog/">eligrey.com</a>
+		</div>
+	</section>
+	
+	<section class="slide dont-resize" title="And also..." id="people">
+		<ul class="delayed">
+			<li>Brad Neuberg</li>
+			<li>Dmitry Baranovskiy</li>
+			<li>Juriy Zaytsev</li>
+			<li>Erik arvidsson</li>
+			<li>Andrea giammarchi</li>
+			<li>Brian Leroux</li>
+			<li>Jonathan Neal</li>
+			<li>Joe Bartlett</li>
+			<li>John Dyer</li>
+			<li>Kroc Camen</li>
+			<li>Ryan Seddon</li>
+			<li>Christopher Giffard</li>
+			<li>Daniel Davis</li>
+			<li>Weston Ruter</li>
+			<li>Eric Hamilton</li>
+			<li>Diego Perini</li>
+			<li>Zoltan Hawryluk</li>
+			<li>Brian McAllister</li>
+			<li>Frank Yan</li>
+			<li>Denis Ciccale</li>
+			<li>Mathias Bynens</li>
+			<li>Mike Taylor</li>
+			<li>Guillermo Rauch</li>
+			<li>Alexander Farkas</li>
+			<li>Manuel Bieh</li>
+			<li>Benjamin Lupton</li>
+			<li>Chris Wanstrath</li>
+			<li>Ben Alman</li>
+			<li>Miller Medeiros</li>
+			<li>Давид Мзареулян</li>
+			<li>Rick Waldron</li>
+			<li>Devon Govett</li>
+			<li>Zoltan Hawryluk</li>
+			<li>Rodney Rehm</li>
+			<li>Andrew Dodson</li>
+			<li>Jeremy Keith</li>
+			<li>David Chambers</li>
+			<li>Grant Galitz</li>
+			<li>Ben Firshman</li>
+			<li>Jussi Kalliokoski</li>
+			<li>Kyle Simpson</li>
+			<li>Sean Kinsey</li>
+			<li>Tim Down</li>
+			<li>Kris Kowal</li>
+			<li>Irakli Gozalishvili</li>
+			<li>Michael Ficarra</li>
+			<li>Sasha Koss</li>
+			<li>Kit Cambridge</li>
+			<li>Domenic Denicola</li>
+			<li>Quildreen Motta</li>
+			<li>Bryan Forbes</li>
+			<li>Florian Schäfer</li>
+			<li>Gerard Paapu</li>
+			<li>Brendan Molloy</li>
+			<li>Sami Samhuri</li>
+			<li>Dan Beam</li>
+			<li>Alexey Zakharov</li>
+			<li>Tom Robinson</li>
+			<li>Douglas Crockford</li>
+			<li>David de Rosier</li>
+			<li>Oliver Nightingale</li>
+			<li>Keith Clark</li>
+			<li>Paul Bakaus</li>
+			<li>Zoltan Hawryluk</li>
+			<li>Jason Johnston</li>
+			<li>Alexis Deveria</li>
+			<li>Simon Madine</li>
+			<li>Cedric Savarese</li>
+			<li>Scott Jehl</li>
+			<li>Micky Hulse</li>
+			<li>Robin Ricard</li>
+			<li>Andrew Kononykhin</li>
+			<li>Nicholas Zakas</li>
+			<li>Philip Jägenstedt</li>
+			<li>Egor Nikolaev</li>
+			<li>Samy Kamkar</li>
+			<li>James Brumond</li>
+			<li>Mathias Nater</li>
+			<li>Addy Osmani</li>
+			<li>Dean Edwards</li>
+		</ul>
+		<ul class="delayed">
+			<li>You?</li>
+		</ul>
+	</section>
+	
+	<section class="slide" id="help">
+		<p>Help yourself</p>
+		<p class="delayed">Help everyone</p>
+		<p class="delayed"><img src="img/polyfilla.png" style="width:150px; vertical-align: -50px;"/> those ____s!</p>
+	</section>
+</section>
+
+<section class="top-heavy image slide" title="Thank you!" style="background-image:url(pics/thankyou.jpg)">
+</section>
+
+<footer class="slide">
+	<h1>Photo credits</h1>
+	<ul>
+		<li>http://www.sxc.hu/photo/1191434/</li>
+		<li>http://www.flickr.com/photos/hersenspinsels/3746112784/</li>
+		<li>http://www.sxc.hu/photo/1208113</li>
+		<li>http://www.flickr.com/photos/malingering/88483639/</li>
+		<li>http://www.flickr.com/photos/8929612@N04/4708420175/</li>
+		<li>http://topworth.blogspot.com/2011/04/most-unrealistic-tattoos.html</li>
+		<li>http://www.flickr.com/photos/purplemattfish/3776619768/</li>
+		<li>http://www.flickr.com/photos/93748736@N00/2677202510/</li>
+		<li>http://www.ixtractor.com/search/women/display/1239944/</li>
+		<li>Condom pic: http://www.flickr.com/photos/fisserman/157883309/</li>
+		<li>Kangaroo pic: http://www.flickr.com/photos/rtv/131284220/</li>
+		<li>http://www.flickr.com/photos/pyxopotamus/2150043533/</li>
+		<li>http://www.flickr.com/photos/deqadent/2247025050/</li>
+		<li>http://www.cameronmcefee.com/wp-content/uploads/2011/03/nasa.jpg</li>
+		<li>Lego warriors: http://www.flickr.com/photos/legofenris/5014898933/in/set-72157624998060958/</li>
+		<li>Thank you: http://www.flickr.com/photos/darwinbell/2602728681/</li>
+	</ul>
+</footer>
+
+<script src="../csss/slideshow.js"></script>
+<script src="../prefixfree/prefixfree.min.js"></script>
+<script>var slideshow = new SlideShow();</script>
+<script src="csss-highlight.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+Hello everyone. I’d like to thank O’Reilly for making it possible for me to be here today. If my name sounds vaguely familiar, it's probably due to one of these open source web apps and libraries I wrote.
+
+Most of these projects have something in common: They try to be as light on the server as possible. They operate on what’s often called "thin server architecture". Everything that can be done on the client, is done on the client. The server is used for three things: Hosting the files, the data and keeping both of these safe. For many projects, this is a no-brainer. In other cases that philosophy becomes more of a challenge.
+
+The biggest reason I support this philosophy is its practically infinite scalability. When dealing with the client-side, you are always dealing with one machine. You don't control its capabilities, so it may fall behind your expectations. But it's always one, even if your app gets slashdotted or becomes the next Facebook overnight. Every line of code you write for the server might end up being executed hundreds or even thousands of times per second.  Many such lines will bring scalability challenges you couldn’t even imagine when writing said code.
+
+This approach also reduces server costs quite a lot. A server that just serves static files and does little processing can be quite cheap to run, even when a web app becomes quite successful. On the other hand, big backends can be quite greedy with server resources. If you manage to have absolutely no server-side code, you can even use services like Github Pages and reduce the costs to zero.
+
+Every time I explain this to somebody, there will be some know-it-all who will be eager to dismiss the idea by saying "But servers these days are cheap!". What he means is that storage is cheap. Bandwidth is cheap. CPU cycles are rarely cheap. Professionals like database administrators and performance engineers and the like, are never cheap. Say all you want about reduced server costs, the reality is that I've witnessed many ambitious projects with fat servers becoming sluggish because they grew too fast. Some survived, some didn't.
+
+As an added advantage, less roundtrips to the server mean less reloads or less dreaded spinning loaders. When something is performed on the client, the result is instant. Users tend to really like that. I’m sure that, as a user, you do too.
+

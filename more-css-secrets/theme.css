@@ -1,0 +1,189 @@
+body {
+	font: 100 100%/1.5 'Helvetica Neue', sans-serif;
+}
+
+h1 {
+	font-weight: inherit;
+	line-height: 1.2;
+}
+
+a {
+	color: inherit;
+}
+
+code, textarea, pre {
+	font: 100%/1.4 Consolas, Monaco, 'Andale Mono', monospace;
+	tab-size: 4;
+}
+
+.slide {
+	background: white;
+}
+
+section.slide > h1,
+footer.slide > h1,
+section.slide > hgroup {
+	text-align: center;
+}
+
+section.slide hgroup > h1 {
+	margin-top: .8em;
+}
+	
+section:not(.iframe).slide > h1,
+footer.slide > h1,
+section.slide > hgroup > h1 {
+	text-align: center;
+	font-weight: bold;
+	font-size: 200%;
+}
+
+section.slide > hgroup > h1:first-child,
+section.slide > hgroup > h2:first-child {
+	margin-bottom: 0;
+}
+
+section.slide > hgroup > h1 + h2,
+section.slide > hgroup > h2 + h1 {
+	margin-top: 0;
+}
+
+section.slide > hgroup > h2 {
+	font-weight: 100;
+}
+
+.slide.iframe > h1 {
+	font-size: 150%;
+}
+
+.image.slide h1 a {
+	text-decoration: none;
+}
+
+table {
+	margin: auto;
+	border-collapse: collapse;
+	outline: 10px solid white;	
+	outline-offset: -9px;
+}
+
+	table td,
+	table th {
+		padding: .1em .5em;
+		border: 1px solid silver;
+		text-align: center;
+	}
+
+	table tbody th {
+		text-align: right;
+	}
+
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', monospace;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+	
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;	
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0,0%,100%,.5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+
+.token.regex,
+.token.important {
+	color: #e90;
+}
+
+.token.important {
+	font-weight: bold;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+code.highlight {
+	padding: .2em .2em .1em;
+	margin: 0 -.2em;
+	border-radius: .2em;
+	background: slategray;
+	color: white;
+	text-shadow: 0 -.05em .1em black;
+}

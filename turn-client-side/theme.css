@@ -1,0 +1,116 @@
+* {
+	margin: 0;
+	color: inherit;
+	font: inherit;
+	text-shadow: inherit;
+}
+
+html {
+	tab-size: 4;
+}
+
+body {
+	background: hsl(30,20%,30%) url(img/noise.png);
+	color: white;
+	font: 100% Futura, sans-serif;
+	text-shadow: 0 -.1em .2em black;
+	-webkit-font-smoothing: antialiased; /* fix for WebKit inconsistency */
+}
+
+@media screen and (max-width: 1050px) {
+	body {
+		font-size: 90%;
+	}
+}
+
+a {
+	color: inherit;
+	text-decoration: inherit;
+}
+
+code, pre {
+	font-family: Consolas, Monaco, monospace;
+}
+
+h1, h2 {
+	font-size: 200%;
+	line-height: 1.1;
+	font-weight: normal;
+	text-align: center;
+}
+
+h2 {
+	font: italic 160% Baskerville, serif;
+}
+
+ul {
+	padding: 0 0 0 1em;
+	margin: .5em;
+}
+
+	ul > li {
+		position: relative;
+		list-style: none;
+	}
+
+q {
+	quotes: '“' '”';
+}
+
+.slide {
+	padding: 1em;
+}
+
+.de-emphasize {
+	opacity: .15;
+}
+
+ul.checklist > li::before,
+li.checked::before {
+	content: '✓';
+	position: absolute;
+	left: -.8em;
+	top: -.3em;
+	color: hsl(75, 70%, 60%);
+	font-size: 150%;
+}
+
+ul.negatives > li::before,
+li.negative::before {
+	content: '✖';
+	position: absolute;
+	left: -.9em;
+	top: -.25em;
+	color: hsl(0, 90%, 60%);
+	font-size: 140%;
+}
+
+/* Syntax highlighting */
+
+.comment {
+	color: #807060;
+}
+
+.keyword {
+	font-weight: bold;
+}
+
+.property, .string, .attr-value, .hash {
+	color: hsl(75, 70%, 60%);
+}
+
+.selector, .keyword, .tag {
+	color: hsl(350, 40%, 70%);
+}
+
+.regex, .operator, .atrule, .attr-name {
+	color: hsl(40, 90%, 60%);
+}
+
+.number, .boolean {
+	color: #abc;
+}
+
+.punctuation {
+	opacity: .6;
+}

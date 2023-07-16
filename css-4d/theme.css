@@ -1,0 +1,201 @@
+* {
+	font-weight: normal;
+}
+
+body {
+	font: 90%/1.5 Futura, sans-serif;
+}
+
+@media (max-width:1050px) {
+	body {
+		font-size: 80%;
+	}
+}
+
+a {
+	text-decoration: none;
+	color: slategray;
+}
+
+textarea, pre, code {
+	font: 80%/1.6 Monaco, Consolas, monospace;
+	tab-size: 4;
+}
+
+pre > code {
+	font: inherit;
+}
+
+textarea, pre[data-content] {
+	min-width: 450px;
+	padding: 1em;
+	border: 0;
+	background: slategray;
+	color: white;
+	border-radius: .8rem;
+	box-sizing: border-box;
+	text-shadow: 0 -2px 2px rgba(0,0,0,.6);
+}
+
+pre {
+	margin: 1rem 0;
+}
+
+pre[data-content] {
+	position: relative;
+}
+
+	pre[data-content]:before {
+		content: attr(data-content);
+		position: absolute;
+		top: 0;
+		right: .3em;
+		color: rgba(255,255,255,.3);
+		font: 200% Futura, sans-serif;
+		text-shadow: none;
+	}
+
+.slide {
+	padding: 1rem;
+}
+
+	.slide > h1 {
+		margin: 0;
+		font-size: 250%;
+		line-height: 1.2;
+		text-align: center;
+	}
+	
+	.slide > h2 {
+		margin: .8em 0 0;
+	}
+	
+	.image.slide > .caption,
+	.image.slide > h1:only-child {
+		font-size: 250%;	
+	}
+	
+	.slide > ul {
+		margin: .2em 0;
+		list-style: none;
+	}
+	
+	.slide > ul > li:before {
+		content: '•';
+		color: #99c62a;
+		margin-right: .3em;
+	}
+	
+.inverse.slide {
+	background: slategray;
+	color: white;
+	text-shadow: 0 -.05em .1em rgba(0,0,0,.6);
+}
+
+	.inverse.slide a {
+		color: inherit;
+	}
+	
+.checkerboard.slide {
+	background: linear-gradient(45deg, #ccc 25%,  transparent 25%, transparent 75%, #ccc 75%, #ccc) 0 0, 
+		linear-gradient(45deg, #ccc 25%,  #eee 25%,  #eee 75%, #ccc 75%, #ccc) 20px 20px #eee;
+	background-size: 40px 40px;
+}
+
+.attribution {
+	font-size: 120%;
+	line-height: 1.2;
+}
+
+	.attribution p {
+		margin: 0;
+	}
+
+.handwritten-caption {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	color: white;
+	font: 300% 'Reenie Beanie';
+	white-space: nowrap;
+}
+
+	.handwritten-caption:before {
+		content: '<---';
+		display: block;
+		transform: rotate(70deg);
+	}
+	
+	.handwritten-caption > img {
+		max-width: 1em;
+		max-height: 1em;
+		margin-right: -1em;
+	}
+	
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: hsl(30,20%,50%);
+}
+
+.token.punctuation {
+	opacity: .7;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.attr-value,
+.token.boolean,
+.token.number {
+	color: hsl(350, 40%, 80%);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string {
+	color: hsl(75, 70%, 60%);
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: hsl(40, 90%, 60%);
+}
+
+.token.atrule,
+.token.tag,
+.token.keyword {
+	color: black;
+	text-shadow: 0 1px 1px hsla(0,0%,100%,.5);
+}
+
+.attr-value,
+.attr-name {
+	text-shadow: 0 -2px 2px rgba(0,0,0,.6);
+}
+
+
+.token.regex,
+.token.important {
+	color: #e90;
+}
+
+.token.important {
+	font-weight: bold;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+::selection {
+	background: black;
+	color: white;
+	text-shadow: none;
+}

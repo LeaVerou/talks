@@ -1,0 +1,1936 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>CSS: Beyond the basics</title>
+	
+	<link href="../csss/slideshow.css" rel="stylesheet" />
+	<link href="style/theme.css" rel="stylesheet" />
+	<link href="style/talk.css" rel="stylesheet" />
+	<link href="style/self-populating.css" rel="stylesheet" />
+	
+	<link rel="csss-import" href="http://beta.caniuse.com" id="caniuse" />
+	<link rel="csss-import slides" href="../chroma-zone/index.html" id="chroma-zone" />
+	<link rel="csss-import slides" href="../humble-border-radius/index.html" id="border-radius" />
+	<link rel="csss-import slides" href="../css-4d/index.html" id="css-4d" />
+	<link rel="csss-import slides" href="../more-css-secrets/index.html" id="secrets2" />
+</head>
+<body>
+
+<header class="slide" id="cover">
+	<hgroup>
+		<h1>CSS</h1>
+		<h2>Visual Effects workshop</h2>
+	</hgroup>
+	<p class="attribution">
+		By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)
+	</p>
+</header>
+
+<section class="plain slide">
+	<hgroup>
+		<h1>Before we begin…</h1>
+		<h2>Instructions &amp; format</h2>
+	</hgroup>
+	<ul>
+		<li><a href="http://lea.verou.me/css-workshop/" target="_blank">lea.verou.me/css-workshop/</a></li>
+		<li>Be patient. It’s big.</li>
+		<li>Please use a recently updated version of Firefox, Safari or Chrome.</li>
+	</ul>
+</section>
+
+<section class="slide" id="css-topics">
+	Flexbox
+	Grid layout
+	Positioned floats
+	CSS regions
+	calc()
+	box-sizing
+	Intrinsic widths &amp; heights
+	rem unit
+	RWD
+	Viewport units
+	Animations
+	Transitions
+	Background extensions
+	border-image
+	border-radius
+	corner-shape
+	box-shadow
+	text-shadow
+	Gradients
+	LESS
+	SASS
+	Compass
+	Bourbon
+	Workflow
+	OOCSS
+	SMACSS
+	2D transforms
+	Web fonts
+	Opentype features
+	tab-size
+	ch unit
+	text-overflow
+	overflow-wrap
+	word-break
+	hyphens
+	Selectors
+	@supports
+	CSS3 Cursors
+	resize
+	CSS Filter Effects
+	Masking
+	Blending modes
+	object-fit
+	object-position
+	Scoped CSS
+	CSS variables
+	currentColor
+	Sticky positioning
+	SVG &amp; CSS
+	3D transforms
+	CSS Shapes
+</section>
+
+<!--<section class="plain slide">
+	<h1>Criteria</h1>
+	
+	<ul>
+		<li>Decent browser support OR degrades gracefully</li>
+		<li>> 50% chance it’s not already known</li>
+		<li>Useful for a large number of devs</li>
+		<li>Possible to have hands-on exercises for it</li>
+	</ul>
+</section>
+
+<section class="plain slide" id="schedule">
+	<h1>Schedule</h1>
+	
+	<table>
+		<tbody>
+			<tr>
+				<th>08:30</th>
+				<td>Introduction</td>
+			</tr>
+			<tr>
+				<th>08:40</th>
+				<td>Hacking border-radius &amp; box-shadow</td>
+			</tr>
+			<tr>
+				<th>09:30</th>
+				<td>Backgrounds &amp; Gradients</td>
+			</tr>
+			<tr>
+				<th>10:30</th>
+				<td>Coffee break</td>
+			</tr>
+			<tr>
+				<th>10:40</th>
+				<td>2D &amp; 3D Transforms</td>
+			</tr>
+			<tr>
+				<th>11:20</th>
+				<td>Transitions &amp; Animations</td>
+			</tr>
+			<tr>
+				<th>12:00</th>
+				<td>The near future: CSS Filters, Blending modes, Masking</td>
+			</tr>
+			<tr>
+				<th>12:30</th>
+				<td>End!</td>
+			</tr>
+		</tbody>
+	</table>
+</section>-->
+
+<!--<section>
+	<header class="slide">
+		<h1>Introduction</h1>
+	</header>
+	
+	<section class="plain slide dont-resize" id="important-thing">
+		<h1>
+			<span>The most important thing</span>
+			<span>you need to know about</span>
+			<strong>CSS3</strong>
+		</h1>
+		<p style="text-align: right" class="delayed">…or CSS4</p>
+	</section>-->
+	
+	<!--<section class="plain slide" style="text-align: center;">
+		<img src="img/thescream.jpg" alt="Edvard Mund’s “The Scream”" title="Shocking, I know." />
+	</section>-->
+	
+	<!--<section class="plain slide">
+		<h1>Why use CSS3?</h1>
+		<ul class="delayed-children">
+			<li>Flexibility</li>
+			<li>Smaller filesize</li>
+			<li>Saves time ⇒ saves your clients money</li>
+			<li>Prototyping</li>
+		</ul>
+	</section>-->
+	
+	<!--<section class="plain slide">
+		<hgroup>
+			<h1>Cascade</h1>
+			<h2>The simplest fallback</h2>
+		</hgroup>
+		<pre class="delayed"><code class="language-css">background: slategray;</code>
+<del><code class="language-css">background: kittens;</code></del></pre>
+		<pre class="delayed"><code class="language-css">background: slategray;</code>
+<del><code class="language-css">kittens: slategray;</code></del></pre>
+<pre class="delayed"><code class="language-css">:first-child { background: slategray; }</code>
+<del><code class="language-css">:first-kitten { background: slategray; }</code></del></pre>
+	</section>
+	
+	<section class="plain slide">
+		<hgroup>
+			<h1>Cascade</h1>
+			<h2>The simplest fallback</h2>
+		</hgroup>
+		<pre><code class="language-css">background: #a0a0a0;
+background: -moz-linear-gradient(gray, silver);
+background: -ms-linear-gradient(gray, silver);
+background: -o-linear-gradient(gray, silver);
+background: -webkit-linear-gradient(gray, silver);
+background: linear-gradient(gray, silver);</code></pre>
+		<p>Browsers drop anything they don’t completely understand</p>
+	</section>
+	
+	<section class="plain slide">
+		<hgroup>
+			<h1>Filters</h1>
+			<h2>Target only CSS3-capable browsers</h2>
+		</hgroup>
+		<pre><code class="language-css">@media all, (min-width: 0) {
+	/* Rules for IE9, FF3.5, 
+	   Opera 9.5, Safari 4, Chrome */
+}</code></pre>
+		<pre><code class="language-css">html:not(body) #foo {
+	/* Declarations for IE9, FF1, IE9,
+	   Opera 9.5, Safari 3.2, Chrome */
+}</code></pre>
+	</section>
+	
+	<section class="plain slide">
+		<hgroup>
+			<h1>Modernizr</h1>
+			<h2>When the cascade is not enough</h2>
+		</hgroup>
+		<pre><code class="language-css">.borderimage body {
+	border: 20px solid transparent;
+	border-image: url(cloth.png) 33.34% round fill;
+}
+
+.no-borderimage body {
+	background: #888;
+	background: rgba(255,255,255,.5);
+}</code></pre>
+	</section>
+	
+	<section class="plain slide">
+		<hgroup>
+			<h1>@supports</h1>
+			<h2>The native Modernizr!</h2>
+		</hgroup>
+<pre><code class="language-css">@supports (border-image: url(cloth.png) 33.34% round fill) {
+	body {
+		border: 20px solid transparent;
+		border-image: url(cloth.png) 33.34% round fill;
+	}
+}
+
+@supports not (border-image: url(cloth.png) 33.34% round fill) {
+	body {
+		background: #888;
+		background: rgba(255,255,255,.5);
+	}
+}</code></pre>
+	</section>
+	
+	<section class="slide" data-base="caniuse" data-src="#feat=css-featurequeries"></section>
+	
+	<section class="plain slide">
+		<hgroup>
+			<h1>DIY detection</h1>
+			<h2>CSS property support</h2>
+		</hgroup>
+		<pre><code class="language-javascript">function propertySupported(property) {
+    return camelCase(property) in document.body.style;
+}
+// Usage:
+if (propertySupported('border-image')) {
+    var root = document.documentElement;
+    root.classList.add('border-image');
+    // jQuery: $('html').addClass('border-image');
+}</code></pre>
+	</section>
+	
+	<section class="plain slide">
+		<hgroup>
+			<h1>DIY detection</h1>
+			<h2>CSS property support</h2>
+		</hgroup>
+		<pre><code class="language-javascript">function propertySupported(property)
+    var prefixes = ['','-moz-','-webkit-',
+            '-o-','-ms-','ms-','-khtml-'],
+        style = document.body.style;
+        
+    for (var i=0; i&lt;prefixes.length; i++)
+        if(camelCase(prefixes[i] + property) in style)
+            return true;
+}</code></pre>
+	</section>
+	
+	<section class="plain slide">
+		<hgroup>
+			<h1>DIY detection</h1>
+			<h2>CSS value support</h2>
+		</hgroup>
+		<pre><code class="language-javascript">function valueSupported(property, value)
+    var style = document.createElement('_').style;
+
+    try {
+        style[property] = value;
+    } catch(e) { return false; }
+    
+    return !!style[property];
+}</code></pre>
+	</section>
+</section>-->
+
+<!--<section>
+	<header class="slide">
+		<h1>Colour</h1>
+	</header>
+	
+	<section class="slide" data-base="chroma-zone" data-src="#slide14 #rgb-2d"></section>
+	
+	<section class="slide" data-src="http://leaverou.github.io/whathecolor/" id="whathecolor"></section>
+	
+	<section class="slide" data-base="chroma-zone" data-src="#hsl #slide36 #slide37"></section>
+	
+	<section class="slide" data-import="whathecolor"></section>
+	
+	<section class="slide" data-base="chroma-zone" data-src="#slide48 #currentColor-demo #css3-colors #slide62 #slide63 #slide64 #slide65 #adjusters #slide67 #slide68 #css4-colors"></section>
+	
+	<section class="slide" data-base="caniuse" data-src="#feat=css3-colors"></section>
+	
+	<section class="plain slide" data-type="browser support">
+		<h1>currentColor</h1>
+		<table class="noprefix">
+			<thead>
+				<tr>
+					<td>Without prefix</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr title="Firefox">
+					<td>1.5</td>
+				</tr>
+				<tr title="Opera">
+					<td>9.5</td>
+				</tr>
+				<tr title="IE">
+					<td>9</td>
+				</tr>
+				<tr title="Safari">
+					<td>4</td>
+				</tr>
+				<tr title="Chrome">
+					<td>1</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+</section>-->
+
+<!--<section>
+	<header class="slide">
+		<h1>border-radius</h1>
+	</header>
+	
+	<section class="slide" data-src="http://simurai.com/archive/buttons"></section>
+	
+	<section class="slide" data-src="http://michaeliahotel.com"></section>
+	
+	<section class="slide" data-base="border-radius" data-src="#spec #slide9 #two-values #three-values #four-values #overlapping #slide14"></section>
+	
+	<section class="slide" data-src="http://codepen.io/kindofone/full/rGcfs"></section>
+	
+	<section class="slide" data-base="border-radius" data-src="#elliptical-curves #shapes #four-elliptical-values #adding-border #overflow"></section>
+	
+	<section class="slide" data-src="http://leaverou.github.io/corner-shape"></section>
+	
+	<section class="plain slide" id="challenge-guidelines">
+		<hgroup>
+			<h1>Challenges</h1>
+			<h2>Instructions &amp; Guidelines</h2>
+		</hgroup>
+		<ul>
+			<li>Pay attention to the hints at the top!</li>
+			<li>Every section builds on the previous ones</li>
+			<li>Use your eyes, but follow the flexibility rules</li>
+			<li>If you type invalid code, the code area will go pink</li>
+			<li>The app will try to recognize your solution, but don’t get too hung up on that, it’s not AI and <strong>will</strong> fail!</li>
+			<li>When you’re stuck, call me!</li>
+		</ul>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">Resize the shape first, by using the lower right corner. Observe what happens to the shape.</p>
+		<section>
+			<div class="demo-box" style="width: 100px;"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">border-radius:100% 0 0 100% / 50%;</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">All percentages are multiples of <code>10%</code>.</p>
+		<section>
+			<div class="css-snippet demo-box" style="width: 130px;"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">border-radius: 50% / 60% 60% 40% 40%;</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">The colors used are <code>rgba(0,0,0,.3)</code> and <code>rgba(0,0,0,.6)</code>. All lengths are multiples of <code>20px</code>. You need 3 declarations minimum.</p>
+		<section>
+			<div class="css-snippet demo-box" style="width: 200px;"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">border-radius: 1000px 1000px 0;
+border-right: 20px solid rgba(0,0,0,.6);
+border-bottom: 20px solid rgba(0,0,0,.3);</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">The big radius is 10 times bigger than the small one. All lengths are multiples of <code>50px</code>.</p>
+		<section>
+			<div class="demo-box"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">border-radius:500px 50px;</textarea>
+	</section>
+	
+	<section class="slide" data-base="caniuse" data-src="#feat=border-radius"></section>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>box-shadow</h1>
+	</header>
+	
+	<section class="slide" data-src="http://viget.com/uploads/file/boxshadows/"></section>
+	
+	<section class="slide" data-src="http://codepen.io/thebabydino/full/shtGe"></section>
+	
+	<section class="examples-list slide">
+		<ul class="delayed-children">
+			<li>Common case</li>
+			<li>Cancelling it</li>
+			<li>Other lengths</li>
+			<li>Inset shadows</li>
+			<li>Spread</li>
+			<li>With RGBA</li>
+			<li>With border-radius</li>
+			<li>Multiple shadows</li>
+			<li>With dotted borders?</li>
+		</ul>
+		<textarea class="demo-box dont-adjust" data-subject>box-shadow:5px 5px 20px black;</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">All lengths are multiples of <code>5px</code>. The shadow is <code>black</code></p>
+		<section>
+			<div class="demo-box"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">box-shadow:0 10px 10px -5px black</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">All lengths are multiples of <code>100px</code>. The light area is 20% white.</p>
+		<section>
+			<div class="demo-box"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">box-shadow: 0 100px hsla(0,0%,100%,.2) inset;</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">The background is <code>slategray</code>. Every length is a multiple of <code>1em</code></p>
+		<section>
+			<div class="demo-box"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">box-shadow: 0 0 1em 1em slategray;</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">The total thickness of the “outline” is <code>1em</code> and the color is <code>orangered</code>. You need 3 declarations total.</p>
+		<section>
+			<div class="demo-box"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code">background: transparent;</textarea>
+		<textarea class="code">box-shadow: 0 0 .5em .5em orangered,
+0 0 .5em .5em orangered inset;
+background: transparent;
+border-radius: 50%;</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">The background is <code>slategray</code>. The inner “border” is <code>white</code>, is <code>1px</code> thick and <code>10px</code> offset from the edges.</p>
+		<section>
+			<div class="demo-box"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">box-shadow: 0 0 0 10px slategray inset,
+		0 0 0 11px white inset;</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">All lengths are multiples of <code>100px</code>. The start color of the “gradient” is <code>white</code>.</p>
+		<section>
+			<div class="demo-box"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">box-shadow: inset 0 200px 100px -100px white;</textarea>
+	</section>
+	
+	<section class="slide" data-src="#feat=css-boxshadow" data-base="caniuse"></section>
+</section>-->
+
+<!--<section id="text-shadow">
+	<style scoped>
+		[data-type="challenge"] .demo-box {
+			width: 400px;
+			padding:20px;
+			font-size:140%;
+			text-align: center;
+			text-shadow: none;
+		}
+	</style>
+	
+	<header class="slide">
+		<h1>text-shadow</h1>
+	</header>
+	
+	<section class="slide" data-src="http://webexpedition18.com/download/css3_text_shadow/"></section>
+	
+	<section class="examples-list slide">
+		<ul class="delayed-children">
+			<li>Common case</li>
+			<li>Other lengths</li>
+			<li>Inset &amp; spread</li>
+			<li>With RGBA text color</li>
+			<li>Multiple shadows</li>
+		</ul>
+		<textarea class="demo-box dont-adjust" data-subject>text-shadow:2px 2px 10px black;</textarea>
+	</section>
+	
+	<section class="plain slide">
+		<h1>Differences <br>from <code>box-shadow</code></h1>
+		
+		<ul>
+			<li>No spread <span class="delayed">(except in IE10+)</span></li>
+			<li>No <code>inset</code> keyword</li>
+			<li>The shadow is drawn behind the text as well</li>
+		</ul>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">You need 2 shadows. All lengths are multiples of <code>.1em</code>.</p>
+		<section>
+			<div class="demo-box">I’m glowing with CSS3 joy!</div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">text-shadow:0 0 .1em white, 0 0 .2em white;</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<style scoped>.demo-box {
+			font-size: 250% !important;
+		}</style>
+		<p class="hint">All lengths are multiples of <code>.05em</code>. The background color is <code>slategray</code>.</p>
+		<section>
+			<div class="demo-box">Vintage</div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">text-shadow: .05em .05em slategray,
+	.1em .1em black;</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">
+			All lengths are multiples of <code>1px</code>.
+			The dark part is 50% black. The light part is <code>white</code>.
+			The background color should only be declared in one place.
+		</p>
+		<section>
+			<div class="demo-box">EmboCSSed</div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code">color: #ddd;</textarea>
+		<textarea class="code">color: #ddd;
+background: currentColor;
+text-shadow:1px 1px rgba(0,0,0,.5), -1px -1px white;</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<style scoped>.demo-box { background: transparent; color:  black; }</style>
+		<p class="hint">All lengths are multiples of <code>.1em</code>.</p>
+		<section>
+			<div class="demo-box">Are you drunk?</div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">color:transparent;
+text-shadow:0 0 .4em black</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<style scoped>.demo-box {
+			background: transparent;  
+			font-size: 250% !important;
+		}</style>
+		<p class="hint">All lengths are multiples of <code>1px</code>. All colors are multiples of <code>#111</code>. There are 7 shadows total.</p>
+		<section>
+			<div class="demo-box">CSS3d</div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code">color: #ddd;</textarea>
+		<textarea class="code">color: #ddd;
+text-shadow: 1px 1px #bbb, 2px 2px #aaa, 3px 3px #999,
+4px 4px #888, 5px 5px #777, 6px 6px #666,
+6px 6px 6px black;</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+			<style scoped>.demo-box { background: transparent; color:  black; }</style>
+			<p class="hint">All lengths are ±<code>1px</code> or <code>0</code>. You need 4 shadows.</p>
+			<section>
+				<div class="demo-box">Hawt, I’m outlined!</div>
+			</section>
+			<section>
+				<div class="my demo-box"></div>
+			</section>
+			<textarea class="my code"></textarea>
+			<textarea class="code">color:white;
+text-shadow: 1px 0 black, -1px 0 black,
+             0 1px black, 0px -1px black;</textarea>
+		</section>
+	
+	<section class="slide" data-src="#feat=css-textshadow" data-base="caniuse"></section>
+</section>-->
+
+<section>
+	<header class="slide">
+		<h1>backgrounds</h1>
+	</header>
+	
+	<!--<section class="slide" data-src="http://designfestival.com/cicada/"></section>-->
+	
+	<section class="examples-list slide">
+		<ul class="delayed-children">
+			<li>Multiple backgrounds</li>
+			<li>Layers</li>
+			<li>background-position</li>
+			<li>background-origin</li>
+			<li>background-clip</li>
+			<li>background-size</li>
+			<li>background-size keywords</li>
+			<li>background-attachment</li>
+		</ul>
+		<textarea class="demo-box dont-adjust" data-subject>background: #333 url(img/hole.png);</textarea>
+	</section>
+	
+	<section class="slide" data-base="secrets2" data-src="#background-attachment #slide6 #slide7 #slide9 #slide10 #slide11"></section>
+	
+	<section class="slide" data-type="challenge">
+			<p class="hint">The image used is <code>url(img/presto.svg)</code>. All lengths are multiples of <code>20px</code>. You need 4 declarations total.</p>
+			<section>
+				<div class="demo-box">This is some dummy text. I hope you are enjoying this workshop.</div>
+			</section>
+			<section>
+				<div class="my demo-box"></div>
+			</section>
+			<textarea class="my code">padding: 20px;
+background: #d00;</textarea>
+			<textarea class="code">padding: 20px;
+background: #d00 url(img/presto.svg) no-repeat bottom right;
+background-size: 100px auto;
+background-origin: content-box;</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+			<p class="hint">You need 3 declarations total. The outer “outline” is <code>2px</code> thick and <code>slategray</code>. The inner one is <code>5px</code> thick and lets the backdrop show through.</p>
+			<section>
+				<div class="demo-box"></div>
+			</section>
+			<section>
+				<div class="my demo-box"></div>
+			</section>
+			<textarea class="my code"></textarea>
+			<textarea class="code">box-shadow: 0 0 0 2px slategray;
+border: 5px solid transparent;
+background-clip: padding-box;</textarea>
+	</section>
+	
+	<!--<section class="slide" data-type="challenge">
+		<p class="hint">The images used are <code>url(img/hole.png)</code>, <code>url(img/shadow.png)</code> and <code>url(img/trident.svg)</code>. All lengths are multiples of 20px. You need 4 declarations total.</p>
+		<section>
+			<div class="demo-box">This is some dummy text. I hope you are enjoying this workshop.</div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code">padding: 20px;
+background: #333;</textarea>
+		<textarea class="code">padding: 20px;
+background: 
+  url(img/shadow.png) no-repeat bottom right,
+  url(img/trident.svg) no-repeat bottom right,
+  #333 url(img/hole.png);
+background-size: contain, 100px auto, auto;
+background-origin: border-box, content-box;</textarea>
+	</section>-->
+	
+	<section class="slide" data-src="#feat=multibackgrounds" data-base="caniuse"></section>
+	
+	<section class="plain slide" style="text-align:center">
+		<img src="img/css2-multiple-background-border-model.png" />
+		<h1 style="font-size: 100%;">An idea by <a href="http://nicolasgallagher.com/multiple-backgrounds-and-borders-with-css2/">Nicolas Gallagher</a></h1>
+	</section>
+	
+	<section class="plain slide">
+		<hgroup>
+			<h1>Up to 3 backgrounds</h1>
+			<h2>With pseudo-elements!</h2>
+		</hgroup>
+		<pre><code class="language-css">/* The foundation */
+body {
+  position:relative; 
+}
+body:before, body:after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -1;
+}</code></pre>
+	</section>
+	
+	<section class="plain slide">
+		<hgroup>
+			<h1>Up to 3 backgrounds</h1>
+			<h2>With pseudo-elements!</h2>
+		</hgroup>
+		<pre><code class="language-css">/* The backgrounds */
+body {
+  background: url(image1.png) no-repeat bottom right;
+}
+body:before {
+  background: url(image2.png) no-repeat top left;
+}
+body:after {
+  background: slategray url(image3.png);
+}</code></pre>
+	</section>
+	
+	<section class="slide" data-src="#feat=background-img-opts" data-base="caniuse"></section>
+		
+	<section class="plain slide" data-type="browser support">
+		<h1>background-attachment: local</h1>
+		<table class="noprefix">
+			<thead>
+				<tr>
+					<td>Without prefix</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr title="Firefox">
+					<td>25</td>
+				</tr>
+				<tr title="Opera">
+					<td>10.5</td>
+				</tr>
+				<tr title="IE">
+					<td>9</td>
+				</tr>
+				<tr title="Safari">
+					<td>5</td>
+				</tr>
+				<tr title="Chrome">
+					<td>1</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+</section>
+
+<section id="gradients">
+	<style scoped>
+		[data-type="challenge"] .demo-box {
+			width: 500px;
+			height: 300px;
+		}
+	</style>
+	<header class="slide">
+		<h1>CSS gradients</h1>
+	</header>
+	
+	<section class="slide" data-src="http://lea.verou.me/css3patterns/"></section>
+	
+	<section class="examples-list slide">
+		<ul class="delayed-children">
+			<li>Common case</li>
+			<li>transparent</li>
+			<li>Angles</li>
+			<li>Color stops</li>
+			<li>Hard lines</li>
+			<li>Stripes</li>
+			<li>Diagonal stripes</li>
+			<li>60deg diagonal stripes</li>
+			<li>Radial gradients</li>
+			<li>Sizing keywords</li>
+			<li>Hard circles</li>
+			<li>Polka dot</li>
+		</ul>
+		<textarea class="demo-box dont-adjust" data-subject>background: linear-gradient(black, slategray);</textarea>
+	</section>
+	
+	<section class="slide dont-resize gradient-angles" id="old-gradient-angles">
+		<h1>Old linear gradient angles</h1>
+		<p class="delayed left center-y">left = 0deg</p>
+		<p class="delayed left bottom">bottom left</p>
+		<p class="delayed center-x bottom">bottom = 90deg</p>
+		<p class="delayed right bottom">bottom right</p>
+		<p class="delayed right center-y">right = 180deg</p>
+		<p class="delayed right top">top right</p>
+		<p class="delayed center-x top">top = 270deg</p>
+		<p class="delayed left top">top left</p>
+		<div class="example"> </div>
+	</section>
+	
+	<section class="slide dont-resize gradient-angles" id="gradient-angles">
+		<h1>Linear gradient angles</h1>
+		<p class="delayed left center-y">to right = 90deg</p>
+		<p class="delayed left bottom">to top right</p>
+		<p class="delayed center-x bottom">to top = 0deg</p>
+		<p class="delayed right bottom">to top left</p>
+		<p class="delayed right center-y">to left = 270deg</p>
+		<p class="delayed right top">to bottom left</p>
+		<p class="delayed center-x top">to bottom = 180deg</p>
+		<p class="delayed left top">to bottom right</p>
+		<div class="example"> </div>
+	</section>
+	
+	<section class="plain slide dont-resize" id="bottom-left-45deg">
+		<h1>to top right ≠ 45deg</h1>
+		<div class="resizable demo-box">
+			to top right
+		</div>
+		<div class="resizable demo-box">
+			45deg
+		</div>
+	</section>
+	
+	<section class="plain slide" data-src="http://dabblet.com/gist/9594012"></section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">The highlight is white, from 70% opaque to completely transparent. You only need one gradient. The gradient should be flexible enough to accommodate changes to the background color.</p>
+		<section>
+			<div class="demo-box"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code">background: black;</textarea>
+		<textarea class="code">background: black;
+background-image: linear-gradient(
+    hsla(0,0%,100%,.7), hsla(0,0%,100%,.3) 50%,
+    hsla(0,0%,100%,.2) 50%, hsla(0,0%,100%,0));</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">Sometimes, you may need to slightly compromise to avoid triggering browser bugs. As slightly as 1%. ;-)</p>
+		<section>
+			<div class="demo-box"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code">background-image: url(img/rainbow-wood.jpg);</textarea>
+		<textarea class="code">background-image: radial-gradient(closest-side, transparent 99%, black), url(img/rainbow-wood.jpg);
+background-size: cover;</textarea>
+	</section>
+	
+	<!--<section class="slide" data-type="challenge">
+		<p class="hint">The light column is 30% white and occupies 30% of the container’s width.</p>
+		<section>
+			<div class="demo-box"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">background-image: linear-gradient(0deg, rgba(255,255,255,.3) 30%, transparent 30%)</textarea>
+	</section>-->
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">Stripe width is <code>30px</code>. The stripe angle is 30 degrees. The light stripes are 30% white.</p>
+		<section>
+			<div class="demo-box"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">background-image: repeating-linear-gradient(-30deg,
+  rgba(255,255,255,.3), rgba(255,255,255,.3) 30px,
+  transparent 30px, transparent 60px)</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<style scoped>
+		.demo-box {
+			box-sizing: border-box;
+			color: navy;
+			font: italic 70% Baskerville, serif;
+			height: auto;
+		}
+		</style>
+		<p class="hint">The lines are <code>1px</code> thick. Use ems to get flexibility based on font-size.</p>
+		<section>
+			<div class="demo-box">I have a cool lined paper background that adjusts to both my font-size and my padding! Isn’t CSS awesome? And here is some more text, because I need this to be several lines. Lorem Ipsum dolor sit amet lalalala!</div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code">padding: 2em;
+background: beige;
+line-height: 1.5;
+font-size: 70%;</textarea>
+		<textarea class="code">background: linear-gradient(
+rgba(0,0,0,.5) 1px, transparent 0) 0 1.2em beige;
+background-size: 100% 1.5em;
+background-origin: content-box;
+padding: 2em;
+font-size: 70%;
+line-height: 1.5;</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">You need 4 gradients, all with the same <code>background-size</code> and the same color stops. The corner cutout is <code>20px</code> diagonally.</p>
+		<section>
+			<div class="demo-box"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">background: linear-gradient(135deg, transparent 20px, slategray 20px) top left,
+linear-gradient(225deg, transparent 20px, slategray 20px) top right,
+linear-gradient(-45deg, transparent 20px, slategray 20px) bottom right,
+linear-gradient(45deg, transparent 20px, slategray 20px) bottom left;
+background-size:50% 50%;
+background-repeat: no-repeat;</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">Square width is <code>25px</code>. The dark squares are <code>20%</code> darker than the light ones. You need 2 identical gradients. It should be possible to change the background color (light squares) in one place.</p>
+		<section>
+			<div class="demo-box"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code">background: #ddd;</textarea>
+		<textarea class="code">background: #ddd;
+background-image: linear-gradient(-45deg, rgba(0,0,0,.2) 25%, transparent
+ 25%, transparent 75%, rgba(0,0,0,.2) 75%), 
+linear-gradient(-45deg, rgba(0,0,0,.2) 25%, transparent
+ 25%, transparent 75%, rgba(0,0,0,.2) 75%);
+background-position: 0 0, 25px 25px;
+background-size: 50px 50px;</textarea>
+	</section>
+	
+	<section class="slide" data-src="#feat=css-gradients" data-base="caniuse"></section>
+</section>
+
+<!--<section id="sexy-button">
+	<style scoped>
+		.demo-box {
+			width: auto;
+			height: auto;
+			padding: .2em 1em;
+			border: 1px solid;
+			background: hsl(50, 80%, 55%);
+			font-size: 80%;
+			color: hsl(50, 80%, 35%);
+		}
+	</style>
+	<header class="slide">
+		<hgroup>
+			<h1>Sexy button</h1>
+			<h2>Combination challenge</h2>
+		</hgroup>
+	</header>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">You need 5 declarations: <code>border-color</code>, <code>border-radius</code>, <code>background-image</code>, <code>text-shadow</code>, <code>box-shadow</code></p>
+		<section>
+			<button class="demo-box">Click me</button>
+		</section>
+		<section>
+			<button class="my demo-box"></button>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">
+border-color: rgba(0,0,0,.2); 
+border-radius: .3em;
+background-image: linear-gradient(hsla(0,0%,100%,.5), hsla(0,0%,100%,0) 60%);
+text-shadow: 0 .05em .05em white;
+box-shadow: 0 1px hsla(0,0%,100%,.8) inset,
+  0 .3em .3em -.3em black;</textarea>
+	</section>
+</section>-->
+
+<!--<section>
+	<header class="slide">
+		<h1>border-image</h1>
+	</header>
+	
+	<section class="slide">
+		<iframe data-src="http://leaverou.me/chainvas/"></iframe>
+	</section>
+	
+	<section class="slide" data-src="http://border-image.com"></section>
+	
+	<section class="slide" data-src="http://lea.verou.me/border-image/"></section>
+	
+	<section class="plain slide">
+		<h1>Unreliable features</h1>
+		<ul>
+			<li>Individual properties</li>
+			<li><code>space</code> keyword</li>
+			<li><code>border-image-width</code> in anything else but pixels</li>
+			<li><code>border-image-outset</code></li>
+			<li><code>fill</code> keyword</li>
+			<li>SVGs in Gecko</li>
+			<li><code>round</code> keyword in WebKit</li>
+			<li>Gradients as border images</li>
+		</ul>
+	</section>
+	
+	<section class="slide" data-src="http://dabblet.com/gist/2872452"></section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">The image used is <code>url(img/organic-dots.png)</code>.</p>
+		<section>
+			<div class="demo-box"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code">background:transparent;</textarea>
+		<textarea class="code">background:transparent;
+border: 14px solid transparent;
+border-image: url(img/organic-dots.png) 14 round;</textarea>
+	</section>
+	
+	<section class="plain slide" data-type="browser support">
+		<h1>border-image</h1>
+		<table class="">
+			<thead>
+				<tr>
+					<td>With -prefix-</td>
+					<td>Without prefix</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr title="Firefox">
+					<td>3.5
+						<p class="note">Buggy with SVGs</p>
+					</td>
+					<td>-</td>
+				</tr>
+				<tr title="Opera">
+					<td>11
+						<p class="note">No width support</p>
+					</td>
+					<td>10.5-11</td>
+				</tr>
+				<tr title="Safari">
+					<td>Safari 3
+						<p class="note">No round support</p>
+					</td>
+					<td>
+						Chrome
+						<p class="note">A complete mess regarding <code>fill</code></p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+</section>-->
+
+<section>
+	<header class="slide">
+		<h1>Transforms</h1>
+	</header>
+	
+	<section class="slide">
+		<iframe data-src="http://www.paulrhayes.com/experiments/cube/multiCubes.html"></iframe>
+	</section>
+	
+	<section class="examples-list slide">
+		<ul class="delayed-children">
+			<li>rotate</li>
+			<li>scale</li>
+			<li>skew</li>
+			<li>translate</li>
+			<li>Combining them</li>
+			<li>Origin</li>
+			<li>3d transforms</li>
+			<li>backface-visibility</li>
+		</ul>
+		<textarea class="demo-box dont-adjust" data-subject>transform: rotate(1deg);</textarea>
+	</section>
+	
+	<section class="plain slide">
+		<h1>Positioning woes</h1>
+		<div>
+			<textarea class="css-snippet">div {
+	transform: rotate(2deg);
+}
+textarea {
+	position: absolute;
+}</textarea>
+		</div>
+	</section>
+	
+	<section class="slide" data-base="secrets2" data-src="#slide34 #slide35"></section>
+	
+	<section class="slide" data-src="http://dabblet.com/gist/7892364"></section>
+	
+	<section class="slide" data-src="http://dabblet.com/gist/3038149"></section>
+	
+	<!--<section class="slide" data-type="challenge">
+		<p class="hint">3 transform functions total, all different kinds. The last two are rotates. Every length or angle is a multiple of <strong>30</strong>.</p>
+		<section>
+			<div class="demo-box">I feel transformed!</div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">transform: perspective(600px) rotateX(60deg) rotateY(30deg)</textarea>
+	</section>-->
+	
+	<section class="slide" data-type="challenge">
+		<style scoped>.demo-box {
+			width: 200px;
+		}</style>
+		<p class="hint">Top of an isometric cube, with three 2D transforms, one of which is <code>scaleY(0.87)</code>. All angles are ±30deg.</p>
+		<section>
+			<div class="demo-box">I feel transformed!</div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code">transform: scaleY(0.87);</textarea>
+		<textarea class="code">transform:rotate(-30deg) skewX(30deg) scaleY(0.87);</textarea>
+	</section>
+	
+	<section class="slide notitle" data-src="http://result.dabblet.com/gist/8f7b30f73fccf50e056b"></section>
+	
+	<section class="slide dabblet-challenge" data-src="http://dabblet.com/gist/2440417"></section>
+	
+	<section class="slide" data-src="http://dabblet.com/gist/9594360"></section>
+	
+	<section class="slide" data-src="http://leaverou.github.io/chroma-zone/rgb-cube.html"></section>
+	
+	<section class="slide" data-base="caniuse" data-src="#feat=transforms2d"></section>
+	
+	<section class="slide" data-base="caniuse" data-src="#feat=transforms3d"></section>
+	
+	<section class="plain slide">
+		<hgroup>
+			<h1>IE Matrix filter</h1>
+			<h2>For transforms in IE &lt; 9</h2>
+		</hgroup>
+		<pre><code class="language-css">/* rotate(45deg) */
+filter: progid:DXImageTransform.Microsoft.Matrix(
+  M11=0.70710678, M12=-0.70710678, 
+  M21=0.70710678, M22=0.70710678,
+  sizingMethod='auto expand');
+-moz-transform:  matrix(.70710678,.70710678,-.70710678,.70710678,0,0);
+-ms-transform:  matrix(.70710678,.70710678,-.70710678,.70710678, 0,0);
+-webkit-transform:  matrix(.70710678,.70710678,-.70710678,.70710678,0,0);
+-o-transform:  matrix(.70710678,.70710678,-.70710678,.70710678,0,0);
+transform:  matrix(.70710678,.70710678,-.70710678,.70710678,0,0);</code></pre>
+	</section>
+	
+	<section class="plain slide">
+		<hgroup>
+			<h1>IE Matrix filter</h1>
+			<h2>For transforms in IE &lt; 9</h2>
+		</hgroup>
+		<p>Finding parameters:</p>
+		<ul>
+			<li>Apply transforms as usual (e.g. <code>rotate(45deg)</code>)</li>
+			<li>Run in the console:<pre>getComputedStyle(element).WebkitTransform;</pre></li>
+			<li>There you get your matrix parameters!</li>
+			<li>More robust: <a href="http://www.useragentman.com/IETransformsTranslator/" target="_blank">useragentman.com/IETransformsTranslator/</a></li>
+		</ul>
+	</section>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>CSS transitions</h1>
+	</header>
+	
+	<section class="slide">
+		<iframe data-src="http://leaverou.github.io/animatable"></iframe>
+	</section>
+	
+	<section class="examples-list slide" id="transitions">
+		<ul class="delayed-children">
+			<li>Common case</li>
+			<li>Restricting properties</li>
+		</ul>
+		<textarea class="demo-box dont-adjust" data-subject>textarea {
+ transition: 1s;
+}
+textarea:hover {
+ background:black;
+}</textarea>
+	</section>
+	
+	<section class="slide" data-base="css-4d" data-src="#lightbox #slide18 #lightbox #height-auto #slide22 #animatable-values #slide24 #slide25 #slide26 #slide27 #panel-demo #slide30"></section>
+		
+	<section class="slide" data-src="http://dabblet.com/gist/2428309"></section>
+	
+	<section class="slide" data-base="css-4d" data-src="#ball-demo"></section>
+	
+	<section class="slide" data-src="http://cubic-bezier.com"></section>
+	
+	<section class="slide" data-type="challenge">
+		<style scoped>
+			.demo-box {
+				font: 45%/1.5 Consolas, Monaco, monospace;
+				white-space: pre;
+				color: white;
+				text-align: left;
+				padding: .5em .8em;
+				overflow: hidden;
+			}
+			
+			.demo-box:not(:hover) {
+				width: 20px;
+				height: 20px;
+				background: black;
+				color: transparent;
+			}
+		</style>
+		<p class="hint">Every property transition lasts <code>0.5s</code>. The background &amp; text color transition at the same time.</p>
+		<section>
+			<div class="demo-box">.demo-box:not(:hover) {
+	width: 20px;
+	height: 20px;
+	background: black;
+	color: transparent;
+}</div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">transition: .5s width, .5s .5s height,
+            .5s 1s background, .5s 1s color;</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+		<style scoped>
+			.demo-box:hover {
+				transform: scale(1.2);
+			}
+		</style>
+		<p class="hint">Everything is a multiple of .5. You only need one declaration.</p>
+		<section>
+			<div class="demo-box">I feel transformed!</div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">transition: 1s cubic-bezier(.5,1.5,.5,2);</textarea>
+	</section>
+	
+	<!--<section class="slide" data-type="challenge">
+		<style scoped>
+			.demo-box {
+				font: 45%/1.5 Consolas, Monaco, monospace;
+				white-space: pre;
+				color: white;
+				text-align: left;
+				padding: .5em .8em;
+			}
+			
+			.demo-box:hover {
+				box-shadow: 0 0 0 999px rgba(0,0,0,.5) !important;
+				position: relative;
+				z-index: 1;
+			}
+		</style>
+		<p class="hint">The transition lasts 1 second. You need two declarations.</p>
+		<section>
+			<div class="demo-box">.demo-box:hover {
+	box-shadow: 0 0 0 
+	            999px 
+	            rgba(0,0,0,.5);
+	position: relative;
+	z-index: 1;
+}</div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code"></textarea>
+		<textarea class="code">transition: 1s;
+box-shadow: 0 0 0 999px transparent;</textarea>
+	</section>-->
+	
+	<!--<section class="plain slide">
+		<h1>transitionEnd</h1>
+		<script style="display:block">var el = document.querySelector('#transitions > textarea'),
+    prefixes = ['', 'o', 'webkit', 'ms'];
+
+for (var i=prefixes.length; i--;) {
+  var prefix = prefixes[i],
+      event = prefix + (prefix? 'T' : 't') + 'ransitionEnd';
+
+  el.addEventListener(event, function(evt) {
+    console.log('Weeee, transition!', evt);
+  }, false);
+}</script>
+	</section>-->
+	
+	<section class="slide" data-base="caniuse" data-src="#feat=css-transitions"></section>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>CSS animations</h1>
+	</header>
+	
+	<section class="slide" data-src="http://kaylarose.github.com/Glowform/"></section>
+	
+	<section class="slide" data-src="http://codepen.io/juliangarnier/full/hzDAF"></section>
+	
+	<section class="slide" data-base="css-4d" data-src="#rainbow-demo #heart-demo #animation-direction #heart-demo #border-demo #slide43"></section>
+	
+	<section class="slide" data-src="http://dabblet.com/gist/1745856"></section>
+	
+	<section class="slide" data-base="border-radius" data-src="#animation"></section>
+	
+	<section class="slide" data-src="http://dabblet.com/gist/9594604"></section>
+	
+	<section class="slide" data-base="caniuse" data-src="#feat=css-animation"></section>
+</section>
+
+<!--
+<section>
+	<header class="slide" id="layout">
+		<h1>Layout</h1>
+	</header>
+	
+	<section class="slide" data-src="http://ie.microsoft.com/testdrive/html5/tweetcolumns/default.html"></section>
+	
+	<section class="examples-list slide">
+		<ul class="delayed-children">
+			<li>box-sizing</li>
+			<li>calc()</li>
+			<li>Vertical centering</li>
+			<li>Multi-column</li>
+			<li>column-width</li>
+			<li>column-rule</li>
+			<li>Breaks</li>
+		</ul>
+		<textarea class="demo-box dont-adjust" data-subject>textarea {
+	box-sizing: content-box;
+	height: 100%;
+	padding: 1em;
+}</textarea>
+	</section>
+	
+	<section class="slide" data-base="caniuse" data-src="#feat=css3-boxsizing"></section>
+	
+	<section class="slide" data-base="secrets2" data-src="#slide16 #padding-auto #slide18"></section>
+	
+	<section class="slide" data-base="caniuse" data-src="#feat=calc"></section>
+	
+	<section class="slide" data-src="http://dabblet.com/gist/9595317"></section>
+	
+	<section class="slide" data-base="caniuse" data-src="#feat=multicolumn"></section>
+	
+	<section class="plain slide">
+		<h1>Flexbox cheatsheet</h1>
+		
+		<ul>
+			<li><code>display: flex</code> to enable</li>
+			<li><code title="flex-start | flex-end | center | baseline | stretch">align-items</code>: align content vertically</li>
+			<li><code title="auto | flex-start | flex-end | center | baseline | stretch">align-self</code>: align the container vertically</li>
+			<li><code title="flex-start | flex-end | center | space-between | space-around | stretch">align-content</code>: align multiple lines vertically</li>
+			<li><code title="flex-start | flex-end | center | space-between | space-around">justify-content</code>: align content horizontally</li>
+			<li><code title="[number] [number] [width]">flex</code>: How much can its width grow?</li>
+			<li><code title="nowrap | wrap | wrap-reverse">flex-wrap</code>: Allow wrapping?</li>
+			<li><code title="row | row-reverse | column | column-reverse">flex-direction</code>: Are children laid out horizontally or vertically?</li>
+			<li><code>flex-flow</code>: Set both <code>flex-wrap</code> and <code>flex-direction</code></li>
+			<li><code>order</code> to override the element's source order</li>
+		</ul>
+	</section>
+	
+	<section class="slide" data-src="http://dabblet.com/gist/2403795"></section>
+	
+	<section class="slide" data-src="http://dabblet.com/gist/9572588"></section>
+	
+	<section class="slide" data-src="http://philipwalton.github.io/solved-by-flexbox/"></section>
+		
+	<section class="slide" data-base="caniuse" data-src="#feat=flexbox"></section>
+</section>
+-->
+<section id="future">
+	<style scoped>
+		.demo-box {
+			height: 300px;
+		}
+	</style>
+	
+	<header class="slide">
+		<h1>The future</h1>
+	</header>
+	
+	<section class="slide" data-src="http://bennettfeely.com/filters/"></section>
+	
+	<section class="slide" data-base="secrets2" data-src="#slide47 #slide48 #slide52 #slide55"></section>
+	
+	<section class="slide" data-type="challenge">
+		<p class="hint">You need 4 declarations total. One of them is a <code>filter</code> with 3 filters. The filter parameters are all <code>200</code> with different units (when they need a parameter)</p>
+		<section>
+			<div class="demo-box"></div>
+		</section>
+		<section>
+			<div class="my demo-box"></div>
+		</section>
+		<textarea class="my code">background: url(img/grumpycat.jpg) no-repeat center;</textarea>
+		<textarea class="code">background: url(img/grumpycat.jpg) no-repeat center;
+background-size: cover;
+border-radius: 50%;
+filter: sepia() hue-rotate(200deg) contrast(200%);</textarea>
+	</section>
+	
+	<section class="slide" data-src="http://codepen.io/dudleystorey/pen/vrwcl"></section>
+	
+	<section class="slide" data-base="caniuse" data-src="#feat=css-filters"></section>
+	
+	<section class="slide" id="blending-modes">
+		<article>normal</article>
+		<article>multiply</article>
+		<article>screen</article>
+		<article>overlay</article>
+		<article>darken</article>
+		<article>lighten</article>
+		<article>color-dodge</article>
+		<article>color-burn</article>
+		<article>hard-light</article>
+		<article>soft-light</article>
+		<article>difference</article>
+		<article>exclusion</article>
+		<article>hue</article>
+		<article>saturation</article>
+		<article>color</article>
+		<article>luminosity</article>
+	</section>
+	
+	<section class="slide" data-src="http://codepen.io/bennettfeely/full/qBJyj"></section>
+	
+	<section class="slide" data-src="http://bennettfeely.com/gradients/"></section>
+	
+	<section class="slide" data-type="challenge">
+			<p class="hint">You need 3+ declarations total. One of them is <code>background-blend-mode</code>. List of <a href="http://dev.w3.org/fxtf/compositing-1/#blendingseparable" target="_blank">Blending modes</a></p>
+			<section>
+				<div class="demo-box"></div>
+			</section>
+			<section>
+				<div class="my demo-box"></div>
+			</section>
+			<textarea class="my code">background: url(img/grumpycat.jpg) no-repeat center, hsl(335,100%,50%);</textarea>
+			<textarea class="code">background: url(img/grumpycat.jpg) no-repeat center, hsl(335,100%,50%);
+background-size: cover;
+border-radius: 50%;
+background-blend-mode: luminosity;</textarea>
+	</section>
+	
+	<section class="slide" data-type="challenge">
+			<p class="hint">The gradient represents the side of the RGB cube where Red=255 (i.e. all RGB colors with R=255). You only need 2 declarations, <code>background</code> and <code>background-blend-mode</code>. List of <a href="http://dev.w3.org/fxtf/compositing-1/#blendingseparable" target="_blank">Blending modes</a></p>
+			<section>
+				<div class="demo-box"></div>
+			</section>
+			<section>
+				<div class="my demo-box"></div>
+			</section>
+			<textarea class="my code"></textarea>
+			<textarea class="code">background: 
+  linear-gradient(90deg, #f0f, #fff), 
+  linear-gradient(#000, #00f);
+background-blend-mode: difference;</textarea>
+	</section>
+	
+	<section class="slide" data-base="caniuse" data-src="#feat=css-backgroundblendmode"></section>
+	
+	<section class="slide" data-src="http://www.html5rocks.com/en/tutorials/masking/adobe/"></section>
+	
+	<section class="slide" data-type="challenge">
+			<p class="hint">Two declarations are missing, one is a <code>mask-box-image</code>. Grumpy cat is clipped in the shape of <code>img/presto.svg</code>.</p>
+			<section>
+				<div class="demo-box"></div>
+			</section>
+			<section>
+				<div class="my demo-box"></div>
+			</section>
+			<textarea class="my code">background: url(img/grumpycat.jpg) no-repeat center, red;
+background-size: cover;</textarea>
+			<textarea class="code">background: url(img/grumpycat.jpg) no-repeat center, red;
+background-size: cover;
+background-blend-mode: multiply;
+mask-box-image: url(img/presto.svg);</textarea>
+	</section>
+	
+	<section class="slide" data-base="caniuse" data-src="#feat=css-masks"></section>
+</section>
+
+<!--<section>
+	<header class="slide">
+		<h1>Selectors</h1>
+	</header>
+	
+	<section class="slide" data-src="https://examples.wufoo.com/forms/custom-checkboxes-and-radio-buttons/"></section>
+	
+	<section class="examples-list slide">
+		<ul class="delayed-children">
+			<li>:first-child</li>
+			<li>:nth-child()</li>
+			<li>:nth-of-type()</li>
+			<li>:last-child</li>
+			<li>:nth-last-child()</li>
+			<li>:nth-last-of-type()</li>
+			<li>:only-child</li>
+			<li>General :only-child</li>
+			<li>:only-of-type</li>
+		</ul>
+		<textarea class="selector-snippet" data-style="opacity:1" data-style-unselected="opacity:.2" data-prefix=".self-populating > ">:first-child</textarea>
+		<div class="self-populating" data-initial="14"></div>
+	</section>
+	
+	<section class="slide" data-src="http://lea.verou.me/css3-secrets/#sibling-count"></section>
+	
+	<section class="plain slide" id="empty">
+		<h1><code>:empty</code></h1>
+		<code class="pass"></code>
+		<code class="fail"> </code>
+		<code class="fail"><br></code>
+		<code class="fail">&lt;span&gt;&lt;/span&gt;</code>
+		<code class="pass">&lt;-- comment --&gt;</code>
+	</section>
+	
+	<section class="plain slide" data-type="browser support">
+		<h1>Sibling combinator (~)</h1>
+		<table class="noprefix">
+			<thead>
+				<tr>
+					<td>Without prefix</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr title="Firefox">
+					<td>1</td>
+				</tr>
+				<tr title="Opera">
+					<td>9</td>
+				</tr>
+				<tr title="IE">
+					<td>7</td>
+				</tr>
+				<tr title="Safari">
+					<td>Safari 3.1
+						<p class="note">Buggy until 5.1</p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	
+	<section class="plain slide" data-type="browser support">
+		<h1>Structural pseudoclasses</h1>
+		<table class="noprefix">
+			<thead>
+				<tr>
+					<td>Without prefix</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr title="Firefox">
+					<td>3.5</td>
+				</tr>
+				<tr title="Opera">
+					<td>9.5</td>
+				</tr>
+				<tr title="IE">
+					<td>9</td>
+				</tr>
+				<tr title="Safari">
+					<td>Safari 3.1</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	
+	<section class="slide" title=":checked">
+		<textarea class="selector-snippet" data-style="opacity:1" data-style-unselected="opacity:.2" data-prefix="form ">:checked</textarea>
+		<form>
+			<input type="checkbox" id="checkbox_prechecked" checked /><label for="checkbox_prechecked">Label</label><br />
+			<input type="checkbox" id="checkbox" /><label for="checkbox">Label</label><br />
+			<input type="radio" id="radio1" name="radio" value="1" checked /><label for="radio1">Label</label><br />
+			<input type="radio" id="radio2" name="radio" value="2" /><label for="radio2">Label</label>
+		</form>
+	</section>
+	
+	<section class="slide" data-src="http://lea.verou.me/css3-secrets/#slide31"></section>
+	
+	<section class="slide" data-src="http://jsfiddle.net/leaverou/CGP87/embedded/result%2Ccss%2Chtml"></section>
+	
+	<section class="slide" data-src="http://en.wikipedia.org/wiki/CSS#cite_note-12" title=":target"></section>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>RWD</h1>
+	</header>
+	
+	<section class="examples-list slide" id="mq">
+			<ul class="delayed-children">
+				<li>Media queries</li>
+				<li>width / height</li>
+				<li>device-width / -height</li>
+				<li>orientation</li>
+				<li>(device-)aspect-ratio</li>
+				<li>color</li>
+				<li>Viewport units</li>
+			</ul>
+			<textarea class="demo-box dont-adjust" data-subject>@media (max-width:600px) {
+  #mq > textarea {
+    background:black;
+  }
+}</textarea>
+	</section>
+	
+	<section class="plain slide" data-type="browser support">
+		<h1>Media queries</h1>
+		<table class="noprefix">
+			<thead>
+				<tr>
+					<td>Without prefix</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr title="Firefox">
+					<td>3.5</td>
+				</tr>
+				<tr title="Opera">
+					<td>9.5</td>
+				</tr>
+				<tr title="IE">
+					<td>9</td>
+				</tr>
+				<tr title="Safari">
+					<td>Safari 4</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	
+	<section class="plain slide" data-type="browser support">
+		<h1>Viewport units</h1>
+		<table class="noprefix">
+			<thead>
+				<tr>
+					<td>Without prefix</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr title="IE">
+					<td>9</td>
+				</tr>
+				<tr title="Safari">
+					<td>Chrome</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>Typography</h1>
+	</header>
+	
+	<section class="examples-list slide">
+		<ul class="delayed-children">
+			<li>@font-face</li>
+			<li>Icon webfonts</li>
+			<li>tab-size</li>
+			<li>hyphens</li>
+		</ul>
+		<textarea class="demo-box dont-adjust" data-subject>@font-face {
+}</textarea>
+	</section>
+	
+	<section class="plain slide" data-type="browser support">
+		<h1>@font-face</h1>
+		<table class="noprefix">
+			<tbody>
+				<tr title="Firefox">
+					<td>3.5</td>
+				</tr>
+				<tr title="Opera">
+					<td>9.5</td>
+				</tr>
+				<tr title="IE">
+					<td>5
+						<p class="note">.eot only until IE9</p>
+					</td>
+				</tr>
+				<tr title="Safari">
+					<td><a href="">Safari 3</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	
+		
+	<section class="plain slide" data-type="browser support">
+		<h1>tab-size</h1>
+		<table class="prefix">
+			<thead>
+				<tr>
+					<td>With -prefix-</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr title="Firefox">
+					<td>1.5</td>
+				</tr>
+				<tr title="Opera">
+					<td>11.10</td>
+				</tr>
+				<tr title="Safari">
+					<td>Chrome Canary</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	
+	<section class="plain slide" data-type="browser support">
+		<h1>hyphens</h1>
+		<table class="prefix">
+			<thead>
+				<tr>
+					<td>With -prefix-</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr title="Firefox">
+					<td>6
+						<p class="note">8-9 for other languages</p>
+					</td>
+				</tr>
+				<tr title="IE">
+					<td>10</td>
+				</tr>
+				<tr title="Safari">
+					<td>iOS Safari 4.2, Safari 5.1 NOT Chrome</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>UX</h1>
+	</header>
+	
+	<section class="examples-list slide">
+		<ul class="delayed-children">
+			<li>resize</li>
+			<li>pointer-events</li>
+			<li>Cursors</li>
+		</ul>
+		<textarea class="demo-box dont-adjust" data-subject></textarea>
+	</section>
+	
+	<section class="slide" data-src="http://lea.verou.me/css3-secrets/#pointer-events"></section>
+	
+	<section class="plain slide dont-resize" id="css3-cursors" title="New cursors">
+		<ul class="cursor-list">
+			<li>none</li>
+			<li>context-menu</li>
+			<li>cell</li>
+			<li>vertical-text</li>
+			<li>alias</li>
+			<li>copy</li>
+			<li>no-drop</li>
+			<li>not-allowed</li>
+			<li>col-resize</li>
+			<li>row-resize</li>
+			<li>all-scroll</li>
+			<li>zoom-in</li>
+			<li>zoom-out</li>
+		</ul>
+	</section>
+	
+	<section class="plain slide" data-type="browser support">
+		<h1>resize</h1>
+		<table class="noprefix">
+			<thead>
+				<tr>
+					<td>Without prefix</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr title="Firefox">
+					<td>4</td>
+				</tr>
+				<tr title="Safari">
+					<td>Safari 3</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	
+	<section class="plain slide" data-type="browser support">
+		<h1>pointer-events for HTML</h1>
+		<table class="noprefix">
+			<thead>
+				<tr>
+					<td>Without prefix</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr title="Firefox">
+					<td>3.6</td>
+				</tr>
+				<tr title="Safari">
+					<td>Safari 4</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+</section>-->
+
+<section class="plain slide" id="spec-index">
+	<h1>Spec index</h1>
+	<ul style="column-count: 2;">
+		<li><a href="http://w3.org/TR/css3-color">Color</a></li>
+		<li><a href="http://w3.org/TR/css3-background">Backgrounds and Borders</a></li>
+		<li><a href="http://w3.org/TR/css3-images">Image Values and Replaced Content</a></li>
+		<!--<li><a href="http://www.w3.org/TR/css-text-decor-3/">Text Decoration</a></li>-->
+		<!--<li><a href="http://www.w3.org/TR/css3-flexbox/">Flexible Box Layout</a></li>-->
+		<li><a href="http://w3.org/TR/css3-transitions">Transitions</a></li>
+		<li><a href="http://w3.org/TR/css3-animations">Animations</a></li>
+		<li><a href="http://w3.org/TR/css3-transforms">Transforms</a></li>
+		<!--<li><a href="http://w3.org/TR/css3-multicol">Multi-column Layout</a></li>-->
+		<li><a href="http://w3.org/TR/css3-values">Values and Units</a></li>
+		<!--<li><a href="http://w3.org/TR/css3-fonts">Fonts</a></li>
+		<li><a href="http://w3.org/TR/css3-selectors">Selectors</a></li>
+		<li><a href="http://w3.org/TR/css3-mediaqueries">Media Queries</a></li>
+		<li><a href="http://w3.org/TR/css3-ui">Basic User Interface</a></li>-->
+		<li><a href="http://www.w3.org/TR/filter-effects-1/">Filter Effects 1.0</a></li>
+		<li><a href="http://www.w3.org/TR/css-masking-1/">CSS Masking 1.0</a></li>
+		<li><a href="http://dev.w3.org/fxtf/compositing-1/">Compositing and Blending 1.0</a></li>
+	</ul>
+</section>
+
+<footer class="plain slide">
+	<h1>Thank you!</h1>
+	<p>Media credits:</p>
+	<ul>
+		<li>Sounds from <a href="ilovewavs.com">ilovewavs.com</a> and <a href="http://soundfxcenter.com/download-sound/sad-trombone-sound-effect/">soundfxcenter.com</a>
+		<li>Rainbow wood wallpaper from <a href="http://lukeroberts.us/2008/12/wallpaper-colourful-wood/">Luke Roberts</a>
+		<!--<li>Painting on slide 5: Edvard Mund’s “The Scream”</li>-->
+	</ul>
+</footer>
+
+<script src="code/utopia.js"></script>
+<script src="../csss/slideshow.js"></script>
+<script src="code/preprocess.js"></script>
+<script src="../csss/prefixfree.min.js"></script>
+<script src="../csss/plugins/css-edit.js"></script>
+<script src="../csss/plugins/css-snippets.js"></script>
+<script src="../csss/plugins/incrementable.js"></script>
+<script src="code/prism.js"></script>
+<script src="code/selector-snippet.js"></script>
+<script src="code/css-challenges.js"></script>
+<script src="code/talk.js"></script>
+</body>
+</html>

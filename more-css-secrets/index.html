@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>More CSS Secrets: Another 10 things you may not know about CSS</title>
+	
+	<link href="../csss/slideshow.css" rel="stylesheet" />
+	<link href="../csss/reusable.css" rel="stylesheet" />
+	<link href="theme.css" rel="stylesheet" />
+	<link href="talk.css" rel="stylesheet" />
+	<script src="../prefixfree/prefixfree.min.js"></script>
+	
+</head>
+<body>
+
+<section>
+	<header id="intro" class="demo slide dont-resize">
+		<h1>
+			<strong>Deep CSS Secrets</strong>
+			10 things you may not know about CSS
+		</h1>
+		<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
+	</header>
+	
+	<section class="inverse slide dont-resize darker" id="hi">
+		<figure class="delayed">
+			<img src="img/me-pirate.png" alt="Picture of me" title="Pirate illustration by Lorenzo Grandi http://www.lorenzograndi.it/" />
+			<figcaption>about:lea</figcaption>
+		</figure>
+		<div class="delayed">
+		<p>I make stuff</p>
+		<ul>
+			<li><a href="http://prismjs.com">prismjs.com</a></li>
+			<li><a href="http://dabblet.com">dabblet.com</a></li>
+			<li><a href="http://leaverou.github.io/prefixfree">-prefix-free</a></li>
+			<li><a href="http://css3test.com">css3test.com</a></li>
+		</ul>
+		<small>More: <a href="http://lea.verou.me/projects">lea.verou.me/projects</a></small>
+		</div>
+		<p class="delayed" id="csswg">
+			<strong>CSS WG</strong>
+			Invited Expert
+		</p>
+		<p class="delayed" id="oreilly">
+			<img src="img/oreilly.svg" alt="O’Reilly" style="display:block" />
+			author (2014)
+		</p>
+	</section>
+	
+	<!--<section class="slide dont-resize oldstyle" id="css3-secrets">
+		<h1>
+			<strong>CSS3 Secrets</strong>
+			10 things you might not know about CSS3
+		</h1>
+		<p id="warning" class="delayed"><strong>CAUTION:</strong> May contain traces of JavaScript</p>
+		<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
+	</section>
+	
+	<section class="slide dont-resize oldstyle">
+		<h1>
+			The 2011 “secrets”
+		</h1>
+		<ol class="delayed-children">
+			<li>Bouncing transitions</li>
+			<li>Flexible ellipses</li>
+			<li>Multiple outlines</li>
+			<li>Make pointer events pass through</li>
+			<li>Adjusting tab size</li>
+			<li>Styling based on sibling count</li>
+		</ol>
+	</section>
+	
+	<section class="slide dont-resize oldstyle">
+		<h1>
+			The 2011 “secrets”
+		</h1>
+		<ol class="delayed-children" start="7">
+			<li>Custom checkboxes &amp; radio buttons</li>
+			<li>More cursors for better UX</li>
+			<li>Background patterns with  pure CSS</li>
+			<li>Background positioning tricks</li>
+		</ol>
+	</section>
+	
+	<section class="image slide" style="background-image: url(img/fronteers11.jpg);">
+		<h1><a href="http://youtu.be/54wJkqG8jXE" target="_blank">youtu.be/54wJkqG8jXE</a></h1>
+	</section>
+	-->
+	<section class="typing slide">
+		<code>about:this-talk</code>
+	</section>
+	
+	<section class="slide" data-import="intro"></section>
+</section>
+
+<section>
+	<header class="slide" id="secret1"><h1>1</h1></header>
+	
+	<section class="image slide" style="background-image: url(img/google-reader.png); background-position: top left ;">
+		<h1><a href="http://www.google.com/reader/view/" target="_blank">My Google Reader (RIP)</a></h1>
+	</section>
+	
+	<section class="image slide" style="background: url(img/scrolling-shadows.png) white no-repeat 50% 40%; background-size: 80% auto;"></section>
+	
+	<section class="slide dont-resize" id="background-attachment">
+		<h1>background-attachment</h1>
+		
+		<pre style="background-attachment: scroll;"></pre>
+		
+		<pre style="background-attachment: fixed;"></pre>
+		
+		<pre style="background-attachment: local;"></pre>
+	</section>
+	
+	<section class="slide">
+		<h1>background-attachment</h1>
+		
+		<table>
+			<thead>
+				<tr>
+					<td></td>
+					<th><code>scroll</code></th>
+					<th><code>fixed</code></th>
+					<th><code>local</code></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Scrolls with page</th>
+					<td>✓</td>
+					<td></td>
+					<td>✓</td>
+				</tr>
+				<tr>
+					<th>Scrolls with element</th>
+					<td></td>
+					<td></td>
+					<td>✓</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	
+	<section class="slide">
+		<div class="scroll-pane">
+			This<br>
+			is<br>
+			some<br>
+			content<br>
+			Lorem<br>
+			Ipsum<br>
+			dolor<br>
+			sit amet
+		</div>
+		<textarea data-subject=".scroll-pane"></textarea>
+	</section>
+	
+	<section class="slide">
+		<div class="scroll-pane">
+			This<br>
+			is<br>
+			some<br>
+			content<br>
+			Lorem<br>
+			Ipsum<br>
+			dolor<br>
+			sit amet
+		</div>
+		<textarea data-subject=".scroll-pane">background:
+  linear-gradient(white 30%, hsla(0,0%,100%,0)),
+  linear-gradient(hsla(0,0%,100%,0), white 70%) bottom,
+  radial-gradient(at top, rgba(0,0,0,.2), transparent 70%),
+  radial-gradient(at bottom, rgba(0,0,0,.2), transparent 70%) bottom;
+background-repeat: no-repeat;
+background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+background-attachment: local, local, scroll, scroll;</textarea>
+	</section>
+	
+	<section class="slide dont-resize">
+		<hgroup>
+			<h1><span class="property">background-attachment: </span>local</h1>
+			<h2>Browser support</h2>
+		</hgroup>
+		<div class="browser-support">
+			<dfn title="firefox">26</dfn>
+			<dfn title="opera">10.5</dfn>
+			<dfn title="ie">9</dfn>
+			<dfn title="chrome">4</dfn>
+			<dfn title="safari">5</dfn>
+		</div>
+		<p class="doc"><a href="http://lea.verou.me/2012/04/background-attachment-local/">lea.verou.me/2012/04/background-attachment-local/</a></p>
+		<p class="doc"><a href="http://w3.org/TR/css3-background/#the-background-attachment">w3.org/TR/css3-background/#the-background-attachment</a></p>
+		<!--<p class="doc"><a href="http://docs.webplatform.org/wiki/css/properties/background-attachment">docs.webplatform.org/wiki/css/properties/background-attachment</a></p>-->
+	</section>
+	
+	<section class="slide">
+		<hgroup>
+			<h1>CSS gradients</h1>
+			<h2>Browser support</h2>
+		</hgroup>
+		<div class="browser-support">
+			<dfn title="firefox">3.6</dfn>
+			<dfn title="opera">11.50</dfn>
+			<dfn title="ie">10</dfn>
+			<dfn title="chrome">10</dfn>
+			<dfn title="safari">5.1</dfn>
+		</div>
+		<p class="doc"><a href="http://w3.org/TR/css3-images/#linear-gradients">w3.org/TR/css3-images/#linear-gradients</a></p>
+		<!--<p class="doc"><a href="http://docs.webplatform.org/wiki/css/functions/linear-gradient">docs.webplatform.org/css/functions/linear-gradient</a></p>-->
+		<!--<p class="doc"><a href="http://docs.webplatform.org/wiki/css/functions/radial-gradient">docs.webplatform.org/css/functions/radial-gradient</a></p>-->
+	</section>
+	
+	<section class="info slide dont-resize">
+		<h1>Caveats</h1>
+		<ul>
+			<li>Requires solid background</li>
+		</ul>
+		<h1>Credits</h1>
+		<ul>
+			<li>Roman Komarov (kizu.ru/en)</li>
+		</ul>
+	</section>
+</section>
+
+<section>
+	<header class="slide" id="secret2"><h1>2</h1></header>
+	
+	<section class="top-heavy image slide dont-resize">
+		<h1 class="caption">Fixed width, fluid background</h1>
+		<div class="delayed sectional">
+			<section>
+				<div class="wrapper">
+					<h1>Heading</h2>
+					<p>Bacon ipsum dolor sit amet eiusmod laborum in aliqua. Enim nisi velit shoulder, swine tail in in fugiat esse fatback duis frankfurter nostrud proident. Swine flank nulla turducken minim aliquip beef. Et aute consectetur quis. Drumstick sausage sint beef chicken veniam short loin.</p>
+				</div>
+			</section>
+			
+			<section>
+				<div class="wrapper">
+					<h1>Another heading</h2>
+					<p>Welsh onion fennel wakame sea lettuce kale bush tomato beetroot radicchio courgette collard greens. Horseradish peanut celtuce gumbo courgette swiss chard coriander squash garbanzo winter purslane. Courgette nori azuki bean garlic sorrel mung bean gourd soybean groundnut.</p>
+					<p>Bacon ipsum dolor sit amet eiusmod laborum in aliqua. Enim nisi velit shoulder, swine tail in in fugiat esse fatback duis frankfurter nostrud proident. Swine flank nulla turducken minim aliquip beef. Et aute consectetur quis. Drumstick sausage sint beef chicken veniam short loin.</p>
+				</div>
+			</section>
+			
+			<section>
+				<div class="wrapper">
+					<h1>Another heading</h2>
+					<p>Bacon ipsum dolor sit amet eiusmod laborum in aliqua. Enim nisi velit shoulder, swine tail in in fugiat esse fatback duis frankfurter nostrud proident. Swine flank nulla turducken minim aliquip beef. Et aute consectetur quis. Drumstick sausage sint beef chicken veniam short loin.</p>
+				</div>
+			</section>
+			
+			<section>
+				<div class="wrapper">
+					<h1>Another heading</h2>
+					<p>Bacon ipsum dolor sit amet eiusmod laborum in aliqua. Enim nisi velit shoulder, swine tail in in fugiat esse fatback duis frankfurter nostrud proident. Swine flank nulla turducken minim aliquip beef. Et aute consectetur quis. Drumstick sausage sint beef chicken veniam short loin.</p>
+				</div>
+			</section>
+			
+			<section>
+				<div class="wrapper">
+					<h1>Another heading</h2>
+					<p>Bacon ipsum dolor sit amet eiusmod laborum in aliqua. Enim nisi velit shoulder, swine tail in in fugiat esse fatback duis frankfurter nostrud proident. Swine flank nulla turducken minim aliquip beef. Et aute consectetur quis. Drumstick sausage sint beef chicken veniam short loin.</p>
+				</div>
+			</section>
+		</div>
+	</section>
+	
+	<section class="slide language-css" id="padding-auto">
+		<pre><code>div.wrapper {
+	width: 700px;
+	margin: 0 auto;
+}</code></pre>
+
+		<pre class="delayed"><code>div.wrapper {
+	width: 700px;
+	margin: 0 </code><code class="highlight">calc(50% - 700px/2)</code>;
+}</code></pre>
+
+		<pre class="delayed"><code class="highlight">section</code><code> {
+		width: 700px;
+		</code><code class="highlight">padding</code><code>: 0 calc(50% - 350px);
+}</code></pre>
+	</section>
+	
+	<section class="top-heavy image slide dont-resize">
+		<h1 class="caption">Look ma, no wrappers!</h1>
+		<div class="delayed sectional">
+			<section>
+				<h1>Heading</h2>
+				<p>Bacon ipsum dolor sit amet eiusmod laborum in aliqua. Enim nisi velit shoulder, swine tail in in fugiat esse fatback duis frankfurter nostrud proident. Swine flank nulla turducken minim aliquip beef. Et aute consectetur quis. Drumstick sausage sint beef chicken veniam short loin.</p>
+			</section>
+			
+			<section>
+				<h1>Another heading</h2>
+				<p>Welsh onion fennel wakame sea lettuce kale bush tomato beetroot radicchio courgette collard greens. Horseradish peanut celtuce gumbo courgette swiss chard coriander squash garbanzo winter purslane. Courgette nori azuki bean garlic sorrel mung bean gourd soybean groundnut.</p>
+				<p>Bacon ipsum dolor sit amet eiusmod laborum in aliqua. Enim nisi velit shoulder, swine tail in in fugiat esse fatback duis frankfurter nostrud proident. Swine flank nulla turducken minim aliquip beef. Et aute consectetur quis. Drumstick sausage sint beef chicken veniam short loin.</p>
+			</section>
+			
+			<section>
+				<h1>Another heading</h2>
+				<p>Bacon ipsum dolor sit amet eiusmod laborum in aliqua. Enim nisi velit shoulder, swine tail in in fugiat esse fatback duis frankfurter nostrud proident. Swine flank nulla turducken minim aliquip beef. Et aute consectetur quis. Drumstick sausage sint beef chicken veniam short loin.</p>
+			</section>
+			
+			<section>
+				<h1>Another heading</h2>
+				<p>Bacon ipsum dolor sit amet eiusmod laborum in aliqua. Enim nisi velit shoulder, swine tail in in fugiat esse fatback duis frankfurter nostrud proident. Swine flank nulla turducken minim aliquip beef. Et aute consectetur quis. Drumstick sausage sint beef chicken veniam short loin.</p>
+			</section>
+			
+			<section>
+				<h1>Another heading</h2>
+				<p>Bacon ipsum dolor sit amet eiusmod laborum in aliqua. Enim nisi velit shoulder, swine tail in in fugiat esse fatback duis frankfurter nostrud proident. Swine flank nulla turducken minim aliquip beef. Et aute consectetur quis. Drumstick sausage sint beef chicken veniam short loin.</p>
+			</section>
+		</div>
+		<textarea>.sectional section {
+	width: 700px;
+	padding: 1em;
+}</textarea>
+	</section>
+	
+	<section class="slide">
+		<hgroup>
+			<h1>calc()</h1>
+			<h2>Browser support</h2>
+		</hgroup>
+		<div class="browser-support">
+			<dfn title="firefox">4</dfn>
+			<dfn title="opera">15</dfn>
+			<dfn title="ie">9</dfn>
+			<dfn title="chrome">19</dfn>
+			<dfn title="safari">6</dfn>
+		</div>
+		<p class="doc"><a href="http://www.w3.org/TR/css3-values/#calc-notation">w3.org/TR/css3-values/#calc-notation</a></p>
+		<!--<p class="doc"><a href="http://docs.webplatform.org/wiki/css/functions/calc">docs.webplatform.org/css/functions/calc</a></p>-->
+	</section>
+	
+	<section class="top-heavy image slide dont-resize">
+		<h1 class="caption">A CSS 2.1 (hacky) way</h1>
+		<div class="sectional">
+			<section>
+				<h1>Heading</h2>
+				<p>Bacon ipsum dolor sit amet eiusmod laborum in aliqua. Enim nisi velit shoulder, swine tail in in fugiat esse fatback duis frankfurter nostrud proident. Swine flank nulla turducken minim aliquip beef. Et aute consectetur quis. Drumstick sausage sint beef chicken veniam short loin.</p>
+			</section>
+			
+			<section>
+				<h1>Another heading</h2>
+				<p>Welsh onion fennel wakame sea lettuce kale bush tomato beetroot radicchio courgette collard greens. Horseradish peanut celtuce gumbo courgette swiss chard coriander squash garbanzo winter purslane. Courgette nori azuki bean garlic sorrel mung bean gourd soybean groundnut.</p>
+				<p>Bacon ipsum dolor sit amet eiusmod laborum in aliqua. Enim nisi velit shoulder, swine tail in in fugiat esse fatback duis frankfurter nostrud proident. Swine flank nulla turducken minim aliquip beef. Et aute consectetur quis. Drumstick sausage sint beef chicken veniam short loin.</p>
+			</section>
+			
+			<section>
+				<h1>Another heading</h2>
+				<p>Bacon ipsum dolor sit amet eiusmod laborum in aliqua. Enim nisi velit shoulder, swine tail in in fugiat esse fatback duis frankfurter nostrud proident. Swine flank nulla turducken minim aliquip beef. Et aute consectetur quis. Drumstick sausage sint beef chicken veniam short loin.</p>
+			</section>
+			
+			<section>
+				<h1>Another heading</h2>
+				<p>Bacon ipsum dolor sit amet eiusmod laborum in aliqua. Enim nisi velit shoulder, swine tail in in fugiat esse fatback duis frankfurter nostrud proident. Swine flank nulla turducken minim aliquip beef. Et aute consectetur quis. Drumstick sausage sint beef chicken veniam short loin.</p>
+			</section>
+			
+			<section>
+				<h1>Another heading</h2>
+				<p>Bacon ipsum dolor sit amet eiusmod laborum in aliqua. Enim nisi velit shoulder, swine tail in in fugiat esse fatback duis frankfurter nostrud proident. Swine flank nulla turducken minim aliquip beef. Et aute consectetur quis. Drumstick sausage sint beef chicken veniam short loin.</p>
+			</section>
+		</div>
+		<textarea>.sectional { width: 700px; margin: auto;}
+
+.sectional section {
+	
+}</textarea>
+	</section>
+</section>
+
+<section>
+	<header class="slide" id="secret3"><h1>3</h1></header>
+	
+	<section class="slide" data-src="http://www.webplatform.org/"></section>
+	
+	<section class="slide dont-resize darker" id="lightbox">
+		<div class="delayed lightbox picture"></div>
+		<textarea data-subject="#lightbox .lightbox"></textarea>
+	</section>
+	
+	<section class="slide">
+		<pre data-content="HTML"><code class="language-markup">&lt;div class="lightbox">&lt;/div></code></pre>
+		<pre data-content="CSS" class="delayed"><code class="language-css">.lightbox {
+  width: 0;
+  height: 0;
+  background: url(img/secret.jpg) / cover, white;
+  box-shadow: 2px 2px 10px black;
+}
+
+.lightbox.current {
+  width: 70%;
+  height: 80%;
+}</code></pre>
+	</section>
+	
+	<section class="slide" data-import="lightbox"></section>
+	
+	<!--<section class="slide">
+		<hgroup>
+			<h1>Transitions</h1>
+			<h2>Browser support</h2>
+		</hgroup>
+		<div class="browser-support">
+			<dfn title="firefox">4</dfn>
+			<dfn title="opera">10.5</dfn>
+			<dfn title="ie">10</dfn>
+			<dfn title="chrome">1</dfn>
+			<dfn title="safari">3</dfn>
+		</div>
+		<p class="doc"><a href="http://w3.org/TR/css3-transitions">w3.org/TR/css3-transitions</a></p>
+	</section>-->
+	
+	<section class="info slide">
+		<h1>Caveats</h1>
+		<ul>
+			<li>Can’t animate to <code>auto</code> values</li>
+		</ul>
+	</section>
+</section>
+
+<section>
+	<header class="slide" id="secret4"><h1>4</h1></header>
+	
+	<section class="darker slide dont-resize">
+		<div class="lined paper">“The only way to get rid of a temptation is to yield to it. Resist it, and your soul grows sick with longing for the things it has forbidden to itself, with desire for what its monstrous laws have made monstrous and unlawful.”
+		<br />— Oscar Wilde, The Picture of Dorian Gray</div>
+		<textarea data-subject=".lined.paper">font-size: 160%;
+padding: 1em;</textarea>
+	</section>
+	
+	<section class="darker slide dont-resize">
+		<div class="paper">“The only way to get rid of a temptation is to yield to it. Resist it, and your soul grows sick with longing for the things it has forbidden to itself, with desire for what its monstrous laws have made monstrous and unlawful.”
+		<br />— Oscar Wilde, The Picture of Dorian Gray</div>
+		<textarea data-subject=".paper:not(.lined)">line-height: 1.2;
+font-size: 160%;</textarea>
+	</section>
+	
+	<section class="slide dont-resize" id="zebra-code">
+		<pre><code class="language-javascript">/**
+ * Prism: Lightweight, robust, elegant syntax highlighting
+ * MIT license http://www.opensource.org/licenses/mit-license.php/
+ * @author Lea Verou http://lea.verou.me
+ */
+
+(function(){
+
+// Private helper vars
+var lang = /\blang(?:uage)?-(?!\*)(\w+)\b/i;
+
+var _ = self.Prism = {
+	highlightAll: function(async, callback) {
+		var elements = document.querySelectorAll('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code');
+
+		for (var i=0, element; element = elements[i++];) {
+			_.highlightElement(element, async === true, callback);
+		}
+	},
+		
+	highlightElement: function(element, async, callback) {
+		// Find language
+		var language, grammar, parent = element;
+		
+		while (parent &amp;&amp; !lang.test(parent.className)) {
+			parent = parent.parentNode;
+		}
+		
+		if (parent) {
+			language = (parent.className.match(lang) || [,''])[1];
+			grammar = _.languages[language];
+		}
+
+		if (!grammar) {
+			return;
+		}
+		
+		// Set language on the element, if not present
+		element.className = element.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+		
+		// Set language on the parent, for styling
+		parent = element.parentNode;
+		
+		if (/pre/i.test(parent.nodeName)) {
+			parent.className = parent.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language; 
+		}
+
+		var code = element.textContent;
+		
+		if(!code) {
+			return;
+		}
+		
+		code = code.replace(/&amp;/g, '&amp;amp;').replace(/&lt;/g, '&amp;lt;')
+		           .replace(/>/g, '&amp;gt;').replace(/\u00a0/g, ' ');
+		//console.time(code.slice(0,50));
+		
+		var env = {
+			element: element,
+			language: language,
+			grammar: grammar,
+			code: code
+		};
+		
+		_.hooks.run('before-highlight', env);
+		
+		if (async &amp;&amp; self.Worker) {
+			var worker = new Worker(_.filename);	
+			
+			worker.onmessage = function(evt) {
+				env.highlightedCode = Token.stringify(JSON.parse(evt.data));
+				env.element.innerHTML = env.highlightedCode;
+				
+				callback &amp;&amp; callback.call(env.element);
+				//console.timeEnd(code.slice(0,50));
+				_.hooks.run('after-highlight', env);
+			};
+			
+			worker.postMessage(JSON.stringify({
+				language: env.language,
+				code: env.code
+			}));
+		}
+		else {
+			env.highlightedCode = _.highlight(env.code, env.grammar)
+			env.element.innerHTML = env.highlightedCode;
+			
+			callback &amp;&amp; callback.call(element);
+			
+			_.hooks.run('after-highlight', env);
+			//console.timeEnd(code.slice(0,50));
+		}
+	},
+	
+	highlight: function (text, grammar) {
+		return Token.stringify(_.tokenize(text, grammar));
+	},
+	
+	tokenize: function(text, grammar) {
+		var Token = _.Token;
+		
+		var strarr = [text];
+		
+		var rest = grammar.rest;
+		
+		if (rest) {
+			for (var token in rest) {
+				grammar[token] = rest[token];
+			}
+			
+			delete grammar.rest;
+		}
+								
+		tokenloop: for (var token in grammar) {
+			if(!grammar.hasOwnProperty(token) || !grammar[token]) {
+				continue;
+			}
+			
+			var pattern = grammar[token], 
+				inside = pattern.inside,
+				lookbehind = !!pattern.lookbehind || 0;
+			
+			pattern = pattern.pattern || pattern;
+			
+			for (var i=0; i&lt;strarr.length; i++) { // Don’t cache length as it changes during the loop
+				
+				var str = strarr[i];
+				
+				if (strarr.length > text.length) {
+					// Something went terribly wrong, ABORT, ABORT!
+					break tokenloop;
+				}
+				
+				if (str instanceof Token) {
+					continue;
+				}
+				
+				pattern.lastIndex = 0;
+				
+				var match = pattern.exec(str);
+				
+				if (match) {
+					if(lookbehind) {
+						lookbehind = match[1].length;
+					}
+
+					var from = match.index - 1 + lookbehind,
+					    match = match[0].slice(lookbehind),
+					    len = match.length,
+					    to = from + len,
+						before = str.slice(0, from + 1),
+						after = str.slice(to + 1); 
+
+					var args = [i, 1];
+					
+					if (before) {
+						args.push(before);
+					}
+					
+					var wrapped = new Token(token, inside? _.tokenize(match, inside) : match);
+					
+					args.push(wrapped);
+					
+					if (after) {
+						args.push(after);
+					}
+					
+					Array.prototype.splice.apply(strarr, args);
+				}
+			}
+		}
+
+		return strarr;
+	}</code></pre>
+		<textarea data-subject="#zebra-code pre">line-height: 1.5;</textarea>
+	</section>
+	
+	<section class="slide">
+		<hgroup>
+			<h1>background-size</h1>
+			<h2>Browser support</h2>
+		</hgroup>
+		<div class="browser-support">
+			<dfn title="firefox">3.6</dfn>
+			<dfn title="opera">9.5</dfn>
+			<dfn title="ie">9</dfn>
+			<dfn title="chrome">1</dfn>
+			<dfn title="safari">3</dfn>
+		</div>
+		<p class="doc"><a href="http://www.w3.org/TR/css3-background/#the-background-size">w3.org/TR/css3-background/#the-background-size</a></p>
+		<!--<p class="doc"><a href="http://docs.webplatform.org/wiki/css/functions/linear-gradient">docs.webplatform.org/css/functions/linear-gradient</a></p>-->
+	</section>
+	
+	<section class="slide">
+		<hgroup>
+			<h1>Linear gradients</h1>
+			<h2>Browser support</h2>
+		</hgroup>
+		<div class="browser-support">
+			<dfn title="firefox">3.6</dfn>
+			<dfn title="opera">11.10</dfn>
+			<dfn title="ie">10</dfn>
+			<dfn title="chrome">10</dfn>
+			<dfn title="safari">5.1</dfn>
+		</div>
+		<p class="doc"><a href="http://w3.org/TR/css3-images/#linear-gradients">w3.org/TR/css3-images/#linear-gradients</a></p>
+		<!--<p class="doc"><a href="http://docs.webplatform.org/wiki/css/functions/linear-gradient">docs.webplatform.org/css/functions/linear-gradient</a></p>-->
+	</section>
+</section>
+
+<section id="cancelling-transforms">
+	<header class="slide" id="secret5"><h1>5</h1></header>
+	
+	<section class="darker demo slide dont-resize">
+		<a href="img/kitty.jpg" class="diamond show-html" target="_blank">
+			<img src="img/kitty.jpg" />
+		</a>
+	</section>
+	
+	<section class="darker slide dont-resize">
+		<a href="img/kitty.jpg" class="diamond show-html" target="_blank">
+			<img src="img/kitty.jpg" />
+		</a>
+		<textarea>.diamond {
+	outline: 1px solid black;
+}</textarea>
+	</section>
+	
+	<section class="slide" data-src="http://dabblet.com/gist/3038149"></section>
+	
+	<section class="slide" data-src="http://dabblet.com/gist/7892364"></section>
+	
+	<section class="info slide">
+		<h1>Caveats</h1>
+		<ul>
+			<li>Requires extra HTML element</li>
+			<li>Tricky when the image is not square</li>
+			<li>Hacky for some shapes</li>
+		</ul>
+		
+		<h1>Credits</h1>
+		<ul>
+			<li>Hipster cat: flickr.com/photos/swanky-hsiao/2089504883</li>
+		</ul>
+	</section>
+	
+	<!--<section class="slide">
+		<hgroup>
+			<h1>CSS Transforms</h1>
+			<h2>Browser support</h2>
+		</hgroup>
+		<div class="browser-support">
+			<dfn title="firefox">3.5</dfn>
+			<dfn title="opera">10.5</dfn>
+			<dfn title="ie">9</dfn>
+			<dfn title="chrome">1</dfn>
+			<dfn title="safari">3.1</dfn>
+		</div>
+		<p class="doc"><a href="http://w3.org/TR/css3-transforms">w3.org/TR/css3-transforms</a></p>
+	</section>-->
+	
+	<div class="slide" data-src="http://www.html5rocks.com/en/tutorials/masking/adobe/" title="The future: CSS Masking"></div>
+</section>
+
+<section>
+	<header class="slide" id="secret6"><h1>6</h1></header>
+	
+	<section class="slide dont-resize">
+		<img src="img/smile.png" alt=":)"  class="play smile" />
+	</section>
+	
+	<section class="darker circle-demo slide dont-resize">
+		<textarea class="dont-resize">@keyframes clockwise {
+  from { transform: rotate(0deg); }
+  to {   transform: rotate(360deg); }
+}
+
+.smile {
+	
+}</textarea>
+		<img src="img/smile.png" alt=":)"  class="smile show-html" />
+	</section>
+	
+	<!--<section class="darker circle-demo slide dont-resize">
+		<textarea class="dont-resize">@keyframes clockwise {
+  from { transform: rotate(0deg); }
+  to {   transform: rotate(360deg); }
+}
+
+.smile {
+	animation: clockwise 6s linear infinite;
+	transform-origin: 50% 370px;
+}
+
+.smile > img {
+	
+}</textarea>
+		<div class="smile show-html"><img src="img/smile.png" alt=":)" /></div>
+	</section>-->
+		
+	<section class="darker circle-demo slide dont-resize" id="circle-demo">
+			<textarea class="dont-resize">@keyframes clockwise {
+  from { transform:rotate(0deg); }
+  to { transform:rotate(360deg); }
+}
+@keyframes anticlockwise {
+  from { transform:rotate(0deg); }
+  to { transform:rotate(-360deg); }
+}
+
+.smile, .smile > img {
+  animation: clockwise 6s linear infinite;
+}
+
+.smile {
+  animation-name: anticlockwise;
+  transform-origin: 50% 370px;
+}</textarea>
+		<div class="smile show-html"><img src="img/smile.png" alt=":)" /></div>
+	</section>
+		
+	<!--<section class="darker circle-demo slide dont-resize" id="circle-demo-2">
+		<textarea class="dont-resize">@keyframes clockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.smile, .smile > img {
+  animation: clockwise 6s linear infinite;
+}
+
+.smile {
+  animation-direction: reverse;
+  transform-origin: 50% 370px;
+}</textarea>
+		<div class="smile show-html"><img src="img/smile.png" alt=":)" /></div>
+	</section>-->
+	
+	<section class="darker circle-demo slide dont-resize" id="circle-demo-3">
+		<textarea class="dont-resize">@keyframes circle {
+  from { transform: rotate(0deg)
+                    translate(-330px)
+                    rotate(0deg);
+  }
+  to {   transform: rotate(360deg)
+                    translate(-330px) 
+                    rotate(-360deg);
+  }
+}
+
+.smile {
+	top: 330px;
+	animation: circle 6s 
+	           linear infinite;
+}</textarea>
+		<img src="img/smile.png" alt=":)"  class="smile show-html" />
+	</section>
+	
+	<!--<section class="slide" id="animations-support">
+		<hgroup>
+			<h1>Animations</h1>
+			<h2>Browser support</h2>
+		</hgroup>
+		<div class="browser-support">
+			<dfn title="firefox">5</dfn>
+			<dfn title="opera">12</dfn>
+			<dfn title="ie">10</dfn>
+			<dfn title="chrome">1</dfn>
+			<dfn title="safari">4</dfn>
+		</div>
+		<p class="doc"><a href="http://w3.org/TR/css3-animations">w3.org/TR/css3-animations</a></p>
+	</section>-->
+	
+	<!--<section class="slide">
+		<hgroup>
+			<h1><span class="property">animation-direction: </span>reverse</h1>
+			<h2>Browser support</h2>
+		</hgroup>
+		<div class="browser-support">
+			<dfn title="firefox">16</dfn>
+			<dfn title="opera">12.10</dfn>
+			<dfn title="ie">10</dfn>
+			<dfn title="chrome">19</dfn>
+			<dfn title="safari">6</dfn>
+		</div>
+		<p class="doc"><a href="http://w3.org/TR/css3-animations/#animation-direction-property">w3.org/TR/css3-animations/#animation-direction-property</a></p>
+		<p class="doc"><a href="http://docs.webplatform.org/wiki/css/properties/animation-direction">docs.webplatform.org/css/properties/animation-direction</a></p>
+	</section>-->
+	
+	<section class="info slide">
+		<h1>Credits</h1>
+		<ul>
+			<li>Aryeh Gregor</li>
+		</ul>
+	</section>
+</section>
+
+<section>
+	<header class="slide" id="secret7"><h1>7</h1></header>
+	
+	<section class="darker slide">
+		<div class="speech-bubble">“The only way to get rid of a temptation is to yield to it. Resist it, and your soul grows sick with longing for the things it has forbidden to itself, with desire for what its monstrous laws have made monstrous and unlawful.”
+		<br />— Oscar Wilde, The Picture of Dorian Gray</div>
+		<textarea data-subject=".speech-bubble">box-shadow: none;</textarea>
+	</section>
+	
+	<section class="darker slide">
+		<div class="dotted">“The only way to get rid of a temptation is to yield to it. Resist it, and your soul grows sick with longing for the things it has forbidden to itself, with desire for what its monstrous laws have made monstrous and unlawful.”
+		<br />— Oscar Wilde, The Picture of Dorian Gray</div>
+		<textarea data-subject=".dotted">box-shadow: none;</textarea>
+	</section>
+	
+	<section class="slide" id="filters-support">
+		<hgroup>
+			<h1>CSS Filters</h1>
+			<h2>Browser support</h2>
+		</hgroup>
+		<div class="browser-support">
+			<dfn title="firefox" class="partial">3.5</dfn>
+			<dfn title="opera">15</dfn>
+			<dfn title="ie"></dfn>
+			<dfn title="chrome">18</dfn>
+			<dfn title="safari">6</dfn>
+		</div>
+		<p class="doc"><a href="http://www.w3.org/TR/filter-effects/">w3.org/TR/filter-effects</a></p>
+		<!--<p class="doc"><a href="http://docs.webplatform.org/wiki/css/properties/filter">docs.webplatform.org/css/properties/filter</a></p>-->
+	</section>
+	
+	<section class="slide">
+		<h1>For Firefox</h1>
+		<pre class="language-markup"><code>&lt;svg version="1.0" 
+     xmlns="http://www.w3.org/2000/svg">
+	&lt;filter id="drop-shadow">
+	    &lt;feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+	    &lt;feOffset dx="2" dy="3" result="offsetblur"/>
+	    &lt;feFlood flood-color="black"/>
+	    &lt;feComposite in2="offsetblur" operator="in"/>
+	    &lt;feMerge>
+	      &lt;feMergeNode/>
+	      &lt;feMergeNode in="SourceGraphic"/>
+	    &lt;/feMerge>
+	  &lt;/filter>
+&lt;/svg></code></pre>
+		<pre class="language-css"><code>filter: url(drop-shadow.svg#drop-shadow);
+filter: drop-shadow(2px 3px 5px black);</code></pre>
+	</section>
+</section>
+
+<section id="frosted-glass">
+	<header class="slide" id="secret8"><h1>8</h1></header>
+	
+	<section class="slide">
+		<div class="glass-pane">“The only way to get rid of a temptation is to yield to it. Resist it, and your soul grows sick with longing for the things it has forbidden to itself, with desire for what its monstrous laws have made monstrous and unlawful.”
+		<br />— Oscar Wilde, The Picture of Dorian Gray</div>
+		<textarea>.glass-pane {}</textarea>
+	</section>
+	
+	<section class="info slide">
+		<h1>Caveats</h1>
+		<ul>
+			<li>Messy background positioning</li>
+			<li>Even messier when there are other elements behind</li>
+		</ul>
+	</section>
+	
+	<!--<section class="slide" data-src="http://lab.hakim.se/avgrund/"></section>-->
+	
+	<section class="slide" data-import="filters-support"></section>
+	
+	<section class="slide">
+		<h1>For Firefox</h1>
+		<pre class="language-markup"><code>&lt;svg version="1.0" 
+     xmlns="http://www.w3.org/2000/svg">
+	&lt;filter id="blur">
+		&lt;feGaussianBlur stdDeviation="5" />
+	&lt;/filter>
+&lt;/svg></code></pre>
+		<pre class="language-css"><code>filter: url(blur.svg#blur);
+filter: blur(5px);</code></pre>
+	</section>
+</section>
+
+<section>
+	<header class="slide" id="secret9"><h1>9</h1></header>
+	
+	<section class="slide dont-resize old-book">
+		<p>“Every impulse that we strive to strangle broods in the mind and poisons us. The body sins once, and has done with its sin, for action is a mode of purification. Nothing remains then but the recollection of a pleasure, or the luxury of a regret. The only way to get rid of a temptation is to yield to it. Resist it, and your soul grows sick with longing for the things it has forbidden to itself, with desire for what its monstrous laws have made monstrous and unlawful.”
+		<br />— Oscar Wilde, The Picture of Dorian Gray</p>
+		<textarea data-subject=".old-book p">width: 50rem;
+text-align: justify;
+font-size: 100%;</textarea>
+	</section>
+	
+	<section class="slide">
+		<hgroup>
+			<h1>CSS Hyphenation</h1>
+			<h2>Browser support</h2>
+		</hgroup>
+		<div class="browser-support">
+			<dfn title="firefox">6</dfn>
+			<dfn title="opera"></dfn>
+			<dfn title="ie">10</dfn>
+			<dfn title="chrome"></dfn>
+			<dfn title="safari">5.1</dfn>
+		</div>
+		<p class="doc"><a href="http://w3.org/TR/css3-text/#hyphens">w3.org/TR/css3-text/#hyphens</a></p>
+		<!--<p class="doc"><a href="http://docs.webplatform.org/wiki/css/properties/hyphens">docs.webplatform.org/css/properties/hyphens</a></p>-->
+	</section>
+</section>
+
+<section class="image slide" style="background: url(img/troll.jpg) center no-repeat, url(img/chrome-logo.png) white; background-size: auto 80%, auto;"></section>
+
+<section>
+	<header class="slide" id="secret10"><h1>10</h1></header>
+	
+	<section class="darker slide" id="frame-by-frame">
+		<img src="img/frames.png" class="picture" />
+		<p>frames.png (500&times;72)</p>
+		<div class="delayed">
+			<div id="frame-animation"></div>
+			<p>&lt;div id="frame-animation">&lt;/div></p>
+		</div>
+		<textarea>#frame-animation {
+	width: 50px; height: 72px;
+	background: url(img/frames.png) 0 0;
+	border: 1px solid black;
+}</textarea>
+	</section>
+	
+	<section class="info slide">
+		<h1>Credits</h1>
+		<ul>
+			<li>simurai (simurai.com)</li>
+		</ul>
+	</section>
+	
+	<!--<section class="slide">
+		<hgroup>
+			<h1>steps()</h1>
+			<h2>Browser support</h2>
+		</hgroup>
+		<div class="browser-support">
+			<dfn title="firefox">4</dfn>
+			<dfn title="opera">12.5</dfn>
+			<dfn title="ie">10</dfn>
+			<dfn title="chrome">8</dfn>
+			<dfn title="safari">5.1</dfn>
+		</div>
+		<p class="doc"><a href="http://www.w3.org/TR/css3-transitions/#transition-timing-function-property">w3.org/TR/css3-transitions/#transition-timing-function-property</a></p>
+	</section>-->
+	
+	<section class="slide" data-src="http://dabblet.com/gist/7615212"></section>
+	
+	<section class="slide" data-src="http://dabblet.com/gist/7387255"></section>
+	
+	<section class="demo typing slide dont-resize">
+		<code>dabblet.com/gist/1745856</code>
+	</section>
+	
+	<section class="slide">
+		<h1>Typing animation</h1>
+		<pre><code class="language-css">
+@keyframes typing { from { width: 0; } }
+@keyframes caret { 50% { border-color: transparent; } }
+
+code {
+	width: 13.2em; /* fallback, # of chars &times; 0.55 */
+	width: 24ch; /* # of characters */
+	border-right: .1em solid;
+	overflow: hidden;
+	animation: typing 12s steps(24, end),
+	           caret .5s step-end infinite alternate;
+}</code></pre>
+	</section>
+	
+	<section class="slide">
+		<hgroup>
+			<h1>ch unit</h1>
+			<h2>Browser support</h2>
+		</hgroup>
+		<div class="browser-support">
+			<dfn title="firefox">1</dfn>
+			<dfn title="opera">15</dfn>
+			<dfn title="ie">10</dfn>
+			<dfn title="chrome">27</dfn>
+			<dfn title="safari">7</dfn>
+		</div>
+		<p class="doc"><a href="http://www.w3.org/TR/css3-values/#font-relative-lengths">w3.org/TR/css3-values/#font-relative-lengths</a></p>
+		<!--<p class="doc"><a href="http://docs.webplatform.org/wiki/css/data_types/length">docs.webplatform.org/css/data_types/length</a></p>-->
+	</section>
+	
+	<section class="info slide">
+		<h1>Caveats</h1>
+		<ul>
+			<li>Hardcoded character count</li>
+			<li>Doesn’t work with multiple lines</li>
+		</ul>
+	</section>
+</section>
+
+<!--<section class="slide" id="total-support">
+	<hgroup>
+		<h1>Total</h1>
+		<h2>Browser support</h2>
+	</hgroup>
+	<div class="browser-support">
+		<dfn title="firefox">1</dfn>
+		<dfn title="opera"></dfn>
+		<dfn title="ie">10</dfn>
+		<dfn title="chrome"></dfn>
+		<dfn title="safari"></dfn>
+	</div>
+</section>-->
+
+<section class="powerpoint slide" id="making-of">
+	<h1>Making of</h1>
+	
+	<ul>
+		<li>This slide deck was entirely built with open web technologies!</li>
+		<li>Slideshow framework: <a href="http://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a></li>
+		<li>Syntax highlighting with Prism (<a href="http://prismjs.com">prismjs.com</a>)</li>
+	</ul>
+	
+	<p><strong>Slides at <a href="http://lea.verou.me/more-css-secrets">lea.verou.me/more-css-secrets</a></strong></p>
+</section>
+
+<!--<section class="slide" title="WebPlatform.org" data-src="http://webplatform.org"></section>-->
+
+<section class="image slide" style="background-image: url('img/question.jpg');" data-source="http://www.flickr.com/photos/dullhunk/202872717/"></section>
+
+<footer class="slide">
+	<img src="img/mark.svg" />
+	<h1>Thank you!</h1>
+	<ul>
+		<li><a href="mailto:lea@verou.me">lea@verou.me</a></li>
+		<li><a href="http://lea.verou.me">lea.verou.me</a></li>
+		<li><a href="http://twitter.com/leaverou">@leaverou</a></li>
+	</ul>
+	
+	<p><strong>Slides at <a href="http://lea.verou.me/more-css-secrets">lea.verou.me/more-css-secrets</a></strong></p>
+	
+	<!--<div class="sticker delayed">
+		<img src="img/sticker.svg" alt="WebPlatform.org Sticker" />
+		<p>PS: Come get a sticker!</p>
+	</div>-->
+</footer>
+
+<script src="../csss/slideshow.js"></script>
+<script src="prism.js"></script>
+<script src="../csss/plugins/css-edit.js"></script>
+<script src="../csss/plugins/css-snippets.js"></script>
+<script src="../csss/plugins/incrementable.js"></script>
+
+
+<script>var slideshow = new SlideShow();</script>
+
+<script src="talk.js"></script>
+
+<!--<script>var _gaq = [['_setAccount', 'UA-25106441-4'],['_trackPageview']];</script>
+<script src="http://www.google-analytics.com/ga.js" async></script>-->
+<audio src="drumroll.wav" preload muted id="drumroll"></audio>
+</body>
+</html>

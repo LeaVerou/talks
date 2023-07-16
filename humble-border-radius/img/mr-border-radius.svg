@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 360 280">
+<defs>
+	
+<ellipse  id="cheek" opacity="0.15" fill="#FF0086" cx="24" cy="19" rx="24" ry="19" />
+
+<g id="eye">
+	<circle fill="white" cx="42" cy="42" r="42" />
+	
+	<g>
+		<circle fill="black" cx="44" cy="50" r="25" />
+		<circle fill="white" cx="53" cy="40" r="5.2" />
+		<circle fill="white" cx="60" cy="48" r="2.5" />
+		
+		<animateTransform attributeName="transform" type="translate" values="0;5;-5;0" begin="7s;21s;43s;97s;134s;157s;200s" dur="1s" repeatCount="2" />
+		<animateTransform attributeName="transform" type="translate" values="0;-6,-12;-6,-12;0" begin="3s;32s;57s;74s;106s;163s" dur="1s" />
+		<animateTransform attributeName="transform" type="translate" values="0;6,-12;6,-12;0" begin="13s;23s;45s;83s;119s;184s" dur="1s" />
+	</g>
+</g>
+
+<path id="eyebrow" fill="#995E00" d="M97.77,40.174c10.821,0,21.023,1.747,30.036,4.824c-9.435-9.089-23.198-14.824-38.536-14.824
+		c-24.303,0-44.659,14.386-50.075,33.731C50.192,49.808,72.286,40.174,97.77,40.174z" />
+
+<rect id="tooth" x="161" y="210" width="17" height="25" rx="5" fill="white" />
+
+<path id="mouth" d="M180,223.012c-15.051,0-28.797-4.551-39.336-12.049c-0.025,0.569-0.043,1.136-0.043,1.71
+c0,21.478,17.631,38.888,39.379,38.888s39.379-17.41,39.379-38.888c0-0.574-0.018-1.141-0.043-1.71
+C208.797,218.461,195.051,223.012,180,223.012z">
+	<animate attributeName="d" to="M143.332,241.18c-5.332,17.32,14.303,9.268,35.83,9.268c21.042,0,45.671,9.885,35.951-13.138
+			C205.801,215.662,151.918,208.406,143.332,241.18z" 
+	 fill="freeze" data-dur="1ms" id="animate-frustrated"  />
+</path>
+
+<mask id="nose-mask" width="40" height="40">
+	<rect width="100%" height="100%" fill="white" />
+	<ellipse cx="15" cy="14" rx="17" ry="14" />
+</mask>
+
+<ellipse id="nose" cx="15" cy="20.5" rx="15" ry="14.25" fill="#E59200" mask="url(#nose-mask)"/>
+
+</defs>
+
+<use xlink:href="#cheek" x="78" y="167" />
+<use xlink:href="#cheek" x="234" y="167" />
+
+<g>
+	<use xlink:href="#eyebrow" />
+	<use xlink:href="#eyebrow" transform="translate(360) scale(-1,1)" />
+	
+	<animateTransform attributeName="transform" type="translate" values="0;0,-10;0" begin="0s;28s;68s;91s;146s;196s" dur="500ms" repeatCount="2" />
+</g>
+
+<use xlink:href="#eye" x="53" y="86" />
+<use xlink:href="#eye" x="223" y="86" />
+
+
+<use xlink:href="#nose" x="165" y="152" />
+
+<use xlink:href="#mouth" />
+
+<clipPath id="mouth-clippath">
+	<use xlink:href="#mouth" />
+</clipPath>
+
+<g clip-path="url(#mouth-clippath)">
+	<ellipse fill="#e00" cx="180" cy="252" rx="22" ry="14"/>
+	
+	<use xlink:href="#tooth" />
+	<use xlink:href="#tooth" x="19" />	
+</g>
+
+<script>
+window.onhashchange = function() {
+	var id = location.hash.slice(1);
+	
+	if (id) {
+		var animation = document.getElementById('animate-' + id);
+		
+		if (animation) {
+			animation.setAttribute('dur', animation.getAttribute('data-dur'));
+		}
+	}
+};
+
+onhashchange();
+</script>
+
+</svg>

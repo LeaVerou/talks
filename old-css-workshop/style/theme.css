@@ -1,0 +1,244 @@
+@font-face {
+	font-family: Futura;
+	src: local('FuturaStd-Light'), local('Futura Light'), url(Futura.ttf), url(../Beteckna.otf);
+	font-weight: 100;
+}
+
+@font-face {
+	font-family: Futura;
+	src: local('Futura'), url(Futura.ttf), url(../Beteckna.otf);
+}
+
+@font-face {
+	font-family: Consolas;
+	src: local('Consolas'), url(Consolas.ttf);
+}
+
+/**
+ * Variables
+ */
+header.slide > h1,
+header.slide > hgroup,
+a:hover {
+	color: black;
+	text-shadow: 0 .1em #ef0, .05em 0 #ef0, 0 -.1em #ef0, -.05em 0 #ef0, 
+		.1em .05em #ef0, -.05em .1em #ef0, .05em -.1em #ef0, -.1em -.05em #ef0;
+}
+
+/**
+ * Styles
+ */
+ 
+* {
+	margin: 0;
+	padding: 0;
+	font: inherit;
+}
+
+body {
+	font-family: Futura, 'Century Gothic', 'Segoe UI', Beteckna, sans-serif;
+	tab-size: 4;
+}
+/*
+h1, h2, h3, h4, h5, h6 {
+	font-family: Futura, 'Century Gothic', 'Segoe UI', Beteckna, sans-serif;
+}*/
+
+code, pre, script, style {
+	font-family: Consolas, 'Andale Mono', monospace;
+	font-size: 90%;
+}
+
+strong, b {
+	font-weight: bold;
+}
+
+em, i {
+	font-style: italic;
+}
+
+a {
+	color: slategray;
+	text-decoration: none;
+}
+
+ul ul {
+	margin-left: 2.5em;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+	margin-right: .2em;
+	
+	transform: scale(2);
+	transform-origin: bottom right;
+}
+
+textarea {
+	width: 100%;
+	background: rgba(255,255,255,.6);
+	text-shadow: 0 1px white;
+	
+	box-sizing: border-box;
+}
+
+pre, style, script {
+	padding: .3em .5em;
+	margin: 1em -.3em;
+	background: rgba(0,0,0,.4);
+	white-space: pre;
+	border-radius: .3em;
+	box-shadow: 1px 1px 6px rgba(0,0,0,.5) inset;
+}
+
+p + pre {
+	margin-top: .2em;
+}
+
+pre:last-child {
+	margin-bottom: .5em;
+}
+
+input {
+	padding: .2em .5em;
+	border: 0;
+	background: rgba(255,255,255,.8);
+	box-sizing: border-box;
+}
+
+.slide {
+	padding: 0 1em;
+	font-size: 220%;
+	background-color:white;
+	background-image: linear-gradient(#ddd 1px, transparent 1px),
+	  linear-gradient(90deg, #ddd 1px, transparent 1px),
+	  linear-gradient(#eee 1px, transparent 1px),
+	  linear-gradient(90deg, #eee 1px, transparent 1px);
+	background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
+	background-position:-1px -1px
+}
+
+	.slide > h1,
+	.slide > hgroup {
+		margin-bottom: .5em;
+	}
+
+	.slide > h1,
+	.slide > hgroup > h1 {
+		font-size: 280%;
+		line-height: 1.2;
+	}
+	
+	.slide > hgroup > h1 + h2 {
+		margin-top: -.5em;
+		font: italic 120% Baskerville, 'Palatino Linotype', Palatino, Georgia, serif;
+		text-transform: lowercase;
+		text-indent: 1em;
+		color: #304050;
+		text-shadow: 0 2px 1px hsla(0,0%,100%,.3);
+	}
+	
+		#cover.slide > hgroup > h1 + h2 {
+			color: black;
+		}
+	
+	.slide > img:first-child {
+		margin-top: 1em;
+	}
+	
+	.slide > img:only-of-type {
+		max-width: 100%;
+		max-height: 90%;
+		border-radius: 10px;
+		box-shadow: 0 -1px 5px rgba(0,0,0,.5);
+	}
+	
+header.slide {
+	height: 100%;
+	align-items: center;
+}
+
+header.slide:target {
+	display: flex;
+}
+	
+	header.slide > h1,
+	header.slide > hgroup {
+		padding: .6em .8em;
+		margin: 1em auto;
+		font-size: 300%;
+		line-height: 1.2;
+		text-align: center;
+		background: white;
+		border: 1px solid #ddd;
+	}
+	
+		header.slide > hgroup > h1 {
+			position: relative;
+			font-size: 100%;
+		}
+		
+		header.slide > hgroup > h2 {
+			color: yellow;
+			font-size: 60%;
+		}
+	
+.plain.slide {
+	padding: 0 1.5em;
+	background: slategray url('../img/noise.png');
+	color: white;
+	text-shadow: 0 -2px .09em rgba(0,0,0,.5);
+}
+
+	.plain.slide h1 {
+		margin-left: -.3em;
+		white-space: nowrap;
+	}
+
+	.plain.slide a:not(:hover) {
+		color: white;
+	}
+
+	.plain.slide > ul {
+		list-style: none;
+		padding-left: 1em;
+		font-weight: 100;
+	}
+	
+		.plain.slide > ul > li:before {
+			content: '✿ ';
+			display: inline-block;
+			opacity: .5;
+			font-family: sans-serif;
+			text-indent: -.9em;
+		}
+
+/* Syntax highlighting */
+
+.comment {
+	color: slategray;
+}
+
+.keyword {
+	font-weight: bold;
+}
+
+.property, .string {
+	color: hsl(75, 70%, 60%);
+}
+
+.selector, .keyword {
+	color: hsl(350, 40%, 70%);
+}
+
+.regex, .operator, .atrule {
+	color: hsl(40, 90%, 60%);
+}
+
+.number, .boolean {
+	color: hsl(20, 20%, 55%);
+}
+
+.punctuation {
+	opacity: .6;
+}

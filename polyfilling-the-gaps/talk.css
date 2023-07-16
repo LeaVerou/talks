@@ -1,0 +1,150 @@
+#cover {
+	text-align: center;
+	background: url(img/polyfilla.png) no-repeat 50% 150%, url(img/tile.png), url(img/wall.png) #ccc;
+	color: white;
+}
+
+	#cover > h1 {
+		text-align: center;
+		font-size: 300%;
+	}
+	
+#leaverou {
+	background: deeppink;
+	color: white;
+	text-align: center;
+}
+
+	#leaverou > img {
+		display: block;
+		margin: .5em auto 0;
+	}
+	
+	#leaverou > pre {
+		margin: 0;
+		background: transparent;
+		font-size: 130%;
+		font-weight: bold;
+	}
+
+		#leaverou .delayed {
+			color: yellow;
+		}
+		
+
+#definitions {
+	font-family: Baskerville, 'Palatino Linotype', Georgia, serif;
+}
+
+	#definitions > h1 {
+		font-family: inherit;
+		font-weight: normal;
+	}
+	
+	#definitions .phonic {
+		font-family: 'Hiragino Mincho Pro';
+		font-size: 80%;
+	}
+	
+
+.error {
+	color: red;
+	font: 75%/1.2 Monaco, Consolas, monospace;
+	font-weight: bold;
+}
+
+	.error:before {
+		content: '×';
+		display: inline-block;
+		width: 1.2em;
+		margin-right: .3em;
+		text-align: center;
+		color: white;
+		font-size: 80%;
+		vertical-align: .2em;
+		background: red;
+		border-radius: 50%;
+	}
+
+.punchline {
+	margin-top: 1em;
+}
+
+	.punchline > strong {
+		display: block;
+		font-size: 320%;
+		line-height: .7;
+	}
+	
+#people.slide {
+	font-size: 180%;
+	line-height: 1.25;
+}
+
+	#people.slide > ul {
+		display: inline;
+	}
+	
+	#people.slide > ul.delayed.displayed {
+		opacity: .2;
+	}
+			
+		#people.slide > ul > li {
+			display: inline;
+			text-transform: uppercase;
+		}
+		
+		#people.slide > ul > li:nth-child(5n + 2) {
+			color: #0cf;
+		}
+		
+		#people.slide > ul > li:nth-child(5n + 3) {
+			color: deeppink;
+		}
+		
+		#people.slide > ul > li:nth-child(5n + 4) {
+			color: orange;
+		}
+		
+		#people.slide > ul > li:nth-child(5n) {
+			color: #6c0;
+		}
+		
+			#people.slide > ul > li:before {
+				content: none;
+			}
+			
+
+#help {
+	background: -moz-linear-gradient(transparent 50%, black 50%);
+	background: -ms-linear-gradient(transparent 50%, black 50%);
+	background: -o-linear-gradient(transparent 50%, black 50%);
+	background: -webkit-linear-gradient(transparent 50%, black 50%);
+	background: linear-gradient(transparent 50%, black 50%);
+}
+
+#help p {
+	text-align: center;
+	font-size: 200%;
+	line-height: 1.2;
+}
+
+#help p:last-child {
+	position: absolute;
+	right: 0;
+	bottom: 1em;
+	left: 0;
+	color: white;
+	font-family: 'Leckerli One', cursive;
+	font-size: 250%;
+}
+
+@media screen and (max-width:1025px) {
+	.punchline > strong {
+		font-size: 250%;
+	}
+	
+	#people.slide {
+		font-size: 145%;
+	}
+}

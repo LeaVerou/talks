@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>CSS in the 4th dimension</title>
+
+<link href="../csss/slideshow.css" rel="stylesheet" />
+<link href="../csss/reusable.css" rel="stylesheet" />
+<link href="theme.css" rel="stylesheet" />
+<link href="talk.css" rel="stylesheet" />
+<script src="../prefixfree/prefixfree.min.js"></script>
+<script src="vunits.js"></script>
+</head>
+<body>
+
+<header id="intro" class="slide dont-resize" data-source="Background from christianheilmann.com">
+	<hgroup>
+		<h1>CSS in the <strong>4th</strong> dimension</h1>
+		<h2 class="delayed">Not your daddy’s CSS animations</h2>
+	</hgroup>
+	<div class="attribution">
+		<p>By Lea Verou</p>
+		<p class="twitter">
+			<img src="img/twitter.png" alt="Twitter: " />
+			@LeaVerou #hybridconf
+		</p>
+	</div>
+</header>
+
+<section class="inverse slide dont-resize" id="hi">
+	<figure class="delayed">
+		<img src="img/me-pirate.png" alt="Picture of me" />
+		<figcaption>Hi, I’m Lea</figcaption>
+	</figure>
+	<div class="delayed">
+		<p>I make stuff</p>
+		<ul>
+			<li><a href="http://prismjs.com">prismjs.com</a></li>
+			<li><a href="http://css3test.com">css3test.com</a></li>
+			<li><a href="http://dabblet.com">dabblet.com</a></li>
+			<li><a href="http://leaverou.github.com/prefixfree">-prefix-free</a></li>
+		</ul>
+		<small>See more: <a href="http://lea.verou.me/projects">lea.verou.me/projects</a></small>
+	</div>
+	<p class="delayed" style="font-size: 130%; margin-top: 1em;">
+		<strong>CSS<br>WG</strong>
+		Invited Expert
+	</p>
+</section>
+
+<section class="inverse slide" id="fourth-dimension">
+	<h1>The 4th dimension?</h1>
+	<div data-dimension="1st"></div>
+	<div data-dimension="2nd"></div>
+	<br>
+	<div data-dimension="3rd" class="delayed"></div>
+	<div data-dimension="4th" class="delayed"></div>
+</section>
+
+<section>
+	<header class="image slide" style="background-image:url(img/slaves.jpg)">
+		<h1>In the old days…</h1>
+	</header>
+	
+	<section class="demo slide" id="panel-demo">
+		<textarea class="dont-resize" data-raw>.panel {
+	display: none;
+}
+
+button:hover + .panel {
+	display: block;
+}
+
+button {
+	background-color: #800;
+}
+
+button:hover {
+	background-color: red;
+}
+</textarea>
+		<button>I make stuff appear</button>
+		<div class="panel">Content, options or whatever, that appears dynamically.</div>
+	</section>
+	
+	<section class="top-heavy image slide" style="background-image:url(img/frustration.jpg)" data-source="flickr.com/photos/sybrenstuvel/2468506922">
+		<h1>Abruptness = bad UX*</h1>
+	</section>
+	
+	<section class="image slide" style="background-image:url(img/osx-minimize.png)" data-source="flickr.com/photos/nimboo/230024491">
+		<h1>Transitions are not just fluff</h1>
+	</section>
+	
+	<section class="image slide" style="background-image:url(img/delayed.jpg)" data-source="flickr.com/photos/michaelduxbury/5824469025">
+		<h1>*Delays are even worse</h1>
+	</section>
+	
+	<section class="top-heavy image slide" style="background-image:url(img/pissed.jpg)" data-source="flickr.com/photos/luca9200/66916039">
+		<h1>Don’t piss off your users</h1>
+	</section>
+	
+	<section class="slide">
+		<h1>JS to the rescue (?)</h1>
+		<pre data-content="HTML"><code class="language-markup">&lt;script src="jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="jquery.animate-colors-min.js"&gt;&lt;/script&gt;</code></pre>
+		<pre data-content="JS"><code class="language-javascript">$('button').hover(function(){
+    $(this).animate('backgroundColor', 'red');
+}, function() {
+    $(this).animate('backgroundColor', '#800');
+});</code></pre>
+		<div class="sum delayed">
+			<dl>
+				<dt>jQuery, minified</dt>
+				<dd>91KB</dd>
+			</dl>
+			<dl>
+				<dt>jQuery animate colors plugin, minified</dt>
+				<dd>2KB</dd>
+			</dl>
+			<dl class="total">
+				<dt>Total</dt>
+				<dd>93KB</dd>
+			</dl>
+		</div>
+	</section>
+	
+	<section class="bottom-heavy image slide" style="background-image:url(img/disgusted.jpg);" data-source="flickr.com/photos/jsome1/3135343257/">
+		<h1>Yuck!</h1>
+	</section>
+</section>
+
+<section>
+	<header class="image slide" id="css-transitions">
+		<h1>CSS transitions</h1>
+	</header>
+	
+	<section class="demo slide" id="button-demo">
+		<ul class="points">
+			<li><hr /></li>
+			<li>Basic usage</li>
+			<li>Different on :hover</li>
+		</ul>
+		<textarea class="dont-resize" data-raw>#button-demo button {
+  background-color: #800;
+}
+
+#button-demo button:hover {
+  background-color: red;
+}</textarea>
+		<button>Hi, I’m a button</button>
+	</section>
+	
+	<section class="talking slide" id="think-of-the-browsers" data-source="flickr.com/photos/x-ray_delta_one/4264423055/">
+		<h1>Won’t somebody please think of the browsers?!</h1>
+	</section>
+	
+	<section class="top-heavy image slide" style="background-image:url(img/contemptcat.jpg)" data-source="flickr.com/photos/ronancantwell/5053769597/">
+		<h1>Lets get this outta the way</h1>
+	</section>
+	
+	<section class="slide dont-resize" title="Browser Support" id="browser-support">
+		<h1>Transitions</h1>
+		<div class="browser-support">
+			<dfn title="firefox">4</dfn>
+			<dfn title="opera">10.5</dfn>
+			<dfn title="ie">10</dfn>
+			<dfn title="chrome">1</dfn>
+			<dfn title="safari">3</dfn>
+		</div>
+		
+		<h1>Animations</h1>
+		<div class="browser-support">
+			<dfn title="firefox">5</dfn>
+			<dfn title="opera">12</dfn>
+			<dfn title="ie">10</dfn>
+			<dfn title="chrome">1</dfn>
+			<dfn title="safari">4</dfn>
+		</div>
+		<div class="user-percentage delayed">80%</div>
+	</section>
+	
+	<section class="slide dont-resize checkerboard" id="lightbox">
+		<div class="delayed lightbox picture"></div>
+		<textarea data-subject=".lightbox" class="bottom">transition: 1s;</textarea>
+	</section>
+	
+	<section class="slide">
+		<pre data-content="HTML"><code class="language-markup">&lt;div class="lightbox">&lt;/div></code></pre>
+		<pre data-content="CSS"><code class="language-css">.lightbox {
+	width: 0;
+	height: 0;
+	background: url(img/secret.jpg), white;
+	background-size: cover;
+	box-shadow: 2px 2px 10px black;
+}
+
+.lightbox.current {
+	width: 80%;
+	height: 80%;
+}</code></pre>
+	</section>
+	
+	<section class="slide" data-import="lightbox"></section>
+	
+	<section class="slide" data-src="http://webplatform.org"></section>
+	
+	<section class="demo slide dont-resize" id="height-auto">
+		<textarea class="dont-resize" data-raw>div {
+  height: 3em;
+  transition: 1s;
+}
+
+div:hover {
+  height: 24em;
+}</textarea>
+		<div contenteditable>Hover over me to see the rest<br>
+First line<br>
+Second line<br>
+3rd line<br>
+4th line<br>
+5th line<br>
+6th line<br>
+7th line<br>
+8th line<br>
+9th line<br>
+10th line<br></div>
+	</section>
+	
+	<section class="top-heavy image slide" style="background-image:url(img/wtf.jpg)" data-source="flickr.com/photos/mugley/3421060154/">
+		<h1>WTF?!</h1>
+	</section>
+	
+	<section class="slide" id="animatable-values" data-source="flickr.com/photos/fairtomiddling/92646099/">
+		<h1>
+			<span>For a value to be animatable</span>
+			<span>it should be possible to represent</span>
+			<span>all intermediate states</span>
+		</h1>
+	</section>
+	
+	<section class="slide dont-resize">
+		<div class="progression">
+			<span class="property">height:</span> <span class="start-value">0px</span>
+			<span class="interpolated delayed">20px
+			40px
+			60px
+			80px</span>
+			<span class="end-value">100px</span>
+		</div>
+		
+		<div class="progression delayed">
+			<span class="property">color:</span> <span class="start-value">white</span>
+			<span class="interpolated delayed">rgba(204,204,204,.8)
+			rgba(153,153,153,.6)
+			rgba(102,102,102,.4)
+			rgba(51,51,51,.2)</span>
+			<span class="end-value">transparent</span>
+		</div>
+		
+		<div class="progression delayed">
+			<span class="property">transform:</span> <span class="start-value">rotate(0deg)</span>
+			<span class="interpolated delayed">rotate(5deg)
+			rotate(10deg)
+			rotate(15deg)
+			rotate(20deg)</span>
+			<span class="end-value">rotate(25deg)</span>
+		</div>
+		
+		<div class="progression delayed">
+			<span class="property">z-index:</span> <span class="start-value">1</span>
+			<span class="interpolated delayed">2
+			3
+			4
+			5</span>
+			<span class="end-value">6</span>
+		</div>
+	</section>
+	
+	<section class="slide dont-resize">
+		<div class="progression">
+			<span class="property">height:</span> <span class="start-value">auto</span>
+			<span class="interpolated delayed">???</span>
+			<span class="end-value">100px</span>
+		</div>
+		
+		<div class="progression delayed">
+			<span class="property">display:</span> <span class="start-value">none</span>
+			<span class="interpolated delayed">???</span>
+			<span class="end-value">block</span>
+		</div>
+		
+		<div class="progression delayed">
+			<span class="property">background:</span> <span class="start-value">url(foo.jpg)</span>
+			<span class="interpolated delayed">???</span>
+			<span class="end-value">url(bar.jpg)</span>
+		</div>
+	</section>
+	
+	<section class="slide dont-resize">
+		<h1>Gradients?</h1>
+		<div class="progression delayed">
+			<span class="property">background-image:</span> <span class="start-value">linear-gradient(white, black)</span>
+			<span class="interpolated delayed">linear-gradient(white 5%, #101010)
+			linear-gradient(white 10%, #202020)
+			linear-gradient(white 15%, #303030)
+			linear-gradient(white 20%, #404040)
+			linear-gradient(white 25%, #505050)
+			linear-gradient(white 30%, #606060)
+			linear-gradient(white 35%, #707070)</span>
+			<span class="end-value">linear-gradient(white 40%, gray)</span>
+		</div>
+	</section>
+	
+	<section class="top-heavy image slide" style="background-image: url('img/neener-ape.jpg');" data-source="flickr.com/photos/34175433@N07/6676992445/">
+		<p class="handwritten-caption delayed">
+			<img src="img/firefox-logo.png" />
+			<img src="img/ie-logo.png" />
+			<img src="img/opera-logo.png" />
+			<img src="img/chrome-logo.png" />
+			<img src="img/safari-logo.png" />
+		</p>
+	</section>
+	
+	<section class="slide" data-src="http://leaverou.github.com/animatable"></section>
+	
+	<section class="slide" data-import="panel-demo"></section>
+	
+	<section class="slide dont-resize">
+		<h1>In CSS4…</h1>
+		<div class="progression">
+			<span class="property">background-image:</span> <span class="start-value">url(foo.jpg)</span>
+			<span class="interpolated delayed">cross-fade(foo.jpg, bar.jpg, 10%)
+			cross-fade(foo.jpg, bar.jpg, 20%)
+			cross-fade(foo.jpg, bar.jpg, 30%)
+			cross-fade(foo.jpg, bar.jpg, 50%)
+			cross-fade(foo.jpg, bar.jpg, 60%)
+			cross-fade(foo.jpg, bar.jpg, 70%)
+			cross-fade(foo.jpg, bar.jpg, 80%)
+			cross-fade(foo.jpg, bar.jpg, 90%)</span>
+			<span class="end-value">url(bar.jpg)</span>
+		</div>
+	</section>
+	
+	<section class="slide" data-src="http://dabblet.com/gist/2428309"></section>
+	
+	<section class="demo slide dont-resize" id="persisting-state">
+		<ul class="points">
+			<li>Persisting state with transition-delay</li>
+		</ul>
+		<textarea class="dont-resize" data-raw>#persisting-state div {
+  background: orange;
+}
+
+#persisting-state div:active {
+  background: yellowgreen;
+  color: black;
+}</textarea>
+		<div>Hey, the code is on the left!<br>&larr; THERE</div>
+	</section>
+	
+	<section class="slide" data-src="http://dabblet.com/gist/2076449"></section>
+	
+	<section class="horizontal demo slide dont-resize" id="ball-demo">
+		<ul class="points">
+			<li>transition-timing-function</li>
+			<li>keywords</li>
+			<li>cubic-bezier()</li>
+		</ul>
+		<textarea data-raw>.ball {
+  margin-left: 200px;
+  transition: 1s;
+}
+.rail:hover > .ball {
+  margin-left: 800px;
+}</textarea>
+		<div class="rail">
+			<div class="ball"></div>
+			<div class="ball"></div>
+		</div>
+	</section>
+	
+	<section class="slide" data-src="http://cubic-bezier.com" title="cubic-bezier.com"></section>
+	
+	<section class="inverse slide">
+		<h1>Transition limitations</h1>
+		<ul>
+			<li>Can’t be fired on pageload</li>
+			<li>Can’t be repeated</li>
+			<li>Can’t have multiple states (keyframes)</li>
+			<li>Can’t be about different properties</li>
+		</ul>
+	</section>
+</section>
+
+<section>
+	<header class="image slide" id="css-animations">
+		<h1>CSS animations</h1>
+	</header>
+	
+	<section class="horizontal demo slide dont-resize" id="rainbow-demo">
+		<ul class="points">
+			<li>name, duration</li>
+			<li>animation-iteration-count</li>
+			<li>from, to</li>
+			<li>keyframe omission</li>
+		</ul>
+		<textarea data-raw>@keyframes rainbow {
+  0% { background: #c00 }
+  50% { background: orange }
+  100% { background: yellowgreen }
+}
+
+textarea {
+	
+}</textarea>
+	</section>
+
+	<!--<section class="horizontal demo slide dont-resize">
+		<ul class="points">
+			<li>animation-timing-function in keyframes</li>
+		</ul>
+		<textarea data-raw>@keyframes bounce {
+  from { margin-left: 100px; }
+  to, 70%, 85% { margin-left: 800px; }
+  80% { margin-left: 600px; }
+  90% {margin-left: 700px; }
+}
+.ball {
+  margin-left:100px;
+  animation:bounce 4s infinite;
+}</textarea>
+		<div class="rail">
+			<div class="ball"></div>
+		</div>
+	</section>-->
+	
+	<section class="demo slide dont-resize" id="heart-demo">
+		<ul class="points">
+			<li>50%</li>
+			<li><hr /></li>
+			<li>animation-direction</li>
+		</ul>
+		<textarea data-raw>@keyframes pound {
+  from { transform: none; }
+  to { transform: scale(1.2); }
+}
+
+.heart {
+  animation: pound .3s infinite;
+}</textarea>
+		<img src="img/heart.svg" class="heart" />
+	</section>
+	
+	<section class="horizontal demo slide" id="animation-direction">
+			<h1>animation-direction</h1>
+			<div>
+				<p class="animation-progress" style="background-image: linear-gradient(90deg, #cc0, #079 33.3%, #cc0 33.3%, #079 66.6%, #cc0 66.6%, #079)">normal</p>
+				<p class="animation-progress" style="background-image: linear-gradient(90deg, #cc0, #079 33.3%, #cc0 66.6%, #079)">alternate</p>
+				<p class="animation-progress" style="background-image: linear-gradient(-90deg, #cc0, #079 33.3%, #cc0 33.3%, #079 66.6%, #cc0 66.6%, #079)">
+					reverse
+					<span class="bad-support delayed non-dismissable">Worse support :(</span>
+				</p>
+				<p class="animation-progress" style="background-image: linear-gradient(-90deg, #cc0, #079 33.3%, #cc0 66.6%, #079)">
+					alternate-reverse
+					<span class="bad-support delayed">Worse support :(</span>
+				</p>
+			</div>
+			<!--<textarea data-raw>@keyframes color {
+  from { background: #cc0 }
+  to { background: #079 }
+}
+textarea { 
+  animation: color 3s infinite;
+}</textarea>-->
+	</section>
+	
+	<section class="slide">
+		<h1>animation-direction: reverse</h1>
+		<div class="browser-support">
+			<dfn title="firefox">16</dfn>
+			<dfn title="opera">12.10</dfn>
+			<dfn title="ie">10</dfn>
+			<dfn title="chrome">19</dfn>
+			<dfn title="safari">6</dfn>
+		</div>
+		<p class="spec"><a href="http://w3.org/TR/css3-animations/#animation-direction-property">w3.org/TR/css3-animations/#animation-direction-property</a></p>
+		<p class="spec"><a href="http://docs.webplatform.org/wiki/css/properties/animation-direction">docs.webplatform.org/wiki/css/properties/animation-direction</a></p>
+	</section>
+	
+	<section class="slide" data-import="heart-demo"></section>
+	
+	<section class="demo slide dont-resize" id="border-demo">
+		<ul class="points">
+			<li>non-animatable properties are discarded</li>
+		</ul>
+		<textarea data-raw>@keyframes border {
+  from {
+  	border: 0 solid;
+  }
+  to {
+  	border: 100px solid;
+  }
+}
+
+h1 {
+  animation: border 1s infinite alternate;
+}</textarea>
+		<h1>Caveats</h1>
+	</section>
+		
+	<!--<section class="slide" id="animation-fill-mode">
+		<h1>animation-fill-mode</h1>
+		<textarea data-raw>@keyframes color {
+  from { background: #cc0 }
+  to { background: #079 }
+}
+
+textarea { 
+  animation: color 8s 1s;
+  background: gray;
+}</textarea>
+		<div>
+			<p class="animation-progress" style="background-image: linear-gradient(0, transparent 10%, #cc0 10%, #079 90%, transparent 90%, transparent)">none</p>
+			<p class="animation-progress delayed" style="background-image: linear-gradient(0, #cc0 10%, #079 90%, transparent 90%, transparent)">backwards</p>
+			<p class="animation-progress delayed" style="background-image: linear-gradient(0, transparent 10%, #cc0 10%, #079 90%)">forwards</p>
+			<p class="animation-progress delayed" style="background-image: linear-gradient(0, #cc0 10%, #079 90%)">both</p>
+		</div>
+	</section>-->
+	
+	<section class="checkerboard slide">
+		<img src="img/frames.png" class="picture" />
+		<p style="text-align: center;">frames.png (500&times;72)</p>
+		<p id="frame-animation"></p>
+		<textarea class="bottom">#frame-animation {
+	width: 50px; height: 72px;
+	background: url(img/frames.png) 0 0;
+}</textarea>
+	</section>
+	
+	<section class="slide">
+		<iframe data-src="http://dabblet.com/gist/1745856"></iframe>
+	</section>
+	
+	<section class="circular-code slide dont-resize" id="rotate-demo">
+		<ul class="points">
+			<li>animation-play-state</li>
+		</ul>
+		<textarea data-raw class="dont-resize">@keyframes rot {
+  to { transform:rotate(360deg); }
+}
+
+.smile {
+  animation: rot 6s linear infinite;
+  transform-origin: 50% 380px;
+}</textarea>
+		<img src="img/smile.png" alt=":)"  class="smile" />
+	</section>
+	
+	<section class="circular-code circle-demo slide dont-resize" id="circle-demo">
+		<ul class="points">
+			<li>We don’t even need two animations!</li>
+		</ul>
+		<textarea data-raw class="dont-resize">@keyframes clockwise {
+  to { transform:rotate(360deg); }
+}
+@keyframes counterclockwise {
+  to { transform:rotate(-360deg); }
+}
+
+.smile, .smile > img {
+  animation: clockwise 6s linear infinite;
+}
+.smile {
+  animation-name: counterclockwise;
+  transform-origin:50% 380px;
+}
+</textarea>
+		<div class="smile"><img src="img/smile.png" alt=":)" /></div>
+	</section>
+	
+	<section class="circular-code circle-demo slide dont-resize" id="circle-demo-3">
+		<textarea data-raw class="dont-resize">@keyframes circle {
+  from { transform: rotate(0deg)
+                    translate(-330px)
+                    rotate(0deg);
+  }
+  to {   transform: rotate(360deg)
+                    translate(-330px) 
+                    rotate(-360deg);
+  }
+}
+
+.smile {
+	top: 330px;
+	animation: circle 6s 
+	           linear infinite;
+}</textarea>
+		<img src="img/smile.png" alt=":)"  class="smile" />
+	</section>
+	<!--
+	<section class="inverse slide">
+		<h1>Animation limitations</h1>
+		<ul>
+			<li>Can’t grow indefinitely</li>
+			<li>Can’t have fixed speed / variable duration</li>
+			<li>Can’t be synchronized</li>
+		</ul>
+	</section>
+	-->
+		
+	<section class="inverse slide" id="summary">
+		<table>
+			<thead>
+				<tr>
+					<td>transition-*</td>
+					<td>animation-*</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>property</td>
+					<td>name</td>
+				</tr>
+				<tr>
+					<td colspan="2">duration</td>
+				</tr>
+				<tr>
+					<td colspan="2">delay</td>
+				</tr>
+				<tr>
+					<td colspan="2">timing-function</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>iteration-count</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>direction</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>fill-mode</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>play-state</td>
+				</tr>
+				<tr>
+					<td colspan="2">events (upon start, end &amp; every iteration)</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	
+	<section class="inverse slide" id="covered">
+		<table>
+			<thead>
+				<tr>
+					<td>transition-*</td>
+					<td>animation-*</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="fully">property</td>
+					<td class="fully">name</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="fully">duration</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="almost-fully">delay</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="almost-fully">timing-function</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class="almost-fully">iteration-count</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class="fully">direction</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class="not-covered">fill-mode</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class="fully">play-state</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="not-covered">events (upon start, end &amp; every iteration)</td>
+				</tr>
+			</tbody>
+		</table>
+		<dl class="legend">
+			<dt class="fully">Green</dt>
+			<dd>Fully covered</dd>
+			
+			<dt class="almost-fully">Yellow green</dt>
+			<dd>Almost fully covered</dd>
+			
+			<dt class="superficially">Orange</dt>
+			<dd>Superficially covered</dd>
+			
+			<dt class="not-covered">Dark red</dt>
+			<dd>Not covered</dd>
+		</dl>
+	</section>
+</section>
+
+<section>
+	<header class="bottom-heavy image slide" id="reality-check" style="background-image: url(img/coveringeyes.jpg)" data-source="flickr.com/photos/jason-samfield/5871161102/">
+		<h1>Reality check</h1>
+	</header>
+	
+	<section class="slide" id="unprefixed-code">
+		<pre>@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.something-awesome {
+  animation: spin 2s ease-out;
+}
+
+.moar-coolness {
+  transition: 1s transform ease-out;
+}</pre>
+	</section>
+	
+	<section class="slide dont-resize" title="Unprefixed browser Support" id="unprefixed-transitions">
+		<h1><strong>Unprefixed</strong> Transitions</h1>
+		<div class="browser-support">
+			<dfn title="firefox">16</dfn>
+			<dfn title="opera">12.1</dfn>
+			<dfn title="ie">10</dfn>
+			<dfn title="chrome">26</dfn>
+			<dfn title="safari"></dfn>
+		</div>
+		<div class="user-percentage delayed">57%</div>
+		
+	</section>
+	
+	<section class="slide dont-resize" title="Unprefixed browser Support" id="unprefixed-animations">
+		<h1><strong>Unprefixed</strong> Animations</h1>
+		<div class="browser-support">
+			<dfn title="firefox">16</dfn>
+			<dfn title="opera"></dfn>
+			<dfn title="ie">10</dfn>
+			<dfn title="chrome"></dfn>
+			<dfn title="safari"></dfn>
+		</div>
+		<div class="user-percentage delayed">24%</div>
+		
+	</section>
+	
+	<section class="slide" data-import="unprefixed-code"></section>
+	
+	<section class="slide">
+			<pre style="float: left;"><span class="prefixed">@-moz-keyframes spin {
+  from { -moz-transform: rotate(0deg); }
+  to { -moz-transform: rotate(360deg); }
+}
+
+@-o-keyframes spin {
+  from { -o-transform: rotate(0deg); }
+  to { -o-transform: rotate(360deg); }
+}
+
+@-webkit-keyframes spin {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
+</span>
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}</pre>
+<pre style="float:right">
+.something-awesome {
+  <span class="prefixed">-moz-animation: spin 2s ease-out;
+  -o-animation: spin 2s ease-out;
+  -webkit-animation: spin 2s ease-out;</span>
+  animation: spin 2s ease-out;
+}
+
+.moar-coolness {
+  <span class="prefixed">-moz-transition: 1s -moz-transform ease-out;
+  -o-transition: 1s -o-transform ease-out;
+  -webkit-transition: 1s -webkit-transform ease-out;</span>
+  transition: 1s transform ease-out;
+}</pre>
+	</section>
+	
+	<section class="talking slide" style="background:url(img/thescream.jpg) bottom right; background-size:cover" data-source="Edvard Munch - The Scream">
+		<h1>OMG that’s not DRY! HELP!!!11</h1>
+	</section>
+	
+	<section class="slide">
+		<iframe data-src="../prefixfree/index.html" title="leaverou.github.com/prefixfree"></iframe>
+	</section>
+	
+	<section class="inverse slide">
+		<h1>Alternatives:</h1>
+		<ul>
+			<li><a href="http://prefixr.com/">prefixr.com</a></li>
+			<li><a href="http://cssprefixer.appspot.com/">CSSPrefixer (cssprefixer.appspot.com)</a></li>
+			<li><a href="http://lesscss.org/">LESS (lesscss.org)</a></li>
+			<li><a href="http://sass-lang.com/">SASS (sass-lang.com)</a>
+		</ul>
+	</section>
+	
+	<section class="image slide" id="csswg-announcement" style="background-image: url(img/donkey.jpg);">
+		<!--<a href="https://twitter.com/csswg/status/210404244682055680">
+			<img class="delayed" src="img/csswg-hooray.png" alt="CSS WG tweet: CSS WG formally allows browser vendors to unprefix CSS 3 Transforms, Transitions, Animations ^DG" />
+		</a>-->
+	</section>
+</section>
+
+<section class="inverse slide" id="specs">
+	<h1>Resources</h1>
+	
+	<h2>W3C specifications</h2>
+	<ul>
+		<li><a href="http://www.w3.org/TR/css3-transitions/">w3.org/TR/css3-transitions</a></li>
+		<li><a href="http://www.w3.org/TR/css3-animations/">w3.org/TR/css3-animations</a></li>
+	</ul>
+	
+	<h2>Tutorials</h2>
+	<ul>
+		<li><a href="http://docs.webplatform.org/wiki/tutorials/css_transitions">docs.webplatform.org/tutorials/css_transitions</a></li>
+		<li><a href="http://docs.webplatform.org/wiki/tutorials/css_animations">docs.webplatform.org/tutorials/css_animations</a></li>
+	</ul>
+</section>
+
+<section class="image slide" style="background-image: url('img/question.jpg');" data-source="http://www.flickr.com/photos/dullhunk/202872717/"></section>
+
+<footer class="inverse slide" id="thanks">
+	<h1>Thank you!</h1>
+	<ul>
+		<li><a href="mailto:lea@verou.me">lea@verou.me</a></li>
+		<li><a href="http://lea.verou.me">lea.verou.me</a></li>
+		<li><a href="http://twitter.com/leaverou">@leaverou</a></li>
+	</ul>
+	<p>Slides at <a href="http://lea.verou.me/css-4d">lea.verou.me/<strong>css-4d</strong></a></p>
+</footer>
+
+
+<script src="../csss/slideshow.js"></script>
+<script src="prism.js"></script>
+<script src="../csss/plugins/css-edit.js"></script>
+<script src="../csss/plugins/css-snippets.js"></script>
+
+<script src="index.js"></script>
+	
+</body>
+</html>

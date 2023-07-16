@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Turning to the client side</title>
+
+<link href="../csss/slideshow.css" rel="stylesheet" />
+<link href="../csss/reusable.css" rel="stylesheet" />
+
+<link href="theme.css" rel="stylesheet" />
+
+<link href="talk.css" rel="stylesheet" />
+
+<script src="../csss/prefixfree.min.js"></script>
+
+</head>
+<body>
+
+<header id="intro" class="slide">
+	<div>
+		<h1>Turning to the <del>dark</del><ins>client</ins> side</h1>
+		<p class="attribution">By Lea Verou (@LeaVerou)</p>
+	</div>
+	<img class="all-the-things" src="img/all-the-things.png" alt="Clientside all the things!" />
+</header>
+
+<section class="lea slide dont-resize">
+	<h1>
+		<div class="symbol">☠</div>
+		<div class="first-name">Lea</div>
+		<div class="last-name">Verou</div>
+	</h1>
+	<ul class="links">
+		<li><a href="http://css3test.com">The CSS3 Test</a></li>
+		<li><a href="http://dabblet.com">Dabblet</a></li>
+		<li><a href="http://leaverou.github.com/prefixfree">-prefix-free</a></li>
+		<li><a href="http://leaverou.github.com/animatable">Animatable</a></li>
+		<li><a href="http://cubic-bezier.com">cubic-bezier.com</a></li>
+		<li><a href="http://leaverou.github.com/chainvas">Chainvas</a></li>
+		<li><a href="http://tweeplus.com">twee+</a></li>
+		<li><a href="http://css.coloratum.com">css.coloratum.com</a></li>
+		<li><a href="https://github.com/LeaVerou/StronglyTyped">StronglyTyped</a></li>
+		<li><a href="http://leaverou.github.com/Incrementable/">Incrementable</a></li>
+		<li><a href="http://lea.verou.me/polyfills/progress/">HTML5 &lt;progress> polyfill</a></li>
+		<li><a href="http://lea.verou.me/css3patterns/">CSS3 Patterns Gallery</a></li>
+		<li><a href="http://lea.verou.me/demos/cssgradientsplease/">CSS gradients please!</a></li>
+		<li><a href="http://leaverou.github.com/CSSS">CSSS</a></li>
+		<li><a href="http://lea.verou.me/demos/nth.html">Structural pseudo-class selector tester</a></li>
+		<li><a href="http://lea.verou.me/rgba.php/">rgba.php</a></li>
+	</ul>
+</section>
+
+<section class="top-heavy image slide" id="lean-server">
+	<h1 class="caption">Lean server</h1>
+	<div class="delayed server-client">
+		<article>
+			<h1>Server</h1>
+			<ul>
+				<li>Files</li>
+				<li>Data</li>
+				<li>Security</li>
+			</ul>
+		</article>
+		
+		<article>
+			<h1>Client</h1>
+			<ul>
+				<li>Pretty much everything else</li>
+			</ul>
+		</article>
+	</div>
+</section>
+
+<section class="partial image slide" style="background-image: url(img/dabblet.png); background-color: transparent;">
+	
+</section>
+
+<section class="image slide" style="background-image: url('img/washing-machine.jpg');" data-source="http://www.flickr.com/photos/restlessglobetrotter/2305219783/">
+	<hgroup>
+		<h1>Infinite scalability</h1>
+		<h2>Always one machine</h2>
+	</hgroup>
+</section>
+
+<section class="image slide" style="background-image: url(img/low-tip.jpg)" data-source="http://www.flickr.com/photos/joelogon/5316766351/">
+	<hgroup>
+		<h1>Reduced server costs</h1>
+		<h2>…or even none</h2>
+	</hgroup>
+</section>
+
+<section class="bottom-heavy image slide" id="dork" data-source="http://www.flickr.com/photos/bearandyeti/3232661485/">
+	<h1><q>But servers these days are cheap!</q></h1>
+</section>
+
+<section class="image slide" style="background: url('img/progress.gif');">
+	<h1>Responsive UI</h1>
+</section>
+
+<!--<section class="top-heavy image slide" style="background-image: url('img/chainvas-download.png');">
+	<hgroup>
+		<h1>Working with files</h1>
+		<h2>…locally</h2>
+	</hgroup>
+</section>
+
+<section class="slide">
+	<pre><code lang="javascript">fileInput.onchange = function(evt) {
+	var files = evt.target.files;
+	
+	for (var i = 0, file; file = files[i++];) {
+		// Get file info
+		console.log(file.name, file.type, file.size);
+		
+		// …or read file with FileReader
+	}
+}</code></pre>
+</section>-->
+
+<section>
+	<section class="image slide" style="background-image: url(img/bodybuilders.jpg); background-position: top;" data-source="http://www.flickr.com/photos/stegsie/5034638556/">
+		<h1>Taking it to the extreme</h1>
+	</section>
+	
+	<section class="server-client slide">
+		<article>
+			<h1>Server:</h1>
+			<ul>
+				<li>Files</li>
+				<li><del>Data</del></li>
+				<li><del>Security</del></li>
+			</ul>
+		</article>
+		
+		<article>
+			<h1>Client:</h1>
+			<ul>
+				<li>ALL the things</li>
+			</ul>
+		</article>
+	</section>
+	
+	<section class="partial image slide" style="background-image: url('img/cubic-bezier.png'); background-color: white;">
+		<h1>localStorage or IndexedDB</h1>
+	</section>
+
+	<section class="image slide dont-resize" id="urls">
+		<h1 class="caption">URIs as storage</h1>
+		<div class="urls">
+			<pre>http://css.coloratum.com/<span class="hash">#hsl(210,13%,50%)</span></pre>
+			<pre>http://cubic-bezier.com/<span class="hash">#.17,.67,.83,.67</span></pre>
+			<pre>http://tweeplus.com/<span class="hash">#%2B+Post+a+part+of+a+tweet+and+link+to+the+rest+%28up+to+2050+characters%29%0A%2B+We+don%E2%80%99t+store+anything%2C+your+data+doesn%27t+even+touch+our+server%0A%2B+No+registration%2C+no+twitter+connect%2C+no+hassle%0A%2B+Even+if+this+site+disappears+%E2%80%94which+we+don%E2%80%99t+plan+to%E2%80%94%2C+you+can+still+recover+your+tweets+%28just+save+this+page+locally+and+use+it%29%0A%0ARead+more%3A+http%3A%2F%2Fleaverou%2Eme%2F2011%2F08%2Ftweeplus-longer-tweets-no-strings-attached</span></pre>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<pre><code lang="javascript">if (history.pushState) {
+	history.pushState(null, '', '#' + data);
+}
+else {
+	location.hash = data;
+}</code></pre>
+	<ul class="delayed">
+		<li class="negative">NOT too frequently!</li>
+		<li class="checked"><code>onblur</code>, <code>onunload</code>, <code>onmouseout</code></li>
+		<li class="negative"><code>onmousemove</code>, <code>onkeyup</code>, <code>oninput</code></li>
+	</ul>
+	</section>
+	
+	<header class="server-client slide">
+		<article>
+			<h1>Server:</h1>
+			<ul>
+				<li>Files</li>
+				<li>Security</li>
+			</ul>
+		</article>
+		
+		<article>
+			<h1>3rd party APIs</h1>
+			<ul>
+				<li>Data</li>
+				<li>Security</li>
+			</ul>
+		</article>
+		
+		<article>
+			<h1>Client:</h1>
+			<ul>
+				<li>Everything else</li>
+			</ul>
+		</article>
+	</header>
+	
+	<section class="image slide">
+		<hgroup>
+			<h1>Third party APIs</h1>
+			<h2>…from the client, of CORS!</h2>
+		</hgroup>
+	</section>
+	
+	<section class="slide" title="CORS">
+		<pre><code lang="javascript">var xhr = new XMLHttpRequest();
+
+if (!("withCredentials" in xhr)) { // CORS not supported?
+	xhr = window.XDomainRequest?
+			new XDomainRequest(); // IE8-9
+		  : null;
+}
+
+if(xhr) {
+	xhr.open('GET', url);
+}</code></pre>
+	</section>
+	
+	<section class="image slide" style="background-image: url('img/access-control.jpg');" data-source="http://www.flickr.com/photos/rbrwr/474996858/">
+		<hgroup>
+			<h1>APIs need to allow it</h1>
+			<h2>Access-Control-Allow-Origin header</h2>
+		</hgroup>
+	</section>
+	
+	<section class="slide">
+		<h1>CORS-enabled services</h1>
+		<ul class="checklist links">
+			<li>Many Google APIs, including YouTube</li>
+			<li><a href="http://developer.github.com/">Github API</a></li>
+			<li><a href="http://openexchangerates.org/">OpenExchangeRates</a></li>
+			<li><a href="http://daspecster.github.com/ziptastic/">Ziptastic</a></li>
+			<li><a href="http://g.etfv.co/">GetFavicon</a>
+			<li><a href="http://www.w3.org/wiki/CORS_Enabled#Services">and many others</a></li>
+		</ul>
+		<ul class="negatives delayed-children persistent">
+			<li>Come on, Twitter</li>
+			<li>Come on, Flickr</li>
+		</ul>
+	</section>
+	
+	<section class="image slide" style="background-image: url(img/comparison.jpg)" data-source="http://www.flickr.com/photos/dunechaser/1780733762/">
+		<h1>CORS vs JSON-P</h1>
+	</section>
+	
+	<section class="top-heavy image slide" style="background-image: url(img/trust.jpg)" data-source="http://www.flickr.com/photos/pagedooley/1303402061/">
+		<h1>Third-party APIs are trusted</h1>
+	</section>
+	
+	<section class="image slide" style="background-image: url('img/pakistani-bus.jpg');" data-source="http://www.flickr.com/photos/sminor/137042117/">
+		<h1>Easy to add new features</h1>
+	</section>
+	
+	<footer class="image slide" style="background-image: url('img/leech.jpg');" data-source="http://www.flickr.com/photos/oakleyoriginals/3622999458/">
+		<h1>Leeching?</h1>
+	</footer>
+</section>
+
+<section class="image slide" style="background-image: url('img/fat.jpg');" data-source="http://www.flickr.com/photos/-sel-/4083564929/">
+	<h1>¿Can clients get too fat?</h1>
+</section>
+
+<section class="slide" id="all-the-things-sad">
+	<img class="all-the-things" src="img/all-the-things-sad.png" alt="clientside all the things?" />
+</section>
+
+<footer class="slide dont-resize" id="thanks">
+	<h1>Thank you!</h1>
+	<div id="contact">
+		<p class="url">lea<strong>.</strong>verou<strong>.me</strong></p>
+		<p class="email">lea<strong>@</strong>verou<strong>.me</strong></p>
+		<p class="twitter"><strong>@</strong>leaverou</p>
+	</div>
+</footer>
+
+<script src="../csss/slideshow.js"></script>
+<script src="../csss/plugins/code-highlight.js"></script>
+
+<script>var slideshow = new SlideShow();</script>
+	
+</body>
+</html>

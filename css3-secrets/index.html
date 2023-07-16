@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>CSS3 Secrets</title>
+
+	<link href="../csss/slideshow.css" rel="stylesheet" type="text/css" />
+	<link href="theme.css" rel="stylesheet" type="text/css" />
+	<link href="talk.css" rel="stylesheet" type="text/css" />
+	<link href="../css3-workshop-mobilede/style/self-populating.css" rel="stylesheet" />
+</head>
+<body data-duration="50">
+
+<section>
+	<header id="intro" class="demo slide dont-resize">
+		<h1>
+			<strong>CSS3 Secrets</strong>
+			10 things you might not know about CSS3
+		</h1>
+		<p id="warning" class="delayed"><strong>CAUTION:</strong> May contain traces of JavaScript</p>
+		<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
+	</header>
+
+	<section class="secret">
+		<header class="slide dont-resize">
+			<h2>Bouncing transitions</h2>
+		</header>
+
+		<div class="slide">
+			<hgroup>
+				<h3>Bouncing transitions</h3>
+				<h4>On an element's position</h4>
+			</hgroup>
+			<textarea class="css-snippet" data-subject="#ball-rail > div > div" data-step="0.1">transition: 1.5s;</textarea>
+			<div id="ball-rail">
+				<div><div></div></div>
+			</div>
+		</div>
+
+		<div class="slide dont-resize">
+			<iframe src="http://cubic-bezier.com"></iframe>
+		</div>
+
+		<div class="slide dont-resize">
+			<hgroup>
+				<h3>Bouncing transitions</h3>
+				<h4>On an element's size</h4>
+			</hgroup>
+			<textarea class="css-snippet" data-subject="#pulse-button" data-step="0.1">transition: .5s cubic-bezier(0, 1, 1, 2);</textarea>
+			<button type="button" id="pulse-button">Hover over me</button>
+		</div>
+
+		<div class="slide dont-resize" id="color-bounce">
+			<hgroup>
+				<h3>Bouncing transitions</h3>
+				<h4>On background colors</h4>
+			</hgroup>
+			<textarea class="css-snippet" data-step="0.1">transition: background 1.5s
+			cubic-bezier(0, 1, 1, 5);</textarea>
+			<p>
+				<button type="button" style="background:gray"></button>
+				<button type="button" style="background:#d00"></button>
+				<button type="button" style="background:yellow"></button>
+				<button type="button" style="background:hsl(180,50%,50%)"></button>
+				<button type="button" style="background:fuchsia"></button>
+
+				<button type="button" style="background:hsl(100,50%,50%)"></button>
+				<button type="button" style="background:hsl(80,50%,30%)"></button>
+				<button type="button" style="background:hsl(340,100%,30%)"></button>
+				<button type="button" style="background:hsl(200,100%,50%)"></button>
+				<button type="button" style="background:hsl(200,0%,20%)"></button>
+			</p>
+		</div>
+
+		<div class="slide dont-resize">
+			<hgroup>
+				<h3 style="font-size:.9in">cubic-bezier(x, y, z, w>1)</h3>
+				<h4>Browser support</h4>
+			</hgroup>
+			<ul class="browser-support">
+				<li title="Firefox" class="supported">
+					Supported
+				</li>
+				<li title="Internet Explorer" class="supported">
+					Since IE10
+				</li>
+				<li title="Opera" class="supported">
+					Supported
+				</li>
+				<li title="Webkit" class="supported">
+					Supported (in nightly)
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="secret">
+		<header class="slide dont-resize">
+			<h2>Flexible ellipses</h2>
+		</header>
+
+		<div class="slide">
+			<hgroup>
+				<h3>Flexible ellipses</h3>
+				<h4>How?</h4>
+			</hgroup>
+			<textarea class="css-snippet" data-subject="#not-ellipse" data-step="10">
+border-radius: 200px / 150px;</textarea>
+			<p id="not-ellipse" class="demo-box">Hi,<br>I pretend to be an ellipse but I’m a liar. Try changing my aspect ratio to see why ;-)</p>
+		</div>
+
+		<div class="slide">
+			<hgroup>
+				<h3>Flexible ellipses</h3>
+				<h4>With border-radius: 50%</h4>
+			</hgroup>
+			<textarea class="css-snippet" data-subject="#ellipse" data-step="10">
+border-radius: 50%;</textarea>
+			<p id="ellipse" class="demo-box">Hi,<br>I’m a true ellipse. Try changing my aspect ratio: I’ll still be an ellipse ;-)</p>
+		</div>
+
+		<div class="slide dont-resize">
+			<hgroup>
+				<h3>border-radius: 50%</h3>
+				<h4>Browser support</h4>
+			</hgroup>
+			<ul class="browser-support">
+				<li title="Firefox" class="supported">
+					Supported since 4, used to be buggy in 3.6
+				</li>
+				<li title="Internet Explorer" class="supported">
+					Supported since IE9
+				</li>
+				<li title="Opera" class="supported">
+					Supported since 11.50
+				</li>
+				<li title="Webkit" class="supported">
+					Supported, used to be buggy with borders
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="secret">
+		<header class="slide dont-resize">
+			<h2>Multiple outlines</h2>
+		</header>
+
+		<div class="slide">
+			<hgroup>
+				<h3>Make shadows bigger</h3>
+				<h4>with box-shadow spread</h4>
+			</hgroup>
+			<textarea class="css-snippet" data-subject="#spread">box-shadow: 0 0 5px white;</textarea>
+			<p id="spread" class="demo-box">I have a shadow and it will soon have a spread radius. Stop reading this and pay attention if you wanna find out what that is!	</p>
+		</div>
+
+		<div class="slide" id="multiple-outlines">
+			<hgroup>
+				<h3>Multiple outlines</h3>
+				<h4>with multiple box-shadows</h4>
+			</hgroup>
+			<textarea class="css-snippet" data-subject="#multiple-outlines > .demo-box">box-shadow: 0 0 0 5px black,
+0 0 0 10px gold, 0 0 0 20px black,
+0 0 0 35px white;</textarea>
+			<p class="demo-box">Hi,<br>I have multiple shadows with spread radii so they look like outlines.</p>
+		</div>
+
+		<div class="slide dont-resize">
+			<hgroup>
+				<h3>box-shadow spread</h3>
+				<h4>Browser support</h4>
+			</hgroup>
+			<ul class="browser-support">
+				<li title="Firefox" class="supported">
+					Supported
+				</li>
+				<li title="Internet Explorer" class="supported">
+					Supported
+				</li>
+				<li title="Opera" class="supported">
+					Supported
+				</li>
+				<li title="Webkit" class="supported">
+					Supported
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="secret">
+		<header class="slide dont-resize">
+			<h2>Make pointer events pass&nbsp;through</h2>
+		</header>
+
+		<div class="slide dont-resize" id="pointer-events">
+			<h3>pointer-events</h3>
+
+			<div id="trends"><div class="inner">
+			<ul class="trendscontent">
+				<li class="trend-label">Trending topics</li>
+				<li><a href="#">Rihanna &amp; Britney</a></li>
+				<li><a href="#">Rise &amp; Grind</a></li>
+				<li><a href="#">Carl Lewis</a></li>
+				<li><a href="#">Deltas</a></li>
+				<li><a href="#">FCAT</a></li>
+				<li><a href="#">Thanking God</a></li>
+				<li><a href="#">GGG</a></li>
+
+			    <li class="trend-label">Trending topics</li>
+				<li><a href="#">Ouattara</a></li>
+				<li><a href="#">Fujimori</a></li>
+				<li><a href="#">Parliament</a></li>
+				<li><a href="#">Abidjan</a></li>
+				<li><a href="#">EunSiHae</a></li>
+				<li><a href="#">Easter</a></li>
+				<li><a href="#">Charl Schwartzel</a></li>
+
+				<li class="trend-label">Trending topics</li>
+				<li><a href="#">Adam Scott</a></li>
+				<li><a href="#">Queen Rowling</a></li>
+				<li><a href="#">Stan Kroenke</a></li>
+				<li><a href="#">Rory McIlroy</a></li>
+				<li><a href="#">Khloe &amp; Lamar</a></li>
+				<li><a href="#">Robert Sheehan</a></li>
+				<li><a href="#">Dream Concert</a></li>
+
+				<li class="trend-label">Trending topics</li>
+				<li><a href="#">Rihanna &amp; Britney</a></li>
+				<li><a href="#">Rise &amp; Grind</a></li>
+				<li><a href="#">Carl Lewis</a></li>
+				<li><a href="#">Deltas</a></li>
+				<li><a href="#">FCAT</a></li>
+				<li><a href="#">Thanking God</a></li>
+				<li><a href="#">GGG</a></li><li class="trend-label">Trending topics</li>
+				<li><a href="#">Ouattara</a></li>
+				<li><a href="#">Fujimori</a></li>
+				<li><a href="#">Parliament</a></li>
+				<li><a href="#">Abidjan</a></li>
+				<li><a href="#">EunSiHae</a></li>
+				<li><a href="#">Easter</a></li>
+				<li><a href="#">Charl Schwartzel</a></li>
+
+				<li class="trend-label">Trending topics</li>
+				<li><a href="#">Adam Scott</a></li>
+				<li><a href="#">Queen Rowling</a></li>
+				<li><a href="#">Stan Kroenke</a></li>
+				<li><a href="#">Rory McIlroy</a></li>
+				<li><a href="#">Khloe &amp; Lamar</a></li>
+				<li><a href="#">Robert Sheehan</a></li>
+				<li><a href="#">Dream Concert</a></li>
+			</ul>
+			</div>
+			<span class="fade fade-left">&nbsp;</span>
+			<span class="fade fade-right">&nbsp;</span>
+			</div>
+			<textarea class="css-snippet" data-subject=".fade">pointer-events:auto;</textarea>
+		</div>
+
+		<div class="slide" id="custom-selects">
+			<hgroup>
+				<h3>Custom select menus</h3>
+				<h4>With pointer-events</h4>
+			</hgroup>
+			<p><label for="menu">
+			    Select your favorite food:
+			    <select id="menu">
+			        <option>Sushi</option>
+			        <option>Steak</option>
+			        <option>Blue cheese &amp; crackers</option>
+			        <option>Other</option>
+			    </select>
+			</label></p>
+			<style contentEditable disabled>#custom-selects label[for="menu"]:after {
+    content: url(img/menu-button.svg);
+    position: absolute;
+    top: -.5em; right: -.5em; bottom: 0;
+    pointer-events:auto;
+}</style>
+		</div>
+
+		<div class="slide dont-resize">
+			<hgroup>
+				<h3>pointer-events</h3>
+				<h4>Browser support</h4>
+			</hgroup>
+			<ul class="browser-support">
+				<li title="Firefox" class="supported">
+					Supported, since 3.6
+				</li>
+				<li title="Internet Explorer" class="not-supported">
+					Not supported (on HTML elements)
+				</li>
+				<li title="Opera" class="not-supported">
+					Not supported (on HTML elements)
+				</li>
+				<li title="Webkit" class="supported">
+					Supported
+				</li>
+			</ul>
+		</div>
+
+		<div class="slide" id="pointer-events-feature-detection">
+			<hgroup>
+				<h3>pointer-events</h3>
+				<h4>Feature detection</h4>
+			</hgroup>
+			<p>First thought:</p>
+			<pre style="font-size:90%"><code lang="javascript">var dummy = document.createElement('_');
+if(!('pointerEvents' in dummy.style)) {
+	/* Workaround here */
+}</code><span id="big-X" class="delayed non-dismissable"></span></pre>
+		</div>
+
+		<div class="slide">
+			<hgroup>
+				<h3>pointer-events</h3>
+				<h4>Feature detection</h4>
+			</hgroup>
+			<pre><code lang="javascript">var supportsPointerEvents = (function(){
+  var dummy = document.createElement('_');</code>
+  <code lang="javascript" class="delayed non-dismissable">if(!('pointerEvents' in dummy.style)) return false;</code>
+  <code lang="javascript" class="delayed non-dismissable">dummy.style.pointerEvents = 'auto';
+  dummy.style.pointerEvents = 'x';</code>
+  <code lang="javascript" class="delayed non-dismissable">document.body.appendChild(dummy);
+  var r = getComputedStyle(dummy).pointerEvents === 'auto';
+  document.body.removeChild(dummy);
+  return r;</code>
+<code lang="javascript">})();</code></pre>
+			<p class="attribution">Original idea by <a href="https://github.com/ausi/Feature-detection-technique-for-pointer-events">Martin Auswöger</a>
+		</div>
+
+		<div class="slide" id="pointer-events-workaround">
+			<hgroup>
+				<h3>pointer-events: none</h3>
+				<h4>JavaScript workaround</h4>
+			</hgroup>
+			<pre style="font-size:75%"><code lang="javascript">function noPointerEvents (element) {
+	$(element).bind('click mouseover', function (evt) {</code>
+		<code lang="javascript" class="delayed non-dismissable">this.style.display = 'none';</code>
+		<code lang="javascript" class="delayed non-dismissable">var x = evt.pageX, y = evt.pageY,</code>
+		    <code class="delayed non-dismissable">under = document.<strong>elementFromPoint</strong>(x, y);</code>
+		<code lang="javascript" class="delayed non-dismissable">this.style.display = '';</code>
+		<code lang="javascript" class="delayed non-dismissable">evt.stopPropagation();
+		evt.preventDefault();</code>
+		<code lang="javascript" class="delayed non-dismissable">$(under).trigger(evt.type);</code>
+	<code lang="javascript">});
+}</code></pre>
+		</div>
+	</section>
+
+	<section class="secret">
+		<header class="slide dont-resize">
+			<h2>Adjusting tab&nbsp;size</h2>
+		</header>
+
+		<div class="slide">
+			<h3>The <code>tab-size</code> property</h3>
+			<textarea class="css-snippet" data-subject="#tab-size-subject">tab-size: 8;</textarea>
+			<pre id="tab-size-subject"><code lang="javascript"><script>
+				document.write(document.querySelector('#pointer-events-workaround > pre').textContent);
+			</script></code></pre>
+		</div>
+
+		<div class="slide dont-resize">
+			<hgroup>
+				<h3>tab-size</h3>
+				<h4>Browser support</h4>
+			</hgroup>
+			<ul class="browser-support">
+				<li title="Firefox" class="supported">
+					Supported
+				</li>
+				<li title="Internet Explorer" class="not-supported">
+					Not supported
+				</li>
+				<li title="Opera" class="supported">
+					Supported
+				</li>
+				<li title="Webkit" class="not-supported">
+					Not supported
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="secret" id="styling-sibling-count">
+		<header class="slide dont-resize">
+			<h2>Styling based on sibling&nbsp;count</h2>
+		</header>
+
+		<div class="slide dont-resize" title=":nth-child tricks">
+			<textarea class="selector-snippet" data-prefix=".self-populating > b"
+				data-style="opacity:1" data-style-unselected="opacity:.2">:nth-child(3n+1)</textarea>
+
+			<div class="self-populating" data-initial="10" data-single></div>
+		</div>
+
+		<div class="slide dont-resize">
+			<hgroup>
+				<h3 style="font-size:205%">Structural pseudo-classes</h3>
+				<h4>Browser support</h4>
+			</hgroup>
+			<ul class="browser-support">
+				<li title="Firefox" class="supported">
+					Supported
+				</li>
+				<li title="Internet Explorer" class="supported">
+					Supported
+				</li>
+				<li title="Opera" class="supported">
+					Supported
+				</li>
+				<li title="Webkit" class="supported">
+					Supported
+				</li>
+			</ul>
+		</div>
+
+		<div class="slide dont-resize" id="sibling-count">
+			<h3>Practical example</h3>
+			<ul id="palette"></ul>
+			<div class="attribution">
+				<p>Colors taken from the palettes:</p>
+				<ul>
+					<li><a href="http://kuler.adobe.com/#themeID/387108">Agave</a>,</li>
+					<li><a href="http://kuler.adobe.com/#themeID/350205">Sushi Maki</a> and</li>
+					<li><a href="http://kuler.adobe.com/#themeID/15325">Sandy stone beach</a>,</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="slide dont-resize">
+			<p>3 colors or more:</p>
+			<style contentEditable disabled>#palette> li:first-child:nth-last-child(n+3) span,
+#palette> li:first-child:nth-last-child(n+3) ~ li span {
+	display:none;
+}</style>
+			<p>9 colors or more:</p>
+			<style contentEditable disabled>#palette> li:first-child:nth-last-child(n+9) .delete-color,
+#palette> li:first-child:nth-last-child(n+9) ~ li .delete-color
+{
+	float:left;
+}</style>
+<p class="attribution">Credit where it’s due: <a href="http://andr3.net/blog/post/142">André Luís</a> came up with the first version of this idea</p>
+		</div>
+
+	</section>
+
+	<section class="secret">
+		<header class="slide dont-resize">
+			<h2>Custom checkboxes &amp; radio buttons</h2>
+		</header>
+
+		<div class="slide dont-resize" id="custom-form-controls">
+			<p>
+				<input type="checkbox" id="custom-checkbox" />
+				<label for="custom-checkbox">Custom checkbox</label>
+			</p>
+			<style contentEditable disabled>:root input#custom-checkbox {
+	position:absolute;	clip: rect(0,0,0,0);
+}</style>
+			<style contentEditable disabled>:root input#custom-checkbox + label:before {
+	content: '\20E0';
+	padding-right: .3em; color: rgba(255,255,255,.5);
+}</style>
+			<style contentEditable disabled>:root input#custom-checkbox:focus + label:before {
+	color: white;
+}</style>
+			<style contentEditable disabled>:root input#custom-checkbox:checked + label:before {
+	color: red;
+}</style>
+			<p class="attribution">Credit where it’s due: <a href="http://cssn.in/ja/023">Ryan Seddon</a> came up with the first version of this idea</p>
+		</div>
+
+		<div class="slide dont-resize">
+			<iframe src="http://jsfiddle.net/leaverou/CGP87/embedded/result%2Ccss%2Chtml/"></iframe>
+		</div>
+
+		<div class="slide dont-resize">
+			<hgroup>
+				<h3>:checked</h3>
+				<h4>Browser support</h4>
+			</hgroup>
+			<ul class="browser-support">
+				<li title="Firefox" class="supported">
+					Supported
+				</li>
+				<li title="Internet Explorer" class="supported">
+					Supported
+				</li>
+				<li title="Opera" class="supported">
+					Supported
+				</li>
+				<li title="Webkit" class="supported">
+					Supported
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="secret">
+		<header class="slide dont-resize">
+			<h2>More cursors <br>for better UX</h2>
+		</header>
+
+		<div class="slide dont-resize" id="css2-cursors">
+			<h3>Cursors in CSS2</h3>
+			<ul class="cursor-list">
+				<li>crosshair</li>
+				<li>default</li>
+				<li>help</li>
+				<li>move</li>
+				<li>e-resize</li>
+				<li>ne-resize</li>
+				<li>nw-resize</li>
+				<li>n-resize</li>
+				<li>se-resize</li>
+				<li>sw-resize</li>
+				<li>s-resize</li>
+				<li>w-resize</li>
+				<li>text</li>
+				<li>wait</li>
+				<li>progress</li>
+			</ul>
+		</div>
+		<div class="slide dont-resize" id="css3-cursors">
+			<h3>New cursors in CSS3</h3>
+			<ul class="cursor-list">
+				<li>none</li>
+				<li>context-menu</li>
+				<li>cell</li>
+				<li>vertical-text</li>
+				<li>alias</li>
+				<li>copy</li>
+				<li>no-drop</li>
+				<li>not-allowed</li>
+				<li>col-resize</li>
+				<li>row-resize</li>
+				<li>all-scroll</li>
+				<li>zoom-in</li>
+				<li>zoom-out</li>
+			</ul>
+		</div>
+
+		<div class="slide dont-resize">
+			<hgroup>
+				<h3>CSS3 cursors</h3>
+				<h4>Browser support</h4>
+			</hgroup>
+			<ul class="browser-support">
+				<li title="Firefox" class="supported">
+					All supported
+					<br>Issue: no-drop same as not-allowed
+				</li>
+				<li title="Internet Explorer" class="buggy">
+					Doesn't support none, context-menu, cell, alias, copy, zoom-in/out.
+				</li>
+				<li title="Opera" class="buggy">
+					Only supports col-resize, row-resize, all-scroll and zoom-in/out on Windows
+				</li>
+				<li title="Webkit" class="supported">
+					All supported
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="secret">
+		<header class="slide dont-resize">
+			<h2 style="margin-left:-10px; margin-right:-10px">Background patterns with &nbsp;pure&nbsp;CSS</h2>
+		</header>
+
+		<div class="slide">
+			<h3>CSS3 gradients</h3>
+			<textarea class="css-snippet">background: linear-gradient(black, gray)</textarea>
+		</div>
+
+		<div class="slide dont-resize">
+			<hgroup>
+				<h3>CSS gradients</h3>
+				<h4>Browser support</h4>
+			</hgroup>
+			<ul class="browser-support">
+				<li title="Firefox" class="supported">
+					Supported since Firefox 3.6
+				</li>
+				<li title="Internet Explorer" class="supported">
+					Supported since IE10
+				</li>
+				<li title="Opera" class="supported">
+					Supported (Radial gradients in v12)
+				</li>
+				<li title="Webkit" class="supported">
+					Supported (Safari since 5.1)
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="secret">
+		<header class="slide dont-resize">
+			<h2>Background positioning&nbsp;tricks</h2>
+		</header>
+
+		<div class="slide dont-resize" id="background-origin">
+			<div>
+				<textarea class="css-snippet" data-subject="#background-origin > div">padding:40px;
+background: url(img/browser_firefox.png)
+			no-repeat;
+background-position: bottom right;</textarea>
+			</div>
+		</div>
+
+		<div class="slide">
+			<hgroup>
+				<h3>CSS3 background-position</h3>
+				<h4>Browser support</h4>
+			</hgroup>
+			<ul class="browser-support">
+				<li title="Firefox" class="not-supported">
+					Not supported
+				</li>
+				<li title="Internet Explorer" class="supported">
+					Supported
+				</li>
+				<li title="Opera" class="supported">
+					Supported
+				</li>
+				<li title="Webkit" class="not-supported">
+					Not supported
+				</li>
+			</ul>
+		</div>
+
+		<div class="slide">
+			<hgroup>
+				<h3>background-origin</h3>
+				<h4>Browser support</h4>
+			</hgroup>
+			<ul class="browser-support">
+				<li title="Firefox" class="supported">
+					Supported
+				</li>
+				<li title="Internet Explorer" class="supported">
+					Supported
+				</li>
+				<li title="Opera" class="supported">
+					Supported
+				</li>
+				<li title="Webkit" class="supported">
+					Supported
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<div class="slide" id="browser-score-card">
+		<h3>Browser score card</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Browser</th>
+					<th>Supported</th>
+					<th>Buggy</th>
+					<th>No support</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="firefox">
+					<th>Firefox</th>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr class="opera">
+					<th>Opera</th>
+					<td></td>
+					<td></td>
+					<td></td>
+				</td>
+				<tr class="webkit">
+					<th>Webkit</th>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr class="ie">
+					<th>Internet Explorer</th>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="slide">
+		<h3>FAQ</h3>
+
+		<p class="question">Q: Will the slides be published? When?</p>
+		<p>A: They already are:</p>
+		<ul>
+			<li>http://lea.verou.me/css3-secrets</li>
+			<li><a href="http://www.slideshare.net/LeaVerou/css3-secrets-10-things-you-might-not-know-about-css3">http://slidesha.re/oGuhk9</a></li>
+			<li><a href="http://speakerdeck.com/u/leaverou/p/css3-secrets-10-things-you-might-not-know-about-css3">speakerdeck.com/u/leaverou/p/css3-secrets-10-things-you-might-not-know-about-css3</a></li>
+		</ul>
+
+		<p class="question">Q: How did you make the slides?</p>
+		<p>A: With my slideshow framework, CSSS (<a href="https://github.com/LeaVerou/CSSS">github.com/LeaVerou/CSSS</a>)
+	</div>
+
+	<div class="slide">
+		<h3 class="question">Any other questions?</h3>
+		<p class="delayed" style="font-size:700%">Takk!</p>
+	</div>
+
+	<section class="slide" id="leaverou">
+		<img src="img/logo.svg" />
+		<pre>lea<span class="delayed">.</span>verou<span class="delayed">.me</span>
+<span class="delayed">@</span>leaverou
+lea<span class="delayed">@</span>verou<span class="delayed">.me</span></pre>
+</section>
+
+</section>
+
+<script src="../csss/slideshow.js"></script>
+<script src="../csss/plugins/incrementable.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<script src="../csss/plugins/css-edit.js"></script>
+<script src="../csss/plugins/css-snippets.js"></script>
+<script src="../polyfilling-the-gaps/csss-highlight.js"></script>
+<script>var slideshow = new SlideShow();</script>
+<script src="../css3-workshop-mobilede/code/selector-snippet.js"></script>
+
+<script src="talk.js"></script>
+
+<script>var _gaq = [['_setAccount', 'UA-25106441-4'],['_trackPageview']];</script>
+<script src="http://www.google-analytics.com/ga.js" async></script>
+
+</body>
+</html>

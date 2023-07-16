@@ -1,0 +1,25 @@
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="600px" height="200px">
+<defs>
+<filter id="3d" filterUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%">
+	<feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+	<feOffset in="blur" dx="2" dy="2" result="offsetBlur"/>
+	<feSpecularLighting in="blur" surfaceScale="3" specularConstant=".8" 
+	                  specularExponent="20" lighting-color="white"  
+	                  result="specOut">
+		<fePointLight x="-3000" y="-9000" z="20000"/>
+	</feSpecularLighting>
+	<feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
+	<feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
+	<feMerge>
+	<feMergeNode in="offsetBlur"/>
+	<feMergeNode in="litPaint"/>
+	</feMerge>
+</filter>
+</defs>
+<g filter="url(filters.svg#3d)" fill="#bbb">
+<text font-family="'LeckerliOne'">
+	<tspan x="0" y="70" font-size="70">by Lea Verou</tspan>
+	<tspan x="0" y="160" font-size="80">@LeaVerou</tspan>
+</text>
+</g>
+</svg>
