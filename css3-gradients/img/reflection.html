@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CSS Reflections for Firefox - by Lea Verou</title>
+
+<style>
+
+body {
+	background: url('/ft2010/img/darker_wood.jpg');
+}
+
+.reflect {
+	position: relative;
+}
+
+.reflect:after {
+    content:"";
+    position: absolute;
+    top:100%;
+    right:0;
+    bottom:-100%;
+    left:0;
+    z-index: -1;
+    opacity: .4;
+    mask: url('mask.svg#mask');
+    -moz-transform:translateY(10px) scaleY(-1);
+    -ms-transform:translateY(10px) scaleY(-1);
+    -o-transform:translateY(10px) scaleY(-1);
+    -webkit-transform:translateY(10px) scaleY(-1);
+    transform:translateY(10px) scaleY(-1);
+}
+
+div {
+	float: left;
+	margin: 30px;
+}
+
+#foo {
+	width:250px;
+	padding:15px;
+	background: deeppink;
+	color:white;
+	text-shadow:1px 1px 2px rgba(0,0,0,.4);
+	border-radius:10px;
+}
+
+#foo:after {
+	background: -moz-element(#foo);
+	background: -ms-element(#foo);
+	background: -o-element(#foo);
+	background: -webkit-element(#foo);
+	background: element(#foo);
+}
+
+#bar {
+	width: 150px;
+	height: 100px;
+	padding: 50px 20px;
+	border-radius: 50%;
+	background: lime;
+	text-align: center;
+}
+
+#bar:after {
+	background: -moz-element(#bar);
+	background: -ms-element(#bar);
+	background: -o-element(#bar);
+	background: -webkit-element(#bar);
+	background: element(#bar);
+}
+
+</style>
+</head>
+<body>
+	<div id="foo" class="reflect">This is a div with a reflection (FF only at the moment)</div>
+	<div id="bar" class="reflect">This is a different one, to show how flexible this technique is</div>
+</body>
+</html>
+

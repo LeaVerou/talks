@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CSS Reflections for Firefox - jsFiddle demo</title>
+
+<style>
+
+#reflect {
+	position: relative;
+	width:200px;
+	padding:15px;
+	background: deeppink;
+	color:white;
+	text-shadow:1px 1px 2px rgba(0,0,0,.4);
+	border-radius:10px;
+}
+
+#reflect:after {
+    content:"";
+    position: absolute;
+    top:100%;
+    right:0;
+    bottom:-100%;
+    left:0;
+    background: -moz-element(#reflect);
+    mask: url('mask.svg#mask');
+    -moz-transform:scaleY(-1);
+    
+}
+
+</style>
+</head>
+<body>
+	<div id="reflect">This is a div with a reflection (FF only at the moment)</div>
+</body>
+</html>
+

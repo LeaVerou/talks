@@ -1,0 +1,495 @@
+.dont-resize.slide {
+	overflow: hidden;	
+}
+
+.demo.slide {
+	background: #111;
+	background-size: auto;
+	background-position: center;
+}
+
+	.demo.slide	textarea.gradient-snippet {
+		margin: 0 0 1em;
+		
+		-moz-resize:none;
+		resize:none;
+	}
+	
+	.demo.slide.hide-ribbon textarea.gradient-snippet {
+		margin: .8em 0;
+	}
+	
+	.demo.slide:not(.live) .gradient-snippet {
+		display: none;
+	}
+
+	.live.demo.slide h3 {
+	}
+	
+	.live.demo.slide:not(.hide-ribbon) h3:after {
+		content: 'Live demo';
+		position: absolute;
+		top: 0;
+		right: 0;
+		color: white;
+		font-size: 25%;
+		text-align: center;
+		text-transform: uppercase;
+		font-weight: bold;
+		background: hsl(40,100%,50%);
+		background-image: -webkit-linear-gradient(rgba(255, 255, 255, .3), rgba(255, 255, 255, 0));
+		background-image: -moz-linear-gradient(rgba(255, 255, 255, .3), rgba(255, 255, 255, 0));
+		background-image: -o-linear-gradient(rgba(255, 255, 255, .3), rgba(255, 255, 255, 0));
+		line-height: 1.6;
+		min-width: 20em;
+		
+		-moz-box-shadow: 0 10px 5px -5px rgba(0,0,0,.5);
+		-webkit-box-shadow: 0 10px 5px -5px rgba(0,0,0,.5);
+		box-shadow: 0 10px 5px -5px rgba(0,0,0,.5);
+		
+		-moz-transform: rotate(45deg) translate(6em, -2em);
+		-webkit-transform: rotate(45deg) translate(6em, -2em);
+		-o-transform: rotate(45deg) translate(6em, -2em);
+		transform: rotate(45deg) translate(6em, -2em);
+	}
+	
+
+.syntax-description {
+	padding: 1.8em 0 2.2em;
+	white-space: nowrap;
+	font-family: Consolas, 'Andale Mono', 'Courier New', monospace;	
+}
+
+.alternative.syntax-description {
+	padding-top: 3em;
+	margin-top: 1em;
+	position: relative;
+}
+
+.alternative.syntax-description:before {
+	content: 'OR:	';
+	display: block;
+	text-align: center;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	background: rgba(255,255,255,.1);
+	line-height: .3;
+	font-weight: bold;
+	
+	-moz-border-radius:50%;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+}
+
+	.syntax-description code[title],
+	code[title].show-title {
+		position: relative;	
+		display: inline-block;
+		line-height: 1;
+	}
+	
+	.syntax-description code[title]:before,
+	.syntax-description code[title]:after,
+	code[title].show-title:after {
+		font-family: 'Reenie Beanie', "Segoe Print", sans-serif;
+		position: absolute;
+	}
+	
+	.light .syntax-description code[title]:before,
+	.light .syntax-description code[title]:after,
+	.light code[title].show-title:after {
+		color: black;
+	}
+	
+	.syntax-description code[title]:before,
+	.syntax-description code[title] ~ code[title] ~ code[title]:before,
+	.syntax-description code[title] ~ code[title] ~ code[title] ~ code[title] ~ code[title]:before {
+		content: '\2191';
+		top: inherit;
+		bottom: -1.5em;
+		left: 50%;
+		margin-left: -.2em;
+	}
+	
+	.syntax-description code[title]:after,
+	.syntax-description code[title] ~ code[title] ~ code[title]:after,
+	.syntax-description code[title] ~ code[title] ~ code[title] ~ code[title] ~ code[title]:after {
+		content: attr(title);
+		margin-left: -100%;
+		top: inherit;
+		bottom: -2.5em;
+	}
+	
+	.syntax-description code.long[title]:after {
+		margin-left: -65%;
+	}
+	
+	.syntax-description code.short[title]:after {
+		margin-left: -150%;
+	}
+	
+	code[title].show-title:after {
+		content: '←\2009' attr(title);
+		margin-left: .5em;
+	}
+	
+	/* Even code[title]s get to be on top */
+	.syntax-description code[title] ~ code[title]:before,
+	.syntax-description code[title] ~ code[title] ~ code[title] ~ code[title]:before {
+		content: '\2193';
+		bottom: inherit;
+		top: -1.6em;
+	}
+	
+	.syntax-description code[title] ~ code[title]:after,
+	.syntax-description code[title] ~ code[title] ~ code[title] ~ code[title]:after {
+		content: attr(title);
+		bottom: inherit;
+		top: -2.5em;
+	}
+	
+	.syntax-description code[title]:hover,
+	.syntax-description code.highlight,
+	code[title].show-title:hover {
+		background: #fa0;
+		background: -moz-linear-gradient(#fa0,#c60);
+	}
+	
+	.light.slide .syntax-description code[title]:hover,
+	.light.slide .syntax-description code.highlight {
+		background: #f09;
+		background: -moz-linear-gradient(#f09,#e08);
+	}
+	
+	.syntax-description code[title]:hover:before,
+	.syntax-description code[title]:hover:after,
+	.syntax-description code.highlight:before,
+	.syntax-description code.highlight:after,
+	code[title].show-title:hover:after {
+		color: #fa0;
+	}
+	
+	.light.slide .syntax-description code[title]:hover:before,
+	.light.slide .syntax-description code[title]:hover:after,
+	.light.slide .syntax-description code.highlight:before,
+	.light.slide .syntax-description code.highlight:after {
+		color: #f09;
+	}
+	
+	.syntax-description + ul:not([class]) {
+		margin-top: 1em;
+	}
+
+.demo-box {
+	background: white;
+	text-align:center;
+	color: #333;
+	margin: .5em 0;
+	float: left;
+	width: 49%;
+	padding: 3em 1em;
+	text-shadow: 1px 1px 1px white;
+	overflow: hidden;
+	
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	
+	border-radius: .2em;
+	
+	box-shadow: .1em .1em .5em black;
+}
+
+.resizable {
+	-webkit-resize:both;
+	resize:both;
+}
+
+.demo-box:first-of-type {
+	clear: right;
+	margin-right: 2%;
+}
+
+#definition .demo-box,
+#no-intrinsic-dimensions .demo-box {
+	background:-moz-linear-gradient(#eee, #111);
+	background:-ms-linear-gradient(#eee, #111);
+	background:-o-linear-gradient(#eee, #111);
+	background:-webkit-linear-gradient(#eee, #111);
+	background:linear-gradient(#eee, #111);
+}
+
+#definition .demo-box + .demo-box {
+	background:-moz-radial-gradient(#eee, #111);
+	background:-ms-radial-gradient(#eee, #111);
+	background:-o-radial-gradient(#eee, #111);
+	background:-webkit-radial-gradient(#eee, #111);
+	background:radial-gradient(#eee, #111);
+}
+
+#are-gradients-useful figure {
+	width:47%;
+	width:-moz-calc(50% - 20px);
+	width:calc(50% - 20px);
+	max-width:527px;
+}
+
+#are-gradients-useful figure:first-of-type {
+	float:left;
+}
+
+#are-gradients-useful figure + figure {
+	float:right;
+	margin-top:-3px;
+}
+
+	#are-gradients-useful img {
+		padding:0;
+		margin:0;
+		background:0;
+	}
+	
+	#are-gradients-useful figcaption {
+		font-size:200%;
+		padding:0 0 .1em;
+	}
+	
+.slide.corner-tricks {
+	background: url(pics/snake.jpg);
+}
+
+	.corner-tricks > textarea {
+		padding:1em 1.2em;
+		font-size:60%;
+		background:transparent;
+		box-shadow: none;
+		border-radius: 0;
+	}
+
+#history,
+#history ~ .slide {
+	background:url(pics/old-gradient.png) center;
+}
+
+.slide#webkit-gradient,
+.slide#moz-linear-gradient {
+	background: -moz-linear-gradient(black, hsl(180,50%,35%) 60%, #b0a089);
+	background: -webkit-linear-gradient(black, hsl(180,50%,35%) 60%, #b0a089);
+	background: -webkit-gradient(linear, left top, left bottom, from(black), color-stop(.6, hsl(180,50%,35%)), to(#b0a089));
+	background-size: auto;
+}
+
+	.slide#webkit-gradient h3,
+	.slide#moz-linear-gradient h3 {
+		color: #b0a089;
+	}
+	
+#repeating-gradients.slide {
+	background-color: hsl(200,30%,80%);
+	background-size: auto;
+}
+
+#linear-gradients.slide {
+	background: -moz-linear-gradient(silver, black);
+	background: -webkit-linear-gradient(silver, black);
+	background: -o-linear-gradient(silver, black);
+}
+
+#bottom-left-45deg .demo-box {
+	float: none;
+	width: auto;
+	margin-right: 0;
+	
+	-moz-transition:1s background-image;
+	-webkit-transition:1s background-image;
+	-o-transition:1s background-image;
+	transition:1s background-image;
+}
+
+#bottom-left-45deg .demo-box {
+	background:-webkit-linear-gradient(bottom left, white, #fa0);
+	background:-moz-linear-gradient(bottom left, white, #fa0);
+	background:-o-linear-gradient(bottom left, white, #fa0);
+}
+
+#bottom-left-45deg .demo-box + .demo-box {
+	background:-webkit-linear-gradient(45deg, white, #fa0);
+	background:-moz-linear-gradient(45deg, white, #fa0);
+	background:-o-linear-gradient(45deg, white, #fa0);
+}
+
+#bottom-left-45deg .demo-box:hover {
+	background:-webkit-linear-gradient(bottom left, white 50%, #fa0 50%);
+	background:-moz-linear-gradient(bottom left, white 50%, #fa0 50%);
+	background:-o-linear-gradient(bottom left, white 50%, #fa0 50%);
+}
+
+#bottom-left-45deg .demo-box + .demo-box:hover {
+	background:-webkit-linear-gradient(45deg, white 50%, #fa0 50%);
+	background:-moz-linear-gradient(45deg, white 50%, #fa0 50%);
+	background:-o-linear-gradient(45deg, white 50%, #fa0 50%);
+}
+
+#angles {
+}
+
+	#angles h3 {
+		position: relative;
+		z-index: 10;
+		width: 5em;
+		text-align: center;
+		margin: 2in auto 0;
+		padding: 1em .2em;
+		background: #fa0;
+		font-size: 150%;
+		color: white;
+		
+		-webkit-border-radius: 50%;
+		-moz-border-radius: 50%;
+		border-radius: 50%;
+		
+		box-shadow: .1em .1em .4em black;
+	}
+	
+	#angles p {
+		position: absolute;
+		left: 0;
+		right: 0;
+		padding: 1em;
+		font-size: 90%;
+	}
+	
+	#angles p.top {
+		top: 0;
+	}
+	
+	#angles p.left {
+	}
+	
+	#angles p.bottom {
+		bottom: 0;
+		margin-bottom: .35em;
+	}
+	
+	#angles p.right {
+		text-align: right;
+	}
+	
+	#angles p.center-x {
+		text-align:center;
+	}
+	
+	#angles p.center-y {
+		top:50%; 
+		margin-top:-2em;
+	}
+	
+	#angles p.current {
+		z-index: 3;	
+	}
+	
+	#angles div.example {
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 2;
+		opacity: 0;
+		
+		-moz-transition: .7s;
+		-webkit-transition: .7s;
+		-o-transition: .7s;
+		transition: .7s;
+	}
+	
+	#angles p.current ~ div.example {
+		opacity: 1;
+	}
+	
+	#angles p.current.center-y.left ~ div.example {
+		background: -webkit-linear-gradient(left, silver, black);
+		background: -moz-linear-gradient(left, silver, black);
+		background: -o-linear-gradient(left, silver, black);
+	}
+	
+	#angles p.current.bottom.left ~ div.example {
+		background: -webkit-linear-gradient(bottom left, silver, black);
+		background: -moz-linear-gradient(bottom left, silver, black);
+		background: -o-linear-gradient(bottom left, silver, black);
+	}
+	
+	#angles p.current.bottom.center-x ~ div.example {
+		background: -webkit-linear-gradient(bottom, silver, black);
+		background: -moz-linear-gradient(bottom, silver, black);
+		background: -o-linear-gradient(bottom, silver, black);
+	}
+	
+	#angles p.current.bottom.right ~ div.example {
+		background: -webkit-linear-gradient(bottom right, silver, black);
+		background: -moz-linear-gradient(bottom right, silver, black);
+		background: -o-linear-gradient(bottom right, silver, black);
+	}
+	
+	#angles p.current.center-y.right ~ div.example {
+		background: -webkit-linear-gradient(right, silver, black);
+		background: -moz-linear-gradient(right, silver, black);
+		background: -o-linear-gradient(right, silver, black);
+	}
+	
+	#angles p.current.top.right ~ div.example {
+		background: -webkit-linear-gradient(top right, silver, black);
+		background: -moz-linear-gradient(top right, silver, black);
+		background: -o-linear-gradient(top right, silver, black);
+	}
+	
+	#angles p.current.top.center-x ~ div.example {
+		background: -webkit-linear-gradient(top, silver, black);
+		background: -moz-linear-gradient(top, silver, black);
+		background: -o-linear-gradient(top, silver, black);
+	}
+	
+	#angles p.current.top.left ~ div.example {
+		background: -webkit-linear-gradient(top left, silver, black);
+		background: -moz-linear-gradient(top left, silver, black);
+		background: -o-linear-gradient(top left, silver, black);
+	}
+
+#conical-gradients {
+	background:url(pics/conical-gradient.png) center;
+}
+
+#conical-gradients ~ .slide {
+	background:url(pics/conical-stripes.png) center;
+}
+
+	#conical-gradients + .slide img:first-of-type {
+		margin-left: 80px;
+	}
+	
+	#conical-gradients + .slide img {
+		margin-left: 25px;
+	}
+
+.de-emphasize {
+	opacity: .6;
+}
+
+.css-property {
+	color: rgba(255, 255, 255, .6);
+}
+
+.css-function {
+	color: #28bcbc;
+}
+
+.css-color {
+	color: #a0c12c;
+}
+
+.notice {
+	border: 4px solid white;
+	padding: .7em 1em;
+	font-size: 65%;
+	margin-top: 2em;
+}

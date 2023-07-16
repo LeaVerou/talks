@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Mastering CSS3 gradients</title>
+	
+	<link href="../csss/slideshow.css" rel="stylesheet" type="text/css" />
+	<link href="theme.css" rel="stylesheet" type="text/css" />
+	<link href="css3-gradients.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<section>
+	<header id="intro" class="demo slide gradient-snippet" style="background: 
+		radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,0.15) 30%, rgba(255,255,255,0.3) 32%, rgba(255,255,255,0) 33%, transparent),
+		radial-gradient(rgba(255,255,255,0), rgba(255,255,255,.2) 11%, rgba(255,255,255,0.43) 13%, rgba(255,255,255,0) 14%, transparent) 0 120px,
+		radial-gradient(rgba(255,255,255,0), rgba(255,255,255,.2) 11%, rgba(255,255,255,0.4) 13%, rgba(255,255,255,0) 14%, transparent) -90px -90px,
+		radial-gradient(rgba(255,255,255,0), rgba(255,255,255,.2) 11%, rgba(255,255,255,0.4) 13%, rgba(255,255,255,0) 14%, transparent) 130px 370px,
+		radial-gradient(rgba(255,255,255,0), rgba(255,255,255,.1) 11%, rgba(255,255,255,0.2) 13%, rgba(255,255,255,0) 14%, transparent) 100px -60px,
+		radial-gradient(rgba(255,255,255,0) 15%, rgba(255,255,255,.1) 22%, rgba(255,255,255,0) 30%, transparent),
+		radial-gradient(rgba(255,255,255,0) 15%, rgba(255,255,255,.1) 22%, rgba(255,255,255,0) 30%, transparent) 500px 350px,
+		linear-gradient(left bottom, #343702, #187546 15%, #006782 30%, #760ea1 45%, #83096e 55%, #840b2a 70%, #b13e12 85%, #e27412);
+		background-size:620px 620px, 900px 900px, 600px 600px, 600px 600px, 730px 730px, 970px 970px, 700px 700px, 100% 100%;
+	background-color:#840b2a;">
+		<h1>
+			<strong>CSS3 gradients</strong>
+			From #000 to #fff in 45 minutes
+		</h1>
+		<p class="notice"><strong>Note:</strong> This was made for conference talks displayed locally in Firefox 4, so it naturally looks/works better there. Use the arrow keys to navigate. Screenshots of how it was used <a href="http://www.slideshare.net/LeaVerou/mastering-css3-gradients" target="_blank">here</a>.</p>
+		<p class="attribution">By Lea Verou (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
+	</header>
+	
+	<section class="slide" id="definition">
+		<h3>What’s a gradient?</h3>
+		<p>Shapes of incrementally closer colors next to each other, creating the illusion of a smooth transition</p>
+		<div class="demo-box">
+			Linear gradients: <br />parallel lines
+		</div>
+		<div class="demo-box">
+			Radial gradients: <br />concentric ellipses
+		</div>
+	</section>
+	
+	<section class="slide dont-resize" id="are-gradients-useful">
+		<h3>Useful?</h3>
+		<figure>
+			<img src="pics/microsoft-1997.gif" alt="microsoft.com screenshot from 1997" />
+			<figcaption>1997</figcaption>
+		</figure>
+		<figure>
+			<img src="pics/apple-2011.png" alt="current apple.com screenshot" />
+			<figcaption>2011</figcaption>
+		</figure>
+	</section>
+	
+	<section class="slide">
+		<hgroup>
+			<h3>Gradients in CSS</h3>
+			<h4>with bitmap bg images</h4>
+		</hgroup>
+		<pre>background: url(gradient.png) repeat-x;</pre>
+		<dl class="crash-test">
+			<dt>Cross-browser compatibility</dt>
+			<dd class="good">Excellent</dd>
+			
+			<dt>Speed</dt>
+			<dd class="bad">Large filesize</dd>
+			<dd class="bad">Extra HTTP request</dd>
+			
+			<dt>Ease of changes</dt>
+			<dd class="bad">Tedious as hell</dd>
+		</dl>
+	</section>
+	
+	<!--<section class="slide">
+		<hgroup>
+			<h3>Gradients in CSS</h3>
+			<h4>SVG background images</h4>
+		</hgroup>
+		<pre>background: url(gradient.svgz);</pre>
+		<dl class="crash-test">
+			<dt>Cross-browser compatibility</dt>
+			<dd class="medium">Medium</dd>
+			
+			<dt>Speed</dt>
+			<dd class="good">Small filesize</dd>
+			<dd class="bad">Extra HTTP request</dd>
+			
+			<dt>Ease of changes</dt>
+			<dd class="good">Easy</dd>
+			
+			<dt>Quality</dt>
+			<dd class="good">Excellent</dd>
+			
+			<dt>Providing fallbacks</dt>
+			<dd class="bad">Hard</dd>
+		</dl>
+	</section>-->
+	
+	<section class="slide">
+		<hgroup>
+			<h3>Gradients in CSS</h3>
+			<h4>Native CSS gradients</h4>
+		</hgroup>
+		<pre>background: linear-gradient(#000, #fff);</pre>
+		<dl class="crash-test">
+			<dt>Cross-browser compatibility</dt>
+			<dd class="bad">Limited</dd>
+			
+			<dt>Speed</dt>
+			<dd class="good">Small filesize</dd>
+			<dd class="good">Νo extra HTTP request</dd>
+			
+			<dt>Ease of changes</dt>
+			<dd class="good">A snap!</dd>
+		</dl>
+	</section>
+	
+	<section class="slide" id="no-intrinsic-dimensions">
+		<h3>Native CSS gradients</h3>
+		<p><strong>Images</strong> with no intrinsic dimensions</p>
+		<div class="resizable demo-box">Resize me</div>
+	</section>
+	
+	<section class="slide">
+		<h3>Native CSS gradients</h3>
+		<ul>
+			<li>Defined in the <a href="http://w3.org/TR/css3-images/#gradients" class="showhref">Image Values module</a></li>
+			<li>Used in every place you can use an image*
+				<ul>
+					<li><code class="show-title" title="Best support">background-image</code></li>
+					<li><code>border-image</code></li>
+					<li><code>list-style-image</code></li>
+					<li><code>cursor</code></li>
+					<li><code>content</code></li>
+					<li>And more&hellip;</li>
+				</ul>
+			</li>
+		</ul>
+		<p class="delayed">* in theory</p>
+	</section>
+</section>
+
+<section>
+	<header class="slide" id="linear-gradients">
+		<h2>Linear gradients</h2>
+	</header>
+	
+	<section class="live demo slide dont-resize">
+		<h3>Basic syntax</h3>
+		
+		<textarea class="gradient-snippet">background: linear-gradient(silver, black);</textarea>
+	</section>
+	
+	<section class="slide dont-resize" id="angles">
+		<h3>Linear gradient angles</h3>
+		<p class="delayed left center-y">left = 0deg</p>
+		<p class="delayed left bottom">bottom left</p>
+		<p class="delayed center-x bottom">bottom = 90deg</p>
+		<p class="delayed right bottom">bottom right</p>
+		<p class="delayed right center-y">right = 180deg</p>
+		<p class="delayed right top">top right</p>
+		<p class="delayed center-x top">top = 270deg</p>
+		<p class="delayed left top">top left</p>
+		<div class="example"> </div>
+	</section>
+	
+	<section class="slide" id="bottom-left-45deg">
+		<h3>bottom left ≠ 45deg</h3>
+		<div class="resizable demo-box">
+			bottom left
+		</div>
+		<div class="resizable demo-box">
+			45deg
+		</div>
+	</section>
+	
+	<section class="live demo slide dont-resize">
+		<h3>Color-stop me now</h3>
+		
+		<textarea class="gradient-snippet">background: linear-gradient(silver, deeppink, black);</textarea>
+	</section>
+	
+	<section class="live demo slide dont-resize">
+		<hgroup>
+			<h3>Diagonal stripes</h3>
+			<h4>with linear gradients</h4>
+		</hgroup>
+		
+		<textarea class="gradient-snippet">background-image: linear-gradient(-45deg,
+	#222 25%, #444 25%, #444 50%,
+	#222 50%, #222 75%, #444 75%, #444);
+background-size:120px 120px;</textarea>
+	</section>
+	
+	<section class="live demo slide dont-resize">
+		<hgroup>
+			<h3>Diagonal stripes</h3>
+			<h4>with repeating gradients</h4>
+		</hgroup>
+		
+		<textarea class="gradient-snippet">background:
+    repeating-linear-gradient(-45deg,
+	    #222, #222 40px, #444 40px, #444 80px);</textarea>
+	</section>
+	
+	<section class="slide">
+		<hgroup>
+			<h3>Diagonal stripes</h3>
+			<h4>Comparison</h4>
+		</hgroup>
+		
+		<h5>With simple linear gradients</h5>
+		<dl class="crash-test">
+			<dt>-webkit-gradient() equivalent?</dt>
+			<dd class="good">Easy</dd>
+			
+			<dt>Conciseness</dt>
+			<dd class="bad">Verbose</dd>
+			
+			<dt>Ease of changes</dt>
+			<dd class="bad">Very hard for angle</dd>
+			<dd class="bad">4 edits for colors</dd>
+			<dd class="good">2 edits for size</dd>
+		</dl>
+		
+		<h5>With repeating gradients</h5>
+		<dl class="crash-test">
+			<dt>-webkit-gradient() equivalent?</dt>
+			<dd class="bad">None</dd>
+			
+			<dt>Conciseness</dt>
+			<dd class="good">Concise</dd>
+			
+			<dt>Ease of changes</dt>
+			<dd class="good">1 edit for angle</dd>
+			<dd class="good">2 edits for colors</dd>
+			<dd class="bad">2n-1 edits for size</dd>
+		</dl>
+	</section>
+	
+	<section class="live demo slide dont-resize">
+		<h3>Easier color changes</h3>
+		
+		<textarea rows="2" class="gradient-snippet">background-color:#256;
+background-image: repeating-linear-gradient(-45deg,
+ rgba(255,255,255,.3), rgba(255,255,255,.3) 40px,
+ transparent 40px, transparent 80px);</textarea>
+	</section>
+		
+	<section class="slide">
+		<h3>More CSS3 patterns</h3>
+		<div class="demo">
+			<img src="pics/csspatterns.png"
+			alt="Screenshot from my CSS3 patterns gallery" />
+		</div>
+		<p><a href="http://lea.verou.me/css3patterns">http://lea.verou.me/css3patterns</a></p>
+	</section>
+		
+	<section class="slide">
+		<hgroup>
+			<h3>CSS3 patterns</h3>
+			<h4>To use or not to use?</h4>
+		</hgroup>
+		<ul class="crash-test">
+			<li class="good">Scalable</li>
+			<li class="bad">Bad aliasing (sometimes)</li>
+			
+			<li class="good">Easily editable from the CSS file</li>
+			<li class="bad">Verbose CSS code</li>
+			
+			<li class="bad">Limited browser support</li>
+			<li class="good">Easy fallbacks</li>
+			
+			<li class="medium">SVG might be more philosophically suitable</li>
+			
+			<li class="bad">Limited possibilities</li>
+			<li class="good">Less HTTP requests</li>
+			
+			<li class="good">Can be interpolated</li>
+			<li class="bad">No interpolation support yet</li>
+		</ul>
+	</section>
+	
+	<section class="live demo slide dont-resize corner-tricks" id="corner-tricks-1">
+		<hgroup>
+			<h3>Corner tricks</h3>
+			<h4>Beveled corners</h4>
+		</hgroup>
+		
+		<textarea rows="2" class="gradient-snippet" data-subject="#corner-tricks-1 > textarea">background: black;
+background:
+    linear-gradient( 45deg, transparent 15px, black 0) bottom left,
+    linear-gradient(135deg, transparent 15px, black 0) bottom right,
+    linear-gradient(225deg, transparent 15px, black 0) top right,
+    linear-gradient(315deg, transparent 15px, black 0) top left;
+background-size: 50%;
+background-repeat: no-repeat;</textarea>
+	</section>
+	
+	<section class="live demo slide dont-resize" id="beware-of-transparent">
+		<h3>Beware of transparent</h3>
+		<textarea rows="2" class="gradient-snippet">background: 
+	linear-gradient(white, transparent 40%),
+	url('pics/snake.jpg'), white;</textarea>
+		<p class="delayed" style="color:black">transparent = rgba(0,0,0,0) = transparent <strong>black</strong></p>
+	</section>
+</section>
+<section>
+	<header class="demo slide">
+		<h2>Radial gradients</h2>
+		<textarea class="gradient-snippet">background-image: radial-gradient(50% 100%, farthest-side, silver, black);</textarea>
+	</header>
+	
+	<section class="demo slide">
+		<h3>Basic syntax</h3>
+		<p class="syntax-description">
+			radial-gradient(<code title="Center position">25% 30%</code>,
+			<code title="Shape and/or size">farthest-side</code>,
+			<code title="Color stop">gray</code>,
+			<code title="Color stop">black</code>)
+		</p>
+		
+		<textarea class="gradient-snippet">background-image: radial-gradient(25% 30%, silver, black);</textarea>
+	</section>
+	
+	<section class="live demo slide dont-resize">
+		<h3>Basic syntax</h3>
+		
+		<textarea class="gradient-snippet">background-image: 
+	radial-gradient(25% 30%, silver, black);</textarea>
+	</section>
+	
+	<section class="slide">
+		<h3>Shape and size</h3>
+		<ul>
+			<li>Shape can be <code>circle</code> or <code class="show-title" title="Default">ellipse</code></li>
+			<li>Size:
+				<ul>
+					<li><code>closest-side</code> or <code>contain</code></li>
+					<li><code>closest-corner</code></li>
+					<li><code>farthest-side</code></li>
+					<li><code>farthest-corner</code> or <code class="show-title" title="Default">cover</code></li>
+				</ul>
+			<li>Or, explicitly specify ellipse width and height</li>
+		</ul>
+	</section>
+	
+	<section class="live demo slide dont-resize corner-tricks" id="corner-tricks-2">
+		<hgroup>
+			<h3>Corner tricks</h3>
+			<h4>Negative border-radius</h4>
+		</hgroup>
+		
+		<textarea rows="2" class="gradient-snippet" data-subject="#corner-tricks-2 > textarea">background: black;
+background:
+    radial-gradient(   0 100%, circle, transparent 24px, black 25px) bottom left,
+    radial-gradient(100% 100%, circle, transparent 24px, black 25px) bottom right,
+    radial-gradient(100%    0, circle, transparent 24px, black 25px) top right,
+    radial-gradient(   0    0, circle, transparent 24px, black 25px) top left;
+background-size: 50%;
+background-repeat: no-repeat;</textarea>
+	</section>
+</section>
+<section>
+	<header class="slide" id="history">
+		<h2>A bit of history</h2>
+	</header>
+	
+	<section class="slide">
+		<hgroup>
+			<h3>-webkit-gradient()</h3>
+			<h4>Early 2008</h4>
+		</hgroup>
+		<div class="demo">
+			<img src="pics/-webkit-gradient-intro.png"
+			alt="Screenshot from the blog post announcing the introduction of -webkit-gradient()" />
+		</div>
+	</section>
+	
+	<section class="slide dont-resize" id="webkit-gradient">
+		<h3>-webkit-gradient()</h3>
+		<pre>background: -webkit-gradient(
+	linear,
+	0 0, left bottom,
+	from(black),
+	color-stop(.6, hsl(180,50%,35%)),
+	to(#b0a089)
+);</pre>
+	</section>
+	
+	<section class="slide">
+		<h3>-webkit-gradient()</h3>
+		<ul>
+			<li class="downside">Verbose and unintuitive</li>
+			<li class="downside">No implicit color stop positions</li>
+			<li class="downside">Percentages only for color stop positions</li>
+			<li class="downside">No fixed angles in linear gradients</li>
+			<li class="downside">Fixed gradient size in radial gradients</li>
+			<li class="downside">No elliptical gradients</li>
+		</ul>
+	</section>
+	
+	<section class="picture slide">
+		<h3>-webkit-gradient()</h3>
+		<a href="http://icanhascheezburger.com/2009/01/22/funny-pictures-well-dis-iznt-right/">
+			<img src="pics/not-right-lolcat.jpg" />
+		</a>
+	</section>
+	
+	<section class="slide">
+		<hgroup>
+			<h3>Mozilla implements <br />CSS gradients</h3>
+			<h4>Early August 2009</h4>
+		</hgroup>
+		<ul>
+			<li class="delayed"><a href="http://hacks.mozilla.org/2009/08/firefox-36a1-for-developers/">First version was Firefox 3.6 Alpha 1</a></li>
+			<li class="delayed">Very similar to -webkit-gradient</li>
+			<li class="delayed">Got the CSS WG talking</li>
+			<li class="delayed">Consensus to add gradients to Image Values shortly after</li>
+		</ul>
+	</section>
+	
+	<section class="slide">
+		<hgroup>
+			<h3>A new syntax</h3>
+			<h4>August 2009</h4>
+		</hgroup>
+		<p>Tab Atkins Jr drafts a <a href="http://www.xanthir.com/blog/b41G0">proposal</a> with a much better syntax</p>
+		<div class="demo">
+			<img src="pics/tabs-proposal.png"
+			alt="Screenshot from the Tab's original proposal" />
+		</div>
+	</section>
+	
+	<section class="slide">
+		<hgroup>
+			<h3>A new syntax</h3>
+			<h4>November 2009</h4>
+		</hgroup>
+		<ul>
+			<li>A syntax very similar to Tab’s proposal was agreed upon</li>
+			<li>Mozilla <a href="http://hacks.mozilla.org/2009/11/api-change-media-load-css-gradient/">drops their syntax</a> and <a href="http://weblogs.mozillazine.org/roc/archives/2009/11/css_gradient_sy.html">ships the new one</a></li> 
+		</ul>
+		<div class="demo">
+			<img src="pics/moz-changes-syntax.png"
+			alt="Screenshot from the MozHacks post" />
+		</div>
+	</section>
+	
+	<section class="live demo slide hide-ribbon" id="moz-linear-gradient">
+		<h3>How better?</h3>
+		<textarea class="gradient-snippet">background:
+linear-gradient(black, hsl(180,50%,35%) 60%, #b0a089);</textarea>
+		<p style="text-align:center">—vs—</p>
+		<pre>background:
+gradient(linear, 0 0, left bottom, from(black), 
+color-stop(.6, hsl(180,50%,35%)), to(#b0a089));</pre>
+		<p>(-moz- and -webkit- prefixes omitted for fairer comparison)</p>
+	</section>
+	
+	<section class="slide">
+		<h3>What did we lose?</h3>
+		<img src="pics/-webkit-gradient-pies.png" alt="-webkit-gradient() pie charts" />
+		<a href="http://jsfiddle.net/leaverou/2BDtZ/">http://jsfiddle.net/leaverou/2BDtZ/</a>
+	</section>
+	
+	<section class="light slide live demo hide-ribbon" id="repeating-gradients">
+		<h3>Additions</h3>
+		<ul>
+			<li>Mozilla also implemented repeating gradients.</li>
+			<li>After a year, they were added to the spec.</li>
+		</ul>
+		<textarea class="gradient-snippet" style="margin-top:3em">background: repeating-radial-gradient(
+    0% 0%, circle,
+    hsl(200,30%,85%), 
+    hsl(200,30%,80%) 100px);</textarea>
+	</section>
+	
+	<section class="slide">
+		<hgroup>
+			<h3>Implementations?</h3>
+			<h4>Early 2011</h4>
+		</hgroup>
+		<ul>
+			<li><strong>Webkit</strong> implements the new syntax in Jan 2011</li>
+			<li><strong>Opera</strong> implements linear gradients in March 2011
+				<ul>
+					<li>Radial gradients are coming soon</li>
+				</ul>
+			</li>
+			<li><strong>Internet Explorer 10</strong> in April 2011</li>
+		</ul>
+		<p class="emphasis">So currently, all browsers support them!</p>
+	</section>
+</section>
+<section>
+	<header class="slide" id="conical-gradients">
+		<h2>What’s next?</h2>
+	</header>
+	
+	<section class="slide">
+		<h3>Conical gradients?</h3>
+		<ul>
+			<li>Rotated lines with a shared end segment</li>
+			<li>Useful for:
+				<ul>
+					<li>Star-shaped striped backgrounds</li>
+					<li>Easier checkerboard patterns</li>
+					<li>Hue wheels in color pickers</li>
+				</ul>
+			</li>
+		</ul>
+		<img src="pics/conical-checkerboard.png" alt="Conical checkerboard tile" />
+		<img src="pics/conical-diagonal-checkerboard.png" alt="Conical diagonal checkerboard tile" />
+		<img src="pics/hue-wheel.png" alt="Hue wheel" />
+	</section>
+	
+	<section class="slide">
+		<h3>And more&hellip;</h3>
+		<div class="demo dont-resize">
+			<img src="pics/twitter-homepage.png"
+			alt="Screenshot from twitter homepage showing a conical gradient on the header" />
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h3>conical-gradient()?</h3>
+		<blockquote>Conical gradients sound good, so I'll keep them in mind when I draft Image Values 4.</blockquote>
+		<cite>Tab Atkins</cite>
+		<ul>
+			<li class="downside">Not quite there yet</li>
+			<li class="downside">Not in spec, no browser support</li>
+			<li class="downside">Not built into graphics libraries</li>
+		</ul>
+	</section>
+</section>
+<section>
+	<header class="slide">
+		<h2>Getting real</h2>
+	</header>
+	
+	<section class="slide">
+		<h3>Browser support</h3>
+		<ul>
+			<li>No browser supports prefix-less gradient values</li>
+			<li>With prefix: 
+				<ul>
+					<li><code>-moz-</code> Firefox 3.6+</li>
+					<li><code>-webkit-</code> Chrome &amp; Webkit nightlies</li>
+					<li><code>-o-</code> Opera 11.10 (linear only)</li>
+					<li><code>-ms-</code> Internet Explorer 10</li>
+				</ul>
+			</li>
+			<li><code>-webkit-gradient()</code> on older Webkit browsers</li>
+		</ul>
+	</section>
+	
+	<section class="slide">
+		<hgroup>
+			<h3>Browser support</h3>
+			<h4>Internet Explorer &lt; 10</h4>
+		</hgroup>
+		<p>IE &lt; 10 supports a few basic cases through filters:</p>
+<pre style="font-size:80%"><span class="css-property">filter</span>: <span class="css-function">progid:DXImageTransform.Microsoft.gradient</span>(
+	        GradientType=0,
+	        startColorstr='<span class="css-color">#81a8cb</span>',
+	        endColorstr='<span class="css-color">#4477a1</span>'
+);</pre>
+	</section>
+	
+	<section class="live demo slide dont-resize">
+		<h3>Emulating gradients with box-shadow</h3>
+		<ul>
+			<li>Much better browser support</li>
+			<li class="downside">More limited, difficult syntax</li>
+			<li class="downside">Really slow in older Webkit browsers</li>
+		</ul>
+		
+		<textarea class="gradient-snippet">background:gray;
+box-shadow:0 1000px 400px -800px #000 inset;</textarea>
+	</section>
+	
+	<section class="live demo slide hide-ribbon">
+		<h3>SVG gradients</h3>
+		<p>Opera 9.5+, Firefox 4, Safari 5+, Chrome 7+, IE9</p>
+		<textarea class="gradient-snippet">background: url('pics/gradient.svg');</textarea>
+		<pre style="font-size:50%">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+    &lt;defs&gt;
+        <strong>&lt;linearGradient</strong> id=&quot;gradient&quot; y2=&quot;100%&quot;<strong>&gt;</strong>
+            &lt;stop stop-color=&quot;<span class="css-color">silver</span>&quot; /&gt;
+            &lt;stop stop-color=&quot;<span class="css-color">black</span>&quot; offset=&quot;100%&quot; /&gt;
+        <strong>&lt;/linearGradient&gt;</strong>
+    &lt;/defs&gt;
+    &lt;rect width=&quot;100%&quot; height=&quot;100%&quot; <strong>fill=&quot;url(#gradient)&quot;</strong>&gt;&lt;/rect&gt;
+&lt;/svg&gt;</pre>
+	</section>
+	
+	<section class="picture slide" style="background:url(pics/gradient.svg)">
+		<h3 style="font-size:225%">Putting it together</h3>
+		<img src="pics/ikea-cat.jpg" alt="Ikea cat - Some assembly required" style="width:530px;" />
+		<a href="http://lokwi.com/item/1559">http://lokwi.com/item/1559</a>
+	</section>
+	
+	<section class="slide dont-resize" style="background:url(pics/gradient.svg)">
+		<hgroup>
+			<h3>Putting it together</h3>
+			<h4>For a bulletproof background</h4>
+		</hgroup>
+		<pre style="font-size:63%"><span class="css-property">background:</span> <span class="css-color">#5A5A5A</span> <span class="css-function">url</span>(gradient.svg);
+<span class="css-property">background-image:</span> <span class="css-function">-moz-linear-gradient</span>(top left, <span class="css-color">silver</span>, <span class="css-color">black</span>);
+<span class="css-property">background-image:</span> <span class="css-function">-ms-linear-gradient</span>(top left, <span class="css-color">silver</span>, <span class="css-color">black</span>);
+<span class="css-property">background-image:</span> <span class="css-function">-o-linear-gradient</span>(top left, <span class="css-color">silver</span>, <span class="css-color">black</span>);
+<span class="css-property">background-image:</span> <span class="css-function">-webkit-gradient</span>(linear, 0 0, 100% 100%, from(<span class="css-color">silver</span>), to(<span class="css-color">black</span>));
+<span class="css-property">background-image:</span> <span class="css-function">-webkit-linear-gradient</span>(top left, <span class="css-color">silver</span>, <span class="css-color">black</span>);
+<span class="css-property">background-image:</span> <span class="css-function">linear-gradient</span>(top left, <span class="css-color">silver</span>, <span class="css-color">black</span>);</pre>
+	</section>
+	
+	<section class="slide">
+		<hgroup>
+			<h3>Putting it together</h3>
+			<h4>Automatically!</h4>
+		</hgroup>
+		<div class="demo">
+			<img src="pics/cssgradientsplease.png"
+			alt="Screenshot from an automatic converter" />
+		</div>
+		<p><a href="http://lea.verou.me/demos/cssgradientsplease">http://lea.verou.me/demos/cssgradientsplease</a></p>
+	</section>
+	
+	<section class="picture slide">
+		<h3>Questions?</h3>
+		<img src="pics/rainbow-what-does-this-mean.jpg" alt="" />
+	</section>
+	
+	
+	<div class="slide dont-resize" id="about-me">
+		<h3>Thank you!</h3>
+		<ul>
+			<li>Name: Lea Verou<image src="pics/map-europe.png" alt="A map of Europe, with Greece highlighted" style="float:right" /></li>
+			<li><a href="http://twitter.com/leaverou">@LeaVerou</a> on twitter</li>
+			<li><a href="http://lea.verou.me">http://leaverou․me</a></li>
+		</ul>
+		
+		<image src="pics/fresset.png" alt="My company (fresset)" style="margin-top:1em" />
+	</div>
+	
+</section>
+<script src="../csss/classList.js"></script>
+<script src="../csss/slideshow.js"></script>
+<script>var slideshow = new SlideShow();</script>
+<script src="../csss/plugins/incrementable.js"></script>
+<script src="../prefixfree/prefixfree.min.js"></script>
+<script src="../csss/plugins/css-edit.js"></script>
+<script src="../csss/plugins/css-snippets.js"></script>
+<script src="css3-gradients-talk.js"></script>
+
+<script>var _gaq = [['_setAccount', 'UA-25106441-4'],['_trackPageview']];</script>
+<script src="http://www.google-analytics.com/ga.js" async></script> 
+</body>
+</html>
