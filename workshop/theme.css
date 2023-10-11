@@ -100,7 +100,7 @@ pre:not(.prism-live) .token.comment {
 }
 
 .light.slide pre {
-	background: var(--dark1);
+	background: hsl(200 15% 20%);
 	color: white;
 	padding: 1em;
 	align-self: stretch;
