@@ -19,7 +19,7 @@
 	<script src="https://inspirejs.org/inspire.mjs" type="module"></script>
 	<script src="talk.js" type="module"></script>
 </head>
-<body class="language-css" data-markdown-elements="details.notes">
+<body class="language-css no-docs" data-markdown-elements="details.notes">
 
 <header id="intro" class="slide dont-resize">
 	<h1>A story of
@@ -439,13 +439,73 @@ body {
 	<article class="slide">
 		<h1>Tokenization</h1>
 
-		<pre class="language-tokenizedcss"><code>
+		<pre class="language-tokenizedcss"><code class="delayed-children">
 			#nav a:hover {
-				color: deeppink;
+				background: white url("bg.png");
+				text-decoration-thickness: .1em;
 			}
 		</code></pre>
+		<div class="legend tokenizedcss">
+			<code class="hash">&lt;hash-token></code>
+			<code class="whitespace">&lt;whitespace-token></code>
+			<code class="ident">&lt;ident-token></code>
+			<span class="literal">Single codepoint tokens (<code>&lt;delim-token></code>, <code>&lt;colon-token></code>, etc)</span>
+			<code class="function">&lt;function-token></code>
+			<code class="string">&lt;string-token></code>
+			<code class="dimension">&lt;dimension-token></code>
+		</div>
+
+		<details class="notes">
+			- The first step of parsing CSS (and any code really) is tokenization.
+			- The tokenizer reads the code character by character and groups them into tokens, i.e. meaningful syntactical units.
+			- Tokens are to programming what words are to human language.
+			- For CSS, these tokens are defined in the [CSS Syntax](https://drafts.csswg.org/css-syntax/) specification.
+		</details>
+	</article>
+
+	<article class="slide">
+		<h1>Grammar</h1>
+
+		<pre class="language-cssgrammar"><code>
+
+		</code></pre>
+
+		<details class="notes">
+			- [Full selector grammmar](https://www.w3.org/TR/selectors/#grammar)
+		</details>
+	</article>
+
+	<article class="slide columns tokenizedcss prism-ignore">
+		<div>
+			<h2>Parsing rules</h2>
+
+			<ul>
+				<li>
+					Pseudo-class: <code class="token delim">:</code> <code class="token ident"></code>
+				</li>
+			</ul>
+		</div>
+		<div>
+			<h2>Parsing declarations</h2>
+
+			<ul>
+				<li>
+					Declaration: <code class="token ident"></code> <code class="token delim">:</code> (Anything until <code class="token delim">;</code> or <code class="token delim">{</code> or <code class="token delim">}</code>)
+				</li>
+			</ul>
+		</div>
+
+		<details class="notes">
+			- Different tokens combine to form different CSS constructs.
+			- Whitespace tokens are typically ignored.
+			- This varies, depending on context
+		</details>
 	</article>
 </section>
+
+<footer class="slide">
+	<h1>Thank you!</h1>
+</footer>
 
 </body>
 </html>

@@ -216,27 +216,116 @@
 	}
 }
 
+.tokenizedcss,
 .language-tokenizedcss {
-	--color: var(--color-aqua);
-
 	.token {
-		padding-block: .2em;
-		background: var(--color-gray-95);
+		opacity: 1;
+		padding-block: .1em .15em;
+		border-radius: .2em;
+		color: inherit;
 
-		&.literal {
-			padding-inline: 0;
+		&:where(:not(.delayed, .delayed-children > *), .current, .displayed) {
+			transition: .2s;
+			padding-inline: .15em;
+			background: var(--background, var(--color, var(--color-gray-60)));
+			outline: var(--outline);
+			outline-offset: -2px;
+
+			&.literal {
+				font-weight: bold;
+				mix-blend-mode: normal;
+			}
+
+			& + & {
+				margin-left: .1em;
+			}
+		}
+	}
+
+	.whitespace {
+		--color: var(--color-gray-60);
+		--background: var(--color) repeating-linear-gradient(-45deg, hsl(0 0% 100% / .2) 0 .4rem, transparent 0 .8rem);
+	}
+
+	.hash {
+		--color: var(--color-accent-1);
+	}
+
+	.ident {
+		--color: var(--color-accent-2);
+	}
+
+	.function {
+		--color: var(--color-accent-3);
+	}
+
+	.string {
+		--color: var(--color-accent-4);
+	}
+
+	.dimension {
+		--color: var(--color-accent-5);
+	}
+
+	.literal {
+		--color: white;
+		--outline: 2px dashed var(--color-gray-70);
+	}
+}
+
+.language-tokenizedcss {
+	line-height: 1.6;
+	--color: var(--color-aqua);
+}
+
+
+.legend {
+	display: flex;
+	flex-flow: column;
+
+	> * {
+		&::before {
+			content: "";
+			display: inline-block;
+			vertical-align: -.15em;
+			width: 1em;
+			aspect-ratio: 1;
+			margin-right: .3em;
+			background: var(--background, var(--color));
+			outline: var(--outline);
+			outline-offset: -2px;
+		}
+	}
+}
+
+#tokenization {
+	& pre {
+		min-width: 21em;
+		font-size: 130%;
+	}
+
+	.legend {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: .2em 2em;
+		margin-top: 1em;
+
+		> * {
+			opacity: 0;
 		}
 
-		&.whitespace {
-			background: var(--color-gray-90);
+		> .literal {
+			grid-column: 1 / -1;
 		}
+	}
 
-		&.hash {
-			background: var(--color-accent1);
-		}
-
-		&.ident {
-			background: var(--color-accent2)
-		}
+	&:has(.hash:is(.current, .displayed)) .legend > .hash,
+	&:has(.ident:is(.current, .displayed)) .legend > .ident,
+	&:has(.function:is(.current, .displayed)) .legend > .function,
+	&:has(.string:is(.current, .displayed)) .legend > .string,
+	&:has(.dimension:is(.current, .displayed)) .legend > .dimension,
+	&:has(.literal:is(.current, .displayed)) .legend > .literal,
+	&:has(.whitespace:is(.current, .displayed)) .legend > .whitespace {
+		opacity: 1;
 	}
 }

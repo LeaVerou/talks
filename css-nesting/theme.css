@@ -29,10 +29,12 @@
 	--color3: var(--color-aqua);
 	--color4: var(--color-orange);
 
-	--accent1: var(--color-aqua);
-	--accent2: var(--color-green);
-	--accent3: var(--color-orange);
-	--accent4: var(--color-magenta);
+	--color-accent-1: var(--color-aqua);
+	--color-accent-2: var(--color-green);
+	--color-accent-3: var(--color-magenta);
+	--color-accent-4: var(--color-orange);
+	--color-accent-5: color-mix(in oklab, var(--color-accent-1), var(--color-accent-2));
+	--color-accent-6: var(--color-yellow);
 
 	--in-oklch: ;
 	--in-oklab: ;
@@ -54,6 +56,11 @@ html {
 	font-weight: 300;
 	letter-spacing: -0.1em;
 	color-scheme: light;
+}
+
+::selection {
+	background: var(--color-accent-1);
+	color: white;
 }
 
 pre {
@@ -148,7 +155,7 @@ pre {
 
 .columns {
 	display: grid;
-	--column-template: repeat(var(--columns, 2), minmax(auto, 1fr));
+	--column-template: repeat(var(--columns, 2), auto);
 	grid-template-columns: var(--column-template);
 	grid-template-rows: auto 1fr;
 
