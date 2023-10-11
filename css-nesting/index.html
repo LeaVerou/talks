@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="dns-prefetch" href="https://lea.verou.me">
+	<title>A story of ice, fire, and CSS Nesting 🧊🔥🪆</title>
+	<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🪆</text></svg>' />
+
+	<link href="https://inspirejs.org/inspire.css" rel="stylesheet" />
+	<link href="https://inspirejs.org/theme.css" rel="stylesheet" />
+	<link href="theme.css" rel="stylesheet" />
+	<link href="talk.css" rel="stylesheet" />
+
+	<script src="../shared/js/bliss.shy.min.js"></script>
+	<script src="../shared/js/prism.js" data-manual></script>
+	<!-- <script src="https://incrementable.verou.me/incrementable.js" type="module"></script> -->
+	<script src="https://inspirejs.org/inspire.mjs" type="module"></script>
+	<script src="talk.js" type="module"></script>
+</head>
+<body class="language-css" data-markdown-elements="details.notes">
+
+<header id="intro" class="slide dont-resize">
+	<h1>A story of
+		<div>
+			<span class="ice">ice</span>,
+			<span class="fire">fire</span>
+		</div>
+		&
+		<span class="nesting">CSS <span>N<span>e<span>s<span>t<span>i<span>n<span>g</span></span></span></span></span></span></span></span>
+	</h1>
+	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
+</header>
+
+<section id="background">
+	<article class="slide columns c3">
+		<h1>
+			CSS Preprocessors
+		</h1>
+		<div>
+			<time>2006</time>
+
+			<h2>
+				<img src="img/sass-logo.svg" alt="Sass">
+			</h2>
+			<a href="https://sass-lang.com">sass-lang.com</a>
+		</div>
+		<div>
+			<time>2009</time>
+
+			<h2>
+				<img src="img/less-logo.png" alt="Less">
+			</h2>
+			<a href="https://lesscss.org/">lesscss.org</a>
+		</div>
+		<div>
+			<time>2010</time>
+
+			<h2>
+				<img src="img/stylus-logo.svg" alt="Stylus">
+			</h2>
+			<a href="https://stylus-lang.com/">stylus-lang.com</a>
+		</div>
+		<details class="notes">
+			Our story begins back in the ancient 2006, with the appearance of the first CSS preprocessor that actually became popular.
+			It was called Sass, and it was written in Ruby.
+			Two more appeared in the following years: Less, written in JavaScript, and Stylus, also written in JavaScript.
+			CSS Preprocessors are languages that compile to CSS, allowing easier syntax without it having to be suppprted in browsers.
+			There were other preprocessors before Sass, but they didn't really take off.
+
+			A lot changed in the CSS landscape once preprocessors appeared.
+		</details>
+	</article>
+
+	<article class="slide">
+		<h1>Top 3 preprocessor features</h1>
+
+		<ul>
+			<li style="list-style: '🥇';">Variables</li>
+			<li style="list-style: '🥈';">Calculations</li>
+			<li style="list-style: '🥉';">Nesting</li>
+		</ul>
+		<details class="notes">
+			Note that all three features are about reuse: variables and calculations are about value reuse, nesting is selector reuse.
+			This is what CSS was desperately lacking: reusability mechanisms to make it more maintainable.
+		</details>
+	</article>
+
+	<article class="slide columns transpilation" id="sass-variables">
+		<h1>Sass Variables</h1>
+
+		<div>
+			<pre class="language-scss"><code>
+$font-sans: Helvetica, sans-serif;
+$color-accent: oklch(.5 .3 180);
+
+
+body {
+	font: 100%/1.5 $font-sans;
+	accent-color: $color-accent;
+}</code></pre>
+		</div>
+		<div>
+			<pre class="language-css delayed"><code>
+				body {
+					font: 100%/1.5 Helvetica, sans-serif;
+					accent-color: oklch(.5 .3 180);
+				}
+			</code></pre>
+		</div>
+		<details class="notes">
+			Preprocessor variables (like every preprocessor feature)
+			are compiled to CSS, which is then sent to the browser.
+		</details>
+	</article>
+
+	<article class="slide columns">
+		<h1>Native CSS Variables</h1>
+
+		<div>
+			<pre data-clone="#sass-variables pre.language-scss" class="language-scss no-whitespace-normalization"></pre>
+		</div>
+		<div>
+			<pre class="language-css delayed"><code>
+				:root {
+					--font-sans: Helvetica, sans-serif;
+					--color-accent: oklch(.5 .3 180);
+				}
+
+				body {
+					font: 100%/1.5 var(--font-sans);
+					accent-color: var(--color-accent);
+				}
+			</code></pre>
+		</div>
+		<details class="notes">
+			At first glance, the CSS version looks more clumsy and verbose.
+			Why not just adopt one of the preprocessor syntaxes?
+		</details>
+	</article>
+
+	<article class="slide minimal live demo" id="reactive-css-variables">
+		<textarea class="language-css">
+			@keyframes angle-spin {
+				to { --angle: 1turn; }
+			}
+			body {
+				--accent-color: oklch(.6 .15 var(--angle));
+				animation: angle-spin 4s linear infinite;
+			}
+			button {
+				border: .1em solid var(--accent-color);
+				color: var(--accent-color);
+			}
+			button.primary, button:hover {
+				background: var(--accent-color);
+				color: white;
+			}
+		</textarea>
+		<style class="demo">
+			button {
+				background: transparent border-box;
+				border-radius: .2em;
+				padding: .15em .5em;
+				font-weight: 500;
+				letter-spacing: inherit;
+			}
+		</style>
+		<button>Log in</button>
+		<button class="primary">Sign up</button>
+		<details class="notes">
+			However, if you look more closely, the CSS syntax has several advantages.
+			CSS variables are actual CSS properties, and share their reactive nature.
+		</details>
+	</article>
+
+	<!-- TODO: Maybe demo to show that MQs can also tweak variables -->
+
+	<article class="transpilation slide columns" id="sass-math">
+		<h1>Sass Calculations</h1>
+
+		<div>
+			<pre class="language-scss"><code>
+				$spacing: 16px;
+
+				button {
+					padding: $spacing / 2;
+				}
+			</code></pre>
+		</div>
+		<div>
+			<pre><code>
+				button {
+					padding: 8px;
+				}
+			</code></pre>
+		</div>
+	</article>
+
+	<article class="transpilation slide columns" id="sass-math">
+		<h1>Sass Calculations</h1>
+
+		<div>
+			<pre class="language-scss"><code>
+				$spacing: 16px;
+
+				textarea {
+					padding: $spacing / 2;
+					width: 100% - $spacing;
+				}
+			</code></pre>
+		</div>
+		<div>
+			<pre class="language-none error"><code>
+				Incompatible units: 'px' and '%'.
+			</code></pre>
+		</div>
+	</article>
+
+	<article class="slide columns">
+		<header>
+			<h1>Native CSS Calculations</h1>
+			<p class="subheading">calc() in 2013</p>
+		</header>
+
+		<div>
+			<pre data-clone="#sass-math pre.language-scss"></pre>
+		</div>
+		<div>
+			<pre><code>
+				:root {
+					--spacing: 16px;
+				}
+
+				textarea {
+					padding: calc(var(--spacing) / 2);
+					width: calc(100% - var(--spacing));
+				}
+			</code></pre>
+		</div>
+	</article>
+
+	<article class="transpilation slide columns">
+		<h1>Sass Color Calculations</h1>
+
+		<div>
+			<pre class="language-scss"><code>
+				$color-accent: #037465;
+
+				button {
+					background: lighten($color-accent, 20%);
+				}
+			</code></pre>
+		</div>
+		<div>
+			<pre><code>
+				button {
+					background: #06d7bc;
+				}
+			</code></pre>
+		</div>
+	</article>
+
+	<article class="transpilation slide columns">
+		<h1>But…</h1>
+
+		<div>
+			<pre class="language-scss"><code>
+				$color-accent: oklch(.5 .3 180);
+
+				button {
+					background: lighten($color-accent, 20%);
+				}
+			</code></pre>
+		</div>
+		<div>
+			<pre class="language-none error"><code>
+				argument `$color` of `lighten($color, $amount)` must be a color
+			</code></pre>
+		</div>
+	</article>
+
+	<article class="slide">
+		<header>
+			<h1>CSS Relative Colors</h1>
+			<p class="subheading"><a href="https://caniuse.com/css-relative-colors">Coming soon!</a></p>
+		</header>
+
+		<div>
+			<pre><code>
+				button {
+					background: oklch(from var(--color-accent) calc(l * 1.2) c h);
+				}
+			</code></pre>
+
+			<pre class="delayed"><code>
+				button {
+					background: oklch(from var(--color-accent) calc(l + .2) c h);
+				}
+			</code></pre>
+		</div>
+		<details class="notes">
+			You may be starting to see a pattern:
+			Once more the native CSS version involves clunkier syntax but is more powerful.
+		</details>
+	</article>
+
+	<article class="slide" id="preprocessors-vs-css">
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th>Preprocessors</th>
+					<th>CSS</th>
+				</tr>
+			</thead>
+			<tbody class="delayed-children">
+				<tr>
+					<th>Performance requirements</th>
+					<td class="win">Looser</td>
+					<td>Stricter</td>
+				</tr>
+				<tr>
+					<th>Syntax restrictions</th>
+					<td class="win">Looser</td>
+					<td>Stricter</td>
+				</tr>
+				<tr>
+					<th>Iteration speed</th>
+					<td class="win">Faster</td>
+					<td>Slower</td>
+				</tr>
+				<tr>
+					<th>Context Awareness</th>
+					<td>None</td>
+					<td class="win">Full</td>
+				</tr>
+				<tr>
+					<th>Reactivity</th>
+					<td>None</td>
+					<td class="win">Yes</td>
+				</tr>
+				<tr>
+					<th>Implementation Limits</th>
+					<td>CSS</td>
+					<td class="win">C++</td>
+				</tr>
+			</tbody>
+		</table>
+		<details class="notes">
+			Preprocessors and native CSS syntax have different strengths and weaknesses.
+			- Native CSS syntax is subject to much stricter performance requirements.
+			Preprocessors only run once, split out CSS, and are done with it, so anything that runs in speed acceptable for a build tool is fair game.
+			CSS doesn't have that luxury. CSS code can be changed and need to re-run millions of times per second, so it has to be blazing fast.
+			This means that certain things that are simple for preprocessors are very hard to do in CSS.
+			- Native CSS syntax is subject to much stricter syntax restrictions.
+			Any syntax added to CSS has to be *both* backwards compatible with existing CSS as well as forwards compatible with any possible future CSS.
+			While this is also a concern for preprocessors, things are a bit easier there due to versioning.
+			- Preprocessors have much faster iteration speed.
+			Adding a new feature requires consensus among the preprocessor maintainers, then it can be implemented and shipped soon after.
+			Adding a new feature to CSS requires consensus among the CSS WG, then someone to write the specification, iterate on it, ensure the spec is implementable,
+			convince browser vendors to implement it, then wait for it to be implemented, then wait for it to be shipped, then wait for it to be widely adopted.
+			The length of this process varies, but it's usually measured in years.
+			- However, native CSS syntax has full context awareness.
+			It knows what the viewport size is, which media queries apply, what is supported and what isn't, what are the metrics of the font being used, etc.
+			This allows native CSS syntax to be a lot more powerful.
+			- Native CSS syntax is reactive. If any of its components change, it will update automatically.
+			Preprocessor syntax is executed top to bottom, analogously to imperative programming.
+			- Lastly, because preprocessor syntax has to be ultimately compiled to CSS, it is subject to the same implementation limits as CSS.
+			However, native CSS syntax can *extend* the bounds of what is possible in CSS, and is only bound by the implementation limits of the browser’s C++.
+
+			This is not a competition: Preprocessors are excellent for prototyping CSS's future with a tighter feedback loop,
+			and allow us to get feedback from real developers, using these features on real projects.
+		</details>
+	</article>
+</section>
+
+<section id="start">
+	<article class="transpilation slide columns vhead">
+		<h1>Sass Nesting</h1>
+
+		<div>
+			<pre class="language-scss"><code>
+				table.datagrid {
+					border-collapse: collapse;
+
+					tbody tr {
+						&:not(:last-child) td {
+							border-bottom: 1px solid #ccc;
+
+							@media (prefers-color-scheme: dark) {
+								border-color: #333;
+							}
+
+							.dark & {
+								border-color: #333;
+							}
+						}
+
+						&:nth-child(odd) td {
+							background: #ccc;
+						}
+					}
+				}
+			</code></pre>
+		</div>
+		<div>
+			<pre><code>
+				table.datagrid {
+					border-collapse: collapse;
+				}
+
+				table.datagrid tbody tr:not(:last-child) td {
+					border-bottom: 1px solid #ccc;
+				}
+
+				@media (prefers-color-scheme: dark) {
+					table.datagrid tbody tr:not(:last-child) td {
+						border-color: #333;
+					}
+				}
+
+				.dark table.datagrid tbody tr:not(:last-child) td {
+					border-color: #333;
+				}
+
+				table.datagrid tbody tr:nth-child(odd) td {
+					background: #ccc;
+				}
+			</code></pre>
+		</div>
+	</article>
+
+	<article class="slide">
+		<h1>Can we adopt this in CSS?</h1>
+	</article>
+
+	<article class="slide">
+		<h1>Tokenization</h1>
+
+		<pre class="language-tokenizedcss"><code>
+			#nav a:hover {
+				color: deeppink;
+			}
+		</code></pre>
+	</article>
+</section>
+
+</body>
+</html>

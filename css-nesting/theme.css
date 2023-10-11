@@ -1,0 +1,204 @@
+@import url("https://lea.verou.me/assets/fonts.css");
+
+:root {
+	--font-sans: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
+	--font-body: var(--font-sans);
+	/* --font-serif: Vollkorn, "Hoefler Text", Garamond, "Times New Roman", serif; */
+	--font-cursive: Zapfino, "Apple Chancery", BrushScriptMT, cursive;
+	--font-monospace: Inconsolata, Consolas, Noto Sans Mono, Source Code Pro, Roboto Mono, Menlo, Monaco, monospace;
+	--font-mono: var(--font-monospace);
+
+	--color-yellow: oklch(.75 0.18 95);
+	--color-orange: oklch(.7 0.185 60);
+	--color-red: oklch(0.55 0.2 30);
+	--color-green: oklch(.7 .2 135);
+	--color-aqua: oklch(0.7 0.16 220);
+	--color-magenta: oklch(0.65 0.29 5);
+
+	--color-gray-60: oklch(0.6 0.015 180);
+	--color-gray-70: oklch(0.7 0.014 180);
+	--color-gray-80: oklch(0.8 0.012 180);
+	--color-gray-90: oklch(0.9 0.01 180);
+	--color-gray-95: oklch(0.95 0.01 180);
+
+	/* --color-green-light: color-mix(in oklch, var(--color-green) 0%, oklch(.95 .12 none));
+	--color-red-light: color-mix(in oklch, var(--color-red) 0%, oklch(.95 .12 none)); */
+
+	--color1: var(--color-yellow);
+	--color2: var(--color-green);
+	--color3: var(--color-aqua);
+	--color4: var(--color-orange);
+
+	--accent1: var(--color-aqua);
+	--accent2: var(--color-green);
+	--accent3: var(--color-orange);
+	--accent4: var(--color-magenta);
+
+	--in-oklch: ;
+	--in-oklab: ;
+}
+
+@supports (background: linear-gradient(in oklch, red, tan)) {
+	:root {
+		--in-oklch: in oklch;
+	}
+}
+
+@supports (background: linear-gradient(in oklab, red, tan)) {
+	:root {
+		--in-oklab: in oklab;
+	}
+}
+
+html {
+	font-weight: 300;
+	letter-spacing: -0.1em;
+	color-scheme: light;
+}
+
+pre {
+	position: relative;
+
+	&, &.prism-live.prism-live {
+		padding: .3em .6em;
+	}
+
+	border-radius: .2em;
+	--color: var(--color-yellow);
+	background: color-mix(in oklch, var(--color) 0%, oklch(.985 .02 none));
+	border-radius: .7rem;
+	letter-spacing: normal;
+
+	&.language-css {
+		--label: "CSS";
+		--color: var(--color-aqua);
+	}
+
+	&.language-scss {
+		--label: "SCSS";
+		--color: var(--color-magenta);
+	}
+
+	&.language-javascript {
+		--label: "JS";
+		--color: var(--color-yellow);
+		--label-text-color: black;
+	}
+
+	&.error {
+		white-space: pre-wrap;
+		color: var(--color-red);
+		font-weight: bold;
+
+		&::before {
+			content: "✖️";
+			display: inline-flex;
+			vertical-align: middle;
+			width: 1em;
+			aspect-ratio: 1;
+			align-items: center;
+			justify-content: center;
+			padding: .05em;
+			border-radius: 50%;
+			margin-right: .4em;
+			background: var(--color-red);
+			color: white;
+			line-height: 1;
+		}
+	}
+
+	&::after {
+		content: var(--label);
+		position: absolute;
+		top: 0;
+		right: 0;
+		border-top-right-radius: inherit;
+		border-bottom-left-radius: inherit;
+		padding: .1em .5em;
+		background: var(--color);
+		color: var(--label-text-color, white);
+		text-transform: uppercase;
+		font: bold 80%/1.5 var(--font-sans);
+	}
+}
+
+.slide {
+	background-image: none;
+
+	> h1,
+	> header > h1 {
+		margin: 0;
+		font-size: calc(3 * var(--slide-base-font-size, 1rem));
+	}
+
+	> h1,
+	> header {
+		.subheading {
+			color: var(--color-gray-60);
+			font-size: calc(1.2 * var(--slide-base-font-size, 1rem));
+			text-align: center;
+			font-weight: 500;
+		}
+	}
+
+	& h2 {
+		color: inherit;
+	}
+}
+
+.columns {
+	display: grid;
+	--column-template: repeat(var(--columns, 2), minmax(auto, 1fr));
+	grid-template-columns: var(--column-template);
+	grid-template-rows: auto 1fr;
+
+	> h1,
+	> header {
+		grid-column: 1 / -1;
+		margin: auto;
+		margin-top: .5em;
+	}
+
+	&.c3 {
+		--columns: 3;
+	}
+
+	& pre {
+		margin-inline: 1em;
+	}
+
+	&.vhead {
+		grid-template-columns: auto var(--column-template);
+		grid-template-rows: 1fr;
+
+		> h1,
+		> header {
+			grid-column: 1;
+			grid-row: 1;
+			writing-mode: vertical-lr;
+			transform: rotate(.5turn);
+			margin-bottom: 0;
+			line-height: 1;
+		}
+
+		> :not(h1, header) {
+			grid-row: 1;
+		}
+	}
+}
+
+.minimal.live.demo {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	justify-content: center;
+}
+
+.token {
+	mix-blend-mode: multiply;
+}
+
+.token.comment, .token.prolog, .token.doctype, .token.cdata {
+	--comment-color: color-mix(in oklch, var(--color) 0%, oklch(.4 none none));
+	color: var(--text-color, hsl(220 10% 10% / .5));
+}

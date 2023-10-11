@@ -1,0 +1,242 @@
+#intro {
+	align-items: end;
+	background: url("img/nesting-dolls.avif") no-repeat right / 140% auto;
+	padding: 0;
+	color: white;
+
+	> h1 {
+		margin-top: auto;
+		text-align: right;
+		text-shadow: 0 0 .3em hsl(0 0% 0% / .2);
+		font: 100 80%/1.4 var(--font-cursive);
+		margin-right: 4rem;
+
+		> div {
+			position: relative;
+			z-index: -1;
+			margin-top: -.7em;
+			margin-bottom: .5em;
+		}
+
+		.ice,
+		.fire,
+		.nesting {
+			font-family: var(--font-sans);
+			font-weight: bold;
+			font-size: 250%;
+		}
+
+		.ice,
+		.fire {
+
+		}
+
+		.ice {
+			color: hsl(200 100% 90%);
+
+			&::before {
+				content: "🧊"
+			}
+		}
+
+		.fire {
+			color: hsl(30 100% 60%);
+
+			&::before {
+				content: "🔥"
+			}
+		}
+
+		.nesting {
+			xdisplay: block;
+			line-height: .7;
+
+			& span {
+				display: inline-block;
+				border: 2px solid;
+				padding: .1em .1em;
+				margin-left: .2em;
+				border-radius: .1em;
+			}
+
+			/* &::before {
+				content: "🪆"
+			} */
+		}
+	}
+
+	.attribution {
+		align-self: stretch;
+		padding: .4em .6em;
+		padding-right: 4rem;
+		margin-top: auto;
+		margin-bottom: 0;
+		background: hsl(0 0% 0% / .4);
+		text-align: right;
+	}
+}
+
+#css-preprocessors {
+	align-items: stretch;
+	overflow: clip;
+
+	> div {
+		display: flex;
+		align-items: center;
+		flex-flow: column;
+
+		& img {
+			height: 12vw;
+		}
+
+		> h2 {
+			margin-bottom: 0;
+		}
+
+		> a {
+			margin-bottom: auto;
+			opacity: .5;
+			font-weight: 500;
+			font-size: 70%;
+		}
+	}
+
+	& time {
+		position: relative;
+		display: block;
+		margin: auto 0;
+		background: black;
+		color: white;
+		width: max-content;
+		padding: .3em .5em;
+		font-weight: bold;
+
+		&::before {
+			content: "";
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			z-index: -1;
+			width: 50vw;
+			height: .2em;
+			background: inherit;
+		}
+	}
+}
+
+@property --angle {
+	syntax: "<angle>";
+	inherits: false;
+	initial-value: 0deg;
+}
+
+#reactive-css-variables {
+	--font-size-multiplier: .9;
+	grid-template-columns: .3fr 1.6fr 1fr;
+
+	.editor-container {
+		grid-column: 2;
+	}
+
+	.demo-target {
+		flex-flow: row;
+		gap: .3em;
+	}
+}
+
+.transpilation.slide {
+	> div:nth-of-type(2) {
+		position: relative;
+
+		&::before {
+			content: "Result";
+			position: absolute;
+			right: 100%;
+			top: 50%;
+			z-index: 1;
+			transform: translate(50%, -50%);
+			padding: .8em 1.2em .8em .7em;
+			background: linear-gradient(to right var(--in-oklab), var(--color-magenta) 25%, var(--color-aqua) 75%);
+			color: white;
+			white-space: nowrap;
+			font-weight: bold;
+
+			/* Clip to a right pointing arrow */
+			--arrow-inset: .6em;
+			--arrow-head-height: 2em;
+			clip-path: polygon(
+				0 var(--arrow-inset), calc(100% - var(--arrow-head-height)) var(--arrow-inset),
+				calc(100% - var(--arrow-head-height)) 0,
+				100% 50%,
+				calc(100% - var(--arrow-head-height)) 100%,
+				calc(100% - var(--arrow-head-height)) calc(100% - var(--arrow-inset)), 0 calc(100% - var(--arrow-inset))
+			);
+
+			text-transform: uppercase;
+			font-size: 60%;
+			letter-spacing: normal;
+		}
+	}
+}
+
+#preprocessors-vs-css {
+	& .displayed {
+		opacity: 1;
+	}
+
+	& :is(td, th):is(:nth-child(2), :nth-child(3)) {
+		text-align: center;
+	}
+
+	& tbody {
+		& th {
+			font-weight: 300;
+		}
+
+		& td {
+			font-weight: 500;
+
+			&:where(:where(.current, .displayed) > *) {
+				transition: .5s 1s color;
+
+				&.win {
+					color: var(--color-green);
+				}
+
+				&:not(.win) {
+					color: var(--color-red);
+				}
+			}
+		}
+	}
+
+	& tbody tr:not(:first-child) :is(td, th) {
+		border-top: 1px solid var(--color-gray-80);
+	}
+}
+
+.language-tokenizedcss {
+	--color: var(--color-aqua);
+
+	.token {
+		padding-block: .2em;
+		background: var(--color-gray-95);
+
+		&.literal {
+			padding-inline: 0;
+		}
+
+		&.whitespace {
+			background: var(--color-gray-90);
+		}
+
+		&.hash {
+			background: var(--color-accent1);
+		}
+
+		&.ident {
+			background: var(--color-accent2)
+		}
+	}
+}
