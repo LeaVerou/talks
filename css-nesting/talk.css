@@ -300,7 +300,7 @@
 
 #tokenization {
 	& pre {
-		min-width: 21em;
+		min-width: 24em;
 		font-size: 130%;
 	}
 
