@@ -1,0 +1,115 @@
+@property --top {
+	syntax: '<length>';
+	initial-value: 0;
+	inherits: true;
+}
+
+@property --parent-top {
+	syntax: '<length>';
+	initial-value: 0;
+	inherits: true;
+}
+
+ul.tree {
+	--_node-color: var(--node-color, hsl(220 10% 50% / .2));
+	--_line-color: var(--line-color, color-mix(in oklab, hsl(220 10% 50%) 70%, canvas));
+	--_line-thickness: var(--line-thickness, .1em);
+	--_line-min-width: var(--line-min-width, 2rem);
+
+	&,
+	& ul {
+		--parent-top: var(--top);
+		--parent-left: var(--left);
+		--parent-width: var(--width);
+		--parent-height: var(--height);
+
+		margin: 0;
+		padding: 0;
+	}
+
+	& ul {
+		flex: 1;
+	}
+
+	& > li {
+		margin: 0;
+	}
+
+	& li {
+		--Δtop: calc(var(--parent-top) - var(--top));
+		--Δleft: calc(var(--parent-left) - var(--left));
+
+		position: relative;
+		display: flex;
+		align-items: center;
+		margin: .3em 0;
+	}
+
+	& .node {
+		order: 0;
+
+		&:where(.generated) {
+			/* Default styling for generated wrapper nodes */
+			padding: .3em .5em .15em;
+			background: var(--_node-color);
+			border-radius: .2em;
+			text-decoration: none;
+			white-space: nowrap;
+		}
+
+		/* Leaf node */
+		&:is(.tree-flushend *):not(:has(+ ul)) {
+			xmargin-left: auto;
+		}
+	}
+
+	& li li {
+		/* Lines */
+		&::before {
+			content: "";
+			min-width: var(--_line-min-width);
+			height: var(--_line-thickness);
+			--angle2: atan2(var(--dy), var(--_line-min-width) * 16);
+
+			--dy: calc(-1 * var(--Δtop) - (var(--parent-height, 0) - var(--height)) / 2);
+
+			transform: translateY(-50%) skewY(var(--angle2)) scaleY(calc(1 / cos(var(--angle2))));
+
+			transform-origin: right;
+			margin: 0;
+			border-radius: 0;
+			background: var(--_line-color);
+		}
+
+		&:is(.tree-flushend *):not(:has(ul)) {
+			&::before {
+				flex: 1;
+			}
+		}
+	}
+
+	/*&.vertical {
+		--_line-min-width: 3rem;
+
+		& li {
+			flex-flow: column;
+			font-size: 85%;
+
+			& li {
+				margin-top: var(--_line-min-width);
+				margin-left: 0;
+
+				& .node {
+					&::before {
+						top: auto;
+						bottom: 100%;
+						right: 50%;
+						height: var(--_line-min-width);
+						width: var(--_line-thickness);
+						transform: none;
+					}
+				}
+			}
+		}
+	}*/
+}

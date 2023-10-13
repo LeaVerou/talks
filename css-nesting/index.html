@@ -19,7 +19,7 @@
 	<script src="https://inspirejs.org/inspire.mjs" type="module"></script>
 	<script src="talk.js" type="module"></script>
 </head>
-<body class="language-css no-docs" data-markdown-elements="details.notes">
+<body class="language-css no-docs no-media" data-markdown-elements="details.notes, .md">
 
 <header id="intro" class="slide dont-resize">
 	<h1>A story of
@@ -33,7 +33,7 @@
 	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> (<a href="http://twitter.com/leaverou">@LeaVerou</a>)</p>
 </header>
 
-<section id="background">
+<section id="background" class="code-labels">
 	<article class="slide columns c3">
 		<h1>
 			CSS Preprocessors
@@ -87,7 +87,7 @@
 		</details>
 	</article>
 
-	<article class="slide columns transpilation" id="sass-variables">
+	<article class="slide columns conversion code-labels" id="sass-variables">
 		<h1>Sass Variables</h1>
 
 		<div>
@@ -177,7 +177,7 @@ body {
 
 	<!-- TODO: Maybe demo to show that MQs can also tweak variables -->
 
-	<article class="transpilation slide columns" id="sass-math">
+	<article class="conversion slide columns" id="sass-math">
 		<h1>Sass Calculations</h1>
 
 		<div>
@@ -198,7 +198,7 @@ body {
 		</div>
 	</article>
 
-	<article class="transpilation slide columns" id="sass-math">
+	<article class="conversion slide columns" id="sass-math">
 		<h1>Sass Calculations</h1>
 
 		<div>
@@ -241,7 +241,7 @@ body {
 		</div>
 	</article>
 
-	<article class="transpilation slide columns">
+	<article class="conversion slide columns">
 		<h1>Sass Color Calculations</h1>
 
 		<div>
@@ -262,7 +262,7 @@ body {
 		</div>
 	</article>
 
-	<article class="transpilation slide columns">
+	<article class="conversion slide columns">
 		<h1>But…</h1>
 
 		<div>
@@ -376,71 +376,131 @@ body {
 	</article>
 </section>
 
-<section id="start">
-	<article class="transpilation slide columns vhead">
-		<h1>Sass Nesting</h1>
+<section id="nesting-101-section" class="code-labels">
+	<header class="slide" id="nesting">
+		<h1>Nesting</h1>
+	</header>
 
-		<div>
-			<pre class="language-scss"><code>
-				table.datagrid {
-					border-collapse: collapse;
+	<article class="conversion slide columns">
+		<h1>Nesting 101</h1>
+		<pre class="language-scss delayed"><code>
+			table.browser-support {
+				border-collapse: collapse;
 
-					tbody tr {
-						&:not(:last-child) td {
-							border-bottom: 1px solid #ccc;
+				th, td { border: 1px solid silver; }
+				th { border: 0; }
 
-							@media (prefers-color-scheme: dark) {
-								border-color: #333;
-							}
+				td {
+					background: yellowgreen;
 
-							.dark & {
-								border-color: #333;
-							}
-						}
-
-						&:nth-child(odd) td {
-							background: #ccc;
-						}
-					}
+					&:empty { background: red; }
+					> a { color: inherit; }
 				}
-			</code></pre>
-		</div>
-		<div>
-			<pre><code>
-				table.datagrid {
-					border-collapse: collapse;
+			}
+		</code></pre>
+		<pre><code>
+			table.browser-support {
+				border-collapse: collapse; }
+			table.browser-support th,
+			table.browser-support td {
+				border: 1px solid silver; }
+			table.browser-support th {
+				border: 0; }
+			table.browser-support td {
+				background: yellowgreen; }
+			table.browser-support td:empty {
+				background: red; }
+			table.browser-support td > a {
+				color: inherit; }
+		</code></pre>
+		<details class="notes">
+			- Nesting was designed to avoid the duplication and error-prone-ness of overly long selectors with a shared prefix.
+			- By default selectors nested inside each other are assumed to be descendants.
+			- To override that, authors can use the `&` character to refer to the parent selector.
+		</details>
+	</article>
+	<article class="conversion slide columns">
+		<h1>Nesting @-rules</h1>
+
+		<pre class="language-scss delayed"><code>
+			h1.make-it-pop {
+				color: var(--brand-color);
+				@supports (-webkit-background-clip: text) {
+					background: var(--brand-gradient);
+					-webkit-background-clip: text;
+					color: transparent;
 				}
 
-				table.datagrid tbody tr:not(:last-child) td {
-					border-bottom: 1px solid #ccc;
+				font-size: 250%;
+				@media (width < 500px) {
+					font-size: 150%;
 				}
-
-				@media (prefers-color-scheme: dark) {
-					table.datagrid tbody tr:not(:last-child) td {
-						border-color: #333;
-					}
-				}
-
-				.dark table.datagrid tbody tr:not(:last-child) td {
-					border-color: #333;
-				}
-
-				table.datagrid tbody tr:nth-child(odd) td {
-					background: #ccc;
-				}
-			</code></pre>
-		</div>
+			}
+		</code></pre>
+		<pre><code>
+			h1.make-it-pop {
+				color: var(--brand-color);
+				font-size: 250%;
+			}
+			@supports (-webkit-background-clip: text) {
+				h1.make-it-pop {
+					background: var(--brand-gradient);
+					-webkit-background-clip: text;
+					color: transparent; }
+			}
+			@media (width < 500px) {
+				h1.make-it-pop { font-size: 150%; }
+			}
+		</code></pre>
 	</article>
 
-	<article class="slide">
+	<article class="conversion slide columns">
+		<h1>Contextual styling</h1>
+		<pre class="language-scss"><code>
+			.callout.info {
+				color: var(--color-blue-dark);
+				background: var(--color-blue-light);
+
+				.dark & { <span class="delayed">/* same as &:is(.dark *) */</span>
+					color: var(--color-blue-light);
+					background: var(--color-blue-dark);
+				}
+			}
+		</code></pre>
+		<pre><code>
+			.callout.info {
+				color: var(--color-blue-dark);
+				background: var(--color-blue-light);
+			}
+
+			.dark .callout.info {
+				color: var(--color-blue-light);
+				background: var(--color-blue-dark);
+			}
+		</code></pre>
+		<details class="notes">
+			While rare, the ampersand can come later in the selector as well,
+			usually to create variations depending on the context
+		</details>
+	</article>
+
+	<article class="slide" id="when-can-we" data-credits="Giphy">
 		<h1>Can we adopt this in CSS?</h1>
 	</article>
-
+</section>
+<section id="parsing-section">
+	<header class="slide" id="css-parsing-101">
+		<h1>
+			<span>CSS</span>
+			<span>Parsing</span>
+			<span>Crash Course</span>
+		</h1>
+	</header>
 	<article class="slide">
 		<h1>Tokenization</h1>
 
 		<pre class="language-tokenizedcss"><code class="delayed-children">
-			#nav a:hover {
+			#nav > a:hover {
 				background: white url("bg.png");
 				text-decoration-thickness: .1em;
 			}
@@ -448,8 +508,8 @@ body {
 		<div class="legend tokenizedcss">
 			<code class="hash">&lt;hash-token></code>
 			<code class="whitespace">&lt;whitespace-token></code>
-			<code class="ident">&lt;ident-token></code>
 			<span class="literal">Single codepoint tokens (<code>&lt;delim-token></code>, <code>&lt;colon-token></code>, etc)</span>
+			<code class="ident">&lt;ident-token></code>
 			<code class="function">&lt;function-token></code>
 			<code class="string">&lt;string-token></code>
 			<code class="dimension">&lt;dimension-token></code>
@@ -463,42 +523,280 @@ body {
 		</details>
 	</article>
 
-	<article class="slide">
-		<h1>Grammar</h1>
+	<article class="slide" id="simple-selector-grammar">
+		<header>
+			<h1>CSS Grammars</h1>
+			<p class="subheading">Simple selectors (simplified)</p>
+		</header>
 
-		<pre class="language-cssgrammar"><code>
+		<div>
+			<script type="text/plain" class="language-cssgrammar no-whitespace-normalization">
+				<type-selector> = <ident-token> | '*'
+				<id-selector> = <hash-token>
+				<class-selector> = '.' <ident-token>
+				<pseudo-class-selector> = ':' <ident-token>
+				| ':' <function-token> <any-value> ')'
+			</script>
+		</div>
+		<dl class="grammar-cheatsheet" title="Grammar cheatsheet" data-show="[] |">
+			<dt data-symbol="[]">[ ]</dt>
+			<dd>Grouping</dd>
 
-		</code></pre>
+			<dt data-symbol="|">|</dt>
+			<dd>Alternative</dd>
+
+			<dt data-symbol="?">?</dt>
+			<dd>Optional</dd>
+
+			<dt data-symbol="*">*</dt>
+			<dd>0 or more</dd>
+
+			<dt data-symbol="+">+</dt>
+			<dd>1 or more</dd>
+
+			<dt data-symbol="#">#</dt>
+			<dd>1+, comma-separated</dd>
+		</dl>
 
 		<details class="notes">
-			- [Full selector grammmar](https://www.w3.org/TR/selectors/#grammar)
+			- The next step is parsing, which is the process of grouping tokens into constructs.
+			- How this happens is defined in a compact form called a grammar.
+			- [`&lt;any-value>`](https://drafts.csswg.org/css-syntax-3/#typedef-any-value)
+			is a special token defined to allow any stream of tokens except open structures (unmatched parentheses, brackets, braces, broken strings, etc).
+			- This is a simplified version. [Full selector grammmar](https://www.w3.org/TR/selectors/#grammar)
+			- [Full declaration grammar](https://www.w3.org/TR/css-syntax-3/#grammar)
 		</details>
 	</article>
 
-	<article class="slide columns tokenizedcss prism-ignore">
-		<div>
-			<h2>Parsing rules</h2>
+	<article class="slide" id="simple-selector-grammar">
+		<header>
+			<h1>CSS Grammars</h1>
+			<p class="subheading">Simple selectors (simplified)</p>
+		</header>
 
-			<ul>
-				<li>
-					Pseudo-class: <code class="token delim">:</code> <code class="token ident"></code>
-				</li>
-			</ul>
-		</div>
 		<div>
-			<h2>Parsing declarations</h2>
-
-			<ul>
-				<li>
-					Declaration: <code class="token ident"></code> <code class="token delim">:</code> (Anything until <code class="token delim">;</code> or <code class="token delim">{</code> or <code class="token delim">}</code>)
-				</li>
-			</ul>
+			<script type="text/plain" class="language-cssgrammar no-whitespace-normalization">
+				<pseudo-class-selector> = ':' <ident-token>
+				| ':' <function-token> <any-value> ')'
+				<pseudo-element-selector> = ':' <pseudo-class-selector>
+			</script>
+			<script type="text/plain" class="language-cssgrammar no-whitespace-normalization">
+				<attr-matcher> = [ '~' | '|' | '^' | '$' | '*' ]? '='
+				<attribute-selector> = '[' <ident-token> <attr-matcher>
+					[ <string-token> | <ident-token> ]? ']'
+			</script>
 		</div>
+		<dl data-clone=".grammar-cheatsheet" data-show="[] | ?"></dl>
 
 		<details class="notes">
-			- Different tokens combine to form different CSS constructs.
-			- Whitespace tokens are typically ignored.
-			- This varies, depending on context
+			- The next step is parsing, which is the process of grouping tokens into constructs.
+			- How this happens is defined in a compact form called a grammar.
+			- [`&lt;any-value>`](https://drafts.csswg.org/css-syntax-3/#typedef-any-value)
+			is a special token defined to allow any stream of tokens except open structures (unmatched parentheses, brackets, braces, broken strings, etc).
+			- This is a simplified version. [Full selector grammmar](https://www.w3.org/TR/selectors/#grammar)
+			- [Full declaration grammar](https://www.w3.org/TR/css-syntax-3/#grammar)
+		</details>
+	</article>
+
+	<article class="slide language-cssgrammar tree-children md dont-resize tree-flushend progressive-subtree" id="lookahead">
+		- Start
+			- `&lt;ident-token>`
+				- `&lt;type-selector>`
+			- `&lt;hash-token>`
+				- `&lt;id-selector>`
+			- `'.'`
+				- `&lt;class-selector>`
+			- `':'`
+				- `&lt;ident-token>`
+					- `&lt;pseudo-class-selector>`
+				- `':'`
+					- `&lt;pseudo-element-selector>`
+			- `'['`
+				- `&lt;attribute-selector>`
+
+		<details class="notes">
+			- Note that for most of these, we can tell what we have from the very first token.
+			Only to distinguish pseudo-classes from pseudo-elements do we actually need two tokens, i.e. we need to "look ahead".
+			- This is not a coincidence, it is by design.
+			- Being able to determine the construct from the current token and by looking ahead at a fixed number of tokens
+			is called "fixed lookahead" or LL(k) and is a very desirable property in parsers.
+			- The CSS parser specifically is LL(1), i.e. needs to only look ahead at most one token.
+		</details>
+	</article>
+
+	<article class="slide dont-resize" id="declaration-grammar">
+		<header>
+			<h1>CSS Grammars</h1>
+			<p class="subheading">Declaration (simplified)</p>
+
+			<script type="text/plain" class="language-cssgrammar no-whitespace-normalization" data-production-indent="2">
+				<declaration> = <ident-token> ':' <declaration-value> [ '!' <ident-token> ]? ';'
+				<declaration-value> = [ <delim-token> | <whitespace-token>
+					| <ident-token> | <hash-token>
+					| <number-token> | <string-token>
+					| <function-token> <any-value> ')'
+					| <dimension-token> | <percentage-token> ]+
+			</script>
+
+			<dl data-clone=".grammar-cheatsheet" data-show="[] ?"></dl>
+
+			<details class="notes">
+				- [`&lt;declaration-value>`](https://drafts.csswg.org/css-syntax-3/#typedef-declaration-value)
+			</details>
+		</header>
+	</article>
+
+	<article class="slide dont-resize language-cssgrammar progressive-subtree" id="unbounded-lookahead">
+		<h1>What could this be?</h1>
+
+		<script type="text/plain" class="language-cssgrammar">
+			<indent-token> <colon-token> <function-token> <ident-token> <comma-token>
+			⮑	<ident-token> <comma-token> <ident-token> <comma-token> <ident-token>
+			⮑	<comma-token> <ident-token> <comma-token> <ident-token> <)-token>
+		</script>
+		<div class="language-tokenizedcss delayed" style="align-self: stretch; margin-top: 2em">
+			<pre><code class="delayed-children">article:is(h1, h2, h3, h4, h5, h6)</code></pre>
+			<pre><code class="delayed-children">background:conic-gradient(red, yellow, lime, aqua, blue, magenta)</code></pre>
+		</div>
+		<details class="notes">
+			- Take a look at this token stream here. Can you guess what CSS construct it represents?
+			- Could it be a selector, like this one? Or maybe a declaration, like this one?
+			- Let’s try to tokenize them and find out!
+		</details>
+	</article>
+
+	<article class="image slide" style="background: hsl(50 74% 92%)">
+		<!-- https://sketchplanations.com/the-blind-and-the-elephant -->
+		<img src="img/elephant-parable.png" alt="">
+		<details class="notes">
+			Without nesting we wouldn’t even try both rules at once, we would know whether we’re parsing a rule or a declaration in the first place, so there is no ambiguity.
+			But with nesting, every time we’re parsing the inside of a rule, we could have either.
+			Would that make CSS ambiguous?
+			Would it make it like the elephant in the well known parable who appeared to be different things to different blindfolded people depending on which part they touched?
+		</details>
+	</article>
+
+	<article class="dont-resize slide" id="resolving-ambiguity">
+		<h1>Resolving ambiguity</h1>
+		<div class="language-tokenizedcss" style="align-self: stretch;">
+			<pre><code>article:is(h1, h2, h3, h4, h5, h6) {</code></pre>
+			<pre><code>background:conic-gradient(red, yellow, lime, aqua, blue, magenta);</code></pre>
+		</div>
+		<details class="notes">
+			Nah, it’s not as bad as that.
+			Eventually, we would read an opening brace (for a selector) or a semicolon or closing brace (for a declaration) and we'd know what we have.
+			But do note that we lost that very desirable fixed lookahead property:
+			we now need to read a potentially unbounded number of tokens to know what we have.
+			So when we started exploring the possibility of adding Nesting to CSS natively, this was a non starter.
+			No browser would implement a CSS feature that would so fundamentally change CSS parsing.
+			Remember, CSS needs to be blazing fast, and backtracking is slow.
+		</details>
+	</article>
+
+	<article class="historical slide" id="first-proposal">
+		<h1>
+			<time>2013</time>
+			First nesting proposal
+		</h1>
+		<iframe src="tab-specs/v0/css-nesting/Overview.html" frameborder="0" class="browser"></iframe>
+		<details class="notes">
+			[Read a copy of the proposal](./tab-specs/v0/css-nesting/Overview.html)
+		</details>
+	</article>
+
+	<article class="slide columns md">
+		<h1>Syntax</h1>
+
+		- `{ }` around nested rules
+		- Optional `&`
+		- No @-rule nesting
+
+		```css
+			table.browser-support {
+				border-collapse: collapse;
+				{
+					th, td { border: 1px solid silver; }
+					th { border: 0; }
+
+					td {
+						background: yellowgreen;
+						{
+							&:empty { background: red; }
+							> a { color: inherit; }
+						}
+					}
+				}
+			}
+		```
+	</article>
+
+	<article class="historical slide">
+		<h1>
+			<time>June 2015</time>
+			PostCSS implements
+		</h1>
+		<iframe src="https://github.com/csstools/postcss-nesting/tree/d63f6b6b1efef37c11d86a84de23fe901f74123a/#readme" class="browser"></iframe>
+	</article>
+
+
+
+	<article class="historical slide columns" id="proposal2">
+		<h1>
+			<time>2015</time>
+			New syntax
+		</h1>
+		<iframe src="tab-specs/v1/css-nesting/" class="browser"></iframe>
+		<div class="md">
+			- Dropped `{ }` around nested rules
+			- Mandatory `&` or `@nest` prefix
+			- Still no @-rule nesting
+		</div>
+		<details class="notes">
+			[Read a copy of the proposal](./tab-specs/v1/css-nesting/)
+		</details>
+	</article>
+
+	<article class="conversion slide columns md" style="--arrow-label: 'Became'">
+		<h1>Changes</h1>
+
+		```css
+			.callout.info {
+				color: var(--color-blue-dark);
+				background: var(--color-blue-light);
+
+				{
+					.dark & {
+						color: var(--color-blue-light);
+						background: var(--color-blue-dark);
+					}
+
+					a { color: var(--color-blue); }
+				}
+			}
+		```
+		```css
+			.callout.info {
+				color: var(--color-blue-dark);
+				background: var(--color-blue-light);
+
+				@nest .dark & {
+					color: var(--color-blue-light);
+					background: var(--color-blue-dark);
+				}
+
+				& a { color: var(--color-blue); }
+			}
+		```
+	</article>
+
+	<article class="historical slide">
+		<h1>
+			<time>Sep 2015</time>
+			PostCSS updates
+		</h1>
+		<iframe src="https://github.com/csstools/postcss-nesting/tree/1931fbbd6a1e3ecf5aea1c73fed37307937544a3/#readme" class="browser"></iframe>
+		<details class="notes">
+			Interestingly, the plugin supported @-rule nesting, even though the spec did not.
 		</details>
 	</article>
 </section>

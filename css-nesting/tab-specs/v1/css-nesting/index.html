@@ -1,0 +1,1489 @@
+<!doctype html><html lang="en">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <title>CSS Nesting Module Level 3</title>
+<style data-fill-with="stylesheet">/* This section copied from the W3C's ED styles. */
+
+	body {
+		color: black;
+		font-family: sans-serif;
+		margin: 0 auto;
+		max-width: 50em;
+		padding: 2em 1em 2em 70px;
+	}
+	:link { color: #00C; background: transparent }
+	:visited { color: #609; background: transparent }
+	a[href]:active { color: #C00; background: transparent }
+	a[href]:hover { background: #ffa }
+
+	a[href] img { border-style: none }
+
+	h1, h2, h3, h4, h5, h6 { text-align: left }
+	h1, h2, h3 { color: #005A9C; }
+	h1 { font: 170% sans-serif }
+	h2 { font: 140% sans-serif }
+	h3 { font: 120% sans-serif }
+	h4 { font: bold 100% sans-serif }
+	h5 { font: italic 100% sans-serif }
+	h6 { font: small-caps 100% sans-serif }
+
+	.hide { display: none }
+
+	div.head { margin-bottom: 1em }
+	div.head h1 { margin-top: 2em; clear: both }
+	div.head table { margin-left: 2em; margin-top: 2em }
+
+	p.copyright { font-size: small }
+	p.copyright small { font-size: small }
+
+	pre { margin-left: 2em }
+	dt { font-weight: bold }
+
+	ul.toc, ol.toc {
+		list-style: none;
+	}
+
+/* The rest copied from the CSSWG's default.css */
+
+	body {
+		counter-reset: exampleno figure issue;
+		max-width: 50em;
+		margin: 0 auto !important;
+		line-height: 1.5;
+	}
+
+/******************************************************************************/
+/*                                Sectioning                                  */
+/******************************************************************************/
+
+/** Headings ******************************************************************/
+
+	h1, h2, h3, h4, h5, h6, dt {
+		page-break-after: avoid;
+	}
+
+	h2, h3, h5, h6 {
+		margin-top: 3em;
+	}
+	h4 {
+		 margin-top: 4em;
+	}
+
+/** Subheadings ***************************************************************/
+
+	h1 + h2,
+	#subtitle + h2 {
+		/* #subtitle is a subtitle in an H2 under the H1 */
+		margin-top: 0;
+	}
+	h2 + h3,
+	h3 + h4,
+	h4 + h5,
+	h5 + h6 {
+		margin-top: 1.2em; /* = 1 x line-height */
+	}
+
+/** Section divider ***********************************************************/
+	/* &lt;hr> used to separate TMI into the second half of a section              */
+	hr:not([title]) {
+		font-size: 1.5em;
+		text-align: center;
+		margin: 1em auto;
+		height: auto;
+		border: transparent solid 0;
+		background: transparent;
+	}
+	hr:not([title])::before {
+		content: "\1F411\2003\2003\1F411\2003\2003\1F411";
+	}
+	/* note: &lt;hr> with title separates document header from contents */
+
+/******************************************************************************/
+/*                            Paragraphs and Lists                            */
+/******************************************************************************/
+
+	p {
+		margin: 1em 0;
+	}
+	dd     > p:first-child,
+	li     > p:first-child {
+		margin-top: 0;
+	}
+
+	ul, ol {
+		margin-left: 0;
+		padding-left: 2em;
+	}
+	li {
+		margin: 0.25em 2em 0.5em 0;
+		padding-left: 0;
+	}
+
+	dl dd {
+		margin: 0 0 1em 2em;
+	}
+	.head dd {
+		margin-bottom: 0;
+	}
+
+	/* Style for algorithms */
+	ol.algorithm ol {
+	 border-left: 1px solid #90b8de;
+	 margin-left: 1em;
+	}
+	ol.algorithm ol.algorithm {
+	 border-left: none;
+	 margin-left: 0;
+	}
+
+	/* Style for switch/case &lt;dl>s */
+	dl.switch > dd > ol.only {
+	 margin-left: 0;
+	}
+	dl.switch > dd > ol.algorithm {
+	 margin-left: -2em;
+	}
+	dl.switch {
+	 padding-left: 2em;
+	}
+	dl.switch > dt {
+	 text-indent: -1.5em;
+	 margin-top: 1em;
+	}
+	dl.switch > dt + dt {
+	 margin-top: 0;
+	}
+	dl.switch > dt::before {
+	 content: '\21AA';
+	 padding: 0 0.5em 0 0;
+	 display: inline-block;
+	 width: 1em;
+	 text-align: right;
+	 line-height: 0.5em;
+	}
+
+	/* Style for paragraphs I know are in MD-genned lists */
+	[data-md] > :first-child {
+		margin-top: 0;
+	}
+	[data-md] > :last-child {
+		margin-bottom: 0;
+	}
+
+/** Inline Lists **************************************************************/
+	/* This is mostly to make the list inside the CR exit criteria more compact. */
+
+	ol.inline, ol.inline li {
+		display: inline;
+		padding: 0; margin: 0;
+	}
+	ol.inline {
+		counter-reset: list-item;
+	}
+	ol.inline li {
+		counter-increment: list-item;
+	}
+	ol.inline li::before {
+		content: "(" counter(list-item) ") ";
+		font-weight: bold;
+	}
+
+/** Terminology Markup ********************************************************/
+
+
+/******************************************************************************/
+/*                                 Inline Markup                              */
+/******************************************************************************/
+
+/** Terminology Markup ********************************************************/
+	dfn   { /* Defining instance */
+		font-weight: bolder;
+	}
+	a > i { /* Instance of term */
+		font-style: normal;
+	}
+	dt dfn code, code.idl {
+		font-size: inherit;
+	}
+	dfn var {
+		font-style: normal;
+	}
+
+/** Change Marking ************************************************************/
+
+	del { color: red;  text-decoration: line-through; }
+	ins { color: #080; text-decoration: underline;    }
+
+/** Miscellaneous improvements to inline formatting ***************************/
+
+	sup {
+		vertical-align: super;
+		font-size: 80%
+	}
+
+/******************************************************************************/
+/*                                    Code                                    */
+/******************************************************************************/
+
+/** General monospace/pre rules ***********************************************/
+
+	pre, code {
+		font-family: Menlo, Consolas, "DejaVu Sans Mono", monospace;
+		font-size: .9em;
+		page-break-inside: avoid;
+	}
+	pre {
+		margin-top: 1em;
+		margin-bottom: 1em;
+		overflow: auto;
+	}
+
+/** Syntax-Highlighted Code ***************************************************/
+
+	.example pre[class*="language-"],
+	.example [class*="language-"] pre,
+	.example pre[class*="lang-"],
+	.example [class*="lang-"] pre {
+		background: transparent; /* Prism applies a gray background that doesn't work well in the template. */
+	}
+
+/** Example Code **************************************************************/
+
+	div.html, div.xml,
+	pre.html, pre.xml {
+		padding: 0.5em;
+		margin: 1em 0;
+		position: relative;
+		clear: both;
+		color: #600;
+	}
+	pre.example,
+	pre.html,
+	pre.xml {
+		padding-top: 1.5em;
+	}
+
+	pre.illegal, .illegal pre
+	pre.deprecated, .deprecated pre {
+		color: red;
+	}
+
+/** IDL fragments *************************************************************/
+
+	pre.idl {
+		/* Match blue propdef boxes */
+		padding: .5em 1em;
+		background: #DEF;
+		margin: 1.2em 0;
+		border-left: 0.5em solid #8CCBF2;
+	}
+	pre.idl :link, pre.idl :visited {
+		color:inherit;
+		background:transparent;
+	}
+
+/** Inline CSS fragments ******************************************************/
+
+	.css.css, .property.property, .descriptor.descriptor {
+		color: #005a9c;
+		font-size: inherit;
+		font-family: inherit;
+	}
+	.css::before, .property::before, .descriptor::before {
+		content: "‘";
+	}
+	.css::after, .property::after, .descriptor::after {
+		content: "’";
+	}
+	.property, .descriptor {
+		/* Don't wrap property and descriptor names */
+		white-space: nowrap;
+	}
+	.type { /* CSS value &lt;type> */
+	font-style: italic;
+	}
+	pre .property::before, pre .property::after {
+		content: "";
+	}
+
+/** Inline markup fragments ***************************************************/
+
+	code.html, code.xml {
+		color: #660000;
+	}
+
+/** Autolinks produced using Bikeshed *****************************************/
+
+	[data-link-type="property"]::before,
+	[data-link-type="propdesc"]::before,
+	[data-link-type="descriptor"]::before,
+	[data-link-type="value"]::before,
+	[data-link-type="function"]::before,
+	[data-link-type="at-rule"]::before,
+	[data-link-type="selector"]::before,
+	[data-link-type="maybe"]::before {
+		content: "‘";
+	}
+	[data-link-type="property"]::after,
+	[data-link-type="propdesc"]::after,
+	[data-link-type="descriptor"]::after,
+	[data-link-type="value"]::after,
+	[data-link-type="function"]::after,
+	[data-link-type="at-rule"]::after,
+	[data-link-type="selector"]::after,
+	[data-link-type="maybe"]::after {
+		content: "’";
+	}
+
+	[data-link-type].production::before,
+	[data-link-type].production::after,
+	.prod [data-link-type]::before,
+	.prod [data-link-type]::after {
+		content: "";
+	}
+
+	[data-link-type=element]         { font-family: monospace; }
+	[data-link-type=element]::before { content: "&lt;" }
+	[data-link-type=element]::after  { content: ">" }
+
+	[data-link-type=biblio] {
+		white-space: pre;
+	}
+
+
+/******************************************************************************/
+/*                                    Links                                   */
+/******************************************************************************/
+
+/** General Hyperlinks ********************************************************/
+
+	/* We hyperlink a lot, so make it less intrusive */
+	a:link, a:visited {
+		color: inherit;
+		text-decoration: none;
+		border-bottom: 1px solid silver;
+	}
+	@supports (text-decoration-color: silver) {
+		a:link, a:visited {
+			border-bottom: none;
+			text-decoration: underline;
+			text-decoration-color: silver;
+		}
+		a:visited {
+			text-decoration-style: dotted;
+		}
+	}
+
+	a.logo:link, a.logo:visited { /* backout above styling for W3C logo */
+		padding: 0;
+		border: none;
+		text-decoration: none;
+	}
+
+/** Self-Links ****************************************************************/
+	/* Auto-generated links from an element to its own anchor, for usability */
+
+	.heading, .issue, .note, .example, li, dt {
+		position: relative;
+	}
+	a.self-link {
+		position: absolute;
+		top: 0;
+		left: -2.5em;
+		width: 2em;
+		height: 2em;
+		text-align: center;
+		border: none;
+		transition: opacity .2s;
+		opacity: .5;
+	}
+	a.self-link:hover {
+		opacity: 1;
+	}
+	.heading > a.self-link {
+		font-size: 83%;
+	}
+	li > a.self-link {
+		left: -3.5em;
+	}
+	dfn > a.self-link {
+		top: auto;
+		left: auto;
+		opacity: 0;
+		width: 1.5em;
+		height: 1.5em;
+		background: gray;
+		color: white;
+		font-style: normal;
+		transition: opacity .2s, background-color .2s, color .2s;
+	}
+	dfn:hover > a.self-link {
+		opacity: 1;
+	}
+	dfn > a.self-link:hover {
+		color: black;
+	}
+
+	a.self-link::before            { content: "¶"; }
+	.heading > a.self-link::before { content: "§"; }
+	dfn > a.self-link::before      { content: "#"; }
+
+/******************************************************************************/
+/*                                    Images                                  */
+/******************************************************************************/
+
+	img {
+		border-style: none;
+		color: white;
+	}
+
+	figure, div.figure, div.sidefigure {
+		page-break-inside: avoid;
+	}
+
+	div.figure, p.figure, div.sidefigure, figure {
+		text-align: center;
+		margin: 2.5em 0;
+	}
+	div.figure pre, div.sidefigure pre, figure pre {
+		text-align: left;
+		display: table;
+		margin: 1em auto;
+	}
+	.figure table, figure table {
+		margin: auto;
+	}
+	div.sidefigure, figure.sidefigure {
+		float: right;
+		width: 50%;
+		margin: 0 0 0.5em 0.5em
+	}
+	div.figure img, div.sidefigure img, figure img,
+	div.figure object, div.sidefigure object, figure object {
+		display: block;
+		margin: auto;
+		max-width: 100%
+	}
+	p.caption, figcaption, caption {
+		text-align: center;
+		font-style: italic;
+		font-size: 90%;
+	}
+	p.caption:not(.no-marker)::before, figcaption:not(.no-marker)::before {
+		content: "Figure " counter(figure) ". ";
+	}
+	p.caption::before, figcaption::before, figcaption > .marker {
+		font-weight: bold;
+	}
+	p.caption, figcaption {
+		counter-increment: figure;
+	}
+
+	/* DL list is indented 2em, but figure inside it is not */
+	dd > div.figure, dd > figure { margin-left: -2em }
+
+	pre.ascii-art {
+		display: table; /* shrinkwrap */
+		margin: 1em auto;
+	}
+
+	/* Displaying the output of text layout, particularly when
+		 line-breaking is being invoked, and thus having a
+		 visible width is good. */
+	pre.output {
+		margin: 1em;
+		border: solid thin silver;
+		padding: 0.25em;
+		display: table;
+	}
+
+/******************************************************************************/
+/*                             Colored Boxes                                  */
+/******************************************************************************/
+
+	.issue, .note, .example, .why, .advisement, blockquote {
+		padding: .5em;
+		border: .5em;
+		border-left-style: solid;
+		page-break-inside: avoid;
+	}
+	span.issue, span.note {
+		padding: .1em .5em .15em;
+		border-right-style: solid;
+	}
+
+	div.issue,
+	div.note,
+	div.example,
+	details.why,
+	blockquote {
+		margin: 1em auto;
+	}
+	.note  > p:first-child,
+	.issue > p:first-child,
+	blockquote > :first-child {
+		margin-top: 0;
+	}
+	blockquote > :last-child {
+		margin-bottom: 0;
+	}
+
+/** Blockquotes ***************************************************************/
+
+	blockquote {
+		border-color: silver;
+	}
+
+/** Open issue ****************************************************************/
+	/* not intended for CR+ publication */
+
+	.issue {
+		border-color: #E05252;
+		background: #FBE9E9;
+		counter-increment: issue;
+		overflow: auto;
+	}
+	.issue:not(.no-marker)::before {
+		content: "ISSUE " counter(issue);
+		padding-right: 1em;
+	}
+	.issue::before, .issue > .marker {
+		color: #AE1E1E;
+	}
+
+/** Example *******************************************************************/
+
+	.example {
+		border-color: #E0CB52;
+		background: #FCFAEE;
+		counter-increment: exampleno;
+		overflow: auto;
+		clear: both;
+	}
+	.example::before, .example > .marker {
+		color: #827017;
+		font-family: sans-serif;
+		min-width: 7.5em;
+		display: block;
+	}
+	.example:not(.no-marker)::before {
+		content: "EXAMPLE";
+		content: "EXAMPLE " counter(exampleno);
+	}
+	.invalid.example::before, .invalid.example > .marker,
+	.illegal.example::before, .illegal.example > .marker {
+		color: red;
+	}
+	.invalid.example:not(.no-marker)::before,
+	.illegal.example:not(.no-marker)::before {
+		content: "INVALID EXAMPLE";
+		content: "INVALID EXAMPLE" counter(exampleno);
+	}
+
+/** Non-normative Note ********************************************************/
+
+	.note, .why {
+		border-color: #52E052;
+		background: #E9FBE9;
+		overflow: auto;
+	}
+	.note::before, .note > .marker {
+		display: block;
+		color: hsl(120, 70%, 30%);
+	}
+
+/** Advisement Box ************************************************************/
+	/*  for attention-grabbing normative statements */
+
+	.advisement {
+		border-color: orange;
+		border-style: none solid;
+		background: #FFEECC;
+		text-align: center;
+	}
+	strong.advisement {
+		display: block;
+	}
+	/*.advisement::before { color: #FF8800; } */
+
+/** ??? ***********************************************************************/
+
+	details.why {
+		border-color: #52E052;
+		background: #E9FBE9;
+		display: block;
+	}
+
+	details.why > summary {
+		font-style: italic;
+		display: block;
+	}
+
+	details.why[open] > summary {
+		border-bottom: 1px silver solid;
+	}
+
+/** Spec Obsoletion Notice ****************************************************/
+	/* obnoxious obsoletion notice for older/abandoned specs. */
+
+	details.annoying-warning {
+		display: block;
+	}
+
+	details.annoying-warning[open] {
+		background: #fdd;
+		color: red;
+		font-weight: bold;
+		text-align: center;
+		padding: .5em;
+		border: thick solid red;
+		border-radius: 1em;
+	}
+@media not print {
+	details.annoying-warning[open] {
+		position: fixed;
+		left: 1em;
+		right: 1em;
+		bottom: 1em;
+		z-index: 1000;
+	}
+}
+
+	details.annoying-warning:not([open]) > summary {
+		background: #fdd;
+		color: red;
+		font-weight: bold;
+		text-align: center;
+		padding: .5em;
+	}
+
+/******************************************************************************/
+/*                                    Tables                                  */
+/******************************************************************************/
+
+/** Property/Descriptor Definition Tables *************************************/
+
+	table.propdef, table.propdef-extra,
+	table.descdef, table.definition-table {
+		page-break-inside: avoid;
+		width: 100%;
+		margin: 1.2em 0;
+		border-left: 0.5em solid #8CCBF2;
+		padding: 0.5em 1em;
+		background: #DEF;
+		border-spacing: 0;
+	}
+
+	table.propdef td, table.propdef-extra td,
+	table.descdef td, table.definition-table td,
+	table.propdef th, table.propdef-extra th,
+	table.descdef th, table.definition-table th {
+		padding: 0.5em;
+		vertical-align: baseline;
+		border-bottom: 1px solid #bbd7e9;
+	}
+	table.propdef > tbody > tr:last-child th,
+	table.propdef-extra > tbody > tr:last-child th,
+	table.descdef > tbody > tr:last-child th,
+	table.definition-table > tbody > tr:last-child th,
+	table.propdef > tbody > tr:last-child td,
+	table.propdef-extra > tbody > tr:last-child td,
+	table.descdef > tbody > tr:last-child td,
+	table.definition-table > tbody > tr:last-child td {
+		border-bottom: 0;
+	}
+
+	table.propdef th,
+	table.propdef-extra th,
+	table.descdef th,
+	table.definition-table th {
+		font-style: italic;
+		font-weight: normal;
+		width: 8.3em;
+		padding-left: 1em;
+	}
+
+	/* For when values are extra-complex and need formatting for readability */
+	table td.pre {
+		white-space: pre-wrap;
+	}
+
+	/* A footnote at the bottom of a propdef */
+	table.propdef td.footnote,
+	table.propdef-extra td.footnote,
+	table.descdef td.footnote,
+	table.definition-table td.footnote {
+		padding-top: 0.6em;
+	}
+	table.propdef td.footnote::before,
+	table.propdef-extra td.footnote::before,
+	table.descdef td.footnote::before,
+	table.definition-table td.footnote::before {
+		content: " ";
+		display: block;
+		height: 0.6em;
+		width: 4em;
+		border-top: thin solid;
+	}
+
+/** Profile Tables ************************************************************/
+	/* table of required features in a CSS profile */
+
+	table.features th {
+		background: #00589f;
+		color: #fff;
+		text-align: left;
+		padding: 0.2em 0.2em 0.2em 0.5em;
+	}
+	table.features td {
+		vertical-align: top;
+		border-bottom: 1px solid #ccc;
+		padding: 0.3em 0.3em 0.3em 0.7em;
+	}
+
+/** Data tables (and properly marked-up proptables) ***************************/
+	/*
+		 &lt;table class="data"> highlights structural relationships in a table
+		 when correct markup is used (e.g. thead/tbody, th vs. td, scope attribute)
+
+		 Use class="complex data" for particularly complicated tables --
+		 (This will draw more lines: busier, but clearer.)
+
+		 Use class="long" on table cells with paragraph-like contents
+		 (This will adjust text alignment accordingly.)
+	*/
+
+	.data, .proptable {
+		margin: 1em auto;
+		border-collapse: collapse;
+		width: 100%;
+		border: hidden;
+	}
+	.data {
+		text-align: center;
+		width: auto;
+	}
+	.data caption {
+		width: 100%;
+	}
+
+	.data td, .data th,
+	.proptable td, .proptable th {
+		padding: 0.5em;
+		border-width: 1px;
+		border-color: silver;
+		border-top-style: solid;
+	}
+
+	.data thead td:empty {
+		padding: 0;
+		border: 0;
+	}
+
+	.data thead th[scope="row"],
+	.proptable thead th[scope="row"] {
+		text-align: right;
+		color: inherit;
+	}
+
+	.data thead,
+	.proptable thead,
+	.data tbody,
+	.proptable tbody {
+		color: inherit;
+		border-bottom: 2px solid;
+	}
+
+	.data colgroup {
+		border-left: 2px solid;
+	}
+
+	.data tbody th:first-child,
+	.proptable tbody th:first-child ,
+	.data tbody td[scope="row"]:first-child,
+	.proptable tbody td[scope="row"]:first-child {
+		text-align: right;
+		color: inherit;
+		border-right: 2px solid;
+		border-top: 1px solid silver;
+		padding-right: 1em;
+	}
+	.data.define td:last-child {
+		text-align: left;
+	}
+
+	.data tbody th[rowspan],
+	.proptable tbody th[rowspan],
+	.data tbody td[rowspan],
+	.proptable tbody td[rowspan]{
+		border-left:  1px solid silver;
+		border-right: 1px solid silver;
+	}
+
+	.complex.data th,
+	.complex.data td {
+		border: 1px solid silver;
+	}
+
+	.data td.long {
+	 vertical-align: baseline;
+	 text-align: left;
+	}
+
+	.data img {
+		vertical-align: middle;
+	}
+
+
+/******************************************************************************/
+/*                                  Indices                                   */
+/******************************************************************************/
+
+
+/** Table of Contents *********************************************************/
+
+	/* ToC not indented, but font style shows hierarchy */
+	ul.toc           { margin: 1em 0;     font-weight: bold; /*text-transform: uppercase;*/ }
+	ul.toc ul        { margin: 0;        font-weight: normal; text-transform: none; }
+	ul.toc ul ul     { margin: 0 0 0 2em; font-style: italic; }
+	ul.toc ul ul ul  { margin: 0; }
+	ul.toc > li      { margin: 1.5em 0; }
+	ul.toc ul.toc li { margin: 0.3em 0 0 0; }
+
+	ul.toc, ul.toc ul, ul.toc li { padding: 0; line-height: 1.3; }
+	ul.toc a { text-decoration: none; border-bottom-style: none; }
+	ul.toc a:hover, ul.toc a:focus  { border-bottom-style: solid; }
+	@supports (text-decoration-style: solid) {
+		ul.toc a:hover, ul.toc a:focus  {
+			border-bottom-style: none;
+			text-decoration-style: solid;
+		}
+	}
+	/*
+	ul.toc li li li, ul.toc li li li ul {margin-left: 0; display: inline}
+	ul.toc li li li ul, ul.toc li li li ul li {margin-left: 0; display: inline}
+	*/
+
+	/* Section numbers in a column of their own */
+	ul.toc {
+		margin-left: 5em
+	}
+	ul.toc span.secno {
+		float: left;
+		width: 4em;
+		margin-left: -5em;
+	}
+	ul.toc ul ul span.secno {
+		margin-left: -7em;
+	}
+	/*ul.toc span.secno {text-align: right}*/
+	ul.toc li {
+		clear: both;
+	}
+	/* If we had 'tab', floats would not be needed here:
+		 ul.toc span.secno {tab: 5em right; margin-right: 1em}
+		 ul.toc li {text-indent: 5em hanging}
+	 The second line in case items wrap
+	*/
+
+/** At-risk List **************************************************************/
+	/* Style for At Risk features (intended as editorial aid, not intended for publishing) */
+
+	.atrisk::before {
+	 float: right;
+	 margin-top: -0.25em;
+	 padding: 0.5em 1em 0.5em 0;
+	 text-indent: -0.9em;
+	 border: 1px solid;
+	 content: '\25C0    Not yet widely implemented';
+	 white-space: pre;
+	 font-size: small;
+	 background-color: white;
+	 color: gray;
+	 text-align: center;
+	}
+
+	.toc .atrisk::before { content:none }
+
+/** Index *********************************************************************/
+
+	/* Index Lists: Layout */
+	ul.indexlist       { margin-left: 0; columns: 15em; -webkit-columns: 15em; text-indent: 1em hanging; }
+	ul.indexlist li    { margin-left: 0; list-style: none; break-inside: avoid; word-break: break-word; }
+	ul.indexlist li li { margin-left: 1em }
+	ul.indexlist dl    { margin-top: 0; }
+	ul.indexlist dt    { margin: .2em 0 .2em 20px;}
+	ul.indexlist dd    { margin: .2em 0 .2em 40px;}
+	/* Index Lists: Typography */
+	ul.indexlist ul,
+	ul.indexlist dl { font-size: smaller; }
+	ul.indexlist li span {
+		white-space: nowrap;
+		position: absolute;
+		color: transparent; }
+	ul.indexlist li a:hover + span,
+	ul.indexlist li a:focus + span {
+		color: gray;
+	}
+	@media print {
+		ul.indexlist li span { color: gray; }
+	}
+
+/** Property Index Tables *****************************************************/
+	/* See also the data table styling section, which this effectively subclasses */
+
+	table.proptable {
+		font-size: small;
+		border-collapse: collapse;
+		border-spacing: 0;
+		text-align: left;
+		margin: 1em 0;
+	}
+
+	table.proptable td,
+	table.proptable th {
+		padding: 0.4em;
+		text-align: center;
+	}
+
+	table.proptable tr:hover td {
+		background: #DEF;
+	}
+	.propdef th {
+		font-style: italic;
+		font-weight: normal;
+		text-align: left;
+		width: 3em;
+	}
+	/* The link in the first column in the property table (formerly a TD) */
+	table.proptable td .property,
+	table.proptable th .property {
+		display: block;
+		text-align: left;
+		font-weight: bold;
+	}
+
+/******************************************************************************/
+/*                                    Print                                   */
+/******************************************************************************/
+
+	@media print {
+		html {
+			margin: 0 !important; }
+		body {
+			font-family: serif; }
+		th, td {
+			font-family: inherit; }
+		a {
+			color: inherit !important; }
+
+		a:link, a:visited {
+			text-decoration: none !important }
+		a:link::after, a:visited::after { /* create a cross-ref "see..." */ }
+		.example::before {
+			font-family: serif !important; }
+	}
+	@page {
+		margin: 1.5cm 1.1cm;
+	}
+
+</style>
+  <meta content="Bikeshed 1.0.0" name="generator">
+<style>.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #ffffff; }
+.highlight .c { color: #708090 } /* Comment */
+.highlight .k { color: #990055 } /* Keyword */
+.highlight .l { color: #669900 } /* Literal */
+.highlight .n { color: #0077aa } /* Name */
+.highlight .o { color: #999999 } /* Operator */
+.highlight .p { color: #999999 } /* Punctuation */
+.highlight .cm { color: #708090 } /* Comment.Multiline */
+.highlight .cp { color: #708090 } /* Comment.Preproc */
+.highlight .c1 { color: #708090 } /* Comment.Single */
+.highlight .cs { color: #708090 } /* Comment.Special */
+.highlight .kc { color: #990055 } /* Keyword.Constant */
+.highlight .kd { color: #990055 } /* Keyword.Declaration */
+.highlight .kn { color: #990055 } /* Keyword.Namespace */
+.highlight .kp { color: #990055 } /* Keyword.Pseudo */
+.highlight .kr { color: #990055 } /* Keyword.Reserved */
+.highlight .kt { color: #990055 } /* Keyword.Type */
+.highlight .ld { color: #669900 } /* Literal.Date */
+.highlight .m { color: #990055 } /* Literal.Number */
+.highlight .s { color: #669900 } /* Literal.String */
+.highlight .na { color: #0077aa } /* Name.Attribute */
+.highlight .nc { color: #0077aa } /* Name.Class */
+.highlight .no { color: #0077aa } /* Name.Constant */
+.highlight .nd { color: #0077aa } /* Name.Decorator */
+.highlight .ni { color: #0077aa } /* Name.Entity */
+.highlight .ne { color: #0077aa } /* Name.Exception */
+.highlight .nf { color: #0077aa } /* Name.Function */
+.highlight .nl { color: #0077aa } /* Name.Label */
+.highlight .nn { color: #0077aa } /* Name.Namespace */
+.highlight .py { color: #0077aa } /* Name.Property */
+.highlight .nt { color: #0077aa } /* Name.Tag */
+.highlight .nv { color: #0077aa } /* Name.Variable */
+.highlight .ow { color: #999999 } /* Operator.Word */
+.highlight .mf { color: #990055 } /* Literal.Number.Float */
+.highlight .mh { color: #990055 } /* Literal.Number.Hex */
+.highlight .mi { color: #990055 } /* Literal.Number.Integer */
+.highlight .mo { color: #990055 } /* Literal.Number.Oct */
+.highlight .sb { color: #669900 } /* Literal.String.Backtick */
+.highlight .sc { color: #669900 } /* Literal.String.Char */
+.highlight .sd { color: #669900 } /* Literal.String.Doc */
+.highlight .s2 { color: #669900 } /* Literal.String.Double */
+.highlight .se { color: #669900 } /* Literal.String.Escape */
+.highlight .sh { color: #669900 } /* Literal.String.Heredoc */
+.highlight .si { color: #669900 } /* Literal.String.Interpol */
+.highlight .sx { color: #669900 } /* Literal.String.Other */
+.highlight .sr { color: #669900 } /* Literal.String.Regex */
+.highlight .s1 { color: #669900 } /* Literal.String.Single */
+.highlight .ss { color: #669900 } /* Literal.String.Symbol */
+.highlight .vc { color: #0077aa } /* Name.Variable.Class */
+.highlight .vg { color: #0077aa } /* Name.Variable.Global */
+.highlight .vi { color: #0077aa } /* Name.Variable.Instance */
+.highlight .il { color: #990055 } /* Literal.Number.Integer.Long */
+        .highlight { background: hsl(24, 20%, 95%); }
+        code.highlight { padding: .1em; border-radius: .3em; }
+        pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
+        </style>
+ </head>
+ <body class="h-entry">
+  <div class="head">
+   <p data-fill-with="logo"></p>
+   <h1 class="p-name no-ref" id="title">CSS Nesting Module Level 3</h1>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2015-09-23">23 September 2015</time></span></h2>
+   <div data-fill-with="spec-metadata">
+    <dl>
+     <dt>This version:
+     <dd><a class="u-url" href="http://tabatkins.github.io/specs/css-nesting/">http://tabatkins.github.io/specs/css-nesting/</a>
+     <dt>Issue Tracking:
+     <dd><a href="https://github.com/tabatkins/specs/issues/">GitHub</a>
+     <dd><a href="#issues-index">Inline In Spec</a>
+     <dt class="editor">Editor:
+     <dd class="editor p-author h-card vcard"><a class="p-name fn u-url url" href="http://xanthir.com/contact/">Tab Atkins</a> (<span class="p-org org">Google</span>)
+    </dl>
+   </div>
+   <div data-fill-with="warning"></div>
+   <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
+and related or neighboring rights to this work.
+In addition, as of 23 September 2015,
+the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
+which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
+Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
+   <hr title="Separator for header">
+  </div>
+  <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
+  <div class="p-summary" data-fill-with="abstract">
+   <p>This module introduces the ability to nest one style rule inside another, with the selector of the child rule relative to the selector of the parent rule.  This increase the modularity and maintainability of CSS stylesheets.</p>
+  </div>
+  <div data-fill-with="at-risk"></div>
+  <h2 class="no-num no-toc no-ref heading settled" id="contents"><span class="content">Table of Contents</span></h2>
+  <div data-fill-with="table-of-contents" role="navigation">
+   <ul class="toc" role="directory">
+    <li>
+     <a href="#intro"><span class="secno">1</span> <span class="content"> Introduction</span></a>
+     <ul class="toc">
+      <li><a href="#placement"><span class="secno">1.1</span> <span class="content"> Module Interactions</span></a>
+      <li><a href="#values"><span class="secno">1.2</span> <span class="content"> Values</span></a>
+      <li><a href="#motivation"><span class="secno">1.3</span> <span class="content"> Motivation</span></a>
+     </ul>
+    <li><a href="#nest-selector"><span class="secno">2</span> <span class="content">Nesting Selector: the <span class="css">&amp;</span> selector</span></a>
+    <li>
+     <a href="#nesting"><span class="secno">3</span> <span class="content">Nesting Style Rules</span></a>
+     <ul class="toc">
+      <li><a href="#direct"><span class="secno">3.1</span> <span class="content">Direct Nesting</span></a>
+      <li><a href="#at-nest"><span class="secno">3.2</span> <span class="content">The Nesting At-Rule: <span class="css">@nest</span></span></a>
+      <li><a href="#mixing"><span class="secno">3.3</span> <span class="content">Mixing Nesting Rules and Declarations</span></a>
+     </ul>
+    <li><a href="#cssom"><span class="secno">4</span> <span class="content">CSS Object Model Modifications</span></a>
+    <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
+    <li>
+     <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
+     <ul class="toc">
+      <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
+      <li><a href="#index-defined-elsewhere"><span class="secno"></span> <span class="content">Terms defined by reference</span></a>
+     </ul>
+    <li>
+     <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
+     <ul class="toc">
+      <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
+      <li><a href="#informative"><span class="secno"></span> <span class="content">Informative References</span></a>
+     </ul>
+    <li><a href="#issues-index"><span class="secno"></span> <span class="content">Issues Index</span></a>
+   </ul>
+  </div>
+  <main>
+   <h2 class="heading settled" data-level="1" id="intro"><span class="secno">1. </span><span class="content"> Introduction</span><a class="self-link" href="#intro"></a></h2>
+   <p><em>This section is not normative.</em></p>
+   <p>This module describes support for nesting a style rule within another style rule,
+	allowing the inner rule’s selector to reference the elements matched by the outer rule.
+	This feature allows related styles to be aggregated into a single structure within the CSS document,
+	improving readability and maintainability.</p>
+   <h3 class="heading settled" data-level="1.1" id="placement"><span class="secno">1.1. </span><span class="content"> Module Interactions</span><a class="self-link" href="#placement"></a></h3>
+   <p>This module introduces new parser rules that extend the <a data-link-type="biblio" href="#biblio-css21">[CSS21]</a> parser model.
+	This module introduces selectors that extend the <a data-link-type="biblio" href="#biblio-selectors4">[SELECTORS4]</a> module.</p>
+   <h3 class="heading settled" data-level="1.2" id="values"><span class="secno">1.2. </span><span class="content"> Values</span><a class="self-link" href="#values"></a></h3>
+   <p>This specification does not define any new properties or values.</p>
+   <h3 class="heading settled" data-level="1.3" id="motivation"><span class="secno">1.3. </span><span class="content"> Motivation</span><a class="self-link" href="#motivation"></a></h3>
+   <p>CSS Rules for even moderately complicated web pages include lots of duplication for the purpose of styling related content.
+	For example, here is a portion of the CSS markup for one version of the <a data-link-type="biblio" href="#biblio-css3color">[CSS3COLOR]</a> module:</p>
+   <div class="example" id="example-0fd3acbb">
+    <a class="self-link" href="#example-0fd3acbb"></a> 
+<pre class="lang-css highlight"><span class="nt">table</span><span class="nc">.colortable</span> <span class="nt">td</span> <span class="p">{</span>
+  <span class="k">text-align</span><span class="o">:</span><span class="k">center</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">table</span><span class="nc">.colortable</span> <span class="nt">td</span><span class="nc">.c</span> <span class="p">{</span>
+  <span class="k">text-transform</span><span class="o">:</span><span class="k">uppercase</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">table</span><span class="nc">.colortable</span> <span class="nt">td</span><span class="nd">:first-child</span><span class="o">,</span> <span class="nt">table</span><span class="nc">.colortable</span> <span class="nt">td</span><span class="nd">:first-child</span><span class="o">+</span><span class="nt">td</span> <span class="p">{</span>
+  <span class="k">border</span><span class="o">:</span><span class="m">1px</span> <span class="k">solid</span> <span class="nb">black</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">table</span><span class="nc">.colortable</span> <span class="nt">th</span> <span class="p">{</span>
+  <span class="k">text-align</span><span class="o">:</span><span class="k">center</span><span class="p">;</span>
+  <span class="k">background</span><span class="o">:</span><span class="nb">black</span><span class="p">;</span>
+  <span class="k">color</span><span class="o">:</span><span class="nb">white</span><span class="p">;</span>
+<span class="p">}</span></pre>
+   </div>
+   <p>Nesting allow the grouping of related style rules, like this:</p>
+   <div class="example" id="example-9d52adf0">
+    <a class="self-link" href="#example-9d52adf0"></a> 
+<pre class="lang-css highlight"><span class="nt">table</span><span class="nc">.colortable</span> <span class="p">{</span>
+  <span class="o">&amp;</span> <span class="n">td</span> <span class="err">{</span>
+    <span class="k">text-align</span><span class="o">:</span><span class="k">center</span><span class="p">;</span>
+    <span class="o">&amp;.</span><span class="n">c</span> <span class="err">{</span> <span class="k">text-transform</span><span class="o">:</span><span class="k">uppercase</span> <span class="p">}</span>
+    <span class="o">&amp;</span><span class="nd">:first-child</span><span class="o">,</span> <span class="o">&amp;</span><span class="nd">:first-child</span> <span class="o">+</span> <span class="nt">td</span> <span class="p">{</span> <span class="k">border</span><span class="o">:</span><span class="m">1px</span> <span class="k">solid</span> <span class="nb">black</span> <span class="p">}</span>
+  <span class="err">}</span>
+  <span class="o">&amp;</span> <span class="nt">th</span> <span class="p">{</span>
+    <span class="k">text-align</span><span class="o">:</span><span class="k">center</span><span class="p">;</span>
+    <span class="k">background</span><span class="o">:</span><span class="nb">black</span><span class="p">;</span>
+    <span class="k">color</span><span class="o">:</span><span class="nb">white</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="err">}</span></pre>
+   </div>
+   <p>Besides removing duplication,
+	the grouping of related rules improves the readability and maintainability of the resulting CSS.</p>
+   <h2 class="heading settled" data-level="2" id="nest-selector"><span class="secno">2. </span><span class="content">Nesting Selector: the <a class="css" data-link-type="maybe" href="#selectordef-">&amp;</a> selector</span><a class="self-link" href="#nest-selector"></a></h2>
+   <p>When using a <a data-link-type="dfn" href="#nested-style-rule">nested style rule</a>,
+	one must be able to refer to the elements matched by the parent rule;
+	that is, after all, <em>the entire point of nesting</em>.
+	To accomplish that,
+	this specification defines a new selector,
+	the <dfn data-dfn-type="dfn" data-noexport="" id="nesting-selector">nesting selector<a class="self-link" href="#nesting-selector"></a></dfn>,
+	written as an ASCII ampersand <dfn class="css" data-dfn-type="selector" data-export="" id="selectordef-">&amp;<a class="self-link" href="#selectordef-"></a></dfn>.</p>
+   <p>When used in the selector of a <a data-link-type="dfn" href="#nested-style-rule">nested style rule</a>,
+	the <a data-link-type="dfn" href="#nesting-selector">nesting selector</a> represents the elements matched by the parent rule.
+	When used in any other context,
+	it represents nothing.
+	(That is, it’s valid, but matches no elements.)</p>
+   <div class="note" role="note">
+     The <a data-link-type="dfn" href="#nesting-selector">nesting selector</a> can be desugared
+		by replacing it with the parent style rule’s selector,
+		wrapped in a <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/selectors-4/#matches-pseudo">:matches()</a> selector.
+		For example, 
+<pre class="lang-css highlight"><span class="nt">a</span><span class="o">,</span> <span class="nt">b</span> <span class="p">{</span>
+  <span class="o">&amp;</span> <span class="n">c</span> <span class="err">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+<span class="err">}</span></pre>
+    <p>is equivalent to</p>
+<pre class="lang-css highlight"><span class="nd">:matches</span><span class="o">(</span><span class="nt">a</span><span class="o">,</span> <span class="nt">b</span><span class="o">)</span> <span class="nt">c</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span></pre>
+   </div>
+   <p>The <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#specificity">specificity</a> of the <a data-link-type="dfn" href="#nesting-selector">nesting selector</a> is equal to the largest specificity among the parent style rule’s selector
+	that match the given element.</p>
+   <div class="example" id="example-36b8cd98">
+    <a class="self-link" href="#example-36b8cd98"></a> For example, given the following style rules: 
+<pre class="lang-css highlight"><span class="nf">#a</span><span class="o">,</span> <span class="nc">.b</span> <span class="p">{</span>
+  <span class="o">&amp;</span> <span class="n">c</span> <span class="err">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+<span class="err">}</span></pre>
+    <p>Then in a DOM structure like</p>
+<pre class="lang-html highlight"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">a</span><span class="nt">></span>
+  <span class="nt">&lt;c></span>foo<span class="nt">&lt;/c></span>
+<span class="nt">&lt;/div></span></pre>
+    <p>the <a class="css" data-link-type="maybe" href="#selectordef-">&amp;</a> selector has specificity [1,0,0]
+		because it matches due to the <span class="css">#a</span> selector,
+		giving the entire <a class="css" data-link-type="propdesc" href="https://drafts.csswg.org/css-color-4/#propdef-color">color: blue</a> rule a specificity of [1,0,1].</p>
+   </div>
+   <p class="note" role="note">Note: This specificity is intentionally equivalent to that of the desugaring described above.</p>
+   <p>The <a data-link-type="dfn" href="#nesting-selector">nesting selector</a> is allowed anywhere in a <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#compound">compound selector</a>,
+	even before a <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#type-selector">type selector</a>,
+	violating the normal restrictions on ordering within a <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#compound">compound selector</a>.</p>
+   <p class="note" role="note">Note: This is required to allow direct nesting.
+	Also, the "type selectors must come first" has no <em>intrinsic</em> reason behind it;
+	it exists because we need to be able to tell simple selectors apart unambiguously
+	when they’re directly appended together in a <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#compound">compound selector</a>,
+	and it’s not clear from <span class="css">.foodiv</span> that it should mean the same as <span class="css">div.foo</span>.
+	An ampersand is unambiguously separable from an ident, tho,
+	so there is no problem with it preceding a type selector,
+	like <span class="css">&amp;div</span>.</p>
+   <h2 class="heading settled" data-level="3" id="nesting"><span class="secno">3. </span><span class="content">Nesting Style Rules</span><a class="self-link" href="#nesting"></a></h2>
+   <p>Nesting style rules naively inside of other style rules is, unfortunately, problematic—<wbr>the syntax of a selector is ambiguous with the syntax of a declaration,
+	so an implementation requires unbounded lookahead
+	to tell whether a given bit of text is a declaration or the start of a style rule.
+	As CSS to date requires only a single token of lookahead in its parsing,
+	this drawback is generally considered unacceptable among popular implementations of CSS.</p>
+   <p>To get around this limitation,
+	this specification defines two methods of <dfn data-dfn-type="dfn" data-lt="nested style rule|nesting style rule" data-noexport="" id="nested-style-rule">nesting style rules<a class="self-link" href="#nested-style-rule"></a></dfn> inside of other style rules,
+	both designed to be immediately unambiguous with the surrounding declarations.
+	The first, <a data-link-type="dfn" href="#direct-nesting">direct nesting</a>,
+	has a somewhat restricted syntax,
+	but imposes minimal additional "weight" in the form of disambiguating syntax,
+	and is suitable for most purposes.
+	The second, the <a class="css" data-link-type="maybe" href="#at-ruledef-nest">@nest</a> rule,
+	imposes a small syntactic weight to disambiguate it from surrounding declarations,
+	but has no restrictions on the makeup of the selector.
+	The two are otherwise equivalent,
+	and either can be used as desired by the stylesheet author.</p>
+   <h3 class="heading settled" data-level="3.1" id="direct"><span class="secno">3.1. </span><span class="content">Direct Nesting</span><a class="self-link" href="#direct"></a></h3>
+   <p>A style rule can be <dfn data-dfn-type="dfn" data-lt="direct nesting|directly nested" data-noexport="" id="direct-nesting">directly nested<a class="self-link" href="#direct-nesting"></a></dfn> within another style rule if its selector is <a data-link-type="dfn" href="#nest-prefixed">nest-prefixed</a>.</p>
+   <p>To be <dfn data-dfn-type="dfn" data-noexport="" id="nest-prefixed">nest-prefixed<a class="self-link" href="#nest-prefixed"></a></dfn>,
+	a <a data-link-type="dfn" href="#nesting-selector">nesting selector</a> must be the first <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#simple">simple selector</a> in the first <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#compound">compound selector</a> of the selector.
+	If the selector is a list of selectors,
+	every <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#complex">complex selector</a> in the list must be <a data-link-type="dfn" href="#nest-prefixed">nest-prefixed</a> for the selector as a whole to <a data-link-type="dfn" href="#nest-prefixed">nest-prefixed</a>.</p>
+   <div class="example" id="example-0c180746">
+    <a class="self-link" href="#example-0c180746"></a> For example, the following nestings are valid: 
+<pre class="lang-css highlight"><span class="nc">.foo</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+  <span class="o">&amp;</span> <span class="o">></span> <span class="o">.</span><span class="n">bar</span> <span class="err">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+<span class="err">}</span>
+<span class="c">/* equivalent to</span>
+<span class="c">   .foo { color: blue; }</span>
+<span class="c">   .foo > .bar { color: red; }</span>
+<span class="c"> */</span>
+
+<span class="nc">.foo</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+  <span class="o">&amp;.</span><span class="n">bar</span> <span class="err">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+<span class="err">}</span>
+<span class="c">/* equivalent to</span>
+<span class="c">   .foo { color: blue; }</span>
+<span class="c">   .foo.bar { color: red; }</span>
+<span class="c"> */</span>
+
+<span class="nc">.foo</span><span class="o">,</span> <span class="nc">.bar</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+  <span class="o">&amp;</span> <span class="o">+</span> <span class="o">.</span><span class="n">baz</span><span class="o">,</span> <span class="o">&amp;.</span><span class="n">qux</span> <span class="err">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span> <span class="p">}</span>
+<span class="err">}</span>
+<span class="c">/* equivalent to</span>
+<span class="c">   .foo, .bar { color: blue; }</span>
+<span class="c">   :matches(.foo, .bar) + .baz,</span>
+<span class="c">   :matches(.foo, .bar).qux { color: red; }</span>
+<span class="c"> */</span></pre>
+    <p>But the following are invalid:</p>
+<pre class="lang-css highlight"><span class="nc">.foo</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+  <span class="o">.</span><span class="n">bar</span> <span class="err">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+<span class="err">}</span>
+<span class="c">/* Invalid because there’s no nesting selector */</span>
+
+<span class="nc">.foo</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+  <span class="o">.</span><span class="n">bar</span> <span class="o">&amp;</span> <span class="err">{</span> <span class="k">color</span><span class="o">:</span><span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+<span class="err">}</span>
+<span class="c">/* Invalid because &amp; isn’t in the first compound selector */</span>
+
+<span class="nc">.foo</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+  <span class="o">&amp;.</span><span class="n">bar</span><span class="o">,</span> <span class="o">.</span><span class="n">baz</span> <span class="err">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+<span class="err">}</span>
+<span class="c">/* Invalid because the second selector in the list doesn’t</span>
+<span class="c">   contain a nesting selector. */</span></pre>
+   </div>
+   <p class="note" role="note">Note: The last invalid example is technically not ambiguous,
+	but it’s still invalid because allowing it would be an editting hazard.
+	Later edits to the stylesheet might remove the first selector in the list,
+	making the other one the new "first selector",
+	and making the rule invalid.
+	Turning an otherwise-innocuous action
+	(like removing a selector from a list)
+	into a possible error
+	makes editting more complicated,
+	and is author-hostile,
+	so we disallow it as a possibility.</p>
+   <h3 class="heading settled" data-level="3.2" id="at-nest"><span class="secno">3.2. </span><span class="content">The Nesting At-Rule: <a class="css" data-link-type="maybe" href="#at-ruledef-nest">@nest</a></span><a class="self-link" href="#at-nest"></a></h3>
+   <p>While <a data-link-type="dfn" href="#direct-nesting">direct nesting</a> looks nice,
+	it is somewhat fragile.
+	Some valid nesting selectors,
+	like <span class="css">.foo &amp;</span>,
+	are disallowed,
+	and editting the selector in certain ways can make the rule invalid unexpectedly.
+	As well,
+	some people find the nesting difficult to visually distinguish
+	from the surrounding declarations.</p>
+   <p>To aid in all these issues,
+	this specification defines the <a class="css" data-link-type="maybe" href="#at-ruledef-nest">@nest</a> rule,
+	which imposes less restrictions on how to validly nest style rules.
+	Its syntax is:</p>
+<pre class="prod"><dfn data-dfn-type="at-rule" data-export="" id="at-ruledef-nest">@nest<a class="self-link" href="#at-ruledef-nest"></a></dfn> = @nest <a class="production" data-link-type="type" href="https://drafts.csswg.org/selectors-4/#typedef-selector">&lt;selector></a> { <a class="production" data-link-type="type" href="https://drafts.csswg.org/css-syntax-3/#typedef-declaration-list">&lt;declaration-list></a> }
+</pre>
+   <p>The <a class="css" data-link-type="maybe" href="#at-ruledef-nest">@nest</a> rule functions identically to a style rule:
+	it starts with a selector,
+	and contains declarations that apply to the elements the selector matches.
+	The only difference is that the selector used in a <a class="css" data-link-type="maybe" href="#at-ruledef-nest">@nest</a> rule
+	must be <dfn data-dfn-type="dfn" data-noexport="" id="nest-containing">nest-containing<a class="self-link" href="#nest-containing"></a></dfn>,
+	which means it contains a <a data-link-type="dfn" href="#nesting-selector">nesting selector</a> in it somewhere.
+	A list of selectors is <a data-link-type="dfn" href="#nest-containing">nest-containing</a> if all of its individual <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#complex">complex selectors</a> are <a data-link-type="dfn" href="#nest-containing">nest-containing</a>.</p>
+   <div class="example" id="example-bad4c111">
+    <a class="self-link" href="#example-bad4c111"></a> For example, the following nestings are valid: 
+<pre class="lang-css highlight"><span class="nc">.foo</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+  <span class="o">@</span><span class="n">nest</span> <span class="o">&amp;</span> <span class="o">></span> <span class="o">.</span><span class="n">bar</span> <span class="err">{</span>
+    <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="err">}</span>
+<span class="c">/* equivalent to</span>
+<span class="c">   .foo { color: red; }</span>
+<span class="c">   .foo > .bar { color: blue; }</span>
+<span class="c"> */</span>
+
+<span class="nc">.foo</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+  <span class="o">@</span><span class="n">nest</span> <span class="o">.</span><span class="n">parent</span> <span class="o">&amp;</span> <span class="err">{</span>
+    <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="err">}</span>
+<span class="c">/* equivalent to</span>
+<span class="c">   .foo { color: red; }</span>
+<span class="c">   .parent .foo { color: blue; }</span>
+<span class="c"> */</span>
+
+<span class="nc">.foo</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+  <span class="o">@</span><span class="n">nest</span> <span class="o">:</span><span class="n">not</span><span class="p">(</span><span class="o">&amp;</span><span class="p">)</span> <span class="err">{</span>
+    <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="err">}</span>
+<span class="c">/* equivalent to</span>
+<span class="c">   .foo { color: red; }</span>
+<span class="c">   :not(.foo) { color: blue; }</span>
+<span class="c"> */</span></pre>
+    <p>But the following are invalid:</p>
+<pre class="lang-css highlight"><span class="nc">.foo</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+  <span class="o">@</span><span class="n">nest</span> <span class="o">.</span><span class="n">bar</span> <span class="err">{</span>
+    <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="err">}</span>
+<span class="c">/* Invalid because there’s no nesting selector */</span>
+
+<span class="nc">.foo</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+  <span class="o">@</span><span class="n">nest</span> <span class="o">&amp;</span> <span class="o">.</span><span class="n">bar</span><span class="o">,</span> <span class="o">.</span><span class="n">baz</span> <span class="err">{</span>
+    <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="err">}</span>
+<span class="c">/* Invalid because not all selectors in the list</span>
+<span class="c">   contain a nesting selector */</span></pre>
+    <h3 class="heading settled" data-level="3.3" id="mixing"><span class="secno">3.3. </span><span class="content">Mixing Nesting Rules and Declarations</span><a class="self-link" href="#mixing"></a></h3>
+    <p>A style rule can have any number of <a data-link-type="dfn" href="#nested-style-rule">nested style rules</a> inside of it,
+	of either type,
+	intermixed with any number of declarations,
+	in any order.</p>
+    <p>The relative ordering of <a data-link-type="dfn" href="#nested-style-rule">nested style rules</a> and other declarations <strong>is</strong> important;
+	it’s possible for a given style rule and a <a data-link-type="dfn" href="#nested-style-rule">nested style rule</a> within it to match the same element,
+	and if the specificity of the two rules is otherwise equivalent,
+	the relative order in the stylesheet of the applicable declarations
+	determines which declaration "wins" the <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#cascade">cascade</a>.</p>
+    <h2 class="heading settled" data-level="4" id="cssom"><span class="secno">4. </span><span class="content">CSS Object Model Modifications</span><a class="self-link" href="#cssom"></a></h2>
+    <div class="issue" id="issue-a72d3683">
+     <a class="self-link" href="#issue-a72d3683"></a> 
+     <ol>
+      <li data-md="">
+       <p>Add an interface for the @nest rule.</p>
+      <li data-md="">
+       <p>Tie into the general work needed to let rules be nested into style rules.</p>
+     </ol>
+    </div>
+   </div>
+  </main>
+  <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
+  <p> Conformance requirements are expressed with a combination of descriptive assertions and RFC 2119 terminology.
+        The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL”
+        in the normative parts of this document
+        are to be interpreted as described in RFC 2119.
+        However, for readability,
+        these words do not appear in all uppercase letters in this specification. </p>
+  <p> All of the text of this specification is normative
+        except sections explicitly marked as non-normative, examples, and notes. <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a> </p>
+  <p> Examples in this specification are introduced with the words “for example”
+        or are set apart from the normative text with <code>class="example"</code>, like this: </p>
+  <div class="example" id="example-ae2b6bc0"><a class="self-link" href="#example-ae2b6bc0"></a> This is an example of an informative example. </div>
+  <p> Informative notes begin with the word “Note”
+        and are set apart from the normative text with <code>class="note"</code>, like this: </p>
+  <p class="note" role="note"> Note, this is an informative note. </p>
+  <h2 class="no-num heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
+  <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
+  <ul class="indexlist">
+   <li><a href="#selectordef-">&amp;</a><span>, in §2</span>
+   <li><a href="#direct-nesting">directly nested</a><span>, in §3.1</span>
+   <li><a href="#direct-nesting">direct nesting</a><span>, in §3.1</span>
+   <li><a href="#at-ruledef-nest">@nest</a><span>, in §3.2</span>
+   <li><a href="#nest-containing">nest-containing</a><span>, in §3.2</span>
+   <li><a href="#nested-style-rule">nested style rule</a><span>, in §3</span>
+   <li><a href="#nesting-selector">nesting selector</a><span>, in §2</span>
+   <li><a href="#nested-style-rule">nesting style rule</a><span>, in §3</span>
+   <li><a href="#nest-prefixed">nest-prefixed</a><span>, in §3.1</span>
+  </ul>
+  <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
+  <ul class="indexlist">
+   <li>
+    <a data-link-type="biblio" href="#biblio-css-cascade-4">[css-cascade-4]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-cascade-4/#cascade">cascade</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio" href="#biblio-css-color-4">[css-color-4]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-color-4/#propdef-color">color</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio" href="#biblio-css-syntax-3">[css-syntax-3]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-syntax-3/#typedef-declaration-list">&lt;declaration-list></a>
+    </ul>
+   <li>
+    <a data-link-type="biblio" href="#biblio-selectors-4">[selectors-4]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/selectors-4/#matches-pseudo">:matches()</a>
+     <li><a href="https://drafts.csswg.org/selectors-4/#typedef-selector">&lt;selector></a>
+     <li><a href="https://drafts.csswg.org/selectors-4/#complex">complex selector</a>
+     <li><a href="https://drafts.csswg.org/selectors-4/#compound">compound selector</a>
+     <li><a href="https://drafts.csswg.org/selectors-4/#simple">simple selector</a>
+     <li><a href="https://drafts.csswg.org/selectors-4/#specificity">specificity</a>
+     <li><a href="https://drafts.csswg.org/selectors-4/#type-selector">type selector</a>
+    </ul>
+  </ul>
+  <h2 class="no-num heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
+  <h3 class="no-num heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
+  <dl>
+   <dt id="biblio-css21"><a class="self-link" href="#biblio-css21"></a>[CSS21]
+   <dd>Bert Bos; et al. <a href="http://www.w3.org/TR/CSS2">Cascading Style Sheets Level 2 Revision 1 (CSS 2.1) Specification</a>. 7 June 2011. REC. URL: <a href="http://www.w3.org/TR/CSS2">http://www.w3.org/TR/CSS2</a>
+   <dt id="biblio-css-cascade-4"><a class="self-link" href="#biblio-css-cascade-4"></a>[CSS-CASCADE-4]
+   <dd>Elika Etemad; Tab Atkins Jr.. <a href="http://www.w3.org/TR/css-cascade-4/">CSS Cascading and Inheritance Level 4</a>. 8 September 2015. WD. URL: <a href="http://www.w3.org/TR/css-cascade-4/">http://www.w3.org/TR/css-cascade-4/</a>
+   <dt id="biblio-css-color-4"><a class="self-link" href="#biblio-css-color-4"></a>[CSS-COLOR-4]
+   <dd>CSS Color Module Level 4 URL: <a href="https://drafts.csswg.org/css-color-4/">https://drafts.csswg.org/css-color-4/</a>
+   <dt id="biblio-css-syntax-3"><a class="self-link" href="#biblio-css-syntax-3"></a>[CSS-SYNTAX-3]
+   <dd>Tab Atkins Jr.; Simon Sapin. <a href="http://www.w3.org/TR/css-syntax-3/">CSS Syntax Module Level 3</a>. 20 February 2014. CR. URL: <a href="http://www.w3.org/TR/css-syntax-3/">http://www.w3.org/TR/css-syntax-3/</a>
+   <dt id="biblio-rfc2119"><a class="self-link" href="#biblio-rfc2119"></a>[RFC2119]
+   <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
+   <dt id="biblio-selectors-4"><a class="self-link" href="#biblio-selectors-4"></a>[SELECTORS-4]
+   <dd>Selectors Level 4 URL: <a href="http://www.w3.org/TR/selectors4/">http://www.w3.org/TR/selectors4/</a>
+  </dl>
+  <h3 class="no-num heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
+  <dl>
+   <dt id="biblio-css3color"><a class="self-link" href="#biblio-css3color"></a>[CSS3COLOR]
+   <dd>Tantek Çelik; Chris Lilley; David Baron. <a href="http://www.w3.org/TR/css3-color">CSS Color Module Level 3</a>. 7 June 2011. REC. URL: <a href="http://www.w3.org/TR/css3-color">http://www.w3.org/TR/css3-color</a>
+   <dt id="biblio-selectors4"><a class="self-link" href="#biblio-selectors4"></a>[SELECTORS4]
+   <dd>Elika Etemad; Tab Atkins Jr.. <a href="http://www.w3.org/TR/selectors4/">Selectors Level 4</a>. 2 May 2013. WD. URL: <a href="http://www.w3.org/TR/selectors4/">http://www.w3.org/TR/selectors4/</a>
+  </dl>
+  <h2 class="no-num heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
+  <div style="counter-reset:issue">
+   <div class="issue">
+    <ol>
+     <li data-md="">
+      <p>Add an interface for the @nest rule.</p>
+     <li data-md="">
+      <p>Tie into the general work needed to let rules be nested into style rules.</p>
+    </ol>
+     <a href="#issue-a72d3683"> ↵ </a>
+   </div>
+  </div>
+ </body>
+</html>

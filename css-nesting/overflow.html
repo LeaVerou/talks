@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="dns-prefetch" href="https://lea.verou.me">
+	<title>A story of ice, fire, and CSS Nesting 🧊🔥🪆</title>
+	<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🪆</text></svg>' />
+
+	<link href="https://inspirejs.org/inspire.css" rel="stylesheet" />
+	<link href="https://inspirejs.org/theme.css" rel="stylesheet" />
+	<link href="theme.css" rel="stylesheet" />
+	<link href="talk.css" rel="stylesheet" />
+
+	<script src="../shared/js/bliss.shy.min.js"></script>
+	<script src="../shared/js/prism.js" data-manual></script>
+	<!-- <script src="https://incrementable.verou.me/incrementable.js" type="module"></script> -->
+	<script src="https://inspirejs.org/inspire.mjs" type="module"></script>
+	<script src="talk.js" type="module"></script>
+</head>
+<body class="language-css no-docs" data-markdown-elements="details.notes, .md">
+
+
+	<article class="slide" id="selector-grammar">
+		<header>
+			<h1>CSS Grammars</h1>
+			<p class="subheading">Selectors (simplified)</p>
+		</header>
+
+		<script type="text/plain" class="language-cssgrammar no-whitespace-normalization">
+			<subclass-selector> = <id-selector> | <class-selector> |
+				<attribute-selector> | <pseudo-class-selector>
+			<simple-selector> = <type-selector> | <subclass-selector>
+			<combinator> = '>' | '+' | '~'
+			<compound-selector> = [ <type-selector>? <subclass-selector>*
+				<pseudo-element-selector>? ]!
+			<complex-selector> = <compound-selector> [ <combinator>? <compound-selector> ]*
+			<selector-list> = <complex-selector>#
+	 	</script>
+		 <dl data-clone=".grammar-cheatsheet" data-show="[] | ? * ! #"></dl>
+	</article>
+
+	<article class="slide">
+		<pre class="language-scss"><code>
+			main .callout {
+				--_hue: var(--hue, 180);
+				padding: .3em .5em;
+				background: oklch(95% .05 var(--_hue));
+
+				&.info { --hue: 220 }
+				&.warning { --hue: 60 }
+
+				> :is(h1, h2, h3) {
+					color: oklch(40% .1 var(--_hue));
+
+					.subtitle { color: oklch(60% .1 var(--_hue)); }
+				}
+
+				a { color: oklch(40% .1 var(--_hue)); }
+			}
+		</code></pre>
+	</article>
+
+	<article class="slide">
+		<pre class="language-scss"><code>
+			main .callout {
+				--_hue: var(--hue, 180);
+				padding: .3em .5em;
+				background: oklch(95% .05 var(--_hue));
+
+				&.info { --hue: 220 }
+				&.warning { --hue: 60 }
+
+				h1, h2, h3 {
+					color: oklch(40% .1 var(--_hue));
+
+					> .subtitle {
+						color: oklch(60% .1 var(--_hue));
+					}
+				}
+			}
+		</code></pre>
+	</article>
+</section>
+
+<footer class="slide">
+	<h1>Thank you!</h1>
+</footer>
+
+</body>
+</html>
