@@ -139,7 +139,14 @@ pre {
 }
 
 .slide {
-	background-image: none;
+	&:not(.dark) {
+		background-image: none;
+	}
+
+	&.dark {
+		color-scheme: dark;
+		background-color: var(--color-gray-50);
+	}
 
 	> h1,
 	> header > h1 {
@@ -307,4 +314,11 @@ h1:has(> .label) {
 
 #indicator {
 	opacity: .5;
+}
+
+.tweet {
+	padding: .2em;
+	background: white;
+	border-radius: .5em;
+	box-shadow: 0 20px 50px black;
 }
