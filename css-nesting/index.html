@@ -5,7 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<link rel="dns-prefetch" href="https://lea.verou.me">
-	<title>A story of ice, fire, and CSS Nesting 🧊🔥🪆</title>
+	<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+	<title>A story of 🧊 ice, 🔥 fire, and 🪆 CSS Nesting</title>
 	<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🪆</text></svg>' />
 
 	<link href="https://inspirejs.org/inspire.css" rel="stylesheet" />
@@ -19,7 +20,7 @@
 	<script src="https://inspirejs.org/inspire.mjs" type="module"></script>
 	<script src="talk.js" type="module"></script>
 </head>
-<body class="language-css no-docs no-media" data-markdown-elements="details.notes, .md">
+<body class="language-css no-docs no-media" data-markdown-elements="details.notes, .md, .they-said blockquote">
 
 <header id="intro" class="slide dont-resize">
 	<h1>A story of
@@ -419,6 +420,45 @@ body {
 			- To override that, authors can use the `&` character to refer to the parent selector.
 		</details>
 	</article>
+
+	<article class="conversion slide columns">
+		<h1>Concatenation</h1>
+		<pre class="language-scss delayed"><code>
+			.card {
+				display: grid;
+
+				&__image {
+					border-radius: 50%;
+				}
+
+				&__button {
+					&--submit { background: var(--accent1); }
+					&--canel { background: none; }
+				}
+			}
+		</code></pre>
+		<pre><code>
+			.card {
+				display: grid;
+			}
+			.card__image {
+				border-radius: 50%;
+			}
+			.card__button--submit {
+				background: var(--accent1);
+			}
+			.card__button--canel {
+				background: none;
+			}
+		</code></pre>
+		<details class="notes">
+			Sass also did concatenation, to facilitate patterns like BEM.
+			Because preprocessors are text-based, things like this are easier.
+			This has always been out of scope for CSS and that remained constant until today, so we will not discuss it more going forwards.
+			In fact, this feature was recognized as [a mistake by Sass’ designers](https://github.com/w3c/csswg-drafts/issues/2701#issuecomment-395572904) too.
+		</details>
+	</article>
+
 	<article class="conversion slide columns">
 		<h1>Nesting @-rules</h1>
 
@@ -484,6 +524,8 @@ body {
 		</details>
 	</article>
 
+
+
 	<article class="slide" id="when-can-we" data-credits="Giphy">
 		<h1>Can we adopt this in CSS?</h1>
 	</article>
@@ -538,7 +580,7 @@ body {
 				| ':' <function-token> <any-value> ')'
 			</script>
 		</div>
-		<dl class="grammar-cheatsheet" title="Grammar cheatsheet" data-show="[] |">
+		<dl class="grammar cheatsheet" title="Grammar cheatsheet" data-show="[] |">
 			<dt data-symbol="[]">[ ]</dt>
 			<dd>Grouping</dd>
 
@@ -586,7 +628,7 @@ body {
 					[ <string-token> | <ident-token> ]? ']'
 			</script>
 		</div>
-		<dl data-clone=".grammar-cheatsheet" data-show="[] | ?"></dl>
+		<dl data-clone=".grammar.cheatsheet" data-show="[] | ?"></dl>
 
 		<details class="notes">
 			- The next step is parsing, which is the process of grouping tokens into constructs.
@@ -638,7 +680,7 @@ body {
 					| <dimension-token> | <percentage-token> ]+
 			</script>
 
-			<dl data-clone=".grammar-cheatsheet" data-show="[] ?"></dl>
+			<dl data-clone=".grammar.cheatsheet" data-show="[] ?"></dl>
 
 			<details class="notes">
 				- [`&lt;declaration-value>`](https://drafts.csswg.org/css-syntax-3/#typedef-declaration-value)
@@ -693,7 +735,7 @@ body {
 		</details>
 	</article>
 
-	<article class="historical slide" id="first-proposal">
+	<article class="history slide" id="first-proposal">
 		<h1>
 			<time>2013</time>
 			First nesting proposal
@@ -730,7 +772,7 @@ body {
 		```
 	</article>
 
-	<article class="historical slide">
+	<article class="history slide">
 		<h1>
 			<time>June 2015</time>
 			PostCSS implements
@@ -740,9 +782,9 @@ body {
 
 
 
-	<article class="historical slide columns" id="proposal2">
+	<article class="history slide columns" id="proposal2">
 		<h1>
-			<time>2015</time>
+			<time>Sep 2015</time>
 			New syntax
 		</h1>
 		<iframe src="tab-specs/v1/css-nesting/" class="browser"></iframe>
@@ -789,7 +831,7 @@ body {
 		```
 	</article>
 
-	<article class="historical slide">
+	<article class="history slide">
 		<h1>
 			<time>Sep 2015</time>
 			PostCSS updates
@@ -800,7 +842,7 @@ body {
 		</details>
 	</article>
 
-	<article class="slide" style="background: url(img/84years.gif) center / cover">
+	<article class="slide" style="background: url(img/84years.gif) center / cover" data-credits="Twentieth Century Fox / Giphy">
 		<details class="notes">
 			Well, not quite 84 but it sure felt like it.
 			Part of the reason not much was happening was that a few people thought nesting was better served by a Houdini custom @-rule.
@@ -811,26 +853,99 @@ body {
 		<img src="img/poll-2016.png" alt="" class="tweet">
 	</article>
 
-	<article class="historical slide">
+	<article class="history slide">
 		<h1><time>Feb 2017</time> Ping #1</h1>
 		<iframe src="https://github.com/w3c/csswg-drafts/issues/998" frameborder="0" class="browser"></iframe>
 	</article>
 
-	<article class="historical slide">
+	<article class="history slide">
 		<h1><time>Mar 2018</time> Ping #2</h1>
 		<iframe src="https://github.com/w3c/csswg-drafts/issues/2456" frameborder="0" class="browser"></iframe>
 	</article>
 
-	<article class="historical slide">
-		<h1><time>Mar 2018</time> Ping #3</h1>
+	<article class="history slide">
+		<h1><time>May 2018</time> Ping #3</h1>
 		<iframe src="https://github.com/w3c/csswg-drafts/issues/2701" frameborder="0" class="browser"></iframe>
 	</article>
 
+	<article class="history slide">
+		<h1><time>July 2018</time> CSS WG adopts spec</h1>
+		<a href="https://github.com/w3c/csswg-drafts/issues/2701#issuecomment-402392212" class="browser" target="_blank"><img src="img/csswg-adopts.png" alt="" /></a>
+	</article>
 
+	<article class="dark slide" style="background: url(img/tumbleweed.gif) bottom / cover" data-credits="Giphy">
+		<h1>Years pass…</h1>
+	</article>
+
+	<article class="history slide">
+		<h1>
+			<time>2022</time>
+			State of CSS Survey
+		</h1>
+		<iframe src="https://stateofcss.com/en-US" frameborder="0" class="browser"></iframe>
+	</article>
+
+	<article class="slide">
+		<h1>What features do you think are currently missing from CSS altogether?</h1>
+		<p>Nesting by far the top feature</p>
+	</article>
+
+	<article class="dont-resize history slide columns">
+		<h1>
+			<time>Oct 2022</time>
+			Chrome suddenly very keen to implement
+		</h1>
+		<a href="https://groups.google.com/a/chromium.org/g/blink-dev/c/-GxQ0MIcons/m/dTi5stNrBAAJ" class="browser" target="_blank"><img src="img/itp.png" alt=""></a>
+	</article>
+
+	<article class="dont-resize history slide they-said">
+		<time>Oct 2022</time>
+		<div class="messages delayed-children">
+			<blockquote>Lea, we cannot let this ship!</blockquote>
+			<blockquote>This will be used all over stylesheets. Having to prefix every rule with `&` or `@nest` will be tedious to write and noisy to read.</blockquote>
+			<blockquote>And it’s incompatible with `@scope`, so copying and pasting will require a ton of fixup.</blockquote>
+			<blockquote>We must do something, ASAP!</blockquote>
+			</blockquote>
+		</div>
+		<article class="person">
+			<img src="img/elika.jpg" alt="Elika" class="person">
+			<div>
+				<h3>Elika Etemad (fantasai)</h3>
+				<p>Extremely prolific CSS editor</p>
+			</div>
+		</article>
+
+		<details class="notes">
+			Around the same time
+		</details>
+	</article>
 </section>
 
 <footer class="slide">
-	<h1>Thank you!</h1>
+	<header>
+		<h1>Thank you!</h1>
+		<p class="subheading">Slides at <a href="https://projects.verou.me/talks/css-nesting/">projects.verou.me/talks/css-nesting/</a></p>
+	</header>
+	<dl class="cheatsheet" title="Reach out!">
+		<dt class="bi bi-link-45deg"></dt>
+		<dd>
+			<a href="https://lea.verou.me">lea.verou.me</a>
+		</dd>
+
+		<dt class="bi bi-envelope-open"></dt>
+		<dd>
+			lea@verou.me
+		</dd>
+
+		<dt>
+			<i class="bi bi-twitter"></i>
+			<i class="bi bi-github"></i>
+			<i class="bi bi-mastodon"></i>
+			<i class="bi bi-linkedin"></i>
+			<i class="bi bi-threads"></i>
+		</dt>
+		<dd>leaverou</dd>
+	</dl>
 </footer>
 
 </body>

@@ -1,4 +1,5 @@
 @import url("https://lea.verou.me/assets/fonts.css");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
 
 :root {
 	--font-sans: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
@@ -26,8 +27,11 @@
 	--color-gray-90: oklch(0.9 0.01 180);
 	--color-gray-95: oklch(0.95 0.01 180);
 
-	/* --color-green-light: color-mix(in oklch, var(--color-green) 0%, oklch(.95 .12 none));
-	--color-red-light: color-mix(in oklch, var(--color-red) 0%, oklch(.95 .12 none)); */
+	--color-green-light: color-mix(in oklch, var(--color-green) 0%, oklch(.95 .12 none));
+	--color-red-light: color-mix(in oklch, var(--color-red) 0%, oklch(.95 .12 none));
+	--color-aqua-light: color-mix(in oklch, var(--color-aqua) 0%, oklch(.95 .05 none));
+
+	--color-aqua-dark: color-mix(in oklch, var(--color-aqua) 0%, oklch(.4 none none));
 
 	--color1: var(--color-yellow);
 	--color2: var(--color-green);
@@ -138,8 +142,16 @@ pre {
 	}
 }
 
+code:not(pre > code) {
+	font-size: 110%;
+}
+
 .slide {
-	&:not(.dark) {
+	padding: 5rem;
+
+
+
+	&:where(:not(.dark)) {
 		background-image: none;
 	}
 
@@ -156,6 +168,10 @@ pre {
 
 	> h1,
 	> header {
+		&:has(+ .browser) {
+			margin-bottom: .2em;
+		}
+
 		.subheading {
 			color: var(--color-gray-60);
 			font-size: calc(1.2 * var(--slide-base-font-size, 1rem));
@@ -187,6 +203,20 @@ header.slide {
 		grid-column: 1 / -1;
 		margin: auto;
 		margin-top: .5em;
+	}
+
+	&:has(> h1 + :last-child),
+	&.h-col {
+		/* No point in doing 2+ columns with a heading and a single element,
+		  the heading must be in one of the columns */
+		grid-template-rows: 1fr;
+
+		> h1,
+		> header {
+			grid-column: auto;
+			margin-top: 0;
+			text-align: left;
+		}
 	}
 
 	> * {
@@ -241,7 +271,8 @@ header.slide {
 	}
 }
 
-iframe.browser {
+.browser,
+a.browser > :only-child {
 	/* Frame offsets in px */
 	--frame-top: 38;
 	--frame-right: 146;
@@ -249,9 +280,7 @@ iframe.browser {
 
 	position: relative;
 	min-width: 347px;
-	width: 100%;
-	height: 100%;
-	flex: 1;
+
 	box-sizing: border-box;
 	border: 1px solid rgba(0 0 0 / .2);
 	border-radius: 5px;
@@ -264,27 +293,26 @@ iframe.browser {
 		url("img/chrome-middle.png") top repeat-x white;
 	background-origin: border-box;
 
-	&::after {
-		content: var(--url);
-		position: absolute;
-		top: .45em;
-		left: 210px;
-		font-size: 38%;
-		color: black;
-		font-weight: 400;
+	&:where(iframe) {
+		width: 100%;
+		height: 100%;
+		flex: 1;
+
+		.columns & {
+			min-width: calc(90vw / var(--columns, 2));
+		}
 	}
 
-	.columns & {
-		min-width: calc(90vw / var(--columns, 2));
+	&:where(a) {
+		display: contents;
 	}
-}
 
-.slide:has(h1:first-child + .browser:last-child, h1:first-child + .browser + details.notes:last-child) {
-	padding: 5rem;
-
-	& > h1 {
-		margin-bottom: .2em;
+	&:where(img, a > img) {
+		flex: 1;
+		min-height: 3em;
 	}
+
+
 }
 
 .slide:is(.takeaway, .recap) h1,
@@ -321,4 +349,55 @@ h1:has(> .label) {
 	background: white;
 	border-radius: .5em;
 	box-shadow: 0 20px 50px black;
+}
+
+.cheatsheet {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	font-size: 60%;
+	background: var(--color-gray-90);
+	letter-spacing: 0;
+	margin: 0;
+
+	&::before,
+	& dt,
+	& dd {
+		padding: .3rem .7rem;
+	}
+
+	&::before,
+	& dt {
+		white-space: nowrap;
+	}
+
+	&[title]::before {
+		content: attr(title);
+		display: flex;
+		align-items: center;
+		background: var(--color-gray-80);
+		text-transform: uppercase;
+		font-weight: 500;
+		font-size: 80%;
+		color: var(--color-gray-40);
+	}
+
+	& dt {
+		display: flex;
+		align-items: center;
+		background: var(--color-gray-40);
+		color: white;
+
+		&:has(> i.bi:where(:not(:only-child))) {
+			display: flex;
+			gap: .5em;
+		}
+	}
+
+	& dd {
+		flex-grow: 1;
+		margin-left: 0;
+	}
 }
