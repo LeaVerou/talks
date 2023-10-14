@@ -93,14 +93,14 @@
 
 		<div>
 			<pre class="language-scss"><code>
-$font-sans: Helvetica, sans-serif;
-$color-accent: oklch(.5 .3 180);
+				$color-accent: oklch(50% .3 180);
+				$font-sans: Helvetica, sans-serif;
 
-
-body {
-	font: 100%/1.5 $font-sans;
-	accent-color: $color-accent;
-}</code></pre>
+				body {
+					font: 100%/1.5 $font-sans;
+					accent-color: $color-accent;
+				}
+			</code></pre>
 		</div>
 		<div>
 			<pre class="language-css delayed"><code>
@@ -120,7 +120,7 @@ body {
 		<h1>Native CSS Variables</h1>
 
 		<div>
-			<pre data-clone="#sass-variables pre.language-scss" class="language-scss no-whitespace-normalization"></pre>
+			<pre data-clone="#sass-variables pre.language-scss"></pre>
 		</div>
 		<div>
 			<pre class="language-css delayed"><code>
@@ -141,35 +141,49 @@ body {
 		</details>
 	</article>
 
-	<article class="slide minimal live demo" id="reactive-css-variables">
-		<textarea class="language-css">
-			@keyframes angle-spin {
-				to { --angle: 1turn; }
+	<article class="slide columns" id="reactive-css-variables">
+		<h1 class="container">CSS Variable Reactivity</h1>
+		<pre><code>
+			.container {
+				--accent-color: oklch(60% .15 var(--angle, 0deg));
 			}
-			body {
-				--accent-color: oklch(.6 .15 var(--angle));
-				animation: angle-spin 4s linear infinite;
-			}
+			h1, button { color: var(--accent-color); }
 			button {
 				border: .1em solid var(--accent-color);
-				color: var(--accent-color);
 			}
 			button.primary, button:hover {
 				background: var(--accent-color);
 				color: white;
 			}
-		</textarea>
-		<style class="demo">
+		</code></pre>
+		<pre class="delayed"><code>
+			@property --angle {
+				syntax: "&lt;angle>";
+				inherits: true;
+				initial-value: 0deg;
+			}
+			@keyframes angle-spin {
+				to { --angle: 1turn; }
+			}
+			.container {
+				animation: angle-spin 4s linear infinite;
+			}
+		</code></pre>
+		<style data-slide>
 			button {
 				background: transparent border-box;
 				border-radius: .2em;
-				padding: .15em .5em;
+				padding: .15em .6em;
 				font-weight: 500;
 				letter-spacing: inherit;
 			}
 		</style>
-		<button>Log in</button>
-		<button class="primary">Sign up</button>
+		<style data-slide data-clone="code"></style>
+		<style data-slide data-clone="pre + pre > code"></style>
+		<div class="container">
+			<button>Log in</button>
+			<button class="primary">Sign up</button>
+		</div>
 		<details class="notes">
 			However, if you look more closely, the CSS syntax has several advantages.
 			CSS variables are actual CSS properties, and share their reactive nature.
@@ -222,7 +236,7 @@ body {
 	<article class="slide columns">
 		<header>
 			<h1>Native CSS Calculations</h1>
-			<p class="subheading">calc() in 2013</p>
+			<p class="subtitle">calc() in 2013</p>
 		</header>
 
 		<div>
@@ -285,7 +299,7 @@ body {
 	<article class="slide">
 		<header>
 			<h1>CSS Relative Colors</h1>
-			<p class="subheading"><a href="https://caniuse.com/css-relative-colors">Coming soon!</a></p>
+			<p class="subtitle"><a href="https://caniuse.com/css-relative-colors">Coming soon!</a></p>
 		</header>
 
 		<div>
@@ -538,8 +552,45 @@ body {
 			<span>Crash Course</span>
 		</h1>
 	</header>
-	<article class="slide">
-		<h1>Tokenization</h1>
+	<article class="slide" id="parsing">
+		<h1>Parsing</h1>
+
+		<ul class="tree arrows">
+			<li>
+				Characters
+				<ul>
+					<li>
+						Tokens
+						<ul>
+							<li>
+								Complex Constructs
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</article>
+	<article class="slide language-cssgrammar columns" id="css-tokens">
+		<h1>CSS tokens</h1>
+		<figure>
+			<object data="img/number-token.svg"></object>
+			<figcaption><code>&lt;number-token></code></figcaption>
+		</figure>
+		<figure>
+			<object data="img/hash-token.svg"></object>
+			<figcaption><code>&lt;hash-token></code></figcaption>
+		</figure>
+		<details class="notes">
+			- Parsing always begins with tokenization.
+			- Tokens are the smallest meaningful units in a programming language
+			- Tokens are to programming what words are to natural language.
+			- Here are some examples of tokens in CSS, shown as railroad diagrams directly from the CSS Syntax spec.
+		</details>
+	</article>
+
+	<article class="slide" id="tokenization">
+		<h1>CSS Tokenization Example</h1>
 
 		<pre class="language-tokenizedcss"><code class="delayed-children">
 			#nav > a:hover {
@@ -560,7 +611,6 @@ body {
 		<details class="notes">
 			- The first step of parsing CSS (and any code really) is tokenization.
 			- The tokenizer reads the code character by character and groups them into tokens, i.e. meaningful syntactical units.
-			- Tokens are to programming what words are to human language.
 			- For CSS, these tokens are defined in the [CSS Syntax](https://drafts.csswg.org/css-syntax/) specification.
 		</details>
 	</article>
@@ -568,7 +618,7 @@ body {
 	<article class="slide" id="simple-selector-grammar">
 		<header>
 			<h1>CSS Grammars</h1>
-			<p class="subheading">Simple selectors (simplified)</p>
+			<p class="subtitle">Simple selectors (simplified)</p>
 		</header>
 
 		<div>
@@ -613,7 +663,7 @@ body {
 	<article class="slide" id="simple-selector-grammar">
 		<header>
 			<h1>CSS Grammars</h1>
-			<p class="subheading">Simple selectors (simplified)</p>
+			<p class="subtitle">Simple selectors (simplified)</p>
 		</header>
 
 		<div>
@@ -640,7 +690,7 @@ body {
 		</details>
 	</article>
 
-	<article class="slide language-cssgrammar tree-children md dont-resize tree-flushend progressive-subtree" id="lookahead">
+	<article class="slide language-cssgrammar tree-children md dont-resize tree-flushend progressive-subtree arrows" id="lookahead">
 		- Start
 			- `&lt;ident-token>`
 				- `&lt;type-selector>`
@@ -648,13 +698,14 @@ body {
 				- `&lt;id-selector>`
 			- `'.'`
 				- `&lt;class-selector>`
+			- `'['`
+				- `&lt;attribute-selector>`
 			- `':'`
 				- `&lt;ident-token>`
 					- `&lt;pseudo-class-selector>`
 				- `':'`
 					- `&lt;pseudo-element-selector>`
-			- `'['`
-				- `&lt;attribute-selector>`
+
 
 		<details class="notes">
 			- Note that for most of these, we can tell what we have from the very first token.
@@ -669,7 +720,7 @@ body {
 	<article class="slide dont-resize" id="declaration-grammar">
 		<header>
 			<h1>CSS Grammars</h1>
-			<p class="subheading">Declaration (simplified)</p>
+			<p class="subtitle">Declaration (simplified)</p>
 
 			<script type="text/plain" class="language-cssgrammar no-whitespace-normalization" data-production-indent="2">
 				<declaration> = <ident-token> ':' <declaration-value> [ '!' <ident-token> ]? ';'
@@ -692,7 +743,7 @@ body {
 		<h1>What could this be?</h1>
 
 		<script type="text/plain" class="language-cssgrammar">
-			<indent-token> <colon-token> <function-token> <ident-token> <comma-token>
+			<ident-token> <colon-token> <function-token> <ident-token> <comma-token>
 			⮑	<ident-token> <comma-token> <ident-token> <comma-token> <ident-token>
 			⮑	<comma-token> <ident-token> <comma-token> <ident-token> <)-token>
 		</script>
@@ -740,7 +791,7 @@ body {
 			<time>2013</time>
 			First nesting proposal
 		</h1>
-		<iframe src="tab-specs/v0/css-nesting/Overview.html" frameborder="0" class="browser"></iframe>
+		<iframe data-src="tab-specs/v0/css-nesting/Overview.html" frameborder="0" class="browser"></iframe>
 		<details class="notes">
 			[Read a copy of the proposal](./tab-specs/v0/css-nesting/Overview.html)
 		</details>
@@ -777,7 +828,7 @@ body {
 			<time>June 2015</time>
 			PostCSS implements
 		</h1>
-		<iframe src="https://github.com/csstools/postcss-nesting/tree/d63f6b6b1efef37c11d86a84de23fe901f74123a/#readme" class="browser"></iframe>
+		<iframe data-src="https://github.com/csstools/postcss-nesting/tree/d63f6b6b1efef37c11d86a84de23fe901f74123a/#readme" class="browser"></iframe>
 	</article>
 
 
@@ -787,7 +838,7 @@ body {
 			<time>Sep 2015</time>
 			New syntax
 		</h1>
-		<iframe src="tab-specs/v1/css-nesting/" class="browser"></iframe>
+		<iframe data-src="tab-specs/v1/css-nesting/" class="browser"></iframe>
 		<div class="md">
 			- Dropped `{ }` around nested rules
 			- Mandatory `&` or `@nest` prefix
@@ -836,7 +887,7 @@ body {
 			<time>Sep 2015</time>
 			PostCSS updates
 		</h1>
-		<iframe src="https://github.com/csstools/postcss-nesting/tree/1931fbbd6a1e3ecf5aea1c73fed37307937544a3/#readme" class="browser"></iframe>
+		<iframe data-src="https://github.com/csstools/postcss-nesting/tree/1931fbbd6a1e3ecf5aea1c73fed37307937544a3/#readme" class="browser"></iframe>
 		<details class="notes">
 			Interestingly, the plugin supported @-rule nesting, even though the spec did not.
 		</details>
@@ -855,17 +906,17 @@ body {
 
 	<article class="history slide">
 		<h1><time>Feb 2017</time> Ping #1</h1>
-		<iframe src="https://github.com/w3c/csswg-drafts/issues/998" frameborder="0" class="browser"></iframe>
+		<iframe data-src="https://github.com/w3c/csswg-drafts/issues/998" frameborder="0" class="browser"></iframe>
 	</article>
 
 	<article class="history slide">
 		<h1><time>Mar 2018</time> Ping #2</h1>
-		<iframe src="https://github.com/w3c/csswg-drafts/issues/2456" frameborder="0" class="browser"></iframe>
+		<iframe data-src="https://github.com/w3c/csswg-drafts/issues/2456" frameborder="0" class="browser"></iframe>
 	</article>
 
 	<article class="history slide">
 		<h1><time>May 2018</time> Ping #3</h1>
-		<iframe src="https://github.com/w3c/csswg-drafts/issues/2701" frameborder="0" class="browser"></iframe>
+		<iframe data-src="https://github.com/w3c/csswg-drafts/issues/2701" frameborder="0" class="browser"></iframe>
 	</article>
 
 	<article class="history slide">
@@ -882,12 +933,12 @@ body {
 			<time>2022</time>
 			State of CSS Survey
 		</h1>
-		<iframe src="https://stateofcss.com/en-US" frameborder="0" class="browser"></iframe>
+		<iframe data-src="https://2022.stateofcss.com/en-US" frameborder="0" class="browser"></iframe>
 	</article>
 
-	<article class="slide">
-		<h1>What features do you think are currently missing from CSS altogether?</h1>
-		<p>Nesting by far the top feature</p>
+	<article class="dont-resize history slide" id="css-pain-points-2022">
+		<time>Oct 2022</time>
+		<img src="img/css-pain-points-2022.png" alt="">
 	</article>
 
 	<article class="dont-resize history slide columns">
@@ -898,33 +949,331 @@ body {
 		<a href="https://groups.google.com/a/chromium.org/g/blink-dev/c/-GxQ0MIcons/m/dTi5stNrBAAJ" class="browser" target="_blank"><img src="img/itp.png" alt=""></a>
 	</article>
 
-	<article class="dont-resize history slide they-said">
+	<article class="history slide they-said">
 		<time>Oct 2022</time>
 		<div class="messages delayed-children">
 			<blockquote>Lea, we cannot let this ship!</blockquote>
-			<blockquote>This will be used all over stylesheets. Having to prefix every rule with `&` or `@nest` will be tedious to write and noisy to read.</blockquote>
+			<blockquote>This will be used all over stylesheets. Having to prefix every rule with `&` or `@nest` will be tedious to write, easy to forget, and noisy to read.</blockquote>
 			<blockquote>And it’s incompatible with `@scope`, so copying and pasting will require a ton of fixup.</blockquote>
 			<blockquote>We must do something, ASAP!</blockquote>
 			</blockquote>
 		</div>
-		<article class="person">
-			<img src="img/elika.jpg" alt="Elika" class="person">
+		<article class="person" id="elika">
+			<img src="img/elika.jpg" alt="" class="person">
 			<div>
-				<h3>Elika Etemad (fantasai)</h3>
+				<h3>Elika Etemad</h3>
 				<p>Extremely prolific CSS editor</p>
 			</div>
 		</article>
-
 		<details class="notes">
-			Around the same time
+			(In actuality we had a video call, and this is my recollection of the conversation)
 		</details>
 	</article>
+
+	<article class="dont-resize slide history" id="breakouts">
+		<h1>
+			<time>Oct 2022</time>
+			Further breakouts
+		</h1>
+		<div class="people">
+			<article id="lea" class="person">
+				<img src="img/lea.jpg" alt="">
+				<div>
+					<h3>Lea Verou</h3>
+					<p>That’s me!</p>
+				</div>
+			</article>
+			<article data-clone="#elika"></article>
+			<article id="tab" class="person">
+				<img src="img/tab.jpg" alt="">
+				<div>
+					<h3>Tab Atkins-Bittner</h3>
+					<p style="white-space: nowrap;">Extremely prolific CSS editor</p>
+				</div>
+			</article>
+			<article id="mia" class="person">
+				<img src="img/mia.avif" alt="">
+				<div>
+					<h3>Miriam Suzanne</h3>
+					<p>Sass core contributor</p>
+				</div>
+			</article>
+
+			<article id="jen" class="person">
+				<img src="img/jen.jpg" alt="">
+				<div>
+					<h3>Jen Simmons</h3>
+					<p>Developer Advocate @ Apple</p>
+				</div>
+			</article>
+			<article id="brad" class="person">
+				<img src="img/brad.jpg" alt="">
+				<div>
+					<h3>Brad Kemper</h3>
+					<p>Web Designer/Developer</p>
+				</div>
+			</article>
+		</div>
+		<details class="notes">
+			Shortly after, there were two seminal breakouts among these people, all seasoned CSS WG members and co-editors of several specs.
+			We had general consensus that the syntax at the time needed improvement before it shipped in browsers,
+			and several ideas about how to improve it.
+		</details>
+	</article>
+
+	<article class="slide">
+		<h1>We share with the WG</h1>
+		<iframe data-src="https://github.com/w3c/csswg-drafts/issues/7834#issuecomment-1268957000" frameborder="0" class="browser"></iframe>
+		<details class="notes">
+			[Read summary](https://github.com/w3c/csswg-drafts/issues/7834#issuecomment-1268957000)
+		</details>
+	</article>
+
+	<article class="slide">
+		<h1>…More discussions…</h1>
+	</article>
+
+	<article class="slide" id="resolve-ambiguity">
+		<h1>Strategies to resolve ambiguity</h1>
+
+		<ol class="pop">
+			<li>Per-rule prefix</li>
+			<li>Nest rules in block</li>
+			<li>Parser switch</li>
+		</ol>
+	</article>
+
+	<article class="slide">
+		<h1>Considerations</h1>
+
+		<table>
+			<thead>
+				<th></th>
+				<th></th>
+			</thead>
+		</table>
+		<tr>
+			<td>Compatibility with existing code</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Compatibility with <code>@scope</code></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</article>
+
+	<article class="slide columns" id="strategy-1">
+		<header>
+			<h1>
+				<span class="pop">1</span> Per-rule prefix
+			</h1>
+			<p class="subtitle">
+				Selectors of nested rules start with a disambiguating token
+			</p>
+		</header>
+
+		<pre class="language-css"><code>
+			ul {
+				list-style: "🦄";
+
+				& li { margin: 0; }
+				& a { color: inherit; }
+				@nest nav & {
+					list-style: none;
+				}
+			}
+		</code></pre>
+		<ul class="pros-cons delayed">
+			<li class="pro">Backwards compat with postcss-nesting code</li>
+			<li class="pro">Allows mixing rules and declarations</li>
+			<li class="con">Easy to forget prefix</li>
+			<li class="con">Tedious: O(N) extra syntax on the number of rules</li>
+			<li class="con">Noisy to read</li>
+			<li class="con">Incompatible with <code>@scope</code></li>
+		</ul>
+	</article>
+
+	<article class="slide columns" id="strategy-2">
+		<header>
+			<h1>
+				<span class="pop">2</span>
+				Nest rules in block
+			</h1>
+			<p class="subtitle">
+				Nested rules are wrapped in a block
+			</p>
+		</header>
+
+		<pre class="language-css"><code>
+			ul {
+				list-style: "🦄";
+
+				{ /* Only rules in here */
+					li { margin: 0; }
+					a { color: inherit; }
+					nav & {
+						list-style: none;
+					}
+				}
+			}
+		</code></pre>
+		<pre class="language-css"><code>
+			ul {
+				list-style: "🦄";
+			}
+			{ /* Only rules in here */
+				li { margin: 0; }
+				a { color: inherit; }
+				nav & {
+					list-style: none;
+				}
+			}
+		</code></pre>
+		<div>
+			<pre class="language-css"><code>
+				ul {
+					list-style: "🦄";
+
+					@nest { /* Only rules in here */
+						li { margin: 0; }
+						a { color: inherit; }
+						nav & {
+							list-style: none;
+						}
+					}
+				}
+			</code></pre>
+			<ul class="pros-cons delayed">
+				<li class="pro">Unrestricted selector syntax</li>
+				<li class="pro">O(1) extra syntax on the number of rules</li>
+				<li class="con">Extra indentation level</li>
+				<li class="con">No mixing of declarations and rules</li>
+			</ul>
+		</div>
+		<details class="notes">
+			There were many more ideas about what the switch could be, even ASCII like `&&` or `@`,
+			and each had its own pros and cons.
+		</details>
+	</article>
+
+	<article class="slide columns" id="strategy-3">
+		<header>
+			<h1>
+				<span class="pop">3</span>
+				Parser switch
+			</h1>
+			<p class="subtitle">
+				A specific token that signifies "only rules from now on"
+			</p>
+		</header>
+
+		<pre class="language-css"><code>
+			ul {
+				list-style: "🦄";
+
+				@nest; /* Only rules below */
+
+				li { margin: 0; }
+				a { color: inherit; }
+				nav & {
+					list-style: none;
+				}
+			}
+		</code></pre>
+		<pre class="language-css"><code>
+			ul {
+				list-style: "🦄";
+
+				@media (width < 500px) {
+					margin-left: 1ch;
+				}
+				li { margin: 0; }
+				a { color: inherit; }
+				nav & {
+					list-style: none;
+				}
+			}
+		</code></pre>
+		<div>
+			<pre class="language-css"><code>
+				ul {
+					list-style: "🦄";
+
+					& li { margin: 0; }
+					a { color: inherit; }
+					nav & {
+						list-style: none;
+					}
+				}
+			</code></pre>
+			<ul class="pros-cons delayed">
+				<li class="pro">O(1) extra syntax on the number of rules</li>
+				<li class="con">Reordering code could break it</li>
+				<li class="con">Nonobvious for some of these</li>
+			</ul>
+		</div>
+		<details class="notes">
+			In this strategy, as long as we encounter a non-declaration, we assume that everything after is a rule.
+			This could be a token specifically for this, such as `@nest`, or any other known rule, including a no-op `@nest`.
+		</details>
+	</article>
+
+	<article class="slide columns">
+		<header>
+			<h1>But what if the prefix occurred naturally?*</h1>
+			<p class="subtitle">* in enough cases to make it worth it</p>
+		</header>
+		<a href="https://github.com/w3c/csswg-drafts/issues/7834#issuecomment-1272373216" target="_blank" class="browser"><img src="img/option-3.png" alt=""></a>
+	</article>
+
+	<article class="slide">
+		<pre class="language-css"><code>
+			ul {
+				list-style: "🦄";
+
+				& li { margin: 0; }
+				.foo {  }
+				> a { color: inherit; }
+				.dark & { }
+				:is(nav) & {
+					list-style: none;
+				}
+			}
+		</code></pre>
+	</article>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>Could we go further?</h1>
+	</header>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>Takeaways</h1>
+	</header>
 </section>
 
 <footer class="slide">
 	<header>
 		<h1>Thank you!</h1>
-		<p class="subheading">Slides at <a href="https://projects.verou.me/talks/css-nesting/">projects.verou.me/talks/css-nesting/</a></p>
+		<p class="subtitle">Slides at <a href="https://projects.verou.me/talks/css-nesting/">projects.verou.me/talks/css-nesting/</a>*</p>
+		<p style="font-size: 60%;">
+			* Yes, they use nesting, natively interperted by the browser.
+		</p>
 	</header>
 	<dl class="cheatsheet" title="Reach out!">
 		<dt class="bi bi-link-45deg"></dt>

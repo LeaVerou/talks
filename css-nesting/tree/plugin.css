@@ -14,7 +14,7 @@ ul.tree {
 	--_node-color: var(--node-color, hsl(220 10% 50% / .2));
 	--_line-color: var(--line-color, color-mix(in oklab, hsl(220 10% 50%) 70%, canvas));
 	--_line-thickness: var(--line-thickness, .1em);
-	--_line-min-width: var(--line-min-width, 2rem);
+	--_line-min-width: var(--line-min-width, 3rem);
 
 	&,
 	& ul {
@@ -64,21 +64,39 @@ ul.tree {
 	}
 
 	& li li {
+		--_arrowhead-aspect-ratio: var(--arrowhead-aspect-ratio, 1.6);
+		--_arrowhead-width: var(--arrowhead-width, calc(8 * var(--_line-thickness)));
+
 		/* Lines */
-		&::before {
+		& > .line {
 			content: "";
+			display: flex;
+			align-items: center;
+			justify-content: end;
 			min-width: var(--_line-min-width);
 			height: var(--_line-thickness);
-			--angle2: atan2(var(--dy), var(--_line-min-width) * 16);
-
 			--dy: calc(-1 * var(--Δtop) - (var(--parent-height, 0) - var(--height)) / 2);
-
+			--angle2: atan2(var(--dy), var(--_line-min-width) * 16);
 			transform: translateY(-50%) skewY(var(--angle2)) scaleY(calc(1 / cos(var(--angle2))));
-
 			transform-origin: right;
 			margin: 0;
 			border-radius: 0;
 			background: var(--_line-color);
+
+			/* Arrows */
+			&:is(.arrows *) {
+				margin-right: var(--_line-thickness);
+				&::after {
+					content: "";
+					position: relative;
+					z-index: 1;
+					margin-right: calc(-1.1 * var(--_line-thickness));
+					background: var(--_line-color);
+					height: var(--_arrowhead-width);
+					aspect-ratio: var(--_arrowhead-aspect-ratio);
+					clip-path: polygon(0 0, 100% 50%, 0 100%);
+				}
+			}
 		}
 
 		&:is(.tree-flushend *):not(:has(ul)) {

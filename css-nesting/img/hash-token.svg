@@ -1,0 +1,50 @@
+<?xml-stylesheet href="railroad.css" type="text/css"?>
+<svg xmlns="http://www.w3.org/2000/svg" class="railroad-diagram" height="100" viewBox="0 0 466.5 100" width="466.5">
+	<g transform="translate(.5 .5)">
+	 <g>
+	  <path d="M20 21v20m10 -20v20m-10 -10h20"></path>
+	 </g>
+	 <path d="M40 31h10"></path>
+	 <g class="terminal ">
+	  <path d="M50 31h0.0"></path>
+	  <path d="M78.5 31h0.0"></path>
+	  <rect height="22" rx="10" ry="10" width="28.5" x="50" y="20"></rect>
+	  <text x="64.25" y="35">#</text>
+	 </g>
+	 <path d="M78.5 31h10"></path>
+	 <path d="M88.5 31h10"></path>
+	 <g>
+	  <path d="M98.5 31h0.0"></path>
+	  <path d="M416.5 31h0.0"></path>
+	  <path d="M98.5 31h10"></path>
+	  <g>
+	   <path d="M108.5 31h0.0"></path>
+	   <path d="M406.5 31h0.0"></path>
+	   <path d="M108.5 31h20"></path>
+	   <g class="non-terminal ">
+		<path d="M128.5 31h0.0"></path>
+		<path d="M386.5 31h0.0"></path>
+		<rect height="22" width="258" x="128.5" y="20"></rect>
+		<text x="257.5" y="35">a-z A-Z 0-9 _ - or non-ASCII</text>
+	   </g>
+	   <path d="M386.5 31h20"></path>
+	   <path d="M108.5 31a10 10 0 0 1 10 10v10a10 10 0 0 0 10 10"></path>
+	   <g class="non-terminal ">
+		<path d="M128.5 61h93.5"></path>
+		<path d="M293.0 61h93.5"></path>
+		<rect height="22" width="71" x="222" y="50"></rect>
+		<text x="257.5" y="65">escape</text>
+	   </g>
+	   <path d="M386.5 61a10 10 0 0 0 10 -10v-10a10 10 0 0 1 10 -10"></path>
+	  </g>
+	  <path d="M406.5 31h10"></path>
+	  <path d="M108.5 31a10 10 0 0 0 -10 10v29a10 10 0 0 0 10 10"></path>
+	  <g>
+	   <path d="M108.5 80h298.0"></path>
+	  </g>
+	  <path d="M406.5 80a10 10 0 0 0 10 -10v-29a10 10 0 0 0 -10 -10"></path>
+	 </g>
+	 <path d="M416.5 31h10"></path>
+	 <path d="M 426.5 31 h 20 m -10 -10 v 20 m 10 -20 v 20"></path>
+	</g>
+   </svg>

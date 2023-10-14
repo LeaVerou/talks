@@ -29,6 +29,8 @@ function renderTrees(element = document) {
 				newNode.append(node);
 				domChanged = true;
 			}
+
+			li.insertAdjacentHTML("afterbegin", `<span class="line"></span>`);
 		}
 
 		if (domChanged) {

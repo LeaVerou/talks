@@ -1,3 +1,5 @@
+@import url("components.css");
+
 #intro {
 	align-items: end;
 	background: url("img/nesting-dolls.avif") no-repeat right / 140% auto;
@@ -125,23 +127,23 @@
 	}
 }
 
-@property --angle {
-	syntax: "<angle>";
-	inherits: true;
-	initial-value: 0deg;
-}
-
 #reactive-css-variables {
-	--font-size-multiplier: .9;
-	grid-template-columns: .3fr 1.6fr 1fr;
+	> pre:first-of-type {
 
-	.editor-container {
-		grid-column: 2;
 	}
 
-	.demo-target {
+	&:has(> pre + pre:not(.current, .displayed)) .container {
+		animation-play-state: paused;
+	}
+
+	> div.container {
+		width: 100%;
+		flex: none;
+		display: flex;
 		flex-flow: row;
+		justify-content: center;
 		gap: .3em;
+		font-size: 150%;
 	}
 }
 
@@ -282,6 +284,45 @@ header#css-parsing-101 {
 	}
 }
 
+#parsing {
+	--line-min-width: 4em;
+
+	.node {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: .7em;
+		text-align: center;
+		width: 5em;
+		aspect-ratio: 1;
+		border-radius: 50%;
+		background: var(--color-accent-1);
+		font-weight: bold;
+		font-size: 80%;
+		line-height: 1;
+		white-space: inherit;
+		color: white;
+	}
+
+	& ul ul .node {
+		background: var(--color-accent-2);
+	}
+
+	& ul ul ul .node {
+		background: var(--color-accent-3);
+	}
+}
+
+#css-tokens {
+	& object {
+		width: 100%;
+	}
+
+	& figcaption {
+		text-align: center;
+	}
+}
+
 .tokenizedcss,
 .language-tokenizedcss,
 .language-cssgrammar {
@@ -349,6 +390,10 @@ header#css-parsing-101 {
 
 	.dimension {
 		--color: var(--color-accent-5);
+	}
+
+	.number {
+		--color: var(--color-accent-6);
 	}
 
 	.literal {
@@ -497,6 +542,9 @@ pre.language-tokenizedcss > code.delayed-children {
 }
 
 #lookahead {
+	--arrowhead-width: calc(2 * var(--_line-thickness));
+	--arrowhead-aspect-ratio: .4;
+
 	& .displayed {
 		opacity: 1;
 	}
@@ -513,6 +561,10 @@ pre.language-tokenizedcss > code.delayed-children {
 		transform: scale(1.5);
 		filter: drop-shadow(.2em .2em .5em hsl(0 0% 0% / .5))
 	}
+}
+
+#css-pain-points-2022 {
+	background: hsl(330deg 5.41% 14.51%);
 }
 
 #resolving-ambiguity {
@@ -545,20 +597,16 @@ pre.language-tokenizedcss > code.delayed-children {
 	& > time:first-child {
 		position: absolute;
 		top: 0;
-		display: flex;
+		left: 5rem;
 		vertical-align: 0.35em;
 		padding: .2em .5em;
 		width: max-content;
-		--background: var(--year-color, var(--color-accent-2));
+		--background: var(--date-color, var(--color-accent-2));
 		background: var(--background);
 		font-weight: 800;
 		text-transform: uppercase;
 		font-size: 3.5rem;
 		color: white;
-	}
-
-	& > time:first-child {
-		left: 5rem;
 	}
 }
 
@@ -578,10 +626,6 @@ pre.language-tokenizedcss > code.delayed-children {
 	align-items: end;
 	justify-content: end;
 	gap: 1em;
-
-	&.history {
-		--year-color: var(--color-aqua);
-	}
 
 	.messages {
 		flex: 1;
@@ -646,43 +690,80 @@ pre.language-tokenizedcss > code.delayed-children {
 		padding: .08em .2em;
 		border-radius: .2em;
 	}
+}
 
-	.person {
-		font-size: 50%;
+.person {
+	position: relative;
+	font-size: 50%;
 
-		> img {
-			width: 30vmin;
-			aspect-ratio: 1;
-			object-fit: cover;
-			border-radius: 50%;
+	> img {
+		width: 28vmin;
+		aspect-ratio: 1;
+		object-fit: cover;
+		border-radius: 50%;
 
-			&[src*="elika"] {
-				object-position: 50% 10%;
-			}
+		&[src*="elika"] {
+			object-position: 50% 10%;
+		}
+	}
+
+	> div {
+		position: absolute;
+		z-index: 1;
+		top: calc(100% - 3em);
+		left: 3em;
+		padding: .3em .5em;
+		letter-spacing: normal;
+		background: var(--color-aqua-dark);
+		color-scheme: dark;
+		color: canvastext;
+		text-wrap: balance;
+
+		> h3,
+		> p {
+			margin: 0;
+			text-align: left;
+			white-space: nowrap;
 		}
 
-		> div {
-			position: relative;
-			padding: .3em .5em;
-			margin-top: -2.6em;
-			margin-left: 3em;
-			letter-spacing: normal;
-			background: var(--color-aqua-dark);
-			color-scheme: dark;
-			color: canvastext;
-			text-wrap: balance;
-
-			> h3,
-			> p {
-				margin: 0;
-				text-align: left;
-			}
-
-			> h3 {
-				text-transform: uppercase;
-				font-weight: bold;
-
-			}
+		> h3 {
+			text-transform: uppercase;
+			font-weight: bold;
 		}
+	}
+}
+
+.people {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.2em 1.8em;
+}
+
+#breakouts {
+	.people {
+		display: grid;
+		grid-template-columns: repeat(3, auto);
+	}
+}
+
+#resolve-ambiguity {
+	flex-flow: row;
+
+	> h1 {
+		max-width: 10ch;
+	}
+
+	> ol {
+
+	}
+}
+
+#strategy-2,
+#strategy-3 {
+	> div > pre:has(+ .pros-cons.current, + .pros-cons.displayed) {
+		display: none;
+	}
+	.pros-cons:not(.current, .displayed) {
+		display: none;
 	}
 }

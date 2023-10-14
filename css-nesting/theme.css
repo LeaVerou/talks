@@ -39,8 +39,8 @@
 	--color4: var(--color-orange);
 
 	--color-accent-1: var(--color-aqua);
-	--color-accent-2: var(--color-green);
-	--color-accent-3: var(--color-magenta);
+	--color-accent-2: var(--color-magenta);
+	--color-accent-3: var(--color-green);
 	--color-accent-4: var(--color-orange);
 	--color-accent-5: color-mix(in oklab, var(--color-accent-1), var(--color-accent-2));
 	--color-accent-6: var(--color-yellow);
@@ -142,14 +142,21 @@ pre {
 	}
 }
 
+li {
+	text-wrap: balance;
+}
+
 code:not(pre > code) {
 	font-size: 110%;
 }
 
+/* Plain slides, just a heading + a list */
+:is(ul, ol):where(h1 + *):where(:last-child, :has(+ details.notes:last-child)) {
+	font-size: 150%;
+}
+
 .slide {
 	padding: 5rem;
-
-
 
 	&:where(:not(.dark)) {
 		background-image: none;
@@ -172,11 +179,12 @@ code:not(pre > code) {
 			margin-bottom: .2em;
 		}
 
-		.subheading {
+		.subtitle {
 			color: var(--color-gray-60);
 			font-size: calc(1.2 * var(--slide-base-font-size, 1rem));
 			text-align: center;
 			font-weight: 500;
+			text-wrap: balance;
 		}
 	}
 
@@ -192,28 +200,22 @@ header.slide {
 }
 
 .columns {
-	display: grid;
-	--column-template: repeat(var(--columns, 2), auto);
-	grid-template-columns: var(--column-template);
-	grid-template-rows: auto 1fr;
+	display: flex;
+	flex-flow: row wrap;
 	gap: 2em;
 
 	> h1,
 	> header {
-		grid-column: 1 / -1;
-		margin: auto;
+		width: 100%;
+		flex: none;
+		text-align: center;
 		margin-top: .5em;
-	}
 
-	&:has(> h1 + :last-child),
-	&.h-col {
 		/* No point in doing 2+ columns with a heading and a single element,
 		  the heading must be in one of the columns */
-		grid-template-rows: 1fr;
-
-		> h1,
-		> header {
-			grid-column: auto;
+		&:is(:nth-last-child(2), :nth-last-child(3):has(~ details.notes:last-child)) {
+			width: auto;
+			flex: 1;
 			margin-top: 0;
 			text-align: left;
 		}
@@ -221,30 +223,8 @@ header.slide {
 
 	> * {
 		margin-top: 0;
+		flex: 1;
 	}
-
-	&.c3 {
-		--columns: 3;
-	}
-
-	/* &.vhead {
-		grid-template-columns: auto var(--column-template);
-		grid-template-rows: 1fr;
-
-		> h1,
-		> header {
-			grid-column: 1;
-			grid-row: 1;
-			writing-mode: vertical-lr;
-			transform: rotate(.5turn);
-			margin-bottom: 0;
-			line-height: 1;
-		}
-
-		> :not(h1, header) {
-			grid-row: 1;
-		}
-	} */
 }
 
 .minimal.live.demo {
@@ -266,7 +246,7 @@ header.slide {
 	}
 
 	&.punctuation {
-		opacity: .5;
+		opacity: .6;
 		mix-blend-mode: normal;
 	}
 }
@@ -344,60 +324,3 @@ h1:has(> .label) {
 	opacity: .5;
 }
 
-.tweet {
-	padding: .2em;
-	background: white;
-	border-radius: .5em;
-	box-shadow: 0 20px 50px black;
-}
-
-.cheatsheet {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	display: flex;
-	font-size: 60%;
-	background: var(--color-gray-90);
-	letter-spacing: 0;
-	margin: 0;
-
-	&::before,
-	& dt,
-	& dd {
-		padding: .3rem .7rem;
-	}
-
-	&::before,
-	& dt {
-		white-space: nowrap;
-	}
-
-	&[title]::before {
-		content: attr(title);
-		display: flex;
-		align-items: center;
-		background: var(--color-gray-80);
-		text-transform: uppercase;
-		font-weight: 500;
-		font-size: 80%;
-		color: var(--color-gray-40);
-	}
-
-	& dt {
-		display: flex;
-		align-items: center;
-		background: var(--color-gray-40);
-		color: white;
-
-		&:has(> i.bi:where(:not(:only-child))) {
-			display: flex;
-			gap: .5em;
-		}
-	}
-
-	& dd {
-		flex-grow: 1;
-		margin-left: 0;
-	}
-}
