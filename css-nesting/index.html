@@ -9,10 +9,7 @@
 	<title>A story of 🧊 ice, 🔥 fire, and 🪆 CSS Nesting</title>
 	<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🪆</text></svg>' />
 
-	<link href="https://inspirejs.org/inspire.css" rel="stylesheet" />
-	<link href="https://inspirejs.org/theme.css" rel="stylesheet" />
-	<link href="theme.css" rel="stylesheet" />
-	<link href="talk.css" rel="stylesheet" />
+	<link href="css/talk.css" rel="stylesheet" />
 
 	<script src="../shared/js/bliss.shy.min.js"></script>
 	<script src="../shared/js/prism.js" data-manual></script>
@@ -20,7 +17,7 @@
 	<script src="https://inspirejs.org/inspire.mjs" type="module"></script>
 	<script src="talk.js" type="module"></script>
 </head>
-<body class="language-css no-docs no-media" data-markdown-elements="details.notes, .md, .they-said blockquote">
+<body class="language-css no-docs no-media" data-markdown-elements="details.notes, .md, .md-children > *, .they-said blockquote">
 
 <header id="intro" class="slide dont-resize">
 	<h1>A story of
@@ -35,7 +32,7 @@
 </header>
 
 <section id="background" class="code-labels">
-	<article class="slide columns c3">
+	<article class="slide columns c3" id="css-preprocessors">
 		<h1>
 			CSS Preprocessors
 		</h1>
@@ -47,7 +44,7 @@
 			</h2>
 			<a href="https://sass-lang.com">sass-lang.com</a>
 		</div>
-		<div>
+		<div class="delayed persistent">
 			<time>2009</time>
 
 			<h2>
@@ -55,7 +52,7 @@
 			</h2>
 			<a href="https://lesscss.org/">lesscss.org</a>
 		</div>
-		<div>
+		<div class="delayed persistent">
 			<time>2010</time>
 
 			<h2>
@@ -187,6 +184,8 @@
 		<details class="notes">
 			However, if you look more closely, the CSS syntax has several advantages.
 			CSS variables are actual CSS properties, and share their reactive nature.
+
+			We can animate them, set them with JS, change them with media queries, and everything automatically adapts.
 		</details>
 	</article>
 
@@ -256,25 +255,21 @@
 		</div>
 	</article>
 
-	<article class="conversion slide columns">
+	<article class="conversion slide columns compact-code">
 		<h1>Sass Color Calculations</h1>
 
-		<div>
-			<pre class="language-scss"><code>
-				$color-accent: #037465;
+		<pre class="language-scss"><code>
+			$color-accent: #037465;
 
-				button {
-					background: lighten($color-accent, 20%);
-				}
-			</code></pre>
-		</div>
-		<div>
-			<pre><code>
-				button {
-					background: #06d7bc;
-				}
-			</code></pre>
-		</div>
+			button {
+				background: lighten($color-accent, 20%);
+			}
+		</code></pre>
+		<pre style="flex: none"><code>
+			button {
+				background: #06d7bc;
+			}
+		</code></pre>
 	</article>
 
 	<article class="conversion slide columns">
@@ -436,8 +431,8 @@
 	</article>
 
 	<article class="conversion slide columns">
-		<h1>Concatenation</h1>
-		<pre class="language-scss delayed"><code>
+		<h1>Concatenation <span class="delayed" data-index="2">🚫</span></h1>
+		<pre class="language-scss delayed persistent"><code>
 			.card {
 				display: grid;
 
@@ -538,10 +533,14 @@
 		</details>
 	</article>
 
-
-
 	<article class="slide" id="when-can-we" data-credits="Giphy">
 		<h1>Can we adopt this in CSS?</h1>
+		<details class="notes">
+			So we define the Sass syntax minus concatenation as the Holy Grail Syntax.
+			However, there are some challenges in supporting this natively in CSS without modifications.
+			To understand these, we need to talk a little bit about how CSS parsing work.
+			It will be short, I promise.
+		</details>
 	</article>
 </section>
 <section id="parsing-section">
@@ -672,7 +671,7 @@
 				| ':' <function-token> <any-value> ')'
 				<pseudo-element-selector> = ':' <pseudo-class-selector>
 			</script>
-			<script type="text/plain" class="language-cssgrammar no-whitespace-normalization">
+			<script type="text/plain" class="language-cssgrammar no-whitespace-normalization delayed persistent">
 				<attr-matcher> = [ '~' | '|' | '^' | '$' | '*' ]? '='
 				<attribute-selector> = '[' <ident-token> <attr-matcher>
 					[ <string-token> | <ident-token> ]? ']'
@@ -791,18 +790,20 @@
 			<time>2013</time>
 			First nesting proposal
 		</h1>
-		<iframe data-src="tab-specs/v0/css-nesting/Overview.html" frameborder="0" class="browser"></iframe>
+		<iframe data-src="tab-specs/v0/css-nesting/Overview.html" data-url="https://tabatkins.github.io/specs/css-nesting/" frameborder="0" class="browser"></iframe>
 		<details class="notes">
 			[Read a copy of the proposal](./tab-specs/v0/css-nesting/Overview.html)
 		</details>
 	</article>
 
 	<article class="slide columns md">
-		<h1>Syntax</h1>
+		<header>
+			<h1>Syntax</h1>
 
-		- `{ }` around nested rules
-		- Optional `&`
-		- No @-rule nesting
+			- `{ }` around nested rules
+			- Optional `&`
+			- No @-rule nesting
+		</header>
 
 		```css
 			table.browser-support {
@@ -810,7 +811,6 @@
 				{
 					th, td { border: 1px solid silver; }
 					th { border: 0; }
-
 					td {
 						background: yellowgreen;
 						{
@@ -831,55 +831,54 @@
 		<iframe data-src="https://github.com/csstools/postcss-nesting/tree/d63f6b6b1efef37c11d86a84de23fe901f74123a/#readme" class="browser"></iframe>
 	</article>
 
+	<article class="dont-resize history slide columns" id="proposal2">
+		<header class="md">
+			<h1>
+				<time>Sep 2015</time>
+				New syntax
+			</h1>
 
-
-	<article class="history slide columns" id="proposal2">
-		<h1>
-			<time>Sep 2015</time>
-			New syntax
-		</h1>
-		<iframe data-src="tab-specs/v1/css-nesting/" class="browser"></iframe>
-		<div class="md">
-			- Dropped `{ }` around nested rules
+			- Dropped `{ }`
 			- Mandatory `&` or `@nest` prefix
 			- Still no @-rule nesting
-		</div>
+		</header>
+		<iframe data-src="tab-specs/v1/css-nesting/" data-url="https://tabatkins.github.io/specs/css-nesting/" class="browser"></iframe>
 		<details class="notes">
 			[Read a copy of the proposal](./tab-specs/v1/css-nesting/)
 		</details>
 	</article>
 
-	<article class="conversion slide columns md" style="--arrow-label: 'Became'">
+	<article class="conversion slide columns" style="--arrow-label: 'Became'">
 		<h1>Changes</h1>
 
-		```css
+		<pre><code>
 			.callout.info {
 				color: var(--color-blue-dark);
 				background: var(--color-blue-light);
 
-				{
+				<mark>{</mark>
 					.dark & {
 						color: var(--color-blue-light);
 						background: var(--color-blue-dark);
 					}
 
 					a { color: var(--color-blue); }
-				}
+				<mark>}</mark>
 			}
-		```
-		```css
+		</code></pre>
+		<pre><code>
 			.callout.info {
 				color: var(--color-blue-dark);
 				background: var(--color-blue-light);
 
-				@nest .dark & {
+				<mark>@nest </mark>.dark & {
 					color: var(--color-blue-light);
 					background: var(--color-blue-dark);
 				}
 
-				& a { color: var(--color-blue); }
+				<mark>&</mark> a { color: var(--color-blue); }
 			}
-		```
+		</code></pre>
 	</article>
 
 	<article class="history slide">
@@ -930,7 +929,7 @@
 
 	<article class="history slide">
 		<h1>
-			<time>2022</time>
+			<time>Sep 2022</time>
 			State of CSS Survey
 		</h1>
 		<iframe data-src="https://2022.stateofcss.com/en-US" frameborder="0" class="browser"></iframe>
@@ -970,6 +969,51 @@
 		</details>
 	</article>
 
+	<article class="slide columns">
+		<header>
+			<h1>@scope</h1>
+			<p class="subtitle">Proximity scope</p>
+		</header>
+
+		<div>
+			<pre><code>
+				.light a { color: darkmagenta; }
+				.dark a { color: plum; }
+			</code></pre>
+			<pre class="delayed"><code>
+				@scope (.light) {
+					a { color: darkmagenta; }
+				}
+
+				@scope (.dark) {
+					a { color: plum; }
+				}
+			</code></pre>
+		</div>
+		<script type="text/plain" class="language-html">
+			<section class="dark">
+				<article class="light">
+					<a href="">Light link?</a>
+				</article>
+			</section>
+			<section class="light">
+				<article class="dark">
+					<a href="">Dark link?</a>
+				</article>
+			</section>
+		</script>
+		<details class="notes">
+			- Remember when you were first learning CSS?
+			I don’t know about you, but I was very surprised to learn that proximity did not play a role in specificity at all.
+			- Take a look at this markup. What color will the links be?
+			Based on this CSS, they will both be `plum`.
+			If we flip the order of rules, they will both be `darkmagenta`. Is this intuitive?
+			- `@scope` solves this age old problem by making proximity part of the cascade.
+			- In addition, it also offers “donut scope”, i.e. being able to exclude entire subtrees.
+			- Just shipped in Chrome
+		</details>
+	</article>
+
 	<article class="dont-resize slide history" id="breakouts">
 		<h1>
 			<time>Oct 2022</time>
@@ -988,7 +1032,7 @@
 				<img src="img/tab.jpg" alt="">
 				<div>
 					<h3>Tab Atkins-Bittner</h3>
-					<p style="white-space: nowrap;">Extremely prolific CSS editor</p>
+					<p style="white-space: nowrap;">Editor of CSS Nesting</p>
 				</div>
 			</article>
 			<article id="mia" class="person">
@@ -1030,7 +1074,29 @@
 	</article>
 
 	<article class="slide">
-		<h1>…More discussions…</h1>
+		<h1>
+			<span class="label">Easy win</span>
+			& allowed everywhere
+		</h1>
+		<a href="https://github.com/w3c/csswg-drafts/issues/5745#issuecomment-1276466934" class="browser" target="_blank"><img src="img/&everywhere.png" alt=""></a>
+		<details class="notes">
+			- Just this single-handedly improved compatibility with `@scope` tenfold.
+			- Even with no changes to the nesting syntax, now only selectors with `@nest` would need to be edited when moving code from a nested block to an `@scope` block.
+			Still a lot of compat problems the other way though.
+		</details>
+	</article>
+
+	<article class="slide" style="background: url(img/chattering.gif) bottom / cover; justify-content: start; color-scheme: dark">
+
+		<details class="notes">
+			A period of heavy activity followed.
+			There were dozens of proposals, that were very hotly debated.
+			In these types of discussions, the big barriers to reaching consensus are
+			not only people assigning different weights to the various pros and cons,
+			but also people disagreeing about what even is a pro or a con.
+			For example, while most people thought that syntaxes allowing `&` to be implicit in descendants was a pro,
+			for many others it was a con, because they thought it should always be mandatory because it added clarity.
+		</details>
 	</article>
 
 	<article class="slide" id="resolve-ambiguity">
@@ -1041,37 +1107,6 @@
 			<li>Nest rules in block</li>
 			<li>Parser switch</li>
 		</ol>
-	</article>
-
-	<article class="slide">
-		<h1>Considerations</h1>
-
-		<table>
-			<thead>
-				<th></th>
-				<th></th>
-			</thead>
-		</table>
-		<tr>
-			<td>Compatibility with existing code</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>Compatibility with <code>@scope</code></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-		</tr>
 	</article>
 
 	<article class="slide columns" id="strategy-1">
@@ -1088,21 +1123,36 @@
 			ul {
 				list-style: "🦄";
 
-				& li { margin: 0; }
-				& a { color: inherit; }
-				@nest nav & {
+				<mark>&</mark> li { margin: 0; }
+				<mark>&</mark> a { color: inherit; }
+				<mark>@nest</mark> nav & {
 					list-style: none;
 				}
 			}
 		</code></pre>
-		<ul class="pros-cons delayed">
-			<li class="pro">Backwards compat with postcss-nesting code</li>
-			<li class="pro">Allows mixing rules and declarations</li>
-			<li class="con">Easy to forget prefix</li>
-			<li class="con">Tedious: O(N) extra syntax on the number of rules</li>
-			<li class="con">Noisy to read</li>
-			<li class="con">Incompatible with <code>@scope</code></li>
-		</ul>
+		<pre class="language-css"><code>
+			ul {
+				list-style: "🦄";
+
+				<mark>@</mark> li { margin: 0; }
+				<mark>@</mark> a { color: inherit; }
+				<mark>@</mark> nav & {
+					list-style: none;
+				}
+			}
+		</code></pre>
+
+		<details class="notes">
+			<ul class="pros-cons">
+				<li class="pro">Backwards compat with postcss-nesting code</li>
+				<li class="pro">Allows mixing rules and declarations</li>
+				<li class="pro">Context-free interpretation</li>
+				<li class="con">Tedious: O(N) extra syntax on the number of rules</li>
+				<li class="con">Easy to forget prefix</li>
+				<li class="con">Noisy to read</li>
+				<li class="con">Incompatible with <code>@scope</code></li>
+			</ul>
+		</details>
 	</article>
 
 	<article class="slide columns" id="strategy-2">
@@ -1112,7 +1162,7 @@
 				Nest rules in block
 			</h1>
 			<p class="subtitle">
-				Nested rules are wrapped in a block
+				Nested rules are wrapped in a `{…}` block or @rule
 			</p>
 		</header>
 
@@ -1120,51 +1170,51 @@
 			ul {
 				list-style: "🦄";
 
-				{ /* Only rules in here */
+				<mark>{</mark>
 					li { margin: 0; }
 					a { color: inherit; }
 					nav & {
 						list-style: none;
 					}
-				}
+				<mark>}</mark>
 			}
 		</code></pre>
 		<pre class="language-css"><code>
 			ul {
 				list-style: "🦄";
 			}
-			{ /* Only rules in here */
+			<mark>{</mark>
 				li { margin: 0; }
 				a { color: inherit; }
 				nav & {
 					list-style: none;
 				}
+			<mark>}</mark>
+		</code></pre>
+		<pre class="language-css"><code>
+			ul {
+				list-style: "🦄";
+
+				<mark>@nest {</mark>
+					li { margin: 0; }
+					a { color: inherit; }
+					nav & {
+						list-style: none;
+					}
+				<mark>}</mark>
 			}
 		</code></pre>
-		<div>
-			<pre class="language-css"><code>
-				ul {
-					list-style: "🦄";
+		<details class="notes">
+			- This can be further broken down into two subcategories: block nested within the parent rule, or block that *follows* the parent rule (post-nesting)
+			- There were many more ideas about what should come before the opening brace, even ASCII like `&&` or `@`, but in the end the two main options were "nothing" and `@nest`.
 
-					@nest { /* Only rules in here */
-						li { margin: 0; }
-						a { color: inherit; }
-						nav & {
-							list-style: none;
-						}
-					}
-				}
-			</code></pre>
 			<ul class="pros-cons delayed">
 				<li class="pro">Unrestricted selector syntax</li>
 				<li class="pro">O(1) extra syntax on the number of rules</li>
-				<li class="con">Extra indentation level</li>
 				<li class="con">No mixing of declarations and rules</li>
+				<li class="con">Extra indentation level (for nested versions)</li>
+				<li class="con">No clear path to inline style nesting (for post-nesting)</li>
 			</ul>
-		</div>
-		<details class="notes">
-			There were many more ideas about what the switch could be, even ASCII like `&&` or `@`,
-			and each had its own pros and cons.
 		</details>
 	</article>
 
@@ -1179,11 +1229,11 @@
 			</p>
 		</header>
 
-		<pre class="language-css"><code>
+		<pre><code>
 			ul {
 				list-style: "🦄";
 
-				@nest; /* Only rules below */
+				<mark>@nest;</mark>
 
 				li { margin: 0; }
 				a { color: inherit; }
@@ -1192,11 +1242,11 @@
 				}
 			}
 		</code></pre>
-		<pre class="language-css"><code>
+		<pre><code>
 			ul {
 				list-style: "🦄";
 
-				@media (width < 500px) {
+				<mark>@media</mark> (width < 500px) {
 					margin-left: 1ch;
 				}
 				li { margin: 0; }
@@ -1206,72 +1256,576 @@
 				}
 			}
 		</code></pre>
-		<div>
-			<pre class="language-css"><code>
-				ul {
-					list-style: "🦄";
+		<pre><code>
+			ul {
+				list-style: "🦄";
 
-					& li { margin: 0; }
-					a { color: inherit; }
-					nav & {
-						list-style: none;
-					}
+				<mark>&</mark> li { margin: 0; }
+				a { color: inherit; }
+				nav & {
+					list-style: none;
 				}
-			</code></pre>
-			<ul class="pros-cons delayed">
-				<li class="pro">O(1) extra syntax on the number of rules</li>
-				<li class="con">Reordering code could break it</li>
-				<li class="con">Nonobvious for some of these</li>
-			</ul>
-		</div>
+			}
+		</code></pre>
 		<details class="notes">
 			In this strategy, as long as we encounter a non-declaration, we assume that everything after is a rule.
 			This could be a token specifically for this, such as `@nest`, or any other known rule, including a no-op `@nest`.
 		</details>
 	</article>
 
-	<article class="slide columns">
+	<article class="dont-resize slide comparison columns" id="syntax-comparison">
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th>Rule Prefix</th>
+					<th>Parser switch</th>
+					<th>Block inside</th>
+					<th>Block after</th>
+					<th>“Lea’s proposal”</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>No syntax overhead per nested rule</td>
+					<td>🚫</td>
+					<td>✅</td>
+					<td>✅</td>
+					<td>✅</td>
+					<td><span class="merge"><span>✅</span><span>🚫</span></span></td>
+				</tr>
+				<tr>
+					<td>Allows mixing rules and declarations?</td>
+					<td>✅</td>
+					<td>🚫</td>
+					<td>🚫</td>
+					<td>🚫</td>
+					<td>✅</td>
+				</tr>
+				<tr>
+					<td>Reordering not error-prone</td>
+					<td>✅</td>
+					<td>🚫</td>
+					<td>✅</td>
+					<td>✅</td>
+					<td>✅</td>
+				</tr>
+				<tr>
+					<td>Compatible with <code class="language-css">@scope</code>?</td>
+					<td>🚫</td>
+					<td>✅</td>
+					<td>✅</td>
+					<td>✅</td>
+					<td>✅</td>
+				</tr>
+				<tr>
+					<td>Same indentation level?</td>
+					<td>✅</td>
+					<td>✅</td>
+					<td>🚫</td>
+					<td>✅</td>
+					<td>✅</td>
+				</tr>
+				<tr>
+					<td>Compatible with Holy Grail Syntax?</td>
+					<td>🚫</td>
+					<td>✅</td>
+					<td>🚫</td>
+					<td>🚫</td>
+					<td>✅</td>
+				</tr>
+				<tr>
+					<td>Clear path for <code class="language-css">style</code> attribute</td>
+					<td>✅</td>
+					<td>✅</td>
+					<td>✅</td>
+					<td>🚫</td>
+					<td>✅</td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
+
+	<article class="slide" id="organic-prefix-morpheus">
+		<h1>Should we rule out rule prefix syntaxes?</h1>
+		<img class="delayed" src="img/organic-prefix-morpheus.jpg" alt="" style="height: -webkit-fill-available">
+	</article>
+
+	<article class="dont-resize slide columns" id="leas-proposal">
 		<header>
-			<h1>But what if the prefix occurred naturally?*</h1>
-			<p class="subtitle">* in enough cases to make it worth it</p>
+			<h1>
+				“Lea’s proposal”
+			</h1>
+			<ul>
+				<li>Any non-ident starts a nested rule</li>
+				<li>Any nested rule must start with a non-ident</li>
+			</ul>
 		</header>
 		<a href="https://github.com/w3c/csswg-drafts/issues/7834#issuecomment-1272373216" target="_blank" class="browser"><img src="img/option-3.png" alt=""></a>
+		<details class="notes">
+			At some point I posted a new idea: what if we went with a prefix-based syntax,
+			but the prefix could be anything other than an ident?
+
+			This came to be known as “Lea’s proposal” so for the lulz I’ll use that name for now as well.
+		</details>
+	</article>
+
+	<article class="dont-resize slide columns">
+		<div>
+			<pre class="language-css"><code>
+				ul {
+					list-style: "🦄";
+
+					.foo { }
+					li { }
+					> a { }
+					.dark & { }
+					#sidebar & { }
+					nav & { }
+				}
+			</code></pre>
+			<h2>Holy Grail Syntax</h2>
+		</div>
+
+		<div>
+			<pre class="language-css"><code>
+				ul {
+					list-style: "🦄";
+
+					.foo {  }
+					<mark>&</mark> li { }
+					> a { }
+					.dark & { }
+					#sidebar & { }
+					<mark>:is(nav)</mark> & { }
+				}
+			</code></pre>
+			<h2>“Lea’s Proposal”</h2>
+		</div>
+
+		<details class="notes">
+			- `&` is optional. If no `&` is present, the rule is interpreted as a descendant
+			- If a descendant rule starts with a type selector, then the `&` is mandatory
+			- Drop `@nest` to maximize compatibility. Contextual selectors that need to start with a type selector must be rewritten.
+			- It combined a lot of the advantages of prefix-based syntaxes (context independence, mixing rules and declarations),
+			without the tediousness of having to add an additional prefix to every single selector.
+			- Dropping `@nest` ensures full compatibility with `@scope`, and offered a clear upgrade path to the Holy Grail Syntax.
+			- Proposal was generally very well received
+			- Some concern that the distinction about when `&` is not optional would be confusing.
+		</details>
+	</article>
+
+	<article class="slide" data-insert="#syntax-comparison"></article>
+
+	<article class="slide columns" id="twitter-polls">
+		<div>
+			<h2>
+				What do you want the general rule to be?
+				<div class="subtitle">592 respondents</div>
+			</h2>
+
+			<div class="pie" style="--value: 42"></div>
+			<div class="legend">
+				<div>Mandatory <code>&</code></div>
+				<div>Optional <code>&</code>
+					<div class="description">(for descendants and combinators)</div>
+				</div>
+			</div>
+		</div>
+		<div class="delayed">
+			<h2>
+				What do you want to do in your own code?
+				<div class="subtitle">1,613 respondents</div>
+			</h2>
+
+			<div class="pie" style="--value: 52"></div>
+			<div class="legend md-children">
+				<div>Explicit `&`</div>
+				<div>Omit `&` whenever possible</div>
+			</div>
+		</div>
+		<details class="notes">
+			*(Percentages normalized to exclude "Just show results" answers)*
+
+			**[Poll 1: What do authors prefer for their own code](https://twitter.com/LeaVerou/status/1579902585540345857)** (1,613 votes)
+
+			Which of the following best expresses how you want to write nested CSS when it's implemented by browsers?
+
+			- (**52%**) I want to use `&` in every selector, as I think it makes code more clear
+			- (**48%**) I want to be able to omit `&` whenever possible, as it's noisy to read and a hassle to type
+
+			**[Poll 2: What do authors want to be the general rule](https://twitter.com/LeaVerou/status/1580215877705687040)** (592 votes)
+
+			If it were up to you, what syntax would you prefer for CSS Nesting?
+
+			- (**42%**) `&` should be mandatory, even in descendants and combinators
+			- (**58%**) `&` should be optional for descendants and combinators
+		</details>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>
+			Use data to short-circuit long debates
+			<div class="subtitle">Even very imperfect data works better than arguing</div>
+		</h1>
+		<details class="notes">
+			- The more statistics-minded among you may be horrified at the thought of using Twitter polls as a source of data.
+			“But the snowballing bias!” I can hear you crying.
+			- Yes, Twitter polls are not perfect, but nothing gets you the same amount of data in the same amount of time,
+			and with their flaws and all, they’re still better than pure speculation.
+			- In general, data works wonders in short-circuiting discussions that do not seem to be converging towards consensus.
+			- Don’t worry about the data being imperfect.
+			For reaching consensus, it's more important to get data fast, than to minimize all possible sources of bias.
+			Getting good data will be no help if it arrives long after the discussion has ended.
+			It’s like prototyping: iterating fast is more important than getting it right the first time.
+		</details>
+	</article>
+
+	<article class="dont-resize slide columns" id="finalists">
+		<header>
+			<h1>Finalists</h1>
+
+			<ol class="pop language-none">
+				<li>(Then) current spec</li>
+				<li>Parser switch
+					<ol class="md-children delayed persistent">
+						<li>Any @rule</li>
+						<li>Any @rule + `&`</li>
+						<li>Any non-ident</li>
+					</ol>
+				</li>
+				<li>“Lea’s proposal”</li>
+				<li>Post-nesting proposal
+					<ol class="md-children delayed">
+						<li>`@nest {}`</li>
+						<li>`& {}`</li>
+						<li>`{}`</li>
+					</ol>
+				</li>
+			</ol>
+		</header>
+		<iframe data-src="https://github.com/w3c/csswg-drafts/blob/2535b93ca241a1db5a29c47c5b22c5b1d0be2e71/css-nesting-1/proposals.md" frameborder="0" class="browser"></iframe>
+	</article>
+
+	<article class="history slide" id="consensus-option-3">
+		<h1>
+			<time>26 Oct 2022</time>
+			WG consensus to switch to Option 3
+		</h1>
+		<div class="they-said">
+			<div class="messages autoplay">
+				<blockquote>
+					While I initially supported option 1, having looked through the details, option 3 is very good
+				</blockquote>
+				<blockquote>
+					It most of the time gives you the ability to write like in Sass, with one awkward exception that’s easy to tell apart
+				</blockquote>
+				<blockquote>
+					The rule for whether you need [an ampersand] or not is very clear, and this does allow us to be close to Sass
+				</blockquote>
+			</div>
+			<article data-clone="#tab"></article>
+		</div>
+		<details class="notes">
+			- [Minutes](https://github.com/w3c/csswg-drafts/issues/7834#issuecomment-1284314893)
+			- Note that the resolution was that we prefer Option 3 over the current spec (at the time),
+			but Option 3 vs Option 4 would be discussed later.
+		</details>
+	</article>
+
+	<article class="history slide">
+		<h1>
+			<time>27 Oct 2022</time>
+			🚀 Spec updated
+			🚀 Chrome implementation updated
+		</h1>
+		<details class="notes">
+			- [Spec updated](https://github.com/w3c/csswg-drafts/issues/7834#issuecomment-1293948163)
+			- [Chrome changes in review](https://github.com/w3c/csswg-drafts/issues/7834#issuecomment-1294064507)
+		</details>
+	</article>
+
+	<article class="history slide columns">
+		<time>June 2018</time>
+		<h1>
+			2022 was not the first time I proposed that idea 🤫
+		</h1>
+		<a href="https://github.com/w3c/csswg-drafts/issues/2701#issuecomment-394785270" class="browser"><img src="img/option-3-2018.png" alt=""></a>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>
+			If your idea is rejected, try again later? 😀
+			<div class="subtitle">(data helps too)</div>
+		</h1>
+	</article>
+
+	<article class="history slide">
+		<h1>
+			<time>15 Dec 2022</time>
+			WebKit polls developers once more
+		</h1>
+		<iframe data-src="https://webkit.org/blog/13607/help-choose-from-options-for-css-nesting-syntax/" class="browser"></iframe>
+	</article>
+
+	<article class="history slide">
+		<h1>
+			<time>15 Dec 2022</time>
+			Option 3 wins by a landslide
+		</h1>
+		<a href="https://webkit.org/blog/13607/help-choose-from-options-for-css-nesting-syntax/#:~:text=Which%20option%20is%20best%20for%20the%20future%20of%20CSS%3F" class="browser" target="_blank"><img src="img/webkit-poll.png" alt=""></a>
+	</article>
+
+	<article class="history slide">
+		<h1>
+			<time>21 Dec 2022</time>
+			Final WG resolution to adopt Option 3
+		</h1>
+		<details class="notes">
+			[Minutes](https://lists.w3.org/Archives/Public/www-style/2022Dec/0015.html)
+		</details>
+	</article>
+</section>
+
+<section>
+	<header class="slide doneyet" id="towards-backtracking" data-credits="Giphy">
+		<h1>So… are we done now?</h1>
+	</header>
+
+	<article class="history slide">
+		<h1>
+			<time>26 Oct 2022</time>
+		</h1>
+		<iframe src="https://github.com/w3c/csswg-drafts/issues/7961" frameborder="0" class="browser"></iframe>
 	</article>
 
 	<article class="slide">
-		<pre class="language-css"><code>
-			ul {
-				list-style: "🦄";
+		<h1>
+			<span class="label">Core idea</span>
+			Allow backtracking, as an edge case
+		</h1>
+		<details class="notes">
+			- What if we could minimize the number of cases that require backtracking so much it becomes exceedingly rare?
+			- “Asymptotically fixed lookahead” 😅
+		</details>
+	</article>
 
-				& li { margin: 0; }
-				.foo {  }
-				> a { color: inherit; }
-				.dark & { }
-				:is(nav) & {
-					list-style: none;
-				}
-			}
-		</code></pre>
+	<article class="slide">
+		<h1>
+			<div class="label">Observation 1</div>
+			Far more declarations than nested rules
+		</h1>
+		<details class="notes">
+			Quite trivially for most existing stylesheets, but this holds true even for stylesheets that use nesting quite heavily.
+		</details>
+	</article>
+
+	<article class="slide">
+		<h1>
+			<div class="label">Observation 2</div>
+			Very few nested selectors are actually ambiguous (&lt; 2%)
+		</h1>
+	</article>
+
+	<article class="slide language-cssgrammar tree-children dont-resize tree-flushend arrows" id="backtracking-algorithm">
+		<ul>
+			<li>
+				<span class="start">Start</span>
+				<ul>
+					<li><code>&lt;ident-token&gt;</code>
+						<ul class="delayed persistent" data-index="2">
+							<li><code>':'</code>
+								<ul class="delayed persistent" data-index="4">
+									<li><code>&lt;ident-token&gt;</code>
+										<ul class="delayed persistent" data-index="7">
+											<li>
+												<img class="end ambiguous" src="img/bazinga.svg">
+											</li>
+										</ul>
+									</li>
+									<li><code>':'</code>
+										<ul class="delayed persistent" data-index="5">
+											<li>
+												<span class="end rule">✅ Rule</span>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<em>(Any other token)</em>
+										<ul class="delayed persistent" data-index="6">
+											<li>
+												<span class="end declaration">✅ Declaration</span>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<em>(Any other token)</em>
+								<ul class="delayed persistent" data-index="3">
+									<li>
+										<span class="end rule">✅ Rule</span>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<em>(Any other token)</em>
+						<ul class="delayed persistent" data-index="1">
+							<li>
+								<span class="end rule">✅ Rule</span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+		<details class="notes">
+			For simplicity, option 3 requires rules to not start with an ident.
+			However, not everything that starts with an ident is actually ambiguous.
+		</details>
+	</article>
+
+	<article class="slide">
+		<h1>
+			Parse <img class="end ambiguous" src="img/bazinga.svg" style="height: 1.1em; vertical-align: -0.25em;"> as declarations, backtrack if no luck
+		</h1>
+		<details class="notes">
+			- 0 perf impact for declarations, and tiny for 2% of rules
+		</details>
+	</article>
+
+	<article class="slide" id="implementor-feedback">
+		<h1>Implementer Feedback</h1>
+		<div class="they-said reverse delayed">
+			<div class="messages autoplay">
+				<blockquote>This may work; needs measurements to assess impact</blockquote>
+			</div>
+			<div class="person" id="emilio">
+				<img src="img/firefox-logo.svg" alt="">
+				<div>
+					<h3>Emilio A.</h3>
+					<p>Mozilla</p>
+				</div>
+			</div>
+		</div>
+		<div class="they-said delayed">
+			<div class="messages autoplay">
+				<blockquote>I want to get any syntax specified and be done with it.</blockquote>
+				<blockquote>So NAK. I won’t be spending resources on this. Non-starter for us.</blockquote>
+			</div>
+			<div class="person" id="emilio">
+				<img src="img/chrome-logo.svg" alt="">
+				<div>
+					<h3>Steinar G.</h3>
+					<p>Google</p>
+				</div>
+			</div>
+		</div>
+		<div class="they-said reverse delayed">
+			<div class="messages autoplay">
+				<blockquote>If Chrome has trouble with this, we will too 🤷🏼</blockquote>
+			</div>
+			<div class="person" id="emilio">
+				<img src="img/safari-logo.png" alt="">
+				<div>
+					<h3>(Redacted)</h3>
+					<p>Apple</p>
+				</div>
+			</div>
+		</div>
+	</article>
+
+	<article class="slide they-said" id="peter-fo">
+		<div class="messages autoplay">
+			<blockquote>Formal Objection if feasibility of the Holy Grail Syntax is not investigated for reals</blockquote>
+		</div>
+		<div class="person">
+			<img src="img/peter.png" alt="">
+			<div>
+				<h3>Peter Linss</h3>
+				<p>W3C TAG co-chair</p>
+			</div>
+		</div>
+	</article>
+
+	<article class="history slide">
+		<h1>
+			<time>Oct 2022 - Jan 2023</time>
+			Tab, Peter, and others refine algorithm further
+		</h1>
+	</article>
+
+	<article class="history slide columns">
+		<h1>
+			<time>Mar 2023</time>
+			Holy Grail Syntax actually possible in Chrome! 🎉
+		</h1>
+		<a href="https://github.com/w3c/csswg-drafts/issues/7961#issuecomment-1489883575" class="browser" target="_blank"><img src="img/backtracking-possible.png" alt=""></a>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>
+			Take “Not implementable” with a grain of salt
+		</h1>
+		<details class="notes">
+			It’s common for things that originally seemed not implementable to prove out to be implementable upon closer inspection.
+			This is by far not the only example. Container queries, `:has()` are two big others.
+		</details>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>
+			100% seems a lot easier once you’re at 80%
+		</h1>
+		<details class="notes">
+			The fact that we were almost there definitely played a role in people being motivated to get all the way there.
+			And getting to 80% requires less than 80% of the effort.
+		</details>
+	</article>
+
+	<article class="takeaway slide">
+		<h1>
+			Favor internal complexity over external complexity
+		</h1>
+		<details class="notes">
+			- Getting to the syntax that is simpler on the outside meant that parsing is now significantly more complex.
+			But usually offloading complexity inwards is a worthy tradeoff.
+			- Each interface is used by far more people than the number of people who have to deal with the internals,
+			and the internals can always be improved down the line.
+			- In fact, the opposite is a usaiblity antipattern: degrading the user experience to make implementation easier.
+		</details>
+	</article>
+
+	<article class="slide">
+		<h1>Current state</h1>
+		<iframe src="https://caniuse.com/css-nesting" frameborder="0" class="browser"></iframe>
+	</article>
+
+	<article class="slide doneyet" data-credits="Giphy">
+		<h1>Surely we’re done now?!</h1>
+	</article>
+
+	<article class="slide md">
+		<h1>Still lots to do!</h1>
+
+		- Nesting in `style=""`
+		- CSS OM
+		- [Cascade of declarations after rules](https://webkit.org/blog/14571/css-nesting-and-the-cascade/)
+		- [and a lot more…](https://github.com/w3c/csswg-drafts/issues?q=is%3Aopen+label%3Acss-nesting-1+sort%3Aupdated-desc)
 	</article>
 </section>
 
-<section>
-	<header class="slide">
-		<h1>Could we go further?</h1>
-	</header>
-</section>
-
-<section>
-	<header class="slide">
-		<h1>Takeaways</h1>
-	</header>
-</section>
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
 <footer class="slide">
+	<img src="../shared/img/stickers.JPG" class="stickers delayed" alt="">
+	<p class="stickercaption delayed">Come get a sticker (and say hi!) ---></p>
 	<header>
 		<h1>Thank you!</h1>
-		<p class="subtitle">Slides at <a href="https://projects.verou.me/talks/css-nesting/">projects.verou.me/talks/css-nesting/</a>*</p>
-		<p style="font-size: 60%;">
+		<p class="subtitle">Slides at <a href="https://projects.verou.me/talks/css-nesting/">projects.verou.me/talks/css-nesting/</a><span style="color: canvastext">*</span></p>
+		<p style="font-size: 60%; position: absolute; right: 2em; bottom: 2em;">
 			* Yes, they use nesting, natively interperted by the browser.
 		</p>
 	</header>
@@ -1289,11 +1843,13 @@
 		<dt>
 			<i class="bi bi-twitter"></i>
 			<i class="bi bi-github"></i>
-			<i class="bi bi-mastodon"></i>
 			<i class="bi bi-linkedin"></i>
 			<i class="bi bi-threads"></i>
 		</dt>
 		<dd>leaverou</dd>
+
+		<dt class="bi bi-mastodon"></dt>
+		<dd>@leaverou@front-end.social</dd>
 	</dl>
 </footer>
 

@@ -1,5 +1,4 @@
-@import url("https://lea.verou.me/assets/fonts.css");
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
+@import url("fonts.css");
 
 :root {
 	--font-sans: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
@@ -27,7 +26,7 @@
 	--color-gray-90: oklch(0.9 0.01 180);
 	--color-gray-95: oklch(0.95 0.01 180);
 
-	--color-green-light: color-mix(in oklch, var(--color-green) 0%, oklch(.95 .12 none));
+	--color-green-light: color-mix(in oklch, var(--color-green) 0%, oklch(.92 .06 none));
 	--color-red-light: color-mix(in oklch, var(--color-red) 0%, oklch(.95 .12 none));
 	--color-aqua-light: color-mix(in oklch, var(--color-aqua) 0%, oklch(.95 .05 none));
 
@@ -45,21 +44,22 @@
 	--color-accent-5: color-mix(in oklab, var(--color-accent-1), var(--color-accent-2));
 	--color-accent-6: var(--color-yellow);
 
-	--in-oklch: ;
-	--in-oklab: ;
-}
+	--transition-duration: .2s;
 
-@supports (background: linear-gradient(in oklch, red, tan)) {
-	:root {
+	--in-oklch: ;
+	@supports (background: linear-gradient(in oklch, red, tan)) {
 		--in-oklch: in oklch;
 	}
-}
 
-@supports (background: linear-gradient(in oklab, red, tan)) {
-	:root {
+	--in-oklab: ;
+	@supports (background: linear-gradient(in oklab, red, tan)) {
 		--in-oklab: in oklab;
 	}
 }
+
+
+
+
 
 html {
 	font-weight: 300;
@@ -72,8 +72,35 @@ html {
 	color: white;
 }
 
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1.1;
+
+	> .subtitle {
+		color: var(--color-gray-60);
+		font-size: clamp(0em, 65%, calc(1.2 * var(--slide-base-font-size, 1rem)));
+		margin-top: .2em;
+		text-align: center;
+		font-weight: 500;
+		text-wrap: balance;
+	}
+}
+
+& code:not(pre > code) {
+	font-weight: 500;
+	color: var(--color-gray-40);
+	background: var(--color-gray-95);
+	padding: .08em .2em;
+	border-radius: .2em;
+	font-size: 90%;
+}
+
 pre {
 	position: relative;
+
+	.compact-code &,
+	.compact-code & > code {
+		tab-size: 2;
+	}
 
 	&, &.prism-live.prism-live {
 		padding: .3em .6em;
@@ -87,6 +114,11 @@ pre {
 
 	& + pre {
 		margin-top: 1em;
+	}
+
+	&.language-html {
+		--label: "HTML";
+		--color: var(--color-green);
 	}
 
 	&.language-css {
@@ -140,25 +172,39 @@ pre {
 		text-transform: uppercase;
 		font: bold 80%/1.5 var(--font-sans);
 	}
+
+	.token:has(> mark:only-child) {
+		opacity: 1;
+	}
+
+	& mark {
+		position: relative;
+		text-shadow: none;
+		--background: color(display-p3 .95 1 0);
+		background: var(--background);
+		box-shadow: 0 0 0 .1em var(--background);
+		color: canvastext;
+
+		.token.token {
+			opacity: 1;
+			color: inherit;
+		}
+	}
 }
 
 li {
 	text-wrap: balance;
 }
 
-code:not(pre > code) {
-	font-size: 110%;
-}
-
 /* Plain slides, just a heading + a list */
-:is(ul, ol):where(h1 + *):where(:last-child, :has(+ details.notes:last-child)) {
+:is(ul, ol):where(.slide > h1 + *):where(:last-child, :has(+ details.notes:last-child)) {
 	font-size: 150%;
 }
 
 .slide {
 	padding: 5rem;
 
-	&:where(:not(.dark)) {
+	&:where(:not(.dark, header)) {
 		background-image: none;
 	}
 
@@ -171,6 +217,14 @@ code:not(pre > code) {
 	> header > h1 {
 		margin: 0;
 		font-size: calc(3 * var(--slide-base-font-size, 1rem));
+
+		+ .subtitle {
+			color: var(--color-gray-60);
+			font-size: calc(1.2 * var(--slide-base-font-size, 1rem));
+			text-align: center;
+			font-weight: 500;
+			text-wrap: balance;
+		}
 	}
 
 	> h1,
@@ -179,13 +233,7 @@ code:not(pre > code) {
 			margin-bottom: .2em;
 		}
 
-		.subtitle {
-			color: var(--color-gray-60);
-			font-size: calc(1.2 * var(--slide-base-font-size, 1rem));
-			text-align: center;
-			font-weight: 500;
-			text-wrap: balance;
-		}
+
 	}
 
 	& h2 {
@@ -202,14 +250,13 @@ header.slide {
 .columns {
 	display: flex;
 	flex-flow: row wrap;
-	gap: 2em;
+	gap: 1em 2em;
 
 	> h1,
 	> header {
 		width: 100%;
 		flex: none;
 		text-align: center;
-		margin-top: .5em;
 
 		/* No point in doing 2+ columns with a heading and a single element,
 		  the heading must be in one of the columns */
@@ -218,11 +265,15 @@ header.slide {
 			flex: 1;
 			margin-top: 0;
 			text-align: left;
+
+			& h1 {
+				text-align: left;
+			}
 		}
 	}
 
 	> * {
-		margin-top: 0;
+		margin-block: 0;
 		flex: 1;
 	}
 }
@@ -246,53 +297,13 @@ header.slide {
 	}
 
 	&.punctuation {
-		opacity: .6;
 		mix-blend-mode: normal;
 	}
 }
 
-.browser,
-a.browser > :only-child {
-	/* Frame offsets in px */
-	--frame-top: 38;
-	--frame-right: 146;
-	--frame-left: 201;
-
-	position: relative;
-	min-width: 347px;
-
-	box-sizing: border-box;
-	border: 1px solid rgba(0 0 0 / .2);
-	border-radius: 5px;
-	box-shadow: 0 20px 80px rgba(0 0 0 / .2);
-	padding-top: calc(var(--frame-top) * 1px);
-	background:
-		url("img/chrome-left.png") left top no-repeat,
-		url("img/chrome-right.png") right top no-repeat,
-		var(--url-image,) 200px top no-repeat,
-		url("img/chrome-middle.png") top repeat-x white;
-	background-origin: border-box;
-
-	&:where(iframe) {
-		width: 100%;
-		height: 100%;
-		flex: 1;
-
-		.columns & {
-			min-width: calc(90vw / var(--columns, 2));
-		}
-	}
-
-	&:where(a) {
-		display: contents;
-	}
-
-	&:where(img, a > img) {
-		flex: 1;
-		min-height: 3em;
-	}
-
-
+.takeaway h1 {
+	counter-reset: takeaway var(--takeaway);
+	--label: "Takeaway #" counter(takeaway);
 }
 
 .slide:is(.takeaway, .recap) h1,
@@ -322,5 +333,62 @@ h1:has(> .label) {
 
 #indicator {
 	opacity: .5;
+}
+
+/* Tables */
+table {
+	border-spacing: 0;
+	margin: 0;
+
+	& caption {
+		font-weight: bold;
+		letter-spacing: -.05em;
+		color: var(--color-orange);
+	}
+
+	& th,
+	& td {
+		vertical-align: middle;
+		text-align: left;
+		padding: .3em .5em;
+
+		&:first-child {
+			text-align: left;
+		}
+	}
+
+	& th {
+		border: 0;
+	}
+
+	& thead th {
+		vertical-align: bottom;
+		font-size: 75%;
+		background: var(--color-accent-1);
+		color: white;
+		padding: .3em .5em;
+	}
+
+	& tbody {
+		& th,
+		& td {
+			border-bottom: 1px solid var(--color-gray-80);
+		}
+
+		& th {
+			text-align: right;
+			padding-left: 0;
+		}
+
+		& td {
+			&:first-child {
+				font-weight: 300;
+			}
+		}
+
+		& tr > * {
+			border-top: 1px solid hsla(0, 0%, 100%, .15);
+		}
+	}
 }
 

@@ -1,0 +1,37 @@
+@font-face {
+	font-family: Inter;
+	src: url("fonts/Inter-upright-var.woff2") format("woff2");
+	font-weight: 100 900; /* stylelint-disable-line font-weight-notation */
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: Inter;
+	src: url("fonts/Inter-italic-var.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: Vollkorn;
+	src: url("fonts/Vollkorn/Vollkorn-VariableFont_wght.woff2") format("woff2");
+	font-weight: 400 900;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: Vollkorn;
+	src: url("fonts/Vollkorn/Vollkorn-Italic-VariableFont_wght.woff2") format("woff2");
+	font-weight: 400 900;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: Inconsolata;
+	src: url("fonts/Inconsolata/Inconsolata-VariableFont_wdth,wght.woff2") format("woff2");
+	font-weight: 200 900;
+	font-stretch: ultra-condensed ultra-expanded;
+}

@@ -10,6 +10,12 @@
 	inherits: true;
 }
 
+/* @property --angle2 {
+	syntax: '<angle>';
+	initial-value: 0deg;
+	inherits: true;
+} */
+
 ul.tree {
 	--_node-color: var(--node-color, hsl(220 10% 50% / .2));
 	--_line-color: var(--line-color, color-mix(in oklab, hsl(220 10% 50%) 70%, canvas));
@@ -64,8 +70,8 @@ ul.tree {
 	}
 
 	& li li {
-		--_arrowhead-aspect-ratio: var(--arrowhead-aspect-ratio, 1.6);
-		--_arrowhead-width: var(--arrowhead-width, calc(8 * var(--_line-thickness)));
+		--_arrowhead-aspect-ratio: var(--arrowhead-aspect-ratio, 1.1);
+		--_arrowhead-width: var(--arrowhead-width, calc(6 * var(--_line-thickness)));
 
 		/* Lines */
 		& > .line {
@@ -86,6 +92,7 @@ ul.tree {
 			/* Arrows */
 			&:is(.arrows *) {
 				margin-right: var(--_line-thickness);
+
 				&::after {
 					content: "";
 					position: relative;
@@ -95,12 +102,16 @@ ul.tree {
 					height: var(--_arrowhead-width);
 					aspect-ratio: var(--_arrowhead-aspect-ratio);
 					clip-path: polygon(0 0, 100% 50%, 0 100%);
+					transform-origin: right;
+					transform: scaleY(calc(cos(var(--angle2))))
+					           skewY(calc(-1 * var(--angle2)))
+							   rotate(var(--angle2));
 				}
 			}
 		}
 
 		&:is(.tree-flushend *):not(:has(ul)) {
-			&::before {
+			& > .line {
 				flex: 1;
 			}
 		}

@@ -82,6 +82,37 @@
 			}
 		</code></pre>
 	</article>
+
+	<article class="slide md">
+		# Considerations
+
+		- Learnability
+			- Is it obvious how it works?
+			- Sselector syntax restrictions
+		- Efficiency
+			- How much extra to type?
+			- How noisy to read?
+		- Safety
+			- How easy is it to make mistakes?
+		- Compatibility
+			- With `@scope`
+			- CSSOM, inline styles
+			- With preprocessors
+			- With the Ideal Syntax
+
+
+		<details class="notes">
+			- Each syntax has pros and cons that largely fall under the three main axes of usability: learnability, efficiency, and safety.
+			There is also a fourth axis, compatibility, which spans across all three as poor compatibility can affect learnability, efficiency, and safety.
+			- Learnability includes things like, how understandable is the syntax at a glance, and how many restrictions are imposed on normal selector syntax.
+			- Efficiency encompasses both reading and writing code. The importance of efficiency is typically weighed against the frequency of use.
+			Since Nesting is a feature that when available is used all over stylesheets, efficiency is a high priority.
+			- Safety is about how easy it is to make mistakes, and how easy it is to debug them.
+			This is also a major consideration, as error-prone features make an interface (and a language is also an interface) extremely frustrating to use.
+			In UIs safety also includes error-recovery, but in a programming language that is less of a concern (as there is always Undo).
+			- Compatibility includes both backwards compatibility with existing preprocessor code, with other constructs of CSS, and future compatibility, in case the Ideal Syntax ever becomes possible.
+		</details>
+	</article>
 </section>
 
 <footer class="slide">

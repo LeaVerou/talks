@@ -20,3 +20,14 @@ Prism.languages.css.selector.inside.parent = {
 	alias: 'important'
 };
 
+$$(".takeaway.slide").forEach((slide, i) => slide.style.setProperty("--takeaway", i+1));
+
+let urlStyles = `font: 1em system-ui, sans-serif;`;
+for (let element of document.querySelectorAll(".browser")) {
+	let url = element.dataset.url ?? element.dataset.src ?? element.href ?? element.src;
+
+	element.style.setProperty("--url-image", `url('data:image/svg+xml,
+		<svg xmlns="http://www.w3.org/2000/svg">
+			<text style="${ urlStyles }" x=".1em" y="1.5em" >${ encodeURIComponent(url) }</text>
+		</svg>')`.replace(/\r?\n|\t/g, ""));
+}
