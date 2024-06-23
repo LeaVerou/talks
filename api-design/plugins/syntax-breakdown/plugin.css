@@ -1,0 +1,270 @@
+.syntax-breakdown {
+	position: relative;
+	z-index: 1;
+
+	&:is(pre) {
+		overflow: visible;
+	}
+
+	.tooltip:not(.current > *, .displayed > *) {
+		display: none;
+	}
+
+	& span[title],
+	& span:has(> .tooltip) {
+		--line-width: .5rem;
+		--_line-offset: var(--line-offset, 0em);
+		--_color-1: var(--color-1, var(--color-accent-1));
+		--_color-2: var(--color-2, var(--color-accent-2));
+		--_text-color-1: var(--text-color-1, white);
+		--_text-color-2: var(--text-color-2, black);
+		--_tooltip-orientation: var(--tooltip-orientation, horizontal);
+		--_tooltip-alignment: var(--tooltip-alignment, end);
+		--_tooltip-line-alignment: var(--tooltip-line-alignment, center);
+		--_tooltip-offset: var(--tooltip-offset, 0em);
+
+		position: relative;
+		&:not(.inline) {
+			display: inline-block;
+			width: fit-content;
+			padding: .1em 0 0;
+		}
+
+		&.inline {
+			padding-block: .2em;
+		}
+
+		opacity: 1;
+		border-radius: .5rem;
+		transition: none;
+
+		&.displayed {
+			opacity: 1;
+		}
+
+		&.current {
+			background: var(--_color-1);
+			filter: drop-shadow(.1em .1em .3em rgba(0 0 0 / .4));
+			z-index: 2;
+
+			&:has(.current) {
+				/* Parent of nested tooltip */
+				--_color-1: var(--color-neutral-95);
+				--_color-2: var(--color-neutral-85);
+				filter: none;
+				z-index: auto;
+
+				&:is(.current *) {
+					/* Parent of nested tooltip that is also a child */
+					filter: drop-shadow(0 0 .05em rgb(0 0 0 / .15));
+				}
+			}
+
+			&:not(:has(.current)) {
+				&,
+				& * {
+					color: white !important;
+					mix-blend-mode: normal !important;
+				}
+			}
+
+			&::after,
+			&:not(:has(>.tooltip))::before,
+			> .tooltip {
+				position: absolute;
+				background: var(--_color-2);
+				font: bold 3rem var(--font-heading);
+				letter-spacing: -.03em;
+				--_line-length: min(var(--line-length, var(--line-length-initial)), var(--max-line-length, 100vmax - 3em));
+			}
+
+			/* Line */
+			&::after {
+				content: '';
+				z-index: 0;
+				background: linear-gradient(var(--gradient-direction, to bottom), var(--_color-1) 20%, var(--_color-2) 80%);
+			}
+
+			/* Tooltip */
+			&:not(:has(>.tooltip))::before {
+				content: attr(title);
+			}
+
+			&:not(:has(>.tooltip))::before,
+			> .tooltip {
+				z-index: 2;
+				width: var(--tooltip-width, max-content);
+				max-width: var(--tooltip-max-width, var(--max-width-initial));
+				box-sizing: border-box;
+				padding: .3em .5em .4em;
+				border-radius: inherit;
+				color: black;
+				white-space: normal;
+			}
+		}
+
+		@container style(--_tooltip-orientation: vertical) {
+			&::after,
+			&:not(:has(>.tooltip))::before,
+			> .tooltip {
+				--max-line-length: calc(100vh - 2em);
+				--line-length-initial: calc(40vh - 3em);
+				--line-length-total: min(
+					var(--max-line-length),
+					var(--line-length, var(--line-length-initial))
+					+ var(--line-length-perline, 0em) * var(--line, 0)
+				);
+				left: 50%;
+			}
+
+			&::after {
+				width: var(--line-width);
+				height: var(--line-length-total);
+				transform: translateX(-50%) translateX(var(--_line-offset));
+			}
+
+			&:not(:has(>.tooltip))::before,
+			> .tooltip {
+				transform: translateX(calc(-1 * min(var(--left, 0) + var(--width, 0) / 2, 50%))) translateX(var(--_tooltip-offset));
+			}
+
+			@container style(--_tooltip-line-alignment: end) {
+				&::after,
+				&:not(:has(>.tooltip))::before, > .tooltip {
+					left: auto;
+				}
+
+				&::after {
+					right: 50%;
+				}
+
+				&:not(:has(>.tooltip))::before, > .tooltip {
+					right: 0;
+					left: auto;
+					transform: none;
+				}
+			}
+
+			@container style(--_tooltip-alignment: start) {
+				&::after,
+				&:not(:has(>.tooltip))::before,
+				> .tooltip {
+					--max-line-length: calc(var(--top) - 3em);
+				}
+
+				&::after {
+					--gradient-direction: to top;
+					bottom: 100%;
+				}
+
+				&:not(:has(>.tooltip))::before,
+				> .tooltip {
+					bottom: calc(100% + var(--line-length-total));
+				}
+			}
+
+			@container style(--_tooltip-alignment: end) {
+				&::after,
+				&:not(:has(>.tooltip))::before, > .tooltip {
+					--max-line-length: calc(100vh - var(--bottom) - 3em);
+				}
+
+				&::after {
+					--gradient-direction: to bottom;
+					top: 100%;
+				}
+
+				&:not(:has(>.tooltip))::before, > .tooltip {
+					top: calc(100% + var(--line-length-total));
+				}
+			}
+		}
+
+		@container style(--_tooltip-orientation: horizontal) {
+			&.current {
+				box-shadow: .2em 0 var(--_color-1), -.2em 0 var(--_color-1);
+
+				&::after,
+				&:not(:has(>.tooltip))::before, > .tooltip {
+					--max-line-length: calc(100vw - 4em);
+					--line-length-initial: 6em;
+					top: 50%;
+					transform: translateY(-50%) translateY(var(--_tooltip-offset));
+				}
+
+				&::after {
+					height: var(--line-width);
+					top: 50%;
+					width: var(--_line-length);
+				}
+			}
+
+			&.after-middle::before {
+				--max-width-initial: 43vw;
+			}
+
+			@container style(--_tooltip-alignment: end) {
+				&::after,
+				&:not(:has(>.tooltip))::before, > .tooltip {
+					--max-line-length: ;
+				}
+
+				&::after {
+					left: 100%;
+					--gradient-direction: to right;
+				}
+
+				&:not(:has(>.tooltip))::before, > .tooltip {
+					left: calc(100% + var(--_line-length));
+					--max-width-initial: calc(98vw - var(--_line-length) - var(--left, 0) - var(--width, 0));
+				}
+			}
+
+			@container style(--_tooltip-alignment: start) {
+				&::after {
+					right: 100%;
+					--gradient-direction: to left;
+				}
+
+				&:not(:has(>.tooltip))::before, > .tooltip {
+					right: calc(100% + var(--_line-length));
+				}
+			}
+		}
+	}
+}
+
+.syntax-breakdown,
+.syntax-breakdown *,
+:has(.syntax-breakdown) {
+	&[data-tooltip~="top"] {
+		--tooltip-orientation: vertical;
+		--tooltip-alignment: start;
+	}
+
+	&[data-tooltip~="bottom"] {
+		--tooltip-orientation: vertical;
+		--tooltip-alignment: end;
+	}
+
+	&[data-tooltip~="top"],
+	&[data-tooltip~="bottom"] {
+		&[data-tooltip~="right"] {
+			--tooltip-line-alignment: end;
+		}
+
+		&[data-tooltip~="left"] {
+			--tooltip-line-alignment: start;
+		}
+	}
+
+	&[data-tooltip="left"] {
+		--tooltip-orientation: horizontal;
+		--tooltip-alignment: start;
+	}
+
+	&[data-tooltip="right"] {
+		--tooltip-orientation: horizontal;
+		--tooltip-alignment: end;
+	}
+}

@@ -1,0 +1,21 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 933.2685906432571 616.7855568632485" width="1866.5371812865142" height="1233.571113726497">
+  <!-- svg-source:excalidraw -->
+
+  <defs>
+    <style class="style-fonts">
+      @font-face {
+        font-family: "Virgil";
+        src: url("../css/fonts/Virgil.woff2");
+      }
+      @font-face {
+        font-family: "Cascadia";
+        src: url("https://excalidraw.com/Cascadia.woff2");
+      }
+      @font-face {
+        font-family: "Assistant";
+        src: url("https://app.excalidraw.com//dist/excalidraw-assets/Assistant-Regular.woff2");
+      }
+    </style>
+
+  </defs>
+  <rect x="0" y="0" width="933.2685906432571" height="616.7855568632485" fill="#ffffff"></rect><g stroke-linecap="round"><g transform="translate(54.12828826904297 11.442020486295235) rotate(0 -0.5649486313406555 288.6347353473306)"><path d="M0.44 -1.44 C-2.95 231.92, -2.07 461.1, 0 578.71 M0.7 -0.75 C-0.18 217.68, -0.52 435.73, -0.54 578.47" stroke="#1e1e1e" stroke-width="1" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(20.96758270263672 562.8544045194983) rotate(0 450.4650569919498 2.5772484111739686)"><path d="M-1.37 1.58 C205.07 6.91, 411.11 7.24, 902.3 -0.22 M0.46 -0.34 C308.2 6.44, 615.63 7.26, 901.02 -0.04" stroke="#1e1e1e" stroke-width="1" fill="none"></path></g></g><mask></mask><g transform="translate(632.2835006713867 571.7855568632485) rotate(0 138.17994689941406 17.5)"><text x="276.3598937988281" y="24.528" font-family="Virgil, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="end" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Use case complexity</text></g><g transform="translate(-64.42395782470703 87.48175437301398) rotate(270 91.92395782470703 17.5)"><text x="183.84791564941406" y="24.528" font-family="Virgil, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="end" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">UI complexity</text></g><g stroke-linecap="round"><g stroke-opacity="0.8" fill-opacity="0.8" transform="translate(74.02488934621215 178.86974185518926) rotate(0 418.2985534667969 0)"><path d="M0 0 C139.43 0, 697.16 0, 836.6 0 M0 0 C139.43 0, 697.16 0, 836.6 0" stroke="#e03131" stroke-width="4" fill="none"></path></g></g><mask></mask><g transform="translate(820.4657462798059 153.387503085658) rotate(0 42.108001708984375 10)"><text x="0" y="14.016" font-family="Virgil, Segoe UI Emoji" font-size="16px" fill="#e03131" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">SVG DOM</text></g></svg>

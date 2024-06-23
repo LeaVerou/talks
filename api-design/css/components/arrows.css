@@ -1,0 +1,37 @@
+.arrow-down,
+.arrow-right {
+	--_arrow-thickness: var(--arrow-thickness, .2em);
+	--_arrow-head-length: var(--arrow-head-length, .8em);
+	--_color: var(--color, var(--color-neutral-80));
+
+	flex: 1;
+	background: var(--_color);
+	inline-size: 1em;
+	margin-block: .5em;
+	margin-inline: auto;
+	min-block-size: calc(1.5 * var(--_arrow-head-length));
+}
+
+.arrow-down {
+	text-align: center;
+	clip-path: polygon(
+		calc(50% - var(--_arrow-thickness) / 2) 0, calc(50% + var(--_arrow-thickness) / 2) 0,
+		calc(50% + var(--_arrow-thickness) / 2) calc(100% - var(--_arrow-head-length)), 100% calc(100% - var(--_arrow-head-length)),
+		50% 100%,
+		0 calc(100% - var(--_arrow-head-length)), calc(50% - var(--_arrow-thickness) / 2) calc(100% - var(--_arrow-head-length)),
+		calc(50% - var(--_arrow-thickness) / 2) 0
+	);
+
+}
+
+.arrow-right {
+	flex: 1;
+	writing-mode: vertical-rl;
+	clip-path: polygon(
+		0 calc(50% - var(--_arrow-thickness) / 2), 0 calc(50% + var(--_arrow-thickness) / 2),
+		calc(100% - var(--_arrow-head-length)) calc(50% + var(--_arrow-thickness) / 2), calc(100% - var(--_arrow-head-length)) 100%,
+		100% 50%,
+		calc(100% - var(--_arrow-head-length)) 0, calc(100% - var(--_arrow-head-length)) calc(50% - var(--_arrow-thickness) / 2),
+		0 calc(50% - var(--_arrow-thickness) / 2)
+	);
+}

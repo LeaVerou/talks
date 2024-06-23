@@ -1,0 +1,36 @@
+.chip {
+	display: inline-block;
+	vertical-align: .3em;
+	padding: .15em .6em .2em;
+	border-radius: 1em;
+	background: var(--color, var(--color-neutral-90));
+	font-size: 60%;
+	letter-spacing: normal;
+
+	&.color-1 {
+		--color: var(--color-accent-1);
+		color: white;
+	}
+
+	&.good,
+	&.color-2 {
+		--color: var(--color-green);
+		color: white;
+	}
+
+	&.bad {
+		--color: var(--color-red);
+		color: white;
+	}
+
+	&.color-3 {
+		--color: var(--color-accent-2);
+		color: white;
+	}
+
+	&.small {
+		vertical-align: .4em;
+		padding: .2em .7em .3em;
+		font-size: clamp(1.5rem, 45%, 50vh);
+	}
+}

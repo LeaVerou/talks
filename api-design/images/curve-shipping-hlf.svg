@@ -1,0 +1,115 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+	viewBox="0 0 932.2566478177904 621.9645446319134" width="1864.5132956355808"
+	height="1243.9290892638269">
+	<!-- svg-source:excalidraw -->
+
+	<defs>
+		<style class="style-fonts">
+			/*
+			#2f9e44 - MVP
+			#9c36b5 - v1
+			#0c8599 - v2
+			*/
+
+			@keyframes toggle {
+				from, 33.3% {
+					opacity: 1;
+				}
+				33.4%, to {
+					opacity: 0;
+				}
+			}
+
+			[fill="#2f9e44"], [stroke="#2f9e44"],
+			[fill="#9c36b5"], [stroke="#9c36b5"],
+			[fill="#0c8599"], [stroke="#0c8599"] {
+				animation: toggle 3s infinite;
+			}
+
+			[fill="#9c36b5"], [stroke="#9c36b5"] {
+				animation-delay: 1s;
+				opacity: 0;
+			}
+
+			[fill="#0c8599"], [stroke="#0c8599"] {
+				animation-delay: 2s;
+				opacity: 0;
+			}
+
+
+			@font-face {
+			font-family: "Virgil";
+			src: url("../css/fonts/Virgil.woff2");
+			}
+		</style>
+
+	</defs>
+	<g stroke-linecap="round">
+		<g
+			transform="translate(54.12828826904297 16.621008254960202) rotate(0 -0.15267868530509077 288.6000491265208)">
+			<path
+				d="M-0.22 -0.66 C0.16 177.93, -2.53 353.1, -1.25 577.21 M-0.14 0.31 C1.72 136.06, 1.49 272.49, 0.74 577.86"
+				stroke="#1e1e1e" stroke-width="1" fill="none"></path>
+		</g>
+	</g>
+	<mask></mask>
+	<g stroke-linecap="round">
+		<g
+			transform="translate(20.96758270263672 568.0333922881633) rotate(0 450.4521531607955 -0.0043791993890067715)">
+			<path
+				d="M1.36 0.96 C183.51 2.15, 368.41 2.23, 900.03 0.73 M-0.38 0.11 C354.79 -2.2, 711.54 -2.89, 901.29 0.29"
+				stroke="#1e1e1e" stroke-width="1" fill="none"></path>
+		</g>
+	</g>
+	<mask></mask>
+	<g transform="translate(632.2835006713868 576.9645446319134) rotate(0 138.17994689941406 17.5)">
+		<text x="276.3598937988281" y="24.528" font-family="Virgil, Segoe UI Emoji" font-size="28px"
+			fill="#1e1e1e" text-anchor="end" style="white-space: pre;" direction="ltr"
+			dominant-baseline="alphabetic">Use case complexity</text>
+	</g>
+	<g transform="translate(-64.42395782470703 92.66074214167895) rotate(270 91.92395782470703 17.5)">
+		<text x="183.84791564941406" y="24.528" font-family="Virgil, Segoe UI Emoji" font-size="28px"
+			fill="#1e1e1e" text-anchor="end" style="white-space: pre;" direction="ltr"
+			dominant-baseline="alphabetic">UI complexity</text>
+	</g>
+	<g stroke-linecap="round">
+		<g stroke-opacity="0.7" fill-opacity="0.7"
+			transform="translate(81.72299116998909 542.4620118938387) rotate(0 52.42567823115735 -44.90026070002466)">
+			<path
+				d="M0.98 -0.66 C11.2 -10.74, 45 -44.96, 62.63 -59 C80.26 -73.05, 99.7 -80.53, 106.78 -84.93 M-1.93 -3.48 C8.01 -13.36, 43.95 -41.97, 61.68 -56.24 C79.42 -70.52, 97.38 -83.46, 104.48 -89.14"
+				stroke="#2f9e44" stroke-width="2" fill="none"></path>
+		</g>
+	</g>
+	<mask></mask>
+	<g stroke-linecap="round">
+		<g stroke-opacity="0.7" fill-opacity="0.7"
+			transform="translate(76.7153409902379 538.4269369402156) rotate(0 226.77950685452674 -164.5143408918381)">
+			<path
+				d="M2.07 -1.69 C47.54 -37.18, 197.52 -155.92, 272.81 -210.24 C348.1 -264.56, 423.46 -307.51, 453.81 -327.62 M-0.25 3.56 C44.97 -30.29, 196.01 -150.9, 271.28 -206.92 C346.54 -262.95, 420.64 -312.16, 451.33 -332.59"
+				stroke="#9c36b5" stroke-width="2" fill="none"></path>
+		</g>
+	</g>
+	<mask></mask>
+
+	<text x="200" y="350" font-family="Virgil, Segoe UI Emoji" font-size="36px" fill="#9c36b5"
+		text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">
+		v1.0</text>
+
+
+	<text x="90" y="520" font-family="Virgil, Segoe UI Emoji" font-size="36px" fill="#2f9e44"
+		text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">
+		MVP</text>
+
+	<g stroke-linecap="round">
+		<g
+			transform="translate(79.51284539327014 540.4364052440972) rotate(0 389.4478582825512 -265.6141418006271)">
+			<path
+				d="M-0.85 -0.79 C63.8 -49.76, 258.76 -203.12, 388.86 -291.4 C518.96 -379.67, 714.88 -490.73, 779.75 -530.44 M3.88 -3.69 C68.15 -52.34, 258.12 -208.84, 387.08 -296.06 C516.04 -383.29, 712.59 -487.22, 777.65 -527.03"
+				stroke="#0c8599" stroke-width="2" fill="none"></path>
+		</g>
+	</g>
+	<mask></mask>
+	<text x="300" y="250" font-family="Virgil, Segoe UI Emoji" font-size="36px" fill="#0c8599"
+			text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">
+			v2.0</text>
+</svg>

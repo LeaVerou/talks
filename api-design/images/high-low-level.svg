@@ -1,0 +1,21 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 588.3162145996093">
+  <!-- svg-source:excalidraw -->
+
+  <defs>
+    <style class="style-fonts">
+      @font-face {
+        font-family: "Virgil";
+        src: url("../css/fonts/Virgil.woff2");
+      }
+      @font-face {
+        font-family: "Cascadia";
+        src: url("https://excalidraw.com/Cascadia.woff2");
+      }
+      @font-face {
+        font-family: "Assistant";
+        src: url("https://app.excalidraw.com//dist/excalidraw-assets/Assistant-Regular.woff2");
+      }
+    </style>
+
+  </defs>
+  <g stroke-linecap="round"><g transform="translate(14.300299289826853 8.455407066345174) rotate(0 -2.2008476518720954 285.7027002334595)"><path d="M-0.1 2.6 C-0.08 97.29, -1.35 472.95, -1.24 567.09 M-3.6 1.54 C-3.94 96.66, -4.59 475.13, -4.15 569.86" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(14.300299289826853 8.455407066345174) rotate(0 -2.2008476518720954 285.7027002334595)"><path d="M10.25 25.23 C5.22 20.59, 3.36 12.58, -1.56 1.56 M8.1 26.91 C5.89 21.2, 4.04 16.81, -0.49 2.4" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(14.300299289826853 8.455407066345174) rotate(0 -2.2008476518720954 285.7027002334595)"><path d="M-6.85 25.19 C-7.59 20.57, -5.17 12.57, -1.56 1.56 M-9 26.88 C-7.72 21.17, -6.08 16.79, -0.49 2.4" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(14.300299289826853 8.455407066345174) rotate(0 -2.2008476518720954 285.7027002334595)"><path d="M-10.87 545.49 C-11.79 552.65, -9.37 556.43, -5.62 568.82 M-13.02 547.18 C-11.93 551.06, -10.3 556.26, -4.54 569.66" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(14.300299289826853 8.455407066345174) rotate(0 -2.2008476518720954 285.7027002334595)"><path d="M6.23 545.47 C1.02 552.63, -0.85 556.41, -5.62 568.82 M4.08 547.16 C1.68 551.04, -0.18 556.25, -4.54 569.66" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g transform="translate(37.29663718045185 50.01873104095455) rotate(0 117.56280517578125 22.5)"><text x="0" y="31.536" font-family="Virgil, Segoe UI Emoji" font-size="36px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">High level</text></g><g transform="translate(37.29932272732685 503.9341668319702) rotate(0 139.85906982421875 22.5)"><text x="0" y="31.536" font-family="Virgil, Segoe UI Emoji" font-size="36px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Low level</text></g></svg>

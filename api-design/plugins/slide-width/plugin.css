@@ -1,0 +1,8 @@
+.slide {
+	--width-px: calc(var(--width) * 1px);
+
+	&.plain,
+	&.dbpp {
+		padding-inline: calc(50vw - var(--width-px, var(--slide-padding) - 100vw) / 2);
+	}
+}

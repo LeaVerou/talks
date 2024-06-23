@@ -1,0 +1,27 @@
+pre.error {
+	white-space: pre-wrap;
+	color: var(--color-red);
+	background: var(--color-red-90);
+	font-weight: bold;
+
+	& :is(*, .token) {
+		color: inherit;
+		font-weight: inherit;
+	}
+
+	&::before {
+		content: "✖️";
+		display: inline-flex;
+		vertical-align: middle;
+		width: 1em;
+		aspect-ratio: 1;
+		align-items: center;
+		justify-content: center;
+		padding: .05em;
+		border-radius: 50%;
+		margin-right: .4em;
+		background: var(--color-red);
+		color: white;
+		line-height: 1;
+	}
+}

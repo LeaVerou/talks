@@ -1,0 +1,13 @@
+.target-width,
+[class*="target-width-"],
+[style*="--target-width:"] {
+	font-size: clamp(
+		var(--min-font-size, 0em),
+		var(--char-aspect-ratio, 2.06) * var(--target-width) / var(--max-line-chars),
+		var(--max-font-size, 100vh)
+	);
+}
+
+.target-width-80 {
+	--target-width: 80vw;
+}

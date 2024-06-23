@@ -1,0 +1,29 @@
+dl.legend {
+	gap: .6em .4em;
+	font-size: 75%;
+
+	&:not(.horizontal) {
+		display: grid;
+		grid-template-columns: auto 1fr;
+	}
+
+	&.horizontal {
+		display: flex;
+
+		dt:not(:first-child) {
+			margin-left: auto;
+		}
+	}
+
+	dt {
+		grid-column: 1;
+		height: 1.3em;
+		aspect-ratio: 1;
+		border-radius: .2em;
+	}
+
+	dd {
+		grid-column: 2;
+		margin: 0;
+	}
+}

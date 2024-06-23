@@ -1,0 +1,97 @@
+.columns {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: stretch;
+	gap: 1em;
+
+	&:where(.slide) {
+		column-gap: 2em;
+	}
+
+	> * {
+		margin-block: 0;
+		flex: 1;
+	}
+
+	> h1,
+	> header,
+	> footer,
+	> .span-all {
+		width: 100%;
+		flex: none;
+		grid-column: 1 / -1;
+		text-align: center;
+	}
+
+	> h1,
+	> header {
+		/* No point in doing 2+ columns with a heading and a single element,
+		  the heading must be in one of the columns */
+		  &:not(.force-1 *):is(:nth-last-child(2), :nth-last-child(3):has(~ details.notes:last-child)) {
+			width: auto;
+			grid-column: auto;
+			flex: 1;
+			margin-top: 0;
+			text-align: left;
+
+			& h1 {
+				text-align: left;
+			}
+		}
+	}
+
+	> section {
+		display: flex;
+		flex-flow: column;
+		gap: .5rem;
+		flex: 1;
+
+		&.delayed.displayed {
+			opacity: 1;
+		}
+
+		h2 {
+			margin-block: 0;
+
+			& + p {
+				text-align: center;
+				margin-top: .5rem;
+				font-size: 75%;
+			}
+		}
+
+		.arrow-down {
+			flex: 1;
+		}
+	}
+
+	> figure {
+		> figcaption {
+			text-align: center;
+		}
+	}
+
+	pre {
+		margin-block: .5rem;
+		font-size: 75%;
+	}
+
+	&.force,
+	&.force-1,
+	&.force-2,
+	&.force-3,
+	&.force-4 {
+		display: grid;
+		grid-template-columns: repeat(var(--columns, 2), 1fr);
+		justify-items: center;
+
+		> img {
+			min-height: 0;
+			max-height: 100%;
+		}
+	}
+
+	&.force-1 { --columns: 1; }
+	&.force-3 { --columns: 3; }
+	&.force-4 { --columns: 4; }
+}

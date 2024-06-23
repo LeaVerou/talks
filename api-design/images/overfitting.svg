@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 376.5 187">
+  <defs>
+    <style>
+      :root {
+        color: white;
+        fill: white;
+      }
+
+      .point {
+        fill: black;
+      }
+
+      .point, .curve, .axis {
+        stroke-width: 0px;
+      }
+
+      .curve {
+        fill: gold;
+      }
+
+      .right .curve {
+        fill: inherit;
+      }
+
+      text {
+        font-family: Inter, Helvetica, Arial;
+        font-size: 22px;
+      }
+
+      .axis {
+        opacity: .6;
+      }
+    </style>
+  </defs>
+  <g class="overfit">
+    <circle class="point" cx="27.8" cy="112.4" r="3.3"/>
+    <circle class="point" cx="32.9" cy="126.2" r="3.3"/>
+    <circle class="point" cx="30.6" cy="143.5" r="3.3"/>
+    <circle class="point" cx="47.8" cy="129.3" r="3.3"/>
+    <circle class="point" cx="70.8" cy="152.3" r="3.3"/>
+    <circle class="point" cx="102.8" cy="129.5" r="3.3"/>
+    <circle class="point" cx="59.6" cy="140.9" r="3.3"/>
+    <circle class="point" cx="47.1" cy="141.6" r="3.3"/>
+    <circle class="point" cx="107.3" cy="144.7" r="3.3"/>
+    <circle class="point" cx="89.5" cy="136.3" r="3.3"/>
+    <circle class="point" cx="89.7" cy="155.2" r="3.3"/>
+    <circle class="point" cx="61.9" cy="156.6" r="3.3"/>
+    <circle class="point" cx="75" cy="136" r="3.3"/>
+    <circle class="point" cx="122.5" cy="139.7" r="3.3"/>
+    <circle class="point" cx="128.1" cy="118.5" r="3.3"/>
+    <circle class="point" cx="142" cy="133.9" r="3.3"/>
+    <circle class="point" cx="139.3" cy="119.5" r="3.3"/>
+    <circle class="point" cx="141.9" cy="98.7" r="3.3"/>
+    <circle class="point" cx="149.7" cy="106.9" r="3.3"/>
+    <circle class="point" cx="160.8" cy="114.5" r="3.3"/>
+    <circle class="point" cx="154.1" cy="127.2" r="3.3"/>
+    <circle class="point" cx="113.4" cy="126.9" r="3.3"/>
+    <path class="curve" d="M61.8,154.8c-.5,0-1.1-.1-1.6-.3-5.3-2.4-6.2-7.5-7-12.5-.4-2.5-.9-5.1-1.9-7.2-1.6-3.4-3.3-5.2-5-5.4-2.5-.4-5.2,2.6-7.5,5.2-2.5,2.8-4.7,5.2-7,4.3-2.5-.9-4.4-5.4-5.3-24.3h2c.8,17.6,2.6,21.9,4,22.4,1,.4,3-1.8,4.8-3.8,2.7-3,5.8-6.4,9.3-5.9,2.4.4,4.5,2.5,6.5,6.5,1.1,2.4,1.6,5.1,2.1,7.8.8,4.7,1.5,9.1,5.8,11,.7.2,1.4.2,2-.1,1.9-1,3.1-4.5,4-7.3.4-1.3.8-2.5,1.2-3.3,1.4-3.6,3.1-5.5,5.1-5.8,3.4-.5,6.5,3.5,9.7,7.7,2.4,3.1,5.2,6.7,7.1,6.6.7-.1,1.3-.6,2-1.7,1.1-9,3-13.8,6.1-15.6,3.2-1.8,6.9.1,10.9,2,4.9,2.4,10,4.8,15.1,1.8.9-2,.6-4.4.4-7-.2-1.7-.3-3.4-.2-5.1.1-1.3.8-2.6,1.9-3.4,1.1-.9,2.5-1.3,3.9-1.1,5.8.7,10.3,5.1,13.9,8.7s4.9,4.8,6.3,4.2c3.3-1.2,5-16.1,6-27.3l2,.2c-2,22.6-4.3,27.9-7.3,29-2.6,1-5.1-1.5-8.4-4.7-3.4-3.3-7.6-7.5-12.7-8.1-.8-.1-1.7.1-2.4.7-.6.5-1,1.2-1.1,2.1-.1,1.5,0,3,.2,4.7.3,2.8.6,5.7-.7,8.3v.3c-.1,0-.3.2-.3.2-6.1,3.9-12.3.9-17.3-1.5-3.6-1.8-6.8-3.3-9.1-2-2.5,1.4-4.2,6-5.1,14.2v.4c-1.1,1.8-2.4,2.8-3.8,2.9-3,.2-5.8-3.4-8.8-7.3-2.6-3.4-5.6-7.3-7.9-7-1.2.2-2.5,1.8-3.6,4.7-.4.8-.8,1.9-1.1,3.1-1,3.2-2.3,7.2-5,8.5-.8,0-1.5.2-2.2.2Z"/>
+    <polygon class="axis" points="158.4 179.6 8.4 179.6 8.4 47.5 10.4 47.5 10.4 177.6 158.4 177.6 158.4 179.6"/>
+  </g>
+  <g class="right">
+    <circle class="point" cx="233.8" cy="112.4" r="3.3"/>
+    <circle class="point" cx="238.9" cy="126.2" r="3.3"/>
+    <circle class="point" cx="236.7" cy="143.5" r="3.3"/>
+    <circle class="point" cx="253.9" cy="129.3" r="3.3"/>
+    <circle class="point" cx="276.8" cy="152.3" r="3.3"/>
+    <circle class="point" cx="308.8" cy="129.5" r="3.3"/>
+    <circle class="point" cx="265.6" cy="140.9" r="3.3"/>
+    <circle class="point" cx="253.1" cy="141.6" r="3.3"/>
+    <circle class="point" cx="313.3" cy="144.7" r="3.3"/>
+    <circle class="point" cx="295.5" cy="136.3" r="3.3"/>
+    <circle class="point" cx="295.7" cy="155.2" r="3.3"/>
+    <circle class="point" cx="267.9" cy="156.6" r="3.3"/>
+    <circle class="point" cx="281" cy="136" r="3.3"/>
+    <circle class="point" cx="328.5" cy="139.7" r="3.3"/>
+    <circle class="point" cx="334.1" cy="118.5" r="3.3"/>
+    <circle class="point" cx="348" cy="133.9" r="3.3"/>
+    <circle class="point" cx="345.3" cy="119.5" r="3.3"/>
+    <circle class="point" cx="347.9" cy="98.7" r="3.3"/>
+    <circle class="point" cx="355.7" cy="106.9" r="3.3"/>
+    <circle class="point" cx="366.8" cy="114.5" r="3.3"/>
+    <circle class="point" cx="360.1" cy="127.2" r="3.3"/>
+    <circle class="point" cx="319.4" cy="126.9" r="3.3" transform="translate(143 421.8) rotate(-80.8)"/>
+    <path class="curve" d="M271.9,150.3c-24.4,0-43.8-20.9-44-21.2l1.5-1.3c.2.2,21.6,23.4,47.3,20.2,44.3-6.3,89.9-37,90.4-37.3l1.1,1.7c-.5.3-46.5,31.3-91.2,37.6-1.8.2-3.5.3-5.1.3Z"/>
+    <polygon class="axis" points="364.4 179.6 214.4 179.6 214.4 47.5 216.4 47.5 216.4 177.6 364.4 177.6 364.4 179.6"/>
+  </g>
+  <text transform="translate(57.1 60)">Overfit</text>
+  <text transform="translate(254.9 60)">Right fit</text>
+</svg>

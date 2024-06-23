@@ -1,0 +1,56 @@
+pre,
+code:not(pre > code) {
+	&.language-html {
+		--label: "HTML";
+		--color: var(--color-green);
+	}
+
+	&.language-css {
+		--label: "CSS";
+		--color: var(--color-aqua);
+	}
+
+	&.language-scss {
+		--label: "SCSS";
+		--color: var(--color-magenta);
+	}
+
+	&.language-javascript,
+	&.language-js {
+		--label: "JS";
+		--color: var(--color-yellow);
+		--label-text-color: black;
+	}
+
+	&.language-json {
+		--label: "JSON";
+		--color: var(--color-blue);
+	}
+
+	&.svelte {
+		--label: "Svelte";
+		--color: var(--color-red);
+	}
+
+	&.language-markdown,
+	&.language-md {
+		--label: "Markdown";
+		--color: var(--color-blue);
+	}
+}
+
+pre {
+	&:where(.code-labels, .code-labels *):not(.no-code-label, .no-code-labels *)::after {
+		content: var(--label);
+		position: absolute;
+		top: 0;
+		right: 0;
+		border-top-right-radius: inherit;
+		border-bottom-left-radius: inherit;
+		padding: .1em .5em;
+		background: var(--color);
+		color: var(--label-text-color, white);
+		text-transform: uppercase;
+		font: bold 1.6rem/1.5 var(--font-sans);
+	}
+}

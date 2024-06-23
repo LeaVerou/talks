@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>API Design is UI Design</title>
+	<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">☑️</text></svg>' />
+
+	<link href="talk.css" rel="stylesheet" />
+	<script src="talk.js" type="module"></script>
+</head>
+<body class="language-js" data-markdown-elements="details.notes, .md, .md-children > *, .md-gc > * > *, md-ggc > * > * > *">
+
+<header id="intro" class="slide dont-resize">
+	<h1>
+		<span>API Design</span>
+		<span class="is">is</span>
+		<span>UI Design</span>
+	</h1>
+	<small>
+		By <a href="http://lea.verou.me">Lea Verou</a>, MIT
+	</small>
+</header>
+
+<article class="slide" id="pain">
+	<h1>Ever used an API<span class="asterisk">*</span> that caused you <mark>pain</mark>?</h1>
+	<p class="footnote"><span class="asterisk">*</span> Library, framework, component, built-in JS class or function, HTML element, CSS property, etc.</p>
+	<details class="notes">
+		Raise your hand if you’ve ever used an API that caused you pain.
+		This includes libraries, frameworks, components, built-in JS APIs, HTML elements, CSS rules and properties etc.
+
+		Nothing worked in the way you’d expect so you had to look up documentation all the time,
+		everything you tried produced errors, and you had to write a ton of boilerplate.
+		Seems familiar?
+	</details>
+</article>
+
+<article class="slide language-markup dont-resize" id="svg-dom">
+	<div class="frame-by-frame">
+		<img src="images/svg-0.png" alt="">
+		<img src="images/svg-1.png" alt="" class="delayed">
+		<img src="images/svg-2.png" alt="" class="delayed">
+		<img src="images/svg-3.png" alt="" class="delayed">
+		<img src="images/svg-4.png" alt="" class="delayed">
+		<img src="images/svg-5.png" alt="" class="delayed">
+		<img src="images/svg-6.png" alt="" class="delayed">
+		<img src="images/svg-7.png" alt="" class="delayed">
+	</div>
+	<details class="notes">
+		Here’s one of mine, the SVG DOM.
+		Who here has used the SVG DOM?
+		Lucky you!
+		You think the HTML DOM is annoying? You haven’t seen anything yet.
+		Here’s the simplest SVG ever: just a circle.
+		We want to read its radius.
+
+		It starts all innocuous, just a good ol’ `document.querySelector()` to get a reference to an SVG element.
+		But it’s downhill from that.
+
+		None of it is _difficult_, but it’s hella _annoying_.
+	</details>
+</article>
+
+<article class="slide" id="alan-kay">
+	<blockquote>
+		“Simple things should be easy, complex things should be possible”
+		<div class="cite"><a href="https://en.wikipedia.org/wiki/Alan_Kay">Alan Kay</a> (famous computer scientist)</div>
+	</blockquote>
+	<img src="images/alan-kay.jpg" alt="Portrait of Alan Kay">
+	<details class="notes">
+		Alan kay said [read] and it’s considered one of the biggest truths in API design.
+		But it doesn’t _just_ apply to API design, it’s built-in to almost every (well designed) product we use.
+	</details>
+</article>
+
+<article class="slide">
+	<video src="../jsux/img/google-calendar.mp4" muted autoplay loop></video>
+	<details class="notes">
+		Take Google Calendar as an example. It takes one click to add an event, and we can drag to change its duration or move it to another date or time.
+
+		Indeed, you will find that most usability principles apply to API design, and vice versa.
+		APIs are just a different kind of user interface, one that is used by developers instead of end users.
+	</details>
+</article>
+
+<article class="slide" id="dx">
+	<div class="dictionary-dfn">
+		<header>
+			<h1>
+				DX
+			</h1>
+			<p>
+				<span class="ipa">ˈdiː ˈɛks</span>
+				<span class="pos">noun</span>
+			</p>
+		</header>
+		<ol>
+			<li>Initialism of <em>“Developer Experience”</em>. Basically User Experience (UX) when the user is a developer and the interaction involves writing code.</li>
+		</ol>
+	</div>
+	<details class="notes">
+		This seemed like such a difficult concept for many, that recently there has been a push to invent a new term
+		that basically means "UX when the interaction involves writing code."
+	</details>
+</article>
+
+<article class="slide">
+	<object data="images/curve-alankay.svg"></object>
+	<details class="notes">
+		Now imagine a plane with two axes: one is the complexity of the use case, i.e. the task users want to do,
+		and the other is the complexity of the UI or API that they need to use to do it.
+
+		Alan Kay’s maxim can be visualized as two points on that plane.
+		Simple things being easy means there should be a point on the lower left (low use case complexity should result in low UI/API complexity).
+		Complex things being possible means there should be a point on the far end, even if it has to be higher up.
+	</details>
+</article>
+
+<article class="slide">
+	<object data="images/curve-svgdom.svg"></object>
+	<details class="notes">
+		The problem with the SVG DOM is that the complex cases where you have different base values and animated values,
+		or where you need to get more data about the value get in the way of the simple cases, where all you want is a damn number.
+		Ideally, complexity should be progressively revealed: there when you need it, tucked away when you don’t.
+	</details>
+</article>
+
+<article class="slide">
+	<pre class="language-html"><code>
+		&lt;select id="country">
+			&lt;option value="fr">France&lt;/option>
+			&lt;option value="gr">Greece&lt;/option>
+			&lt;option value="us">United States&lt;/option>
+		&lt;/select>
+	</code></pre>
+	<details class="notes">
+		Let’s look at another example, a humble `&lt;select>` menu.
+		It’s certainly quite simple to use! But, it doesn’t do very much.
+		You can use JS to manipulate the options dynamically or toggle multiple selection, but that’s about it.
+		You can’t style it, you can’t add icons, you can’t add a search box, you can’t allow custom options, you can’t turn it into a multiselect.
+		It has the opposite problem: simple things are easy, but complex things are _not_ possible.
+	</details>
+</article>
+
+<article class="slide">
+	<object data="images/curve-svgdom-select.svg"></object>
+</article>
+
+<article class="slide columns force-2">
+	<h1>How?</h1>
+
+	<section>
+		<h2>Making simple things easy</h2>
+
+		<ul>
+			<li>Sensible defaults</li>
+			<li>Shortcuts</li>
+			<li>Consistency</li>
+			<li>Robustness</li>
+		</ul>
+	</section>
+	<section>
+		<h2>Making complex things possible</h2>
+
+		<ul>
+			<li>Extension points</li>
+			<li>Composability</li>
+			<li>Aggregation</li>
+		</ul>
+	</section>
+</article>
+
+<article class="slide language-markup" id="video-controls">
+	<pre><code>&lt;video src="videos/cat.mp4" controls>&lt;/video></code></pre>
+	<video src="videos/cat.mp4" controls></video>
+</article>
+
+<article class="slide language-markup dont-resize" id="video-no-controls">
+	<pre><code>&lt;video src="videos/cat.mp4">&lt;/video></code></pre>
+	<div class="columns code-labels count-lines delayed-children">
+		<pre class="language-js"><code>
+			let controls = Object.assign(document.createElement('div'), {
+				className: 'video-player'
+			});
+			video.replaceWith(controls);
+			controls.append(video);
+			controls.insertAdjacentHTML('beforeend', `&lt;div class="video-controls">
+				&lt;div class="toolbar">
+					&lt;button class="play-pause" title="Play">&lt;i class="fa-play">&lt;/i>&lt;/button>
+					&lt;button class="jump-back">&lt;i class="fa-arrow-rotate-left">&lt;/i>&lt;/button>
+					&lt;button class="jump-forward">&lt;i class="fa-arrow-rotate-right">&lt;/i>&lt;/button>
+					&lt;input type="range" class="volume" max="1" step="0.01" value="1">
+					&lt;button id="fullscreen">&lt;i class="fa-expand">&lt;/i>&lt;/button>
+				&lt;/div>
+				&lt;input type="range" class="progress" step="0.1" value="0">
+			&lt;/div>`);
+
+			controls.querySelector(".play-pause").addEventListener('click', async function () {
+				if (video.paused) {
+					await video.play();
+					this.title = 'Pause';
+					this.firstElementChild.className = "fa-pause";
+				}
+				else {
+					video.pause();
+					this.title = 'Play';
+					this.firstElementChild.className = "fa-play";
+				}
+			});
+			controls.querySelector('.jump-back').addEventListener('click', function() {
+				video.currentTime -= 10;
+			});
+			controls.querySelector('.jump-forward').addEventListener('click', function() {
+				video.currentTime += 10;
+			});
+			controls.querySelector('.progress').addEventListener('input', function() {
+				video.currentTime = this.value / 100 * video.duration;
+			});
+			controls.querySelector('.volume').addEventListener('input', function() {
+				video.volume = this.value;
+			});
+
+			video.addEventListener('timeupdate', function() {
+				controls.querySelector('.progress').value = this.currentTime / this.duration * 100;
+			});
+		</code></pre>
+		<pre class="language-css"><code>
+			.video-player {
+				position: relative;
+
+				.video-controls {
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					padding: .4em .5em;
+					display: flex;
+					flex-flow: column;
+					background-color: rgb(0 0 0 / 20%);
+					backdrop-color: blur(5px);
+
+					.toolbar {
+						display: flex;
+						justify-content: space-between;
+
+						.volume {
+							width: 30%;
+						}
+
+						button {
+							cursor: pointer;
+							background-color: #444;
+							border: none;
+							color: white;
+							padding: 5px 10px;
+						}
+					}
+
+					.progress {
+						width: 100%;
+					}
+				}
+			}
+		</code></pre>
+	</div>
+
+
+	<details class="notes">
+		Now let’s suppose my use case complexity increases just a tiny bit.
+		Maybe I want to add buttons to jump 10 seconds back or forwards.
+		Or a button to open the video on YouTube.
+
+		We need to remove the `controls` attribute and implement **our own** controls.
+		Here is a very simple example, which takes us from 1 loc to …81!
+		And if we wanted proper UX, we’d need to add a lot more (well, probably use a library or component, but you get my point)
+	</details>
+</article>
+
+<article class="slide">
+	<object data="images/curve-cliff.svg"></object>
+
+	<details class="notes">
+		Making simple things easy and complex things possible is a good first step, and it’s surprising how many APIs fail it.
+		But it’s not enough.
+		Making simple things easy and complex things possible are just the two ends of the spectrum,
+		but all the points in between matter as well.
+
+		The type of cliff we saw in HTMLMediaElement is something you see frequently when APIs
+		try to make simple things easy and complex things possible by providing two distinct interfaces:
+		a very high level one that caters to the simplest use cases very easily,
+		and a very low level one that lets you do whatever you want but you have to reimplement everything from scratch.
+
+
+	</details>
+</article>
+
+<article class="slide">
+	<header>
+		<h1>Delightful APIs</h1>
+		<p class="subtitle">Incremental user effort produces incremental value</p>
+	</header>
+	<object data="images/curve-delightful.svg"></object>
+	<details class="notes">
+		For APIs to be truly delightful, all the points in-between matter just as much.
+		You want to be aiming for a smooth curve, where the complexity of the API increases gradually as the complexity of the use case increases.
+	</details>
+</article>
+
+<article class="slide principle">
+	<h1><span class="label">Corollary</span>
+		Syntax should not require more than is needed to declare intent
+	</h1>
+
+	<ul class="examples">
+		<li class="bad">
+			<pre><code>parent.removeChild(node);</code></pre>
+		</li>
+		<li class="good">
+			<pre><code>node.remove();</code></pre>
+		</li>
+	</ul>
+
+	<details class="notes">
+		Input should not require users to repeat things that can be derived or write boilerplate.
+	</details>
+</article>
+
+<article class="slide">
+	<h1>A or B?</h1>
+	<object data="images/curve-floor-ceiling.svg"></object>
+	<details class="notes">
+		There are many ways to have a smooth ease-of-use to power curve.
+		If we compare two APIs, A and B, which do you think has better usability?
+		Both have a relatively smooth ease-of-use to power curve, so they’re probably not too bad.
+		A has a _higher ceiling_, meaning you can do more things.
+		B has a lower ceiling, but also a _lower floor_, meaning it’s easier to get started with.
+		Furthermore, B’s UI complexity remains lower for pretty much all use cases.
+		So which one is better?
+		We can’t tell without knowing anything about them.
+		How important are the use cases you can’t do with B? How commonly do they come up?
+	</details>
+</article>
+
+<article class="slide" id="use-case">
+	<div class="dictionary-dfn">
+		<header>
+			<h1>
+				use case
+			</h1>
+			<p>
+				<span class="ipa">juːs keɪs</span>
+				<span class="pos">noun</span>
+			</p>
+		</header>
+		<ol>
+			<li>A possible, expected, desired use of an interface</li>
+			<!-- <li>A description of the different ways a user can interact with an application or product.</li> -->
+		</ol>
+	</div>
+</article>
+
+<article class="slide dont-resize" id="use-case-examples">
+	<header>
+		<h1>How will <mark>people</mark> use it?</h1>
+		<p class="subtitle">Pain points, Use cases, usage scenarios, user goals</p>
+	</header>
+	<ul class="delayed">
+		<li>Verify a zip code</li>
+		<li></li>
+		<li>Trim a string</li>
+		<li></li>
+		<li>Match repetitions of the same pattern</li>
+		<li>Match patterns at the start or end</li>
+		<li>Match whitespace</li>
+		<li>Match digits</li>
+	</ul>
+	<object data="images/high-low-level.svg" type=""></object>
+	<details class="notes">
+		Use cases help keep us focused on optimizing for the right things.
+		We need to collect use cases at all stages: before designing the API to drive the design,
+		and after to _test_ it and ensure it is not **overfit**.
+
+		Think of it like unit testing, but for UX!
+	</details>
+</article>
+
+<article class="slide" id="internal-over-external">
+	<h1>Internal complexity over external complexity</h1>
+
+	<div>
+		<pre><code>
+			const sanitizer = new Sanitizer();
+			container.replaceChildren( sanitizer.sanitize(untrusted_input) );
+		</code></pre>
+		<pre><code>
+			const sanitizer = new Sanitizer({
+				allowElements: ['span', 'em', 'strong', 'b', 'i'],
+				allowAttributes: {'class': ['*']}
+			});
+			container.replaceChildren( sanitizer.sanitize(untrusted_input) );
+		</code></pre>
+	</div>
+
+
+	<details class="notes">
+		“Simple” in Kay’s maxim refers to the conceptual complexity of the use case, not the implementation.
+		Simple things are the most common things that people want to do with your API, not things that are simple to implement.
+
+		For example, the Sanitizer API optimizes for the common case where we want to sanitize untrusted input with a default set of allowed elements and attributes.
+		This involves some pretty complex logic, but it’s simple to use.
+		It would be far simpler for implementors if users had to provide inputs for what to allow, but that would be an antipattern as it would increase the user effort required for the common case.
+		Instead, it uses a very good pattern: it optimizes for the common case by having sensible defaults,
+		and provides extension points that allow users to override the defaults when they need to.
+
+		UI complexity is revealed progressively, as needed, and does not get in the way when not needed. Perfect!
+	</details>
+</article>
+
+<article class="slide" id="priority-of-constituencies" data-steps="2">
+	<h1>Priority of Constituencies</h1>
+
+	<blockquote>
+		<div><strong>User needs</strong></div>
+		<div>come before the needs of <strong>web page authors</strong></div>
+		<div>which come before the needs of <strong>user agent implementors</strong></div>
+		<div>which come before the needs of <strong>specification writers</strong></div>
+		<div>which come before <strong>theoretical purity</strong></div>
+		<div class="cite"><a href="https://w3.org/TR/design-principles/#priority-of-constituencies">1.1. Put user needs first (Priority of Constituencies)</a><br>
+			<a href="https://w3.org/TR/design-principles/">Web Platform Design Principles</a></div>
+	</blockquote>
+
+	<details class="notes">
+		This also highlights another important point, also known as the **Priority of Constituencies**.
+		In the context of web standards, it can be worded as [read out]
+
+		But the core idea extends way beyond web standards, and applies to all product and API design.
+		What the PoC tells us is that when making design decisions, the needs of the user should come before the needs of the implementor,
+		and the needs of all humans should come before theoretical purity.
+
+		This centralizes and abstracts away complexity, and minimizes collective pain since all UIs usually have a lot more users than implementors.
+	</details>
+</article>
+
+
+
+<article class="slide">
+	<h1>Optimize for the right use cases</h1>
+
+	<ul class="delayed-children examples">
+		<li class="bad"><pre><code>history.pushState(null, "", "https://lea.verou.me");</code></pre>
+		<li class="bad"><pre><code>JSON.stringify(data, null, "\t");</code></pre>
+	</ul>
+
+	<details class="notes">
+		Not all use cases are equally important.
+
+		**Primary use cases** are what drives the design, and should be the most common ones.
+		Your API should cater to them with minimal user effort.
+
+		**Secondary use cases** are things that our API makes _possible_ but do not drive its design.
+		Making secondary use cases possible is great, because it buys us more time before we can solve them properly:
+		users tend to complain a lot more about things that are not possible, than about things that are not easy.
+
+		In fact, if you wait for user complaints to figure out what is not easy, you’d be waiting a long time:
+		users tend to blame themselves, and will very rarely complain about the usability of a product or API they use.
+		You need to be proactive about this: dogfood! Look at people’s code!
+
+		Lastly, it’s ok to decide that some use cases are simply **out of scope**.
+		Catering to them would complicate the problem so much that it would make the API unusable
+		for the primary and secondary use cases.
+	</details>
+</article>
+
+<article class="slide">
+	<h1>Optimize for the right use cases</h1>
+
+	<ul class="examples">
+		<li class="bad">
+			<pre><code>!!(a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_CONTAINS);</code></pre>
+		</li>
+		<li class="good delayed">
+			<pre><code>a.contains(b)</code></pre>
+		</li>
+	</ul>
+</article>
+
+<article class="slide dont-resize columns force-2" id="layering">
+	<header>
+		<h1>Layering</h1>
+		<p class="subtitle">No, you don’t have to do it all at once</p>
+	</header>
+
+	<figure>
+		<object data="images/curve-shipping-hlf.svg" type=""></object>
+		<figcaption>High level first</figcaption>
+	</figure>
+	<figure>
+		<object data="images/curve-shipping-llf.svg" type=""></object>
+		<figcaption>Low level first</figcaption>
+	</figure>
+
+	<details class="notes">
+		Since resources are finite, it’s common to ship these APIs in layers,
+		with each release changing the curve for the better,
+		ether making simple things easier, or pushing the boundary of what is possible.
+
+		But where to start?
+		That depends on a number of factors.
+		What is the biggest pain point that your API is solving?
+		Is it that the status quo is too hard or that things are not possible?
+		How diverse are the primary use cases? How well do you understand user needs?
+
+		If the primary use cases are well-known, and clustered around a few common patterns, and we have a pretty good idea about how to address them,
+		we can start with a high level design that covers them well
+		and ship extension points and lower level primitives later that explain the high level feature.
+		As a rule of thumb, this works well when that high level MVP can cover about 80% of use cases.
+
+		If you have less confidence about what a high level API could look like,
+		or the use cases are too diverse,
+		or the biggest pain point is around things not being possible,
+		you can start with a lower level primitive that makes complex things possible, even if simple things are hard.
+
+		Once we have a good sense of what the most common use cases are, we can add higher level abstractions on top of the lower level primitives.
+	</details>
+</article>
+
+<article class="slide" id="overfitting">
+	<div class="dictionary-dfn">
+		<header>
+			<h1>
+				overfitting
+			</h1>
+			<p>
+				<span class="ipa">ˈoʊvərˌfɪtɪŋ</span>
+				<span class="pos">noun</span>
+			</p>
+		</header>
+		<ol>
+			<li>
+				<em>(Statistics)</em>
+				When a model is so tailored to a specific dataset that it fails to predict future observations.
+			</li>
+			<li class="delayed">
+				<em>(Usability)</em>
+				When a UI is too tailored to a specific use case that it cannot cater to new use cases.
+			</li>
+		</ol>
+	</div>
+	<details class="notes">
+		Overfitting is a borrowed idea from statistical modeling, and more recently very relevant to machine learning.
+		Essentially: if you introduce too many variables into a statistical model, it will predict your test data with remarkable accuracy.
+		But the minute you try to apply it to another data set, it loses its predictive power.
+		The model has over-optimized on a specific set of data and in doing so, lost its general use.
+
+		In UI design, [overfitting](https://bootcamp.uxdesign.cc/overfitting-and-the-problem-with-use-cases-337d9f4bf4d7)
+		is when you optimize for a specific use case so much that the UI cannot generalize to other, highly related use cases.
+
+		It tends to happen when we ship high level APIs first but we don’t have a good understanding of the current and future spectrum of primary use cases.
+	</details>
+</article>
+
+<article class="tbd slide">
+	<h1>TBD: Example of overfitting</h1>
+	<p>ideally something that was later improved to not overfit</p>
+</article>
+
+<article class="slide">
+	<h1>How to avoid overfitting?</h1>
+
+	<details class="notes">
+		Decompose the driving use case into orthogonal lower-level problems.
+		Then, design solutions for those orthogonal problems that don’t already have one.
+
+	</details>
+</article>
+
+<footer class="slide" id="end">
+	<h1>Thank you!</h1>
+</footer>
+
+</body>
+</html>

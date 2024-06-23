@@ -1,0 +1,147 @@
+ul.tree {
+	font: bold 160%/1 var(--font-mono);
+	--dx: 5rem;
+
+	&,
+	& ul {
+		margin: 0;
+		padding: 0;
+	}
+
+	& > li {
+		margin: 0;
+	}
+
+	& li {
+		position: relative;
+		display: flex;
+		align-items: center;
+		margin: .3em 0;
+		font-size: 75%;
+
+		& li {
+			margin-left: var(--dx);
+		}
+	}
+
+	.node {
+		padding: .3em .5em .15em;
+		background: var(--color, var(--color-green));
+		border-radius: .2em;
+		text-decoration: none;
+		white-space: nowrap;
+		color: white;
+
+		&[href]:hover {
+			text-decoration: underline;
+			text-decoration-color: initial;
+		}
+	}
+
+	& li li .node {
+		&::before {
+			content: "";
+			position: absolute;
+			top: 50%;
+			right: 100%;
+			width: var(--dx);
+			height: .15em;
+			transform: translateY(-50%) skewY(calc(var(--angle, 0) * 1deg)) scaleY(calc(1 / var(--cos-angle, 1)));
+			transform-origin: right;
+			margin: 0;
+			border-radius: 0;
+			background-image: linear-gradient(var(--direction, to right), var(--parent-color), var(--color));
+		}
+	}
+
+	&.vertical {
+		--dx: 3rem;
+
+		& li {
+			flex-flow: column;
+			font-size: 85%;
+
+			& li {
+				margin-top: var(--dx);
+				margin-left: 0;
+
+				& .node {
+					&::before {
+						top: auto;
+						bottom: 100%;
+						right: 50%;
+						height: var(--dx);
+						width: .15em;
+						--direction: to bottom;
+						transform: none;
+					}
+				}
+			}
+		}
+	}
+
+	& > li li,
+	& li[data-level="2"] { /* 2+ level */
+		--color: var(--color-magenta);
+	}
+
+	& > li li li,
+	& li[data-level="3"],
+	& li[data-level="2"] li { /* 3+ level */
+		--color: var(--color-aqua);
+	}
+
+	& > li li li li,
+	& li[data-level="4"],
+	& li[data-level="3"] li,
+	& li[data-level="2"] li li { /* 4+ level */
+		--color: var(--color-orange);
+	}
+
+	& > li li li li li,
+	& li[data-level="5"],
+	& li[data-level="3"] li li,
+	& li[data-level="2"] li li li { /* 5+ level */
+		--color: var(--accent1);
+	}
+
+	& > li li li li li li,
+	& li[data-level="6"],
+	& li[data-level="5"] li li li,
+	& li[data-level="4"] li li li li { /* 6+ level */
+		--color: var(--accent2);
+	}
+
+	& > li,
+	& > li > ul > li > ul > li,
+	& > li > ul > li > ul > li > ul > li {
+		--color-copy-odd: var(--color);
+		--parent-color: var(--color-copy-even);
+	}
+
+	& > li > ul > li,
+	& > li > ul > li > ul > li > ul > li,
+	& > li > ul > li > ul > li > ul > li > ul > li > ul > li {
+		--color-copy-even: var(--color);
+		--parent-color: var(--color-copy-odd);
+	}
+
+	& li.highlight.highlight {
+		--color: white;
+		color: black;
+	}
+
+	& li.circle .node {
+		box-shadow: 0 0 0 0.3em white;
+	}
+
+	& li.de-emphasize > .node {
+		border: 2px dashed var(--color);
+		background: none;
+		color: var(--color);
+	}
+
+	& a::before {
+		content: none;
+	}
+}

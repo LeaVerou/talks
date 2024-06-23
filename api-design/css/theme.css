@@ -1,0 +1,142 @@
+@import url("https://inspirejs.org/inspire.css");
+@import url("https://inspirejs.org/style/base.css");
+@import url("https://inspirejs.org/style/components/ribbons.css");
+@import url("fonts.css");
+@import url("components.css");
+
+:root {
+	--font-sans: Inter, "Helvetica Neue", Helvetica, system-ui, sans-serif;
+	--font-serif: Vollkorn, "Hoefler Text", Garamond, serif;
+	--font-cursive: Zapfino, "Apple Chancery", BrushScriptMT, cursive;
+	--font-monospace: Consolas, Inconsolata, Noto Sans Mono, Source Code Pro, Roboto Mono, Menlo, Monaco, monospace;
+
+	--color-accent-1: var(--color-aqua);
+	--color-accent-2: var(--color-magenta);
+	--color-accent-3: var(--color-green);
+	--color-accent-4: var(--color-orange);
+	--color-accent-5: var(--color-blue);
+	--color-accent-6: var(--color-yellow);
+}
+
+html {
+	font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1;
+	margin-bottom: .5rem;
+
+	> .subtitle {
+		color: var(--color-neutral-60);
+		font-size: clamp(0em, 65%, calc(1.2 * var(--slide-base-font-size, 1rem)));
+		margin-top: .2em;
+		text-align: center;
+		font-weight: 500;
+	}
+}
+
+p, ul, ol {
+	margin-block: .5rem;
+}
+
+input:where([type=number]) {
+	width: 4em;
+}
+
+pre,
+code:not(pre > code) {
+	--char-aspect-ratio: 2.06;
+	--max-font-size: 3em;
+	font-size: 85%;
+
+	--background-color: color-mix(in oklch, var(--color, var(--color-neutral)) 5%, oklch(.985 .02 none));
+	--text-color: color-mix(in oklch, var(--color, var(--color-neutral)) 30%, oklch(0 0 none));
+	background: var(--background-color);
+	color: var(--text-color);
+	letter-spacing: normal;
+
+	&:is(.compact-code, .compact-code *) {
+		tab-size: 2;
+	}
+}
+
+code:not(pre > code) {
+	font-weight: 500;
+	padding: .25em .3em .15em;
+	border-radius: .2em;
+}
+
+pre {
+	position: relative;
+	border-radius: .7rem;
+
+	&,
+	&.prism-live.prism-live {
+		padding: .7rem 1.2rem;
+	}
+}
+
+.token.tag {
+	mix-blend-mode: multiply;
+}
+
+kbd {
+	padding: .2em .3em;
+	vertical-align: bottom;
+	box-shadow:
+		0 0 0 2px white inset,
+		1px 1px var(--color-neutral-85),
+		2px 2px var(--color-neutral-80),
+		3px 3px var(--color-neutral-75),
+		4px 4px var(--color-neutral-70),
+		5px 5px var(--color-neutral-65),
+		6px 6px var(--color-neutral-60),
+		6px 6px 0.2em rgb(0 0 0 / .3);
+	border-color: var(--color-neutral-60);
+	background-color: var(--color-neutral-95);
+	line-height: 1;
+	font-weight: 500;
+}
+
+.slide {
+	--slide-padding: 5rem;
+
+	&:where(:not(.dark, header)) {
+		background-image: none;
+	}
+
+	h1,
+	> header > h1 {
+		margin: 0;
+		margin-bottom: 1.5rem;
+		font-size: calc(3 * var(--slide-base-font-size, 1rem));
+
+		+ .subtitle {
+			margin-top: -1.3rem;
+			color: var(--color-neutral-50a);
+			font-size: calc(1.2 * var(--slide-base-font-size, 1rem));
+			font-weight: 500;
+			text-wrap: balance;
+
+		}
+	}
+
+	> header {
+		text-align: center;
+		margin-bottom: 1em;
+	}
+}
+
+body > header.slide:first-of-type {
+	padding: 0;
+}
+
+header.slide {
+	& h1 {
+		font-weight: 800;
+	}
+}
+
+.syntax-breakdown {
+	--color-2: var(--color-green);
+}

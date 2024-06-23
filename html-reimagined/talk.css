@@ -1143,6 +1143,10 @@ ul.blocks {
 		margin-top: -2em;
 	}
 
+@supports (background: linear-gradient(in oklch, red, tan)) {
+	:root { --in-oklch: in oklch; }
+}
+
 .graph-1d {
 	position: relative;
 	width: 80%;
