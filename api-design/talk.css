@@ -18,7 +18,7 @@
 }
 
 #end {
-	background: url("images/thats-all-folks.webp") center / cover no-repeat;
+	background: url("css/images/thats-all-folks.webp") center / cover no-repeat;
 
 	&::after {
 		content: "Animation by Fabrizio Bergamo";
@@ -112,7 +112,7 @@
 .full-height {
 	&:only-child,
 	&.full-height,
-	&:where(:first-child:is(h1, h2, header) + *):where(:last-child, :has(+ details.notes:last-child)) {
+	&:where(:first-child, :first-child:is(h1, h2, header) + *):where(:last-child, :has(+ details.notes:last-child)) {
 		flex: 1;
 		min-height: 0;
 	}
@@ -125,7 +125,7 @@ ul.examples {
 	}
 }
 
-pre:where(.examples > li > *, .good, .bad) {
+pre:is(.examples > li > *, .good, .good *, .bad, .bad *) {
 	position: relative;
 
 	&::before {
@@ -135,7 +135,7 @@ pre:where(.examples > li > *, .good, .bad) {
 		z-index: 2;
 	}
 
-	&.good {
+	&:is(.good, .good *) {
 		--color: var(--color-green);
 
 		&::before {
@@ -143,7 +143,7 @@ pre:where(.examples > li > *, .good, .bad) {
 		}
 	}
 
-	&.bad {
+	&:is(.bad, .bad *) {
 		--color: var(--color-red);
 
 		&::before {
@@ -215,7 +215,8 @@ pre:where(.examples > li > *, .good, .bad) {
 	}
 }
 
-#use-case-examples {
+#use-case-examples,
+#use-case-examples-2 {
 	flex-flow: row;
 
 	header, h1 {
@@ -240,6 +241,10 @@ pre:where(.examples > li > *, .good, .bad) {
 			&:empty {
 				flex: 1;
 			}
+
+			h2 {
+				text-align: inherit;
+			}
 		}
 	}
 
@@ -247,8 +252,6 @@ pre:where(.examples > li > *, .good, .bad) {
 		align-self: stretch;
 		min-height: 0;
 	}
-
-
 }
 
 h1 mark {
@@ -342,5 +345,49 @@ h1 mark {
 	strong {
 		font-weight: 500;
 		color: var(--color-neutral-0);
+	}
+}
+
+#video-complex {
+	img {
+		max-width: 90vw;
+		max-height: 90vh;
+
+		&:not(.delayed) {
+			max-height: 80vh;
+		}
+
+		&.delayed {
+			position: absolute;
+			bottom: 15vh;
+		}
+	}
+}
+
+#internal-over-external {
+	> div {
+		min-width: 42ch;
+		min-height: 6lh;
+	}
+
+	.delayed {
+		transition: display .01s, opacity .5s .5s;
+		transition-behavior: allow-discrete;
+
+		&:not(.current) {
+
+		}
+	}
+}
+
+#dogfood {
+	background: linear-gradient(to bottom right, rgb(0 0 0 / .5) 20%, transparent 60%), url(images/dogfood.jpg) bottom / cover;
+	align-items: start;
+	justify-content: start;
+	padding-right: 50vw;
+	color-scheme: dark;
+
+	& h1 {
+		text-align: left;
 	}
 }

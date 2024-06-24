@@ -1,0 +1,94 @@
+@font-face {
+	font-family: "Virgil";
+	src: url("../css/fonts/Virgil.woff2");
+}
+
+@keyframes toggle {
+	2%, 15% {
+		opacity: 1;
+	}
+	18%, to {
+		opacity: 0;
+	}
+}
+
+text {
+	font: 36px Virgil, Segoe UI Emoji;
+}
+
+path {
+	stroke-linecap: round;
+}
+
+:root {
+	--color-ok: #f08c00;
+	--color-good: #709517;
+	--color-amazing: #2f9e44;
+}
+
+@keyframes curve {
+	0%, 20%, to { /* good */
+		stroke: var(--color-good);
+		d: path("M 116, 511 c 56.79,-45.61,222.79,-190.51,341.06,-271.56 c 118.28,-81.05,307.43,-178.87,368.59,-214.73m-712.56,483.47 c 56.5,-45.41,224.65,-184.7,343.03,-265.98 c 118.38,-81.28,306.05,-184.56,367.23,-221.71");
+	}
+
+	33.333%, 53.333% { /* ok */
+		stroke: var(--color-ok);
+		d: path("M 116, 511 c 42.57,-66.68,136.28,-317.33,254.84,-398.41 c 118.55,-81.08,380.73,-72.85,456.5,-88.07m-713.78,491.67 c 42.09,-67.54,136.33,-325.26,255.14,-408.02 c 118.81,-82.77,381.52,-74.35,457.72,-88.59");
+	}
+
+	66.6666%, 86.6666% { /* amazing */
+		stroke: var(--color-amazing);
+		d: path("M 116, 511 c 82.49,-25.45,380.37,-70.81,498.92,-152.38 c 118.55,-81.56,176.93,-280.66,212.35,-337.01m-707.21,487.5 c 82.15,-25.3,375.01,-66.04,493.81,-148.12 c 118.79,-82.08,183.47,-288.04,218.96,-344.35");
+	}
+}
+
+@keyframes point {
+	0%, 20%, to { /* good */
+		fill: var(--color-good);
+	}
+
+	33.333%, 53.333% { /* ok */
+		fill: var(--color-ok);
+	}
+
+	66.6666%, 86.6666% { /* amazing */
+		fill: var(--color-amazing);
+	}
+}
+
+.curve,
+.point,
+.curve-label {
+	animation: 4s infinite;
+
+	&:is(#paused:target ~ *, #paused:target ~ * *) {
+		animation-play-state: paused;
+	}
+}
+
+.curve {
+	fill: none;
+	stroke: var(--color-good);
+	stroke-width: 2px;
+	animation-name: curve;
+}
+
+.point {
+	fill: var(--color-good);
+	animation-name: point;
+}
+
+.curve-label {
+	animation-name: toggle;
+}
+
+.ok {
+	animation-delay: 1.333s;
+	opacity: 0;
+}
+
+.amazing {
+	animation-delay: 2.666s;
+	opacity: 0;
+}
