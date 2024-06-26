@@ -7,6 +7,11 @@ import "../shared/js/prism.js";
 import Inspire from "https://inspirejs.org/inspire.mjs";
 // import { SELECTOR as TARGET_WIDTH_SELECTOR } from "./plugins/target-width/plugin.js";
 
+let takeaway = 0;
+for (let slide of document.querySelectorAll(".slide.takeaway")) {
+	slide.style.setProperty("--takeaway", ++takeaway);
+}
+
 let path = new URL("./plugins", import.meta.url);
 Inspire.plugins.register({
 	// "syntax-breakdown": {

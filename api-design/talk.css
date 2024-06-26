@@ -1,6 +1,9 @@
 @import url("css/theme.css");
 
 #intro {
+	color-scheme: dark;
+	background: var(--color-accent-3);
+
 	h1 {
 		font-size: 20vh;
 		line-height: .9;
@@ -15,6 +18,26 @@
 	span:nth-child(3) {
 		margin-left: 0.75em;
 	}
+
+	.by {
+		text-align: center;
+		color-scheme: light;
+		color: canvastext;
+		line-height: 1;
+		margin-top: 2rem;
+		font-size: 130%;
+
+		small {
+			font-size: 50%;
+			font-weight: 500;
+		}
+	}
+}
+
+.tip.slide {
+	--label: "API Design Tip";
+	--label-color: var(--color-accent-3);
+	--label-font-size: 35%;
 }
 
 #end {
@@ -62,7 +85,7 @@
 
 #svg-dom {
 	color-scheme: dark;
-	background: var(--color-accent-1);
+	background: var(--color-red);
 
 	img {
 		max-height: 90vh;
@@ -108,13 +131,23 @@
 	}
 }
 
-.slide > :is(object, img, video, svg),
+.slide > :is(object, img, video, svg, figure),
 .full-height {
 	&:only-child,
 	&.full-height,
 	&:where(:first-child, :first-child:is(h1, h2, header) + *):where(:last-child, :has(+ details.notes:last-child)) {
 		flex: 1;
 		min-height: 0;
+	}
+
+	&:is(figure) {
+		display: flex;
+		flex-flow: column;
+
+		> :is(object, img, video, svg) {
+			flex: 1;
+			min-height: 0;
+		}
 	}
 }
 
@@ -391,3 +424,48 @@ h1 mark {
 		text-align: left;
 	}
 }
+
+#user-testing {
+	video {
+		filter: contrast(1.5);
+	}
+}
+
+#dateformat {
+	color-scheme: dark;
+	background: var(--color-green);
+}
+
+#beginner {
+	justify-content: start;
+	background: url("images/student.avif") 50% 45% / auto 390%;
+
+	h1 {
+		max-width: 5em;
+		text-shadow: 0 0 .3em white;
+	}
+}
+
+#empathy {
+	background: url("images/empathy.png") bottom / 60% auto no-repeat #172B51;
+	color-scheme: dark;
+
+	h1 {
+		margin-bottom: 3em;
+	}
+}
+
+/* Media credits */
+.slide[data-credits]:after {
+	content: "Media credits: " attr(data-credits);
+	position: absolute;
+	bottom: .5rem;
+	right: 1rem;
+	z-index: 100;
+	color: canvastext;
+	font-size: .8rem;
+	font-weight: 300;
+	text-shadow: 0 0 .1em canvas;
+	text-shadow: 0 0 .1em .1em canvas;
+}
+

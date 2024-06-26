@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>API Design is UI Design</title>
+	<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">☑️</text></svg>' />
+
+	<link href="talk.css" rel="stylesheet" />
+	<script src="talk.js" type="module"></script>
+</head>
+<body class="language-js" data-markdown-elements="details.notes, .md, .md-children > *, .md-gc > * > *, md-ggc > * > * > *">
+
+<header id="intro" class="slide dont-resize">
+	<h1>
+		<span>API Design</span>
+		<span class="is">is</span>
+		<span>UI Design</span>
+	</h1>
+	<small>
+		Deleted scenes
+	</small>
+</header>
+
+
+<article class="slide columns force-2">
+	<h1>How?</h1>
+
+	<section>
+		<h2>Making simple things easy</h2>
+
+		<ul>
+			<li>Sensible defaults</li>
+			<li>Shortcuts</li>
+			<li>Consistency</li>
+			<li>Robustness</li>
+		</ul>
+	</section>
+	<section>
+		<h2>Making complex things possible</h2>
+
+		<ul>
+			<li>Extension points</li>
+			<li>Composability</li>
+			<li>Aggregation</li>
+		</ul>
+	</section>
+</article>
+
+<article class="slide">
+	<h1>Which one is better?</h1>
+	<object data="images/curve-floor-ceiling.svg"></object>
+	<details class="notes">
+		There are many ways to have a smooth ease-of-use to power curve.
+		If we compare two APIs, A and B, which do you think has better usability?
+		Both have a relatively smooth ease-of-use to power curve, so they’re probably not too bad.
+		A has a _higher ceiling_, meaning you can do more things.
+		B has a lower ceiling, but also a _lower floor_, meaning it’s easier to get started with.
+		Furthermore, B’s UI complexity remains lower for pretty much all use cases.
+		So which one is better?
+		We can’t tell without knowing anything about them.
+		How important are the use cases you can’t do with B? How commonly do they come up?
+	</details>
+</article>
+
+
+<article class="slide">
+	<h1>Optimize for the right use cases</h1>
+
+	<ul class="delayed-children examples">
+		<li class="bad"><pre><code>history.pushState(null, "", "https://lea.verou.me");</code></pre>
+		<li class="bad"><pre><code>JSON.stringify(data, null, "\t");</code></pre>
+	</ul>
+
+	<details class="notes">
+		Not all use cases are equally important.
+
+		**Primary use cases** are what drives the design, and should be the most common ones.
+		Your API should cater to them with minimal user effort.
+
+		**Secondary use cases** are things that our API makes _possible_ but do not drive its design.
+		Making secondary use cases possible is great, because it buys us more time before we can solve them properly:
+		users tend to complain a lot more about things that are not possible, than about things that are not easy.
+
+		In fact, if you wait for user complaints to figure out what is not easy, you’d be waiting a long time:
+		users tend to blame themselves, and will very rarely complain about the usability of a product or API they use.
+		You need to be proactive about this: dogfood! Look at people’s code!
+
+		Lastly, it’s ok to decide that some use cases are simply **out of scope**.
+		Catering to them would complicate the problem so much that it would make the API unusable
+		for the primary and secondary use cases.
+	</details>
+</article>
+
+
+
+<article class="slide">
+	<header>
+		<h1>Layering</h1>
+		<p class="subtitle">No, you don’t have to do it all at once</p>
+	</header>
+	<img src="images/layers.webp" alt="">
+	<details class="notes">
+		A smooth use case complexity to UI complexity curve requires a lot more resources than a quick fix.
+		But you don’t need to spend all those resources up front and delay shipping.
+
+		It’s common to ship these APIs in layers,
+		with each release changing the curve for the better,
+		ether making simple things easier, or pushing the boundary of what is possible.
+
+		But where to start?
+		That depends on a number of factors.
+		What is the biggest pain point that your API is solving?
+		Is it that the status quo is too hard or that things are not possible?
+		How diverse are the primary use cases? How well do you understand user needs?
+	</details>
+</article>
+
+<article class="slide">
+	<h1>High level first</h1>
+	<object data="images/curve-shipping-hlf.svg" type=""></object>
+
+	<details class="notes">
+		If the primary use cases are well-known, and clustered around a few common patterns, and we have a pretty good idea about how to address them,
+		we can start with a high level design that covers them well
+		and ship extension points and lower level primitives later that explain the high level feature.
+		As a rule of thumb, this works well when that high level MVP can cover about 80% of use cases.
+	</details>
+</article>
+
+<article class="slide">
+	<h1>Low level first</h1>
+	<object data="images/curve-shipping-llf.svg" type=""></object>
+
+	<details class="notes">
+		If you have less confidence about what a high level API could look like,
+		or the use cases are too diverse,
+		or the biggest pain point is around things not being possible,
+		you can start with a lower level primitive that makes complex things possible, even if simple things are hard.
+
+		Once we have a good sense of what the most common use cases are, we can add higher level abstractions on top of the lower level primitives.
+
+		In general, it tends to be less risky to ship a low level API first and use that to learn more about people’s use cases,
+		which will inform your higher level abstractions.
+		Shipping the wrong high level API can be catastrophic, and is much more likely than shipping the wrong low-level one.
+
+		However, there have been cases where teams became complacent after shipping a low-level API and never shipped the higher level abstractions.
+		This is easy to happen since users will rarely complain about simple things not being easy — they are far more vocal about things not being possible.
+		But their pain is still there. They just tend to blame themselves for it, or resign to it as a part of life.
+		There is so much poor UX out there that people are _surprised_ when things work well!
+	</details>
+</article>
+
+<article class="tbd slide">
+	<h1>TBD: Examples of layering</h1>
+</article>
+
+
+<article class="slide" id="overfitting">
+	<div class="dictionary-dfn">
+		<header>
+			<h1>
+				overfitting
+			</h1>
+			<p>
+				<span class="ipa">ˈoʊvərˌfɪtɪŋ</span>
+				<span class="pos">noun</span>
+			</p>
+		</header>
+		<ol>
+			<li>
+				<em>(Statistics)</em>
+				When a model is so tailored to a specific dataset that it fails to predict future observations.
+			</li>
+			<li class="delayed">
+				<em>(Usability)</em>
+				When a UI is too tailored to a specific use case that it cannot cater to new use cases.
+			</li>
+		</ol>
+	</div>
+	<details class="notes">
+		Overfitting is a borrowed idea from statistical modeling, and more recently very relevant to machine learning.
+		Essentially: if you introduce too many variables into a statistical model, it will predict your test data with remarkable accuracy.
+		But the minute you try to apply it to another data set, it loses its predictive power.
+		The model has over-optimized on a specific set of data and in doing so, lost its general use.
+
+		In UI design, [overfitting](https://bootcamp.uxdesign.cc/overfitting-and-the-problem-with-use-cases-337d9f4bf4d7)
+		is when you optimize for a specific use case so much that the UI cannot generalize to other, highly related use cases.
+
+		We need to collect use cases at all stages: before designing the API to drive the design,
+		and after to _test_ it and ensure it is not **overfit**.
+		Think of it like unit testing, but for UX!
+
+		It tends to happen when we ship high level APIs first but we don’t have a good understanding of the current and future spectrum of primary use cases.
+	</details>
+</article>
+
+<article class="tbd slide">
+	<h1>TBD: Example of overfitting</h1>
+	<p>ideally something that was later improved to not overfit</p>
+</article>
+
+<article class="slide">
+	<h1>How to avoid overfitting?</h1>
+
+	<details class="notes">
+		Decompose the driving use case into orthogonal lower-level problems that are encountered individually.
+		Some of them may already have solutions, some may not.
+		Then, design solutions for those orthogonal problems that don’t already have one.
+	</details>
+</article>
+
+<footer class="slide" id="end">
+
+</footer>
+
+</body>
+</html>

@@ -18,9 +18,10 @@
 		<span class="is">is</span>
 		<span>UI Design</span>
 	</h1>
-	<small>
-		By <a href="http://lea.verou.me">Lea Verou</a>, MIT
-	</small>
+	<div class="by">
+		By <a href="http://lea.verou.me">Lea Verou</a><br>
+		<small>MIT &bull; W3C TAG &bull; CSS WG &bull; TC39</small>
+	</div>
 </header>
 
 <article class="slide" id="pain">
@@ -205,37 +206,81 @@
 	</details>
 </article>
 
-<article class="slide language-html">
-	<div class="columns for">
-		<section>
-			<pre><code>
-				&lt;select id="country">
-					&lt;option value="fr" selected>France&lt;/option>
-					&lt;option value="gr">Greece&lt;/option>
-					&lt;option value="us">United States&lt;/option>
-				&lt;/select>
-			</code></pre>
-			<video src="videos/select.mp4" muted autoplay loop></video>
-		</section>
-		<section class="delayed">
-			<pre><code>
-				&lt;select id="country" multiple>
-					&lt;option value="fr" selected>France&lt;/option>
-					&lt;option value="gr">Greece&lt;/option>
-					&lt;option value="us">United States&lt;/option>
-				&lt;/select>
-			</code></pre>
-			<video src="videos/select-multiple.mp4" muted autoplay loop></video>
-		</section>
-	</div>
+<article class="slide language-html columns force-3" id="select">
+
+	<section>
+		<pre><code>
+			&lt;select id="country">
+				&lt;option value="fr" selected>
+					France
+				&lt;/option>
+				&lt;option value="gr">
+					Greece
+				&lt;/option>
+				&lt;option value="us">
+					United States
+				&lt;/option>
+			&lt;/select>
+		</code></pre>
+		<video src="videos/select.mp4" muted autoplay loop></video>
+	</section>
+	<section class="delayed">
+		<pre><code>
+			&lt;select id="country" multiple>
+				&lt;option value="fr" selected>
+					France
+				&lt;/option>
+				&lt;option value="gr">
+					Greece
+				&lt;/option>
+				&lt;option value="us">
+					United States
+				&lt;/option>
+			&lt;/select>
+		</code></pre>
+		<video src="videos/select-multiple.mp4" muted autoplay loop></video>
+	</section>
+	<section class="delayed">
+		<h2>???</h2>
+		<img src="images/multiselect.png" alt="">
+	</section>
+
 	<details class="notes">
 		Let’s look at another example, a humble `&lt;select>` menu.
-		It’s certainly quite simple to use! But, it doesn’t do very much.
-		You can add a `multiple` attribute and turn it into a multiselect listbox, which is already an API Design smell:
-		These are separate use cases, and it’s common to need a single-select listbox, or a multiselect dropdown.
+		Are HTML elements APIs? Of course. Just like your own components.
 
-		Beyond that, you can use JS to manipulate the options dynamically, but that’s about it.
+		Several issues with this API.
+		First, you can add a `multiple` attribute and turn it into a multiselect listbox, but what if you wanted a multiselect dropdown?
+		This highlights a very common antipattern, which is best explained with an example from UI design in the physical world.
+
+		----
+
+		Now back to the `&lt;select>` element.
+		Lack of orthogonality is not its only issue.
+
+		It’s certainly quite simple to use! But, it doesn’t do very much.
+		You can use JS to manipulate the options dynamically, but that’s about it.
 	</details>
+</article>
+
+<article class="recap tip slide">
+	<h1>Orthogonal knobs for orthogonal concepts</h1>
+	<div class="columns force-2 full-height">
+		<img src="images/faucet-1.jpg" alt="">
+		<img src="images/faucet-2.jpg" alt="">
+	</div>
+	<details class="notes">
+		Remember these older faucets with a separate control for hot and cold water?
+		This is a great example of UI design being driven by implementation specifics, rather than user needs.
+		The use cases are clear: 1. adjust the flow of water, and 2. adjust the temperature of water.
+		The implementation involves adjusting the flow of two streams of water: one for hot water and one for cold water.
+		The older faucets were simply exposing these internals to users, causing a lot of frustration because it was impossible to adjust temperature without also adjusting flow,
+		so every change requires a series of adjustments and corrections.
+		This was fixed with the newer mixer faucets which expose the two concepts separately.
+	</details>
+</article>
+
+<article class="slide" data-insert="#select">
 </article>
 
 <article class="slide columns force-3" style="grid-template-columns: 3fr 1.2fr 2.5fr">
@@ -244,7 +289,8 @@
 	<img src="images/multiselect.png" alt="">
 
 	<details class="notes">
-		You can’t style it or add custom content, you can’t add a search box, you can’t allow custom options, you can’t turn it into a multiselect.
+		You can’t style it or add custom content, you can’t add a search box, you can’t allow custom options, you can’t turn it into a multiselect
+		or combo box.
 		It has the opposite problem: simple things are easy, but complex things are _not_ possible.
 
 		No wonder it comes up as a top pain point in most web development surveys
@@ -259,7 +305,7 @@
 		Let’s add `&lt;select>` to our chart.
 		Note that it starts at the bottom left, which is good, but then just …stops.
 
-		Thankfully, there are efforts recently to extend `&lt;select>` to cater to all these use cases, but until then it remains an excellent example
+		Thankfully, there are recent efforts to extend `&lt;select>` to cater to all these use cases, but until then it remains an excellent example
 		of an API that makes simple things easy, but complex things impossible.
 	</details>
 </article>
@@ -293,7 +339,7 @@
 	<video src="videos/cat.mp4" controls></video>
 	<details class="notes">
 		Now let’s look at another example, the `&lt;video>` element and its corresponding JS API,
-		and let’s focus specifically on its playback controls.
+		and specifically its playback controls.
 		Simple things are certainly easy: all we need to do to get a nice default toolbar is add the `controls` attribute.
 	</details>
 </article>
@@ -507,7 +553,7 @@
 <article class="slide" id="priority-of-constituencies" data-steps="2">
 	<header>
 		<h1>Drive complexity inwards</h1>
-		<p class="subtitle">Priority of Constituencies</p>
+		<p class="subtitle">“Put the pain on those who can bear it”</p>
 	</header>
 
 	<blockquote>
@@ -522,23 +568,31 @@
 
 	<details class="notes">
 		“Simple” in Kay’s maxim refers to the conceptual complexity of the use case, not the implementation.
-		Simple things are the most common things that people want to do with your API, not things that are simple to implement.
+		Simple things are the most common things that people want to do with your API, not things that are necessarily simple to implement.
 
-		In general, it’s a good rule of thumb to prefer internal complxity over external complexity.
+		Remember the faucet example: the older faucets were simpler to implement, but made the most common user goals hard.
+		The newer faucets are a little more complex to implement internally, but make the primary use cases simple.
 
-		A different formulation of the same principle is known as **Priority of Constituencies**.
-		For the Web, it’s worded in the Web Platform Design Principles as this: [read out]
+		This is not a coincidence. It’s a good rule of thumb to opt for internal complexity over external complexity.
 
+		In the web standards world, it’s known as the **Priority of Constituencies**,
+		which goes like this: [read out]
+
+		For example, being someone designing APIs for the Web Platform, _your_ needs are above _my_ needs.
 		The different groups may vary, but the core idea is the same and applies to all product and API design.
 		What this tells us is to prioritize users over implementors, and to be pragmatic.
 
 		Encapsulating complexity in the lowest level possible centralizes and abstracts it away,
-		which minimizes collective pain since most UIs have a lot more users than implementors
-		(if your API doesn’t, feel free to ignore this).
+		which minimizes collective pain since most UIs have a lot more users than implementors.
+		If your API has fewer users than implementors, by all means, ignore this!
+
+		Another reason to do this is that if your abstractions are doing their job,
+		users will need less technical knowledge than implementors,
+		which brings us to another formulation of this principle: "put the pain on those who can bear it".
 	</details>
 </article>
 
-<article class="slide" id="internal-over-external">
+<article class="tip recap slide" id="internal-over-external">
 	<h1>Encapsulate complexity</h1>
 
 	<div>
@@ -558,20 +612,22 @@
 		It’s a great example that the most common use cases are not necessarily the simplest conceptually, or the simplest to implement,
 		but they’re the ones to optimize for.
 
-		In an HTML sanitizer, the common case is that we want to sanitize untrusted input with a default set of allowed elements and attributes.
-		This involves some pretty complex rules and edge cases, but it’s simple to use.
+		In an HTML sanitizer, the common case is that we want to take untrusted input and make it it self to stuff into `innerHTML`.
+		This does not involve simply an allowlist of elements and attributes, but is actually pretty complex.
+
 		It would be far simpler for implementation if users had to provide inputs for what to allow,
 		but that would make the common case tedious AF.
-		Instead, it uses an excellent design: it optimizes for the common case by having sensible defaults,
-		and provides extension points that allow users to override the defaults when they need to.
 
-		UI complexity is revealed progressively, as needed, and does not get in the way when not needed. Perfect! 👌🏼
+		Instead, this API used an excellent design: it optimized for the common case by having sensible defaults,
+		and provides extension points that allowed users to override the defaults when they need to.
+
+		UI complexity was revealed progressively, as needed, and did not get in the way when not needed. Perfect! 👌🏼
 	</details>
 </article>
 
-<article class="slide principle">
+<article class="tip recap slide">
 	<header>
-		<h1><span class="label">Corollary</span>
+		<h1>
 			No boilerplate
 		</h1>
 		<p class="subtitle">Syntax should not require more than is needed to declare intent</p>
@@ -588,42 +644,17 @@
 
 	<details class="notes">
 		If it can be inferred, it’s your API’s job.
-		Users should not have to copy and paste (or these days, generate with AI) boilerplate that they carry from project to project.
-		Of course, individual users may have their own boilerplate, as in, configuration they reuse.
-		But boilerplate that is shared across your entire userbase is an API design smell.
+
+		Remember the older DOM methods like `removeChild()`? Every operation required a reference to the parent.
+		But the parent could be inferred from the node!
+		There was absolutely no reason for this, except some vague academic ideas about theoretical purity,
+		which as we’ve just seen, should be at the very bottom of priorities.
+
+		Users should not have to copy and paste (or these days, generate with AI) boilerplate and have to manage multiple sources of truth for the same thing.
+		What is the minimum syntax needed to clearly and unambiguously declare their intent?
+		Can you make that syntax possible?
 	</details>
 </article>
-
-
-<article class="slide">
-	<h1>Optimize for the right use cases</h1>
-
-	<ul class="delayed-children examples">
-		<li class="bad"><pre><code>history.pushState(null, "", "https://lea.verou.me");</code></pre>
-		<li class="bad"><pre><code>JSON.stringify(data, null, "\t");</code></pre>
-	</ul>
-
-	<details class="notes">
-		Not all use cases are equally important.
-
-		**Primary use cases** are what drives the design, and should be the most common ones.
-		Your API should cater to them with minimal user effort.
-
-		**Secondary use cases** are things that our API makes _possible_ but do not drive its design.
-		Making secondary use cases possible is great, because it buys us more time before we can solve them properly:
-		users tend to complain a lot more about things that are not possible, than about things that are not easy.
-
-		In fact, if you wait for user complaints to figure out what is not easy, you’d be waiting a long time:
-		users tend to blame themselves, and will very rarely complain about the usability of a product or API they use.
-		You need to be proactive about this: dogfood! Look at people’s code!
-
-		Lastly, it’s ok to decide that some use cases are simply **out of scope**.
-		Catering to them would complicate the problem so much that it would make the API unusable
-		for the primary and secondary use cases.
-	</details>
-</article>
-
-
 
 <article class="slide">
 	<header>
@@ -639,7 +670,9 @@
 		with each release changing the curve for the better,
 		ether making simple things easier, or pushing the boundary of what is possible.
 
-		But where to start?
+		Sometimes that’s the plan from the start, and sometimes it just works out this way, as a response to developer feedback.
+
+		But where to start from?
 		That depends on a number of factors.
 		What is the biggest pain point that your API is solving?
 		Is it that the status quo is too hard or that things are not possible?
@@ -669,78 +702,132 @@
 		or the biggest pain point is around things not being possible,
 		you can start with a lower level primitive that makes complex things possible, even if simple things are hard.
 
-		Once we have a good sense of what the most common use cases are, we can add higher level abstractions on top of the lower level primitives.
+		We can deploy this and learn from the way people use it, then use this knowledge to design a better high level API.
 
-		In general, it tends to be less risky to ship a low level API first and use that to learn more about people’s use cases,
-		which will inform your higher level abstractions.
-		Shipping the wrong high level API can be catastrophic, and is much more likely than shipping the wrong low-level one.
+		In general, this tends to be a safer path, as it makes fewer assumptions.
+		The wrong high-level API will not be used at all,
+		whereas an API that is too low-level will be painful, but still usable,
+		and people can always build and share abstractions on top of it.
 
-		However, there have been cases where teams became complacent after shipping a low-level API and never shipped the higher level abstractions.
+		One danger with that path is complacency.
+		It’s common to ship a low-level API planning to later ship a higher level one and never do so.
 		This is easy to happen since users will rarely complain about simple things not being easy — they are far more vocal about things not being possible.
-		But their pain is still there. They just tend to blame themselves for it, or resign to it as a part of life.
+		But their pain is still there. They just tend to blame themselves for it, or resign to it as a part of life and build their own abstractions.
 		There is so much poor UX out there that people are _surprised_ when things work well!
 	</details>
 </article>
 
-<article class="tbd slide">
-	<h1>TBD: Examples of layering</h1>
-</article>
+<article class="slide" id="dateformat">
+	<h1>Layering done right</h1>
 
-<!--
-<article class="slide" id="overfitting">
-	<div class="dictionary-dfn">
-		<header>
-			<h1>
-				overfitting
-			</h1>
-			<p>
-				<span class="ipa">ˈoʊvərˌfɪtɪŋ</span>
-				<span class="pos">noun</span>
-			</p>
-		</header>
-		<ol>
-			<li>
-				<em>(Statistics)</em>
-				When a model is so tailored to a specific dataset that it fails to predict future observations.
-			</li>
-			<li class="delayed">
-				<em>(Usability)</em>
-				When a UI is too tailored to a specific use case that it cannot cater to new use cases.
-			</li>
-		</ol>
+	<div class="frame-by-frame full-height">
+		<img src="images/date-1.png" alt="">
+		<img src="images/date-2.png" alt="" class="delayed">
+		<img src="images/date-3.png" alt="" class="delayed">
+		<img src="images/date-4.png" alt="" class="delayed">
+		<img src="images/date-5.png" alt="" class="delayed">
+		<img src="images/date-6.png" alt="" class="delayed">
+		<img src="images/date-7.png" alt="" class="delayed">
+		<img src="images/date-8.png" alt="" class="delayed">
+		<img src="images/date-9.png" alt="" class="delayed">
+		<img src="images/date-10.png" alt="" class="delayed">
 	</div>
+
 	<details class="notes">
-		Overfitting is a borrowed idea from statistical modeling, and more recently very relevant to machine learning.
-		Essentially: if you introduce too many variables into a statistical model, it will predict your test data with remarkable accuracy.
-		But the minute you try to apply it to another data set, it loses its predictive power.
-		The model has over-optimized on a specific set of data and in doing so, lost its general use.
+		Here’s an example of high-level first layering that resulted in a very smooth curve eventually.
+		For years, all we had was this super high level `toLocaleString()` method on `Date` objects,
+		that gave you some formatted datetime in the user’s locale.
 
-		In UI design, [overfitting](https://bootcamp.uxdesign.cc/overfitting-and-the-problem-with-use-cases-337d9f4bf4d7)
-		is when you optimize for a specific use case so much that the UI cannot generalize to other, highly related use cases.
+		It was so high level it was practically useless.
+		But once the `Intl.DateTimeFormat` API came along, it also enhanced the `toLocaleString()` method,
+		so that you could get progressively more control over the output format.
 
-		We need to collect use cases at all stages: before designing the API to drive the design,
-		and after to _test_ it and ensure it is not **overfit**.
-		Think of it like unit testing, but for UX!
-
-		It tends to happen when we ship high level APIs first but we don’t have a good understanding of the current and future spectrum of primary use cases.
+		You want to just provide a locale? You can do that and it will deal.
+		You want to just provide a hint about how long the date should be? You can do that and it will deal.
+		You want to control the format and presence of each individual part of the date? You can do that too.
+		You want total control, and just want the API to give you a data structure of all the parts?
+		You guessed it, you can do that too.
 	</details>
 </article>
 
-<article class="tbd slide">
-	<h1>TBD: Example of overfitting</h1>
-	<p>ideally something that was later improved to not overfit</p>
-</article>
+<article class="slide" id="user-testing" data-credits="youtube.com/watch?v=BrVnBdW6_rE">
+	<header>
+		<h1>User testing</h1>
+		<p class="subtitle">Yes, it works for APIs too.</p>
+	</header>
 
-<article class="slide">
-	<h1>How to avoid overfitting?</h1>
+	<video src="videos/user-testing.mp4" muted autoplay loop></video>
 
 	<details class="notes">
-		Decompose the driving use case into orthogonal lower-level problems that are encountered individually.
-		Some of them may already have solutions, some may not.
-		Then, design solutions for those orthogonal problems that don’t already have one.
+		Lastly, let’s talk about a few general usability guidelines and how they apply to API design,
+		starting from user testing, the cornerstone of usability.
+
+		You are not the user, and you know too much about your UI.
+		Dogfooding is great, but it’s not enough.
+		You need to see how people who aren’t you use what you designed.
+
+		User testing is surrounded by many misconceptions.
+		One misconception is that it only applies to visual interfaces.
+
+		The core idea is to get ahold of a few representative users (and for an API these will be developers, but not developers of that API),
+		ask them to perform a few representative tasks,
+		observe what they do, where they succeed, and where they struggle.
+		None of this requires visuals.
+
+		For user testing to be valuable, it’s important that you **shut up and let the users the talking**.
+		Make it clear upfront that you are testing the design, not them, and that you can answer their questions after, but not during.
+		You can give them documentation, and even a brief tutorial in the beginning, but after that, you should not help them,
+		only encourage them to think out loud and ask non-leading questions.
 	</details>
 </article>
--->
+<article class="slide" id="user-testing-2" data-credits="Norman/Nielsen Group">
+	<header>
+		<h1>User testing</h1>
+		<p class="subtitle">No, it’s not some big investment.</p>
+	</header>
+
+	<img src="images/5-users.jpg" alt="">
+
+	<details class="notes">
+		Another misconception is that user testing is time-consuming and expensive.
+		Nope, you need no special equipment, it can be done over a Zoom call,
+		or live with a screen recorder,
+		and [you only need five users](https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/)
+		to uncover 80% of the problems.
+		Even just two users will reveal half of the issues.
+
+		User testing can also be fantastic in resolving these long bikeshedding debates in a team.
+		Should we call it this or that? Should we use positional arguments or an object literal?
+		Test with both! In most cases, the answer will be clear.
+	</details>
+</article>
+
+<article class="recap tip slide dont-resize">
+	<h1>It’s not the user’s fault</h1>
+
+	<!-- <pre><code>
+		import styles from "./styles.css";
+	</code></pre> -->
+	<figure>
+		<img src="images/css-in-js.png" alt="">
+		<figcaption>
+			CSS-in-JS usage over time,
+			State of CSS 2023
+		</figcaption>
+	</figure>
+
+	<details class="notes">
+		If one user makes a mistake using your UI, it could be their fault.
+		But if several users are making the same mistake, the problem lies with your UI and you should figure out how to serve their needs better instead of blaming them.
+
+		An example from the web platform is CSS-in-JS.
+		It has been a point of contention for at least a decade.
+		As one of the people who design CSS, I’m not personally a fan of it.
+		But the attitude that developers are _doing it wrong_ and should "simply" learn to use CSS properly is problematic.
+
+		Thankfully, in recent years the attitude has changed and we are shipping a ton of features that should hopefully make CSS-in-JS less necessary.
+	</details>
+</article>
 
 <article class="slide takeway" id="dogfood">
 	<h1>Dogfood, dogfood, dogfood</h1>
@@ -750,11 +837,11 @@
 	</details>
 </article>
 
-<article class="slide takeaway">
+<article class="slide recap tip" id="beginner">
 	<h1>Remain a beginner</h1>
 
 	<details class="notes">
-		Obviously I’m not suggesting you should stop learning and getting better.
+		Obviously I’m not suggesting you should stop learning.
 
 		But a lot of poor API design comes from engineers who are _really good_.
 		Because they are so great, they have forgotten what it’s like to be a beginner.
@@ -767,8 +854,8 @@
 	</details>
 </article>
 
-<article class="slide takeaway">
-	<h1>Code with <strong>empathy</strong></h1>
+<article class="slide recap tip" data-credits="Chinwe Uzegbu" id="empathy">
+	<h1>Hone your <strong>empathy</strong></h1>
 
 	<details class="notes">
 		The biggest, most important point is to hone your _empathy_.
