@@ -1,12 +1,18 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1/font/bootstrap-icons.css");
 @import url("css/theme.css");
+
+object:not(.interactive) {
+	pointer-events: none;
+}
 
 #intro {
 	color-scheme: dark;
-	background: var(--color-accent-3);
+	background: var(--color-accent-3) url("images/pixelized-teapot.svg") 5rem 100% / 10em no-repeat;
 
 	h1 {
 		font-size: 20vh;
 		line-height: .9;
+		text-shadow: .03em .03em black;
 	}
 
 	.is {
@@ -40,26 +46,12 @@
 	--label-font-size: 35%;
 }
 
-#end {
-	background: url("css/images/thats-all-folks.webp") center / cover no-repeat;
-
-	&::after {
-		content: "Animation by Fabrizio Bergamo";
-		position: absolute;
-		bottom: .5rem;
-		right: .8rem;
-		font-size: 40%;
-		color: white;
-		font-weight: 500;
-		opacity: .8;
-	}
-}
-
 #pain {
 	background: var(--color-red);
 	color-scheme: dark;
 
 	mark {
+		position: relative;
 		--mark-color: oklab(from var(--color-red) calc(l * .7) a b);
 		color: white;
 	}
@@ -109,13 +101,75 @@
 	}
 }
 
-#video-controls {
+#dx {
+	background: var(--color-accent-2);
+	color-scheme: dark;
+}
+
+#progressive-complexity {
+	color-scheme: dark;
+	padding-left: 35%;
+	background: url("images/iceberg.jpg") 30% / cover no-repeat;
+
+	h1 {
+		max-width: 7em;
+
+		&::before {
+			margin-bottom: 1rem;
+		}
+	}
+}
+
+#select {
 	pre {
-		margin: 1em;
+		width: 100%;
+
+		&:has(h2) {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			white-space: normal;
+		}
+	}
+
+	code {
+		mark {
+			background: color(display-p3 1 1 0);
+			text-shadow: 0 0 .1em white;
+			box-shadow: none;
+		}
+
+		h2 {
+			font-family: var(--font-heading);
+			font-size: 300%;
+			margin: 0;
+		}
+	}
+
+	&[data-visit="2"] .delayed {
+		opacity: 1 !important;
+	}
+}
+
+#video-controls {
+	> div {
+		video {
+			width: 100%;
+		}
+	}
+	pre {
+		margin-bottom: 1em;
+		font-size: 110%;
 	}
 }
 
 #video-no-controls {
+	counter-reset: total-loc 0;
+
+	pre:where(.current, .displayed, :not(.delayed, .delayed-children > *)) {
+		counter-increment: total-loc var(--loc, 1);
+	}
+
 	.columns {
 		align-items: start;
 		margin-top: 1em;
@@ -127,6 +181,21 @@
 			--height: calc(100vh - 9.5em);
 			overflow: hidden;
 			font-size: calc(var(--height) / var(--loc) / 1.3);
+		}
+	}
+
+	.total-loc {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		right: var(--slide-padding);
+		text-align: center;
+		line-height: 1;
+
+		&::before {
+			content: counter(total-loc);
+			display: block;
+			font-size: 300%;
 		}
 	}
 }
@@ -166,6 +235,7 @@ pre:is(.examples > li > *, .good, .good *, .bad, .bad *) {
 		top: -.5em;
 		right: -.4em;
 		z-index: 2;
+		font-size: 2rem;
 	}
 
 	&:is(.good, .good *) {
@@ -182,6 +252,12 @@ pre:is(.examples > li > *, .good, .good *, .bad, .bad *) {
 		&::before {
 			content: "👎🏼";
 		}
+	}
+}
+
+#components {
+	.bad {
+		font-size: 50%;
 	}
 }
 
@@ -434,6 +510,19 @@ h1 mark {
 #dateformat {
 	color-scheme: dark;
 	background: var(--color-green);
+
+	.subtitle {
+		color: white;
+
+		code {
+			background: none;
+			color: canvastext;
+
+			* {
+				color: inherit;
+			}
+		}
+	}
 }
 
 #beginner {
@@ -447,11 +536,15 @@ h1 mark {
 }
 
 #empathy {
-	background: url("images/empathy.png") bottom / 60% auto no-repeat #172B51;
+	background: url("images/empathy.png") bottom / 60% auto no-repeat hsl(220 68% 19%);
 	color-scheme: dark;
 
 	h1 {
 		margin-bottom: 3em;
+
+		strong {
+			color: var(--color-green)
+		}
 	}
 }
 
@@ -468,4 +561,48 @@ h1 mark {
 	text-shadow: 0 0 .1em canvas;
 	text-shadow: 0 0 .1em .1em canvas;
 }
+#end {
+	background: center / cover no-repeat;
+	color-scheme: dark;
+	justify-content: space-between;
+	font-weight: 400;
+	padding-block: 2.5rem;
 
+	&:target {
+		background-image: url("css/images/thats-all-folks.webp");
+	}
+
+	&::after {
+		content: "Animation by Fabrizio Bergamo";
+		position: absolute;
+		bottom: .5rem;
+		right: .8rem;
+		font-size: 40%;
+		color: white;
+		font-weight: 500;
+		opacity: .8;
+	}
+
+	p.slides {
+		margin: 0;
+	}
+
+	.info {
+		list-style: none;
+		display: grid;
+		grid-template-columns: repeat(2, max-content);
+		gap: .2em 6em;
+		margin-left: 3em;
+		justify-content: space-between;
+		padding: 0;
+
+		small {
+			font-size: 60%;
+			font-style: italic;
+		}
+	}
+
+	a {
+		font-weight: 600;
+	}
+}
