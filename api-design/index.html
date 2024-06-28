@@ -24,7 +24,7 @@
 	</div>
 </header>
 
-<article class="slide" id="pain">
+<article class="slide" id="pain" data-time="00:16">
 	<h1>
 		Ever used an API<span class="asterisk">*</span> that caused you <mark>pain</mark>?
 	</h1>
@@ -32,15 +32,14 @@
 	<details class="notes">
 		Raise your hand if you’ve ever used an API that caused you pain.
 
-		And by APIs here (and in the rest of the talk) I’m referring to libraries, frameworks, components, built-in JS APIs, HTML elements, CSS rules and properties etc.
+		Nothing worked in the way you’d expect so you had to constantly look at the docs,
+		everything produced errors, and you had to copy-pasta a ton of boilerplate.
 
-		Nothing worked in the way you’d expect so you had to look up documentation all the time,
-		everything you tried produced errors, and you had to copy-pasta a ton of boilerplate.
 		Seems familiar? Yeah, me too.
 	</details>
 </article>
 
-<article class="slide language-markup dont-resize" id="svg-dom">
+<article class="slide language-markup dont-resize" id="svg-dom" data-time="1:50">
 	<div class="frame-by-frame">
 		<img src="images/svg-0.png" alt="">
 		<img src="images/svg-1.png" alt="" class="delayed">
@@ -56,10 +55,10 @@
 		Who here has used the SVG DOM?
 		Lucky you! It’s like the HTML DOM, except worse.
 
-		Here’s the simplest SVG ever: just a circle.
+		Here’s the simplest SVG ever: a circle.
 		We want to read its radius in JS.
 
-		- It starts all innocuous, just a good ol’ `document.querySelector()` to get a reference to the circle.
+		- It starts all simple, just a good ol’ `document.querySelector()` to get a reference to the circle.
 		Easy peasy.➡️
 		But it’s all downhill from there.➡️
 		- Based on the HTML DOM, we’d probably try `circle.r` next, right?
@@ -83,24 +82,26 @@
 	</details>
 </article>
 
-<article class="slide" id="alan-kay">
+<article class="slide" id="alan-kay" data-time="00:17">
 	<blockquote>
 		“Simple things should be easy, complex things should be possible”
 		<div class="cite"><a href="https://en.wikipedia.org/wiki/Alan_Kay">Alan Kay</a> (famous computer scientist)</div>
 	</blockquote>
 	<img src="images/alan-kay.jpg" alt="Portrait of Alan Kay">
 	<details class="notes">
-		Alan Kay was a famous computer scientist, and this quote of his is considered one of the biggest API design principles.
+		Alan Kay famously said [read]. It’s considered one of the biggest API design principles.
 
-		Except it doesn’t _just_ apply to API design, it’s built-in to almost every (well designed) product we use.
-		Such as Google Calendar…
+		Except it doesn’t _just_ apply to API design, but any well-designed product.
 	</details>
 </article>
 
-<article class="slide" id="google-calendar">
+<article class="slide" id="google-calendar" data-time="00:37">
 	<video src="../jsux/img/google-calendar.mp4" muted autoplay loop></video>
 	<details class="notes">
-		It takes one click to add an event. We can drag an edge to change its duration or drag & drop to reschedule it.
+		Take Google Calendar.
+
+		It takes one click to add an event. We can drag an edge to make it shorter or longer, or drag & drop to reschedule it.
+		We can edit its main details from the popup, or click “More Options” and do crazy things like repeat it every third Sunday on a full moon.
 		Simple things are easy, and complex things are possible.
 
 		This is not an outlier. You will find that **most usability principles apply to API design**,
@@ -110,7 +111,7 @@
 	</details>
 </article>
 
-<article class="slide" id="dx">
+<article class="slide" id="dx" data-time="00:14">
 	<div class="dictionary-dfn">
 		<header>
 			<h1>
@@ -127,17 +128,17 @@
 		</ol>
 	</div>
 	<details class="notes">
-		This seemed like such a difficult concept, that we had to invent a new word
-		that basically means "UX when the interaction involves writing code."
+		This seemed like such a difficult concept, that people could not possibly reuse the same words, nooo.
+		We had to invent a new word that basically means "UX when the interaction involves writing code."
 	</details>
 </article>
 
-<article class="slide">
+<article class="slide" data-time="00:30">
 	<object data="images/curve-alankay.svg"></object>
 	<details class="notes">
-		Now back to Alan Kay’s maxim. We can visualize it if we draw a plane with two axes:
+		Now picture a a plane with two axes:
 		the horizontal axis being the complexity of the desired task,
-		and the other the UI complexity they need to deal with to do it.
+		and the Y axis the UI or API complexity users need to deal with to accomplish it.
 
 		Alan Kay’s maxim can be visualized as two points on that plane.
 		“Simple things being easy” means there should be a point on the lower left.
@@ -146,7 +147,7 @@
 	</details>
 </article>
 
-<article class="slide dont-resize" id="use-case-examples">
+<article class="slide dont-resize" id="use-case-examples" data-time="00:45">
 	<header>
 		<h1>How will <mark>people</mark> use it?</h1>
 		<p class="subtitle">Pain points, Use cases, usage scenarios, user goals</p>
@@ -160,15 +161,16 @@
 		<li></li>
 		<li class="delayed">Screw a drywall screw</li>
 	</ul>
-	<object data="images/high-low-level.svg" type=""></object>
+	<object data="images/high-low-level.svg"></object>
 	<details class="notes">
 		Being aware of user needs is crucial in designing a good UI.
 		It means we can solve actual problems that real people have,
 		rather than expending energy solving imaginary problems we think they have.
 
-		There are many different words to describe user needs in different ways: pain points, use cases, usage scenarios, user goals.
+		There are many different words to describe user needs from different angles:
+		pain points, use cases, usage scenarios, user goals.
 		For simplicity, we will stick to "use case":
-		a common, expected task that people will use our UI for.
+		an example of a common, expected task that people will use our UI for.
 
 		Use cases can be high level, low level, or anywhere in between.
 
@@ -177,7 +179,7 @@
 	</details>
 </article>
 
-<article class="slide dont-resize" id="use-case-examples">
+<article class="slide dont-resize" id="use-case-examples" data-time="00:30">
 	<header>
 		<h1>How will <mark>people</mark> use it?</h1>
 		<p class="subtitle">Pain points, Use cases, usage scenarios, user goals</p>
@@ -195,13 +197,15 @@
 		For example, a high level use case for regular expressions is data validation,
 		and a low level use case is matching repeating digits.
 
-		We collect use cases throughout the design process: initial use cases help **drive the design**,
+		We collect use cases throughout the design process:
+		initial use cases help **drive the design**,
 		and later use cases help **validate it** and ensure it does not **[overfit](https://bootcamp.uxdesign.cc/overfitting-and-the-problem-with-use-cases-337d9f4bf4d7)**.
-		You can think of use cases as **the unit tests of UI design**: the more diverse they are the more robust the design.
+
+		You can think of use cases as **the unit tests of API design**: the more diverse they are, the more robust the design.
 	</details>
 </article>
 
-<article class="slide">
+<article class="slide" data-time="00:13">
 	<object data="images/curve-svgdom.svg"></object>
 	<details class="notes">
 		Now let’s get back to the _use case complexity_ to _UI complexity_ chart.
@@ -211,7 +215,7 @@
 	</details>
 </article>
 
-<article class="tip recap slide" id="progressive-complexity">
+<article class="tip recap slide" id="progressive-complexity" data-time="00:08">
 	<h1>
 		Reveal complexity progressively
 	</h1>
@@ -220,7 +224,7 @@
 	</details>
 </article>
 
-<article class="slide language-html columns force-3" id="select">
+<article class="slide language-html columns force-3" id="select" data-time="00:40">
 	<pre><code>
 		&lt;select id="country">
 			&lt;option value="fr" selected>
@@ -262,8 +266,10 @@
 		Are HTML elements APIs? Of course. Just like your own components.
 
 		Several issues here.
-		First, you can add a `multiple` attribute and turn it into a multiselect listbox, but what if you wanted a multiselect dropdown?
-		This highlights a very common antipattern, which is best explained with an example from UI design from the physical world.
+		You can add a `multiple` attribute and turn it into a multiselect listbox.
+		But… ➡️ what if you wanted a multiselect _dropdown_?
+
+		This highlights a common antipattern, which is best explained with an example from the physical world.
 
 		----
 
@@ -275,7 +281,7 @@
 	</details>
 </article>
 
-<article class="recap tip slide">
+<article class="recap tip slide" data-time="01:10">
 	<h1 class="delayed">Orthogonal controls for orthogonal concepts</h1>
 	<div class="columns force-2 full-height">
 		<img src="images/faucet-1.jpg" alt="">
@@ -285,13 +291,14 @@
 		Remember these older faucets that had separate controls for hot and cold water?
 
 		The **use cases** are clear: 1. adjust the flow of water, and 2. adjust the temperature of water.
-		The **implementation** involves mixing two streams of water: one for hot water and one for cold water.
+		The **implementation** involves mixing two streams of water: one for hot and one for cold water.
 
-		The older UI is driven by implementation, rather than user needs, and exposed the internals directly to users, resulting in friction and frustration.
+		The older UI is driven by implementation, rather than user needs, and exposed the internals directly to users,
+		resulting in friction and frustration.
 		Adjusting either the temperature or the flow required a series of adjustments and corrections.
 
-		The modern one is instead designed around the actual user needs, and exposes the two concepts separately.
-		The internals are still the same — the newer tap just takes care of doing the translation for you.
+		Modern faucets are instead designed around the actual user needs, and expose the two concepts separately.
+		The internals are still the same — the faucet just takes care of doing the translation for you.
 
 		➡️ It’s usually a good practice to expose orthogonal controls for orthogonal concepts.
 		Examples abound of this going wrong, e.g. CSS positioning is another example.
@@ -304,7 +311,7 @@
 <article class="slide" data-insert="#select">
 </article>
 
-<article class="slide columns force-3" style="grid-template-columns: 3fr 1.2fr 2.5fr">
+<article class="slide columns force-3" style="grid-template-columns: 3fr 1.2fr 2.5fr" data-time="00:14">
 	<img src="images/airbnb-select.png" alt="">
 	<img src="images/selectlist-animation.gif" alt="">
 	<img src="images/multiselect.png" alt="">
@@ -312,16 +319,18 @@
 	<details class="notes">
 		You can’t style it or add custom content, you can’t add a search box, you can’t allow custom options, you can’t turn it into a multiselect
 		or combo box.
+
+		All pretty common things that people want to do with it.
 	</details>
 </article>
 
-<article class="slide">
+<article class="slide" data-time="00:30">
 	<object data="images/curve-svgdom-select.svg"></object>
 
 	<details class="notes">
 		Let’s add `&lt;select>` to our chart.
 		It starts at the bottom left, since simple things are easy.
-		But then it just …stops.
+		It goes up a bit and then just …stops.
 		Even slightly complex things are _not_ possible.
 
 		No wonder that in most surveys it comes up as both the most hated and the most frequently recreated HTML element!
@@ -331,7 +340,7 @@
 	</details>
 </article>
 
-<article class="slide language-markup" id="video-controls" id="video-simple">
+<article class="slide language-markup" id="video-controls" id="video-simple" data-time="00:17">
 	<div>
 		<pre><code>&lt;video src="videos/cat.mp4" <mark>controls</mark>>&lt;/video></code></pre>
 		<video src="videos/cat.mp4" controls></video>
@@ -339,11 +348,13 @@
 	<details class="notes">
 		Now let’s look at another example, the `&lt;video>` element and its corresponding JS API.
 
-		Simple things are certainly easy: all we need to do to get a nice sleek toolbar that just works is add a single attribute: `controls`.
+		Simple things are certainly easy:
+		all we need to get a nice sleek toolbar that works well is a single attribute: `controls`.
+		We just slap it on our `&lt;video>` element and bam, we’re done.
 	</details>
 </article>
 
-<article class="slide" id="video-complex">
+<article class="slide" id="video-complex" data-time="00:30">
 	<img src="images/youtube.png" alt="">
 	<img src="images/netflix.png" alt="" class="delayed">
 
@@ -361,7 +372,7 @@
 	</details>
 </article>
 
-<article class="slide language-markup dont-resize" id="video-no-controls">
+<article class="slide language-markup dont-resize" id="video-no-controls" data-time="00:14">
 	<pre><code>&lt;video src="videos/cat.mp4">&lt;/video></code></pre>
 	<div class="columns code-labels count-lines delayed-children">
 		<pre class="language-js"><code>
@@ -455,14 +466,14 @@
 	</div>
 
 	<details class="notes">
-		Just reimplementing the simplest toolbar takes us from 1 lines of code to …81!
+		Just reimplementing the simplest toolbar takes us from 1 line of code to …81!
 		And in practice a lot more.
 
 		Wouldn’t it be so much better if the default controls were more extensible?
 	</details>
 </article>
 
-<article class="slide">
+<article class="slide" data-time="00:34">
 	<object data="images/curve-cliff.svg"></object>
 
 	<details class="notes">
@@ -472,25 +483,28 @@
 
 		This is called a **usability cliff**, and is common in UIs that make simple things easy and complex things possible
 		by providing two distinct interfaces:
-		a super high level one that caters to the simplest use cases,
+		a super high level one that caters to the most common use cases,
 		and a super low level one that lets us do whatever but we have to reimplement _everything_ from scratch.
 	</details>
 </article>
 
-<article class="slide" id="delightful-apis">
+<article class="slide" id="delightful-apis" data-time="00:25">
 	<header>
 		<h1>Delightful APIs</h1>
 		<p class="subtitle">Incremental user effort produces incremental value</p>
 	</header>
 	<object data="images/curve-delightful-3.svg#paused"></object>
 	<details class="notes">
+		I used to think Alan Kay’s maxim was the begin-all and end-all of API design.
+		I don’t anymore.
+
 		Making simple things easy and complex things possible is a good first step, and it’s surprising how many APIs fail it.
 		But these are just the two ends of the spectrum.
 		For truly delightful APIs **all the points in between matter too**.
 	</details>
 </article>
 
-<article class="slide" id="delightful-apis-2">
+<article class="slide" id="delightful-apis-2" data-time="00:08">
 	<header>
 		<h1>Delightful APIs</h1>
 		<p class="subtitle">Incremental user effort produces incremental value</p>
@@ -502,7 +516,7 @@
 	</details>
 </article>
 
-<article class="slide columns force-2">
+<article class="slide columns force-2" data-time="01:40">
 	<header>
 		<h1>Which one is better?</h1>
 		<p class="subtitle delayed" data-index="3">Optimize for the right use cases</p>
@@ -521,12 +535,17 @@
 		</li>
 	</ul>
 	<details class="notes">
-		Take a look at these two APIs. Which one is better?
+		Take a look at these two different designs we’re considering for an API.
 
-		A can do more, but is more complex even for simple things.
+		A can do more, but is harder to use.
 		B can only do one thing, but it does it well.
 
-		We can’t tell without knowing anything about their use cases.
+		Which one is better?
+		Raise your hand if you would pick A.
+		Now raise your hand if you would pick B.
+		Well, both are wrong.
+
+		How could we pick one without knowing anything about their use cases?!
 		How common are the simple things that are a pain with A?
 		How common are the complex things that B can’t do?
 
@@ -534,17 +553,18 @@
 
 		Remember `compareDocumentPosition()`? That’s a fun one.
 		It returns a bitmask of ALL possible relative positions of two nodes.
-		Then you have to do **binary operations** to derive anything meaningful from it.
+		Then you have to do **bitwise operations** with a static `Node` constant to derive anything meaningful from it.
 
 		But the complex case it was trying to solve is largely imaginary.
 		It’s far, _far_ more common to need to check if an element contains another than to compare source order in arbitrary ways.
 		So `contains()` is the clear winner here, even if it can’t do as much.
 
 		➡️ It’s not just about having a smooth curve. It’s also about optimizing for the right use cases.
+		(And not using bitmasks. There is literally no good reason today to ever use bitmasks)
 	</details>
 </article>
 
-<article class="recap tip slide">
+<article class="recap tip slide" data-time="00:42">
 	<h1>Encapsulate complexity</h1>
 	<div class="columns force-2 full-height">
 		<img src="images/faucet-1.jpg" alt="">
@@ -552,17 +572,21 @@
 	</div>
 	<details class="notes">
 		“Simple” in Kay’s maxim refers to the conceptual complexity of the use case, not the implementation.
-		Simple things are the most common things that people want to do with your API, not things that are necessarily simple to implement.
+		Simple things are the most common things that people want to do, not things that are necessarily simple to implement.
 
 		Remember the faucet example: the older faucets were simpler to implement, but made the most common user goals hard.
 		The newer faucets are a little more complex to implement internally, but make the primary use cases simple.
 
 		This is not a coincidence. It’s a good rule of thumb to opt for internal complexity over external complexity.
+		This may require sacrificing code quality, such as using hacks in production, but it’s a tradeoff worth making.
 	</details>
 </article>
 
-<article class="slide" id="internal-over-external">
-	<h1>Encapsulating complexity</h1>
+<article class="slide" id="internal-over-external" data-time="00:43">
+	<header>
+		<h1>Encapsulating complexity</h1>
+		<p class="subtitle">The (now defunct) Sanitizer API</p>
+	</header>
 
 	<div>
 		<pre><code>
@@ -579,18 +603,19 @@
 		Even though it was removed for other reasons,
 		this was something the [Sanitizer API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Sanitizer_API) proposal did _really_ well.
 
-		The common use case is to take untrusted input and make it safe to stuff into `innerHTML`.
-		This is not simple to implement — it involves some pretty complicated logic and edge cases.
-		But that’s the use case they correctly chose to facilitate.
+		Its common use case is to take untrusted input and make it safe to stuff into your DOM.
+		This is not simple to implement — it involves some pretty complicated logic and many edge cases.
+		But that’s the use case they (correctly) chose to facilitate by default.
 
 		To also make complex things possible, they made some of these defaults customizable
 		by allowing users to provide their own allowlists of elements and attributes.
 
-		UI complexity was revealed progressively, as needed, and did not get in the way when not needed. Perfect! 👌🏼
+		UI complexity was revealed progressively, as needed, and did not get in the way when not needed.
+		Perfect! 👌🏼
 	</details>
 </article>
 
-<article class="slide" id="priority-of-constituencies" data-steps="2">
+<article class="slide" id="priority-of-constituencies" data-steps="2" data-time="00:45">
 	<header>
 		<h1>Priority of Constituencies</h1>
 		<p class="subtitle">“Put the pain on those who can bear it”</p>
@@ -608,8 +633,10 @@
 
 	<details class="notes">
 		A good way to ensure that complexity is encapsulated is to have an agreed upon priority of constituencies.
-		This is what the web platform’s PoC looks like.
-		Being someone designing APIs for the web platform, this means that _your_ needs as authors are above _my_ needs as a spec writer.
+		This is what the web platform’s PoC looks like.➡️
+
+		End-users above web developers above browser devs above spec writers above theoretical purity.
+		As someone designing APIs for the web platform, this means that _your_ needs as authors are above _my_ needs as a spec writer.
 
 		The groups involved in defining, implementing, and using a UI vary, but the core idea is to
 		**prioritize users over implementors at every level, and be pragmatic**.
@@ -619,9 +646,7 @@
 	</details>
 </article>
 
-
-
-<article class="tip recap slide">
+<article class="tip recap slide" data-time="00:34">
 	<header>
 		<h1>
 			No boilerplate
@@ -651,16 +676,17 @@
 	<details class="notes">
 		Remember the older DOM methods like `removeChild()` or `replaceChild()`?
 		Every operation required a reference to the parent.
-		But the parent could be inferred from the node!
-		There was zero reason for this, beyond some vague academic ideas about the proper way to do tree operations,
-		and as we’ve just seen, theoretical purity is at the bottom of priorities.
+		But the parent could be inferred from the node!!
 
-		**If it can be inferred, it’s your API’s job.**
+		There was zero reason for this, beyond some vague academic ideas about the proper way to do tree operations,
+		and as we’ve just seen, theoretical purity should be at the bottom of priorities.
+
+		**If it can be computed, it’s your API’s job.**
 		Users should not have to manage multiple sources of truth so they can use your API — just fix your API instead.
 	</details>
 </article>
 
-<article class="slide language-html code-labels" id="components">
+<article class="slide language-html code-labels" id="components" data-time="00:18">
 	<header>
 		<h1>
 			No boilerplate
@@ -714,7 +740,7 @@
 	</details>
 </article>
 
-<article class="slide">
+<article class="slide" data-time="00:28">
 	<header>
 		<h1>Layering</h1>
 		<p class="subtitle">No, you don’t have to do it all at once</p>
@@ -735,7 +761,7 @@
 	</details>
 </article>
 
-<article class="slide">
+<article class="slide" data-time="00:20">
 	<h1>High level first</h1>
 	<object data="images/curve-shipping-hlf.svg" type=""></object>
 
@@ -747,7 +773,7 @@
 	</details>
 </article>
 
-<article class="slide">
+<article class="slide" data-time="01:00">
 	<h1>Low level first</h1>
 	<object data="images/curve-shipping-llf.svg" type=""></object>
 
@@ -768,7 +794,7 @@
 	</details>
 </article>
 
-<article class="slide" id="dateformat">
+<article class="slide" id="dateformat" data-time="01:00">
 	<header>
 		<h1>Layering done right</h1>
 		<p class="subtitle"><code>Intl.DateTimeFormat</code> + <code>Date.prototype.toLocaleString()</code></p>
@@ -788,25 +814,28 @@
 	</div>
 
 	<details class="notes">
-		Here’s an example of high-level first layering that resulted in a very smooth curve eventually.
+		Here’s a disaster turned success story.
+
 		For years, all we had was this super high level `toLocaleString()` method on `Date` objects,
 		that gave you some formatted datetime in the user’s locale.
+		What was that? Who knows.
+		What format did you get? Who knows.
 
 		It was so high level it was practically useless.
 		But once the `Intl.DateTimeFormat` API came along, it also enhanced the `toLocaleString()` method,
 		so that you could get progressively more control over the output format.
 
-		You want to just provide a locale? You can do that and it will deal.
-		You want to just provide a hint about how long the date should be? You can do that and it will deal.
-		You want to control the format and presence of each individual part of the date? You can do that too.
-		You want total control, and just want the API to give you a data structure of all the parts?
+		➡️ You want to just provide a locale? You can do that and it will deal.
+		➡️ You want to just provide a hint about how long the date should be? You can do that and it will deal.
+		➡️ You want to control the format and presence of each individual part of the date? You can do that too.
+		➡️ You want total control, and just want the API to give you a data structure of all the parts?
 		You guessed it, you can do that too.
 
 		The curve is as smooth as it gets.
 	</details>
 </article>
 
-<article class="slide" id="user-testing" data-credits="youtube.com/watch?v=BrVnBdW6_rE">
+<article class="slide" id="user-testing" data-credits="youtube.com/watch?v=BrVnBdW6_rE" data-time="01:01">
 	<header>
 		<h1>User testing</h1>
 		<p class="subtitle">Yes, it works for APIs too.</p>
@@ -836,7 +865,7 @@
 		only encourage them to think out loud and ask non-leading questions.
 	</details>
 </article>
-<article class="slide" id="user-testing-2" data-credits="Norman/Nielsen Group">
+<article class="slide" id="user-testing-2" data-credits="Norman/Nielsen Group" data-time="00:35">
 	<header>
 		<h1>User testing</h1>
 		<p class="subtitle">No, it’s not some big investment.</p>
@@ -854,11 +883,11 @@
 
 		User testing can also be fantastic in resolving these long bikeshedding debates in a team.
 		Should we call it this or that? Should we use positional arguments or an object literal?
-		Test with both! In most cases, the answer will be clear.
+		Test with both! In most cases, the answer will become clear pretty fast.
 	</details>
 </article>
 
-<article class="recap tip slide dont-resize">
+<article class="recap tip slide dont-resize" data-time="00:37">
 	<h1>It’s not the user’s fault</h1>
 
 	<!-- <pre><code>
@@ -873,6 +902,8 @@
 	</figure>
 
 	<details class="notes">
+		It’s common to hear devs say that users are doing it wrong.
+
 		If one user makes a mistake using your UI, it might be their fault.
 		But if several users are making the same mistake, the problem lies with your UI and instead of blaming them, you should focus on fixing it.
 
@@ -883,7 +914,7 @@
 	</details>
 </article>
 
-<article class="slide takeway" id="dogfood">
+<article class="slide takeway" id="dogfood" data-time="00:28">
 	<h1>Dogfood the hell out of it</h1>
 
 	<ol class="delayed-children">
@@ -901,19 +932,20 @@
 		You dogfood because it’s impractical to user test every nook and cranny of your API.
 
 		It’s _crucial_ to **make** things with your API _before_ it ships, and ideally before you even spend time implementing it.
-		Write out code for a few demos to see how it _feels_ before you implement anything.
-		Then write the docs.
-		Then write the tests.
-		And only after all that go and actually implement it.
+		➡️ Write out code for a few demos to see how it _feels_ before you implement anything.
+		➡️ Then write the docs.
+		➡️ Then write the tests.
+		➡️ And only after all that go and actually implement it.
 	</details>
 </article>
 
-<article class="slide recap tip" data-credits="Chinwe Uzegbu" id="empathy">
+<article class="slide recap tip" data-credits="Chinwe Uzegbu" id="empathy" data-time="00:23">
 	<h1>Hone your <strong>empathy</strong></h1>
 
 	<details class="notes">
-		The biggest, most important point is to hone your _empathy_.
-		Simply **caring** about users goes a long way, and matters more than any individual design principle.
+		But beyond all design principles,
+		the biggest, most important goal is to hone your _empathy_.
+		Simply **caring** about users goes a long way, and matters more than any individual principle.
 
 		Think about the humans that will use the APIs you’re designing.
 		Their needs, their use cases. Make their lives easier. Reduce their pain.
