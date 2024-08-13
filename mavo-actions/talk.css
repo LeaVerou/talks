@@ -1613,9 +1613,8 @@ ul.fancy li + li::before {
 	overflow: hidden;
 	font-size: 500%;
 	padding: 0;
-}
 
-	#click-to ul {
+	ul {
 		margin: 0;
 		margin-top: calc(50vh - .75em);
 		align-self: flex-start;
@@ -1626,11 +1625,12 @@ ul.fancy li + li::before {
 		text-shadow: 0 calc(1.5em * var(--rows)), 0 calc(-1.5em * var(--rows)); /* make copies of text */
 	}
 
-	#click-to p,
-	#click-to li.active {
+	p,
+	li.active {
 		color: var(--color1);
 		transition: .2s .3s color;
 	}
+}
 
 #time {
 	position: fixed;

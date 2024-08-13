@@ -1195,10 +1195,7 @@ footer.slide {
 	}
 
 #access-control {
-
-}
-
-	#access-control div {
+	div {
 		width: 35em;
 		font-size: 50%;
 		border: 1px solid hsla(0,0%,100%,.4);
@@ -1208,55 +1205,56 @@ footer.slide {
 		background: hsla(0,0%,100%,.1);
 	}
 
-	#access-control p {
+	p {
 		margin: 0;
 		margin-left: 7em;
+
+		&:first-of-type {
+			font-family: Blokk;
+		}
+
+		&:last-of-type {
+			font-weight: bold;
+			margin-top: .5em;
+		}
 	}
 
-	#access-control p:first-of-type {
-		font-family: Blokk;
-	}
-
-	#access-control p:last-of-type {
-		font-weight: bold;
-		margin-top: .5em;
-	}
-
-		#access-control a {
+		a {
 			text-decoration: none;
 			margin-right: 1em;
 			font-size: 120%;
+
+			&::before {
+				display: inline-block;
+				vertical-align: middle;
+				margin-right: .3em;
+			}
 		}
 
-		#access-control a::before {
-			display: inline-block;
-			vertical-align: middle;
-			margin-right: .3em;
-		}
-
-		#access-control .reply::before {
+		.reply::before {
 			content: "↩";
 			transform: scaleY(-1);
 			color: hsl(200, 100%, 80%);
 			vertical-align: .1em;
 		}
 
-		#access-control .edit::before {
+		.edit::before {
 			content: "✏️";
 		}
 
-		#access-control .delete::before {
+		.delete::before {
 			content: "❌";
 			color: #f44;
 		}
 
-	#access-control img {
+	img {
 		float: left;
 		width: 6em;
 		height: 6em;
 		border-radius: 50%;
 		margin: 0 1em 0 0;
 	}
+}
 
 #realtime {
 	background: hsl(264, 55%, 56%);
