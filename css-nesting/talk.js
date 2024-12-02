@@ -1,5 +1,8 @@
 import "./js/prism-tokenizedcss.js";
 import "./js/prism-cssgrammar.js";
+import Inspire from "https://inspirejs.org/inspire.mjs";
+
+let { $$ } = Inspire.util;
 
 let path = new URL(".", import.meta.url);
 Inspire.plugins.register({

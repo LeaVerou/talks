@@ -4,6 +4,8 @@ export const hasCSS = true;
 
 await Inspire.importsLoaded;
 
+let { $$ } = Inspire.util;
+
 function renderTrees(element = document) {
 	// Create trees from nested <ul>s
 	let trees = element.querySelectorAll("ul:is(.tree, .tree-children > *):not(.initialized)");
