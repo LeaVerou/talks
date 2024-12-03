@@ -1,5 +1,5 @@
 @import url("https://inspirejs.org/inspire.css") layer(base-theme);
-@import url("https://inspirejs.org/theme.css") layer(base-theme);
+@import url("https://inspirejs.org/style/theme.css") layer(base-theme);
 @import url("theme.css") layer(theme);
 @import url("components.css");
 
