@@ -1,9 +1,13 @@
 {
+	"workspaces": [
+		"whathecolor"
+	],
 	"scripts": {
 		"build:css": "npx postcss \"**/*.postcss\" --base . --dir . --ext .css",
 		"build": "npm run build:css",
 		"watch:css": "npx postcss \"**/*.postcss\" --base . --dir . --ext .css --watch",
-		"watch": "npm run watch:css"
+		"watch": "npm run watch:css",
+		"prepare": "npm run dependencies --if-present --workspaces"
 	},
 	"devDependencies": {
 		"postcss": "^8",

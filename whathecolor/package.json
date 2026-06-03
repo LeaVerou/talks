@@ -10,7 +10,6 @@
   },
   "type": "module",
   "scripts": {
-    "dependencies": "npx nudeps",
-    "prepare": "npx nudeps"
+    "dependencies": "npx nudeps"
   }
 }
