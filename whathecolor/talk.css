@@ -1,0 +1,29 @@
+/* On CDN, not nudeps: bootstrap-icons is asset-only (no JS entry), which nudeps 0.2.4 doesn't vendor. */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1/font/bootstrap-icons.css");
+@import url("css/theme.css");
+
+#intro {
+	color-scheme: dark;
+	background: var(--color-accent-3);
+
+	h1 {
+		font-size: 20vh;
+		line-height: .9;
+		text-shadow: .03em .03em black;
+	}
+
+	.by {
+		text-align: center;
+		color-scheme: light;
+		color: canvastext;
+		line-height: 1;
+		margin-top: 2rem;
+		font-size: 130%;
+
+		small {
+			font-size: 50%;
+			font-weight: 500;
+		}
+	}
+}
+

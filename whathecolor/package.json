@@ -1,0 +1,16 @@
+{
+  "name": "whathecolor",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "inspirejs.org": "^3"
+  },
+  "devDependencies": {
+    "nudeps": "^0.2.4"
+  },
+  "type": "module",
+  "scripts": {
+    "dependencies": "npx nudeps",
+    "prepare": "npx nudeps"
+  }
+}
