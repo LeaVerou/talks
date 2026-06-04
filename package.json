@@ -13,5 +13,9 @@
 		"postcss": "^8",
 		"postcss-cli": "^9",
 		"postcss-nesting": "^10"
+	},
+	"dependencies": {
+		"inspirejs.org": "^3.0.0",
+		"inspirejs2": "npm:inspirejs.org@^2.1.1"
 	}
 }
