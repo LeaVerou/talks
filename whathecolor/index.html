@@ -9,19 +9,122 @@
 
 	<link href="talk.css" rel="stylesheet" />
 	<script src="importmap.js"></script>
+	<script src="talk-sync.js"></script>
 	<script src="talk.js" type="module"></script>
 </head>
 <body class="language-css" data-markdown-elements="details.notes, .md, .md-children > *, .md-gc > * > *, md-ggc > * > * > *">
 
-<header id="intro" class="slide dont-resize">
-	<h1>What the color?!</h1>
-	<div class="by">
-		By <a href="http://lea.verou.me">Lea Verou</a><br>
+<header class="slide dont-resize" id="intro">
+	<div class="raining-words">
+		<code>hwb()</code>
+		<code>lab()</code>
+		<code>color(srgb)</code>
+		<code>lch()</code>
+		<code class="s">color(display-p3)</code>
+		<code>oklab()</code>
+		<code class="m">color(rec2020)</code>
+		<code>oklch()</code>
+		<code class="s">hsl(none none none / 50%)</code>
 	</div>
+	<div class="content delayed disappear-current">
+		<h1>What the color?!</h1>
+		<div class="by">
+			by <a href="http://lea.verou.me">Lea Verou</a>
+			<small>CSS WG, <wbr>CSS Color co-editor, <wbr><a href="https://colorjs.io">Color.js</a> co-founder</small>
+			<small><a href="http://lea.verou.me"><strong>lea.verou.me</strong></a> &bull; <strong>lea＠verou.me</strong></small>
+		</div>
+	</div>
+	<div class="emoji delayed-children">
+		<span>😵‍💫</span>
+		<span>🥴</span>
+		<span>🫠</span>
+	</div>
+	<div class="raining-words">
+		<code class="s">linear-gradient(in oklab)</code>
+		<code>lab()</code>
+		<code class="m">color-mix()</code>
+		<code>lch()</code>
+		<code>color(display-p3)</code>
+		<code class="s">linear-gradient(in oklch longer hue)</code>
+		<code>color(rec2020)</code>
+		<code>oklch()</code>
+	</div>
+
+	<details class="notes">
+		Raise your hand if you have been confused around the developments in CSS Color in the last few years.
+		Why do we need all of these? What are they good for? Should I care?
+	</details>
 </header>
 
+<article class="slide dont-resize" id="failed-oklch-scales">
+	<style>
+		@scope {
+			table {
+				tbody {
+					.swatch {
+						display: flex;
+					}
+					td {
+						--tr-color: var(--color); /* workaround for lack of inherit() */
+
+						.swatch {
+							--color: oklch(from var(--tr-color) var(--l) c h);
+						}
+					}
+
+					td:nth-of-type(1) { --l: 0.97; }
+					td:nth-of-type(2) { --l: 0.9; }
+					td:nth-of-type(3) { --l: 0.8; }
+					td:nth-of-type(4) { --l: 0.7; }
+					td:nth-of-type(5) { --l: 0.6; }
+					td:nth-of-type(6) { --l: 0.5; }
+					td:nth-of-type(7) { --l: 0.4; }
+
+				}
+			}
+		}
+	</style>
+	<table>
+		<thead>
+			<tr>
+				<th>Accent color</th>
+				<th>L=0.97</th>
+				<th>L=0.9</th>
+				<th>L=0.8</th>
+				<th>L=0.7</th>
+				<th>L=0.6</th>
+				<th>L=0.5</th>
+				<th>L=0.4</th>
+			</tr>
+		</thead>
+		<tbody>
+			<script>
+				for (let color in TwColors) {
+					document.write(`
+						<tr style="--color: var(--tw-${color})">
+							<th><div class="swatch">${color}</div></th>
+							${ `<td><div class="swatch"></div></td>
+							 `.repeat(7) }
+						</tr>
+					`);
+				}
+			</script>
+		</tbody>
+	</table>
+</article>
+
 <article class="slide">
-	This is a slide
+	<header>
+		<h1>This is a plain slide</h1>
+		<p class="subtitle">With a header and some content.</p>
+	</header>
+	<h2>Heading level 2</h2>
+	<h3>Heading level 3</h3>
+	<ul>
+		<li>List item</li>
+		<li>Another item</li>
+		<li>And another one</li>
+	</ul>
 </article>
 
 <footer class="slide" id="end">
