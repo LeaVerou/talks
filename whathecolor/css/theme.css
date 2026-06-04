@@ -1,6 +1,5 @@
-@import url("../client_modules/inspirejs.org/inspire.css");
-@import url("../client_modules/inspirejs.org/style/theme.css");
-@import url("../client_modules/inspirejs.org/style/components/ribbons.css");
+@import url("../client_modules/@inspirejs/core/inspire.css");
+@import url("https://inspirejs.org/style/theme.css");
 @import url("fonts.css");
 
 :root {
