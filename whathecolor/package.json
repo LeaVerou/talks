@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "color-elements": "^0.0.11",
     "inspirejs.org": "^3"
   },
   "devDependencies": {
-    "nudeps": "^0.2.4"
+    "nudeps": "^0.2.5"
   },
   "type": "module",
   "scripts": {
