@@ -1,0 +1,21 @@
+input:where([type=number]) {
+	width: 4em;
+	field-sizing: content;
+}
+
+input:not([type=file]),
+button,
+select {
+	font: inherit;
+	color: inherit;
+}
+
+input:is(:not([type]), [type="text"], [type="email"], [type="tel"], [type="url"]),
+textarea {
+	padding: 0 .3em;
+	border: var(--ui-border-l);
+
+	&:invalid {
+		border-color: var(--color-red);
+	}
+}

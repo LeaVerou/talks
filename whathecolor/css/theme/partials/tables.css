@@ -1,0 +1,41 @@
+/* Tables */
+table {
+	border-spacing: 0;
+	margin-block: 1em;
+
+	caption {
+		color: light-dark(var(--color-neutral-80), canvastext);
+	}
+
+	th,
+	td {
+		vertical-align: middle;
+		text-align: start;
+		padding: .3em .5em;
+
+		&:first-child {
+			text-align: start;
+		}
+	}
+
+	thead th {
+		vertical-align: bottom;
+		padding: .3em .5em;
+		font-size: var(--font-size-s);
+		color: var(--color-neutral-30);
+		border-block-end: var(--ui-border-l);
+	}
+
+	tbody {
+		th,
+		td {
+			border-bottom: var(--ui-border);
+		}
+
+		td {
+			&:first-child {
+				font-weight: 300;
+			}
+		}
+	}
+}

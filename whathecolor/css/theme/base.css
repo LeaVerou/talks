@@ -1,0 +1,90 @@
+@import url("tokens.css");
+
+html {
+	color-scheme: light dark;
+	background: var(--img-checkerboard) var(--color-neutral-95);
+	font: var(--font-weight) 100%/var(--lh-body) var(--font-body);
+	font-synthesis: none;
+	font-kerning: normal;
+	accent-color: var(--color-accent-1);
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: var(--lh-heading);
+	text-align: center;
+	text-wrap: balance;
+	margin-block-end: .5rem;
+
+	header > & {
+		margin: 0;
+	}
+
+	> .subtitle {
+		color: var(--color-neutral-60);
+		font-size: calc(1.2 * var(--slide-base-font-size, 1rem));
+		margin-top: .2em;
+		text-align: center;
+		font-weight: 500;
+		margin-top: -1.3rem;
+		text-wrap: balance;
+	}
+}
+
+li, p {
+	text-wrap: pretty;
+}
+
+a {
+	color: inherit;
+	--text-decoration-opacity: 30%;
+	text-decoration-color: color-mix(in lab, currentColor, transparent calc(100% - var(--text-decoration-opacity)));
+
+	&:where(:not(:hover, :focus)) {
+		text-decoration: none;
+	}
+
+	&:hover {
+		--text-decoration-opacity: 50%;
+	}
+
+	&:where(:not(:has(:not(em, strong)))) {
+		/* PLain text link */
+		color: var(--color-blue-0);
+
+		&:where(:visited) {
+			color: var(--color-purple-0);
+		}
+	}
+}
+
+:focus:not(:focus-visible) {
+	outline: none;
+}
+
+img, video, object {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+}
+
+object:where(:not(.interactive)) {
+	pointer-events: none;
+}
+
+::selection {
+	background: var(--color-accent-1);
+	color: white;
+	text-shadow: none;
+}
+
+#indicator {
+	opacity: .5;
+}
+
+.dark {
+	color-scheme: dark;
+}
+
+.light {
+	color-scheme: light;
+}

@@ -1,0 +1,92 @@
+.slide {
+	--slide-padding: 5rem;
+
+	@media (width > 1024px) {
+		--slide-padding: 3vmin;
+	}
+
+	display: flex;
+	flex-flow: column;
+	align-items: safe center;
+	justify-content: safe center;
+	padding: var(--slide-padding);
+	background: canvas;
+	color: canvastext;
+
+	h1,
+	&:where(:not(:has(h1))) h2,
+	&:where(:not(:has(h1, h2))) h3,
+	&:where(:not(:has(h1, h2, h3))) h4,
+	&:where(:not(:has(h1, h2, h3, h4))) h5,
+	&:where(:not(:has(h1, h2, h3, h4, h5))) h6 {
+		text-align: center;
+		font-size: var(--font-size-2xl);
+	}
+
+	&:where(:has(h1)) h2,
+	&:where(:has(h2):not(:has(h1))) h3,
+	&:where(:has(h3):not(:has(h1, h2))) h4,
+	&:where(:has(h4):not(:has(h1, h2, h3))) h5,
+	&:where(:has(h5):not(:has(h1, h2, h3, h4))) h6 {
+		font-size: var(--font-size-xl);
+	}
+
+	&:where(:has(h1, h2)) h3,
+	&:where(:has(h2, h3):not(:has(h1))) h4,
+	&:where(:has(h3, h4):not(:has(h1, h2))) h5,
+	&:where(:has(h4, h5):not(:has(h1, h2, h3))) h6 {
+		font-size: var(--font-size-l);
+	}
+}
+
+.slide {
+	h1,
+	> header > h1 {
+		margin: 0;
+		margin-bottom: 1.5rem;
+		font-size: calc(3 * var(--slide-base-font-size, 1rem));
+
+	}
+
+	> header {
+		text-align: center;
+		margin-bottom: 1em;
+	}
+}
+
+/* Header slides, not whole deck cover */
+header.slide:where(section > header) {
+	--overlay-color: var(--color-accent-1);
+	--background: radial-gradient(transparent, var(--overlay-color) 30%), var(--cover-image) center / cover;
+	--fallback-background: linear-gradient(to bottom right var(--in-oklch,),
+			var(--color-magenta),
+				var(--color-aqua),
+					var(--color-green),
+				var(--color-aqua),
+			var(--color-magenta));
+	background: var(--background, var(--fallback-background));
+	background-blend-mode: hue;
+
+	> h1 {
+		margin: auto;
+		padding: .5em .7em;
+		color-scheme: dark;
+		background: canvas;
+		color: canvastext;
+		text-align: center;
+		font-size: var(--font-size-3xl);
+		line-height: 1.2;
+		font-weight: 800;
+	}
+
+	/* Nested sections */
+	&:where(section section *) {
+		--fallback-background: linear-gradient(to bottom right var(--in-oklch,),
+			var(--color-green),
+				var(--color-aqua),
+					var(--color-yellow),
+				var(--color-aqua),
+			var(--color-green));
+		--overlay-color: var(--color-accent-2);
+	}
+}

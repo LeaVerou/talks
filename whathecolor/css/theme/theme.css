@@ -1,0 +1,9 @@
+/* (To-be) default Inspire.js theme */
+
+@import url("https://live-colors.verou.me/dist/index.css");
+@import url("tokens.css");
+@import url("base.css");
+@import url("partials/slide.css");
+@import url("partials/code.css");
+@import url("partials/tables.css");
+@import url("partials/forms.css");
