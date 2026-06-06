@@ -1,4 +1,4 @@
-@import url("https://live-colors.verou.me/dist/index.css");
+/* @import url("https://live-colors.verou.me/dist/index.css") layer(tints); */
 
 :root {
 	@supports (background: linear-gradient(in oklch, red, tan)) {
@@ -7,6 +7,17 @@
 }
 
 :root {
+	--color-red: oklch(54% 0.24 25);
+	--color-orange: oklch(74% 0.19 58);
+	--color-yellow: oklch(88% 0.2 95);
+	--color-green: oklch(69% 0.24 139);
+	--color-cyan: oklch(69% 0.15 205);
+	--color-blue: oklch(56% 0.24 260);
+	--color-indigo: oklch(50% 0.27 275);
+	--color-purple: oklch(57% 0.27 292);
+	--color-magenta: oklch(60% 0.25 10);
+	--color-gray: oklch(54% 0.04 250);
+
 	--font-sans: Inter, "Helvetica Neue", Helvetica, system-ui, sans-serif;
 	--font-serif: Vollkorn, "Hoefler Text", Garamond, serif;
 	--font-cursive: Zapfino, "Apple Chancery", BrushScriptMT, cursive;
@@ -23,7 +34,7 @@
 	/*
 	 * Colors by semantic purpose
 	 */
-	--color-accent-1: var(--color-aqua);
+	--color-accent-1: var(--color-cyan);
 	--color-accent-2: var(--color-magenta);
 	--color-accent-3: var(--color-green);
 	--color-accent-4: var(--color-orange);

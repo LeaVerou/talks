@@ -21,15 +21,20 @@ table {
 	thead th {
 		vertical-align: bottom;
 		padding: .3em .5em;
-		font-size: var(--font-size-s);
 		color: var(--color-neutral-30);
 		border-block-end: var(--ui-border-l);
+		font-weight: 500;
+		font-size: var(--font-size-s);
 	}
 
 	tbody {
 		th,
 		td {
 			border-bottom: var(--ui-border);
+		}
+
+		th {
+			border-inline-end: var(--ui-border-s);
 		}
 
 		td {
