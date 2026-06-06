@@ -1,5 +1,6 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1/font/bootstrap-icons.css");
 @import url("client_modules/@inspirejs/core/inspire.css");
+@import url("css/theme/tokens.css");
 @import url("css/theme/theme.css");
 @import url("css/fonts.css");
 @import url("css/theme.css");
@@ -18,30 +19,6 @@
 	--p3-cyan: color(display-p3 0 1 1);
 	--p3-magenta: color(display-p3 1 0 1);
 	--p3-yellow: color(display-p3 1 1 0);
-
-	/* Tailwind key colors */
-	--tw-red: oklch(57.7% 0.245 27.325);
-	--tw-orange: oklch(64.6% 0.222 41.116);
-	--tw-amber: oklch(82.8% 0.189 84.429);
-	--tw-yellow: oklch(85.2% 0.199 91.936);
-	--tw-lime: oklch(84.1% 0.238 128.85);
-	--tw-green: oklch(72.3% 0.219 149.58);
-	--tw-emerald: oklch(76.5% 0.177 163.22);
-	--tw-teal: oklch(77.7% 0.152 181.91);
-	--tw-cyan: oklch(78.9% 0.154 211.53);
-	--tw-sky: oklch(68.5% 0.169 237.32);
-	--tw-blue: oklch(54.6% 0.245 262.88);
-	--tw-indigo: oklch(51.1% 0.262 276.97);
-	--tw-violet: oklch(54.1% 0.281 293.01);
-	--tw-purple: oklch(55.8% 0.288 302.32);
-	--tw-fuchsia: oklch(66.7% 0.295 322.15);
-	--tw-pink: oklch(59.2% 0.249 0.584);
-	--tw-rose: oklch(58.6% 0.253 17.585);
-
-	--tw-stone: oklch(55.3% 0.013 58.071);
-	--tw-slate: oklch(55.4% 0.046 257.42);
-	--tw-zinc: oklch(44.2% 0.017 285.79);
-	--tw-gray: oklch(37.3% 0.034 259.73);
 }
 
 @function --avoid-range(--n <number>, --min <number>, --max <number>) returns <number> {
@@ -159,6 +136,55 @@
 				color: inherit;
 				opacity: .5;
 			}
+		}
+	}
+}
+
+:where(color-picker) {
+	min-width: 70%;
+	min-height: 70%;
+}
+
+#not-as-pictured {
+	display: grid;
+	grid: 1fr / 1fr;
+	align-items: center;
+	justify-items: center;
+	background: var(--color-cyan);
+
+	img {
+		grid-area: 1 / 1;
+		/* position: absolute;
+		top: calc(2em * sibling-index());
+		left: calc(2em * sibling-index()); */
+		margin: 1em;
+		box-shadow: .1em .1em 1em rgba(0,0,0,.8);
+		max-width: 80%;
+
+		&:nth-child(odd) {
+			rotate: 2deg;
+
+		}
+
+		&:nth-child(even) {
+			rotate: -1deg;
+
+		}
+
+		&:nth-child(3n + 3) {
+			justify-self: end;
+		}
+
+		&:nth-child(3n + 2) {
+			justify-self: start;
+		}
+
+		&:nth-child(5n + 3) {
+			align-self: end;
+		}
+
+		&:nth-child(5n + 4) {
+			align-self: start;
 		}
 	}
 }

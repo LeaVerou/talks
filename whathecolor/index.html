@@ -12,7 +12,7 @@
 	<script src="talk-sync.js"></script>
 	<script src="talk.js" type="module"></script>
 </head>
-<body class="language-css" data-markdown-elements="details.notes, .md, .md-children > *, .md-gc > * > *, md-ggc > * > * > *">
+<body class="language-css" data-markdown-elements="details.notes, .md, .md-children > :not(.no-md)">
 
 <header class="slide dont-resize" id="intro">
 	<div class="raining-words">
@@ -55,6 +55,59 @@
 		Why do we need all of these? What are they good for? Should I care?
 	</details>
 </header>
+
+<article class="slide">
+	<color-picker color="oklch(50% 0 0)"></color-picker>
+
+	<details class="notes">
+		Or maybe you tried to use these new color spaces and were baffled at the result.
+		Why does changing the lightness not seem to work for certain values?
+		Shouldn't 0 be black and 100 be white? Why are we getting these extremely bright colors instead?
+
+		TODO: Make the slider automatically do:
+		L: 100% (show white)
+		L: 0% (show black)
+		Increase C
+		L: 100% (wtf?!)
+	</details>
+</article>
+
+<article class="slide">
+	<img src="images/mbp-vs-print.jpg" alt="">
+	<details class="notes">
+		But even beyond CSS, this talk will help you figure out answers to longstanding questions such as "why are printed colors so washed out when they looked lovely on my screen"?
+	</details>
+</article>
+
+</article>
+<article class="slide">
+	<img src="images/highlight.jpg" alt="">
+	<details class="notes">
+		Or why does it seem so impossible to recreate certain colors with a color picker on a screen?
+	</details>
+</article>
+
+<article class="slide" id="not-as-pictured">
+	<img src="images/color-not-as-pictured-1.png" alt="">
+	<img src="images/color-not-as-pictured-2.png" alt="" class="delayed">
+	<img src="images/color-not-as-pictured-3.png" alt="" class="delayed">
+	<img src="images/color-not-as-pictured-4.png" alt="" class="delayed">
+	<img src="images/color-not-as-pictured-5.png" alt="" class="delayed">
+
+	<details class="notes">
+		Or why was the t-shirt I bought a different color than what it looked like on Amazon?
+	</details>
+</article>
+
+<article class="cyan slide" id="turquoise-dress">
+	<img src="images/turquoise-dress.png" alt="" class="browser">
+	<details class="notes">
+		The opposite happens too.
+		This is what this dress looked like on Amazon.
+		Its real color is way brighter and more vibrant.
+		This talk will explain why this was not their fault — this color cannot actually be reliably displayed on a screen!
+	</details>
+</article>
 
 <article class="slide dont-resize" id="failed-oklch-scales">
 	<style>
@@ -99,9 +152,9 @@
 		</thead>
 		<tbody>
 			<script>
-				for (let color in TwColors) {
+				for (let color in colors.accents) {
 					document.write(`
-						<tr style="--color: var(--tw-${color})">
+						<tr style="--color: var(--color-${color})">
 							<th><div class="swatch">${color}</div></th>
 							${ `<td><div class="swatch"></div></td>
 							 `.repeat(7) }
@@ -111,6 +164,13 @@
 			</script>
 		</tbody>
 	</table>
+</article>
+
+<article class="slide">
+	<article class="callout">
+		<h2>The callout problem</h2>
+		<p>Callouts are such an excellent example for design systems, because they use so many different color tokens, and they have so many variations.</p>
+	</article>
 </article>
 
 <article class="slide">

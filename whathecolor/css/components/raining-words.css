@@ -1,0 +1,57 @@
+
+@keyframes raining-words {
+	from {
+		translate: 0 0;
+	}
+
+	50% {
+		translate: calc(sign(mod(sibling-index(), 2) - 0.5) * 1em * mod(sibling-index(), 4)) calc(50vh + .5lh);
+	}
+
+	to {
+		translate: 0 calc(100vh + 1lh);
+	}
+}
+
+.raining-words {
+	--period: 7;
+	--duration: 5s;
+
+	display: flex;
+	justify-content: space-around;
+	align-items: end;
+	width: 100%;
+	contain: inline-size;
+	position: absolute;
+	bottom: 100%;
+
+	> * {
+		display: flex;
+		justify-content: center;
+		flex-basis: 0;
+		flex-grow: 0;
+		flex-shrink: 1;
+		width: 0;
+		white-space: nowrap;
+		animation: raining-words var(--duration) infinite both linear;
+		animation-delay: calc(
+			var(--extra-delay, 0s) +
+			-100ms * mod(sibling-index(), 2) +
+			-100ms * mod(sibling-index(), 3) +
+			-100ms * mod(sibling-index(), 5) +
+			var(--duration) * -1/var(--period) * (
+				calc(var(--period) / 2)
+					- abs(
+						mod(
+							sibling-index() - 1,
+							var(--period)) - calc(var(--period) / 2
+						)
+					)
+				)
+			);
+	}
+
+	& ~ & {
+		--extra-delay: calc(-1 * var(--duration) / 2);
+	}
+}

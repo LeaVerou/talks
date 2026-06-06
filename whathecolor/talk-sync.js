@@ -1,5 +1,6 @@
 /* Tailwind key colors */
-var TwColors = {
+var colors = {};
+colors.tw = {
 	red: "oklch(57.7% 0.245 27.325)",
 	orange: "oklch(64.6% 0.222 41.116)",
 	// amber: "oklch(82.8% 0.189 84.429)",
@@ -24,6 +25,10 @@ var TwColors = {
 	gray: "oklch(37.3% 0.034 259.73)"
 };
 
-for (let color in TwColors) {
-	document.documentElement.style.setProperty(`--tw-${color}`, TwColors[color]);
+for (let color in colors.tw) {
+	document.documentElement.style.setProperty(`--tw-${color}`, colors.tw[color]);
 }
+
+colors.accents = Object.fromEntries(
+	["gray", "red", "orange", "yellow", "green", "cyan", "blue", "indigo", "purple", "magenta"]
+		.map(hue => [hue, getComputedStyle(document.documentElement).getPropertyValue(`--color-${hue}`).trim()]));
