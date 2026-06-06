@@ -3,16 +3,7 @@
 		"whathecolor"
 	],
 	"scripts": {
-		"build:css": "npx postcss \"**/*.postcss\" --base . --dir . --ext .css",
-		"build": "npm run build:css",
-		"watch:css": "npx postcss \"**/*.postcss\" --base . --dir . --ext .css --watch",
-		"watch": "npm run watch:css",
 		"prepare": "npm run prepare --if-present --workspaces"
-	},
-	"devDependencies": {
-		"postcss": "^8",
-		"postcss-cli": "^9",
-		"postcss-nesting": "^10"
 	},
 	"dependencies": {
 		"inspirejs.org": "^3.0.0",
