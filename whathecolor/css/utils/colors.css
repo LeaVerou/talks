@@ -1,0 +1,47 @@
+
+.red {
+	--accent-color: var(--color-red);
+}
+
+.orange {
+	--accent-color: var(--color-orange);
+}
+
+.yellow {
+	--accent-color: var(--color-yellow);
+}
+
+.green {
+	--accent-color: var(--color-green);
+}
+
+.cyan {
+	--accent-color: var(--color-cyan);
+}
+
+.blue {
+	--accent-color: var(--color-blue);
+}
+
+.indigo {
+	--accent-color: var(--color-indigo);
+}
+
+.purple {
+	--accent-color: var(--color-purple);
+}
+
+.magenta {
+	--accent-color: var(--color-magenta);
+}
+
+.gray {
+	--accent-color: var(--color-gray);
+}
+
+.red, .orange, .yellow, .green, .cyan, .blue, .indigo, .purple, .magenta, .gray {
+	&.slide {
+		background: var(--accent-color);
+		color: contrast-color(var(--accent-color));
+	}
+}

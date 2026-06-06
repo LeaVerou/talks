@@ -188,3 +188,103 @@
 		}
 	}
 }
+
+#displays {
+
+
+	figure {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+		img {
+			background: linear-gradient(var(--color-displayed)) var(--display) no-repeat;
+		}
+
+		/* Subpixel geometry */
+		&::after {
+			content: "";
+			position: absolute;
+			top: 55%;
+			left: 15%;
+			translate: 50% -50%;
+			border: .4em solid;
+			border-radius: 50%;
+			width: 10em;
+			aspect-ratio: 1;
+			background: var(--subpixel-geometry);
+			background-size: var(--subpixel-geometry-tile-x) var(--subpixel-geometry-tile-y);
+			background-color: black;
+		}
+
+		figcaption {
+			justify-self: flex-end;
+			text-align: center;
+			font-size: var(--font-size-xs);
+			font-weight: 500;
+		}
+	}
+
+	.display {
+		--color-displayed-r: color(from var(--color-displayed) var(--rgb-space, srgb) r 0 0);
+		--color-displayed-g: color(from var(--color-displayed) var(--rgb-space, srgb) 0 g 0);
+		--color-displayed-b: color(from var(--color-displayed) var(--rgb-space, srgb) 0 0 b);
+	}
+
+	.crt {
+		--display: 60% 60% / 80% 80%;
+
+		--size: calc((0.5vw + 0.5vh) * var(--scale, 1));
+		--radius: calc(var(--size) * 1.01) var(--size);
+		--pitch-x: calc(2.5 * var(--size));
+		--pitch-y: calc(1.75 * var(--size));
+
+		--r: radial-gradient(var(--radius), var(--color-displayed-r) 0 50%, transparent 90%);
+		--g: radial-gradient(var(--radius), var(--color-displayed-g) 0 59%, transparent 85%);
+		--b: radial-gradient(var(--radius), var(--color-displayed-b) 0 58%, transparent 90%);
+
+		--subpixel-geometry:
+			var(--r) 0 0,
+			var(--g) var(--pitch-x) 0,
+			var(--b) calc(2 * var(--pitch-x)) 0,
+
+			var(--b) calc(.5 * var(--pitch-x)) var(--pitch-y),
+			var(--r) calc(1.5 * var(--pitch-x)) var(--pitch-y),
+			var(--g) calc(2.5 * var(--pitch-x)) var(--pitch-y);
+
+		--subpixel-geometry-tile-x: calc(3 * var(--pitch-x));
+		--subpixel-geometry-tile-y: calc(2 * var(--pitch-y));
+	}
+
+	.lcd {
+		--size: calc((0.5vw + 0.5vh) * var(--scale, 1));
+		--display: 50% 2% / 96% 75%;
+		--rgb-space: display-p3;
+		--subpixel-geometry: repeating-linear-gradient(to right,
+			var(--color-displayed-r) 0 var(--size),
+			transparent,
+			var(--color-displayed-g) calc(var(--size) * 1.05) calc(var(--size) * 2),
+			transparent,
+			var(--color-displayed-b) calc(var(--size) * 2.05) calc(var(--size) * 3),
+			transparent calc(var(--size) * 3.05)
+			) 0 0;
+		--subpixel-geometry-tile-size-x: calc(3em * var(--scale, 1));
+		--subpixel-geometry-tile-size-y: 100%;
+	}
+
+	color-picker {
+		display: contents;
+		margin-top: auto;
+
+		&::part(color-space),
+		&::part(swatch) {
+			display: none;
+		}
+
+		&::part(sliders) {
+			flex-direction: row;
+			gap: 1em;
+		}
+	}
+}

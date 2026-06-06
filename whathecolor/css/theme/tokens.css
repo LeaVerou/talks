@@ -46,6 +46,7 @@
 	--ui-border-l: 1px solid var(--color-neutral-70);
 	--ui-border: var(--ui-border-m);
 
+	--font-size-xs: .7rem;
 	--font-size-s: .85rem;
 	--font-size-m: 1rem;
 	--font-size-l: 1.25rem;

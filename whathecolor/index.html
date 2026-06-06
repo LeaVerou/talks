@@ -104,10 +104,56 @@
 	<details class="notes">
 		The opposite happens too.
 		This is what this dress looked like on Amazon.
-		Its real color is way brighter and more vibrant.
-		This talk will explain why this was not their fault — this color cannot actually be reliably displayed on a screen!
+		Its real color is way brighter and more vibrant, right?
+		This talk will explain why this was not their fault — bright turquoise is a notoriously hard color to reproduce on a screen — it's not just fluorescent colors.
 	</details>
 </article>
+
+<section>
+	<header class="slide">
+		<h2>Device RGB</h2>
+
+		<details class="notes">
+			To understand all of this, we first need to go back to the beginning.
+		</details>
+	</header>
+
+	<article class="slide" id="displays">
+		<div class="flex">
+			<figure class="crt display">
+				<img src="images/crt.png" alt="">
+				<figcaption>First color CRT (1954)</figcaption>
+			</figure>
+			<figure class="lcd display">
+				<img src="images/lcd.png" alt="">
+				<figcaption>Modern high-end P3 LCD</figcaption>
+			</figure>
+
+		</div>
+		<div class="flex">
+			<color-picker color="hsl(0 100 100)" space="srgb" oncolorchange="this.closest('.slide').style.setProperty('--color-displayed', this.color)"></color-picker>
+			<input type="range" oninput="this.closest('.slide').style.setProperty('--scale', this.value / 100)" min="20" max="200" value="100">
+		</div>
+
+		<details class="notes">
+			Red, green and blue is how our computer screens produce color.
+						Imagine three lightbulbs.
+			One red, one green, and one blue, each having a dimmer.
+			This is basically how pixels are made.
+			And this mechanism has remained largely unchanged since the first color screens in the 50s.
+			We just got more levels for these dimmers, and their max brightness got higher.
+			But ultimately, every pixel on your screen is still three teeny tiny dimmable lightbulbs.
+
+			Now, there are A LOT of these lightbulbs in digital screens.
+			Hundreds of thousands in early screens, several million in modern ones.
+			Early computers were not very powerful, so a computation that applied to every single pixel, was very expensive.
+		</details>
+	</article>
+
+	<article class="slide">
+
+	</article>
+</section>
 
 <article class="slide dont-resize" id="failed-oklch-scales">
 	<style>
