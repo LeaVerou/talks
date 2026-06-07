@@ -5,6 +5,7 @@
 @import url("css/fonts.css");
 @import url("css/theme.css");
 @import url("css/utils.css");
+@import url("client_modules/color-elements/src/color-slider/color-slider.css");
 
 @keyframes cover {
 	to {
@@ -190,9 +191,14 @@
 }
 
 #displays {
+	background: var(--color-neutral-95);
 
+	.display {
+		--color-displayed: color(var(--rgb-space, srgb) calc(var(--r) * var(--r-scale, 1)) calc(var(--g) * var(--g-scale, 1)) calc(var(--b) * var(--b-scale, 1)));
+		--color-displayed-r: color(var(--rgb-space, srgb) calc(var(--r) * var(--r-scale, 1)) 0 0);
+		--color-displayed-g: color(var(--rgb-space, srgb) 0 calc(var(--g) * var(--g-scale, 1)) 0);
+		--color-displayed-b: color(var(--rgb-space, srgb) 0 0 calc(var(--b) * var(--b-scale, 1)));
 
-	figure {
 		position: relative;
 		display: flex;
 		flex-direction: column;
@@ -226,12 +232,6 @@
 		}
 	}
 
-	.display {
-		--color-displayed-r: color(from var(--color-displayed) var(--rgb-space, srgb) r 0 0);
-		--color-displayed-g: color(from var(--color-displayed) var(--rgb-space, srgb) 0 g 0);
-		--color-displayed-b: color(from var(--color-displayed) var(--rgb-space, srgb) 0 0 b);
-	}
-
 	.crt {
 		--display: 60% 60% / 80% 80%;
 
@@ -240,18 +240,18 @@
 		--pitch-x: calc(2.5 * var(--size));
 		--pitch-y: calc(1.75 * var(--size));
 
-		--r: radial-gradient(var(--radius), var(--color-displayed-r) 0 50%, transparent 90%);
-		--g: radial-gradient(var(--radius), var(--color-displayed-g) 0 59%, transparent 85%);
-		--b: radial-gradient(var(--radius), var(--color-displayed-b) 0 58%, transparent 90%);
+		--dot-r: radial-gradient(var(--radius), var(--color-displayed-r) 0 50%, transparent 90%);
+		--dot-g: radial-gradient(var(--radius), var(--color-displayed-g) 0 59%, transparent 85%);
+		--dot-b: radial-gradient(var(--radius), var(--color-displayed-b) 0 58%, transparent 90%);
 
 		--subpixel-geometry:
-			var(--r) 0 0,
-			var(--g) var(--pitch-x) 0,
-			var(--b) calc(2 * var(--pitch-x)) 0,
+			var(--dot-r) 0 0,
+			var(--dot-g) var(--pitch-x) 0,
+			var(--dot-b) calc(2 * var(--pitch-x)) 0,
 
-			var(--b) calc(.5 * var(--pitch-x)) var(--pitch-y),
-			var(--r) calc(1.5 * var(--pitch-x)) var(--pitch-y),
-			var(--g) calc(2.5 * var(--pitch-x)) var(--pitch-y);
+			var(--dot-b) calc(.5 * var(--pitch-x)) var(--pitch-y),
+			var(--dot-r) calc(1.5 * var(--pitch-x)) var(--pitch-y),
+			var(--dot-g) calc(2.5 * var(--pitch-x)) var(--pitch-y);
 
 		--subpixel-geometry-tile-x: calc(3 * var(--pitch-x));
 		--subpixel-geometry-tile-y: calc(2 * var(--pitch-y));
@@ -273,18 +273,42 @@
 		--subpixel-geometry-tile-size-y: 100%;
 	}
 
-	color-picker {
-		display: contents;
-		margin-top: auto;
+	label:has(> .color-slider) {
+		flex: 1;
+	}
 
-		&::part(color-space),
-		&::part(swatch) {
-			display: none;
+	.color-slider {
+		--slider-gradient: linear-gradient(to right, black, var(--max-color));
+		--slider-height: .5em;
+		--slider-thumb-height: 1em;
+		--color: white;
+
+		&[name="r"] {
+			--color: color(display-p3 var(--r) 0 0);
 		}
+		&[name="g"] {
+			--color: color(display-p3 0 var(--g) 0);
+		}
+		&[name="b"] {
+			--color: color(display-p3 0 0 var(--b));
+		}
+	}
 
-		&::part(sliders) {
-			flex-direction: row;
-			gap: 1em;
+	label {
+		/* font-size: var(--font-size-s); */
+		text-transform: uppercase;
+		font-weight: bold;
+		color: oklch(from var(--max-color) clamp(0, l, 0.6) calc(c * .7) h);
+		--max-color: var(--color-neutral);
+
+		&.r {
+			--max-color: var(--p3-red);
+		}
+		&.g {
+			--max-color: var(--p3-green);
+		}
+		&.b {
+			--max-color: var(--p3-blue);
 		}
 	}
 }
