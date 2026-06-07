@@ -1,6 +1,6 @@
 @function --window-button(--color, --offset) {
 	result: radial-gradient(circle closest-side,
-		oklch(from var(--color) clamp(0.7, l, 0.85) clamp(0, c, 0.2) h) 90%,
+		oklch(from var(--color) clamp(0.7, l, 0.85) c h) 90%,
 		oklch(from var(--color) calc(l - 0.2) c h) 98%,
 		transparent 99%) var(--offset) 0 / var(--button-size) var(--button-size) no-repeat;
 }
@@ -9,17 +9,20 @@
 	--button-size: .5em;
 	--button-spacing: .5;
 	--window-color: var(--color-neutral-90);
-	--img-address-bar: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" ry="50vh" fill="white" fill-opacity="0.6"/></svg>');
-	--address-bar-x: calc(1em + var(--button-size) * (1 + var(--button-spacing)) * 3);
+	--img-address-bar: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" ry="50vh" fill="white" fill-opacity="0.7"/></svg>');
+	--address-bar-x: calc(.5em + var(--button-size) * (1 + var(--button-spacing)) * 3);
 
-	border: 1rem solid transparent;
-	padding-top: 5rem;
+	border: .5rem solid transparent;
+	padding-top: calc(1lh + .5em);
+
 
 	background:
 		--window-button(var(--color-red), 0),
 		--window-button(var(--color-yellow), calc(var(--button-size) * (1 + var(--button-spacing)))),
 		--window-button(var(--color-green), calc(var(--button-size) * (1 + var(--button-spacing)) * 2)),
-		var(--img-address-bar) var(--address-bar-x) .3em / calc(99% - var(--address-bar-x)) 1.1em no-repeat;
+		var(--img-address-bar) var(--address-bar-x) 0 / calc(99% - var(--address-bar-x)) 1lh no-repeat,
+		linear-gradient(white) content-box no-repeat,
+		none;
 	background-color: var(--window-color);
 
 	/* 1px ring + soft, multi-layered elevation so the window appears to float */
@@ -31,8 +34,16 @@
 
 	border-radius: .5em;
 	margin: 1em;
+	box-sizing: content-box;
 	max-width: -webkit-fill-available;
 	max-width: stretch;
 	max-height: -webkit-fill-available;
 	max-height: stretch;
+	line-height: 1;
+
+	:where(.slide > &:only-child) {
+		/* width: 80%; */
+		aspect-ratio: calc(1vw / 1vh);
+
+	}
 }

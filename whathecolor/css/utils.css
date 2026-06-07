@@ -51,4 +51,12 @@
 	> * {
 		flex: 1;
 	}
+
+	> .fr2 {
+		flex: 2;
+	}
+}
+
+.big {
+	font-size: var(--font-size-2xl);
 }

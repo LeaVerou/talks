@@ -44,4 +44,8 @@
 		background: var(--accent-color);
 		color: contrast-color(var(--accent-color));
 	}
+
+	&:is(span) {
+		color: var(--accent-color);
+	}
 }

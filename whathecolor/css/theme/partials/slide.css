@@ -21,6 +21,10 @@
 	&:where(:not(:has(h1, h2, h3, h4, h5))) h6 {
 		text-align: center;
 		font-size: var(--font-size-2xl);
+
+		&:where(header.slide *) {
+			font-size: var(--font-size-3xl);
+		}
 	}
 
 	&:where(:has(h1)) h2,
@@ -56,37 +60,5 @@
 
 /* Header slides, not whole deck cover */
 header.slide:where(section > header) {
-	--overlay-color: var(--color-accent-1);
-	--background: radial-gradient(transparent, var(--overlay-color) 30%), var(--cover-image) center / cover;
-	--fallback-background: linear-gradient(to bottom right var(--in-oklch,),
-			var(--color-magenta),
-				var(--color-cyan),
-					var(--color-green),
-				var(--color-cyan),
-			var(--color-magenta));
-	background: var(--background, var(--fallback-background));
-	background-blend-mode: hue;
-
-	> h1 {
-		margin: auto;
-		padding: .5em .7em;
-		color-scheme: dark;
-		background: canvas;
-		color: canvastext;
-		text-align: center;
-		font-size: var(--font-size-3xl);
-		line-height: 1.2;
-		font-weight: 800;
-	}
-
-	/* Nested sections */
-	&:where(section section *) {
-		--fallback-background: linear-gradient(to bottom right var(--in-oklch,),
-			var(--color-green),
-				var(--color-cyan),
-					var(--color-yellow),
-				var(--color-cyan),
-			var(--color-green));
-		--overlay-color: var(--color-accent-2);
-	}
+	color-scheme: dark;
 }

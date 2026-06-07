@@ -3,7 +3,7 @@
 html {
 	color-scheme: light dark;
 	background: var(--img-checkerboard) var(--color-neutral-95);
-	font: var(--font-weight) 100%/var(--lh-body) var(--font-body);
+	font: var(--font-weight) var(--slide-base-font-size) / var(--lh-body) var(--font-body);
 	font-synthesis: none;
 	font-kerning: normal;
 	accent-color: var(--color-accent-1);
