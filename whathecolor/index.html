@@ -153,7 +153,173 @@
 
 			Now, there are A LOT of these lightbulbs in digital screens.
 			Hundreds of thousands in early screens, several million in modern ones.
+		</details>
+	</article>
+
+	<article class="slide dont-resize">
+		<div class="flex" style="gap: 1em">
+			<color-swatch size="large" style="min-width: 10em">
+				<input value="rgb(255, 0, 140)" />
+			</color-swatch>
+			<div>
+				<table class="fr2">
+					<style>
+						@scope {
+							:scope {
+								font-size: 50%;
+								align-self: start;
+							}
+
+							td {
+								font-family: var(--font-monospace);
+							}
+
+							tr {
+								color: oklch(from var(--accent-color) clamp(0, l, .5) c h);
+							}
+						}
+					</style>
+					<thead>
+						<tr>
+							<th></th>
+							<th>Decimal</th>
+							<th>Binary</th>
+							<th class="delayed" data-index="2">Hex</th>
+						</tr>
+					</thead>
+					<tr class="red">
+						<th>R</th>
+						<td>255</td>
+						<td>1111&nbsp;1111</td>
+						<td class="delayed" data-index="2">0xFF</td>
+					</tr>
+					<tr class="green">
+						<th>G</th>
+						<td>0</td>
+						<td>0000&nbsp;0000</td>
+						<td class="delayed" data-index="2">0x00</td>
+					</tr>
+					<tr class="blue">
+						<th>B</th>
+						<td>140</td>
+						<td>1000&nbsp;1100</td>
+						<td class="delayed" data-index="2">0x8C</td>
+					</tr>
+				</table>
+				<div class="delayed" data-index="10" style="font-size: var(--font-size-2xl); white-space: nowrap;">
+					= <code style="background: none; padding: 0; font-weight: bold;">#<span class="red">FF</span><span class="green">00</span><span class="blue">8C</span></code>
+				</div>
+			</div>
+			<table id="binary-to-hex" class="borders delayed">
+				<style>
+					@scope {
+						:scope {
+							font-size: 40%;
+
+							caption {
+								font-size: 80%;
+								white-space: nowrap;
+							}
+
+							tbody {
+								font-family: var(--font-monospace);
+
+								th, td {
+									padding-block: 0;
+									font-weight: inherit;
+								}
+
+								td {
+									font-weight: bold;
+								}
+							}
+
+						}
+
+					}
+				</style>
+				<caption>Binary&thinsp;→&thinsp;Hex</caption>
+				<!-- <thead>
+					<tr>
+						<th>Binary</th>
+						<th>Hex</th>
+					</tr>
+				</thead> -->
+				<tbody>
+					<tr>
+						<th>0000</th>
+						<td>0</td>
+					</tr>
+					<tr>
+						<th>0001</th>
+						<td>1</td>
+					</tr>
+					<tr>
+						<th>0010</th>
+						<td>2</td>
+					</tr>
+					<tr>
+						<th>0011</th>
+						<td>3</td>
+					</tr>
+					<tr>
+						<th>0100</th>
+						<td>4</td>
+					</tr>
+					<tr>
+						<th>0101</th>
+						<td>5</td>
+					</tr>
+					<tr>
+						<th>0110</th>
+						<td>6</td>
+					</tr>
+					<tr>
+						<th>0111</th>
+						<td>7</td>
+					</tr>
+					<tr>
+						<th>1000</th>
+						<td>8</td>
+					</tr>
+					<tr>
+						<th>1001</th>
+						<td>9</td>
+					</tr>
+					<tr>
+						<th>1010</th>
+						<td>A</td>
+					</tr>
+					<tr>
+						<th>1011</th>
+						<td>B</td>
+					</tr>
+					<tr>
+						<th>1100</th>
+						<td>C</td>
+					</tr>
+					<tr>
+						<th>1101</th>
+						<td>D</td>
+					</tr>
+					<tr>
+						<th>1110</th>
+						<td>E</td>
+					</tr>
+					<tr>
+						<th>1111</th>
+						<td>F</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<details class="notes">
 			Early computers were not very powerful, so a computation that applied to every single pixel, was very expensive.
+			So when we needed to specify a color, it had to be as close to the metal as possible:
+			we'd specify the levels of the dimmers directly.
+			In fact, we'd go one step further and provide them **directly in binary** — well, in hex which is just a convenient way to write binary numbers!
+			Remind you of anything?
 		</details>
 	</article>
 
