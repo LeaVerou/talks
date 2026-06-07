@@ -13,3 +13,11 @@ export function textToSvg (text) {
 	`], { type: "image/svg+xml" });
 	return URL.createObjectURL(svg);
 }
+
+Inspire.plugins.register({
+	vue: {
+		test: "[v-app]",
+		base: new URL("./plugins/", import.meta.url),
+	},
+});
+
