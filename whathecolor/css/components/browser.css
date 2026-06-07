@@ -15,12 +15,14 @@
 	border: .5rem solid transparent;
 	padding-top: calc(1lh + .5em);
 
+	--img-url-layer: var(--img-url) calc(var(--address-bar-x) + .5em) 0 / auto 1lh no-repeat;
 
 	background:
 		--window-button(var(--color-red), 0),
 		--window-button(var(--color-yellow), calc(var(--button-size) * (1 + var(--button-spacing)))),
 		--window-button(var(--color-green), calc(var(--button-size) * (1 + var(--button-spacing)) * 2)),
-		var(--img-address-bar) var(--address-bar-x) 0 / calc(99% - var(--address-bar-x)) 1lh no-repeat,
+		var(--img-url-layer, none),
+		var(--img-address-bar) var(--address-bar-x) 0 / calc(99% - var(--address-bar-x)) 1.1lh no-repeat,
 		linear-gradient(white) content-box no-repeat,
 		none;
 	background-color: var(--window-color);
@@ -43,7 +45,6 @@
 
 	:where(.slide > &:only-child) {
 		/* width: 80%; */
-		aspect-ratio: calc(1vw / 1vh);
-
+		aspect-ratio: calc((100vw - 2em) / (100vh - 2em));
 	}
 }

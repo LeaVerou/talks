@@ -312,3 +312,7 @@
 		}
 	}
 }
+
+.slide:has(> .browser:only-child) {
+	padding: 0;
+}
