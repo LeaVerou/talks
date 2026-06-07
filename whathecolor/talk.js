@@ -1,4 +1,4 @@
-import "../shared/js/prism.js";
+import "./prism.js";
 import Inspire from "inspirejs.org";
 import "color-elements";
 
