@@ -1,11 +1,12 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1/font/bootstrap-icons.css");
-@import url("client_modules/@inspirejs/core/inspire.css");
-@import url("css/theme/tokens.css");
-@import url("css/theme/theme.css");
-@import url("css/fonts.css");
-@import url("css/theme.css");
-@import url("css/utils.css");
-@import url("client_modules/color-elements/src/color-slider/color-slider.css");
+@import url("client_modules/@inspirejs/core/inspire.css") layer(inspire);
+@import url("css/theme/tokens.css") layer(theme);
+@import url("css/theme/theme.css") layer(theme);
+@import url("css/fonts.css") layer(theme);
+@import url("css/theme.css") layer(theme);
+@import url("css/utils.css") layer(theme.utils);
+@import url("client_modules/color-elements/src/color-slider/color-slider.css") layer(theme.utils);
+@import url("css/displays.css");
 
 @keyframes cover {
 	to {
@@ -190,87 +191,21 @@
 	}
 }
 
-#displays {
+.displays.slide {
 	background: var(--color-neutral-95);
 
+	.flex {
+		--color-displayed: color(var(--rgb-space, srgb) var(--r) var(--g) var(--b));
+		--color-displayed-r: color(var(--rgb-space, srgb) var(--r) 0 0);
+		--color-displayed-g: color(var(--rgb-space, srgb) 0 var(--g) 0);
+		--color-displayed-b: color(var(--rgb-space, srgb) 0 0 var(--b));
+	}
+
 	.display {
-		--color-displayed: color(var(--rgb-space, srgb) calc(var(--r) * var(--r-scale, 1)) calc(var(--g) * var(--g-scale, 1)) calc(var(--b) * var(--b-scale, 1)));
-		--color-displayed-r: color(var(--rgb-space, srgb) calc(var(--r) * var(--r-scale, 1)) 0 0);
-		--color-displayed-g: color(var(--rgb-space, srgb) 0 calc(var(--g) * var(--g-scale, 1)) 0);
-		--color-displayed-b: color(var(--rgb-space, srgb) 0 0 calc(var(--b) * var(--b-scale, 1)));
-
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-
-		img {
-			background: linear-gradient(var(--color-displayed)) var(--display) no-repeat;
-		}
-
-		/* Subpixel geometry */
-		&::after {
-			content: "";
-			position: absolute;
-			top: 55%;
-			left: 15%;
-			translate: 50% -50%;
-			border: .4em solid;
-			border-radius: 50%;
-			width: 10em;
-			aspect-ratio: 1;
-			background: var(--subpixel-geometry);
-			background-size: var(--subpixel-geometry-tile-x) var(--subpixel-geometry-tile-y);
-			background-color: black;
-		}
-
-		figcaption {
-			justify-self: flex-end;
-			text-align: center;
-			font-size: var(--font-size-xs);
-			font-weight: 500;
-		}
-	}
-
-	.crt {
-		--display: 60% 60% / 80% 80%;
-
-		--size: calc((0.5vw + 0.5vh) * var(--scale, 1));
-		--radius: calc(var(--size) * 1.01) var(--size);
-		--pitch-x: calc(2.5 * var(--size));
-		--pitch-y: calc(1.75 * var(--size));
-
-		--dot-r: radial-gradient(var(--radius), var(--color-displayed-r) 0 50%, transparent 90%);
-		--dot-g: radial-gradient(var(--radius), var(--color-displayed-g) 0 59%, transparent 85%);
-		--dot-b: radial-gradient(var(--radius), var(--color-displayed-b) 0 58%, transparent 90%);
-
-		--subpixel-geometry:
-			var(--dot-r) 0 0,
-			var(--dot-g) var(--pitch-x) 0,
-			var(--dot-b) calc(2 * var(--pitch-x)) 0,
-
-			var(--dot-b) calc(.5 * var(--pitch-x)) var(--pitch-y),
-			var(--dot-r) calc(1.5 * var(--pitch-x)) var(--pitch-y),
-			var(--dot-g) calc(2.5 * var(--pitch-x)) var(--pitch-y);
-
-		--subpixel-geometry-tile-x: calc(3 * var(--pitch-x));
-		--subpixel-geometry-tile-y: calc(2 * var(--pitch-y));
-	}
-
-	.lcd {
-		--size: calc((0.5vw + 0.5vh) * var(--scale, 1));
-		--display: 50% 2% / 96% 75%;
-		--rgb-space: display-p3;
-		--subpixel-geometry: repeating-linear-gradient(to right,
-			var(--color-displayed-r) 0 var(--size),
-			transparent,
-			var(--color-displayed-g) calc(var(--size) * 1.05) calc(var(--size) * 2),
-			transparent,
-			var(--color-displayed-b) calc(var(--size) * 2.05) calc(var(--size) * 3),
-			transparent calc(var(--size) * 3.05)
-			) 0 0;
-		--subpixel-geometry-tile-size-x: calc(3em * var(--scale, 1));
-		--subpixel-geometry-tile-size-y: 100%;
+		--color: var(--color-displayed);
+		--subpixel-r: color-mix(in srgb, var(--_red) calc(var(--r, 1) * 100%), black);
+		--subpixel-g: color-mix(in srgb, var(--_green) calc(var(--g, 1) * 100%), black);
+		--subpixel-b: color-mix(in srgb, var(--_blue) calc(var(--b, 1) * 100%), black);
 	}
 
 	label:has(> .color-slider) {
@@ -315,4 +250,70 @@
 
 .slide:has(> .browser:only-child) {
 	padding: 0;
+}
+
+.slide > .browser:first-child:has( + details.notes:last-child) {
+	width: 90%;
+	height: 100%;
+}
+
+#device-rgb-2 {
+	.display {
+		--color: color(display-p3 1 0 0.4);
+		--count: 8;
+		--display-img: linear-gradient(to right in srgb,
+			var(--_red) calc(100% / var(--count)),
+			var(--_yellow) 0 calc(100% / var(--count) * 2),
+			var(--_green) 0 calc(100% / var(--count) * 3),
+			var(--_cyan) 0 calc(100% / var(--count) * 4),
+			var(--_blue) 0 calc(100% / var(--count) * 5),
+			var(--_magenta) 0 calc(100% / var(--count) * 6),
+			var(--_gray) 0 calc(100% / var(--count) * 7),
+			var(--white, white) 0
+		);
+	}
+}
+
+#standardized-rgb {
+	.display {
+		--color: color(display-p3 1 0 0.4);
+
+		&.mba2013 {
+			--color: var(--_magenta);
+		}
+
+		img {
+			/* height: 2em; */
+			width: 5rem;
+			/* aspect-ratio: 1.65964566; */
+		}
+	}
+
+	thead tr:first-child {
+		th {
+			background: none;
+
+
+				border: none;
+
+		}
+
+		figure {
+			padding: 0;
+		}
+	}
+
+	td, thead th {
+		text-align: center;
+	}
+
+	td {
+		font-weight: 500;
+	}
+
+	.delayed.future {
+		&, * {
+			border: none;
+		}
+	}
 }

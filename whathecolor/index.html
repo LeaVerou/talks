@@ -12,7 +12,7 @@
 	<script src="talk-sync.js"></script>
 	<script src="talk.js" type="module"></script>
 </head>
-<body class="language-css" data-markdown-elements="details.notes, .md, .md-children > :not(.no-md)">
+<body class="xlanguage-css no-autosize no-prism" data-markdown-elements="details.notes, .md, .md-children > :not(.no-md)">
 
 <header class="slide dont-resize" id="intro">
 	<div class="raining-words">
@@ -111,14 +111,18 @@
 
 <section>
 	<header class="slide">
-		<h2>Device RGB</h2>
+		<h2>RGB</h2>
+		<h3 class="subtitle">
+			color spaces
+			<div class="red text delayed" style="margin-top: .4em; font: 70%/1.5 var(--font-handwritten)">(and why they suck)</div>
+		</h3>
 
 		<details class="notes">
 			To understand all of this, we first need to go back to the beginning.
 		</details>
 	</header>
 
-	<article class="slide" id="displays" v-app>
+	<article class="slide show-subpixels displays" id="displays" v-app>
 		<div class="flex" :style="{'--r': r/255, '--g': g/255, '--b': b/255, '--scale': scale / 100}">
 			<figure class="crt display">
 				<img src="images/crt.png" alt="">
@@ -150,9 +154,6 @@
 			And this mechanism has remained largely unchanged since the first color screens in the 50s.
 			We just got more levels for these dimmers, and their max brightness got higher.
 			But ultimately, every pixel on your screen is still three teeny tiny dimmable lightbulbs.
-
-			Now, there are A LOT of these lightbulbs in digital screens.
-			Hundreds of thousands in early screens, several million in modern ones.
 		</details>
 	</article>
 
@@ -233,9 +234,7 @@
 									font-weight: bold;
 								}
 							}
-
 						}
-
 					}
 				</style>
 				<caption>Binary&thinsp;→&thinsp;Hex</caption>
@@ -246,75 +245,30 @@
 					</tr>
 				</thead> -->
 				<tbody>
-					<tr>
-						<th>0000</th>
-						<td>0</td>
-					</tr>
-					<tr>
-						<th>0001</th>
-						<td>1</td>
-					</tr>
-					<tr>
-						<th>0010</th>
-						<td>2</td>
-					</tr>
-					<tr>
-						<th>0011</th>
-						<td>3</td>
-					</tr>
-					<tr>
-						<th>0100</th>
-						<td>4</td>
-					</tr>
-					<tr>
-						<th>0101</th>
-						<td>5</td>
-					</tr>
-					<tr>
-						<th>0110</th>
-						<td>6</td>
-					</tr>
-					<tr>
-						<th>0111</th>
-						<td>7</td>
-					</tr>
-					<tr>
-						<th>1000</th>
-						<td>8</td>
-					</tr>
-					<tr>
-						<th>1001</th>
-						<td>9</td>
-					</tr>
-					<tr>
-						<th>1010</th>
-						<td>A</td>
-					</tr>
-					<tr>
-						<th>1011</th>
-						<td>B</td>
-					</tr>
-					<tr>
-						<th>1100</th>
-						<td>C</td>
-					</tr>
-					<tr>
-						<th>1101</th>
-						<td>D</td>
-					</tr>
-					<tr>
-						<th>1110</th>
-						<td>E</td>
-					</tr>
-					<tr>
-						<th>1111</th>
-						<td>F</td>
-					</tr>
+					<tr><th>0000</th><td>0</td></tr>
+					<tr><th>0001</th><td>1</td></tr>
+					<tr><th>0010</th><td>2</td></tr>
+					<tr><th>0011</th><td>3</td></tr>
+					<tr><th>0100</th><td>4</td></tr>
+					<tr><th>0101</th><td>5</td></tr>
+					<tr><th>0110</th><td>6</td></tr>
+					<tr><th>0111</th><td>7</td></tr>
+					<tr><th>1000</th><td>8</td></tr>
+					<tr><th>1001</th><td>9</td></tr>
+					<tr><th>1010</th><td>A</td></tr>
+					<tr><th>1011</th><td>B</td></tr>
+					<tr><th>1100</th><td>C</td></tr>
+					<tr><th>1101</th><td>D</td></tr>
+					<tr><th>1110</th><td>E</td></tr>
+					<tr><th>1111</th><td>F</td></tr>
 				</tbody>
 			</table>
 		</div>
 
 		<details class="notes">
+			Now, there are A LOT of these lightbulbs in digital screens.
+			Hundreds of thousands in early screens, several million in modern ones.
+
 			Early computers were not very powerful, so a computation that applied to every single pixel, was very expensive.
 			So when we needed to specify a color, it had to be as close to the metal as possible:
 			we'd specify the levels of the dimmers directly.
@@ -324,8 +278,214 @@
 	</article>
 
 	<article class="slide">
-		<iframe src="https://whathecolor.com" class="browser"></iframe>
+		<iframe src="https://whathecolor.com/?space=srgb" class="browser"></iframe>
+		<details class="notes">
+			As often happens, the closer a UI is to the machine, the farther it is from humans.
+			RGB is efficient, but *hard* to manipulate by humans or reason about.
+
+			These hex codes became opaque mystery meat tokens to copy and paste.
+			Universal, but indecipherable except to the most initiated.
+		</details>
 	</article>
+
+	<article class="displays slide" id="device-rgb-2">
+		<div class="flex">
+			<figure class="mba2013 display">
+				<img src="images/mba2013.png" alt="">
+				<figcaption>Macbook Air 2013</figcaption>
+			</figure>
+			<figure class="mbp2026 p3 display">
+				<img src="images/mbp2026.png" alt="">
+				<figcaption>Macbook Pro 2026</figcaption>
+			</figure>
+		</div>
+
+		<details class="notes">
+			But usability around color authoring and manipulation is not the only problem with specifying colors through raw subpixel intensities.
+			As different screens have subpixels with different characteristics, throwing raw coordinates at the screen means different things in different devices.
+
+			Many people think this only applies to the brighter colors, but it affects the entire color space — every color looks different.
+		</details>
+	</article>
+
+	<article class="slide" id="standardized-rgb">
+		<h3>Standardized RGB spaces to the rescue?</h3>
+
+		<table class="borders">
+			<thead>
+				<tr>
+					<th rowspan="2"></th>
+					<th colspan="3">
+						<figure class="mba2013 display">
+							<img src="images/mba2013.png" alt="">
+							<figcaption>Macbook Air 2013</figcaption>
+						</figure>
+					</th>
+					<th colspan="3">
+						<figure class="mbp2026 p3 display">
+							<img src="images/mbp2026.png" alt="">
+							<figcaption>Macbook Pro 2026</figcaption>
+						</figure>
+					</th>
+				</tr>
+				<tr>
+					<th>R</th>
+					<th>G</th>
+					<th>B</th>
+					<th>R</th>
+					<th>G</th>
+					<th>B</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Device RGB</th>
+					<td>1</td>
+					<td>0</td>
+					<td>0.4</td>
+
+					<td>1</td>
+					<td>0</td>
+					<td>0.4</td>
+				</tr>
+				<tr class="delayed">
+					<th>sRGB</th>
+					<td>0.9124</td>
+					<td>0.27551</td>
+					<td>0.50037</td>
+					<td class="oog">1.093</td>
+					<td class="oog">-0.2267</td>
+					<td class="oog">-0.1501</td>
+				</tr>
+				<tr class="delayed">
+					<th>Display P3</th>
+					<td>0.8428</td>
+					<td>0.32568</td>
+					<td>0.49946</td>
+
+					<td>1</td>
+					<td>0</td>
+					<td>0.4</td>
+				</tr>
+				<tr class="delayed">
+					<th>Rec.2020</th>
+					<td>0.77306</td>
+					<td>0.40651</td>
+					<td>0.52267</td>
+
+					<td>0.89202</td>
+					<td>0.2807</td>
+					<td>0.42666</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<details class="notes">
+			But usability around color authoring and manipulation is not the only problem with specifying colors through raw subpixel intensities.
+			As different screens have subpixels with different characteristics, throwing raw coordinates at the screen means different things in different devices.
+
+			Many people think this only applies to the brighter colors, but it affects the entire color space — **every color looks different**.
+
+
+		</details>
+
+		<style type="slide delayed">
+			.oog {
+				color: var(--color-red);
+				font-weight: bold;
+			}
+		</style>
+	</article>
+
+	<article class="slide">
+		<h2>Summary</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Color space(s)</th>
+					<th>Usability</th>
+					<th>Device <br>independence</th>
+					<th>Perceptual <br>uniformity</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Device RGB</th>
+					<td class="red"><strong>1</strong>/5</td>
+					<td class="red">❌</td>
+					<td class="red"><strong>1</strong>/5</td>
+				</tr>
+				<tr>
+					<th>Standardized RGB spaces
+						<small>sRGB, Display P3, Rec.2020, ProPhoto, …</small>
+					</th>
+					<td class="red"><strong>1</strong>/5</td>
+					<td class="red">✅</td>
+					<td class="red"><strong>1</strong>/5</td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
+
+
+	<article class="slide">
+		<color-scale class="compact" colors="rgb(0, 0, 0), rgb(128, 128, 128), rgb(255, 255, 255)"></color-scale>
+		<div class="flex space-between">
+			<span>← 3&times;128<sup>2</sup> →</span>
+			<span>← 3&times;128<sup>2</sup> →</span>
+		</div>
+	</article>
+	<article class="slide">
+		<color-scale class="compact" colors="rgb(0, 0, 0), rgb(64, 64, 64), rgb(128, 128, 128), rgb(192, 192, 192), rgb(255, 255, 255)"></color-scale>
+		<div class="flex space-between" style="word-spacing: -.1em">
+			<span>← 3&times;64<sup>2</sup> →</span>
+			<span>← 3&times;64<sup>2</sup> →</span>
+			<span>← 3&times;64<sup>2</sup> →</span>
+			<span>← 3&times;64<sup>2</sup> →</span>
+		</div>
+	</article>
+	<article class="slide">
+		<div class="gradient stretch" style="height: 5em; background: linear-gradient(to right in srgb, rgb(0, 0, 0), rgb(255, 255, 255))"></div>
+	</article>
+	<article class="slide">
+		<h2>Summary</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Color space(s)</th>
+					<th>Usability</th>
+					<th>Device <br>independence</th>
+					<th>Perceptual <br>uniformity</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Device RGB</th>
+					<td class="red"><strong>1</strong>/5</td>
+					<td class="red">❌</td>
+					<td class="red"><strong>1</strong>/5</td>
+				</tr>
+			</tbody>
+		</table>
+		<details class="notes">
+			So how did we solve these problems?
+		</details>
+	</article>
+</section>
+
+
+<section>
+	<header class="slide">
+		<h2>Standardized RGB spaces</h2>
+		<p class="subtitle">sRGB, Display P3, Rec.2020, ProPhoto, …</p>
+	</header>
+
+
+<!-- The first solution was to standardize the RGB color spaces.
+			Instead of throwing raw RGB values at the screen, we would specify which RGB space we were using, and the screen would do the conversion to its own native RGB internally.
+
+			This solved the device-independence problem, but not the usability or perceptual uniformity problems. -->
+
 </section>
 
 <article class="slide dont-resize" id="failed-oklch-scales">
@@ -384,27 +544,14 @@
 		</tbody>
 	</table>
 </article>
-
+<!--
 <article class="slide">
 	<article class="callout">
 		<h2>The callout problem</h2>
 		<p>Callouts are such an excellent example for design systems, because they use so many different color tokens, and they have so many variations.</p>
 	</article>
-</article>
+</article> -->
 
-<article class="slide">
-	<header>
-		<h1>This is a plain slide</h1>
-		<p class="subtitle">With a header and some content.</p>
-	</header>
-	<h2>Heading level 2</h2>
-	<h3>Heading level 3</h3>
-	<ul>
-		<li>List item</li>
-		<li>Another item</li>
-		<li>And another one</li>
-	</ul>
-</article>
 
 <footer class="slide" id="end">
 	<p class="slides">

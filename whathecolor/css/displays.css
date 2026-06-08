@@ -1,0 +1,137 @@
+.display {
+	--xyz-2x: calc(x * 2) calc(y * 2) calc(z * 2);
+	--default-red: color(var(--rgb-space, srgb) 1 0 0);
+	--default-green: color(var(--rgb-space, srgb) 0 1 0);
+	--default-blue: color(var(--rgb-space, srgb) 0 0 1);
+	--default-magenta: color(from color-mix(in xyz-d50, var(--red) 71%, var(--blue)) xyz-d50 calc(x * 1.4) calc(y * 1.4) calc(z * 1.4));
+	--default-yellow: color(from color-mix(in xyz-d50, var(--red), var(--green)) xyz-d50 var(--xyz-2x));
+	--default-cyan: color(from color-mix(in xyz-d50, var(--green), var(--blue)) xyz-d50 var(--xyz-2x));
+	--default-gray: color-mix(in srgb, var(--_yellow) 51%, var(--blue));
+
+	--_red: var(--red, var(--default-red));
+	--_green: var(--green, var(--default-green));
+	--_blue: var(--blue, var(--default-blue));
+	--_yellow: var(--yellow, var(--default-yellow));
+	--_cyan: var(--cyan, var(--default-cyan));
+	--_magenta: var(--magenta, var(--default-magenta));
+	--_gray: var(--gray, var(--default-gray));
+
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+
+	img {
+		background: var(--display-img, linear-gradient(var(--color))) var(--display) no-repeat;
+	}
+
+	&:is(figure) {
+		margin: 0;
+	}
+
+	/* Subpixel geometry */
+	&:is(.show-subpixels, .show-subpixels *)::after {
+		content: "";
+		position: absolute;
+		top: 52%;
+		left: 20%;
+		translate: 50% -50%;
+		border: .4rem solid;
+		border-radius: 50%;
+		width: 10rem;
+		aspect-ratio: 1;
+		background: var(--subpixel-geometry);
+		background-size: var(--subpixel-geometry-tile-x) var(--subpixel-geometry-tile-y);
+		background-color: black;
+	}
+
+	figcaption {
+		contain: inline-size;
+		width: stretch;
+		justify-self: flex-end;
+		text-align: center;
+		font-size: var(--font-size-xs);
+		font-weight: 500;
+	}
+
+	&.crt {
+		--display: 60% 60% / 80% 80%;
+
+		--size: calc((0.5vw + 0.5vh) * var(--scale, 1));
+		--radius: calc(var(--size) * 1.01) var(--size);
+		--pitch-x: calc(2.5 * var(--size));
+		--pitch-y: calc(1.75 * var(--size));
+
+		--dot-r: radial-gradient(var(--radius), var(--subpixel-r) 0 50%, transparent 90%);
+		--dot-g: radial-gradient(var(--radius), var(--subpixel-g) 0 59%, transparent 85%);
+		--dot-b: radial-gradient(var(--radius), var(--subpixel-b) 0 58%, transparent 90%);
+
+		--subpixel-geometry:
+			var(--dot-r) 0 0,
+			var(--dot-g) var(--pitch-x) 0,
+			var(--dot-b) calc(2 * var(--pitch-x)) 0,
+
+			var(--dot-b) calc(.5 * var(--pitch-x)) var(--pitch-y),
+			var(--dot-r) calc(1.5 * var(--pitch-x)) var(--pitch-y),
+			var(--dot-g) calc(2.5 * var(--pitch-x)) var(--pitch-y);
+
+		--subpixel-geometry-tile-x: calc(3 * var(--pitch-x));
+		--subpixel-geometry-tile-y: calc(2 * var(--pitch-y));
+
+		--oklch-tweak: l calc(c * .75) calc(h + 10 * sign(mod(h - 140, 120)));
+
+		/* Approx. early 1954 color CRT, near NTSC 1953, slightly reduced */
+		--white: color(xyz-d50 0.99135 0.9993 0.89495); /* Illuminant C */
+
+		--red:   color(xyz 0.5075 0.2881 0.0419);
+		--green: color(xyz 0.2269 0.5844 0.0891);
+		--blue:  color(xyz 0.216  0.1275 0.9578);
+	}
+
+	&.lcd {
+		--size: calc((0.5vw + 0.5vh) * var(--scale, 1));
+		--display: 50% 2% / 96% 75%;
+		--rgb-space: display-p3;
+		--subpixel-geometry: repeating-linear-gradient(to right,
+			var(--subpixel-r) 0 var(--size),
+			transparent,
+			var(--subpixel-g) calc(var(--size) * 1.05) calc(var(--size) * 2),
+			transparent,
+			var(--subpixel-b) calc(var(--size) * 2.05) calc(var(--size) * 3),
+			transparent calc(var(--size) * 3.05)
+			) 0 0;
+		--subpixel-geometry-tile-size-x: calc(3em * var(--scale, 1));
+		--subpixel-geometry-tile-size-y: 100%;
+	}
+
+	&.lcd,
+	&.p3 {
+		--red: var(--p3-red);
+		--yellow: var(--p3-yellow);
+		--green: var(--p3-green);
+		--blue: var(--p3-blue);
+		--cyan: var(--p3-cyan);
+		--magenta: color(display-p3 1 0 0.4);
+		--gray: color(display-p3 0.5 0.5 0.5);
+	}
+
+	&.mbp2026 {
+		--display: 50% 19% / 83% 84%;
+		--rgb-space: display-p3;
+	}
+
+	&.mba2013 {
+		--display: 50% 31% / 70% 74%;
+
+		/* --white: color(xyz-d50 0.950 1 1.089); */
+		--white: color(xyz-d50 0.9642 1 0.8249);
+		/* rgb(91.56% 24.78% 20.05%) */
+		/* color(display-p3 0.8446 0.3045 0.2424) */
+		--red: color(xyz-d50 0.381 0.22 0.040);
+		--green: color(xyz-d50 0.434 0.682 0.088);
+		--blue: color(xyz-d50 0.150 0.099 0.697);
+
+		--magenta: color(srgb 0.9124 0.27551 0.50037);
+	}
+}

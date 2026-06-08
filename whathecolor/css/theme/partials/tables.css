@@ -4,6 +4,7 @@ table {
 	border-spacing: 0;
 	border-collapse: collapse;
 	margin-block: 1em;
+	font-size: var(--font-size-s);
 
 	caption {
 		color: light-dark(var(--color-neutral-60), canvastext);
@@ -19,6 +20,13 @@ table {
 
 		&:first-child {
 			text-align: start;
+		}
+
+		> small {
+			display: block;
+			font-size: 50%;
+			font-weight: 500;
+			color: var(--color-neutral);
 		}
 	}
 
@@ -63,5 +71,9 @@ table {
 	&:has(tbody th:only-of-type) thead th:first-of-type,
 	tbody th:last-of-type {
 		border-inline-end: var(--ui-border);
+	}
+
+	td {
+		font-variant-numeric: tabular-nums;
 	}
 }

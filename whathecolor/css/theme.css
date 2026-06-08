@@ -4,3 +4,24 @@
 @import url("theme/tokens.css");
 @import url("theme/theme.css");
 @import url("fonts.css");
+
+color-scale {
+	align-self: stretch;
+
+	&::part(swatch) {
+		box-shadow: 0 0 3px var(--color-neutral);
+	}
+
+	&.compact {
+		font-size: 80%;
+		gap: 0;
+
+		&::part(swatch) {
+			border-radius: 0;
+		}
+	}
+}
+
+.browser, .stretch {
+	align-self: stretch;
+}

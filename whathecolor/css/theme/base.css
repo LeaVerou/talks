@@ -19,15 +19,15 @@ h1, h2, h3, h4, h5, h6 {
 		margin: 0;
 	}
 
-	> .subtitle {
+	/* > .subtitle {
 		color: var(--color-neutral-60);
-		font-size: calc(1.2 * var(--slide-base-font-size, 1rem));
+		font-size: 80%;
 		margin-top: .2em;
 		text-align: center;
 		font-weight: 500;
 		margin-top: -1.3rem;
 		text-wrap: balance;
-	}
+	} */
 }
 
 li, p {

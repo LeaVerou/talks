@@ -45,7 +45,7 @@
 		color: contrast-color(var(--accent-color));
 	}
 
-	&:is(span) {
+	&:is(span, tr, td, th, .text) {
 		color: var(--accent-color);
 	}
 }

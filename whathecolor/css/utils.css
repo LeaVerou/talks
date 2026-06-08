@@ -48,15 +48,23 @@
 	display: flex;
 	gap: 1em;
 
-	> * {
+	&:not(.space-between) > * {
 		flex: 1;
 	}
 
 	> .fr2 {
 		flex: 2;
 	}
+
+	> .space-between {
+		justify-content: space-between;
+	}
 }
 
 .big {
 	font-size: var(--font-size-2xl);
+}
+
+.handwritten {
+	font-family: var(--font-handwritten);
 }

@@ -21,6 +21,7 @@
 	--font-sans: Inter, "Helvetica Neue", Helvetica, system-ui, sans-serif;
 	--font-serif: Vollkorn, "Hoefler Text", Garamond, serif;
 	--font-cursive: Zapfino, "Apple Chancery", BrushScriptMT, cursive;
+	--font-handwritten: Excalifont;
 	--font-monospace: Consolas, Inconsolata, Noto Sans Mono, Source Code Pro, Roboto Mono, Menlo, Monaco, monospace;
 	--font-mono: var(--font-monospace);
 
@@ -51,13 +52,13 @@
 	--font-size-m: 1rem;
 	--font-size-l: 1.25rem;
 	--font-size-xl: 1.75rem;
-	--font-size-2xl: 3rem;
-	--font-size-3xl: 10rem;
+	--font-size-2xl: 2.5rem;
+	--font-size-3xl: 5rem;
 
 	--font-weight: 300;
 
 	--lh-body: 1.5;
-	--lh-heading: 1.15;
+	--lh-heading: 1.1;
 
 	--radius-s: .2rem;
 	--radius-m: .5rem;
