@@ -122,7 +122,7 @@
 	}
 
 	&.mba2013 {
-		--display: 50% 31% / 70% 74%;
+		--display: 50% 31% / 71% 74%;
 
 		/* --white: color(xyz-d50 0.950 1 1.089); */
 		--white: color(xyz-d50 0.9642 1 0.8249);
@@ -131,6 +131,7 @@
 		--red: color(xyz-d50 0.381 0.22 0.040);
 		--green: color(xyz-d50 0.434 0.682 0.088);
 		--blue: color(xyz-d50 0.150 0.099 0.697);
+		--gray: color(srgb 0.56688 0.56689 0.56694);
 
 		--magenta: color(srgb 0.9124 0.27551 0.50037);
 	}

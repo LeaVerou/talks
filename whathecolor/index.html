@@ -12,7 +12,7 @@
 	<script src="talk-sync.js"></script>
 	<script src="talk.js" type="module"></script>
 </head>
-<body class="xlanguage-css no-autosize no-prism" data-markdown-elements="details.notes, .md, .md-children > :not(.no-md)">
+<body class="xlanguage-css no-prism" data-markdown-elements="details.notes, .md, .md-children > :not(.no-md)">
 
 <header class="slide dont-resize" id="intro">
 	<div class="raining-words">
@@ -318,13 +318,17 @@
 					<th colspan="3">
 						<figure class="mba2013 display">
 							<img src="images/mba2013.png" alt="">
-							<figcaption>Macbook Air 2013</figcaption>
+							<figcaption>Macbook Air 2013
+								<small>60% of sRGB gamut, 8 bits/channel</small>
+							</figcaption>
 						</figure>
 					</th>
 					<th colspan="3">
 						<figure class="mbp2026 p3 display">
 							<img src="images/mbp2026.png" alt="">
-							<figcaption>Macbook Pro 2026</figcaption>
+							<figcaption>Macbook Pro 2026
+								<small>P3 gamut, 10 bits/channel</small>
+							</figcaption>
 						</figure>
 					</th>
 				</tr>
@@ -339,6 +343,16 @@
 			</thead>
 			<tbody>
 				<tr>
+					<th>Device RGB (raw)</th>
+					<td>255</td>
+					<td>0</td>
+					<td>102</td>
+
+					<td>1023</td>
+					<td>0</td>
+					<td>408</td>
+				</tr>
+				<tr class="delayed">
 					<th>Device RGB</th>
 					<td>1</td>
 					<td>0</td>
@@ -381,12 +395,10 @@
 		</table>
 
 		<details class="notes">
-			But usability around color authoring and manipulation is not the only problem with specifying colors through raw subpixel intensities.
-			As different screens have subpixels with different characteristics, throwing raw coordinates at the screen means different things in different devices.
+			Instead of throwing raw RGB values at the screen, we would interpret them based on a particular, predefined RGB space and the screen would do the translation to its own native RGB coordinates internally.
 
-			Many people think this only applies to the brighter colors, but it affects the entire color space — **every color looks different**.
-
-
+			Instead of being tied to hardware, these color spaces typically use 0-1 ranges and colors outside their gamut have at least one component outside that range.
+			For example, this P3 magenta is outside the sRGB gamut so all three of its components are outside 0-1.
 		</details>
 
 		<style type="slide delayed">
@@ -397,7 +409,7 @@
 		</style>
 	</article>
 
-	<article class="slide">
+	<article class="slide" id="rgb-summary">
 		<h2>Summary</h2>
 		<table>
 			<thead>
@@ -405,7 +417,7 @@
 					<th>Color space(s)</th>
 					<th>Usability</th>
 					<th>Device <br>independence</th>
-					<th>Perceptual <br>uniformity</th>
+					<th data-visit="2">Perceptual <br>uniformity</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -413,7 +425,7 @@
 					<th>Device RGB</th>
 					<td class="red"><strong>1</strong>/5</td>
 					<td class="red">❌</td>
-					<td class="red"><strong>1</strong>/5</td>
+					<td class="red" data-visit="2"><strong>1</strong>/5</td>
 				</tr>
 				<tr>
 					<th>Standardized RGB spaces
@@ -421,72 +433,76 @@
 					</th>
 					<td class="red"><strong>1</strong>/5</td>
 					<td class="red">✅</td>
-					<td class="red"><strong>1</strong>/5</td>
+					<td class="red" data-visit="2"><strong>1</strong>/5</td>
 				</tr>
 			</tbody>
 		</table>
 	</article>
 
+	<article class="slide" id="scales-rgb-gray">
+		<color-scale class="compact" colors="color(srgb 0 0 0), color(srgb 0.5 0.5 0.5), color(srgb 1 1 1)">
+			<div class="distances delayed">
+				<span class="dark">√3&times;0.5</span>
+				<span>√3&times;0.5</span>
+			</div>
+		</color-scale>
 
-	<article class="slide">
-		<color-scale class="compact" colors="rgb(0, 0, 0), rgb(128, 128, 128), rgb(255, 255, 255)"></color-scale>
-		<div class="flex space-between">
-			<span>← 3&times;128<sup>2</sup> →</span>
-			<span>← 3&times;128<sup>2</sup> →</span>
-		</div>
+
+		<color-scale class="compact delayed" colors="color(srgb 0 0 0), color(srgb 0.25 0.25 0.25), color(srgb 0.5 0.5 0.5), color(srgb 0.75 0.75 0.75), color(srgb 1 1 1)">
+			<div class="distances delayed">
+				<span class="dark">√3&times;0.25</span>
+				<span class="dark">√3&times;0.25</span>
+				<span>√3&times;0.25</span>
+				<span>√3&times;0.25</span>
+			</div>
+		</color-scale>
+
+
+		<code class="gradient stretch delayed" style="height: 5em; background: linear-gradient(to right in srgb, rgb(0, 0, 0), rgb(255, 255, 255))">
+			linear-gradient(to right in srgb, black, white)
+		</code>
 	</article>
-	<article class="slide">
-		<color-scale class="compact" colors="rgb(0, 0, 0), rgb(64, 64, 64), rgb(128, 128, 128), rgb(192, 192, 192), rgb(255, 255, 255)"></color-scale>
-		<div class="flex space-between" style="word-spacing: -.1em">
-			<span>← 3&times;64<sup>2</sup> →</span>
-			<span>← 3&times;64<sup>2</sup> →</span>
-			<span>← 3&times;64<sup>2</sup> →</span>
-			<span>← 3&times;64<sup>2</sup> →</span>
-		</div>
-	</article>
-	<article class="slide">
-		<div class="gradient stretch" style="height: 5em; background: linear-gradient(to right in srgb, rgb(0, 0, 0), rgb(255, 255, 255))"></div>
-	</article>
-	<article class="slide">
-		<h2>Summary</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Color space(s)</th>
-					<th>Usability</th>
-					<th>Device <br>independence</th>
-					<th>Perceptual <br>uniformity</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>Device RGB</th>
-					<td class="red"><strong>1</strong>/5</td>
-					<td class="red">❌</td>
-					<td class="red"><strong>1</strong>/5</td>
-				</tr>
-			</tbody>
-		</table>
-		<details class="notes">
-			So how did we solve these problems?
-		</details>
-	</article>
+
+	<article class="slide" data-insert="#rgb-summary"></article>
 </section>
-
 
 <section>
 	<header class="slide">
-		<h2>Standardized RGB spaces</h2>
-		<p class="subtitle">sRGB, Display P3, Rec.2020, ProPhoto, …</p>
+		<h2>Polar spaces</h2>
 	</header>
 
+	<article class="slide" id="humans-colors">
+		<div class="swatch" style="--color: hsl(20 25% 70%); width: 50vw; height: 30vh;">
+			<code class="delayed" data-index="2">color(srgb 0.625 0.458 0.375)</code>
+		</div>
 
-<!-- The first solution was to standardize the RGB color spaces.
-			Instead of throwing raw RGB values at the screen, we would specify which RGB space we were using, and the screen would do the conversion to its own native RGB internally.
+		<div class="delayed-children quotes">
+			<q>Light muted brown</q>
+			<q>Dark beige</q>
+			<q>Light brown</q>
+			<div data-index="2">
+				<q>About 60% red, a little less green and even less blue</q>
+				<span class="delayed">— No-one, ever</span>
+			</div>
+		</div>
 
-			This solved the device-independence problem, but not the usability or perceptual uniformity problems. -->
+		<details class="notes">
+			Let’s try this little experiment.
+			Try to describe this color to the person next to you.
+			Suppose you wanted to explain to your partner what color [something] you wanted them to buy.
 
+			When we talk about colors, we usually talk about them in terms of a pure hue and some modifiers like light, dark, bright, muted, grayish, greenish etc.
+			Studies disagree on the exact hues and modifiers, but they all find the same general approach.
+
+		</details>
+	</article>
+
+	<article class="slide" id="hsl">
+		<hue-wheel space="hsl" channel="s"></hue-wheel>
+		<channel-slider space="hsl" channel="l"></channel-slider>
+	</article>
 </section>
+
 
 <article class="slide dont-resize" id="failed-oklch-scales">
 	<style>

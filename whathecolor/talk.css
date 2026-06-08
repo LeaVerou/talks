@@ -292,14 +292,19 @@
 	thead tr:first-child {
 		th {
 			background: none;
-
-
-				border: none;
-
+			border: none;
 		}
 
 		figure {
 			padding: 0;
+			color: canvastext;
+			font-weight: bold;
+
+			small {
+				display: block;
+				color: var(--color-neutral);
+				font-weight: 500;
+			}
 		}
 	}
 
@@ -307,13 +312,102 @@
 		text-align: center;
 	}
 
-	td {
+	:where(&) td {
 		font-weight: 500;
 	}
 
 	.delayed.future {
 		&, * {
 			border: none;
+		}
+	}
+}
+
+#scales-rgb-gray {
+	color-scale {
+		position: relative;
+
+		&::part(swatch-label) {
+			text-align: center;
+			font-size: 50%;
+			font-family: var(--font-monospace);
+		}
+
+		.distances {
+			position: absolute;
+			inset-inline: 0;
+			inset-block-start: 2em;
+			display: flex;
+			text-shadow: 0 1h white;
+			font-weight: 600;
+			font-size: 80%;
+
+			> span {
+				flex: 1;
+				display: flex;
+				justify-content: space-between;
+				color: canvastext;
+				gap: .2em;
+
+				--arrow-thickness: .12em;
+				--arrow-y: 52%;
+
+				&::before,
+				&::after {
+					flex: 1;
+					background: linear-gradient(to bottom, transparent calc(var(--arrow-y) - var(--arrow-thickness)/2), currentColor 0 calc(var(--arrow-y) + var(--arrow-thickness)/2), transparent 0) no-repeat;
+					background-size: calc(100% - .2em) 100%;
+				}
+
+				&::before {
+					content: "←";
+					/* background-color: yellow; */
+					background-position: right;
+				}
+
+				&::after {
+					content: "→";
+					/* background-color: cyan; */
+					text-align: end;
+					background-position: left;
+				}
+			}
+		}
+	}
+
+	.gradient {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: 900;
+		-webkit-text-stroke: .05em white;
+	}
+}
+
+#humans-colors {
+	.quotes {
+		max-width: 70vw;
+
+		> * {
+			text-wrap: balance;
+		}
+
+		q {
+			font-style: italic;
+		}
+
+		> :last-child:is(.displayed, .current:has(.current)) q {
+			color: var(--color-neutral);
+			text-decoration: line-through;
+		}
+	}
+
+	.swatch {
+		code {
+			font-size: 70%;
+			padding: 0;
+			background: none;
+			font-weight: bold;
 		}
 	}
 }
