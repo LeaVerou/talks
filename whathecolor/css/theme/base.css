@@ -13,21 +13,27 @@ h1, h2, h3, h4, h5, h6 {
 	line-height: var(--lh-heading);
 	text-align: center;
 	text-wrap: balance;
-	margin-block-end: .5rem;
+	margin: 0;
+	margin-block-end: 1rem;
 
 	header > & {
 		margin: 0;
 	}
 
-	/* > .subtitle {
+	&:not(:has(+ .subtitle)) {
+
+	}
+
+	> .subtitle,
+	+ .subtitle {
 		color: var(--color-neutral-60);
 		font-size: 80%;
-		margin-top: .2em;
+		margin-block-start: 1rem;
 		text-align: center;
 		font-weight: 500;
 		margin-top: -1.3rem;
 		text-wrap: balance;
-	} */
+	}
 }
 
 li, p {

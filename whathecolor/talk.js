@@ -1,11 +1,20 @@
 import "./prism.js";
 import Inspire from "inspirejs.org";
-import "color-elements";
-import Color from "colorjs.io";
+// import "color-elements";
+// import Color from "colorjs.io";
+// import "./mba2013.js";
 
-import "./mba2013.js";
+const repos = {
+	"apps.colorjs.io": "color-js/apps",
+	"palettes.colorjs.io": "color-js/apps",
+	"elements.colorjs.io": "color-js/elements",
+}
 
-
+// for (let iframe of document.querySelectorAll("iframe")) {
+// 	iframe.addEventListener("error", e => {
+// 		console.log(e);
+// 	});
+// }
 
 /* Render text in an SVG and return a data URL of the resulting image. */
 export function textToSvg (text, style = "font: 600 40px system-ui") {

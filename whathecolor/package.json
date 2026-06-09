@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@inspirejs/core": "^3.0.1",
+    "@inspirejs/core": "^3.0.2",
+    "@inspirejs/plugins": "^3.0.2",
     "color-elements": "^0.0.12",
     "colorjs.io": "^0.6.1",
-    "inspirejs.org": "^3",
+    "inspirejs.org": "^3.0.1",
     "vue": "^3.5.35"
   },
   "devDependencies": {

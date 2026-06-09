@@ -33,7 +33,36 @@ code:not(pre > code) {
 }
 
 pre {
+	color-scheme: dark;
 	border-radius: var(--radius-l);
+	background: var(--color-neutral-10, #333);
+	color: canvastext;
+	padding: .6em .8em;
+}
+
+.code-fragments {
+	display: flex;
+	gap: 1em;
+	align-items: center;
+	font-size: 60%;
+
+	> pre:first-of-type {
+		align-self: flex-start;
+	}
+
+	> pre:last-of-type {
+		align-self: flex-end;
+	}
+
+	> pre:not(:last-of-type) {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+
+	> pre:not(:first-of-type) {
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
 }
 
 /* Syntax highlighting */
@@ -41,11 +70,11 @@ pre {
 	--comment-color: color-mix(in oklch, var(--color) 0%, oklch(50% .01 none / 60%));
 	--_color-code-comment: var(--color-code-comment, var(--comment-color, var(--color-neutral-50a)));
 	--_color-code-punctuation: var(--color-code-punctuation, var(--color-neutral-80a));
-	--_color-code-1: var(--color-code-1, var(--color-accent-2));
-	--_color-code-2: var(--color-code-2, var(--color-accent-1));
-	--_color-code-3: var(--color-code-3, var(--color-accent-4));
-	--_color-code-4: var(--color-code-4, var(--color-accent-3));
-	--_color-code-5: var(--color-code-5, orange);
+	--_color-code-1: var(--color-code-1, oklch(from var(--color-magenta) clamp(.7, l, 1) c h));
+	--_color-code-2: var(--color-code-2, var(--color-cyan));
+	--_color-code-3: var(--color-code-3, var(--color-green));
+	--_color-code-4: var(--color-code-4, var(--color-blue));
+	--_color-code-5: var(--color-code-5, var(--col));
 }
 
 .token.comment,

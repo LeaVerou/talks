@@ -375,12 +375,23 @@
 		}
 	}
 
-	.gradient {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-weight: 900;
-		-webkit-text-stroke: .05em white;
+
+}
+
+.gradient {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 900;
+	color: white;
+	-webkit-text-stroke: .1em black;
+	text-shadow: .07em .08em black;
+	paint-order: stroke fill;
+	background: var(--gradient, linear-gradient(var(--params, to right), var(--stops, white, black)));
+
+	:where(&) {
+		height: 5em;
+		align-self: stretch;
 	}
 }
 
@@ -409,5 +420,20 @@
 			background: none;
 			font-weight: bold;
 		}
+	}
+}
+
+.callout {
+	font-size: 50%;
+	border: 1px solid;
+	padding: .6em 1em;
+	border-radius: var(--radius-l);
+
+	> * {
+		margin: 0;
+	}
+
+	.title {
+		font-weight: 600;
 	}
 }

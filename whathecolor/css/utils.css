@@ -18,19 +18,37 @@
 	}
 }
 
-/* Simple color swatch so we don't need to reach for custom elements for every color we show */
+/* Simple color swatch so we don't need to reach for <color-swatch> for every color we show */
 .swatch {
 	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	min-width: 1lh;
-	height: 1lh;
-	border-radius: 0.25em;
-	background: var(--color);
-	color: contrast-color(var(--color));
-	box-sizing: border-box;
-	padding-inline: 0.5em;
+	flex-flow: column;
+
+	&:not(:has(> .label)),
+	&:has(> .label):not(:has(> .swatch))::before,
+	& > .swatch {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 1lh;
+		height: 1lh;
+		border-radius: 0.25em;
+		background: var(--color);
+		color: contrast-color(var(--color));
+		box-sizing: border-box;
+		padding-inline: 0.5em;
+	}
+
+	&:has(> .label):not(:has(> .swatch))::before {
+		content: "";
+	}
+
+	&:has(> .label) {
+		font-weight: 500;
+		font-size: var(--font-size-s);
+	}
 }
+
+
 
 .slide.bleed {
 	padding: 0;
@@ -44,13 +62,12 @@
 	}
 }
 
-.flex {
+.flex,
+.stack {
 	display: flex;
 	gap: 1em;
 
-	&:not(.space-between) > * {
-		flex: 1;
-	}
+
 
 	> .fr2 {
 		flex: 2;
@@ -59,6 +76,16 @@
 	> .space-between {
 		justify-content: space-between;
 	}
+}
+
+.flex {
+	&:not(.space-between) > * {
+		flex: 1;
+	}
+}
+
+.stack {
+	flex-flow: column;
 }
 
 .big {

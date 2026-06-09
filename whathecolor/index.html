@@ -12,7 +12,7 @@
 	<script src="talk-sync.js"></script>
 	<script src="talk.js" type="module"></script>
 </head>
-<body class="xlanguage-css no-prism" data-markdown-elements="details.notes, .md, .md-children > :not(.no-md)">
+<body class="language-css xno-prism" data-markdown-elements="details.notes, .md, .md-children > :not(.no-md)">
 
 <header class="slide dont-resize" id="intro">
 	<div class="raining-words">
@@ -409,7 +409,7 @@
 		</style>
 	</article>
 
-	<article class="slide" id="rgb-summary">
+	<article class="slide" id="summary">
 		<h2>Summary</h2>
 		<table>
 			<thead>
@@ -434,6 +434,33 @@
 					<td class="red"><strong>1</strong>/5</td>
 					<td class="red">✅</td>
 					<td class="red" data-visit="2"><strong>1</strong>/5</td>
+				</tr>
+				<tr data-visit="3">
+					<th>
+						Naïve polar spaces
+						<small>HSL, HWB, HWB, …</small>
+					</th>
+					<td class="green"><strong>4</strong>/5</td>
+					<td>✅*</td>
+					<td class="red" data-visit="2"><strong>1</strong>/5</td>
+				</tr>
+				<tr data-visit="4">
+					<th>
+						Perceptually uniform rectangular spaces
+						<small>Lab, OKLab, …</small>
+					</th>
+					<td class="orange"><strong>2</strong>/5</td>
+					<td>✅</td>
+					<td class="green" data-visit="2"><strong>4-5</strong>/5</td>
+				</tr>
+				<tr data-visit="4">
+					<th>
+						Perceptually uniform polar spaces
+						<small>LCH, OKLCh, …</small>
+					</th>
+					<td class="green"><strong>5</strong>/5</td>
+					<td>✅</td>
+					<td class="green" data-visit="2"><strong>4-5</strong>/5</td>
 				</tr>
 			</tbody>
 		</table>
@@ -463,7 +490,7 @@
 		</code>
 	</article>
 
-	<article class="slide" data-insert="#rgb-summary"></article>
+	<article class="slide" data-insert="#summary"></article>
 </section>
 
 <section>
@@ -498,75 +525,482 @@
 	</article>
 
 	<article class="slide" id="hsl">
-		<hue-wheel space="hsl" channel="s"></hue-wheel>
-		<channel-slider space="hsl" channel="l"></channel-slider>
+		<form id="hsl_picker" class="flex">
+			<div>
+				<hue-wheel name="hue" space="hsl" color="hsl(0 100 50)"
+					oninput="hsl_picker.elements.l.color = hsl_picker.elements.swatch.color = this.color"></hue-wheel>
+				<script type="slide delayed">
+					hsl_picker.elements.hue.channel = "s";
+				</script>
+				<channel-slider class="delayed" name="l" space="hsl" channel="l" color="hsl(0 100 50)"
+					oninput="hsl_picker.elements.hue.color = hsl_picker.elements.swatch.color = this.color"></channel-slider>
+			</div>
+
+			<color-swatch name="swatch" class="delayed" size="large">hsl(0 100 50)</color-swatch>
+
+			<style>
+				@scope {
+					:scope {
+						flex: 1;
+						align-self: stretch;
+
+						> div {
+							display: flex;
+							flex-direction: column;
+							gap: 1em;
+						}
+
+						hue-wheel {
+							width: 100%;
+						}
+
+						channel-slider {
+							flex: 1;
+							--slider-height: 4em;
+
+							&::part(channel-info),
+							&::part(spinner) {
+								display: none;
+							}
+						}
+					}
+				}
+			</style>
+		</form>
+		<details class="notes">
+			HSL and other similar color spaces (HSV, HWB) was designed to fix that.
+			It allowed people to express colors as a hue, saturation, lightness triplet.
+		</details>
+	</article>
+
+	<article class="slide language-js">
+		<div class="flex">
+			<pre class="flex"><code>
+				function rgb_to_hsl (r, g, b) {
+					let max = Math.max(r, g, b);
+					let min = Math.min(r, g, b);
+					let [h, s, l] = [null, 0, (min + max)/2];
+					let d = max - min;
+					let ε = 1 / 100000;
+
+					if (d !== 0) {
+						s = (l === 0 || l === 1)
+							? 0
+							: (max - l) / Math.min(l, 1 - l);
+						switch (max) {
+							case r:   h = (g - b) / d + (g < b ? 6 : 0); break;
+							case g: h = (b - r) / d + 2; break;
+							case b:  h = (r - g) / d + 4;
+						}
+						h = h * 60;
+					}
+
+					h = s <= ε ? null : h;
+					return [h, s * 100, l * 100];
+				}
+			</code></pre>
+			<pre><code>
+				fhsl_to_rgb(h, s, l) {
+					s /= 100;
+					l /= 100;
+
+					return [0, 8, 4].map(n => {
+						let k = (n + h/30) % 12;
+						let a = s * Math.min(l, 1 - l);
+						return l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1));
+					});
+				}
+			</code></pre>
+		</div>
+		<details class="notes">
+			Moreover, the math was simple enough that it could be implemented in the hardware of the time performantly.
+			This is the entire algorhtm to and fro.
+			All fairly simple, efficient math: basic arithmetic, mins, maxes, conditionals, that's it.
+
+			It sounds too good to be true.
+			And sadly, it is.
+		</details>
+	</article>
+
+	<article class="slide">
+		<div class="flex stretch" style="text-align: center;">
+			<color-swatch value="hsl(60 100 50)" size="large">
+				<div>hsl(60 100% <span class="wtf">50%</span>)</div>
+			</color-swatch>
+			<color-swatch value="hsl(240 100 50)" size="large">
+				<div>hsl(240 100% <span class="wtf">50%</span>)</div>
+			</color-swatch>
+		</div>
+		<style type="slide delayed">
+			@scope {
+				.wtf {
+					color: var(--color-red);
+					font-weight: bold;
+				}
+			}
+		</style>
+		<p class="emoji delayed">🤔🤔🤔</p>
+		<style>
+			@scope {
+				.emoji {
+					position: absolute;
+					bottom: 0;
+					font-size: var(--font-size-2xl);
+					line-height: 1;
+				}
+
+				color-swatch {
+					&::part(color) {
+						display: contents;
+					}
+
+					span {
+						align-self: stretch;
+						text-align: center;
+					}
+				}
+			}
+		</style>
+	</article>
+
+	<article class="slide" data-insert="#summary"></article>
+</section>
+
+<section>
+	<header class="slide">
+		<h2>Perceptually uniform spaces</h2>
+		<h3 class="subtitle">Lab, OKLab, LCh, OkLCh…</h3>
+	</header>
+
+	<article class="slide">
+		<code class="gradient" style="--params: to right in srgb; --stops: white, blue">
+			linear-gradient(to right in srgb, white, blue)
+		</code>
+		<code class="gradient" style="--params: to right in lab; --stops: white, blue">
+			linear-gradient(to right in lab, white, blue)
+		</code>
+		<code class="gradient" style="--params: to right in oklab; --stops: white, blue">
+			linear-gradient(to right in oklab, white, blue)
+		</code>
+		<details class="notes">
+			TODO make interactive
+		</details>
+	</article>
+
+	<article class="slide">
+		TODO: OKlab whathecolor frame/video
+		<!-- <iframe src="https://whathecolor.com/?color=oklab()" class="browser"></iframe> -->
+	</article>
+
+	<article class="slide">
+		TODO: Show how (Ok)Lab trivially becomes polar
+	</article>
+
+	<article class="slide" data-insert="#summary"></article>
+
+
+</section>
+
+<section class="language-css">
+	<article class="slide dont-resize">
+		<h2>Imagine if instead of all this…</h2>
+		<div class="code-fragments">
+			<pre><code>
+				:root {
+					--color-red-1: oklch();
+					--color-red-2: oklch();
+					--color-red-3: oklch();
+					--color-red-4: oklch();
+					--color-red-5: oklch();
+					--color-red-6: oklch();
+					--color-red-7: oklch();
+					--color-red-8: oklch();
+					--color-red-8: oklch();
+				}
+			</code></pre>
+			<pre><code>
+				--color-red-1: oklch();
+				--color-red-2: oklch();
+				--color-red-3: oklch();
+				--color-red-4: oklch();
+				--color-red-5: oklch();
+				--color-red-6: oklch();
+				--color-red-7: oklch();
+				--color-red-8: oklch();
+				--color-red-8: oklch();
+			</code></pre>
+			<script>
+				for (let i=0; i<9; i++) {
+					document.currentScript.after(document.currentScript.previousElementSibling.cloneNode(true))
+				}
+			</script>
+			<pre><code>
+				&shy;	--color-red-1: oklch();
+					--color-red-2: oklch();
+					--color-red-3: oklch();
+					--color-red-4: oklch();
+					--color-red-5: oklch();
+					--color-red-6: oklch();
+					--color-red-7: oklch();
+					--color-red-8: oklch();
+					--color-red-8: oklch();
+				}
+			</code></pre>
+		</div>
+	</article>
+	<article class="slide">
+		<h2>We just needed this…</h2>
+		<div class="code-fragments">
+			<pre><code>
+				:root {
+					--l-9: 0.97;
+					--l-8: 0.88;
+					--l-7: 0.76;
+					--l-6: 0.66;
+					--l-5: 0.56;
+					--l-4: 0.47;
+					--l-3: 0.38;
+					--l-2: 0.29;
+					--l-1: 0.19;
+
+			</code></pre>
+			<pre><code>
+				&shy;	--color-red:     oklch(54% 0.24 25);
+					--color-orange:  oklch(74% 0.19 58);
+					--color-yellow:  oklch(88% 0.2 95);
+					--color-green:   oklch(69% 0.24 139);
+					--color-cyan:    oklch(69% 0.15 205);
+					--color-blue:    oklch(56% 0.24 260);
+					--color-indigo:  oklch(50% 0.27 275);
+					--color-purple:  oklch(57% 0.27 292);
+					--color-magenta: oklch(60% 0.25 10);
+					--color-gray:    oklch(54% 0.04 250);
+				}
+			</code></pre>
+		</div>
+	</article>
+
+	<article class="slide">
+		<h2>Components own their styling</h2>
+
+		<pre><code>
+			.callout {
+				/* Until we get AccentColor… */
+				--_accent-color: var(--accent-color, var(--color-neutral));
+
+				--color-border: oklch(from var(--_accent-color) var(--l-8) c h);
+				--color-bg: oklch(from var(--_accent-color) var(--l-9) c h);
+				--color-icon: var(--_accent-color);
+				--color-heading: oklch(from var(--_accent-color) var(--l-3) c h);
+				--color-text: oklch(from var(--_accent-color) var(--l-1) c h);
+			}
+		</code></pre>
+		<article class="callout">
+			<p class="title">I am a callout</p>
+			<i class="bi bi-mastodon"></i>
+			<p>Callouts are such an excellent example for design systems, because they use so many different color tokens, and they have so many variations.</p>
+		</article>
+	</article>
+
+	<article class="slide">
+		<h2>Variations become trivial</h2>
+		<p class="subtitle">Combinatorial explosion no more!</p>
+		<div class="flex">
+			<pre style="font-size: 50%"><code>
+				.danger.callout {
+					--accent-color: var(--color-red);
+				}
+
+				.warning.callout {
+					--accent-color: var(--color-yellow);
+				}
+
+				.success.callout {
+					--accent-color: var(--color-green);
+				}
+
+				.brand.callout {
+					--accent-color: var(--color-brand);
+				}
+
+				.magenta.callout {
+					--accent-color: var(--color-magenta);
+				}
+			</code></pre>
+			<div class="stack">
+				<article class="danger callout">This is a danger callout</article>
+				<article class="warning callout">This is a warning callout</article>
+				<article class="success callout">This is a success callout</article>
+				<article class="brand callout">This is a brand callout</article>
+				<article class="magenta callout">This is a magenta callout, because why not?</article>
+			</div>
+		</div>
+	</article>
+
+	<article class="slide dont-resize" id="failed-oklch-scales">
+		<style>
+			@scope {
+				table {
+					tbody {
+						.swatch {
+							display: flex;
+						}
+						td {
+							--tr-color: var(--color); /* workaround for lack of inherit() */
+
+							.swatch {
+								--color: oklch(from var(--tr-color) var(--l) c h);
+							}
+						}
+
+						td:nth-of-type(1) { --l: 0.97; }
+						td:nth-of-type(2) { --l: 0.9; }
+						td:nth-of-type(3) { --l: 0.8; }
+						td:nth-of-type(4) { --l: 0.7; }
+						td:nth-of-type(5) { --l: 0.6; }
+						td:nth-of-type(6) { --l: 0.5; }
+						td:nth-of-type(7) { --l: 0.4; }
+					}
+				}
+			}
+		</style>
+		<table>
+			<thead>
+				<tr>
+					<th>Accent color</th>
+					<th>L=0.97</th>
+					<th>L=0.9</th>
+					<th>L=0.8</th>
+					<th>L=0.7</th>
+					<th>L=0.6</th>
+					<th>L=0.5</th>
+					<th>L=0.4</th>
+				</tr>
+			</thead>
+			<tbody>
+				<script>
+					for (let color in colors.accents) {
+						document.write(`
+							<tr style="--color: var(--color-${color})">
+								<th><div class="swatch">${color}</div></th>
+								${ `<td><div class="swatch"></div></td>
+								`.repeat(7) }
+							</tr>
+						`);
+					}
+				</script>
+			</tbody>
+		</table>
+	</article>
+
+	<article class="slide">
+		TODO show callouts with these colors
+		<details class="notes">
+			Unfortunately, the result left a lot to be desired.
+		</details>
+	</article>
+
+	<article class="slide">
+		<iframe src="https://palettes.colorjs.io" class="browser"></iframe>
+		<details class="notes">
+			Why didn't it work???
+			The question haunted me.
+			It became an obsession.
+			I built a website to analyze designer crafted color palettes, trying to find patterns.
+			I noticed that chroma was never constant throughout the scale, it dropped dramatically, especially for the lighter colors.
+		</details>
+	</article>
+
+	<article class="slide">
+		<blockquote class="thought-bubble">
+			“Maybe we are all misled about what chroma means.
+			Perhaps we _don’t_ actually want just a lightness change!”
+		</blockquote>
+		<details class="notes">
+			I gaslit myself into thinking we were all asking for the wrong thing.
+			That lighter tints fundamentally need a smaller chroma, and I just had to find the right formula to get close to a designer-crafted color scale.
+			So I started looking.
+		</details>
+	</article>
+
+	<article class="slide">
+		TODO early color-mix experiments
+
+		<details class="notes">
+			People often create dynamic scales by mixing with white or black.
+			The problem with this is that you’re desaturating at the same time as darkening/lightening,
+			and you have no control over it.
+			The resulting tints are often washed out.
+
+			Also, if we naively mix a predefined amount we get no guarantees about each tint except relative to its key color.
+			It’s the HSL problem all over again.
+		</details>
+	</article>
+
+	<article class="slide">
+		TODO complex formulas
+
+		<details class="notes">
+			Then I got sucked into the rabbit hole of trying to tweak formulas by eye — surprisingly common in color stuff.
+
+			Algorithms that got incresingly more complex, fudge factors all over the place.
+			Getting close in terms of result, but no further in terms of understanding.
+		</details>
+	</article>
+
+	<article class="slide">
+		<color-picker color="oklch(69% 0.15 205)" gamuts="srgb, p3, rec2020:, prophoto">
+		</color-picker>
+		<details class="notes">
+
+			One day, it dawned on me.
+			I was playing with this color picker component I've made when I noticed that when the color got ligther, it was always out of gamut — not just P3, but any reasonable gamut.
+		</details>
+	</article>
+
+	<article class="slide">
+		<iframe src="https://apps.colorjs.io/gamut/" class="browser"></iframe>
+		<details class="notes">
+			So I made another app to explore this hypothesis further.
+			Turns out that indeed — the lighter or darker you go, the smaller the gamut gets, down to a single point at 0 and 1.
+			It wasn't that we didn’t know what we wanted.
+			It was that we were not getting the color we asked for.
+		</details>
+	</article>
+
+	<article class="slide">
+		<iframe src="https://apps.colorjs.io/tints/" class="browser"></iframe>
+		<details class="notes">
+			Indeed, look here how close just gamut mapping gets us!
+			It's a pretty acceptable result upfront.
+			And with a little tweaking, we'd _be_ there.
+
+			There was only one problem.
+			Browsers did not implement gamut mapping.
+			_But what if we could implement it ourselves?_
+		</details>
 	</article>
 </section>
 
+<section>
+	<header class="slide">
+		<h2>Implementing gamut mapping in CSS?!</h2>
+	</header>
 
-<article class="slide dont-resize" id="failed-oklch-scales">
-	<style>
-		@scope {
-			table {
-				tbody {
-					.swatch {
-						display: flex;
-					}
-					td {
-						--tr-color: var(--color); /* workaround for lack of inherit() */
+	<article class="slide">
+		TODO show fitting curve
 
-						.swatch {
-							--color: oklch(from var(--tr-color) var(--l) c h);
-						}
-					}
-
-					td:nth-of-type(1) { --l: 0.97; }
-					td:nth-of-type(2) { --l: 0.9; }
-					td:nth-of-type(3) { --l: 0.8; }
-					td:nth-of-type(4) { --l: 0.7; }
-					td:nth-of-type(5) { --l: 0.6; }
-					td:nth-of-type(6) { --l: 0.5; }
-					td:nth-of-type(7) { --l: 0.4; }
-
-				}
-			}
-		}
-	</style>
-	<table>
-		<thead>
-			<tr>
-				<th>Accent color</th>
-				<th>L=0.97</th>
-				<th>L=0.9</th>
-				<th>L=0.8</th>
-				<th>L=0.7</th>
-				<th>L=0.6</th>
-				<th>L=0.5</th>
-				<th>L=0.4</th>
-			</tr>
-		</thead>
-		<tbody>
-			<script>
-				for (let color in colors.accents) {
-					document.write(`
-						<tr style="--color: var(--color-${color})">
-							<th><div class="swatch">${color}</div></th>
-							${ `<td><div class="swatch"></div></td>
-							 `.repeat(7) }
-						</tr>
-					`);
-				}
-			</script>
-		</tbody>
-	</table>
-</article>
-<!--
-<article class="slide">
-	<article class="callout">
-		<h2>The callout problem</h2>
-		<p>Callouts are such an excellent example for design systems, because they use so many different color tokens, and they have so many variations.</p>
+		<details class="notes">
+			I focused most of my work on gamut mapping the lightest tint.
+			First because that's where the problem was most egregious,
+			and second because worst case we could always interpolate to get the rest.
+		</details>
 	</article>
-</article> -->
+
+	<article class="slide">
+		TODO show HSL algo incrementally
+	</article>
+</section>
 
 
 <footer class="slide" id="end">
