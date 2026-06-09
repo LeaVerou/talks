@@ -2,6 +2,7 @@
 
 @import url("../client_modules/@inspirejs/core/inspire.css");
 @import url("theme/tokens.css");
+@import url("theme/tints.css");
 @import url("theme/theme.css");
 @import url("fonts.css");
 

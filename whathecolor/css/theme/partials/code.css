@@ -33,10 +33,9 @@ code:not(pre > code) {
 }
 
 pre {
-	color-scheme: dark;
 	border-radius: var(--radius-l);
-	background: var(--color-neutral-10, #333);
-	color: canvastext;
+	background: var(--color-neutral-20, #333);
+	color: white;
 	padding: .6em .8em;
 }
 

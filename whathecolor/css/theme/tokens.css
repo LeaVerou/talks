@@ -1,4 +1,4 @@
-/* @import url("https://live-colors.verou.me/dist/index.css") layer(tints); */
+@import url("https://live-colors.verou.me/dist/index.css") layer(tints);
 
 :root {
 	@supports (background: linear-gradient(in oklch, red, tan)) {

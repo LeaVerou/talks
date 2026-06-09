@@ -783,6 +783,12 @@
 	<article class="slide">
 		<h2>Components own their styling</h2>
 
+		<article class="callout">
+			<p class="title">I am a callout</p>
+			<i class="bi bi-mastodon"></i>
+			<p>Callouts are such an excellent example for design systems, because they use so many different color tokens, and they have so many variations.</p>
+		</article>
+
 		<pre><code>
 			.callout {
 				/* Until we get AccentColor… */
@@ -795,11 +801,6 @@
 				--color-text: oklch(from var(--_accent-color) var(--l-1) c h);
 			}
 		</code></pre>
-		<article class="callout">
-			<p class="title">I am a callout</p>
-			<i class="bi bi-mastodon"></i>
-			<p>Callouts are such an excellent example for design systems, because they use so many different color tokens, and they have so many variations.</p>
-		</article>
 	</article>
 
 	<article class="slide">
@@ -828,11 +829,31 @@
 				}
 			</code></pre>
 			<div class="stack">
-				<article class="danger callout">This is a danger callout</article>
-				<article class="warning callout">This is a warning callout</article>
-				<article class="success callout">This is a success callout</article>
-				<article class="brand callout">This is a brand callout</article>
-				<article class="magenta callout">This is a magenta callout, because why not?</article>
+				<article class="danger callout">
+					<p class="title">Beware</p>
+					<p>This is a danger callout</p>
+					<i class="bi bi-exclamation-circle-fill"></i>
+				</article>
+				<article class="warning callout">
+					<p class="title">Warning</p>
+					<p></p>This is a warning callout</p>
+					<i class="bi bi-exclamation-triangle-fill"></i>
+				</article>
+				<article class="success callout">
+					<p class="title">Success</p>
+					<p>This is a success callout</p>
+					<i class="bi bi-check-circle-fill"></i>
+				</article>
+				<article class="brand callout">
+					<p class="title">Brand</p>
+					<p>This is a brand callout</p>
+					<i class="bi bi-info-circle-fill"></i>
+				</article>
+				<article class="magenta callout">
+					<p class="title">Magenta</p>
+					<p>This is a magenta callout, because why not?</p>
+					<i class="bi bi-star-fill"></i>
+				</article>
 			</div>
 		</div>
 	</article>
