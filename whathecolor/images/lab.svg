@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-120 -120 240 240" overflow="visible" fill="white">
+
+<style>
+:root {
+    font: bold 10px/1 Helvetica Neue, Segoe UI, sans-serif;
+}
+
+.l-label,
+.wheel {
+    opacity: 0;
+    --dur: 6s;
+    animation: show-label var(--dur) infinite both linear;
+}
+
+.wheel {
+    animation-name: show-wheel;
+}
+
+#l-25,
+#wheel-25 {
+    opacity: 1;
+
+}
+
+#wheel-25 {
+    animation: none;
+}
+
+@keyframes show-wheel {
+    from, 30%, 66%, to {
+        opacity: 0;
+    }
+
+    33%, 60% {
+        opacity: 1;
+    }
+}
+@keyframes show-label {
+    from, 33%, to {
+        opacity: 0;
+    }
+
+    5%, 25% {
+        opacity: 1;
+    }
+}
+
+#l-25 {
+    animation-delay: 0s;
+}
+
+#l-50,
+#wheel-75 {
+    animation-delay: calc(var(--dur) / 3);
+}
+
+#l-75 {
+    animation-delay: calc(2 * var(--dur) / 3);
+}
+
+</style>
+<defs>
+    <pattern id="image-25" x="0" y="0" patternUnits="objectBoundingBox" height="100%" width="100%">
+        <image x="0" y="0" href="lab-l-25.png" width="200" height="200"></image>
+    </pattern>
+    <pattern id="image-50" x="0" y="0" patternUnits="objectBoundingBox" height="100%" width="100%">
+        <image x="0" y="0" href="lab-l-50.png" width="200" height="200"></image>
+    </pattern>
+    <pattern id="image-75" x="0" y="0" patternUnits="objectBoundingBox" height="100%" width="100%">
+        <image x="0" y="0" href="lab-l-75.png" width="200" height="200"></image>
+    </pattern>
+    <marker id="arrow-black" viewBox="0 0 10 10" refX="5" refY="5"
+        markerWidth="6" markerHeight="6"
+        orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5"
+        markerWidth="6" markerHeight="6"
+        orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="white" />
+    </marker>
+</defs>
+
+<rect x="-120" y="-120" width="100%" height="100%" fill="black" />
+
+<text x="-100" y="-100" id="l-25" class="l-label">L=25</text>
+<text x="-100" y="-100" id="l-50" class="l-label">L=50</text>
+<text x="-100" y="-100" id="l-75" class="l-label">L=75</text>
+
+<circle class="wheel" r="100" id="wheel-25" fill="url(#image-25)" />
+<circle class="wheel" r="100" id="wheel-50" fill="url(#image-50)" />
+<circle class="wheel" r="100" id="wheel-75" fill="url(#image-75)" />
+
+<g fill="none" stroke="black" stroke-width="0.3">
+  <polyline points="0 -100 0 100"/>
+  <polyline points="-100 0 100 0"/>
+</g>
+
+<g stroke="gray" stroke-opacity=".5" stroke-width="0.5" fill="none">
+    <!-- <circle r="10" /> -->
+    <circle r="20" />
+    <!-- <circle r="30" /> -->
+    <circle r="40" />
+    <!-- <circle r="50" /> -->
+    <circle r="60" />
+    <!-- <circle r="70" /> -->
+    <circle r="80" />
+    <!-- <circle r="90" /> -->
+    <circle r="100" />
+</g>
+
+<path stroke="white" d="m 40 -105 a 112 112 0 0 1 60 50" fill="none" marker-start="url(#arrow)" marker-end="url(#arrow)"  />
+<text x="80" y="-85">Hue</text>
+
+<line x2="52" y2="-30" marker-end="url(#arrow)" stroke="white" />
+<text x="10" y="-2" transform="rotate(-30, 0, 0)">Chroma</text>
+
+<text x="104" y="2">+a</text>
+<text x="-104" y="2" text-anchor="end">-a</text>
+<text x="-4" y="110">-b</text>
+<text x="-4" y="-104">+b</text>
+
+</svg>
