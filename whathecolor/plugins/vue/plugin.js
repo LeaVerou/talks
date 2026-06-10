@@ -10,21 +10,21 @@ function getValue (element) {
 }
 
 function initVueApp (container) {
-	let appInit = container.app;
+	// `.app` is an optional Vue options object; its `data` is initial state (an
+	// object here, not Vue's usual function) and the rest are passed through.
+	let { data: appData, ...appOptions } = container.app ?? {};
 	let entries = [...container.querySelectorAll("[v-model]")].map(e => [
 				e.getAttribute("v-model"),
 				getValue(e),
 			]);
 	let data = {
 		...Object.fromEntries(entries),
-		...(appInit?.data),
+		...appData,
 	};
 
 	container.app = createApp({
-		data () {
-			return data;
-		},
-		...appInit,
+		...appOptions,
+		data: () => data,
 	}).mount(container);
 	container.removeAttribute("v-app");
 }
