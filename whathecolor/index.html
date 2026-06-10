@@ -1056,12 +1056,7 @@
 
 	<article class="slide" id="hsl-gm">
 		<div>
-			<div>
-				<button @click="n = Math.max(1, n - 1)">-</button>
-				{{ n }}
-				<button @click="n = n + 1">+</button>
-				iterations
-			</div>
+			<v-stepper v-model="n">iterations</v-stepper>
 			<pre class="show-colors small no-whitespace-normalization" ref="pre">
 <code>--set-l: .97 c h;
 --clamp-s: h clamp(0, s, 100) l;
@@ -1072,7 +1067,9 @@
 		</div>
 		<script type="module">
 			import { createApp } from "vue";
+			import Stepper from "./vue/stepper.js";
 			createApp({
+				components: { "v-stepper": Stepper },
 				data() {
 					return {
 						color: "oklch(70% 0.16 205)",

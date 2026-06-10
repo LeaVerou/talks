@@ -543,3 +543,23 @@
 		background-color: var(--computed-color);
 	}
 }
+
+#hsl-gm {
+	.iterations {
+		position: absolute;
+		top: 0em;
+		display: flex;
+		gap: .3em;
+		align-items: center;
+		margin-top: 1em;
+		margin-left: 1em;
+
+		button {
+			line-height: 1;
+		}
+
+		strong {
+			font-weight: 900;
+		}
+	}
+}
