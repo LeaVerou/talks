@@ -376,8 +376,6 @@
 			}
 		}
 	}
-
-
 }
 
 .gradient {
@@ -386,10 +384,13 @@
 	justify-content: center;
 	font-weight: 900;
 	color: white;
-	-webkit-text-stroke: .1em black;
+	-webkit-text-stroke: .15em black;
+	stroke-linejoin: round;
+	stroke-linecap: round;
 	text-shadow: .07em .08em black;
 	paint-order: stroke fill;
 	background: var(--gradient, linear-gradient(var(--params, to right), var(--stops, white, black)));
+	border-radius: 0;
 
 	:where(&) {
 		height: 5em;
@@ -536,7 +537,7 @@
 	&::before {
 		content: "";
 		position: absolute;
-		right: calc(100% + 1em);
+		right: calc(100% + .8em);
 		width: 2lh;
 		height: 1lh;
 		background-color: var(--computed-color);

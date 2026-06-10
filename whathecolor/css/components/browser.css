@@ -42,4 +42,6 @@
 	max-height: -webkit-fill-available;
 	max-height: stretch;
 	line-height: 1;
+	resize: both;
+	min-height: 50vh;
 }
