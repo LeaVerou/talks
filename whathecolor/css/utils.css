@@ -16,6 +16,20 @@
 			opacity: 0;
 		}
 	}
+
+	&.hide,
+	&.hide-current,
+	&.show,
+	&.show-current {
+		opacity: 1;
+
+		&.hide.displayed,
+		&.hide-current.current,
+		&.show:not(.displayed),
+		&.show-current:not(.future) {
+			display: none;
+		}
+	}
 }
 
 /* Simple color swatch so we don't need to reach for <color-swatch> for every color we show */

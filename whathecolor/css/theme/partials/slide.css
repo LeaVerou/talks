@@ -49,12 +49,18 @@
 		margin: 0;
 		margin-bottom: 1.5rem;
 		font-size: calc(3 * var(--slide-base-font-size, 1rem));
-
 	}
 
 	> header {
 		text-align: center;
 		margin-bottom: 1em;
+	}
+}
+
+header.slide:where(section > header) {
+	.subtitle {
+		margin-top: 0rem;
+		font-weight: 700;
 	}
 }
 

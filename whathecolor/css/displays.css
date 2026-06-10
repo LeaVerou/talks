@@ -1,3 +1,7 @@
+@keyframes subpixels-show {
+	from { scale: 0 }
+}
+
 .display {
 	--xyz-2x: calc(x * 2) calc(y * 2) calc(z * 2);
 	--default-red: color(var(--rgb-space, srgb) 1 0 0);
@@ -31,20 +35,29 @@
 	}
 
 	/* Subpixel geometry */
-	&:is(.show-subpixels, .show-subpixels *)::after {
-		content: "";
-		position: absolute;
-		top: 52%;
-		left: 20%;
-		translate: 50% -50%;
-		border: .4rem solid;
-		border-radius: 50%;
-		width: 10rem;
-		aspect-ratio: 1;
-		background: var(--subpixel-geometry);
-		background-size: var(--subpixel-geometry-tile-x) var(--subpixel-geometry-tile-y);
-		background-color: black;
+	&:is(.show-subpixels, .show-subpixels *) {
+		&::after {
+			content: "";
+			position: absolute;
+			top: 52%;
+			left: 20%;
+			translate: 50% -50%;
+			border: .4rem solid;
+			border-radius: 50%;
+			width: 10rem;
+			aspect-ratio: 1;
+			background: var(--subpixel-geometry);
+			background-size: var(--subpixel-geometry-tile-x) var(--subpixel-geometry-tile-y);
+			background-color: black;
+			transform-origin: 0 0;
+		}
+
+		&:is(:target *)::after {
+			animation: subpixels-show 1s 1s both;
+		}
 	}
+
+
 
 	figcaption {
 		contain: inline-size;
@@ -136,3 +149,4 @@
 		--magenta: color(srgb 0.9124 0.27551 0.50037);
 	}
 }
+

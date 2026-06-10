@@ -5,8 +5,8 @@
 @import url("css/theme/theme.css") layer(theme);
 @import url("css/fonts.css") layer(theme);
 @import url("css/theme.css") layer(theme);
-@import url("css/utils.css") layer(theme.utils);
-@import url("client_modules/color-elements/src/color-slider/color-slider.css") layer(theme.utils);
+@import url("css/utils.css") layer(theme);
+@import url("client_modules/color-elements/src/color-slider/color-slider.css") layer(theme);
 @import url("css/displays.css");
 @import url("css/callouts.css");
 
@@ -78,7 +78,7 @@
 		display: flex;
 		font-size: 40vh;
 		position: absolute;
-		z-index: 1;
+		z-index: 3;
 		top: 50%;
 		left: 50%;
 		translate: -50% -50%;
@@ -276,7 +276,8 @@
 	}
 }
 
-#standardized-rgb {
+#standardized-rgb,
+#standardized-rgb-2 {
 	.display {
 		--color: color(display-p3 1 0 0.4);
 
@@ -337,19 +338,21 @@
 
 		.distances {
 			position: absolute;
-			inset-inline: 0;
-			inset-block-start: 2em;
+			inset-inline: calc(50% / var(--num-colors));
+			inset-block-start: 1.5em;
 			display: flex;
 			text-shadow: 0 1h white;
 			font-weight: 600;
 			font-size: 80%;
 
-			> span {
+			> .distance {
 				flex: 1;
 				display: flex;
 				justify-content: space-between;
+				align-items: center;
 				color: canvastext;
 				gap: .2em;
+
 
 				--arrow-thickness: .12em;
 				--arrow-y: 52%;
@@ -372,6 +375,29 @@
 					/* background-color: cyan; */
 					text-align: end;
 					background-position: left;
+				}
+
+				> div {
+					display: flex;
+					flex-flow: column;
+
+					> span {
+						display: flex;
+						flex-flow: row;
+						gap: .3em;
+
+						&::before {
+							opacity: .6;
+						}
+					}
+
+					.coords-d::before {
+						content: "d:"
+					}
+
+					.deltae::before {
+						content: "ΔE:"
+					}
 				}
 			}
 		}

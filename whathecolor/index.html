@@ -130,7 +130,7 @@
 			</figure>
 
 		</div>
-		<div class="flex" style="align-self: stretch" :style="{'--r': r/255, '--g': g/255, '--b': b/255}">
+		<div class="flex delayed" style="align-self: stretch" :style="{'--r': r/255, '--g': g/255, '--b': b/255}">
 			<label class="r">Red: <input type="range" name="r" v-model="r" min="0" max="255" value="255" class="color-slider"></label>
 			<label class="g">Green: <input type="range" name="g" v-model="g" min="0" max="255" value="255" class="color-slider"></label>
 			<label class="b">Blue: <input type="range" name="b" v-model="b" min="0" max="255" value="255" class="color-slider"></label>
@@ -276,11 +276,119 @@
 	<article class="slide">
 		<iframe src="https://whathecolor.com/?color=%23947480" class="browser"></iframe>
 		<details class="notes">
-			As often happens, the closer a UI is to the machine, the farther it is from humans.
+
 			RGB is efficient, but *hard* to manipulate by humans or reason about.
 
 			These hex codes became opaque mystery meat tokens to copy and paste.
 			Universal, but indecipherable except to the most initiated.
+		</details>
+	</article>
+
+	<article class="slide" style="flex-flow: row">
+		<img src="images/faucet-1.jpg" alt="">
+		<img src="images/faucet-2.jpg" alt="" style="scale: 0.75">
+		<details class="notes">
+			As often happens, the closer a UI is to the machine, the farther it is from humans.
+		</details>
+	</article>
+
+	<article class="slide" id="humans-colors">
+		<div class="swatch" style="--color: hsl(20 25% 70%); width: 50vw; height: 30vh;">
+			<code class="delayed" data-index="2">color(srgb 0.625 0.458 0.375)</code>
+		</div>
+
+		<div class="delayed-children quotes">
+			<q>Light muted brown</q>
+			<q>Dark beige</q>
+			<q>Light brown</q>
+			<div data-index="2">
+				<q>About 60% red, a little less green and even less blue</q>
+				<span class="delayed">— No-one, ever</span>
+			</div>
+		</div>
+
+		<details class="notes">
+			Let’s try this little experiment.
+			Try to describe this color to the person next to you.
+			Suppose you wanted to explain to your partner what color [something] you wanted them to buy.
+
+			When we talk about colors, we usually talk about them in terms of a pure hue and some modifiers like light, dark, bright, muted, grayish, greenish etc.
+			Studies disagree on the exact hues and modifiers, but they all find the same general approach.
+
+		</details>
+	</article>
+
+	<article class="slide" id="polar">
+		<h3>Polar color spaces</h3>
+		<form id="polar_picker" class="flex" v-app>
+			<div>
+				<hue-wheel name="hue" :space="hsl" :color="color"
+					@input="color = $event.target.color"></hue-wheel>
+
+				<channel-slider class="xdelayed" name="l" :space="hsl" channel="l" v-model="color"></channel-slider>
+			</div>
+
+			<color-swatch name="swatch" class="xdelayed" size="large" :color="color"></color-swatch>
+			<script type="slide">
+				polar_picker.app = {
+					color: "hsl(180 50 50)",
+					space: "hsl"
+				};
+			</script>
+		</form>
+
+		<script type="slide xdelayed">
+			polar_picker.elements.hue.channel = "s";
+		</script>
+		<style>
+			@scope {
+				:scope > form {
+					flex: 1;
+					align-self: stretch;
+
+					> div {
+						display: flex;
+						flex-direction: column;
+						gap: 1em;
+					}
+
+					hue-wheel {
+						width: 100%;
+					}
+
+					channel-slider {
+						flex: 1;
+						--slider-height: 4em;
+
+						&::part(channel-info),
+						&::part(spinner) {
+							display: none;
+						}
+					}
+				}
+			}
+		</style>
+		<details class="notes">
+			Polar color spaces consist of a hue angle plus two components that control ligthness and chroma/saturation.
+			They differ in their characteristics, but all share the goal of improving human usability of an otherwise rectangular color space.
+		</details>
+	</article>
+
+	<article class="slide" id="scales-rgb-gray">
+		<color-scale class="compact show-distances" colors="color(srgb 0 0 0), color(srgb 0.5 0.5 0.5), color(srgb 1 1 1)">
+			<div class="distances delayed"></div>
+		</color-scale>
+
+		<color-scale class="compact delayed show-distances" colors="color(srgb 1 0.5 1), color(srgb 1 0 1), color(srgb 0.5 0 1)">
+			<div class="distances delayed"></div>
+		</color-scale>
+
+		<color-scale class="compact xdelayed show-distances" colors="color(srgb 1 0 1), color(srgb 0 0 1), color(srgb 0.5 0 1)">
+			<div class="distances xdelayed"></div>
+		</color-scale>
+
+		<details class="notes">
+			This is why RGB is a poor choice for gradient interpolation
 		</details>
 	</article>
 
@@ -337,7 +445,7 @@
 					<th>B</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="delayed-children">
 				<tr>
 					<th>Device RGB (raw)</th>
 					<td>255</td>
@@ -402,11 +510,21 @@
 				color: var(--color-red);
 				font-weight: bold;
 			}
+
 		</style>
 	</article>
 
+	<article class="chromaticity slide">
+		<h3>u*v* <a href="https://en.wikipedia.org/wiki/Chromaticity">chromaticity</a> diagram</h3>
+		<object data="img/chromaticity.svg"></object>
+	</article>
+
+	<article class="chromaticity slide">
+		<h3>Typical screen gamut vs print</h3>
+		<object data="img/chromaticity.svg#srgb-cmyk"></object>
+	</article>
+
 	<article class="slide" id="summary">
-		<h2>Summary</h2>
 		<table>
 			<thead>
 				<tr>
@@ -462,29 +580,7 @@
 		</table>
 	</article>
 
-	<article class="slide" id="scales-rgb-gray">
-		<color-scale class="compact" colors="color(srgb 0 0 0), color(srgb 0.5 0.5 0.5), color(srgb 1 1 1)">
-			<div class="distances delayed">
-				<span class="dark">√3&times;0.5</span>
-				<span>√3&times;0.5</span>
-			</div>
-		</color-scale>
 
-
-		<color-scale class="compact delayed" colors="color(srgb 0 0 0), color(srgb 0.25 0.25 0.25), color(srgb 0.5 0.5 0.5), color(srgb 0.75 0.75 0.75), color(srgb 1 1 1)">
-			<div class="distances delayed">
-				<span class="dark">√3&times;0.25</span>
-				<span class="dark">√3&times;0.25</span>
-				<span>√3&times;0.25</span>
-				<span>√3&times;0.25</span>
-			</div>
-		</color-scale>
-
-
-		<code class="gradient stretch delayed" style="height: 5em; background: linear-gradient(to right in srgb, rgb(0, 0, 0), rgb(255, 255, 255))">
-			linear-gradient(to right in srgb, black, white)
-		</code>
-	</article>
 
 	<article class="slide" data-insert="#summary"></article>
 </section>
@@ -494,31 +590,7 @@
 		<h2>Polar spaces</h2>
 	</header>
 
-	<article class="slide" id="humans-colors">
-		<div class="swatch" style="--color: hsl(20 25% 70%); width: 50vw; height: 30vh;">
-			<code class="delayed" data-index="2">color(srgb 0.625 0.458 0.375)</code>
-		</div>
 
-		<div class="delayed-children quotes">
-			<q>Light muted brown</q>
-			<q>Dark beige</q>
-			<q>Light brown</q>
-			<div data-index="2">
-				<q>About 60% red, a little less green and even less blue</q>
-				<span class="delayed">— No-one, ever</span>
-			</div>
-		</div>
-
-		<details class="notes">
-			Let’s try this little experiment.
-			Try to describe this color to the person next to you.
-			Suppose you wanted to explain to your partner what color [something] you wanted them to buy.
-
-			When we talk about colors, we usually talk about them in terms of a pure hue and some modifiers like light, dark, bright, muted, grayish, greenish etc.
-			Studies disagree on the exact hues and modifiers, but they all find the same general approach.
-
-		</details>
-	</article>
 
 	<article class="slide" id="hsl">
 		<form id="hsl_picker" class="flex">

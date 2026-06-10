@@ -1,57 +1,240 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="49.1 26.0 612.6 727.9"
-     width="613" height="728"
-     font-family="ui-sans-serif, system-ui, sans-serif" style="max-width:100%;height:auto">
-  <defs>
-    <style>
-      .locus { fill:none; stroke:#222; stroke-width:0.0025; stroke-linejoin:round; }
-      .gamut { fill:none; stroke-width:0.0035; stroke-linejoin:round; }
-      .leg   { font-size:14px; fill:#222; }
-      .lbl   { font-size:13px; fill:#444; }
-    </style>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -600 700 590" overflow="visible">
+<desc>Show u*,v* UCS diagram</desc>
+<style>
+text {
+	font: bold 160%/1.5 Helvetica Neue, Segoe UI, sans-serif;
+	fill: white;
+}
 
-  <rect x="49.1" y="26.0" width="612.6" height="727.9" fill="#fff"/>
+.color-space {
+	opacity: 0;
+	transition: 1s;
+}
 
-  <!-- xy space: +y up, raw chromaticity coords. A gamut = one closed <polygon> of the
-       R,G,B primaries + three <circle>s (red/green/blue) at the same coords, e.g.
-         <polygon class="gamut" stroke="#888" points="0.64 0.33 0.30 0.60 0.15 0.06"/>
-         <circle cx="0.64" cy="0.33" r="0.0075" fill="#e53935"/>  (R)
-         <circle cx="0.30" cy="0.60" r="0.0075" fill="#2e9e3a"/>  (G)
-         <circle cx="0.15" cy="0.06" r="0.0075" fill="#1e88e5"/>  (B) -->
-  <g transform="translate(60.0 740.0) scale(800.0 -800.0)">
-      <path class="locus" d="M 0.1741,0.0050 Q 0.1740,0.0050 0.1739,0.0049 Q 0.1738,0.0049 0.1737,0.0049 Q 0.1736,0.0049 0.1734,0.0049 Q 0.1733,0.0048 0.1731,0.0048 Q 0.1730,0.0048 0.1728,0.0048 Q 0.1726,0.0048 0.1724,0.0048 Q 0.1721,0.0048 0.1718,0.0049 Q 0.1714,0.0051 0.1709,0.0054 Q 0.1703,0.0058 0.1696,0.0063 Q 0.1689,0.0069 0.1679,0.0077 Q 0.1669,0.0086 0.1656,0.0097 Q 0.1644,0.0109 0.1628,0.0123 Q 0.1611,0.0138 0.1588,0.0158 Q 0.1566,0.0177 0.1538,0.0202 Q 0.1510,0.0227 0.1475,0.0262 Q 0.1440,0.0297 0.1397,0.0348 Q 0.1355,0.0399 0.1298,0.0488 Q 0.1241,0.0578 0.1169,0.0723 Q 0.1096,0.0868 0.1005,0.1098 Q 0.0913,0.1327 0.0800,0.1667 Q 0.0687,0.2007 0.0571,0.2478 Q 0.0454,0.2950 0.0345,0.3538 Q 0.0235,0.4127 0.0158,0.4756 Q 0.0082,0.5384 0.0060,0.5966 Q 0.0039,0.6548 0.0089,0.7025 Q 0.0139,0.7502 0.0264,0.7811 Q 0.0389,0.8120 0.0566,0.8229 Q 0.0743,0.8338 0.0943,0.8300 Q 0.1142,0.8262 0.1345,0.8160 Q 0.1547,0.8059 0.1738,0.7937 Q 0.1929,0.7816 0.2112,0.7679 Q 0.2296,0.7543 0.2477,0.7393 Q 0.2658,0.7243 0.2837,0.7083 Q 0.3016,0.6923 0.3195,0.6756 Q 0.3374,0.6588 0.3552,0.6417 Q 0.3731,0.6245 0.3909,0.6071 Q 0.4087,0.5896 0.4264,0.5721 Q 0.4441,0.5547 0.4615,0.5374 Q 0.4788,0.5202 0.4956,0.5034 Q 0.5125,0.4866 0.5286,0.4705 Q 0.5448,0.4544 0.5600,0.4393 Q 0.5752,0.4242 0.5891,0.4103 Q 0.6029,0.3965 0.6149,0.3845 Q 0.6270,0.3725 0.6376,0.3619 Q 0.6482,0.3514 0.6570,0.3427 Q 0.6658,0.3340 0.6729,0.3268 Q 0.6801,0.3197 0.6858,0.3140 Q 0.6915,0.3083 0.6961,0.3038 Q 0.7006,0.2993 0.7043,0.2956 Q 0.7079,0.2920 0.7109,0.2889 Q 0.7140,0.2859 0.7165,0.2834 Q 0.7190,0.2809 0.7210,0.2789 Q 0.7230,0.2769 0.7245,0.2754 Q 0.7260,0.2740 0.7271,0.2729 Q 0.7283,0.2717 0.7291,0.2709 Q 0.7300,0.2700 0.7306,0.2694 Q 0.7311,0.2689 0.7315,0.2684 Q 0.7320,0.2680 0.7324,0.2676 Q 0.7327,0.2673 0.7330,0.2670 Q 0.7334,0.2666 0.7337,0.2663 Q 0.7340,0.2660 0.7342,0.2658 Q 0.7344,0.2656 0.7345,0.2655 Q 0.7346,0.2654 0.7347,0.2653 Q 0.7347,0.2653 0.7347,0.2653 Z"/>
-      <circle cx="0.3127" cy="0.3290" r="0.006" fill="#000"/>
-      <polygon class="gamut" points="0.7347 0.2653 0.1596 0.8404 0.0366 0.0001" stroke="#d81b60"><title>ProPhoto</title></polygon>
-      <circle cx="0.7347" cy="0.2653" r="0.0075" fill="#e53935"/>
-      <circle cx="0.1596" cy="0.8404" r="0.0075" fill="#2e9e3a"/>
-      <circle cx="0.0366" cy="0.0001" r="0.0075" fill="#1e88e5"/>
-      <polygon class="gamut" points="0.708 0.292 0.17 0.797 0.131 0.046" stroke="#7e57c2"><title>Rec.2020</title></polygon>
-      <circle cx="0.708" cy="0.292" r="0.0075" fill="#e53935"/>
-      <circle cx="0.17" cy="0.797" r="0.0075" fill="#2e9e3a"/>
-      <circle cx="0.131" cy="0.046" r="0.0075" fill="#1e88e5"/>
-      <polygon class="gamut" points="0.68 0.32 0.265 0.69 0.15 0.06" stroke="#00897b"><title>Display P3</title></polygon>
-      <circle cx="0.68" cy="0.32" r="0.0075" fill="#e53935"/>
-      <circle cx="0.265" cy="0.69" r="0.0075" fill="#2e9e3a"/>
-      <circle cx="0.15" cy="0.06" r="0.0075" fill="#1e88e5"/>
-      <polygon class="gamut" points="0.64 0.33 0.3 0.6 0.15 0.06" stroke="#fb8c00"><title>sRGB</title></polygon>
-      <circle cx="0.64" cy="0.33" r="0.0075" fill="#e53935"/>
-      <circle cx="0.3" cy="0.6" r="0.0075" fill="#2e9e3a"/>
-      <circle cx="0.15" cy="0.06" r="0.0075" fill="#1e88e5"/>
-      <polygon class="gamut" points="0.5765 0.3381 0.3395 0.5692 0.1513 0.09" stroke="#455a64"><title>MacBook Air 2013</title></polygon>
-      <circle cx="0.5765" cy="0.3381" r="0.0075" fill="#e53935"/>
-      <circle cx="0.3395" cy="0.5692" r="0.0075" fill="#2e9e3a"/>
-      <circle cx="0.1513" cy="0.09" r="0.0075" fill="#1e88e5"/>
-  </g>
+.color-space:target,
+.color-space.show {
+	opacity: 1;
+}
 
-  <text x="316.0" y="484.0" class="lbl">D65</text>
-  <line x1="466.0" y1="48.0" x2="484.0" y2="48.0" stroke="#d81b60" stroke-width="3"/>
-  <text x="490.0" y="52.0" class="leg">ProPhoto</text>
-  <line x1="466.0" y1="70.0" x2="484.0" y2="70.0" stroke="#7e57c2" stroke-width="3"/>
-  <text x="490.0" y="74.0" class="leg">Rec.2020</text>
-  <line x1="466.0" y1="92.0" x2="484.0" y2="92.0" stroke="#00897b" stroke-width="3"/>
-  <text x="490.0" y="96.0" class="leg">Display P3</text>
-  <line x1="466.0" y1="114.0" x2="484.0" y2="114.0" stroke="#fb8c00" stroke-width="3"/>
-  <text x="490.0" y="118.0" class="leg">sRGB</text>
-  <line x1="466.0" y1="136.0" x2="484.0" y2="136.0" stroke="#455a64" stroke-width="3"/>
-  <text x="490.0" y="140.0" class="leg">MacBook Air 2013</text>
+.color-space polygon {
+	fill: none;
+	stroke: var(--color, white);
+	stroke-width: 3px;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.color-space text {
+	fill: var(--color, white);
+}
+
+.color-space circle {
+	r: 5px;
+	fill: var(--color, white);
+}
+
+.color-space line {
+	stroke: var(--color);
+	stroke-width: 2px;
+}
+
+#cmyk text {
+	font-size: 150%
+}
+
+</style>
+<defs>
+	<path id="tongue" d="M 256.804  -16.594
+	  L 256.637  -16.593
+	  L 256.418  -16.266
+	  L 256.085  -16.263
+	  L 255.699  -15.935
+	  L 255.2  -15.932
+	  L 254.535  -15.927
+	  L 253.704  -15.921
+	  L 252.207  -16.885
+	  L 249.615  -19.128
+	  L 246.12  -22.623
+	  L 241.063  -27.948
+	  L 234.69  -35.011
+	  L 226.63  -43.68
+	  L 216.06  -54.946
+	  L 203.34  -68.779
+	  L 187.72  -87.114
+	  L 168.963  -111.946
+	  L 144.076  -150.984
+	  L 114.692  -204.374
+	  L 82.816  -270.829
+	  L 52.134  -342.686
+	  L 28.159  -411.679
+	  L 11.891  -469.843
+	  L 3.473  -513.066
+	  L 1.438  -543.162
+	  L 4.643  -563.843
+	  L 5.859  -567.036
+	  L 7.213  -569.939
+	  L 8.771  -572.575
+	  L 10.438  -574.905
+	  L 12.285  -576.969
+	  L 14.22  -578.754
+	  L 16.315  -580.309
+	  L 18.482  -581.618
+	  L 20.756  -582.743
+	  L 23.116  -583.667
+	  L 25.566  -584.422
+	  L 28.05  -585.009
+	  L 30.633  -585.478
+	  L 33.285  -585.851
+	  L 36.008  -586.142
+	  L 50.059  -586.754
+	  L 64.335  -586.523
+	  L 79.224  -585.616
+	  L 95.269  -584.113
+	  L 112.701  -582.069
+	  L 131.858  -579.553
+	  L 153.101  -576.592
+	  L 176.586  -573.182
+	  L 202.596  -569.364
+	  L 231.17  -565.107
+	  L 262.343  -560.441
+	  L 295.958  -555.411
+	  L 331.527  -550.115
+	  L 368.06  -544.626
+	  L 403.475  -539.334
+	  L 437.943  -534.187
+	  L 469.171  -529.561
+	  L 496.768  -525.419
+	  L 520.257  -521.894
+	  L 539.92  -518.977
+	  L 556.503  -516.489
+	  L 570.88  -514.332
+	  L 583.036  -512.508
+	  L 592.866  -511.07
+	  L 600.496  -509.926
+	  L 606.437  -509.035
+	  L 610.879  -508.368
+	  L 613.777  -507.933
+	  L 616.162  -507.576
+	  L 618.025  -507.296
+	  L 619.897  -507.015
+	  L 621.507  -506.774
+	  L 622.584  -506.612
+	  L 623.123  -506.531
+	  L 623.393  -506.491
+	  L 623.393  -506.491
+	  L 623.393  -506.491
+	  L 623.393  -506.491
+	  L 623.393  -506.491
+	  L 623.393  -506.491
+	  L 623.393  -506.491
+	  L 623.393  -506.491
+	  L 623.393  -506.491
+	  L 623.393  -506.491
+	  L 623.393  -506.491
+	  L 623.393  -506.491
+	  L 623.393  -506.491
+	  L 623.393  -506.491
+	  L 623.393  -506.491
+	  L 623.393  -506.491
+	  L 623.393  -506.491
+	  Z"/>
+	<mask id="tongueMask">
+		<use href="#tongue" fill="white" />
+	</mask>
+	<clipPath id="tongueClip">
+		<use href="#tongue" />
+	</clipPath>
+</defs>
+
+<g id="base" mask="url(#tongueMask)">
+<foreignObject x="0" y="-590" width="100%" height="100%"
+	style="background:
+		radial-gradient(at 31.5% 20.5%, white, transparent 25%),
+		conic-gradient(from 80deg at 31.5% 20.5%, red, fuchsia, blue 105deg, aqua, lime 240deg, yellow, red);">
+</foreignObject>
+<!-- tongue -->
+<use href="#tongue" fill="none" />
+</g>
+
+<!-- White point -->
+<circle r="6" cx="197.83" cy="-468.32" fill="white" stroke="#770000" stroke-width="2"/>
+
+<!-- 2013 MBA -->
+<g style="--color: hsl(220, 10%, 70%)" class="color-space" id="mba2013">
+	<polygon stroke-dasharray="10 8" points="
+		390.56942515497445, -515.3788828291725
+		148.3925956684223, -559.7832025700986
+		160.2160216021602, -214.433208026685"/>
+	<circle cx="169" cy="-245" />
+	<line x1="169" y1="-245" x2="320" y2="-80" />
+	<text x="330" y="-60">2013 MacBook Air</text>
+</g>
+
+<!-- CMYK Coated Fogra39 -->
+<g style="--color: hsl(220, 10%, 90%)" class="color-space" id="coated-cmyk">
+	<polygon points="
+		116.44722528663361, -369.08153876305255
+		188.08834574836739, -270.3017120722187
+		385.84368625165466, -438.71705643583797
+		426.8155565822759, -519.0463607322464
+		218.67094411857949, -555.0051292316984
+		 97.89275075285607, -538.006803973048"/>
+	<circle cx="190" cy="-290" />
+	<line x1="190" y1="-290" x2="360" y2="-130" />
+	<text x="350" y="-100">CMYK (Coated Fogra 39)</text>
+</g>
+
+<!-- CMYK Uncoated Fogra 29 -->
+<g style="--color: hsl(220, 10%, 90%)" class="color-space" id="cmyk">
+	<polygon points="
+		123.56141586472318, -375.41669120774596
+		175.52180146844729, -317.06953830328866
+		359.7435743083791, -439.01925462043856
+		417.9633732588927, -516.0632573048524
+		222.57864167186453, -554.7144993565686
+		104.88392488310494, -536.5412948408318"/>
+	<circle cx="180" cy="-335" />
+	<line x1="180" y1="-335" x2="375" y2="-155" />
+	<text x="380" y="-140">CMYK (Uncoated Fogra 29)</text>
+</g>
+
+
+<!-- display-p3000
+red 496.35036, 525.54745
+green 98.60465, 577.67442
+blue 175.4386, 157.89474
+white 197.83001, 468.31999
+-->
+<g style="--color: hsl(220, 10%, 50%)" class="color-space" id="p3">
+	<polygon points="496.35, -525.54 98.6, -577.67 175.44, -157.89"/>
+	<text x="500" y="-530">P3</text>
+</g>
+
+
+<!-- sRGB
+red 450.70423, 522.88732
+green  125, 562.5
+blue 175.4386, 157.89474
+white 197.83001, 468.31999
+-->
+<g style="--color: hsl(220, 10%, 10%)" class="color-space" id="srgb">
+	<polygon points="450.7, -522.887 125, -562.5 175.44, -157.89"/>
+	<circle cx="432" cy="-515" />
+	<line x1="432" y1="-515" x2="490" y2="-470" />
+	<text x="490" y="-450">sRGB</text>
+</g>
+
+<script>
+function hashchange() {
+
+	let ids = location.hash.slice(1).split("-");
+	for (let space of document.querySelectorAll(".color-space")) {
+		space.classList.toggle("show", ids.includes(space.id) || ids.includes("all"));
+	}
+}
+
+hashchange();
+window.addEventListener("hashchange", hashchange);
+</script>
+
 </svg>

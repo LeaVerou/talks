@@ -6,6 +6,22 @@
 @import url("theme/theme.css");
 @import url("fonts.css");
 
+:root {
+	--rainbow-stripes:
+		var(--color-red) 0 calc(100%/8),
+		var(--color-orange) 0 calc(2 * 100%/8),
+		var(--color-yellow) 0 calc(3 * 100%/8),
+		var(--color-green) 0 calc(4 * 100%/8),
+		var(--color-cyan) 0 calc(5 * 100%/8),
+		var(--color-blue) 0 calc(6 * 100%/8),
+		var(--color-purple) 0 calc(7 * 100%/8),
+		var(--color-magenta) 0 calc(8 * 100%/8);
+}
+
+header.slide:is(section > header) {
+	background: linear-gradient(to right, var(--rainbow-stripes)) 0 0 / 100% 1rem repeat-x black;
+}
+
 color-scale {
 	align-self: stretch;
 
