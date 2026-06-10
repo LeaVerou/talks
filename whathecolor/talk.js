@@ -1,8 +1,8 @@
 import "./prism.js";
 import Inspire from "inspirejs.org";
-// import "color-elements";
-// import Color from "colorjs.io";
-// import "./mba2013.js";
+import "color-elements";
+import Color from "colorjs.io";
+import "./mba2013.js";
 
 const repos = {
 	"apps.colorjs.io": "color-js/apps",
@@ -56,3 +56,4 @@ Inspire.plugins.register({
 	},
 });
 
+import "./js/show-colors.js";

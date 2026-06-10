@@ -1,4 +1,5 @@
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1/font/bootstrap-icons.css");
+/* @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1/font/bootstrap-icons.css"); */
+@import url("client_modules/bootstrap-icons/font/bootstrap-icons.css");
 @import url("client_modules/@inspirejs/core/inspire.css") layer(inspire);
 @import url("css/theme/tokens.css") layer(theme);
 @import url("css/theme/theme.css") layer(theme);
@@ -7,6 +8,7 @@
 @import url("css/utils.css") layer(theme.utils);
 @import url("client_modules/color-elements/src/color-slider/color-slider.css") layer(theme.utils);
 @import url("css/displays.css");
+@import url("css/callouts.css");
 
 @keyframes cover {
 	to {
@@ -423,102 +425,120 @@
 	}
 }
 
-.callout {
-	font-size: 50%;
-	border: 1px solid;
-	padding: .6em 1em;
-	border-radius: var(--radius-l);
+.callout-demos {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: .5em 2em;
 
-	> * {
-		margin: 0;
-	}
 
-	.title {
+	> div {
+		display: grid;
+		grid-template-columns: subgrid;
+		grid-column-end: span 2;
+		gap: .5em 1em;
+		align-items: start;
 
+		.callout {
+			min-width: 25vw;
+		}
 	}
 }
 
+.palette {
+	& table, table& {
+		tbody {
+			.swatch {
+				display: flex;
+			}
 
-.callout {
-	margin-bottom: 1rem;
+			thead th {
+				font-weight: 700;
+			}
 
-	/* Until we get AccentColor… */
-	--_accent-color: var(--accent-color, var(--color-neutral));
+			tbody th {
+				padding: 0;
+			}
 
-	--color-border: var(--color-gray-80);
-	--color-bg: var(--color-gray-95);
-	--color-icon: var(--color-gray);
-	--color-heading: var(--color-gray-40);
-	--color-text: var(--color-gray-10);
+			td {
+				--tr-color: var(--color); /* workaround for lack of inherit() */
+				padding-block: 0;
+				padding-inline: .3em;
 
-	background: var(--color-bg);
-	border: 1px solid var(--color-border);
-	color: var(--color-text);
-	padding: 1em;
-	border-radius: 0.5em;
-	display: grid;
-	grid-template-columns: auto 1fr;
-	gap: 0 1em;
-	align-items: start;
+				.swatch {
+					--color: oklch(from var(--tr-color) var(--l) c h);
+				}
+			}
 
-	> :not(i.bi) {
-		grid-column: 2;
-		margin: 0;
+			td:nth-of-type(1) { --l: var(--l-90); }
+			td:nth-of-type(2) { --l: var(--l-80); }
+			td:nth-of-type(3) { --l: var(--l-70); }
+			td:nth-of-type(4) { --l: var(--l-60); }
+			td:nth-of-type(5) { --l: var(--l-50); }
+			td:nth-of-type(6) { --l: var(--l-40); }
+			td:nth-of-type(7) { --l: var(--l-30); }
+			td:nth-of-type(8) { --l: var(--l-20); }
+			td:nth-of-type(9) { --l: var(--l-10); }
+
+			.callout {
+				padding-block: .5em;
+				font-size: 50%;
+
+				--color-90: oklch(from var(--color) var(--l-90) c h);
+				--color-80: oklch(from var(--color) var(--l-80) c h);
+				--color-70: oklch(from var(--color) var(--l-70) c h);
+				--color-60: oklch(from var(--color) var(--l-60) c h);
+				--color-50: oklch(from var(--color) var(--l-50) c h);
+				--color-40: oklch(from var(--color) var(--l-40) c h);
+				--color-30: oklch(from var(--color) var(--l-30) c h);
+				--color-20: oklch(from var(--color) var(--l-20) c h);
+				--color-10: oklch(from var(--color) var(--l-10) c h);
+			}
+
+				> i {
+					grid-row: 1;
+				}
+		}
+	}
+}
+
+@property --offset {
+	syntax: '<length>';
+	inherits: true;
+	initial-value: 0px;
+}
+
+#why {
+	h2 {
+		font-size: var(--font-size-4xl);
+		translate: calc(-4 * var(--offset)) calc(-4 * var(--offset));
+		text-shadow:
+			var(--offset) var(--offset) 0 var(--color-red),
+			calc(var(--offset) * 2) calc(var(--offset) * 2) 0 var(--color-orange),
+			calc(var(--offset) * 3) calc(var(--offset) * 3) 0 var(--color-yellow),
+			calc(var(--offset) * 4) calc(var(--offset) * 4) 0 var(--color-green),
+			calc(var(--offset) * 5) calc(var(--offset) * 5) 0 var(--color-cyan),
+			calc(var(--offset) * 6) calc(var(--offset) * 6) 0 var(--color-blue),
+			calc(var(--offset) * 7) calc(var(--offset) * 7) 0 var(--color-indigo),
+			calc(var(--offset) * 8) calc(var(--offset) * 8) 0 var(--color-purple),
+			calc(var(--offset) * 9) calc(var(--offset) * 9) 0 var(--color-magenta)
+			;
+		transition: 1s;
 	}
 
-	> i.bi {
-		grid-column: 1;
-		grid-row: 1 / -1;
-		font-size: 1lh;
-		color: var(--color-icon);
+	&:target > h2 {
+		--offset: .05em;
 	}
+}
 
-	.title {
-		color: var(--color-heading);
-		font-weight: 600;
-	}
+.property.token.has-color {
+	position: relative;
 
-	&.danger,
-	&.red {
-		--color-bg: var(--color-red-95);
-		--color-border: var(--color-red-80);
-		--color-icon: var(--color-red);
-		--color-heading: var(--color-red-40);
-		--color-text: var(--color-red-10);
-	}
-
-	&.warning,
-	&.yellow {
-		--color-border: var(--color-yellow-80);
-		--color-bg: var(--color-yellow-95);
-		--color-icon: var(--color-yellow);
-		--color-heading: var(--color-yellow-40);
-		--color-text: var(--color-yellow-10);
-	}
-
-	&.success,
-	&.green {
-		--color-bg: var(--color-green-95);
-		--color-border: var(--color-green-80);
-		--color-icon: var(--color-green);
-		--color-heading: var(--color-green-40);
-		--color-text: var(--color-green-10);
-	}
-
-	&.brand,
-	&.indigo {
-		--color-bg: var(--color-indigo-95);
-		--color-border: var(--color-indigo-80);
-		--color-icon: var(--color-indigo);
-		--color-heading: var(--color-indigo-40);
-		--color-text: var(--color-indigo-10);
-	}
-
-	&.magenta {
-		--color-bg: var(--color-magenta-95);
-		--color-border: var(--color-magenta-80);
-		--color-icon: var(--color-magenta);
-		--color-heading: var(--color-magenta-40);
-		--color-text: var(--color-magenta-10);
+	&::before {
+		content: "";
+		position: absolute;
+		right: calc(100% + 1em);
+		width: 2lh;
+		height: 1lh;
+		background-color: var(--computed-color);
 	}
 }

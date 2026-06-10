@@ -10,21 +10,21 @@ function getValue (element) {
 }
 
 function initVueApp (container) {
+	let appInit = container.app;
 	let entries = [...container.querySelectorAll("[v-model]")].map(e => [
 				e.getAttribute("v-model"),
 				getValue(e),
 			]);
 	let data = {
 		...Object.fromEntries(entries),
-		...container.app,
+		...(appInit?.data),
 	};
 
 	container.app = createApp({
 		data () {
-
-
 			return data;
 		},
+		...appInit,
 	}).mount(container);
 	container.removeAttribute("v-app");
 }

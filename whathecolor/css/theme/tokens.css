@@ -1,5 +1,3 @@
-@import url("https://live-colors.verou.me/dist/index.css") layer(tints);
-
 :root {
 	@supports (background: linear-gradient(in oklch, red, tan)) {
 		--in-oklch: in oklch;
@@ -10,7 +8,7 @@
 	--color-red: oklch(54% 0.24 25);
 	--color-orange: oklch(74% 0.19 58);
 	--color-yellow: oklch(88% 0.2 95);
-	--color-green: oklch(69% 0.24 139);
+	--color-green: oklch(70% 0.24 135);
 	--color-cyan: oklch(69% 0.15 205);
 	--color-blue: oklch(56% 0.24 260);
 	--color-indigo: oklch(50% 0.27 275);
@@ -41,6 +39,17 @@
 	--color-accent-4: var(--color-orange);
 	--color-accent-5: var(--color-blue);
 	--color-accent-6: var(--color-yellow);
+	--color-neutral: var(--color-gray);
+
+	--color-neutral-10: var(--color-gray-10);
+	--color-neutral-20: var(--color-gray-20);
+	--color-neutral-30: var(--color-gray-30);
+	--color-neutral-40: var(--color-gray-40);
+	--color-neutral-50: var(--color-gray-50);
+	--color-neutral-60: var(--color-gray-60);
+	--color-neutral-70: var(--color-gray-70);
+	--color-neutral-80: var(--color-gray-80);
+	--color-neutral-90: var(--color-gray-90);
 
 	--ui-border-s: 1px solid light-dark(var(--color-neutral-90), var(--color-neutral-40));
 	--ui-border-m: 1px solid light-dark(var(--color-neutral-80), var(--color-neutral-50));

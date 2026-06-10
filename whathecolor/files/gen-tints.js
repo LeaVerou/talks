@@ -1,13 +1,18 @@
 #!/usr/bin/env node
-// Generates a lightness-keyed tint scale for each key color, borrowing
-// Tailwind v4's chroma & hue *curves* (how C and H bend with L) but anchoring
-// each scale to our own base hue and peak chroma.
+// Generates a lightness-keyed tint scale for each key color.
 //
-// Naming matches the project convention: --color-{name}-{L%}  (e.g. --color-blue-90).
+// Structure & lightness ramp follow Web Awesome's wa-default.css (tiers 05–95
+// are *names*, sharing one non-linear lightness ramp; each color has a -key
+// tier holding the pure hue, plus a bare --color-{name} alias).
+//
+// Chroma & hue *curves* (how C and H bend with L) blend Tailwind v4 and Web
+// Awesome, re-anchored so each color's key tier is exactly our base color.
 
 import { readFileSync } from "node:fs";
 
-const tw = JSON.parse(readFileSync(new URL("./tailwind-v4.json", import.meta.url)));
+const here = url => new URL(url, import.meta.url);
+const tw = JSON.parse(readFileSync(here("./tailwind-v4.json")));
+const waCss = readFileSync(here("./wa-default.css"), "utf8");
 
 // Our key colors: [L%, C, H]
 const BASE = {
@@ -23,78 +28,140 @@ const BASE = {
 	gray:    [54, 0.04, 250],
 };
 
-// Which Tailwind family's curve shape to borrow — pick the one whose base hue
-// is closest, so the per-step hue/chroma *deltas* are meaningful. Absolute hue
-// is re-anchored to our base anyway, so this only affects curve shape.
-const FAMILY = {
+// Which family's curve shape to borrow from each source (nearest hue, so the
+// per-tier deltas are meaningful — absolute hue is re-anchored to our base).
+const TW_FAMILY = {
 	red: "red", orange: "orange", yellow: "yellow", green: "green",
 	cyan: "cyan", blue: "blue", indigo: "indigo",
-	purple: "violet",   // our purple hue 292 ≈ Tailwind violet
-	magenta: "rose",    // our magenta hue 10 ≈ Tailwind rose
-	gray: "gray",
+	purple: "violet", magenta: "rose", gray: "gray",
+};
+const WA_FAMILY = {
+	red: "red", orange: "orange", yellow: "yellow", green: "green",
+	cyan: "cyan", blue: "blue", indigo: "indigo",
+	purple: "purple", magenta: "pink", gray: "gray",
 };
 
-// Lightness stops (the token number = target L%). Superset of what the codebase uses.
-const STOPS = [0, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95];
+// Lightness ramp: tier name -> L%. Our own ramp (see the --l-* slide), light → dark.
+const RAMP = {
+	"90": 97, "80": 88, "70": 76, "60": 66, "50": 56,
+	"40": 47, "30": 38, "20": 29, "10": 19,
+};
+const TIERS = Object.keys(RAMP);
 
-// Parse "oklch(63.7% 0.237 25.331)" -> [L, C, H]
-function parse(str) {
+// --- parse sources into per-family curves of {L, C, H} points ---
+
+function parseOklch(str) {
 	let [, l, c, h] = str.match(/oklch\(([\d.]+)% ([\d.]+) ([\d.-]+)\)/);
-	return [+l, +c, +h];
+	return { L: +l, C: +c, H: +h };
 }
 
-// Per-family curve as points sorted by ascending L.
-function curve(family) {
-	return Object.values(tw[family]).map(parse).sort((a, b) => a[0] - b[0]);
+// Tailwind: each family is an object of step -> oklch string.
+function twCurve(family) {
+	return Object.values(tw[family]).map(parseOklch);
 }
 
-// Linear-interpolate [C, H] at a target lightness along the curve.
-// Below/above the data range: chroma fades toward 0 as L→0, hue holds at the end.
+// Web Awesome: parse the oklch values from the comments in wa-default.css.
+const waCurves = {};
+for (let line of waCss.split("\n")) {
+	let m = line.match(/--wa-color-([a-z]+)-\d\d:.*oklch\(([\d.]+)% ([\d.]+) ([\d.-]+)\)/);
+	if (!m) continue;
+	let [, family, l, c, h] = m;
+	(waCurves[family] ??= []).push({ L: +l, C: +c, H: +h });
+}
+
+// --- sampling: treat a curve as C(L) and H(L), interpolating over lightness ---
+
+// Sort points by ascending L once.
+function byL(points) {
+	return [...points].sort((a, b) => a.L - b.L);
+}
+
+// Sample {C, H} at a target lightness. Below the data range, chroma fades
+// toward 0 as L→0 (so very dark tiers go near-neutral); hue holds at the end.
 function sample(points, L) {
 	let lo = points[0], hi = points.at(-1);
-	if (L <= lo[0]) {
-		return [lo[1] * (L / lo[0]), lo[2]]; // fade chroma toward black
+	if (L <= lo.L) {
+		return { C: lo.C * (L / lo.L), H: lo.H };
 	}
-	if (L >= hi[0]) {
-		return [hi[1], hi[2]];
+	if (L >= hi.L) {
+		return { C: hi.C, H: hi.H };
 	}
 	for (let i = 1; i < points.length; i++) {
 		let a = points[i - 1], b = points[i];
-		if (L <= b[0]) {
-			let t = (L - a[0]) / (b[0] - a[0]);
-			return [a[1] + t * (b[1] - a[1]), a[2] + t * (b[2] - a[2])];
+		if (L <= b.L) {
+			let t = (L - a.L) / (b.L - a.L);
+			return { C: a.C + t * (b.C - a.C), H: lerpHue(a.H, b.H, t) };
 		}
 	}
 }
 
+// Hue interpolation/averaging on the circle (handles the 0°/360° wrap).
+function lerpHue(a, b, t) {
+	let d = ((b - a + 540) % 360) - 180;
+	return norm(a + d * t);
+}
+function meanHue(a, b) {
+	return lerpHue(a, b, 0.5);
+}
+function norm(h) {
+	return ((h % 360) + 360) % 360;
+}
+
+// --- generate ---
+
 let out = [
 	"/*",
-	" * Color tints, keyed by lightness (token number = L%).",
-	" * Chroma & hue curves borrowed from Tailwind v4, re-anchored to our base palette.",
+	" * Color tints, keyed by lightness tier (10-90, light→dark).",
+	" * Chroma/hue curves blend Tailwind v4 + Web Awesome, anchored so each",
+	" * -key tier is our base color.",
 	" * Generated by files/gen-tints.js — do not edit by hand.",
 	" */",
 	"",
 	":root {",
 ];
 
-for (let [name, [L0, C0, H0]] of Object.entries(BASE)) {
-	let points = curve(FAMILY[name]);
-	// Anchor: hue offset and chroma scale evaluated at our base lightness.
-	let [cAnchor, hAnchor] = sample(points, L0);
-	let hueOffset = H0 - hAnchor;
-	let chromaScale = C0 / cAnchor;
+for (let [name, base] of Object.entries(BASE)) {
+	let [L0, C0, H0] = base;
+	let twPts = byL(twCurve(TW_FAMILY[name]));
+	let waPts = byL(waCurve(name));
+	// Blended curve as a function of L: average the two sources.
+	let blend = L => {
+		let a = sample(twPts, L), b = sample(waPts, L);
+		return { C: (a.C + b.C) / 2, H: meanHue(a.H, b.H) };
+	};
 
-	out.push(`\t/* ${name} — base oklch(${L0}% ${C0} ${H0}) */`);
-	for (let stop of STOPS) {
-		let [c, h] = sample(points, stop);
-		c = c * chromaScale;
-		h = h + hueOffset;
-		// normalize hue to [0, 360)
-		h = ((h % 360) + 360) % 360;
-		out.push(`\t--color-${name}-${stop}: oklch(${stop}% ${c.toFixed(3)} ${h.toFixed(1)});`);
+	// Key tier = the ramp tier whose lightness is closest to our base L.
+	let key = TIERS.reduce((best, tier) =>
+		Math.abs(RAMP[tier] - L0) < Math.abs(RAMP[best] - L0) ? tier : best
+	);
+
+	// Anchor at the base lightness so the key tier comes out exactly as our base.
+	let at0 = blend(L0);
+	let hueOffset = H0 - at0.H;
+	let chromaScale = C0 / at0.C;
+
+	out.push(`\t/* ${name} — key ${key}, base oklch(${L0}% ${C0} ${H0}) */`);
+	for (let tier of TIERS) {
+		// Snap the key tier to our exact base lightness; others use the ramp.
+		let L = tier === key ? L0 : RAMP[tier];
+		let { C, H } = blend(L);
+		C = Math.max(0, C * chromaScale);
+		H = norm(H + hueOffset);
+		out.push(`\t--color-${name}-${tier}: oklch(${round(L)}% ${C.toFixed(3)} ${H.toFixed(1)});`);
 	}
+	out.push(`\t--color-${name}: var(--color-${name}-${key});`);
+	out.push(`\t--color-${name}-key: ${key};`);
 	out.push("");
 }
 
 out.push("}");
+
+function round(n) {
+	return Math.round(n * 10) / 10;
+}
+
 process.stdout.write(out.join("\n") + "\n");
+
+function waCurve(name) {
+	return waCurves[WA_FAMILY[name]];
+}

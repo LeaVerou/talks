@@ -37,38 +37,26 @@ pre {
 	background: var(--color-neutral-20, #333);
 	color: white;
 	padding: .6em .8em;
+	font-size: var(--font-size-s);
+
+	&.small {
+		font-size: 60%;
+	}
 }
 
-.code-fragments {
-	display: flex;
-	gap: 1em;
-	align-items: center;
+div.code-fragments {
+	column-width: 32ch;
 	font-size: 60%;
-
-	> pre:first-of-type {
-		align-self: flex-start;
-	}
-
-	> pre:last-of-type {
-		align-self: flex-end;
-	}
-
-	> pre:not(:last-of-type) {
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
-	}
-
-	> pre:not(:first-of-type) {
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
-	}
+	max-height: stretch;
 }
 
 /* Syntax highlighting */
 :where(.token) {
-	--comment-color: color-mix(in oklch, var(--color) 0%, oklch(50% .01 none / 60%));
-	--_color-code-comment: var(--color-code-comment, var(--comment-color, var(--color-neutral-50a)));
-	--_color-code-punctuation: var(--color-code-punctuation, var(--color-neutral-80a));
+	/* --comment-color: color-mix(in oklch, var(--color) 0%, oklch(50% .01 none / 60%)); */
+	--_color-code-comment: var(--color-code-comment,
+		var(--comment-color, oklch(var(--color-neutral-80) l c h / 60%))
+	);
+	--_color-code-punctuation: var(--color-code-punctuation, oklch(var(--color-neutral) l c h / 80%));
 	--_color-code-1: var(--color-code-1, oklch(from var(--color-magenta) clamp(.7, l, 1) c h));
 	--_color-code-2: var(--color-code-2, var(--color-cyan));
 	--_color-code-3: var(--color-code-3, var(--color-green));
@@ -81,6 +69,7 @@ pre {
 .token.doctype,
 .token.cdata {
 	color: var(--_color-code-comment);
+	opacity: 0.9;
 }
 
 .token.punctuation {
