@@ -98,7 +98,7 @@ for (let scale of document.querySelectorAll("color-scale.show-distances")) {
 		distanceEl.classList.toggle("dark", color.oklch.l < .7);
 		distanceEl.innerHTML = `<div>
 			<span class="coords-d">${distance.toLocaleString("en", { maximumFractionDigits: 2 })}</span>
-			<span class="deltae delayed show">${deltaE.toLocaleString("en", { maximumFractionDigits: 2 })}</span>
+			<span class="deltae">${deltaE.toLocaleString("en", { maximumFractionDigits: 2 })}</span>
 		</div>`;
 
 		distancesEl.appendChild(distanceEl);
