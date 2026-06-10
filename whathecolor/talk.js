@@ -16,6 +16,22 @@ const repos = {
 // 	});
 // }
 
+for (let pre of document.querySelectorAll("pre[data-src]")) {
+	let src = pre.dataset.src;
+	console.log(src)
+	fetch(src).then(r => r.text()).then(text => {
+		if (pre.dataset.remove) {
+			const remove = pre.dataset.remove.split(",");
+			for (let str of remove) {
+				text = text.replaceAll(str, "");
+			}
+		}
+
+		pre.innerHTML = `<code>${text}</code>`;
+		Prism.highlightElement(pre);
+	})
+}
+
 /* Render text in an SVG and return a data URL of the resulting image. */
 export function textToSvg (text, style = "font: 600 40px system-ui") {
 	// Estimate text width liberally (longer is better than shorter)

@@ -711,17 +711,8 @@
 	<article class="slide dont-resize">
 		<h2>Imagine if instead of all this…</h2>
 		<div class="code-fragments">
-			<pre>
-				<script type="slide">
-					{
-						const thisScript = document.currentScript;
-						fetch("files/wa-default.css").then(r => r.text()).then(text => {
-							text = text.replaceAll("wa-", "");
-							const pre = thisScript.parentNode;
-							pre.innerHTML = `<code>${text}</code>`;
-						})
-					}
-				</script>
+			<pre data-src="files/wa-default.css" data-remove="wa-">
+
 			</pre>
 		</div>
 		<style>
@@ -931,7 +922,7 @@
 	</article>
 
 	<article class="slide">
-		<iframe src="https://palettes.colorjs.io" class="browser"></iframe>
+		<iframe src="https://palettes.colorjs.io" class="browser stretch"></iframe>
 		<details class="notes">
 			It became an obsession.
 			I built a website to analyze designer crafted color palettes, trying to find patterns.
@@ -940,10 +931,11 @@
 	</article>
 
 	<article class="slide">
-		<blockquote class="thought-bubble">
+		<!-- <blockquote class="thought-bubble">
 			“Maybe we are all misled about what chroma means.
 			Perhaps we also want lower chroma as we go lighter and we <em>think</em> we just want higher lightness!”
-		</blockquote>
+		</blockquote> -->
+		<img src="images/gaslit.png" alt="">
 		<details class="notes">
 			I gaslit myself into thinking we were all asking for the wrong thing.
 			That lighter tints fundamentally need a smaller chroma, and I just had to find the right formula to get close to a designer-crafted color scale.
@@ -1057,13 +1049,13 @@
 	<article class="slide dont-resize" id="hsl-gm">
 		<div>
 			<header>
-				<v-stepper v-model="n">iterations</v-stepper>
+				<v-stepper class="delayed" v-model="n">iterations</v-stepper>
 				<div class="callout small"><i class="bi bi-star-fill"></i> Callout</div>
 			</header>
 			<div class="pre-container"><pre data-el=".callout" class="show-colors small no-whitespace-normalization" ref="pre">
-<code>--set-l: .97 c h;
---clamp-s: h clamp(0, s, 100) l;
---color: {{ color }};</code>
+<code>--set-l: .97 c h;</code>
+<code>--clamp-s: h clamp(0, s, 100) l;</code>
+<code>--color: {{ color }};</code>
 <code v-for="i in n" ref="code">--color-90-{{i}}: oklch(from var(--color{{ i-1 ? '-90-' + (i-1) + '-hsl' : '' }}) var(--set-l));
 --color-90-{{i}}-hsl: hsl(from var(--color-90-{{i}}) var(--clamp-s));
 </code><code>--color-90: oklch(from var(--color{{ n ? `-90-${n}-hsl` : '' }}) var(--set-l));</code></pre></div>

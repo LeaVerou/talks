@@ -44,4 +44,10 @@
 	line-height: 1;
 	resize: both;
 	min-height: 50vh;
+
+	&.stretch {
+		height: -webkit-fill-available;
+		height: stretch;
+		flex: 1;
+	}
 }

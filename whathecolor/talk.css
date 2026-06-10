@@ -580,7 +580,7 @@
 		max-width: 80vw;
 
 		/* n = 2 */
-		&:has(code:nth-of-type(4)) {
+		&:has(code:nth-of-type(5)) {
 			font-size: 70%;
 			line-height: 1.8;
 			transition: .2s;
@@ -588,29 +588,29 @@
 		}
 
 		/* n = 3 */
-		&:has(code:nth-of-type(5)) {
+		&:has(code:nth-of-type(6)) {
 			font-size: 60%;
 			line-height: 1.7;
 		}
 
 		/* n = 4 */
-		&:has(code:nth-of-type(6)) {
+		&:has(code:nth-of-type(7)) {
 			font-size: 50%;
 			line-height: 1.6;
 		}
 
 		/* n = 5 */
-		&:has(code:nth-of-type(7)) {
+		&:has(code:nth-of-type(8)) {
 			font-size: 40%;
 			line-height: 1.5;
 		}
 
-		&:has(code:nth-of-type(8)) {
+		&:has(code:nth-of-type(9)) {
 			font-size: 30%;
 		}
 	}
 
-	.pre-container:has(pre > code:nth-of-type(8)) {
+	.pre-container:has(pre > code:nth-of-type(9)) {
 		column-count: 2;
 	}
 
