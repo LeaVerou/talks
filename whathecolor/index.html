@@ -1054,16 +1054,19 @@
 		</details>
 	</article>
 
-	<article class="slide" id="hsl-gm">
+	<article class="slide dont-resize" id="hsl-gm">
 		<div>
-			<v-stepper v-model="n">iterations</v-stepper>
-			<pre class="show-colors small no-whitespace-normalization" ref="pre">
+			<header>
+				<v-stepper v-model="n">iterations</v-stepper>
+				<div class="callout small"><i class="bi bi-star-fill"></i> Callout</div>
+			</header>
+			<div class="pre-container"><pre data-el=".callout" class="show-colors small no-whitespace-normalization" ref="pre">
 <code>--set-l: .97 c h;
 --clamp-s: h clamp(0, s, 100) l;
 --color: {{ color }};</code>
 <code v-for="i in n" ref="code">--color-90-{{i}}: oklch(from var(--color{{ i-1 ? '-90-' + (i-1) + '-hsl' : '' }}) var(--set-l));
 --color-90-{{i}}-hsl: hsl(from var(--color-90-{{i}}) var(--clamp-s));
-</code><code>--color-90: oklch(from var(--color-90-{{n}}-hsl) var(--set-l));</code></pre>
+</code><code>--color-90: oklch(from var(--color{{ n ? `-90-${n}-hsl` : '' }}) var(--set-l));</code></pre></div>
 		</div>
 		<script type="module">
 			import { createApp } from "vue";
@@ -1073,7 +1076,7 @@
 				data() {
 					return {
 						color: "oklch(70% 0.16 205)",
-						n: 1,
+						n: 0,
 					}
 				},
 

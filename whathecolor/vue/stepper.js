@@ -1,5 +1,5 @@
 const template = `
-<div class="iterations">
+<div class="stepper">
 	<button @click="step(-1)" :disabled="modelValue <= min">-</button>
 	<strong>{{ modelValue }}</strong>
 	<button @click="step(1)" :disabled="modelValue >= max">+</button>

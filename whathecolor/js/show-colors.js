@@ -1,9 +1,11 @@
 import Inspire from "inspirejs.org";
 
-let dummy = document.createElement("div");
+let dummyEl = document.createElement("div");
 
-function processCodeBlock (el) {
+function processCodeBlock (el, slide) {
 	let code = el.textContent.trim();
+	let dummy = el.dataset.el ? slide.querySelector(el.dataset.el) : dummyEl;
+	// dummy ??= dummyEl;
 	dummy.style.cssText = code;
 
 	for (let prop of el.querySelectorAll(".token.property")) {
@@ -24,12 +26,12 @@ function processCodeBlock (el) {
 }
 
 Inspire.hooks.add("slidechange", ({ slide }) => {
-	slide.appendChild(dummy);
+	slide.appendChild(dummyEl);
 	for (let el of slide.querySelectorAll(".show-colors")) {
-		processCodeBlock(el);
+		processCodeBlock(el, slide);
 
 		el.addEventListener("input", () => {
-			processCodeBlock(el);
+			processCodeBlock(el, slide);
 		});
 	}
 })
