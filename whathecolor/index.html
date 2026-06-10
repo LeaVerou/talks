@@ -1063,7 +1063,7 @@
 <code>--set-l: .97 c h;
 --clamp-s: h clamp(0, s, 100) l;
 --color: {{ color }};</code>
-<code v-for="i in n" ref="code">--color-90-{{i}}: oklch(from var(--color{{ i-1 ? '-90-' + (i-1) : '' }}) var(--set-l));
+<code v-for="i in n" ref="code">--color-90-{{i}}: oklch(from var(--color{{ i-1 ? '-90-' + (i-1) + '-hsl' : '' }}) var(--set-l));
 --color-90-{{i}}-hsl: hsl(from var(--color-90-{{i}}) var(--clamp-s));
 </code><code>--color-90: oklch(from var(--color-90-{{n}}-hsl) var(--set-l));</code></pre>
 		</div>
