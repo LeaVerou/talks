@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RGB Cube</title>
+<script src="importmap.js"></script>
+<script type="module">import "color-elements/color-swatch";</script>
+<style>
+body {
+	display: grid;
+	place-items: center;
+	min-height: 100vh;
+	margin: 0;
+	font: 300 1rem/1.5 system-ui, sans-serif;
+	background: #fff;
+}
+
+/*
+ * RGB cube diagram.
+ *
+ * Rotation is controlled by --rotate-x / --rotate-y / --rotate-z on .rgb-cube.
+ * Add points by nesting <color-swatch> children with --r / --g / --b (channels in 0–255):
+ * those drive the 3D position, so a point's place in the cube *is* its color.
+ * (The color value is currently repeated on the swatch itself; that duplication goes
+ * away once the channels are wired to the swatch in JS.)
+ */
+.rgb-cube {
+	/* Knobs */
+	--size: 300px;
+	--rotate-x: -24deg;
+	--rotate-y: 36deg;
+	--rotate-z: 0deg;
+	--edge-width: 1px;
+	--axis-width: 4px;
+	--axis-over: calc(var(--size) * 0.3); /* how far axes extend past the cube */
+	--edge-color: light-dark(oklch(0% 0 0 / 0.25), oklch(100% 0 0 / 0.3));
+
+	/* Counter-rotation that cancels the cube's rotation, so points and labels
+	   always face the camera instead of skewing with the cube. */
+	--billboard:
+		rotateZ(calc(-1 * var(--rotate-z)))
+		rotateY(calc(-1 * var(--rotate-y)))
+		rotateX(calc(-1 * var(--rotate-x)));
+
+	position: relative;
+	width: var(--size);
+	height: var(--size);
+	transform-style: preserve-3d;
+	transform: rotateX(var(--rotate-x)) rotateY(var(--rotate-y)) rotateZ(var(--rotate-z));
+
+	/* Sits inside the perspective established by its parent */
+	& :is(.face, .axis, .label, color-swatch) {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+	}
+
+	/* Six transparent faces whose borders draw the full 12-edge wireframe */
+	.face {
+		width: var(--size);
+		height: var(--size);
+		margin: calc(var(--size) / -2);
+		border: var(--edge-width) solid var(--edge-color);
+	}
+	.face.front  { transform: translateZ(calc(var(--size) / 2)); }
+	.face.back   { transform: translateZ(calc(var(--size) / -2)); }
+	.face.right  { transform: rotateY(90deg) translateZ(calc(var(--size) / 2)); }
+	.face.left   { transform: rotateY(90deg) translateZ(calc(var(--size) / -2)); }
+	.face.top    { transform: rotateX(90deg) translateZ(calc(var(--size) / 2)); }
+	.face.bottom { transform: rotateX(90deg) translateZ(calc(var(--size) / -2)); }
+
+	/* The three colored axes radiating from the black (0,0,0) corner. Each is anchored
+	   at the origin and extends past the cube by --axis-over, with an arrowhead at the
+	   tip — so they read as a coordinate triad distinct from the wireframe edges.
+	   Self-centered with a negative margin so any rotation happens about the bar's center;
+	   the center is offset by --axis-over/2 toward the tip to keep the origin end fixed. */
+	.axis {
+		background: var(--axis-color);
+		margin: calc(var(--cross) / -2) calc(var(--length) / -2);
+		width: var(--length);
+		height: var(--cross);
+		--cross: var(--axis-width);
+		--length: calc(var(--size) + var(--axis-over));
+	}
+	.axis.r {
+		--axis-color: red;
+		transform: translate3d(calc(var(--axis-over) / 2), calc(var(--size) / 2), calc(var(--size) / -2));
+	}
+	.axis.g {
+		--axis-color: green;
+		width: var(--axis-width);
+		height: var(--length);
+		margin: calc(var(--length) / -2) calc(var(--axis-width) / -2);
+		transform: translate3d(calc(var(--size) / -2), calc(var(--axis-over) / -2), calc(var(--size) / -2));
+	}
+	.axis.b {
+		--axis-color: blue;
+		transform: translate3d(calc(var(--size) / -2), calc(var(--size) / 2), calc(var(--axis-over) / 2)) rotateY(90deg);
+	}
+
+	/* Arrowhead at each axis tip (a flat CSS triangle, coplanar with the bar) */
+	.axis::after {
+		content: "";
+		position: absolute;
+		width: 0;
+		height: 0;
+	}
+	.axis.r::after, .axis.b::after {
+		top: 50%;
+		right: 0;
+		translate: 100% -50%;
+		border-block: calc(var(--axis-width) * 1.6) solid transparent;
+		border-left: calc(var(--axis-width) * 2.6) solid var(--axis-color);
+	}
+	.axis.g::after {
+		top: 0;
+		left: 50%;
+		translate: -50% -100%;
+		border-inline: calc(var(--axis-width) * 1.6) solid transparent;
+		border-bottom: calc(var(--axis-width) * 2.6) solid var(--axis-color);
+	}
+
+	/* R / G / B labels, billboarded so they stay upright, placed just past each tip */
+	.label {
+		margin: 0;
+		font: 700 calc(var(--size) * 0.1) / 1 system-ui, sans-serif;
+		color: var(--axis-color);
+		transform: translate3d(var(--x), var(--y), var(--z)) var(--billboard) translate(-50%, -50%);
+	}
+	.label.r {
+		--axis-color: red;
+		--x: calc(var(--size) / 2 + var(--axis-over) + 0.7em);
+		--y: calc(var(--size) / 2);
+		--z: calc(var(--size) / -2);
+	}
+	.label.g {
+		--axis-color: green;
+		--x: calc(var(--size) / -2);
+		--y: calc(var(--size) / -2 - var(--axis-over) - 0.7em);
+		--z: calc(var(--size) / -2);
+	}
+	.label.b {
+		--axis-color: blue;
+		--x: calc(var(--size) / -2);
+		--y: calc(var(--size) / 2);
+		--z: calc(var(--size) / 2 + var(--axis-over) + 0.7em);
+	}
+
+	/* Points are <color-swatch> dots. Each sits at the cube coordinate matching its
+	   color (--r/--g/--b, 0–255) and is billboarded so it stays a circle as the cube turns.
+	   The trailing translate(-50%,-50%) centers the dot on its coordinate regardless of size,
+	   so the swatch component owns the dot's size. */
+	color-swatch {
+		--swatch-style: dot;
+		transform:
+			translate3d(
+				calc((var(--r) / 255 - 0.5) * var(--size)),
+				calc((0.5 - var(--g) / 255) * var(--size)),
+				calc((var(--b) / 255 - 0.5) * var(--size))
+			)
+			var(--billboard)
+			translate(-50%, -50%);
+	}
+}
+
+/* Establishes the 3D viewing context for any cube inside it */
+.scene {
+	perspective: 1200px;
+}
+</style>
+</head>
+<body>
+
+<div class="scene">
+	<div class="rgb-cube">
+		<div class="face front"></div>
+		<div class="face back"></div>
+		<div class="face left"></div>
+		<div class="face right"></div>
+		<div class="face top"></div>
+		<div class="face bottom"></div>
+
+		<div class="axis r"></div>
+		<div class="axis g"></div>
+		<div class="axis b"></div>
+
+		<div class="label r">R</div>
+		<div class="label g">G</div>
+		<div class="label b">B</div>
+
+		<!-- Points: position = color. Add as many as you like. -->
+		<color-swatch style="--r: 255; --g: 0;   --b: 0;"  >rgb(255 0 0)</color-swatch>
+		<color-swatch style="--r: 0;   --g: 255; --b: 0;"  >rgb(0 255 0)</color-swatch>
+		<color-swatch style="--r: 0;   --g: 0;   --b: 255;">rgb(0 0 255)</color-swatch>
+		<color-swatch style="--r: 255; --g: 255; --b: 255;">rgb(255 255 255)</color-swatch>
+		<color-swatch style="--r: 128; --g: 128; --b: 128;">rgb(128 128 128)</color-swatch>
+	</div>
+</div>
+
+</body>
+</html>
