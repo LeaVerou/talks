@@ -758,3 +758,23 @@ footer.slide#end {
 		}
 	}
 }
+
+.fromto-swatches {
+	justify-content: center;
+
+	.arrow {
+		font-size: 3rem;
+		flex: none;
+	}
+
+	color-swatch {
+		flex: 1;
+		contain: initial;
+		container-type: initial;
+		font-family: var(--font-monospace);
+
+		&::part(swatch) {
+			width: 100%;
+		}
+	}
+}

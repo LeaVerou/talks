@@ -299,7 +299,7 @@
 	</article>
 
 	<article class="slide" id="standardized-rgb">
-		<h3>Standardized RGB spaces to the rescue!<span class=delayed>?</span></h3>
+		<h3>Standardized RGB spaces to the rescue!</h3>
 
 		<table class="borders">
 			<thead>
@@ -391,14 +391,32 @@
 			For example, this P3 magenta is outside the sRGB gamut so all three of its components are outside 0-1.
 		</details>
 
-		<style type="slide delayed">
-			.oog {
-				color: var(--color-red);
-				font-weight: bold;
-			}
+		<style type="slide">
+			.slide[data-visit="2"] {
+				.oog {
+					color: var(--color-red);
+					font-weight: bold;
+				}
 
+				.delayed-children > * {
+					opacity: 1 !important;
+				}
+			}
 		</style>
 	</article>
+
+	<article class="slide">
+		<h2>All legacy CSS colors are in sRGB</h2>
+		<ul class="delayed-children">
+			<li><code>red</code> is sRGB red, not your screen’s brightest red</li>
+			<li>Same with <code>#ff0000</code></li>
+			<li>Same with <code>rgb(255 0 0)</code> or <code>rgb(100% 0% 0%)</code></li>
+			<li>Yup, <code>hsl(0 100% 50%)</code> too</li>
+			<li>Sorry HWB, we forgot about you again. Yes, <code>hwb(0 0 0)</code> too!</li>
+		</ul>
+	</article>
+
+	<article class="slide" data-insert="#standardized-rgb"></article>
 
 	<article class="chromaticity slide">
 		<h3>Color gamut</h3>
@@ -435,10 +453,27 @@
 		<h2>So what happens if we try to render an <span class="red">out of gamut</span> color?</h2>
 	</article>
 
+	<article class="slide flex fromto-swatches">
+		<color-swatch size="large" oncolorchange="
+		this.parentNode.querySelector('.clipped').color = this.color.to('srgb').toGamut({method: 'clip'});
+		this.parentNode.querySelector('.mapped').color = this.color.to('srgb').toGamut();">
+			<input type="text" value="rgb(150% 0 -100%)">
+		</color-swatch>
+		<span class="arrow">→</span>
+		<div>
+			<color-swatch class="clipped" size="large"><span slot="swatch-content">Clipped</span></color-swatch>
+			<color-swatch class="mapped" size="large"><span slot="swatch-content">Mapped</span></color-swatch>
+		</div>
+		<details class="notes">
+			Guess which one browsers do?
+		</details>
+	</article>
+
 	<article class="slide">
-		<h2>The hardware clips</h2>
 		<iframe src="https://apps.colorjs.io/gamut-mapping/" class="browser stretch"></iframe>
 	</article>
+
+
 
 	<article class="scales slide">
 		<h3>Perceptual uniformity</h3>
@@ -511,35 +546,58 @@
 		</details>
 	</article>
 
-	<!-- <article class="slide dont-resize" id="polar">
+	<article class="slide dont-resize" id="polar">
 		<h3>Polar color spaces</h3>
-		<form id="polar_picker" class="flex" v-app>
+		<form id="polar_picker" class="flex">
 			<div class="space-picker">
-				<label><input type="radio" name="space" value="hsl" v-model="space"> HSL</label>
-				<label><input type="radio" name="space" value="hwb" v-model="space"> HWB</label>
-				<label><input type="radio" name="space" value="lch" v-model="space"> LCH</label>
-				<label><input type="radio" name="space" value="oklch" v-model="space"> OKLCH</label>
+				<label><input type="radio" name="space" value="hsl" checked> HSL</label>
+				<label><input type="radio" name="space" value="hwb"> HWB</label>
+				<label><input type="radio" name="space" value="lch"> LCH</label>
+				<label><input type="radio" name="space" value="oklch"> OKLCH</label>
 			</div>
-			<hue-wheel name="hue" space="hsl" :space="space" :color="color"
-				@input="color = $event.target.color"></hue-wheel>
+			<hue-wheel name="hue" space="hsl" color="hsl(180 50 50)"></hue-wheel>
 
-			<channel-slider class="xdelayed" name="l" :space="space" channel="l"
-				:color="color" @colorchange="color = $event.target.color"></channel-slider>
+			<channel-slider class="delayed" name="l" space="hsl" channel="l" color="hsl(180 50 50)"></channel-slider>
 
 
-			<color-swatch name="swatch" class="xdelayed" size="large" :color="color" >{{ color }}</color-swatch>
+			<color-swatch name="swatch" class="delayed" size="large" color="hsl(180 50 50)" style="width: stretch; font-family: var(--font-monospace)">hsl(180 50 50)</color-swatch>
 
 		</form>
-		<script>
-			// Set initial Vue data before the slide mounts. A plain (not type="slide")
-			// script runs at parse, ahead of the mount on slidechange, avoiding the race
-			// where the Vue plugin would read .app before it's set.
-			polar_picker.app = {
-				data: {
-					color: "hsl(180 50 50)",
-					space: "hsl"
-				}
-			};
+		<script type="slide">
+			// whenDefined so the form's elements collection is populated first.
+			customElements.whenDefined("hue-wheel").then(() => {
+				let { hue, l: slider, swatch } = polar_picker.elements;
+
+				// Wheel radial + slider axis per space (HWB has neither L nor C).
+				let channels = {
+					hsl: { wheel: "s", slider: "l" },
+					hwb: { wheel: "w", slider: "b" },
+					lch: { wheel: "c", slider: "l" },
+					oklch: { wheel: "c", slider: "l" },
+				};
+
+				// hue.color is canonical; assigning converts each control into its space.
+				let setColor = color => {
+					hue.color = slider.color = color;
+					swatch.color = swatch.textContent = hue.color;
+				};
+
+				// input = user edit only (programmatic sets fire colorchange), so no loop.
+				hue.addEventListener("input", () => setColor(hue.color));
+				slider.addEventListener("input", () => setColor(slider.color));
+
+				// Re-tag both controls, then re-apply the color so each converts it.
+				polar_picker.addEventListener("change", event => {
+					if (event.target.name === "space") {
+						let space = event.target.value;
+						hue.space = slider.space = space;
+						hue.channel = channels[space].wheel;
+						slider.channel = channels[space].slider;
+						slider.step = undefined; // recompute step for new range (color-elements bug)
+						setColor(hue.color);
+					}
+				});
+			});
 		</script>
 
 		<script type="slide delayed">
@@ -589,9 +647,9 @@
 			Polar color spaces consist of a hue angle plus two components that control ligthness and chroma/saturation.
 			They differ in their characteristics, but all share the goal of improving human usability of an otherwise rectangular color space.
 		</details>
-	</article> -->
+	</article>
 
-	<article class="slide" id="hsl">
+	<!-- <article class="slide" id="hsl">
 		<form id="hsl_picker" class="flex">
 			<div>
 				<hue-wheel name="hue" space="hsl" color="hsl(0 100 50)"
@@ -638,9 +696,9 @@
 			HSL and other similar color spaces (HSV, HWB) was designed to fix that.
 			It allowed people to express colors as a hue, saturation, lightness triplet.
 		</details>
-	</article>
+	</article> -->
 
-	<article class="slide language-js">
+	<!-- <article class="slide language-js">
 		<div class="flex">
 			<pre class="flex"><code>
 				function rgb_to_hsl (r, g, b) {
@@ -687,9 +745,11 @@
 			It sounds too good to be true.
 			And sadly, it is.
 		</details>
-	</article>
+	</article> -->
 
 	<article class="slide">
+		<h2>HSL</h2>
+		<h3 class="subtitle">Fast to compute from RGB but…</h3>
 		<div class="flex stretch" style="text-align: center;">
 			<color-swatch value="hsl(60 100 50)" size="large">
 				<div>hsl(60 100% <span class="wtf">50%</span>)</div>
@@ -736,6 +796,20 @@
 		<object data="images/lab.svg" alt="" style="height: 100%"></object>
 	</article>
 
+	<article class="slide">
+		<h2>Why OkLab/OkLCH? What's wrong with Lab/LCH?</h2>
+		<p class="delayed">Ahem…</p>
+		<code class="delayed gradient" style="--params: to right in srgb; --stops: white, blue">
+			linear-gradient(to right in srgb, white, blue)
+		</code>
+		<code class="delayed gradient" style="--params: to right in lab; --stops: white, blue">
+			linear-gradient(to right in lab, white, blue)
+		</code>
+		<code class="delayed gradient" style="--params: to right in oklab; --stops: white, blue">
+			linear-gradient(to right in oklab, white, blue)
+		</code>
+	</article>
+
 	<article class="slide" id="summary">
 		<table>
 			<thead>
@@ -761,34 +835,34 @@
 					<td class="red">✅</td>
 					<td class="red"><strong>1</strong>/5</td>
 				</tr>
-				<tr data-visit="3">
+				<tr>
 					<th>
 						sRGB polar spaces
 						<small>HSL, HWB, HWB, …</small>
 					</th>
 					<td class="green"><strong>4</strong>/5</td>
-					<td>✅*</td>
+					<td>✅</td>
 					<td class="red"><strong>1</strong>/5</td>
 				</tr>
-				<tr data-visit="4">
+				<tr>
 					<th>Lab</th>
 					<td class="orange"><strong>2</strong>/5</td>
 					<td>✅</td>
 					<td class="green"><strong>4</strong>/5</td>
 				</tr>
-				<tr data-visit="4">
+				<tr>
 					<th>LCH</th>
 					<td class="orange"><strong>5</strong>/5</td>
 					<td>✅</td>
 					<td class="green"><strong>4</strong>/5</td>
 				</tr>
-				<tr data-visit="4">
+				<tr>
 					<th>OKLab</th>
 					<td class="orange"><strong>2</strong>/5</td>
 					<td>✅</td>
 					<td class="green"><strong>5</strong>/5</td>
 				</tr>
-				<tr data-visit="4">
+				<tr>
 					<th>OKLCh</th>
 					<td class="green"><strong>5</strong>/5</td>
 					<td>✅</td>
@@ -852,46 +926,6 @@
 			</tbody>
 		</table>
 	</article> -->
-</section>
-
-<section>
-
-
-
-
-	<article class="slide" data-insert="#summary"></article>
-</section>
-
-<section>
-	<header class="slide">
-		<h2>Perceptually uniform spaces</h2>
-		<h3 class="subtitle">Lab, OKLab, LCh, OkLCh…</h3>
-	</header>
-
-
-	<article class="slide">
-		<code class="gradient" style="--params: to right in srgb; --stops: white, blue">
-			linear-gradient(to right in srgb, white, blue)
-		</code>
-		<code class="gradient" style="--params: to right in lab; --stops: white, blue">
-			linear-gradient(to right in lab, white, blue)
-		</code>
-		<code class="gradient" style="--params: to right in oklab; --stops: white, blue">
-			linear-gradient(to right in oklab, white, blue)
-		</code>
-	</article>
-
-	<article class="slide">
-		<iframe src="https://whathecolor.com/?color=oklab(60% 0.05 -0.05)" class="browser"></iframe>
-	</article>
-
-	<article class="slide">
-		TODO: Show how (Ok)Lab trivially becomes polar
-	</article>
-
-	<article class="slide" data-insert="#summary"></article>
-
-
 </section>
 
 <section class="language-css">
@@ -1148,17 +1182,6 @@
 	</article>
 
 	<article class="slide">
-		TODO complex formulas
-
-		<details class="notes">
-			Then I got sucked into the rabbit hole of trying to tweak formulas by eye — surprisingly common in color stuff.
-
-			Algorithms that got incresingly more complex, fudge factors all over the place.
-			Getting close in terms of result, but no further in terms of understanding.
-		</details>
-	</article>
-
-	<article class="slide">
 		<color-picker color="oklch(69% 0.15 205)" gamuts="srgb, p3, rec2020:, prophoto">
 		</color-picker>
 		<details class="notes">
@@ -1334,33 +1357,12 @@
 		<p class="delayed">CSS WG approved but not yet specced</p>
 	</article>
 
-	<article class="slide flex">
+	<article class="slide flex fromto-swatches">
 		<color-swatch size="large" oncolorchange="this.nextElementSibling.nextElementSibling.textContent = this.color.to('hsl')">
 			<input type="text" value="rgb(50% 50% 50%)">
 		</color-swatch>
-		<span class="big">→</span>
+		<span class="arrow">→</span>
 		<color-swatch size="large"></color-swatch>
-		<style>
-			@scope {
-				:scope {
-					justify-content: center;
-
-					.big {
-						flex: none;
-					}
-				}
-				color-swatch {
-					flex: 1;
-					contain: initial;
-					container-type: initial;
-					font-family: var(--font-monospace);
-
-					&::part(swatch) {
-						width: 100%;
-					}
-				}
-			}
-		</style>
 		<details class="notes">
 			`none` was originally invented to represent the missing hues in grayscale colors.
 		</details>
