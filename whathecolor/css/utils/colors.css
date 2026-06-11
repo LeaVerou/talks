@@ -40,7 +40,8 @@
 }
 
 .red, .orange, .yellow, .green, .cyan, .blue, .indigo, .purple, .magenta, .gray {
-	&.slide {
+	&.slide,
+	&.bg {
 		background: var(--accent-color);
 		color: contrast-color(var(--accent-color));
 	}

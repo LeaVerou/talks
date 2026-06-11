@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@inspirejs/core": "^3.0.2",
     "@inspirejs/plugins": "^3.0.2",
     "bootstrap-icons": "^1.13.1",
     "color-elements": "^0.0.12",

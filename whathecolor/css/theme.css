@@ -16,9 +16,15 @@
 		var(--color-blue) 0 calc(6 * 100%/8),
 		var(--color-purple) 0 calc(7 * 100%/8),
 		var(--color-magenta) 0 calc(8 * 100%/8);
+	--rgb-stripes:
+		var(--color-red) 0 calc(100%/3),
+		var(--color-green) 0 calc(2 * 100%/3),
+		var(--color-blue) 0 calc(3 * 100%/3);
 }
 
-header.slide:is(section > header) {
+header.slide:is(section > header),
+footer.slide#end,
+.rainbow-stripes.slide {
 	background: linear-gradient(to right, var(--rainbow-stripes)) 0 0 / 100% 1rem repeat-x black;
 }
 

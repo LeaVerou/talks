@@ -31,7 +31,9 @@
 		<div class="by">
 			by <a href="http://lea.verou.me">Lea Verou</a>
 			<small>CSS WG, <wbr>CSS Color co-editor, <wbr><a href="https://colorjs.io">Color.js</a> co-founder</small>
-			<small><a href="http://lea.verou.me"><strong>lea.verou.me</strong></a> &bull; <strong>lea＠verou.me</strong></small>
+			<small><a href="http://lea.verou.me"><strong>lea.verou.me</strong></a> &bull; <strong>lea＠verou.me</strong> &bull;
+				<strong><a href="https://colorjs.io">colorjs.io</a></strong>
+			</small>
 		</div>
 	</div>
 	<div class="emoji delayed-children">
@@ -56,57 +58,59 @@
 	</details>
 </header>
 
-<article class="slide">
-	<color-picker color="oklch(50% 0 0)"></color-picker>
+<section>
+	<article class="slide">
+		<color-picker color="oklch(50% 0 0)"></color-picker>
 
-	<details class="notes">
-		(Show 100% and 0%, then increase CSS and try agian, wtf?!)
+		<details class="notes">
+			(Show 100% and 0%, then increase CSS and try agian, wtf?!)
 
-		Or maybe you tried to use these new color spaces and were baffled at the result.
-		Why does changing the lightness not seem to work for certain values?
-		Shouldn't 0 be black and 100 be white? Why are we getting these extremely bright colors instead?
-	</details>
-</article>
+			Or maybe you tried to use these new color spaces and were baffled at the result.
+			Why does changing the lightness not seem to work for certain values?
+			Shouldn't 0 be black and 100 be white? Why are we getting these extremely bright colors instead?
+		</details>
+	</article>
 
-<article class="slide">
-	<img src="images/mbp-vs-print.jpg" alt="">
-	<details class="notes">
-		But even beyond CSS, this talk will help you figure out answers to longstanding questions such as "why are printed colors so washed out when they looked lovely on my screen"?
-	</details>
-</article>
+	<article class="slide">
+		<img src="images/mbp-vs-print.jpg" alt="">
+		<details class="notes">
+			But even beyond CSS, this talk will help you figure out answers to longstanding questions such as "why are printed colors so washed out when they looked lovely on my screen"?
+		</details>
+	</article>
 
-</article>
-<article class="slide">
-	<img src="images/highlight.jpg" alt="">
-	<details class="notes">
-		Or why does it seem so impossible to recreate certain colors with a color picker on a screen?
-	</details>
-</article>
+	</article>
+	<article class="slide">
+		<img src="images/highlight.jpg" alt="">
+		<details class="notes">
+			Or why does it seem so impossible to recreate certain colors with a color picker on a screen?
+		</details>
+	</article>
 
-<article class="slide" id="not-as-pictured">
-	<img src="images/color-not-as-pictured-1.png" alt="">
-	<img src="images/color-not-as-pictured-2.png" alt="" class="delayed">
-	<img src="images/color-not-as-pictured-3.png" alt="" class="delayed">
-	<img src="images/color-not-as-pictured-4.png" alt="" class="delayed">
-	<img src="images/color-not-as-pictured-5.png" alt="" class="delayed">
+	<article class="slide" id="not-as-pictured">
+		<img src="images/color-not-as-pictured-1.png" alt="">
+		<img src="images/color-not-as-pictured-2.png" alt="" class="delayed">
+		<img src="images/color-not-as-pictured-3.png" alt="" class="delayed">
+		<img src="images/color-not-as-pictured-4.png" alt="" class="delayed">
+		<img src="images/color-not-as-pictured-5.png" alt="" class="delayed">
 
-	<details class="notes">
-		Or why was the t-shirt I bought a different color than what it looked like on Amazon?
-	</details>
-</article>
+		<details class="notes">
+			Or why was the t-shirt I bought a different color than what it looked like on Amazon?
+		</details>
+	</article>
 
-<article class="cyan slide" id="turquoise-dress">
-	<img src="images/turquoise-dress.png" alt="" class="browser">
-	<details class="notes">
-		The opposite happens too.
-		This is what this dress looked like on Amazon.
-		Its real color is way brighter and more vibrant, right?
-		This talk will explain why this was not their fault — bright turquoise is a notoriously hard color to reproduce on a screen — it's not just fluorescent colors.
-	</details>
-</article>
+	<article class="cyan slide" id="turquoise-dress">
+		<img src="images/turquoise-dress.png" alt="" class="browser" data-url="amazon.com">
+		<details class="notes">
+			The opposite happens too.
+			This is what this dress looked like on Amazon.
+			Its real color is way brighter and more vibrant, right?
+			This talk will explain why this was not their fault — bright turquoise is a notoriously hard color to reproduce on a screen — it's not just fluorescent colors.
+		</details>
+	</article>
+</section>
 
 <section>
-	<header class="slide">
+	<header class="slide" style="--rainbow-stripes: var(--rgb-stripes)">
 		<h2>RGB</h2>
 		<h3 class="subtitle">
 			color spaces
@@ -153,7 +157,7 @@
 		</details>
 	</article>
 
-	<article class="slide dont-resize">
+	<article class="slide dont-resize" id="hex">
 		<div class="flex" style="gap: 1em">
 			<color-swatch size="large" style="min-width: 10em">
 				<input value="rgb(255, 0, 140)" />
@@ -273,126 +277,8 @@
 		</details>
 	</article>
 
-	<article class="slide">
-		<iframe src="https://whathecolor.com/?color=%23947480" class="browser"></iframe>
-		<details class="notes">
-
-			RGB is efficient, but *hard* to manipulate by humans or reason about.
-
-			These hex codes became opaque mystery meat tokens to copy and paste.
-			Universal, but indecipherable except to the most initiated.
-		</details>
-	</article>
-
-	<article class="slide" style="flex-flow: row">
-		<img src="images/faucet-1.jpg" alt="">
-		<img src="images/faucet-2.jpg" alt="" style="scale: 0.75">
-		<details class="notes">
-			As often happens, the closer a UI is to the machine, the farther it is from humans.
-		</details>
-	</article>
-
-	<article class="slide" id="humans-colors">
-		<div class="swatch" style="--color: hsl(20 25% 70%); width: 50vw; height: 30vh;">
-			<code class="delayed" data-index="2">color(srgb 0.625 0.458 0.375)</code>
-		</div>
-
-		<div class="delayed-children quotes">
-			<q>Light muted brown</q>
-			<q>Dark beige</q>
-			<q>Light brown</q>
-			<div data-index="2">
-				<q>About 60% red, a little less green and even less blue</q>
-				<span class="delayed">— No-one, ever</span>
-			</div>
-		</div>
-
-		<details class="notes">
-			Let’s try this little experiment.
-			Try to describe this color to the person next to you.
-			Suppose you wanted to explain to your partner what color [something] you wanted them to buy.
-
-			When we talk about colors, we usually talk about them in terms of a pure hue and some modifiers like light, dark, bright, muted, grayish, greenish etc.
-			Studies disagree on the exact hues and modifiers, but they all find the same general approach.
-
-		</details>
-	</article>
-
-	<article class="slide" id="polar">
-		<h3>Polar color spaces</h3>
-		<form id="polar_picker" class="flex" v-app>
-			<div>
-				<hue-wheel name="hue" :space="hsl" :color="color"
-					@input="color = $event.target.color"></hue-wheel>
-
-				<channel-slider class="xdelayed" name="l" :space="hsl" channel="l" v-model="color"></channel-slider>
-			</div>
-
-			<color-swatch name="swatch" class="xdelayed" size="large" :color="color"></color-swatch>
-			<script type="slide">
-				polar_picker.app = {
-					color: "hsl(180 50 50)",
-					space: "hsl"
-				};
-			</script>
-		</form>
-
-		<script type="slide xdelayed">
-			polar_picker.elements.hue.channel = "s";
-		</script>
-		<style>
-			@scope {
-				:scope > form {
-					flex: 1;
-					align-self: stretch;
-
-					> div {
-						display: flex;
-						flex-direction: column;
-						gap: 1em;
-					}
-
-					hue-wheel {
-						width: 100%;
-					}
-
-					channel-slider {
-						flex: 1;
-						--slider-height: 4em;
-
-						&::part(channel-info),
-						&::part(spinner) {
-							display: none;
-						}
-					}
-				}
-			}
-		</style>
-		<details class="notes">
-			Polar color spaces consist of a hue angle plus two components that control ligthness and chroma/saturation.
-			They differ in their characteristics, but all share the goal of improving human usability of an otherwise rectangular color space.
-		</details>
-	</article>
-
-	<article class="slide" id="scales-rgb-gray">
-		<color-scale class="compact show-distances" colors="color(srgb 0 0 0), color(srgb 0.5 0.5 0.5), color(srgb 1 1 1)">
-			<div class="distances delayed"></div>
-		</color-scale>
-
-		<color-scale class="compact delayed show-distances" colors="color(srgb 1 0.5 1), color(srgb 1 0 1), color(srgb 0.5 0 1)">
-			<div class="distances delayed"></div>
-		</color-scale>
-
-		<color-scale class="compact xdelayed show-distances" colors="color(srgb 1 0 1), color(srgb 0 0 1), color(srgb 0.5 0 1)">
-			<div class="distances xdelayed"></div>
-		</color-scale>
-
-		<details class="notes">
-			This is why RGB is a poor choice for gradient interpolation
-		</details>
-	</article>
-
 	<article class="displays slide" id="device-rgb-2">
+		<h2>Same coordinates, different colors</h2>
 		<div class="flex">
 			<figure class="mba2013 display">
 				<img src="images/mba2013.png" alt="">
@@ -413,7 +299,7 @@
 	</article>
 
 	<article class="slide" id="standardized-rgb">
-		<h3>Standardized RGB spaces to the rescue?</h3>
+		<h3>Standardized RGB spaces to the rescue!<span class=delayed>?</span></h3>
 
 		<table class="borders">
 			<thead>
@@ -515,82 +401,195 @@
 	</article>
 
 	<article class="chromaticity slide">
-		<h3>u*v* <a href="https://en.wikipedia.org/wiki/Chromaticity">chromaticity</a> diagram</h3>
-		<object data="img/chromaticity.svg"></object>
+		<h3>Color gamut</h3>
+		<h4 class="subtitle">Range of displayable colors</h4>
+		<div class="flex">
+			<object data="images/chromaticity.svg#p3-srgb-mba2013" style="height: 65vh"></object>
+			<ul class="delayed-children">
+				<li>Depends on the <strong>primaries</strong> (<strong class="red text">red</strong>, <strong class="green text"></strong>green</strong>, <strong class="blue text">blue</strong>) so often shown as a triangle on the <em>spectral locus</em></li>
+				<li><strong>All</strong> RGB spaces (device-dependent and standardized) have one</li>
+				<li>If <em>any</em> component is <strong>outside [0,1]</strong> = <strong>out of gamut color</strong></li>
+			</ul>
+		</div>
 	</article>
 
 	<article class="chromaticity slide">
-		<h3>Typical screen gamut vs print</h3>
-		<object data="img/chromaticity.svg#srgb-cmyk"></object>
+		<img src="images/mbp-vs-print.jpg" alt="" style="width: 10em; position: absolute; left: 1em; bottom: 1em">
+		<object data="images/chromaticity.svg#srgb-cmyk" style="flex: 1; min-height: 0; align-self: end"></object>
 	</article>
 
-	<article class="slide" id="summary">
-		<table>
-			<thead>
-				<tr>
-					<th>Color space(s)</th>
-					<th>Usability</th>
-					<th>Device <br>independence</th>
-					<th data-visit="2">Perceptual <br>uniformity</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>Device RGB</th>
-					<td class="red"><strong>1</strong>/5</td>
-					<td class="red">❌</td>
-					<td class="red" data-visit="2"><strong>1</strong>/5</td>
-				</tr>
-				<tr>
-					<th>Standardized RGB spaces
-						<small>sRGB, Display P3, Rec.2020, ProPhoto, …</small>
-					</th>
-					<td class="red"><strong>1</strong>/5</td>
-					<td class="red">✅</td>
-					<td class="red" data-visit="2"><strong>1</strong>/5</td>
-				</tr>
-				<tr data-visit="3">
-					<th>
-						Naïve polar spaces
-						<small>HSL, HWB, HWB, …</small>
-					</th>
-					<td class="green"><strong>4</strong>/5</td>
-					<td>✅*</td>
-					<td class="red" data-visit="2"><strong>1</strong>/5</td>
-				</tr>
-				<tr data-visit="4">
-					<th>
-						Perceptually uniform rectangular spaces
-						<small>Lab, OKLab, …</small>
-					</th>
-					<td class="orange"><strong>2</strong>/5</td>
-					<td>✅</td>
-					<td class="green" data-visit="2"><strong>4-5</strong>/5</td>
-				</tr>
-				<tr data-visit="4">
-					<th>
-						Perceptually uniform polar spaces
-						<small>LCH, OKLCh, …</small>
-					</th>
-					<td class="green"><strong>5</strong>/5</td>
-					<td>✅</td>
-					<td class="green" data-visit="2"><strong>4-5</strong>/5</td>
-				</tr>
-			</tbody>
-		</table>
+	<article class="slide">
+		<img src="images/projector-day-night.jpg" alt="" class="stretch">
 	</article>
 
+	<article class="dark slide orange bg">
+		<strong>
+			It’s all about that gamut<br>
+			’bout that gamut<br>
+			’bout that gamut<br>
+			such trouble <span style="font-variant-emoji: unicode">🎵</span>
+		</strong>
+	</article>
+
+	<article class="dark slide">
+		<h2>So what happens if we try to render an <span class="red">out of gamut</span> color?</h2>
+	</article>
+
+	<article class="slide">
+		<h2>The hardware clips</h2>
+		<iframe src="https://apps.colorjs.io/gamut-mapping/" class="browser stretch"></iframe>
+	</article>
+
+	<article class="scales slide">
+		<h3>Perceptual uniformity</h3>
+		<color-scale class="compact show-distances" colors="color(srgb 0 0 0), color(srgb 0.5 0.5 0.5), color(srgb 1 1 1)">
+			<div class="distances delayed"></div>
+		</color-scale>
+	</article>
+	<article class="scales slide">
+		<color-scale class="compact show-distances" colors="color(srgb 1 0.5 1), color(srgb 1 0 1), color(srgb 0.5 0 1), color(srgb 0 0 1)">
+			<div class="distances delayed"></div>
+		</color-scale>
+	</article>
+	<article class="scales slide">
+		<color-scale class="compact show-distances" colors="red, rgb(100% 50% 0%), yellow">
+			<div class="distances delayed"></div>
+		</color-scale>
+
+		<details class="notes">
+			This is why RGB is a poor choice for gradient interpolation
+		</details>
+	</article>
+
+	<article class="slide">
+		<h3>Usability</h3>
+		<iframe src="https://whathecolor.com/?color=%23947480" class="browser"></iframe>
+		<details class="notes">
+
+			RGB is efficient, but *hard* to manipulate by humans or reason about.
+
+			These hex codes became opaque mystery meat tokens to copy and paste.
+			Universal, but indecipherable except to the most initiated.
+		</details>
+	</article>
+
+	<article class="slide">
+		<img src="images/blinds.gif" alt="" style="flex: 1;">
+	</article>
+
+	<article class="slide" style="flex-flow: row">
+		<img src="images/faucet-1.jpg" alt="">
+		<img src="images/faucet-2.jpg" alt="" style="scale: 0.75">
+		<details class="notes">
+			As often happens, the closer a UI is to the machine, the farther it is from humans.
+		</details>
+	</article>
+
+	<article class="slide" id="humans-colors">
+		<div class="swatch" style="--color: hsl(20 25% 70%); width: 50vw; height: 30vh;">
+			<code class="language-none delayed" data-index="2">rgb(62.5% 45.8% 37.5%)</code>
+		</div>
+
+		<div class="delayed-children quotes">
+			<q>Light muted brown</q>
+			<q>Dark beige</q>
+			<q>Light brown</q>
+			<div data-index="2">
+				<q>About 60% red, a little less green and even less blue</q>
+				<span class="delayed">— No-one, ever</span>
+			</div>
+		</div>
+
+		<details class="notes">
+			Let’s try this little experiment.
+			Try to describe this color to the person next to you.
+			Suppose you wanted to explain to your partner what color [something] you wanted them to buy.
+
+			When we talk about colors, we usually talk about them in terms of a pure hue and some modifiers like light, dark, bright, muted, grayish, greenish etc.
+			Studies disagree on the exact hues and modifiers, but they all find the same general approach.
+
+		</details>
+	</article>
+
+	<!-- <article class="slide dont-resize" id="polar">
+		<h3>Polar color spaces</h3>
+		<form id="polar_picker" class="flex" v-app>
+			<div class="space-picker">
+				<label><input type="radio" name="space" value="hsl" v-model="space"> HSL</label>
+				<label><input type="radio" name="space" value="hwb" v-model="space"> HWB</label>
+				<label><input type="radio" name="space" value="lch" v-model="space"> LCH</label>
+				<label><input type="radio" name="space" value="oklch" v-model="space"> OKLCH</label>
+			</div>
+			<hue-wheel name="hue" space="hsl" :space="space" :color="color"
+				@input="color = $event.target.color"></hue-wheel>
+
+			<channel-slider class="xdelayed" name="l" :space="space" channel="l"
+				:color="color" @colorchange="color = $event.target.color"></channel-slider>
 
 
-	<article class="slide" data-insert="#summary"></article>
-</section>
+			<color-swatch name="swatch" class="xdelayed" size="large" :color="color" >{{ color }}</color-swatch>
 
-<section>
-	<header class="slide">
-		<h2>Polar spaces</h2>
-	</header>
+		</form>
+		<script>
+			// Set initial Vue data before the slide mounts. A plain (not type="slide")
+			// script runs at parse, ahead of the mount on slidechange, avoiding the race
+			// where the Vue plugin would read .app before it's set.
+			polar_picker.app = {
+				data: {
+					color: "hsl(180 50 50)",
+					space: "hsl"
+				}
+			};
+		</script>
 
+		<script type="slide delayed">
+			polar_picker.elements.hue.channel = "s";
+		</script>
+		<style>
+			@scope {
+				:scope > form {
+					display: grid;
+					grid-template-columns: 60vmin auto;
+					grid-template-rows: auto 1fr auto;
+					flex: 1;
+					align-self: stretch;
 
+					.space-picker {
+						display: flex;
+						grid-column: 1 / -1;
+						grid-row: 1;
+					}
+
+					hue-wheel {
+						grid-column: 1;
+						grid-row: 2;
+						width: 100%;
+					}
+
+					channel-slider {
+						grid-row: 3;
+						grid-column: 1;
+						flex: 1;
+						--slider-height: 4em;
+
+						&::part(channel-info),
+						&::part(spinner) {
+							display: none;
+						}
+					}
+
+					color-swatch {
+						grid-column: 2;
+						grid-row: 2;
+					}
+				}
+			}
+		</style>
+		<details class="notes">
+			Polar color spaces consist of a hue angle plus two components that control ligthness and chroma/saturation.
+			They differ in their characteristics, but all share the goal of improving human usability of an otherwise rectangular color space.
+		</details>
+	</article> -->
 
 	<article class="slide" id="hsl">
 		<form id="hsl_picker" class="flex">
@@ -604,7 +603,7 @@
 					oninput="hsl_picker.elements.hue.color = hsl_picker.elements.swatch.color = this.color"></channel-slider>
 			</div>
 
-			<color-swatch name="swatch" class="delayed" size="large">hsl(0 100 50)</color-swatch>
+			<color-swatch name="swatch" class="delayed" size="large"><h2 slot="swatch-content">HSL</h2>hsl(0 100 50)</color-swatch>
 
 			<style>
 				@scope {
@@ -731,6 +730,135 @@
 		</style>
 	</article>
 
+	<article class="dark slide">
+		<h3>Perceptually uniform color spaces</h3>
+		<h4 class="subtitle">Lab, OKLab, LCH, OKLCH, …</h4>
+		<object data="images/lab.svg" alt="" style="height: 100%"></object>
+	</article>
+
+	<article class="slide" id="summary">
+		<table>
+			<thead>
+				<tr>
+					<th>Color space(s)</th>
+					<th>Usability</th>
+					<th>Device <br>independence</th>
+					<th>Perceptual <br>uniformity</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Device RGB</th>
+					<td class="red"><strong>1</strong>/5</td>
+					<td class="red">❌</td>
+					<td class="red"><strong>1</strong>/5</td>
+				</tr>
+				<tr>
+					<th>Standardized RGB spaces
+						<small>sRGB, Display P3, Rec.2020, ProPhoto, …</small>
+					</th>
+					<td class="red"><strong>1</strong>/5</td>
+					<td class="red">✅</td>
+					<td class="red"><strong>1</strong>/5</td>
+				</tr>
+				<tr data-visit="3">
+					<th>
+						sRGB polar spaces
+						<small>HSL, HWB, HWB, …</small>
+					</th>
+					<td class="green"><strong>4</strong>/5</td>
+					<td>✅*</td>
+					<td class="red"><strong>1</strong>/5</td>
+				</tr>
+				<tr data-visit="4">
+					<th>Lab</th>
+					<td class="orange"><strong>2</strong>/5</td>
+					<td>✅</td>
+					<td class="green"><strong>4</strong>/5</td>
+				</tr>
+				<tr data-visit="4">
+					<th>LCH</th>
+					<td class="orange"><strong>5</strong>/5</td>
+					<td>✅</td>
+					<td class="green"><strong>4</strong>/5</td>
+				</tr>
+				<tr data-visit="4">
+					<th>OKLab</th>
+					<td class="orange"><strong>2</strong>/5</td>
+					<td>✅</td>
+					<td class="green"><strong>5</strong>/5</td>
+				</tr>
+				<tr data-visit="4">
+					<th>OKLCh</th>
+					<td class="green"><strong>5</strong>/5</td>
+					<td>✅</td>
+					<td class="green"><strong>5</strong>/5</td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
+	<!-- <article class="slide" id="summary">
+		<table>
+			<thead>
+				<tr>
+					<th>Color space(s)</th>
+					<th>Usability</th>
+					<th>Device <br>independence</th>
+					<th>Perceptual <br>uniformity</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Device RGB</th>
+					<td class="red"><strong>1</strong>/5</td>
+					<td class="red">❌</td>
+					<td class="red"><strong>1</strong>/5</td>
+				</tr>
+				<tr>
+					<th>Standardized RGB spaces
+						<small>sRGB, Display P3, Rec.2020, ProPhoto, …</small>
+					</th>
+					<td class="red"><strong>1</strong>/5</td>
+					<td class="red">✅</td>
+					<td class="red"><strong>1</strong>/5</td>
+				</tr>
+				<tr data-visit="3">
+					<th>
+						Naïve polar spaces
+						<small>HSL, HWB, HWB, …</small>
+					</th>
+					<td class="green"><strong>4</strong>/5</td>
+					<td>✅*</td>
+					<td class="red"><strong>1</strong>/5</td>
+				</tr>
+				<tr data-visit="4">
+					<th>
+						Perceptually uniform rectangular spaces
+						<small>Lab, OKLab, …</small>
+					</th>
+					<td class="orange"><strong>2</strong>/5</td>
+					<td>✅</td>
+					<td class="green"><strong>4-5</strong>/5</td>
+				</tr>
+				<tr data-visit="4">
+					<th>
+						Perceptually uniform polar spaces
+						<small>LCH, OKLCh, …</small>
+					</th>
+					<td class="green"><strong>5</strong>/5</td>
+					<td>✅</td>
+					<td class="green"><strong>4-5</strong>/5</td>
+				</tr>
+			</tbody>
+		</table>
+	</article> -->
+</section>
+
+<section>
+
+
+
+
 	<article class="slide" data-insert="#summary"></article>
 </section>
 
@@ -740,17 +868,7 @@
 		<h3 class="subtitle">Lab, OKLab, LCh, OkLCh…</h3>
 	</header>
 
-	<article class="slide">
-		<code class="gradient" style="--params: to right in srgb; --stops: white, black">
-			linear-gradient(to right in srgb, white, black)
-		</code>
-		<code class="gradient" style="--params: to right in lab; --stops: white, black">
-			linear-gradient(to right in lab, white, black)
-		</code>
-		<code class="gradient" style="--params: to right in oklab; --stops: white, black">
-			linear-gradient(to right in oklab, white, black)
-		</code>
-	</article>
+
 	<article class="slide">
 		<code class="gradient" style="--params: to right in srgb; --stops: white, blue">
 			linear-gradient(to right in srgb, white, blue)
@@ -1118,7 +1236,7 @@
 		</details>
 	</article>
 
-	<article class="slide dont-resize" id="hsl-gm">
+	<article class="slide hsl-gm" id="hsl-gm">
 		<div>
 			<header>
 				<v-stepper class="delayed" v-model="n">iterations</v-stepper>
@@ -1161,37 +1279,238 @@
 			}).mount("#hsl-gm div");
 		</script>
 	</article>
+
+	<article class="slide dont-resize hsl-gm" id="hsl-gm-map">
+		<div>
+			<header>
+				<v-stepper v-model="n">iterations</v-stepper>
+			</header>
+			<div class="pre-container"><pre class="show-colors small no-whitespace-normalization" ref="pre">
+<code>--color-lh: oklch(from var(--color) l none h);</code>
+<code>--clamp-s: h clamp(0, s, 100) l;</code>
+<code>--color: {{ color }};</code>
+<code v-for="i in n" ref="code">
+--color-{{i}}-hsl: hsl(from var(--color{{ i-1 ? '-' + (i-1) : '' }}) var(--clamp-s));
+--color-{{ i < n ? i : 'mapped' }}: color-mix(in oklch, var(--color-{{i}}-hsl) 0%, var(--color-lh));</code></pre></div>
+		</div>
+		<script type="module">
+			import { createApp } from "vue";
+			import Stepper from "./vue/stepper.js";
+			createApp({
+				components: { "v-stepper": Stepper },
+				data() {
+					return {
+						color: "oklch(97% 0.16 205)",
+						n: 1,
+					}
+				},
+
+				watch: {
+					async n () {
+						await this.$nextTick();
+						let pre = this.$refs.pre;
+						for (let code of pre.querySelectorAll("code")) {
+							if (!code.firstElementChild) {
+								// If no child elements, needs highlighting
+								Prism.highlightElement(code);
+							}
+						}
+
+						pre.dispatchEvent(new InputEvent("input"))
+					}
+				}
+			}).mount("#hsl-gm-map div");
+		</script>
+	</article>
+
+	<article class="slide">
+		<h3>Relative color syntax with 2 colors?</h3>
+		<pre><code>
+			--color: oklch(
+				from var(--color-1) var(--color-2)
+				l c2 h
+			);
+		</code></pre>
+		<p class="delayed">CSS WG approved but not yet specced</p>
+	</article>
+
+	<article class="slide flex">
+		<color-swatch size="large" oncolorchange="this.nextElementSibling.nextElementSibling.textContent = this.color.to('hsl')">
+			<input type="text" value="rgb(50% 50% 50%)">
+		</color-swatch>
+		<span class="big">→</span>
+		<color-swatch size="large"></color-swatch>
+		<style>
+			@scope {
+				:scope {
+					justify-content: center;
+
+					.big {
+						flex: none;
+					}
+				}
+				color-swatch {
+					flex: 1;
+					contain: initial;
+					container-type: initial;
+					font-family: var(--font-monospace);
+
+					&::part(swatch) {
+						width: 100%;
+					}
+				}
+			}
+		</style>
+		<details class="notes">
+			`none` was originally invented to represent the missing hues in grayscale colors.
+		</details>
+	</article>
+
+	<article class="show-images slide">
+		<h2><code>none</code> is awesome</h2>
+
+		<pre class="show-images show-colors small"><code>
+--color: <span id="color_none">oklch(0.6 0.3 350)</span>;
+--img: linear-gradient(to right in oklab,
+	var(--color), oklab(0.5 none none));
+--img2: linear-gradient(to right in oklab,
+	var(--color), oklab(0.5 0 0));
+		</code></pre>
+	</article>
+
+	<article class="show-images slide">
+		<h2><code>none</code> is awesome</h2>
+
+		<pre class="show-images show-colors small"><code>
+--color: <span id="color_none">oklch(0.6 0.3 350)</span>;
+--color2: <span id="color_none2">oklch(0.8 0.2 80 / 50%)</span>;
+--img1: linear-gradient(to right in oklch,
+	var(--color), var(--color2));
+--img2: linear-gradient(to right in oklch,
+	oklch(from var(--color) none c h / alpha),
+	oklch(from var(--color2) l none h / none));
+		</code></pre>
+	</article>
+
+	<article class="show-images slide">
+		<h2>Emulate multi-color RCS with <code>none</code></h2>
+
+		<pre class="show-images show-colors small"><code>
+--color: <span id="color_none">oklch(0.6 0.3 350)</span>;
+--color2: <span id="color_none2">oklch(0.8 0.2 80 / 50%)</span>;
+--mix1: color-mix(in oklch, var(--color), var(--color2));
+/* oklch(from var(--color1) var(--color2)
+	l2 c calc((h + h2)/2) / alpha) */
+--mix2: color-mix(in oklch,
+	oklch(from var(--color) none c h / alpha),
+	oklch(from var(--color2) l none h / none));
+		</code></pre>
+	</article>
+
+	<article class="slide dont-resize hsl-gm" data-insert="#hsl-gm-map"></article>
+
+	<article class="slide">
+		<iframe src="https://apps.colorjs.io/gamut-mapping/" class="browser stretch"></iframe>
+	</article>
+
+	<article class="slide">
+		<h2>💡 Near future: Recursive @function?</h2>
+		<pre style="position: relative;"><code>
+			@function --gamut-map(--color &lt;color>, --i &lt;integer>: 1) returns &lt;color> {
+				--color-lh: oklch(from var(--color) l none h);
+				--clamp-s: h clamp(0, s, 100) l;
+				--color-hsl: hsl(from var(--color) var(--clamp-s));
+				--color-mapped: color-mix(in oklch, var(--color-hsl) 0%, var(--color-lh));
+				result: if(
+					style(--i: 0): var(--color-mapped);
+					else: --gamut-map(var(--color-mapped), calc(var(--i) - 1))
+				);
+			}<span class="delayed emoji">❌</span>
+		</code></pre>
+		<details class="notes">
+			if() does not short circuit, recursive not supported
+		</details>
+	</article>
+
+	<article class="slide">
+		<h2>💡 Attempt No 2</h2>
+		<pre style="position: relative;"><code>
+			@function --gamut-map-iteration(--color &lt;color>) returns &lt;color> {
+				--color-lh: oklch(from var(--color) l none h);
+				--clamp-s: h clamp(0, s, 100) l;
+				--color-hsl: hsl(from var(--color) var(--clamp-s));
+				result: color-mix(in oklch, var(--color-hsl) 0%, var(--color-lh));
+			}
+
+			@function --gamut-map(--color &lt;color>, --i &lt;integer>: 1) returns &lt;color> {
+				--color-1: --gamut-map-iteration(var(--color));
+				--color-2: --gamut-map-iteration(var(--color-1));
+				--color-3: --gamut-map-iteration(var(--color-2));
+				--color-4: --gamut-map-iteration(var(--color-3));
+				result: --gamut-map-iteration(var(--color-4));
+			}<span class="delayed emoji">❌</span>
+		</code></pre>
+	</article>
+
+	<article class="slide flex">
+		<iframe src="https://github.com/w3c/csswg-drafts/issues/13943" class="browser stretch" style="flex: 2"></iframe>
+		<p><strong>tl;dr</strong> No nesting allowed rn, but it will be fixed</p>
+	</article>
 </section>
 
+<article class="slide">
+	<img src="images/what-do-we-want-gm.png" alt="">
+</article>
 
-<footer class="slide" id="end">
+
+<footer class="dark slide dont-resize" id="end">
+	<h2>Thank you!</h2>
 	<p class="slides">
 		<i class="bi bi-easel3-fill"></i>
 		Slides at <a href="https://talks.verou.me/whathecolor">talks.verou.me/whathecolor</a>.
 		Made with <a href="https://inspirejs.org">InspireJS</a>.
 	</p>
 
-	<ul class="info">
-		<li>
-			<i class="bi bi-link-45deg"></i>
-			lea.verou.me
-		</li>
-		<li>
-			<i class="bi bi-mastodon"></i>
-			leaverou@front-end.social
-		</li>
+	<div class="flex">
+		<div class="colorjs">
+			<strong>Colorverse:</strong>
+			<ul>
+				<li><a href="https://colorjs.io">colorjs.io</a> Mature color manipulation library</li>
+				<li><a href="https://apps.colorjs.io">apps.colorjs.io</a> Various color tools</li>
+				<li><a href="https://elements.colorjs.io">elements.colorjs.io</a> Experimental web components</li>
+				<li><a href="https://palettes.colorjs.io">palettes.colorjs.io</a> Research on color palettes</li>
+				<li><a href="https://whathecolor.com">whathecolor.com</a> Color matching game</li>
+			</ul>
+		</div>
 
-		<li>
-			<i class="bi bi-envelope-fill"></i>
-			lea@verou.me
-		</li>
+		<ul class="info">
+			<li>
+				👋🏼 Come say hi!
+			</li>
+			<li>
+				<i class="bi bi-link-45deg"></i>
+				lea.verou.me
+			</li>
+			<li>
+				<i class="bi bi-mastodon"></i>
+				leaverou@front-end.social
+			</li>
 
-		<li>
-			<i class="bi bi-twitter"></i>
-			<small>(and everywhere else)</small>
-			@leaverou
-		</li>
-	</ul>
+			<li>
+				<i class="bi bi-envelope-fill"></i>
+				lea@verou.me
+			</li>
+
+			<li>
+				<i class="bi bi-bluesky"></i>
+				@lea.verou.me
+			</li>
+			<li>
+				<i class="bi bi-github"></i>
+				@leaverou <small>elsewhere</small>
+			</li>
+		</ul>
+	</div>
 </footer>
 
 </body>

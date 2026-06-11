@@ -81,8 +81,6 @@
 	display: flex;
 	gap: 1em;
 
-
-
 	> .fr2 {
 		flex: 2;
 	}
@@ -93,6 +91,8 @@
 }
 
 .flex {
+	flex-flow: row;
+
 	&:not(.space-between) > * {
 		flex: 1;
 	}
@@ -108,4 +108,16 @@
 
 .handwritten {
 	font-family: var(--font-handwritten);
+}
+
+.emoji {
+	display: flex;
+	font-size: 40vh;
+	position: absolute;
+	z-index: 3;
+	top: 50%;
+	left: 50%;
+	translate: -50% -50%;
+	line-height: 1;
+	text-shadow: 0 .2em .5em rgb(0 0 0 / .5);
 }

@@ -68,8 +68,8 @@ div.code-fragments {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: var(--_color-code-comment);
-	opacity: 0.9;
+	color: var(--_color-code-comment, oklch(currentColor l clamp(0, c, .1) h));
+	opacity: 0.7;
 }
 
 .token.punctuation {
