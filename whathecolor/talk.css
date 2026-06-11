@@ -526,30 +526,9 @@ footer.slide#end {
 				padding: 0;
 			}
 
-			td {
-				--tr-color: var(--color); /* workaround for lack of inherit() */
-				padding-block: 0;
-				padding-inline: .3em;
-
-				.swatch {
-					--color: oklch(from var(--tr-color) var(--l) c h);
-				}
-			}
-
-			td:nth-of-type(1) { --l: var(--l-90); }
-			td:nth-of-type(2) { --l: var(--l-80); }
-			td:nth-of-type(3) { --l: var(--l-70); }
-			td:nth-of-type(4) { --l: var(--l-60); }
-			td:nth-of-type(5) { --l: var(--l-50); }
-			td:nth-of-type(6) { --l: var(--l-40); }
-			td:nth-of-type(7) { --l: var(--l-30); }
-			td:nth-of-type(8) { --l: var(--l-20); }
-			td:nth-of-type(9) { --l: var(--l-10); }
-
-			.callout {
-				padding-block: .5em;
-				font-size: 50%;
-
+			/* Each row owns its tint scale, so both the swatches and the
+			   callout demo in that row consume the same --color-N tokens. */
+			tr {
 				--color-90: oklch(from var(--color) var(--l-90) c h);
 				--color-80: oklch(from var(--color) var(--l-80) c h);
 				--color-70: oklch(from var(--color) var(--l-70) c h);
@@ -561,9 +540,57 @@ footer.slide#end {
 				--color-10: oklch(from var(--color) var(--l-10) c h);
 			}
 
+			td {
+				padding-block: 0;
+				padding-inline: .3em;
+
+				.swatch {
+					--color: var(--tint);
+				}
+			}
+
+			td:nth-of-type(1) { --tint: var(--color-90); }
+			td:nth-of-type(2) { --tint: var(--color-80); }
+			td:nth-of-type(3) { --tint: var(--color-70); }
+			td:nth-of-type(4) { --tint: var(--color-60); }
+			td:nth-of-type(5) { --tint: var(--color-50); }
+			td:nth-of-type(6) { --tint: var(--color-40); }
+			td:nth-of-type(7) { --tint: var(--color-30); }
+			td:nth-of-type(8) { --tint: var(--color-20); }
+			td:nth-of-type(9) { --tint: var(--color-10); }
+
+			.callout {
+				padding-block: .5em;
+				font-size: 50%;
+			}
+
 				> i {
 					grid-row: 1;
 				}
+		}
+	}
+}
+
+/*
+ * color-mix() variant of the palette: instead of varying lightness at constant
+ * chroma, each tint is the key color naively mixed with white (lighter columns)
+ * or black (darker columns). Mixing toward white/black desaturates as it
+ * lightens/darkens — exactly the "washed out" problem the slide demonstrates.
+ */
+.color-mix {
+	& table, table& {
+		/* Override only the row's tint scale; the swatch ↔ column mapping
+		   and the callout demo are inherited from .palette unchanged. */
+		tbody tr {
+			--color-90: color-mix(in oklab, white 85%, var(--color));
+			--color-80: color-mix(in oklab, white 65%, var(--color));
+			--color-70: color-mix(in oklab, white 45%, var(--color));
+			--color-60: color-mix(in oklab, white 22%, var(--color));
+			--color-50: var(--color);
+			--color-40: color-mix(in oklab, black 22%, var(--color));
+			--color-30: color-mix(in oklab, black 45%, var(--color));
+			--color-20: color-mix(in oklab, black 65%, var(--color));
+			--color-10: color-mix(in oklab, black 85%, var(--color));
 		}
 	}
 }
@@ -589,10 +616,17 @@ footer.slide#end {
 			calc(var(--offset) * 8) calc(var(--offset) * 8) 0 var(--color-purple),
 			calc(var(--offset) * 9) calc(var(--offset) * 9) 0 var(--color-magenta)
 			;
-		transition: 1s;
+		/* transition: 1s; */
+		animation: offset 1s both infinite alternate;
 	}
 
 	&:target > h2 {
+		/* --offset: .05em; */
+	}
+}
+
+@keyframes offset {
+	to {
 		--offset: .05em;
 	}
 }

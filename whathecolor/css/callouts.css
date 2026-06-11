@@ -2,7 +2,7 @@
 .callout {
 	--color-bg: var(--color-90, var(--color-gray-90));
 	--color-border: var(--color-70, var(--color-gray-70));
-	--color-icon: var(--color, var(--color-gray));
+	--color-icon: oklch(from var(--color) clamp(var(--l-30), l, var(--l-70)) c h);
 	--color-heading: var(--color-40, var(--color-gray-40));
 	--color-text: var(--color-30, var(--color-gray-30));
 

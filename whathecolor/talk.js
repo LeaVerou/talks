@@ -74,5 +74,6 @@ Inspire.plugins.register({
 });
 
 import "./js/show-colors.js";
+import "./js/gamut-mapped-palette.js";
 
 customElements.whenDefined("color-scale").then(() => import("./js/show-distances.js"));

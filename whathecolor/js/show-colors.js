@@ -14,7 +14,7 @@ const types = {
 
 function processCodeBlock (el, slide, type = "color") {
 	let code = el.textContent.trim();
-	let dummy = el.dataset.el ? slide.querySelector(el.dataset.el) : dummyEl;
+	let dummy = el.dataset.el ? slide.matches(el.dataset.el) ? slide : slide.querySelector(el.dataset.el) : dummyEl;
 	dummy ??= dummyEl;
 	if (dummy === dummyEl) {
 		slide.appendChild(dummy);

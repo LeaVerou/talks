@@ -470,7 +470,7 @@
 	</article>
 
 	<article class="slide">
-		<iframe src="https://apps.colorjs.io/gamut-mapping/" class="browser stretch"></iframe>
+		<iframe src="https://apps.colorjs.io/gamut-mapping/" class="browser stretch" style="zoom: 0.5"></iframe>
 	</article>
 
 
@@ -793,7 +793,35 @@
 	<article class="dark slide">
 		<h3>Perceptually uniform color spaces</h3>
 		<h4 class="subtitle">Lab, OKLab, LCH, OKLCH, …</h4>
-		<object data="images/lab.svg" alt="" style="height: 100%"></object>
+		<div class="flex">
+			<object data="images/lab.svg" alt="" style="height: 50vh; flex: none"></object>
+			<ul class="delayed-children">
+				<li>Coordinate distance = perceptual distance</li>
+				<li>Polar coords mean the same thing across the space</li>
+				<li>Polar coords are <em>orthogonal</em></li>
+			</ul>
+		</div>
+	</article>
+
+	<article class="slide" id="why-pu">
+		<h2>Why?</h2>
+
+		<ul>
+			<li>Interpolation (gradients! transitions!)</li>
+			<li>Dynamic palettes/ramps</li>
+			<li>Other dynamic computations (e.g. contrasting colors)</li>
+		</ul>
+	</article>
+
+	<article class="slide">
+		<h2>Custom contrast-color()?</h2>
+
+		<pre class="show-colors" data-el=".slide"><code>
+			--l-threshold: 0.7;
+			color: oklch(from var(--color) calc(l - var(--l-threshold)) 0 none);
+		</code></pre>
+
+		<color-picker></color-picker>
 	</article>
 
 	<article class="slide">
@@ -995,7 +1023,7 @@
 				.callout {
 					--color-bg: oklch(from var(--accent-color) var(--l-95) c h);
 					--color-border: oklch(from var(--accent-color) var(--l-80) c h);
-					--color-icon: var(--accent-color);
+					--color-icon: oklch(from var(--accent-color) clamp(var(--l-30), l, clamp(var(--l-70))) c h);
 					--color-heading: oklch(from var(--accent-color) var(--l-30) c h);
 					--color-text: oklch(from var(--accent-color) var(--l-10) c h);
 				}
@@ -1146,7 +1174,7 @@
 	</article>
 
 	<article class="slide">
-		<iframe src="https://palettes.colorjs.io" class="browser stretch"></iframe>
+		<iframe src="https://palettes.colorjs.io" class="browser stretch" style="zoom: 0.7"></iframe>
 		<details class="notes">
 			It became an obsession.
 			I built a website to analyze designer crafted color palettes, trying to find patterns.
@@ -1167,8 +1195,54 @@
 		</details>
 	</article>
 
+	<article class="slide palette color-mix" id="color-mix-scales">
+		<table>
+			<thead>
+				<tr>
+					<th>Key color</th>
+					<th>90</th>
+					<th>80</th>
+					<th>70</th>
+					<th>60</th>
+					<th>50</th>
+					<th>40</th>
+					<th>30</th>
+					<th>20</th>
+					<th>10</th>
+				</tr>
+			</thead>
+			<tbody>
+				<script>
+					for (let color in colors.accents) {
+						document.write(`
+							<tr style="--color: var(--color-${color})">
+								<th><div class="swatch">${color}</div></th>
+								${ `<td><div class="swatch"></div></td>
+								`.repeat(9) }
+								<td class="delayed" data-index="2"><div class="callout">
+									<i class="bi bi-info-circle-fill"></i>
+									Callout
+								</td>
+							</tr>
+						`);
+					}
+				</script>
+			</tbody>
+		</table>
+		<details class="notes">
+			People often create dynamic scales by mixing with white or black.
+			The problem with this is that you’re desaturating at the same time as darkening/lightening,
+			and you have no control over it.
+			The resulting tints are often washed out.
+
+			Also, if we naively mix a predefined amount we get no guarantees about each tint except relative to its key color.
+			It’s the HSL problem all over again.
+		</details>
+	</article>
+
 	<article class="slide">
-		TODO early color-mix experiments
+		<h2>Early experiments mixing the two</h2>
+		<iframe src="https://live-colors.verou.me" class="browser stretch"></iframe>
 
 		<details class="notes">
 			People often create dynamic scales by mixing with white or black.
@@ -1213,12 +1287,29 @@
 			_But what if we could implement it ourselves?_
 		</details>
 	</article>
+
+	<article class="dark slide rainbow-stripes">
+		<h2>Out of gamut is the Wild West</h2>
+
+		<ul>
+			<li>No perceptual uniformity*</li>
+			<li>No device independence*</li>
+			<li>No orthogonality*</li>
+		</ul>
+		<p>* even in spaces that generally have these properties</p>
+	</article>
 </section>
 
 <section>
 	<header class="slide">
 		<h2>Implementing gamut mapping in CSS?!</h2>
 	</header>
+
+	<article class="slide">
+		<h2>There is always a chroma that brings the color in gamut</h2>
+		<h3 class="subtitle">we just need to find it</h3>
+		<color-picker color="oklch(69% 0.15 205)" gamut="p3">
+	</article>
 
 	<article class="slide xdont-resize">
 		<img src="images/gamut-fitting.png" data-url="https://www.desmos.com/calculator/mpx57mwtgv" alt="" class="browser delayed">
@@ -1354,15 +1445,18 @@
 				l c2 h
 			);
 		</code></pre>
-		<p class="delayed">CSS WG approved but not yet specced</p>
+		<p class="delayed"><a href="">CSS WG approved</a> but not yet specced</p>
 	</article>
 
-	<article class="slide flex fromto-swatches">
-		<color-swatch size="large" oncolorchange="this.nextElementSibling.nextElementSibling.textContent = this.color.to('hsl')">
+	<article class="slide fromto-swatches">
+		<h2>none values</h2>
+		<div class="flex">
+			<color-swatch size="large" oncolorchange="this.nextElementSibling.nextElementSibling.textContent = this.color.to('hsl')">
 			<input type="text" value="rgb(50% 50% 50%)">
 		</color-swatch>
 		<span class="arrow">→</span>
 		<color-swatch size="large"></color-swatch>
+		</div>
 		<details class="notes">
 			`none` was originally invented to represent the missing hues in grayscale colors.
 		</details>
@@ -1374,9 +1468,9 @@
 		<pre class="show-images show-colors small"><code>
 --color: <span id="color_none">oklch(0.6 0.3 350)</span>;
 --img: linear-gradient(to right in oklab,
-	var(--color), oklab(0.5 none none));
---img2: linear-gradient(to right in oklab,
 	var(--color), oklab(0.5 0 0));
+--img2: linear-gradient(to right in oklab,
+	var(--color), oklab(0.5 none none));
 		</code></pre>
 	</article>
 
@@ -1412,7 +1506,7 @@
 	<article class="slide dont-resize hsl-gm" data-insert="#hsl-gm-map"></article>
 
 	<article class="slide">
-		<iframe src="https://apps.colorjs.io/gamut-mapping/" class="browser stretch"></iframe>
+		<iframe src="https://apps.colorjs.io/gamut-mapping/" class="browser stretch" style="zoom: 0.5"></iframe>
 	</article>
 
 	<article class="slide">
@@ -1462,6 +1556,48 @@
 
 <article class="slide">
 	<img src="images/what-do-we-want-gm.png" alt="">
+</article>
+
+<article class="slide palette gamut-mapped" id="gamut-mapped-scales">
+	<h2>Gamut mapped scales</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Key color</th>
+				<th>90</th>
+				<th>80</th>
+				<th>70</th>
+				<th>60</th>
+				<th>50</th>
+				<th>40</th>
+				<th>30</th>
+				<th>20</th>
+				<th>10</th>
+			</tr>
+		</thead>
+		<tbody>
+			<script>
+				for (let color in colors.accents) {
+					document.write(`
+						<tr style="--color: var(--color-${color})">
+							<th><div class="swatch">${color}</div></th>
+							${ `<td><div class="swatch"></div></td>
+							`.repeat(9) }
+							<td class="delayed" data-index="2"><div class="callout">
+								<i class="bi bi-info-circle-fill"></i>
+								Callout
+							</td>
+						</tr>
+					`);
+				}
+			</script>
+		</tbody>
+	</table>
+	<details class="notes">
+		And here's the same constant-chroma oklch scale, but gamut mapped to sRGB.
+		Each tint keeps its lightness and hue; we just reduce chroma until it fits.
+		No washing out, no out-of-gamut surprises — and it's remarkably close to a hand-crafted palette.
+	</details>
 </article>
 
 
