@@ -1,3 +1,3 @@
 export default {
-	mode: "dev",
+	mode: process.env.NETLIFY ? undefined : "dev",
 };
