@@ -19,7 +19,7 @@
 	</feMerge>
 </filter>
 </defs>
-<g filter="url(filters.svg#3d)" fill="#ddd">
+<g filter="url(#3d)" fill="#ddd">
 <text font-family="'Leckerli One', cursive" font-size="170">
 	<tspan x="0" y="140">Polyfilling </tspan>
 	<tspan x="68.7" y="300">the gaps</tspan>
