@@ -153,6 +153,11 @@ body {
 	   so the swatch component owns the dot's size. */
 	color-swatch {
 		--swatch-style: dot;
+		/* Compact mode moves the color label into a hover tooltip, so the swatch's
+		   layout box is just the dot. Otherwise the inline label widens the box and
+		   translate(-50%,-50%) centers dot+label — knocking the dot off its coordinate. */
+		--details-style: compact;
+		margin: 0;
 		transform:
 			translate3d(
 				calc((var(--r) / 255 - 0.5) * var(--size)),
