@@ -11,7 +11,7 @@
 	<script src="importmap.js"></script>
 	<script src="talk.js" type="module"></script>
 </head>
-<body class="language-js" data-markdown-elements="details.notes, .md, .md-children > :not(.no-md)">
+<body class="language-js" data-markdown-elements="details.notes, .md, .md-children > :not(.no-md)" data-markdown-plugins="markdown-it-attrs">
 
 <header class="slide" id="intro">
 	<h1>No-build:<br><em>pipe dream</em>, or near future?</h1>
@@ -25,6 +25,63 @@
 		Raise your hand if you have ever spent more time fighting your build pipeline than writing the code it builds.
 	</details>
 </header>
+
+<article class="slide md flex">
+
+- marked-demo/
+  - package.json
+  - *node_modules/*
+  - .gitignore
+  - main.js
+
+{ .file-tree }
+
+```js
+import { marked } from 'marked';
+const md = '# _Hello_ Markdown!';
+const html = marked.parse(md);
+console.log(html);
+```
+
+<details class="notes">
+Suppose we want to include a library to do something, e.g. parse Markdown.
+We have a file, let's call it `app.js` that looks like this.
+Nice and simple, right?
+So how do we make this work?
+</details>
+
+</article>
+
+<article class="slide md">
+## Dependencies in Node.js
+
+```bash
+npm install marked
+```
+
+- marked-demo/
+  - package.json
+  - *node_modules/*
+  - main.js
+
+{ .file-tree }
+</article>
+
+<article class="slide md">
+## Dependencies in Node.js
+
+<div class="flex">
+
+- marked-demo/
+  - package.json
+  - *node_modules/*
+  - .gitignore
+  - main.js
+
+{ .file-tree }
+
+</div>
+</article>
 
 <section>
 	<header class="slide">

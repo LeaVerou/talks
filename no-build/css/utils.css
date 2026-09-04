@@ -1,0 +1,114 @@
+@import url("utils/colors.css");
+@import url("components/browser.css");
+@import url("components/raining-words.css");
+
+/* A "delayed item" is any element whose reveal Inspire.js staggers:
+   a .delayed, a .delayed-children container, or its children.
+   When such an item is in a disappear state, hide its revealed child. */
+.delayed,
+.delayed-children > * {
+	&.disappear,
+	&.disappear-current {
+		opacity: 1;
+
+		&.disappear.displayed,
+		&.disappear-current:not(.future) {
+			opacity: 0;
+		}
+	}
+
+	&.hide,
+	&.hide-current,
+	&.show,
+	&.show-current {
+		opacity: 1;
+
+		&.hide.displayed,
+		&.hide-current.current,
+		&.show:not(.displayed),
+		&.show-current:not(.future) {
+			display: none;
+		}
+	}
+}
+
+.slide.bleed {
+	padding: 0;
+	--dont-resize: true;
+
+	> img,
+	> video,
+	> object {
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.flex,
+.stack {
+	display: flex;
+	gap: 1em;
+
+	> .fr2 {
+		flex: 2;
+	}
+
+	> .space-between {
+		justify-content: space-between;
+	}
+}
+
+.flex {
+	flex-flow: row;
+
+	&:not(.space-between) > * {
+		flex: 1;
+	}
+}
+
+.stack {
+	flex-flow: column;
+}
+
+.big {
+	font-size: var(--font-size-2xl);
+}
+
+.handwritten {
+	font-family: var(--font-handwritten);
+}
+
+.emoji {
+	display: flex;
+	font-size: 40vh;
+	position: absolute;
+	z-index: 3;
+	top: 50%;
+	left: 50%;
+	translate: -50% -50%;
+	line-height: 1;
+	text-shadow: 0 .2em .5em rgb(0 0 0 / .5);
+}
+
+.faded {
+	opacity: .65;
+}
+
+.file-tree {
+
+	font-family: var(--font-monospace);
+
+	li {
+		list-style: none;
+		--icon-start: var(--icon-file);
+	}
+
+	li.folder {
+		--icon-start: var(--icon-folder);
+	}
+
+	em {
+		opacity: .5;
+		font-style: normal;
+	}
+}
