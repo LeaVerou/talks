@@ -1,6 +1,4 @@
-@import url("utils/colors.css");
-@import url("components/browser.css");
-@import url("components/raining-words.css");
+@import url("theme/components/browser.css");
 
 /* A "delayed item" is any element whose reveal Inspire.js staggers:
    a .delayed, a .delayed-children container, or its children.
