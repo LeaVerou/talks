@@ -1,0 +1,79 @@
+/* Tables */
+table {
+	table-layout: fixed;
+	border-spacing: 0;
+	border-collapse: collapse;
+	margin-block: 1em;
+	font-size: var(--font-size-s);
+
+	caption {
+		color: light-dark(oklch(from var(--color-neutral) var(--tint-60)), canvastext);
+		font-size: var(--font-size-xs);
+		font-weight: 600;
+	}
+
+	th,
+	td {
+		vertical-align: middle;
+		text-align: start;
+		padding: .3em .5em;
+
+		&:first-child {
+			text-align: start;
+		}
+
+		> small {
+			display: block;
+			font-size: 50%;
+			font-weight: 500;
+			color: var(--color-neutral);
+		}
+	}
+
+	&.borders {
+		th, td {
+			border: var(--ui-border);
+		}
+
+		thead th {
+			background: oklch(from var(--color-neutral) var(--tint-95));
+		}
+	}
+
+	thead {
+		th {
+			vertical-align: bottom;
+			padding: .3em .5em;
+			color: var(--color-neutral);
+			font-weight: 500;
+			font-size: var(--font-size-s);
+			line-height: var(--lh-heading);
+			text-wrap: balance;
+		}
+
+		tr {
+			border-block-end: var(--ui-border-l);
+		}
+	}
+
+	tbody {
+		tr {
+			border-block-end: var(--ui-border);
+		}
+
+		td {
+			&:first-child {
+				font-weight: 300;
+			}
+		}
+	}
+
+	&:has(tbody th:only-of-type) thead th:first-of-type,
+	tbody th:last-of-type {
+		border-inline-end: var(--ui-border);
+	}
+
+	td {
+		font-variant-numeric: tabular-nums;
+	}
+}

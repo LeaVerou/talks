@@ -1,6 +1,7 @@
 {
 	"workspaces": [
-		"whathecolor"
+		"whathecolor",
+		"no-build"
 	],
 	"scripts": {
 		"build:css": "npx postcss \"**/*.postcss\" --base . --dir . --ext .css",

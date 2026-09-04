@@ -1,0 +1,125 @@
+
+
+code, textarea, pre {
+	margin: 0;
+	font: 100%/1.5 var(--font-mono);
+	tab-size: 4;
+	color: inherit;
+}
+
+	pre > code {
+		font-size: inherit;
+		line-height: inherit;
+	}
+
+
+pre,
+code:not(pre > code) {
+	--_color: var(--color, var(--color-neutral));
+
+	font-size: 85%;
+
+	--background-color: color-mix(in oklch, var(--_color) 5%, oklch(.985 .02 none));
+	--text-color: color-mix(in oklch, var(--_color) 30%, oklch(0 0 none));
+	background: var(--background-color);
+	color: var(--text-color);
+	letter-spacing: normal;
+}
+
+code:not(pre > code) {
+	font-weight: 500;
+	padding: .25em .3em .15em;
+	border-radius: var(--radius-s);
+}
+
+pre {
+	border-radius: var(--radius-l);
+	background: oklch(from var(--color-neutral) var(--tint-20));
+	color: white;
+	padding: .6em .8em;
+	font-size: var(--font-size-s);
+
+	&.small {
+		font-size: 60%;
+	}
+}
+
+div.code-fragments {
+	column-width: 32ch;
+	font-size: 60%;
+	max-height: stretch;
+}
+
+/* Syntax highlighting */
+:where(.token) {
+	/* --comment-color: color-mix(in oklch, var(--color) 0%, oklch(50% .01 none / 60%)); */
+	--_color-code-comment: var(--color-code-comment,
+		var(--comment-color, oklch(from var(--color-neutral) var(--tint-80) / 60%))
+	);
+	--_color-code-punctuation: var(--color-code-punctuation, oklch(from var(--color-neutral) l c h / 80%));
+	--_color-code-1: var(--color-code-1, oklch(from var(--color-magenta) clamp(.7, l, 1) c h));
+	--_color-code-2: var(--color-code-2, var(--color-cyan));
+	--_color-code-3: var(--color-code-3, var(--color-green));
+	--_color-code-4: var(--color-code-4, var(--color-blue));
+	--_color-code-5: var(--color-code-5, var(--col));
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: var(--_color-code-comment, oklch(currentColor l clamp(0, c, .1) h));
+	opacity: 0.7;
+}
+
+.token.punctuation {
+	color: var(--_color-code-punctuation);
+	mix-blend-mode: normal;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol {
+	color: var(--_color-code-1);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin {
+	color: var(--_color-code-2);
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css > .token.string,
+.token.inserted,
+.token.function {
+	color: var(--_color-code-3);
+}
+
+.token.attr-value,
+.token.keyword,
+.token.variable {
+	color: var(--_color-code-4);
+}
+
+.token.atrule,
+.token.regex,
+.token.important {
+	color: var(--_color-code-5);
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}

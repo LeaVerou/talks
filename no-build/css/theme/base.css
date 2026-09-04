@@ -1,0 +1,104 @@
+@import url("tokens.css");
+
+html {
+	color-scheme: light dark;
+	background: var(--img-checkerboard) oklch(from var(--color-neutral) var(--tint-95));
+	font: var(--font-weight) var(--slide-base-font-size) / var(--lh-body) var(--font-body);
+	font-synthesis: none;
+	font-kerning: normal;
+	accent-color: var(--color-accent-1);
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: var(--lh-heading);
+	text-align: center;
+	text-wrap: balance;
+	margin: 0;
+	margin-block-end: 1rem;
+
+	header > & {
+		margin: 0;
+	}
+
+	&:not(:has(+ .subtitle)) {
+
+	}
+
+	> .subtitle,
+	+ .subtitle {
+		color: oklch(from var(--color-neutral) var(--tint-60));
+		font-size: 80%;
+		margin-block-start: 1rem;
+		text-align: center;
+		font-weight: 500;
+		margin-top: -1.3rem;
+		text-wrap: balance;
+	}
+}
+
+li, p {
+	text-wrap: pretty;
+}
+
+a {
+	color: inherit;
+	--text-decoration-opacity: 30%;
+	text-decoration-color: color-mix(in lab, currentColor, transparent calc(100% - var(--text-decoration-opacity)));
+
+	&:where(:not(:hover, :focus)) {
+		text-decoration: none;
+	}
+
+	&:hover {
+		--text-decoration-opacity: 50%;
+	}
+
+	&:where(:not(:has(:not(em, strong)))) {
+		/* Plain text link */
+		color: light-dark(var(--color-blue), oklch(from var(--color-blue) var(--tint-75)));
+
+		&:where(:visited) {
+			color: light-dark(var(--color-purple), oklch(from var(--color-purple) var(--tint-75)));
+		}
+	}
+}
+
+:focus:not(:focus-visible) {
+	outline: none;
+}
+
+strong {
+	font-weight: 600;
+}
+
+li {
+	margin-block-end: .25em;
+}
+
+img, video, object {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+}
+
+object:where(:not(.interactive)) {
+	pointer-events: none;
+}
+
+::selection {
+	background: var(--color-accent-1);
+	color: white;
+	text-shadow: none;
+}
+
+#indicator {
+	opacity: .5;
+}
+
+.dark {
+	color-scheme: dark;
+}
+
+.light {
+	color-scheme: light;
+}

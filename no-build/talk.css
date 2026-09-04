@@ -1,0 +1,94 @@
+@import url("client_modules/bootstrap-icons/font/bootstrap-icons.css");
+@import url("client_modules/@inspirejs/core/inspire.css") layer(inspire);
+@import url("client_modules/@nudeui/color/dist/index.css") layer(theme);
+@import url("css/theme/theme.css") layer(theme);
+@import url("css/fonts.css") layer(theme);
+
+#intro {
+	color-scheme: dark;
+	background: linear-gradient(to bottom right var(--in-oklch), var(--color-indigo), var(--color-blue));
+	gap: 3rem;
+
+	h1 {
+		font-size: 9vmin;
+		line-height: 1;
+		letter-spacing: -.02em;
+		text-wrap: balance;
+
+		em {
+			font-style: normal;
+			font-family: var(--font-handwritten);
+		}
+	}
+
+	.by {
+		text-align: center;
+		color-scheme: light;
+		color: canvastext;
+		font-size: 150%;
+		background: white;
+		align-self: center;
+		padding-inline: 3rem;
+		padding-block: .5rem 1.5rem;
+		box-shadow: .5rem .5rem black;
+		corner-shape: bevel;
+		border-radius: 3rem / 100% 0 100% 0;
+
+		> a {
+			font-weight: bold;
+			letter-spacing: -.01em;
+		}
+
+		small {
+			display: block;
+			font-size: 50%;
+			font-weight: 500;
+		}
+	}
+}
+
+footer.slide#end {
+	gap: 0;
+
+	h2 {
+		margin-bottom: 0;
+		font-family: var(--font-handwritten);
+		color: var(--color-cyan);
+	}
+
+	.slides {
+		margin: 0 0 1rem 0;
+		font-size: var(--font-size-s);
+
+		.bi {
+			color: var(--color-yellow);
+		}
+	}
+
+	.info {
+		display: grid;
+		grid-template-columns: repeat(2, max-content);
+		gap: .3em 2em;
+		justify-content: center;
+		list-style: none;
+		padding: 0;
+		font-weight: 600;
+		font-size: var(--font-size-s);
+
+		li {
+			white-space: nowrap;
+		}
+	}
+
+	.bi {
+		color: var(--color-magenta);
+	}
+
+	.bi-bluesky {
+		color: var(--color-blue);
+	}
+
+	.bi-mastodon {
+		color: var(--color-purple);
+	}
+}
