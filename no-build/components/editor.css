@@ -4,22 +4,45 @@
 		"files code"
 		"files terminal";
 	gap: .1em;
+	font-size: 80%;
 
 	> pre {
 		border-radius: 0;
 		overflow: auto;
 	}
 
+	.file,
 	> pre:not(.language-bash) {
 		grid-area: code;
+		anchor-name: --code;
 	}
 
+	> .terminal,
 	> pre.language-bash {
 		grid-area: terminal;
+		anchor-name: --terminal;
+		position: relative;
+
+		&::after {
+			content: "Terminal";
+			position: absolute;
+			top: 0;
+			right: 0;
+			padding: .3rem .5rem;
+			color: oklch(from var(--color-neutral) var(--tint-60));
+			font: 600 60%/1 var(--font-sans);
+			text-transform: uppercase;
+			letter-spacing: .02em;
+		}
+	}
+
+	> .terminal {
+		background: oklch(from var(--color-neutral) var(--tint-20));
 	}
 
 	.file-tree {
 		grid-area: files;
+		anchor-name: --files;
 		padding-inline-end: 1em;
 	}
 }

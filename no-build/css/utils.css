@@ -18,6 +18,7 @@
 	&.show,
 	&.show-current {
 		opacity: 1;
+		transition-behavior: allow-discrete;
 
 		&.hide.displayed,
 		&.hide-current.current,

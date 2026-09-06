@@ -1,0 +1,43 @@
+/* Green badge that pops into view, then draws its check mark.
+   The check stays frozen at its start frame until the pop is over,
+   so the two happen in sequence rather than at once. */
+.icon {
+	--icon-start: var(--icon);
+	display: inline-grid;
+
+	/* The shared icon pseudo assumes inline text flow; here it is the only content */
+	&::before {
+		margin-inline-end: 0;
+	}
+
+	/* data-anchored="--foo" centers the badge on the top right corner of that anchor */
+	&[data-anchored] {
+		position: absolute;
+		position-anchor: attr(data-anchored type(<custom-ident>));
+		left: anchor(right);
+		top: anchor(top);
+		translate: -50% -50%;
+	}
+}
+
+.icon.pop {
+	--pop-duration: .3s;
+	padding: .3em;
+	border-radius: 50%;
+	transition:
+		scale var(--pop-duration) cubic-bezier(.34, 1.56, .64, 1),
+		--icon-start 0s var(--pop-duration) allow-discrete;
+
+	/* Swapping in the self-animating icon is what starts it drawing */
+	@starting-style {
+		scale: 0;
+		--icon-start: var(--icon-before);
+	}
+}
+
+.check.icon {
+	--icon: var(--icon-check-animated);
+	--icon-before: var(--icon-check-animated-start);
+	background: var(--color-green);
+	color: white;
+}

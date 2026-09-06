@@ -7,6 +7,7 @@
 @import url("components/window.css");
 @import url("components/file-tree.css");
 @import url("components/editor.css");
+@import url("components/icon.css");
 
 #intro {
 	color-scheme: dark;

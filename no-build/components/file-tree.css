@@ -13,9 +13,14 @@
 		--icon-start: var(--icon-file);
 		white-space: nowrap;
 		margin: 0;
+		font-weight: 500;
 
 		&.folder {
 			--icon-start: var(--icon-folder);
+		}
+
+		&.selected {
+			background: linear-gradient(oklch(from var(--color-blue) var(--tint-95))) 0 0 / 100% 1lh no-repeat;
 		}
 
 		&::before {
@@ -29,5 +34,8 @@
 
 	}
 
+	.gitignored {
+		color: oklch(from var(--color-neutral) var(--tint-50));
+	}
 
 }

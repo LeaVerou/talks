@@ -29,10 +29,10 @@
 
 - marked-demo/
   - package.json
-  - node_modules/ { .faded .delayed }
+  - node_modules/ { .gitignored .delayed .show }
     - marked/
   - .gitignore
-  - main.js
+  - main.js { .selected }
 
 { .file-tree }
 
@@ -43,9 +43,11 @@ const html = marked.parse(md);
 console.log(html);
 ```
 
-```bash
+```bash { .delayed-children }
 $ npm install marked
 ```
+
+<i class="icon pop check delayed show" data-anchored="--code"></i>
 
 </div>
 
@@ -54,6 +56,9 @@ Suppose we want to include a library to do something, e.g. parse Markdown.
 We have a file, let's call it `app.js` that looks like this.
 Nice and simple, right?
 So how do we make this work?
+
+In Node.js, things are simple. We install the library with `npm install` and things Just Work™.
+
 </details>
 
 </article>
