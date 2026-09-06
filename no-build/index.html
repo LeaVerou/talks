@@ -20,16 +20,17 @@
 		<small>CSS WG, <wbr>MIT CSAIL</small>
 		<small><a href="http://lea.verou.me"><strong>lea.verou.me</strong></a> &bull; <strong>lea＠verou.me</strong></small>
 	</div>
-
-	<details class="notes">
-		Raise your hand if you have ever spent more time fighting your build pipeline than writing the code it builds.
-	</details>
 </header>
 
-<article class="slide md flex">
+<article class="slide md">
+## Dependencies in Node.js
+
+<div class="editor window">
 
 - marked-demo/
   - package.json
+  - node_modules/ { .faded .delayed }
+    - marked/
   - .gitignore
   - main.js
 
@@ -42,6 +43,12 @@ const html = marked.parse(md);
 console.log(html);
 ```
 
+```bash
+$ npm install marked
+```
+
+</div>
+
 <details class="notes">
 Suppose we want to include a library to do something, e.g. parse Markdown.
 We have a file, let's call it `app.js` that looks like this.
@@ -51,37 +58,6 @@ So how do we make this work?
 
 </article>
 
-<article class="slide md">
-## Dependencies in Node.js
-
-```bash { .browser }
-npm install marked
-```
-
-- marked-demo/
-  - package.json
-  - *node_modules/*
-	- marked/
-  - main.js
-
-{ .file-tree }
-</article>
-
-<article class="slide md">
-## Dependencies in Node.js
-
-<div class="flex">
-
-- marked-demo/
-  - package.json
-  - *node_modules/*
-  - .gitignore
-  - main.js
-
-{ .file-tree }
-
-</div>
-</article>
 
 <section>
 	<header class="slide">

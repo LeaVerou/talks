@@ -34,7 +34,7 @@ code:not(pre > code) {
 
 pre {
 	border-radius: var(--radius-l);
-	background: oklch(from var(--color-neutral) var(--tint-20));
+	--background-color: oklch(from var(--color-neutral) var(--tint-20));
 	color: white;
 	padding: .6em .8em;
 	font-size: var(--font-size-s);
@@ -52,16 +52,17 @@ div.code-fragments {
 
 /* Syntax highlighting */
 :where(.token) {
+	--tint: var(--tint-75);
 	/* --comment-color: color-mix(in oklch, var(--color) 0%, oklch(50% .01 none / 60%)); */
 	--_color-code-comment: var(--color-code-comment,
-		var(--comment-color, oklch(from var(--color-neutral) var(--tint-80) / 60%))
+		var(--comment-color, oklch(from var(--color-neutral) var(--tint) / 60%))
 	);
 	--_color-code-punctuation: var(--color-code-punctuation, oklch(from var(--color-neutral) l c h / 80%));
-	--_color-code-1: var(--color-code-1, oklch(from var(--color-magenta) clamp(.7, l, 1) c h));
-	--_color-code-2: var(--color-code-2, var(--color-cyan));
-	--_color-code-3: var(--color-code-3, var(--color-green));
-	--_color-code-4: var(--color-code-4, var(--color-blue));
-	--_color-code-5: var(--color-code-5, var(--col));
+	--_color-code-1: var(--color-code-1, oklch(from var(--color-magenta) var(--tint)));
+	--_color-code-2: var(--color-code-2, oklch(from var(--color-green) var(--tint)));
+	--_color-code-3: var(--color-code-3, oklch(from var(--color-magenta) var(--tint)));
+	--_color-code-4: var(--color-code-4, oklch(from var(--color-cyan) var(--tint)));
+	--_color-code-5: var(--color-code-5, oklch(from var(--color-yellow) var(--tint)));
 }
 
 .token.comment,

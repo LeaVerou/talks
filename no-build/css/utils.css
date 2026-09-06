@@ -1,5 +1,3 @@
-@import url("theme/components/browser.css");
-
 /* A "delayed item" is any element whose reveal Inspire.js staggers:
    a .delayed, a .delayed-children container, or its children.
    When such an item is in a disappear state, hide its revealed child. */
@@ -59,6 +57,10 @@
 .flex {
 	flex-flow: row;
 
+	:where(&) {
+		align-items: start;
+	}
+
 	&:not(.space-between) > * {
 		flex: 1;
 	}
@@ -88,25 +90,29 @@
 	text-shadow: 0 .2em .5em rgb(0 0 0 / .5);
 }
 
-.faded {
-	opacity: .65;
+:where(.faded) {
+	opacity: .5;
 }
 
-.file-tree {
+.frame-by-frame {
+	position: relative;
 
-	font-family: var(--font-monospace);
+	.delayed,
+	.delayed-children > * {
+		transition: 0s;
 
-	li {
-		list-style: none;
-		--icon-start: var(--icon-file);
-	}
+		&:not(:first-child) {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
 
-	li.folder {
-		--icon-start: var(--icon-folder);
-	}
+		&.displayed:has(+ .displayed) {
+			visibility: hidden;
+		}
 
-	em {
-		opacity: .5;
-		font-style: normal;
+		&.current {
+			z-index: 1;
+		}
 	}
 }

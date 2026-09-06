@@ -1,0 +1,33 @@
+.file-tree {
+	font-family: var(--font-monospace);
+
+	&, ul {
+		display: flex;
+		flex-flow: column;
+		gap: .2em;
+		margin: 0;
+	}
+
+	li {
+		list-style: none;
+		--icon-start: var(--icon-file);
+		white-space: nowrap;
+		margin: 0;
+
+		&.folder {
+			--icon-start: var(--icon-folder);
+		}
+
+		&::before {
+			color: oklch(from var(--color-neutral) var(--tint-50));
+		}
+
+		ul {
+			padding-inline-start: 1.5em;
+		}
+
+
+	}
+
+
+}

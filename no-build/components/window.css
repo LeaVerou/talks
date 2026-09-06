@@ -1,0 +1,71 @@
+/* Traffic-light button, positioned in the title bar by index (0-2) */
+@function --window-button(--color, --index) {
+	result: radial-gradient(circle closest-side,
+		oklch(from var(--color) clamp(0.7, l, 0.85) c h) 90%,
+		oklch(from var(--color) calc(l - 0.2) c h) 98%,
+		transparent 99%) calc(var(--frame) + var(--index) * var(--_step)) var(--_button-y) / var(--button-size) var(--button-size);
+}
+
+/* macOS-style window frame drawn entirely with borders + backgrounds.
+   The title bar lives in the (transparent) top border, so the element's own padding
+   and --background-color are preserved for the content area. */
+.window,
+.browser {
+	--button-size: .6em;
+	--button-spacing: .5;
+	--frame: .5em;
+	--window-color: oklch(from var(--color-neutral) var(--tint-90));
+
+	--_step: calc(var(--button-size) * (1 + var(--button-spacing)));
+	--_bar: var(--button-size); /* title bar height; .browser makes room for the address bar */
+	--_button-y: calc(var(--frame) + (var(--_bar) - var(--button-size)) / 2);
+	--_title-layers: none;
+
+	border: var(--frame) solid transparent;
+	border-top-width: calc(var(--_bar) + 2 * var(--frame));
+	border-radius: var(--radius-m);
+
+	background:
+		--window-button(var(--color-red), 0),
+		--window-button(var(--color-yellow), 1),
+		--window-button(var(--color-green), 2),
+		var(--_title-layers),
+		linear-gradient(var(--background-color, white)) padding-box,
+		none; /* trailing layer so background-color clips to the border box */
+	background-color: var(--window-color);
+	background-origin: border-box;
+	background-repeat: no-repeat;
+
+	/* 1px ring + soft, multi-layered elevation so the window appears to float */
+	box-shadow:
+		0 0 0 1px oklch(from var(--window-color) calc(l - 0.1) c h),
+		0 0.3em 0.5em -0.3em rgb(0 0 0 / 0.2),
+		0 0.8em 1.2em -0.5em rgb(0 0 0 / 0.25),
+		0 2em 3em -1em rgb(0 0 0 / 0.3);
+
+	margin: 1em;
+	box-sizing: content-box;
+	max-width: stretch;
+	max-height: stretch;
+	resize: both;
+
+	&:is(iframe) {
+		min-height: 50vh;
+	}
+
+	&.stretch {
+		height: stretch;
+		flex: 1;
+	}
+}
+
+/* Window with an address bar; --img-url (if set) is drawn inside it */
+.browser {
+	--_bar: 1.2em;
+	--img-address-bar: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" ry="50vh" fill="white" fill-opacity="0.7"/></svg>');
+	--_bar-x: calc(2 * var(--frame) + 3 * var(--_step));
+	--_url-layer: var(--img-url) calc(var(--_bar-x) + .5em) var(--frame) / auto var(--_bar);
+	--_title-layers:
+		var(--_url-layer, none),
+		var(--img-address-bar) var(--_bar-x) var(--frame) / calc(100% - var(--_bar-x) - var(--frame)) var(--_bar);
+}

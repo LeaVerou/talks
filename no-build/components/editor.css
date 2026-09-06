@@ -1,0 +1,25 @@
+.editor {
+	display: grid;
+	grid-template-areas:
+		"files code"
+		"files terminal";
+	gap: .1em;
+
+	> pre {
+		border-radius: 0;
+		overflow: auto;
+	}
+
+	> pre:not(.language-bash) {
+		grid-area: code;
+	}
+
+	> pre.language-bash {
+		grid-area: terminal;
+	}
+
+	.file-tree {
+		grid-area: files;
+		padding-inline-end: 1em;
+	}
+}

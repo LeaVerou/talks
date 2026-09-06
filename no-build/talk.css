@@ -3,7 +3,10 @@
 @import url("client_modules/@nudeui/color/dist/index.css") layer(theme);
 @import url("css/theme/theme.css") layer(theme);
 @import url("css/fonts.css") layer(theme);
-@import url("css/utils.css");
+@import url("css/utils.css") layer(theme);
+@import url("components/window.css");
+@import url("components/file-tree.css");
+@import url("components/editor.css");
 
 #intro {
 	color-scheme: dark;
