@@ -1,0 +1,101 @@
+No-build: pipe dream, or near future?
+
+- Links
+  - [https://lea.verou.me/blog/2026/web-deps/](https://lea.verou.me/blog/2026/web-deps/)
+  - [https://lea.verou.me/blog/2026/external-import-maps-today/](https://lea.verou.me/blog/2026/external-import-maps-today/)
+  - [https://nudeps.dev](https://nudeps.dev/) 
+  - [https://www.w3.org/community/nobuild/](https://www.w3.org/community/nobuild/)
+  - [https://olliewilliams.xyz/blog/no-build/](https://olliewilliams.xyz/blog/no-build/)
+- Scenario: you want to use a library
+  - NodeJS
+    - `npm install marked`  
+  - Client-side
+- Tons of languages are compiled, so what's the problem?
+  - **Fragmentation** is the problem
+  - Things that work on the raw platform, don't in bundlers
+    - new URL() broken
+    - Now we need new primitives!
+  - The JS ecosystem has outsourced the most fundamental functionality of a programming language to libraries
+- Show data on dissatisfaction
+- A brief history of bundlers
+  - Browserify (2012)
+  -  [Webpack](https://webpack.js.org/), [rollup](https://rollupjs.org/), [esbuild](https://esbuild.github.io/) 
+- Why are bundlers used today?
+  - Performance: CSS waterfalls, SSR, bundling
+  - Transpilation
+    - TS (show data)
+    - CSS?
+    - JSX
+    - Templating languages
+  - Dependencies
+  - Hot reloading
+- Highlight that all of these except dependencies are advanced concerns 
+- Show usability curve
+- The web platform has a usability problem
+- The goal is not getting rid of bundlers
+  - It's making them **lighter** and less **essential**
+- Is there light at the end of the tunnel?
+  - Let's start from the easy bits. Transpilation
+    - New features coming to CSS: conditionals, mixins, functions, custom MQs
+    - TS: [https://github.com/tc39/proposal-type-annotations](https://github.com/tc39/proposal-type-annotations)
+      - Already shipped in Node
+    - Templating languages? Nah
+    - JSX: Yeah, you may as well go get coffee now…
+  - Performance
+    - Improvements in HTML2
+    - But ultimately ok if bundlers stay as a perf optimization. That's their purpose. They just shouldn't be necessary from the get-go
+  - Now the tricky bit: Dependencies
+    - Dependencies are far more fundamental than the others. There is very little you can do without any dependency, and even less you can do _well_ .
+- Dependencies in no-build land (image from Jumanji)
+  - In the past: Manual file management, manual updates, eek
+  - Why URLs suck
+    - Link inside node_modules?
+      - Not deployed
+      - Huge
+      - Can force to deploy, but insecure
+    - npm script to copy? Now you're managing other packages' dependency graph
+  - **Specifiers are an encapsulation layer**
+    - Same from everywhere
+    - Can change in versions
+    - Context-dependent: A URL is largely the same everywhere, whereas `foo` can resolve to different things depending on context. 
+  - Even worse for library authors
+  - Ok, let's use specifiers. Import maps!
+    - Inline in HTML
+    - In HTML???
+    - Recent advances: [https://shopify.engineering/resilient-import-maps](https://shopify.engineering/resilient-import-maps)
+      - Multiple import maps
+      - Module loading can start after import maps
+    - Yo dawg, I put a build tool in your HTML so you can go no-build :(
+    - No support in workers :(
+      - Why? No reason! PR just stalled
+    - No support beyond JS (CSS, SVG, etc)
+      - WHATWG issue for specifier URL
+    - import maps shim?
+  - Remote import maps are possible!
+  - Ok, but how do we generate them?
+  - JSPM!
+    - Generates an import map for you
+    - Even adds it to your HTML!
+  - Yay? Nay :( 
+    - We've just exchanged one build tool for another, less popular one
+    - Must depend on CDNs
+      - Integrity hashes add security, but bloat the import map
+      - No way around latency, reliability, COEP restrictions, etc
+  - Nudeps!
+    - Principle: your own code should not be touched
+    - No watcher
+    - Entirely local
+    - Highly configurable
+  - Yay? Nay :(
+    - Still something to install. 
+      - What about online playgrounds, e.g. Codepen?
+      - Still something to teach learners
+    - No good answer for non-JS
+    - Distinguishing client vs server deps
+    - But hopefully a ray of light?
+  - Other proposals
+    - Empty import map
+    - Moving import maps outside WHATWG
+- Does it need to be an either/or?
+  - Making bundlers lighter is still a win
+  - Making bundlers less frequently needed is still a win

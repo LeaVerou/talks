@@ -23,7 +23,96 @@
 </header>
 
 <article class="slide md">
+## Dependencies in JS
+
+```js
+import { marked } from 'marked';
+const md = '# _Hello_ Markdown!';
+const html = marked.parse(md);
+console.log(html);
+```
+<details class="notes">
+Suppose we want to include a library to do something nontrivial, e.g. parse Markdown.
+We find a library we like and want to use it in our project.
+How do we make it work?
+
+</details>
+
+</article>
+
+<article class="slide md">
 ## Dependencies in Node.js
+
+```bash
+$ npm install marked
+```
+
+<details class="notes">
+
+In Node.js and other JS runtimes, things are simple.
+We install the library with `npm install` and things Just Work™.
+
+</details>
+</article>
+
+<article class="slide md">
+## Dependencies in the browser
+
+```error
+Uncaught TypeError: Failed to resolve module specifier "marked".
+Relative references must start with either "/", "./", or "../".
+```
+
+
+<details class="notes">
+Now suppose we need to use a library client-side.
+
+We try to `npm install` again, but nope, that doesn’t work.
+You need to use a bundler!
+Suddenly, the workflow is 10x more complex.
+
+</details>
+
+</article>
+
+<article class="slide">
+	<img src="images/why-1.png" alt="">
+</article>
+
+<article class="slide md">
+
+## Now you have multiple problems
+
+- Which bundler?? Vite, Webpack, esbuild, Rollup, Parcel...
+- Configuration
+- Source != Distribution
+- Compilation → Sourcemaps
+- Entry point
+
+<details class="notes">
+Now you have multiple problems.
+If you’re using a meta-framework like Next.js or Nuxt, they already encapsulate this choice for you,
+but otherwise you need to pick one.
+And then install it.
+And then configure it.
+And then run it.
+And remember to run it whenever you want to change anything.
+Now you need to have a lot more:
+- a source directory separate from a served directory
+- an entry point concept
+- a compile step between saving and reloading
+- an artifact that isn't the file you wrote
+- sourcemaps, to undo the previous line
+
+This introduces more complexity to solve problems the bundler introduced:
+- Sourcemaps
+- Hot reloading
+- Code splitting / chunking
+</details>
+</article>
+
+<!-- <article class="slide md">
+
 
 <div class="editor window">
 
@@ -51,18 +140,37 @@ $ npm install marked
 
 </div>
 
-<details class="notes">
-Suppose we want to include a library to do something, e.g. parse Markdown.
-We have a file, let's call it `app.js` that looks like this.
-Nice and simple, right?
-So how do we make this work?
+</article> -->
 
-In Node.js, things are simple. We install the library with `npm install` and things Just Work™.
+<article class="slide md">
+## Dependencies across ecosystems
+
+|  | How to use a dependency |
+|-----------|----------------------|
+| Node.js   | `npm install marked`          |
+| Rust      | `cargo add marked` |
+| Python    | `pip install marked` |
+| Web       | `npm install marked` + 🤕🤕🫠 |
+
+<details class="notes">
+One of these is not like the others
 
 </details>
 
 </article>
 
+<article class="slide md">
+## The web platform has outsourced this fundamental functionality to third-party tooling.
+
+<details class="notes">
+Abstraction is the cornerstone of modern software engineering. Reusing logic and building higher-level solutions from lower-level building blocks is what makes all the technological wonders around us possible. Imagine if every time anyone wrote a calculator they also had to reinvent floating-point arithmetic and string encoding!
+</details>
+</article>
+
+<article class="slide md">
+## In healthy ecosystems dependencies are normal, cheap, and first-class.
+“Dependency-free” is not a badge of honor.
+</article>
 
 <section>
 	<header class="slide">

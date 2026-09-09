@@ -8,6 +8,7 @@
 @import url("components/file-tree.css");
 @import url("components/editor.css");
 @import url("components/icon.css");
+@import url("components/error.css");
 
 #intro {
 	color-scheme: dark;
