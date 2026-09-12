@@ -1,4 +1,4 @@
-@import url("https://inspirejs.org/inspire.css");
+@import url("../client_modules/@inspirejs/core/inspire.css");
 @import url("https://inspirejs.org/style/theme.css");
 @import url("https://inspirejs.org/style/components/ribbons.css");
 @import url("fonts.css");
