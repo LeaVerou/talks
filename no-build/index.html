@@ -17,7 +17,6 @@
 	<h1>No-build:<br><em>pipe dream</em>, or near future?</h1>
 	<div class="by">
 		by <a href="http://lea.verou.me">Lea Verou</a>
-		<small>CSS WG, <wbr>MIT CSAIL</small>
 		<small><a href="http://lea.verou.me"><strong>lea.verou.me</strong></a> &bull; <strong>lea＠verou.me</strong></small>
 	</div>
 </header>
@@ -142,6 +141,31 @@ $ npm install marked
 
 </article> -->
 
+<article class="slide">
+	<header>
+		<h1>Delightful APIs</h1>
+		<p class="subtitle">Incremental user effort produces incremental value</p>
+	</header>
+
+	<object data="images/curve-delightful.svg"></object>
+
+	<details class="notes">
+		Good user interfaces make simple things easy, complex things possible,
+		and ensure a smooth transition from simple use cases to more complex ones.
+	</details>
+</article>
+
+<article class="slide">
+	<object data="images/curve-cliff.svg"></object>
+
+	<details class="notes">
+		When a small increase in use case complexity results in disproportionate increase in UI complexity,
+		this is called a _usability cliff_ and it is an **antipattern**.
+		The way dependencies work in the web platform is a textbook usability cliff.
+	</details>
+</article>
+
+
 <article class="slide md">
 ## Dependencies across ecosystems
 
@@ -153,14 +177,21 @@ $ npm install marked
 | Web       | `npm install marked` + 🤕🤕🫠 |
 
 <details class="notes">
-One of these is not like the others
+One of these is not like the others.
+
+In NodeJS, you just npm install and reference specifiers straight away in your code.
+Same in Python, with pip install.
+Same in Rust with cargo add.
+In healthy ecosystems you don’t ponder how or whether to use dependencies.
+The ecosystem assumes dependencies are normal, cheap, and first-class.
+You just install them, use them, and move on. “Dependency-free” is not a badge of honor.
 
 </details>
 
 </article>
 
 <article class="slide md">
-## The web platform has outsourced this fundamental functionality to third-party tooling.
+## The web platform has outsourced the most fundamental ecosystem functionality to third-party tooling.
 
 <details class="notes">
 Abstraction is the cornerstone of modern software engineering. Reusing logic and building higher-level solutions from lower-level building blocks is what makes all the technological wonders around us possible. Imagine if every time anyone wrote a calculator they also had to reinvent floating-point arithmetic and string encoding!
