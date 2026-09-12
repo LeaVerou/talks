@@ -4,8 +4,14 @@
 
 import "../shared/js/bliss.shy.min.js";
 import "../shared/js/prism.js";
-import Inspire from "https://inspirejs.org/inspire.mjs";
+import Inspire from "inspirejs.org";
+import { registry } from "@inspirejs/core";
 // import { SELECTOR as TARGET_WIDTH_SELECTOR } from "./plugins/target-width/plugin.js";
+
+registry.markdown = {
+	test: "[data-markdown-elements]",
+	base: new URL("../", import.meta.resolve("@inspirejs/markdown")),
+};
 
 let takeaway = 0;
 for (let slide of document.querySelectorAll(".slide.takeaway")) {

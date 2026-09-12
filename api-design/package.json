@@ -1,0 +1,17 @@
+{
+	"name": "api-design",
+	"version": "1.0.0",
+	"private": true,
+	"type": "module",
+	"dependencies": {
+		"@inspirejs/markdown": "^0.0.1",
+		"inspirejs.org": "^3.0.1"
+	},
+	"devDependencies": {
+		"nudeps": "^0.2.8"
+	},
+	"scripts": {
+		"dependencies": "npx nudeps",
+		"prepare": "npx nudeps"
+	}
+}
