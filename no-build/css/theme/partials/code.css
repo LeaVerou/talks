@@ -14,15 +14,14 @@ code, textarea, pre {
 
 
 pre,
-code:not(pre > code) {
-	--_color: var(--color, var(--color-neutral));
+code:where(:not(pre > code)) {
+	--_accent-color: var(--accent-color, var(--color-neutral));
+	--background-color: oklch(from var(--_accent-color) var(--tint-code-bg, var(--tint-95)));
+	--text-color: oklch(from var(--_accent-color) var(--tint-code-text, var(--tint-20)));
 
-	font-size: 85%;
-
-	--background-color: color-mix(in oklch, var(--_color) 5%, oklch(.985 .02 none));
-	--text-color: color-mix(in oklch, var(--_color) 30%, oklch(0 0 none));
 	background: var(--background-color);
 	color: var(--text-color);
+	font-size: 85%;
 	letter-spacing: normal;
 }
 
@@ -55,7 +54,7 @@ div.code-fragments {
 	--tint: var(--tint-75);
 	/* --comment-color: color-mix(in oklch, var(--color) 0%, oklch(50% .01 none / 60%)); */
 	--_color-code-comment: var(--color-code-comment,
-		var(--comment-color, oklch(from var(--color-neutral) var(--tint) / 60%))
+		var(--comment-color, oklch(from var(--color-neutral) var(--tint) / 80%))
 	);
 	--_color-code-punctuation: var(--color-code-punctuation, oklch(from var(--color-neutral) l c h / 80%));
 	--_color-code-1: var(--color-code-1, oklch(from var(--color-magenta) var(--tint)));
@@ -69,7 +68,7 @@ div.code-fragments {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: var(--_color-code-comment, oklch(currentColor l clamp(0, c, .1) h));
+	color: var(--_color-code-comment, oklch(currentColor var(--tint)));
 	opacity: 0.7;
 }
 

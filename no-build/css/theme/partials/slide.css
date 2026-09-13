@@ -2,7 +2,7 @@
 	--slide-padding: 5rem;
 
 	@media (width > 1024px) {
-		--slide-padding: 3vmin;
+		--slide-padding: 5vmin;
 	}
 
 	display: flex;

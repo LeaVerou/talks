@@ -1,3 +1,5 @@
+@import url("utils/colors.css");
+
 /* A "delayed item" is any element whose reveal Inspire.js staggers:
    a .delayed, a .delayed-children container, or its children.
    When such an item is in a disappear state, hide its revealed child. */
@@ -7,7 +9,7 @@
 	&.disappear-current {
 		opacity: 1;
 
-		&.disappear.displayed,
+		&.disappear.past,
 		&.disappear-current:not(.future) {
 			opacity: 0;
 		}
@@ -20,9 +22,9 @@
 		opacity: 1;
 		transition-behavior: allow-discrete;
 
-		&.hide.displayed,
+		&.hide.past,
 		&.hide-current.current,
-		&.show:not(.displayed),
+		&.show:not(.past),
 		&.show-current:not(.future) {
 			display: none;
 		}
@@ -91,8 +93,24 @@
 	text-shadow: 0 .2em .5em rgb(0 0 0 / .5);
 }
 
-:where(.faded) {
-	opacity: .5;
+.abs,
+.abs-bottom,
+.abs-top {
+	position: absolute;
+}
+
+.abs-top,
+.abs-bottom {
+	inset-inline-start: 50%;
+	translate: -50% 0;
+}
+
+.abs-bottom {
+	bottom: var(--slide-padding);
+}
+
+.abs-top {
+	top: var(--slide-padding);
 }
 
 .frame-by-frame {
@@ -108,7 +126,7 @@
 			left: 0;
 		}
 
-		&.displayed:has(+ .displayed) {
+		&.past:has(+ .past) {
 			visibility: hidden;
 		}
 
@@ -116,4 +134,62 @@
 			z-index: 1;
 		}
 	}
+}
+
+/* Soft, layered elevation, e.g. for screenshots. Same recipe as .window, sans ring. */
+.shadow {
+	--shadow-color: black;
+	box-shadow:
+		0 .3em .5em -.3em oklch(from var(--shadow-color) l c h / .2),
+		0 .8em 1.2em -.5em oklch(from var(--shadow-color) l c h / .25),
+		0 2em 3em -1em oklch(from var(--shadow-color) l c h / .3);
+}
+
+/* Tinted surface: background and text both derived from the accent color. */
+.tinted-95,
+.speech-bubble {
+	background: oklch(from var(--accent-color, var(--color-neutral)) var(--tint-bg));
+	color: oklch(from var(--accent-color, var(--color-neutral)) var(--tint-text));
+}
+
+/* Tint levels. Those of .speech-bubble are zero-specificity defaults,
+   so any .tinted-* class on the same element wins, regardless of source order. */
+.tinted-95,
+:where(.speech-bubble) {
+	--tint-bg: var(--tint-95);
+	--tint-text: var(--tint-10);
+}
+
+.speech-bubble {
+	position: relative;
+	margin: 0;
+	padding: .5em .8em;
+	border-radius: var(--radius-l);
+
+	/* Tail. Inherits the bubble's background, so any override follows along. */
+	&::after {
+		content: "";
+		position: absolute;
+		top: 100%;
+		left: 1.5em;
+		width: 1.2em;
+		height: .8em;
+		background: inherit;
+		clip-path: polygon(0 0, 100% 0, 0 100%);
+	}
+}
+
+.supertitle {
+	display: block;
+	width: fit-content;
+	padding: .2em .5em;
+	margin: 0 auto;
+	--background-color: var(--supertitle-color, var(--accent-color));
+	background: var(--background-color);
+	--text-color: var(--supertitle-color-text,  oklch(from var(--background-color) var(--tint-text)));
+	color: var(--text-color);
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 50%;
+	text-shadow: none;
 }

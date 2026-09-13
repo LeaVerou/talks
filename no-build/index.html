@@ -141,29 +141,6 @@ $ npm install marked
 
 </article> -->
 
-<article class="slide">
-	<header>
-		<h1>Delightful APIs</h1>
-		<p class="subtitle">Incremental user effort produces incremental value</p>
-	</header>
-
-	<object data="images/curve-delightful.svg"></object>
-
-	<details class="notes">
-		Good user interfaces make simple things easy, complex things possible,
-		and ensure a smooth transition from simple use cases to more complex ones.
-	</details>
-</article>
-
-<article class="slide">
-	<object data="images/curve-cliff.svg"></object>
-
-	<details class="notes">
-		When a small increase in use case complexity results in disproportionate increase in UI complexity,
-		this is called a _usability cliff_ and it is an **antipattern**.
-		The way dependencies work in the web platform is a textbook usability cliff.
-	</details>
-</article>
 
 
 <article class="slide md">
@@ -191,49 +168,200 @@ You just install them, use them, and move on. “Dependency-free” is not a bad
 </article>
 
 <article class="slide md">
-## The web platform has outsourced the most fundamental ecosystem functionality to third-party tooling.
-
-<details class="notes">
-Abstraction is the cornerstone of modern software engineering. Reusing logic and building higher-level solutions from lower-level building blocks is what makes all the technological wonders around us possible. Imagine if every time anyone wrote a calculator they also had to reinvent floating-point arithmetic and string encoding!
-</details>
-</article>
-
-<article class="slide md">
 ## In healthy ecosystems dependencies are normal, cheap, and first-class.
 “Dependency-free” is not a badge of honor.
 </article>
 
-<section>
-	<header class="slide">
-		<h2>Why we build</h2>
-		<h3 class="subtitle">The jobs a build step does for us</h3>
+<article class="slide md dark">
+## The web platform has outsourced the most fundamental ecosystem functionality to third-party tooling.
+
+<details class="notes">
+Abstraction is the cornerstone of modern software engineering.
+Reusing logic and building higher-level solutions from lower-level building blocks is what makes all the technological wonders around us possible.
+Imagine if every time anyone wrote a calculator they also had to reinvent floating-point arithmetic and string encoding!
+
+</details>
+</article>
+
+<article class="slide tinted-95 red">
+<h2>Why do we use bundlers?</h2>
+
+<div class="flex">
+<div>
+<ol>
+	<li>
+		<strong>Transpilation</strong>
+		<small>TS, JSX, CSS preprocessors, templating, etc</small>
+	</li>
+	<li>
+		<strong>Performance</strong>
+		<small>bundling, minification, etc</small>
+	</li>
+	<li>
+		<strong class="delayed:red">Dependency resolution</strong>
+		<small class="md">Making `import "foo"` work in the browser</small>
+	</li>
+</ol>
+
+<p class="handwritten red">One of these is not like the others</p>
+
+</div>
+
+<img src="images/reasons.png" alt="Reasons for using bundlers" class="shadow" style="max-width: 40%">
+</div>
+
+<details class="notes">
+
+Do you notice that one of these is not like the others?
+Performance and transpilation are generally _advanced concerns_.
+You can get quite far without hitting them, especially in an SPA.
+But using a dependency is not an advanced use case, it’s something you usually need very early on.
+Even in a one-off experiment or a CodePen snippet you need dependencies!
+
+</details>
+
+</article>
+
+
+<article class="slide">
+	<header>
+		<h1>Delightful APIs</h1>
+		<p class="subtitle">Incremental user effort produces incremental value</p>
 	</header>
 
-	<article class="slide">
-		<h2>Placeholder</h2>
-		<ul>
-			<li class="delayed">Modules &amp; dependency resolution</li>
-			<li class="delayed">Syntax the platform doesn’t support (yet)</li>
-			<li class="delayed">Bundling &amp; minification</li>
-			<li class="delayed">Everything else (assets, types, templates…)</li>
-		</ul>
+	<object data="images/curve-delightful.svg"></object>
 
-		<details class="notes">
-			Outline placeholder — replace.
-		</details>
-	</article>
-</section>
+	<details class="notes">
+		Good user interfaces make simple things easy, complex things possible,
+		and ensure a smooth transition from simple use cases to more complex ones.
+	</details>
+</article>
 
-<section>
-	<header class="slide">
-		<h2>What the platform can do today</h2>
-	</header>
+<article class="slide">
+	<object data="images/curve-cliff.svg"></object>
 
-	<article class="slide">
-		<h2>Placeholder</h2>
-		<pre><code>&lt;script type="importmap"&gt;</code></pre>
-	</article>
-</section>
+	<details class="notes">
+		When a small increase in use case complexity results in disproportionate increase in UI complexity,
+		this is called a _usability cliff_ and it is an **antipattern**.
+		The way dependencies work in the web platform is a textbook usability cliff.
+
+		There is nothing wrong with bundlers when used as a performance optimization to minimize waterfall effects and overhead from too many HTTP requests.
+		You know, what a bundler is named after!
+		Or to provide a different DX, possibly optimized for specific use cases.
+		**It is okay to require advanced tools for advanced needs**,
+		and performance optimization is generally an advanced use case. Same for most other things bundlers and build tools are used for, such as strong typing, linting, or transpiling. All of these are needs that come much later than dependency management, both in a programmer’s learning journey, as well as in a project’s development lifecycle.
+	</details>
+</article>
+
+<article class="slide">
+	<blockquote class="speech-bubble">
+		Tons of languages are compiled, what's the problem?
+	</blockquote>
+
+	<details class="notes">
+		Oftentimes when discussing these issues, I get the question “but other languages are completely compiled, why is it a problem here?”.
+		Yes, but their compiler is official and always there.
+		You literally can’t use the language without it.
+		You don’t get a broken experience, you get _no experience at all_.
+	</details>
+</article>
+
+<article class="slide dark">
+	<h2><span class="red">Fragmentation</span> is the problem</h2>
+
+	<details class="notes">
+		The problem is not compilation, it’s fragmentation.
+		It’s the experience of linking to a package via a browser import only to see errors about specifiers.
+		It’s the visible complexity and indirection just to use a utility function.
+	</details>
+</article>
+
+<article class="slide">
+
+<iframe src="https://github.com/color-js/elements/commit/e685c86297a580c52caae4bcc8f1e25ea3d830e3" class="window"></iframe>
+
+<!-- <pre class="language-js"><code>
+// Fetches this.constructor.style
+// and adopts it in the shadow root
+import { BaseElement } from "./base.js";
+
+class MyElement extends BaseElement {
+	<span class="delayed:red">static const style = "./style.css";</span>
+	// ...
+}
+</code></pre> -->
+
+<details class="notes">
+There is no coherent story.
+Web platform primitives that work fine in the browser, may or may not work in certain bundlers and you can’t know until you test in all of them.
+
+Instead of the bundler serving our code, our code has to adapt to appease the bundler.
+</details>
+
+</article>
+
+<article class="slide">
+
+<pre class="language-js"><code>
+import { BaseElement } from "./base.js";
+import style from "./style.css" with { type: "css" }
+
+class MyElement extends BaseElement {
+	static const style = style;
+	// ...
+}
+</code></pre>
+
+<details class="notes">
+
+It gets worse.
+In some cases the web platform _itself_ must adapt to appease bundlers.
+So much collective effort invested in fixing problems that would not exist if bundlers weren't so necessary.
+
+</details>
+
+</article>
+
+<header class="slide md flex">
+<img src="images/no-build-today.png" alt="No-build today: Choose your own adventure!" style="border-radius: .2em; flex: none" class="shadow">
+
+1. Rawdogging `node_modules/` imports
+2. Using CDNs
+3. Import maps
+
+{ .delayed-children }
+</header>
+
+<article class="slide md">
+## Rawdogging `node_modules/` imports
+
+```diff
+-    import { marked } from 'marked';
++    import { marked } from '/node_modules/marked/lib/marked.esm.js';
+```
+
+</article>
+
+<article class="slide green">
+<h2>
+	<span class="supertitle">The Good</span>
+	It works!
+	<span style="position: absolute;">🎉</span>
+</h2>
+
+<p class="handwritten delayed black abs-bottom">…for this particular case</p>
+
+</article>
+
+<article class="slide md red">
+
+## The Bad
+
+- We lose specifiers as an abstraction
+- It breaks if the library uses any dependencies
+- `node_modules` is not generally deployed in most hosts
+
+</article>
 
 <footer class="dark slide" id="end">
 	<h2>Thank you!</h2>

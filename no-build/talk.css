@@ -98,3 +98,42 @@ footer.slide#end {
 		color: var(--color-purple);
 	}
 }
+
+.slide > :is(object, img, video, svg, figure, iframe),
+.full-height {
+	&:only-child,
+	&.full-height,
+	&:where(:first-child, :first-child:is(h1, h2, header) + *):where(:last-child, :has(+ details.notes:last-child)) {
+		flex: 1;
+		min-height: 0;
+	}
+
+	&:is(iframe) {
+		width: 100%;
+		width: stretch;
+		--_zoom: var(--zoom, 1.5);
+		zoom: var(--_zoom);
+		font-size: calc(1em / var(--_zoom));
+	}
+
+	&:is(figure) {
+		display: flex;
+		flex-flow: column;
+
+		> :is(object, img, video, svg) {
+			flex: 1;
+			min-height: 0;
+		}
+	}
+}
+
+small {
+	display: block;
+	font-size: 60%;
+	color: oklch(from var(--color-neutral) var(--tint-50));
+	font-weight: 400;
+}
+
+ol {
+	padding-left: 1.5em;
+}

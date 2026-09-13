@@ -19,21 +19,16 @@ h1, h2, h3, h4, h5, h6 {
 	header > & {
 		margin: 0;
 	}
+}
 
-	&:not(:has(+ .subtitle)) {
-
-	}
-
-	> .subtitle,
-	+ .subtitle {
-		color: oklch(from var(--color-neutral) var(--tint-60));
-		font-size: 80%;
-		margin-block-start: 1rem;
-		text-align: center;
-		font-weight: 500;
-		margin-top: -1.3rem;
-		text-wrap: balance;
-	}
+.subtitle {
+	color: oklch(from var(--accent-color, var(--color-neutral)) var(--subtitle-tint, var(--tint-60)));
+	font-size: 80%;
+	margin-block-start: 1rem;
+	text-align: center;
+	font-weight: 500;
+	margin-top: -1.3rem;
+	text-wrap: balance;
 }
 
 li, p {

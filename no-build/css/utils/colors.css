@@ -1,0 +1,74 @@
+:root {
+	--accent-color: var(--color-neutral);
+}
+
+.red {
+	--accent-color: var(--color-red);
+}
+
+.orange {
+	--accent-color: var(--color-orange);
+}
+
+.yellow {
+	--accent-color: var(--color-yellow);
+}
+
+.green {
+	--accent-color: var(--color-green);
+}
+
+.cyan {
+	--accent-color: var(--color-cyan);
+}
+
+.blue {
+	--accent-color: var(--color-blue);
+}
+
+.indigo {
+	--accent-color: var(--color-indigo);
+}
+
+.purple {
+	--accent-color: var(--color-purple);
+}
+
+.magenta {
+	--accent-color: var(--color-magenta);
+}
+
+.gray {
+	--accent-color: var(--color-gray);
+}
+
+.white {
+	--accent-color: white;
+}
+
+.black {
+	--accent-color: black;
+}
+
+.red, .orange, .yellow, .green, .cyan, .blue, .indigo, .purple, .magenta, .gray, .white, .black {
+	&.bg,
+	&:where(.slide):where(:not(.text, .not-bg)) {
+		background: var(--accent-color);
+		color: oklch(from var(--accent-color) var(--tint-text));
+		--supertitle-color: white;
+		--supertitle-color-text: var(--accent-color);
+
+		code:where(:not(pre > code)) {
+			background: --tint(var(--accent-color), calc(l + .2));
+		}
+	}
+
+	&.text,
+	&:where(span, tr, td, th, p, strong, em, small, a):where(:not(.bg, .not-text)) {
+		color: var(--accent-color);
+
+		.token {
+			color: inherit;
+		}
+	}
+}
