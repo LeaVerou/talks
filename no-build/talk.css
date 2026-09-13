@@ -137,3 +137,8 @@ small {
 ol {
 	padding-left: 1.5em;
 }
+
+.slide.red {
+	--error-color-text: white;
+	--error-color-bg: transparent;
+}

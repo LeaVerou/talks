@@ -280,22 +280,12 @@ Even in a one-off experiment or a CodePen snippet you need dependencies!
 
 <iframe src="https://github.com/color-js/elements/commit/e685c86297a580c52caae4bcc8f1e25ea3d830e3" class="window"></iframe>
 
-<!-- <pre class="language-js"><code>
-// Fetches this.constructor.style
-// and adopts it in the shadow root
-import { BaseElement } from "./base.js";
-
-class MyElement extends BaseElement {
-	<span class="delayed:red">static const style = "./style.css";</span>
-	// ...
-}
-</code></pre> -->
 
 <details class="notes">
 There is no coherent story.
 Web platform primitives that work fine in the browser, may or may not work in certain bundlers and you can’t know until you test in all of them.
 
-Instead of the bundler serving our code, our code has to adapt to appease the bundler.
+**Instead of the bundler serving our code, our code has to adapt to appease the bundler.**
 </details>
 
 </article>
@@ -333,7 +323,10 @@ So much collective effort invested in fixing problems that would not exist if bu
 </header>
 
 <article class="slide md">
-## Rawdogging `node_modules/` imports
+<h2>
+	<div class="circle red" data-around="Choose your own adventure">1</div>
+	Rawdogging <code>node_modules/</code> imports
+</h2>
 
 ```diff
 -    import { marked } from 'marked';
@@ -346,22 +339,63 @@ So much collective effort invested in fixing problems that would not exist if bu
 <h2>
 	<span class="supertitle">The Good</span>
 	It works!
-	<span style="position: absolute;">🎉</span>
+	<span class="abs">🎉</span>
 </h2>
 
 <p class="handwritten delayed black abs-bottom">…for this particular case</p>
 
 </article>
 
-<article class="slide md red">
+<article class="slide orange red">
+	<h2>
+		<span class="supertitle">The Bad</span>
+		Requires deploying <code>node_modules/</code>
+	</h2>
 
-## The Bad
+	<details class="notes">
+		Wasteful and insecure.
+		Most hosts do not even deploy `node_modules/` by default.
+		Now you need additional ad hoc tooling to make this work in prod.
+	</details>
+</article>
 
-- We lose specifiers as an abstraction
-- It breaks if the library uses any dependencies
-- `node_modules` is not generally deployed in most hosts
+<article class="slide orange red">
+	<h2>
+		<span class="supertitle">The Bad</span>
+		We just lost the abstraction of specifiers
+	</h2>
+
+	<details class="notes">
+		Have you wondered why we use specifiers and not URLs?
+		Specifiers are an _abstraction_ over URLs.
+		They decouple the actual file structure from the dependency.
+
+	</details>
+</article>
+
+<article class="slide red md">
+<h2>
+	<span class="supertitle">The Ugly</span>
+	Breaks with transitive dependencies
+</h2>
+
+```js
+import {html, css, LitElement} from '/node_modules/lit/index.js';
+```
+
+```error { .delayed }
+Uncaught (in promise) TypeError: Failed to resolve module specifier "@lit/reactive-element".
+Relative references must start with either "/", "./", or "../".
+```
+
+<details class="notes">
+	But the real dealbreaker is that even if you stomach all other warts,
+	this only works for dependencies that don’t use dependencies.
+	Once a dependency has its own dependencies, this approach breaks down completely.
+</details>
 
 </article>
+
 
 <footer class="dark slide" id="end">
 	<h2>Thank you!</h2>

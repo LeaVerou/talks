@@ -10,6 +10,10 @@
 	--accent-color: var(--color-orange);
 }
 
+.orange.red {
+	--accent-color: color-mix(in oklch, var(--color-orange), var(--color-red));
+}
+
 .yellow {
 	--accent-color: var(--color-yellow);
 }
@@ -52,7 +56,7 @@
 
 .red, .orange, .yellow, .green, .cyan, .blue, .indigo, .purple, .magenta, .gray, .white, .black {
 	&.bg,
-	&:where(.slide):where(:not(.text, .not-bg)) {
+	&:where(.slide):where(:not(.text, .no-bg)) {
 		background: var(--accent-color);
 		color: oklch(from var(--accent-color) var(--tint-text));
 		--supertitle-color: white;

@@ -3,8 +3,8 @@ pre.language-error {
 	display: flex;
 	align-items: start;
 	white-space: pre-wrap;
-	color: var(--color-red);
-	background: oklch(from var(--color-red) var(--tint-95));
+	color: var(--error-color-text, var(--color-red));
+	background: oklch(from var(--error-color-bg, var(--color-red)) var(--tint-95));
 	font-weight: bold;
 	--icon-start: var(--icon-x-circle);
 
@@ -15,6 +15,8 @@ pre.language-error {
 
 	&::before {
 		font-size: 200%;
+		translate: 0 -.1lh;
 	}
+
 
 }

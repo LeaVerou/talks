@@ -9,6 +9,7 @@
 		"build": "npm run build:css",
 		"watch:css": "npx postcss \"**/*.postcss\" --base . --dir . --ext .css --watch",
 		"watch": "npm run watch:css",
+		"dependencies": "npm run dependencies --if-present --workspaces",
 		"prepare": "npm run prepare --if-present --workspaces",
 		"postprepare": "node aggregate-redirects.mjs"
 	},
