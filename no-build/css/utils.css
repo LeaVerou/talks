@@ -73,6 +73,16 @@
 	flex-flow: column;
 }
 
+.columns {
+	display: grid;
+	gap: 1em;
+	grid-template-columns: repeat(var(--columns, 2), minmax(auto, 1fr));
+
+	.span-2 {
+		grid-column: span 2;
+	}
+}
+
 .big {
 	font-size: var(--font-size-2xl);
 }
@@ -179,19 +189,35 @@
 	}
 }
 
-.supertitle {
-	display: block;
-	width: fit-content;
-	padding: .2em .5em;
-	margin: 0 auto;
-	--background-color: var(--supertitle-color, var(--accent-color));
-	background: var(--background-color);
-	--text-color: var(--supertitle-color-text,  oklch(from var(--background-color) var(--tint-text)));
-	color: var(--text-color);
-	font-weight: bold;
-	text-transform: uppercase;
-	font-size: 50%;
-	text-shadow: none;
+.slide.the-bad {
+	--supertitle: "The bad";
+}
+
+.slide:has(.supertitle) {
+	--supertitle: 1;
+}
+
+@container style(--supertitle) {
+	.slide :nth-child(1 of h1, h2, h3, h4, h5, h6)::before,
+	.supertitle {
+		content: var(--supertitle);
+		display: block;
+		width: fit-content;
+		padding: .2em .5em;
+		margin: 0 auto;
+		--background-color: var(--supertitle-color, var(--accent-color));
+		background: var(--background-color);
+		--text-color: var(--supertitle-color-text,  oklch(from var(--background-color) var(--tint-text)));
+		color: var(--text-color);
+		font-weight: bold;
+		text-transform: uppercase;
+		font-size: 50%;
+		text-shadow: none;
+	}
+}
+
+[data-supertitle]::before {
+	content: attr(data-supertitle);
 }
 
 .circle {
@@ -205,4 +231,139 @@
 	justify-content: center;
 	line-height: 1.5em;
 	margin-inline: auto;
+	position: relative;
+
+	/* Text on a circular path around the element, from data-around (talk.js turns it into an SVG textPath).
+	   The path hugs the circle's edge and --around-gap pushes the SVG outward, so the text baseline sits
+	   exactly that far from the edge. */
+	> .around {
+		position: absolute;
+		inset: calc(-1 * var(--around-gap, .1em));
+		overflow: visible;
+		pointer-events: none;
+
+		text {
+			/* viewBox units: the circle is 100 wide, so this scales with it */
+			font-size: .1em;
+			font-weight: 700;
+			text-transform: uppercase;
+			text-anchor: middle;
+			fill: var(--accent-color);
+		}
+	}
+}
+
+/* Custom list markers in a shared column, so they line up no matter their width.
+   Works on ul, ol, or any element whose children are the items.
+   Set --icon-marker on the parent for icon markers (rendered by icons.css), or --marker for a text one.
+   A child with class .marker replaces the generated marker for that item.
+   .check-list is the same, with check marks as the icon. */
+.custom-list,
+.check-list,
+.x-list {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	column-gap: .5em;
+	padding-inline-start: 0;
+	list-style: none;
+	counter-reset: item;
+	--marker: "•";
+
+	&:where(ol) {
+		--marker: counter(item) ".";
+	}
+
+	> * {
+		display: grid;
+		grid-template-columns: subgrid;
+		grid-column: span 2;
+		align-items: baseline;
+		counter-increment: item;
+		--icon-start: var(--icon-marker);
+
+		/* NOTE: bare text runs next to inline elements become separate grid items
+		   and auto-place into the marker column. Wrap such content in an element. */
+		> * {
+			grid-column: 2;
+		}
+
+		> .marker {
+			grid-column: 1;
+		}
+
+		&::before {
+			grid-column: 1;
+		}
+
+		&:has(> .marker)::before {
+			content: none;
+		}
+	}
+
+	@container not style(--icon-marker) {
+		> *::before {
+			content: var(--marker);
+		}
+	}
+
+	/* Center the icon on the first line; the inline vertical-align from icons.css is moot in a grid */
+	@container style(--icon-marker) {
+		> *::before {
+			align-self: start;
+			margin: calc((1lh - 1em) / 2) 0 0;
+		}
+	}
+}
+
+.check-list {
+	--icon-marker: var(--icon-check);
+}
+
+.x-list {
+	--icon-marker: var(--icon-x);
+}
+
+.best {
+	--accent-color: oklch(from var(--color-green) var(--tint-darker));
+	--icon: var(--icon-star);
+}
+
+.good {
+	--accent-color: var(--color-green);
+	--icon: var(--icon-check);
+}
+
+.ok {
+	--accent-color: var(--color-orange);
+	--icon: var(--icon-tilde);
+}
+
+.bad {
+	--accent-color: var(--color-red);
+	--icon: var(--icon-x);
+}
+
+.worst {
+	--accent-color: oklch(from var(--color-red) var(--tint-darker));
+	--icon: var(--icon-exclamation-mark);
+}
+
+.best, .good, .ok, .bad,  .worst {
+	pre& {
+		position: relative;
+		border: .2em solid var(--accent-color);
+
+		&::after {
+			content: var(--icon);
+			position: absolute;
+			top: -.5em;
+			right: -.5em;
+			width: 1em;
+			height: 1em;
+			padding: .3em;
+			border-radius: 50%;
+			filter: invert();
+			background: color(from var(--accent-color) display-p3 calc(1 - r) calc(1 - g) calc(1 - b));
+		}
+	}
 }

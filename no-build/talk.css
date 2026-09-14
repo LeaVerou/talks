@@ -138,7 +138,21 @@ ol {
 	padding-left: 1.5em;
 }
 
+.slide {
+	&.the-bad {
+		--supertitle: "The bad";
+	}
+
+	&.req {
+		--supertitle: "Requirement";
+	}
+}
+
 .slide.red {
 	--error-color-text: white;
 	--error-color-bg: transparent;
 }
+
+/* .slide {
+	--dont-resize: 1;
+} */

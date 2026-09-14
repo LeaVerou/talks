@@ -315,12 +315,68 @@ So much collective effort invested in fixing problems that would not exist if bu
 <header class="slide md flex">
 <img src="images/no-build-today.png" alt="No-build today: Choose your own adventure!" style="border-radius: .2em; flex: none" class="shadow">
 
+<div>
+
+## Dependencies sans bundlers, today?
+</div>
+
 1. Rawdogging `node_modules/` imports
-2. Using CDNs
+2. Import from CDNs
 3. Import maps
 
 { .delayed-children }
 </header>
+
+<article class="slide md req">
+
+## Specifiers
+
+<div class="columns xdelayed-children">
+
+```js { .bad }
+import { marked } from
+'/node_modules/marked/lib/marked.esm.js';
+```
+
+```js { .bad }
+import { marked } from
+'/lib/marked/lib/marked.esm.js';
+```
+
+```js { .bad .span-2 }
+import { marked } from 'https://esm.sh/marked@18.0.13/lib/marked.esm.js';
+```
+
+```js { .ok }
+import { marked } from 'https://esm.sh/marked';
+```
+
+```js { .good }
+import { marked } from 'marked'
+```
+
+</div>
+
+<details class="notes">
+
+The first requirement is specifiers.
+Specifiers are an _abstraction_.
+They decouple the dependency from its version, file structure.
+Packages can be upgraded, or change the mapping of exports to file paths
+without requiring any downstream changes.
+Multiple versions of the same package can co-exist, and specifiers just resolve to the correct one.
+These are not consumer concerns, and should not be scattered all over the codebase.
+
+Some CDNs do allow URLs that map to specifiers, providing the same encapsulation.
+However, even that way, version management is still ad hoc.
+
+</details>
+
+</article>
+
+
+
+
 
 <article class="slide md">
 <h2>
@@ -393,6 +449,127 @@ Relative references must start with either "/", "./", or "../".
 	this only works for dependencies that don’t use dependencies.
 	Once a dependency has its own dependencies, this approach breaks down completely.
 </details>
+
+</article>
+
+<article class="slide md">
+<h2>
+	<div class="circle red" data-around="Choose your own adventure">2</div>
+	Import from CDNs
+</h2>
+
+```js
+import {html, css, LitElement} from 'https://esm.sh/lit';
+```
+
+- Transitive dependencies work
+- Specifiers, not paths (mostly)
+
+{ .check-list .green .text .delayed-children }
+
+</article>
+
+<article class="slide red orange the-bad">
+	<h2>
+		A point of failure you don’t control
+	</h2>
+
+	<details class="notes">
+		It is always a bad idea to introduce a dependency on a whole other domain you do not control, and an even worse one when linking to executable code.
+
+		Any third-party domain is an unnecessary additional point of failure you do not control.
+		I still remember scrambling to change JSDelivr URLs to Unpkg during an outage right before one of my talks, or having to hunt down all my repos that used RawGit URLs when it sunset, including many libraries.
+
+		Wanted to code on a flight? Good luck.
+		Needed to show a live demo during a talk, over clogged conference wifi?
+		Maybe sacrifice a goat to the gods first.
+
+		More complexity:
+		- How to avoid CDN roundtrips for local dev?
+		- Proxies for APIs that require COEP/single-origin isolation.
+
+
+	</details>
+</article>
+
+<article class="slide red orange the-bad">
+## Inconsistency
+
+<details class="notes">
+Because everything is URLs, nothing prevents the same module from being referenced in multiple ways (different versions, from different CDNs, etc), leading to potential inconsistencies and even bugs.
+</details>
+</article>
+
+<article class="slide red orange">
+	<h2>
+		<span class="supertitle">The Bad</span>
+		What about local packages?
+	</h2>
+
+	<details class="notes">
+		If a CDN is both your package manager and your source of executable code,
+		how do you modularize _your own_ code?
+	</details>
+</article>
+
+<article class="slide red">
+<h2>
+	<span class="supertitle">The Ugly</span>
+	Security implications
+</h2>
+
+<details class="notes">
+	Unless you link to a specific version, down to the patch number and/or use SRI, the resource could turn malicious overnight under your nose if the package is compromised.
+
+	And even if you link to a specific version, there is always the risk that the CDN itself could get compromised.
+	Who remembers polyfill.io?
+</details>
+</article>
+
+<article class="slide md">
+<h2>
+	<div class="circle red" data-around="Choose your own adventure">3</div>
+	Import maps
+</h2>
+
+<div class="stack">
+```html
+&lt;script type="importmap"&gt;
+{
+	"imports": {
+		"marked": "https://esm.sh/marked@18.0.13",
+		"localpkg": "../localpkg/index.js"
+	}
+}
+&lt;/script&gt;
+```
+```js
+import { marked } from 'marked';
+import stuff from 'localpkg';
+```
+</div>
+- Transitive dependencies work
+- Specifiers!
+- Centralized dependency management
+- Local packages
+
+{ .check-list .green .text .delayed-children }
+
+</article>
+
+<article class="slide md">
+## Transitive dependencies?
+
+
+```html
+&lt;script type="importmap"&gt;
+{
+	"imports": {
+		"marked": "https://esm.sh/marked@18.0.13"
+	}
+}
+&lt;/script&gt;
+```
 
 </article>
 

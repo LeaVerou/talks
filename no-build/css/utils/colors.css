@@ -11,7 +11,7 @@
 }
 
 .orange.red {
-	--accent-color: color-mix(in oklch, var(--color-orange), var(--color-red));
+	--accent-color: var(--color-orange-red);
 }
 
 .yellow {
@@ -20,6 +20,10 @@
 
 .green {
 	--accent-color: var(--color-green);
+}
+
+.yellow.green {
+	--accent-color: var(--color-yellow-green);
 }
 
 .cyan {
@@ -57,14 +61,13 @@
 .red, .orange, .yellow, .green, .cyan, .blue, .indigo, .purple, .magenta, .gray, .white, .black {
 	&.bg,
 	&:where(.slide):where(:not(.text, .no-bg)) {
-		background: var(--accent-color);
-		color: oklch(from var(--accent-color) var(--tint-text));
+		--background-color: var(--accent-color);
+		background: var(--background-color);
+		--text-color: oklch(from var(--accent-color) var(--tint-text));
+		color: var(--text-color);
 		--supertitle-color: white;
 		--supertitle-color-text: var(--accent-color);
-
-		code:where(:not(pre > code)) {
-			background: --tint(var(--accent-color), calc(l + .2));
-		}
+		--tint-code-bg: var(--tint-darker);
 	}
 
 	&.text,
@@ -75,4 +78,15 @@
 			color: inherit;
 		}
 	}
+}
+
+.tinted-95 {
+	--background-color: oklch(from var(--accent-color, var(--color-neutral)) var(--tint-bg));
+	--text-color: oklch(from var(--accent-color, var(--color-neutral)) var(--tint-text));
+	color: var(--text-color);
+	background: var(--background-color);
+
+	--tint-bg: var(--tint-95);
+	--tint-text: var(--tint-10);
+	--tint-code-bg: var(--tint-90);
 }
