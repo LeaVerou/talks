@@ -1,0 +1,30 @@
+:host {
+	display: block;
+}
+
+svg {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+text {
+	/* Ceiling: each line is scaled down from here as needed */
+	font-size: calc(var(--height) / 11);
+	font-family: Impact, sans-serif;
+	text-anchor: middle;
+	text-transform: uppercase;
+	fill: white;
+	stroke: black;
+	stroke-width: .12em;
+	stroke-linejoin: round;
+	paint-order: stroke;
+
+	&.top {
+		translate: 0 var(--padding, .45em);
+	}
+
+	&.bottom {
+		translate: 0 calc(-1 * var(--padding, .45em));
+	}
+}

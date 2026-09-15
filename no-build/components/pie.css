@@ -1,0 +1,78 @@
+.legend {
+	display: flex;
+	padding-left: 1.3em;
+
+	&:not(.compact) {
+		flex-flow: column;
+	}
+
+	> * {
+		background: none;
+		color: inherit;
+
+		&::before {
+			content: "";
+			display: inline-block;
+			vertical-align: -.15em;
+			width: 1em;
+			aspect-ratio: 1;
+			margin-right: .3em;
+			margin-left: -1.3em;
+			background: var(--background, var(--color));
+			outline: var(--outline);
+			outline-offset: -2px;
+		}
+	}
+
+	.description {
+		font-size: 75%;
+		line-height: 1;
+		color: var(--color-gray-60);
+	}
+}
+
+:where(.pie, .legend) {
+	--_color-1: var(--color-1, var(--color-accent-1));
+	--_color-2: var(--color-2, var(--color-accent-2));
+
+	&.pie {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 10em;
+		padding: 1em;
+		box-sizing: border-box;
+		aspect-ratio: 1;
+		--pct: calc(var(--value, .2) * 100);
+		background: conic-gradient(
+			var(--_color-2) calc(100% - var(--pct) * 1%),
+			var(--_color-1) 0) no-repeat;
+		border-radius: 50%;
+
+		&::before,
+		&::after {
+			content: counter(p) "%";
+			font-weight: bold;
+			color: white;
+		}
+
+		&::before {
+			counter-reset: p var(--pct);
+		}
+
+		&::after {
+			counter-reset: p calc(100 - var(--pct));
+		}
+	}
+
+
+	&.legend {
+		> :first-child {
+			--color: var(--_color-1);
+		}
+
+		> :nth-child(2) {
+			--color: var(--_color-2);
+		}
+	}
+}

@@ -2,6 +2,9 @@ import "./prism.js";
 import Inspire from "inspirejs.org";
 import { registry } from "@inspirejs/core";
 import "./components/file-tree.js";
+import "./components/yo-dawg.js";
+import "./components/window.js";
+
 
 registry.markdown = {
 	test: "[data-markdown-elements]",
@@ -18,3 +21,4 @@ for (let element of document.querySelectorAll("[data-around]")) {
 	</svg>`);
 	element.querySelector(".around textPath").textContent = element.dataset.around;
 }
+

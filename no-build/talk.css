@@ -9,6 +9,7 @@
 @import url("components/editor.css");
 @import url("components/icon.css");
 @import url("components/error.css");
+@import url("components/pie.css");
 
 #intro {
 	color-scheme: dark;
@@ -111,9 +112,6 @@ footer.slide#end {
 	&:is(iframe) {
 		width: 100%;
 		width: stretch;
-		--_zoom: var(--zoom, 1.5);
-		zoom: var(--_zoom);
-		font-size: calc(1em / var(--_zoom));
 	}
 
 	&:is(figure) {
@@ -156,3 +154,17 @@ ol {
 /* .slide {
 	--dont-resize: 1;
 } */
+
+.slide.slap {
+	background: hsl(2 95% 68.5%) url("images/slap.avif") no-repeat bottom right;
+
+	.speech-bubble {
+		margin: 1em auto auto 1em;
+		--pointer-apex-x: 100%;
+	}
+}
+
+.slide.imaps {
+	--supertitle: 'Import maps';
+	--accent-color: var(--color-orange);
+}

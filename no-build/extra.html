@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>No-build: pipe dream, or near future?</title>
+	<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🛠️</text></svg>' />
+
+	<link href="talk.css" rel="stylesheet" />
+	<script src="importmap.js"></script>
+	<script src="talk.js" type="module"></script>
+</head>
+<body class="language-js" data-markdown-elements="details.notes, .md, .md-children > :not(.no-md)" data-markdown-plugins="markdown-it-attrs">
+
+
+<article class="slide md">
+<h2>
+	<div class="circle red" data-around="Choose your own adventure">1</div>
+	Rawdogging <code>node_modules/</code> imports
+</h2>
+
+```diff
+-    import { marked } from 'marked';
++    import { marked } from '/node_modules/marked/lib/marked.esm.js';
+```
+
+</article>
+
+<article class="slide green">
+<h2>
+	<span class="supertitle">The Good</span>
+	It works!
+	<span class="abs">🎉</span>
+</h2>
+
+<p class="handwritten delayed black abs-bottom">…for this particular case</p>
+
+</article>
+
+<article class="slide orange red">
+	<h2>
+		<span class="supertitle">The Bad</span>
+		Requires deploying <code>node_modules/</code>
+	</h2>
+
+	<details class="notes">
+		Wasteful and insecure.
+		Most hosts do not even deploy `node_modules/` by default.
+		Now you need additional ad hoc tooling to make this work in prod.
+	</details>
+</article>
+
+<article class="slide orange red">
+	<h2>
+		<span class="supertitle">The Bad</span>
+		We just lost the abstraction of specifiers
+	</h2>
+
+	<details class="notes">
+		Have you wondered why we use specifiers and not URLs?
+		Specifiers are an _abstraction_ over URLs.
+		They decouple the actual file structure from the dependency.
+
+	</details>
+</article>
+
+<article class="slide red md">
+<h2>
+	<span class="supertitle">The Ugly</span>
+	Breaks with transitive dependencies
+</h2>
+
+```js
+import {html, css, LitElement} from '/node_modules/lit/index.js';
+```
+
+```error { .delayed }
+Uncaught (in promise) TypeError: Failed to resolve module specifier "@lit/reactive-element".
+Relative references must start with either "/", "./", or "../".
+```
+
+<details class="notes">
+	But the real dealbreaker is that even if you stomach all other warts,
+	this only works for dependencies that don’t use dependencies.
+	Once a dependency has its own dependencies, this approach breaks down completely.
+</details>
+
+</article>
+
+<article class="slide md">
+<h2>
+	<div class="circle red" data-around="Choose your own adventure">2</div>
+	Import from CDNs
+</h2>
+
+```js
+import {html, css, LitElement} from 'https://esm.sh/lit';
+```
+
+- Transitive dependencies work
+- Specifiers, not paths (mostly)
+
+{ .check-list .green .text .delayed-children }
+
+</article>
+
+<article class="slide red orange the-bad">
+	<h2>
+		A point of failure you don’t control
+	</h2>
+
+	<details class="notes">
+		It is always a bad idea to introduce a dependency on a whole other domain you do not control, and an even worse one when linking to executable code.
+
+		Any third-party domain is an unnecessary additional point of failure you do not control.
+		I still remember scrambling to change JSDelivr URLs to Unpkg during an outage right before one of my talks, or having to hunt down all my repos that used RawGit URLs when it sunset, including many libraries.
+
+		Wanted to code on a flight? Good luck.
+		Needed to show a live demo during a talk, over clogged conference wifi?
+		Maybe sacrifice a goat to the gods first.
+
+		More complexity:
+		- How to avoid CDN roundtrips for local dev?
+		- Proxies for APIs that require COEP/single-origin isolation.
+
+
+	</details>
+</article>
+
+<article class="slide red orange the-bad">
+## Inconsistency
+
+<details class="notes">
+Because everything is URLs, nothing prevents the same module from being referenced in multiple ways (different versions, from different CDNs, etc), leading to potential inconsistencies and even bugs.
+</details>
+</article>
+
+<article class="slide red orange">
+	<h2>
+		<span class="supertitle">The Bad</span>
+		What about local packages?
+	</h2>
+
+	<details class="notes">
+		If a CDN is both your package manager and your source of executable code,
+		how do you modularize _your own_ code?
+	</details>
+</article>
+
+<article class="slide red">
+<h2>
+	<span class="supertitle">The Ugly</span>
+	Security implications
+</h2>
+
+<details class="notes">
+	Unless you link to a specific version, down to the patch number and/or use SRI, the resource could turn malicious overnight under your nose if the package is compromised.
+
+	And even if you link to a specific version, there is always the risk that the CDN itself could get compromised.
+	Who remembers polyfill.io?
+</details>
+</article>
+
+<article class="slide md">
+<h2>
+	<div class="circle red" data-around="Choose your own adventure">3</div>
+	Import maps
+</h2>
+
+<div class="stack">
+```html
+&lt;script type="importmap"&gt;
+{
+	"imports": {
+		"marked": "https://esm.sh/marked@18.0.13",
+		"localpkg": "../localpkg/index.js"
+	}
+}
+&lt;/script&gt;
+```
+```js
+import { marked } from 'marked';
+import stuff from 'localpkg';
+```
+</div>
+- Transitive dependencies work
+- Specifiers!
+- Centralized dependency management
+- Local packages
+
+{ .check-list .green .text .delayed-children }
+
+</article>
+
+<article class="slide md">
+## Transitive dependencies?
+
+
+```html
+&lt;script type="importmap"&gt;
+{
+	"imports": {
+		"marked": "https://esm.sh/marked@18.0.13"
+	}
+}
+&lt;/script&gt;
+```
+
+</article>
+
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+/* Zigzag edges via border-shape (Chrome only).
+   Combine .zig-zag-{top,right,bottom,left} freely, or use .zig-zag for all four.
+   --zig-zag-size: tooth depth. Teeth are 45°, so it is also their half-width. Default .5em.
+   --border-radius: rounds corners between two straight edges (border-shape ignores border-radius).
+   Every edge starts and ends in a notch, so two zigzag edges meet in a notch and
+   a straight edge stops at its neighbor's notch.
+   Teeth are scaled a little so a whole number fits each edge. shape() cannot repeat,
+   so every edge gets 64 teeth and the surplus collapses onto the far corner. */
+.zig-zag,
+.zig-zag-top,
+.zig-zag-right,
+.zig-zag-bottom,
+.zig-zag-left {
+	--_zz-top: 0px;
+	--_zz-right: 0px;
+	--_zz-bottom: 0px;
+	--_zz-left: 0px;
+	--_zz-size: var(--zig-zag-size, .5em);
+	--_zz-r: var(--border-radius, 0px);
+
+	/* How far each corner pushes the edges meeting there: the radius between two straight edges,
+	   otherwise the neighbor's tooth depth (x: along the horizontal edge, y: along the vertical one) */
+	--_zz-tl-x: if(style((--_zz-top: 0px) and (--_zz-left: 0px)): var(--_zz-r); else: var(--_zz-left));
+	--_zz-tl-y: if(style((--_zz-top: 0px) and (--_zz-left: 0px)): var(--_zz-r); else: var(--_zz-top));
+	--_zz-tr-x: if(style((--_zz-top: 0px) and (--_zz-right: 0px)): var(--_zz-r); else: var(--_zz-right));
+	--_zz-tr-y: if(style((--_zz-top: 0px) and (--_zz-right: 0px)): var(--_zz-r); else: var(--_zz-top));
+	--_zz-br-x: if(style((--_zz-bottom: 0px) and (--_zz-right: 0px)): var(--_zz-r); else: var(--_zz-right));
+	--_zz-br-y: if(style((--_zz-bottom: 0px) and (--_zz-right: 0px)): var(--_zz-r); else: var(--_zz-bottom));
+	--_zz-bl-x: if(style((--_zz-bottom: 0px) and (--_zz-left: 0px)): var(--_zz-r); else: var(--_zz-left));
+	--_zz-bl-y: if(style((--_zz-bottom: 0px) and (--_zz-left: 0px)): var(--_zz-r); else: var(--_zz-bottom));
+
+	/* Clockwise from the top-left corner. The arcs have zero length except between two straight edges. */
+	border-shape: shape(
+		from var(--_zz-left) var(--_zz-tl-y),
+		arc to var(--_zz-tl-x) var(--_zz-top) of var(--_zz-r) cw,
+		--zz-64(1, top),
+		arc to calc(100% - var(--_zz-right)) var(--_zz-tr-y) of var(--_zz-r) cw,
+		--zz-64(1, right),
+		arc to calc(100% - var(--_zz-br-x)) calc(100% - var(--_zz-bottom)) of var(--_zz-r) cw,
+		--zz-64(1, bottom),
+		arc to var(--_zz-left) calc(100% - var(--_zz-bl-y)) of var(--_zz-r) cw,
+		--zz-64(1, left),
+		close
+	);
+}
+
+.zig-zag,
+.zig-zag-top {
+	--_zz-top: var(--_zz-size);
+}
+
+.zig-zag,
+.zig-zag-right {
+	--_zz-right: var(--_zz-size);
+}
+
+.zig-zag,
+.zig-zag-bottom {
+	--_zz-bottom: var(--_zz-size);
+}
+
+.zig-zag,
+.zig-zag-left {
+	--_zz-left: var(--_zz-size);
+}
+
+/* Position of point --i along an edge, between the insets --a and --b of its two corners */
+@function --zz-along(--i, --a, --b) {
+	--end: calc(100% - var(--b));
+	--length: calc(var(--end) - var(--a));
+	--w: calc(var(--length) / (2 * max(1, round(var(--length) / (2 * var(--_zz-size))))));
+	result: min(var(--a) + var(--i) * var(--w), var(--end));
+}
+
+/* One tooth of --edge, clockwise: its peak at point --i, its notch at the next point */
+@function --zz-tooth(--i, --edge) {
+	--j: calc(var(--i) + 1);
+	result: if(
+		style(--edge: top):
+			line to --zz-along(var(--i), var(--_zz-tl-x), var(--_zz-tr-x)) 0,
+			line to --zz-along(var(--j), var(--_zz-tl-x), var(--_zz-tr-x)) var(--_zz-top);
+		style(--edge: right):
+			line to 100% --zz-along(var(--i), var(--_zz-tr-y), var(--_zz-br-y)),
+			line to calc(100% - var(--_zz-right)) --zz-along(var(--j), var(--_zz-tr-y), var(--_zz-br-y));
+		style(--edge: bottom):
+			line to calc(100% - --zz-along(var(--i), var(--_zz-br-x), var(--_zz-bl-x))) 100%,
+			line to calc(100% - --zz-along(var(--j), var(--_zz-br-x), var(--_zz-bl-x))) calc(100% - var(--_zz-bottom));
+		else:
+			line to 0 calc(100% - --zz-along(var(--i), var(--_zz-bl-y), var(--_zz-tl-y))),
+			line to var(--_zz-left) calc(100% - --zz-along(var(--j), var(--_zz-bl-y), var(--_zz-tl-y)));
+	);
+}
+
+/* N teeth of --edge starting at point --i, by doubling */
+@function --zz-2(--i, --edge) {
+	result: --zz-tooth(var(--i), var(--edge)), --zz-tooth(calc(var(--i) + 2), var(--edge));
+}
+
+@function --zz-4(--i, --edge) {
+	result: --zz-2(var(--i), var(--edge)), --zz-2(calc(var(--i) + 4), var(--edge));
+}
+
+@function --zz-8(--i, --edge) {
+	result: --zz-4(var(--i), var(--edge)), --zz-4(calc(var(--i) + 8), var(--edge));
+}
+
+@function --zz-16(--i, --edge) {
+	result: --zz-8(var(--i), var(--edge)), --zz-8(calc(var(--i) + 16), var(--edge));
+}
+
+@function --zz-32(--i, --edge) {
+	result: --zz-16(var(--i), var(--edge)), --zz-16(calc(var(--i) + 32), var(--edge));
+}
+
+@function --zz-64(--i, --edge) {
+	result: --zz-32(var(--i), var(--edge)), --zz-32(calc(var(--i) + 64), var(--edge));
+}

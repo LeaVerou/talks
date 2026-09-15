@@ -17,9 +17,84 @@
 	<h1>No-build:<br><em>pipe dream</em>, or near future?</h1>
 	<div class="by">
 		by <a href="http://lea.verou.me">Lea Verou</a>
+		<small>TC39, WHATWG, CSS WG, PrismJS, Color.js</small>
 		<small><a href="http://lea.verou.me"><strong>lea.verou.me</strong></a> &bull; <strong>lea＠verou.me</strong></small>
 	</div>
 </header>
+
+<article class="slide columns" style="--color-1: black; align-items: start;">
+
+<style>
+	@scope {
+		.pie {
+			align-self: center;
+			justify-self: center;
+
+			font-size: 70%;
+		}
+	}
+</style>
+
+<img src="images/x-poll.png" alt="" class="shadow">
+<img src="images/mastodon-poll.png" alt="" class="shadow">
+
+<div class="pie delayed abs-bottom-left" data-index="1" style="--value: calc(25.2 / (55.9 + 25.2));"></div>
+<div class="pie delayed abs-bottom-right" data-index="2" style="--value: .5;"></div>
+
+<div class="legend abs-bottom delayed" data-index="1">
+	<span>Wish didn’t</span>
+	<span>OK</span>
+</div>
+
+<details class="notes">
+Raise your hand if you use a bundler.
+This includes Vite, Webpack, esbuild, Rollup, Parcel, and more.
+But it also includes bundlers that are built into frameworks, like Next.js or Nuxt.
+
+Nearly all of us do, right?
+But how many actually _like it_?
+</details>
+
+</article>
+
+<article class="slide tinted-95 red">
+<h2>Why do we use bundlers?</h2>
+
+<div class="flex">
+<div>
+<ol>
+	<li>
+		<strong>Transpilation</strong>
+		<small>TS, JSX, CSS preprocessors, templating, etc</small>
+	</li>
+	<li>
+		<strong>Performance</strong>
+		<small>bundling, minification, etc</small>
+	</li>
+	<li>
+		<strong class="delayed:red">Dependency resolution</strong>
+		<small class="md">Making `import "foo"` work in the browser</small>
+	</li>
+</ol>
+
+<p class="handwritten red">One of these is not like the others</p>
+
+</div>
+
+<img src="images/reasons.png" alt="Reasons for using bundlers" class="shadow" style="max-width: 40%">
+</div>
+
+<details class="notes">
+
+Do you notice that one of these is not like the others?
+Performance and transpilation are generally _advanced concerns_.
+You can get quite far without hitting them, especially in an SPA.
+But using a dependency is not an advanced use case, it’s something you usually need very early on.
+Even in a one-off experiment or a CodePen snippet you need dependencies!
+
+</details>
+
+</article>
 
 <article class="slide md">
 ## Dependencies in JS
@@ -183,44 +258,7 @@ Imagine if every time anyone wrote a calculator they also had to reinvent floati
 </details>
 </article>
 
-<article class="slide tinted-95 red">
-<h2>Why do we use bundlers?</h2>
 
-<div class="flex">
-<div>
-<ol>
-	<li>
-		<strong>Transpilation</strong>
-		<small>TS, JSX, CSS preprocessors, templating, etc</small>
-	</li>
-	<li>
-		<strong>Performance</strong>
-		<small>bundling, minification, etc</small>
-	</li>
-	<li>
-		<strong class="delayed:red">Dependency resolution</strong>
-		<small class="md">Making `import "foo"` work in the browser</small>
-	</li>
-</ol>
-
-<p class="handwritten red">One of these is not like the others</p>
-
-</div>
-
-<img src="images/reasons.png" alt="Reasons for using bundlers" class="shadow" style="max-width: 40%">
-</div>
-
-<details class="notes">
-
-Do you notice that one of these is not like the others?
-Performance and transpilation are generally _advanced concerns_.
-You can get quite far without hitting them, especially in an SPA.
-But using a dependency is not an advanced use case, it’s something you usually need very early on.
-Even in a one-off experiment or a CodePen snippet you need dependencies!
-
-</details>
-
-</article>
 
 
 <article class="slide">
@@ -327,11 +365,49 @@ So much collective effort invested in fixing problems that would not exist if bu
 { .delayed-children }
 </header>
 
+
+<article class="slide md req">
+
+## Transitive dependencies
+
+<div class="stack">
+
+```js
+import { html, css, LitElement } from '/node_modules/lit/index.js';
+/* or */
+import { html, css, LitElement } from '/lib/lit/index.js';
+```
+
+```error { .delayed }
+Uncaught (in promise) TypeError: Failed to resolve module specifier "@lit/reactive-element".
+Relative references must start with either "/", "./", or "../".
+```
+</div>
+
+
+<details class="notes">
+
+Some people have tried rawdogging `node_modules/` imports
+or having a script that copies them out selectively.
+
+There is a host of problems with this approach, but possibly the biggest one is that it breaks down the moment your dependency uses a dependency.
+
+Perhaps most importantly, for a solution to work in practice,
+it must be able to handle transitive dependencies.
+Your workflow cannot be risking collapse the moment you need to use a library that uses a library.
+This rules out all path-based solutions.
+
+Unless of course you’re willing to rewrite the files you’re copying,
+but now you’re effectively building your own bundler.
+
+</details>
+</article>
+
 <article class="slide md req">
 
 ## Specifiers
 
-<div class="columns xdelayed-children">
+<div class="stack xdelayed-children">
 
 ```js { .bad }
 import { marked } from
@@ -343,11 +419,12 @@ import { marked } from
 '/lib/marked/lib/marked.esm.js';
 ```
 
-```js { .bad .span-2 }
-import { marked } from 'https://esm.sh/marked@18.0.13/lib/marked.esm.js';
+```js { .bad }
+import { marked } from
+'https://esm.sh/marked@18.0.13/lib/marked.esm.js';
 ```
 
-```js { .ok }
+```js { .good }
 import { marked } from 'https://esm.sh/marked';
 ```
 
@@ -361,11 +438,9 @@ import { marked } from 'marked'
 
 The first requirement is specifiers.
 Specifiers are an _abstraction_.
-They decouple the dependency from its version, file structure.
-Packages can be upgraded, or change the mapping of exports to file paths
+They decouple the dependency from its file structure.
+Packages can change the mapping of exports to file paths
 without requiring any downstream changes.
-Multiple versions of the same package can co-exist, and specifiers just resolve to the correct one.
-These are not consumer concerns, and should not be scattered all over the codebase.
 
 Some CDNs do allow URLs that map to specifiers, providing the same encapsulation.
 However, even that way, version management is still ad hoc.
@@ -374,202 +449,248 @@ However, even that way, version management is still ad hoc.
 
 </article>
 
+<article class="slide md req">
 
+## Centralized dependency management
 
+<div class="stack xdelayed-children">
 
-
-<article class="slide md">
-<h2>
-	<div class="circle red" data-around="Choose your own adventure">1</div>
-	Rawdogging <code>node_modules/</code> imports
-</h2>
-
-```diff
--    import { marked } from 'marked';
-+    import { marked } from '/node_modules/marked/lib/marked.esm.js';
+```js { .bad }
+import { marked } from
+'https://esm.sh/marked@18.0.13/lib/marked.esm.js';
 ```
 
-</article>
-
-<article class="slide green">
-<h2>
-	<span class="supertitle">The Good</span>
-	It works!
-	<span class="abs">🎉</span>
-</h2>
-
-<p class="handwritten delayed black abs-bottom">…for this particular case</p>
-
-</article>
-
-<article class="slide orange red">
-	<h2>
-		<span class="supertitle">The Bad</span>
-		Requires deploying <code>node_modules/</code>
-	</h2>
-
-	<details class="notes">
-		Wasteful and insecure.
-		Most hosts do not even deploy `node_modules/` by default.
-		Now you need additional ad hoc tooling to make this work in prod.
-	</details>
-</article>
-
-<article class="slide orange red">
-	<h2>
-		<span class="supertitle">The Bad</span>
-		We just lost the abstraction of specifiers
-	</h2>
-
-	<details class="notes">
-		Have you wondered why we use specifiers and not URLs?
-		Specifiers are an _abstraction_ over URLs.
-		They decouple the actual file structure from the dependency.
-
-	</details>
-</article>
-
-<article class="slide red md">
-<h2>
-	<span class="supertitle">The Ugly</span>
-	Breaks with transitive dependencies
-</h2>
-
-```js
-import {html, css, LitElement} from '/node_modules/lit/index.js';
+```js { .bad }
+// Automatically resolves to latest version
+import { marked } from 'https://esm.sh/marked';
 ```
 
-```error { .delayed }
-Uncaught (in promise) TypeError: Failed to resolve module specifier "@lit/reactive-element".
-Relative references must start with either "/", "./", or "../".
+```js { .good }
+import { marked } from 'marked'
 ```
+
+</div>
+
 
 <details class="notes">
-	But the real dealbreaker is that even if you stomach all other warts,
-	this only works for dependencies that don’t use dependencies.
-	Once a dependency has its own dependencies, this approach breaks down completely.
+
+Specifiers also buy us something else, which an ad hoc URL that just resolves to the latest version cannot.
+
+They do not just abstract file paths, they also allow us to manage dependencies
+in a centralized manner, rather than scattering version information throughout the codebase.
+
+With proper specifiers, packages can be upgraded without requiring any downstream changes.
+Multiple versions of the same package can co-exist, and specifiers just resolve to the correct one contextually.
+These are not consumer concerns, and should not be scattered all over the codebase.
+
+Some CDNs do allow URLs that map to specifiers, providing the same encapsulation.
+However, even that way, version management is still ad hoc.
+
 </details>
 
-</article>
-
-<article class="slide md">
-<h2>
-	<div class="circle red" data-around="Choose your own adventure">2</div>
-	Import from CDNs
-</h2>
-
-```js
-import {html, css, LitElement} from 'https://esm.sh/lit';
-```
-
-- Transitive dependencies work
-- Specifiers, not paths (mostly)
-
-{ .check-list .green .text .delayed-children }
 
 </article>
 
-<article class="slide red orange the-bad">
-	<h2>
-		A point of failure you don’t control
-	</h2>
+<article class="slide md req">
 
-	<details class="notes">
-		It is always a bad idea to introduce a dependency on a whole other domain you do not control, and an even worse one when linking to executable code.
-
-		Any third-party domain is an unnecessary additional point of failure you do not control.
-		I still remember scrambling to change JSDelivr URLs to Unpkg during an outage right before one of my talks, or having to hunt down all my repos that used RawGit URLs when it sunset, including many libraries.
-
-		Wanted to code on a flight? Good luck.
-		Needed to show a live demo during a talk, over clogged conference wifi?
-		Maybe sacrifice a goat to the gods first.
-
-		More complexity:
-		- How to avoid CDN roundtrips for local dev?
-		- Proxies for APIs that require COEP/single-origin isolation.
-
-
-	</details>
-</article>
-
-<article class="slide red orange the-bad">
-## Inconsistency
+## Security & Reliability
 
 <details class="notes">
-Because everything is URLs, nothing prevents the same module from being referenced in multiple ways (different versions, from different CDNs, etc), leading to potential inconsistencies and even bugs.
+
+At first, it seems like CDNs could be a great solution.
+
+It’s quick and easy.
+Nothing to install or configure!
+Great, right?
+
+No. Not great.
+
+**It is always a bad idea to introduce a dependency on a whole other domain you do not control**, and an even worse one when linking to executable code.
+
+First, there is the obvious security risk.
+Unless you link to a specific version, down to the patch number and/or use [SRI](https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity), the resource could turn malicious overnight under your nose if the package is compromised.
+And even if you link to a specific version, there is always the risk that the CDN itself could get compromised.
+Who remembers [polyfill.io](https://blog.qualys.com/vulnerabilities-threat-research/2024/06/28/polyfill-io-supply-chain-attack)?
+
+But even supply-chain attacks aside, any third-party domain is an unnecessary **additional point of failure**.
+I still remember scrambling to change [JSDelivr](https://www.jsdelivr.com/) URLs to [Unpkg](https://unpkg.com/) during an outage right before one of my talks, or having to hunt down all my repos that used [RawGit](https://rawgit.com/) URLs when it sunset, including many libraries.
+You don’t need malice for shit to happen.
+
+The DX is also suboptimal.
+You now must wait for a network roundtrip even when working locally, unless you pile more tooling on top.
+Wanted to code on a flight?
+Good luck.
+Needed to show a live demo during a talk, over clogged conference wifi?
+Maybe sacrifice a goat to the gods first.
 </details>
 </article>
 
-<article class="slide red orange">
-	<h2>
-		<span class="supertitle">The Bad</span>
-		What about local packages?
-	</h2>
 
-	<details class="notes">
-		If a CDN is both your package manager and your source of executable code,
-		how do you modularize _your own_ code?
-	</details>
-</article>
+<article class="slide md req">
 
-<article class="slide red">
-<h2>
-	<span class="supertitle">The Ugly</span>
-	Security implications
-</h2>
+## Local dependencies
 
 <details class="notes">
-	Unless you link to a specific version, down to the patch number and/or use SRI, the resource could turn malicious overnight under your nose if the package is compromised.
 
-	And even if you link to a specific version, there is always the risk that the CDN itself could get compromised.
-	Who remembers polyfill.io?
+And what about your _own_ packages?
+You may not want to distribute them publicly and publish them on a CDN.
+A good workflow should support local dependencies seamlessly.
+
 </details>
 </article>
 
-<article class="slide md">
+<article class="slide slap">
+	<blockquote class="speech-bubble">
+		But CDNs get you caching for free!
+	</blockquote>
+
+	<details class="notes">
+		Oh my sweet summer child. I hate to be the one to break it to you, but no, you don’t, and that has been the case since about 2020.
+		Double keyed caching obliterated this advantage.
+		The upcoming Cross-Origin Storage may bring some of the benefits back, but right now that’s a non-benefit.
+	</details>
+</article>
+
+
+<article class="slide">
 <h2>
-	<div class="circle red" data-around="Choose your own adventure">3</div>
+	<!-- <div class="circle red" data-around="Choose your own adventure">3</div> -->
 	Import maps
 </h2>
-
-<div class="stack">
+<style>
+	@scope {
+		pre {
+			font-size: 60%;
+		}
+	}
+</style>
+<div class="columns md">
 ```html
 &lt;script type="importmap"&gt;
 {
 	"imports": {
 		"marked": "https://esm.sh/marked@18.0.13",
 		"localpkg": "../localpkg/index.js"
+	},
+	"integrity": {
+		"https://esm.sh/marked@18.0.13": "sha384-oqVu…8wC"
 	}
 }
 &lt;/script&gt;
 ```
-```js
+```js { .col-1 }
 import { marked } from 'marked';
 import stuff from 'localpkg';
 ```
-</div>
-- Transitive dependencies work
-- Specifiers!
-- Centralized dependency management
-- Local packages
 
-{ .check-list .green .text .delayed-children }
+- **Specifiers!**
+- **Local dependencies!**
+- **Reliability?** If local! { .ok }
+- **Security?** With SRI! { .ok }
+- **Transitive dependencies?** If you include them too! { .ok }
+- **Centralized dependency management?** Up to you. { .ok }
+
+{ .check-list .green .text .row-1 .col-2 .rspan-2 }
+
+</div>
+
+<details class="notes">
+
+</details>
+
+</article>
+
+<article class="slide md columns imaps">
+
+## Um, centralized?
+
+<yo-dawg>
+Yo dawg, I herd u like no-build
+
+So I put a build step in ur no-build
+so u can build while you don't build
+</yo-dawg>
+
+- `&lt;script src="importmap.js"&gt;` injection script { .ok }
+- Near future: `&lt;script type="importmap" src="importmap.js"&gt;`
+- Speculative: `Link`-like HTTP header? { .best }
+
+{ .check-list .delayed-children }
+
+<details class="notes">
+
+Note that for the import map to be centralized,
+we'd need build tools to inject it on every page (yikes),
+
+
+</details>
+
+</article>
+
+<article class="slide md imaps columns">
+
+## Generating import maps
+
+<iframe src="https://jspm.org/" class="browser stretch" data-url="https://jspm.org/"
+style="min-width: 15em"></iframe>
+
+
+- Generates injection script
+- CDNs + `node_modules/` for localhost
+- SRI support
+- Watches source files and only includes deps used
+
+{ .check-list }
+
 
 </article>
 
 <article class="slide md">
-## Transitive dependencies?
+## Can we do lighter?
 
+- I didn’t want to depend on CDNs
+- I didn’t want to run a watcher
+</article>
 
-```html
-&lt;script type="importmap"&gt;
-{
-	"imports": {
-		"marked": "https://esm.sh/marked@18.0.13"
-	}
-}
-&lt;/script&gt;
-```
+<article class="slide md columns">
+## So I wrote my own 😂
+
+<iframe src="https://nudeps.dev/" class="browser stretch" data-url="https://nudeps.dev/"
+style="min-width: 15em"></iframe>
+
+- Still uses JSPM under the hood ❤️
+- Local-first
+- No watcher to run
+
+{ .check-list }
+
+</article>
+
+<article class="slide slap">
+	<blockquote class="speech-bubble">But won’t Claude get confused?</blockquote>
+</article>
+
+<article class="slide md">
+
+## Give agents a little more credit yo
+
+<details class="notes">
+Claude was able to figure things out pretty easily, with minor recoverable mistakes.
+Once I added a `SKILL.md`, even the minor mistakes were gone.
+No, we are not doomed to repeat the same patterns forever because LLMs have been trained on them.
+</details>
+</article>
+
+<article class="slide md imaps">
+
+## Are we there yet?
+
+- No **multiple import maps** in Firefox [(Interop 2027 proposal #1399)](https://github.com/web-platform-tests/interop/issues/1399){.delayed}
+- No import maps in **workers** [(whatwg/html#10858)](https://github.com/whatwg/html/pull/10858){.delayed}
+- What about **non-JS assets**? [(`specifier:` URLs?)](https://github.com/whatwg/html/issues/12163){.delayed}
+
+{ .x-list }
+
 
 </article>
 

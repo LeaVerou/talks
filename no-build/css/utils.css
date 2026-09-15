@@ -1,4 +1,5 @@
 @import url("utils/colors.css");
+@import url("utils/zig-zag.css");
 
 /* A "delayed item" is any element whose reveal Inspire.js staggers:
    a .delayed, a .delayed-children container, or its children.
@@ -74,12 +75,39 @@
 }
 
 .columns {
+	--_columns: 2;
+
 	display: grid;
 	gap: 1em;
-	grid-template-columns: repeat(var(--columns, 2), minmax(auto, 1fr));
+	grid-template-columns: repeat(var(--_columns), minmax(auto, 1fr));
+
+	> :where(h1, h2, h3, h4, h5, h6),
+	.span {
+		grid-column-end: span var(--_columns);
+	}
 
 	.span-2 {
-		grid-column: span 2;
+		grid-column-end: span 2;
+	}
+
+	.col-1 {
+		grid-column: 1;
+	}
+
+	.col-2 {
+		grid-column: 2;
+	}
+
+	.row-1 {
+		grid-row: 1;
+	}
+
+	.row-2 {
+		grid-row: 2;
+	}
+
+	.rspan-2 {
+		grid-row-end: span 2;
 	}
 }
 
@@ -104,8 +132,10 @@
 }
 
 .abs,
+.abs-top,
 .abs-bottom,
-.abs-top {
+.abs-bottom-left,
+.abs-bottom-right {
 	position: absolute;
 }
 
@@ -115,12 +145,22 @@
 	translate: -50% 0;
 }
 
-.abs-bottom {
+.abs-bottom,
+.abs-bottom-left,
+.abs-bottom-right {
 	bottom: var(--slide-padding);
 }
 
 .abs-top {
 	top: var(--slide-padding);
+}
+
+.abs-bottom-left {
+	inset-inline-start: var(--slide-padding);
+}
+
+.abs-bottom-right {
+	inset-inline-end: var(--slide-padding);
 }
 
 .frame-by-frame {
@@ -155,22 +195,12 @@
 		0 2em 3em -1em oklch(from var(--shadow-color) l c h / .3);
 }
 
-/* Tinted surface: background and text both derived from the accent color. */
-.tinted-95,
 .speech-bubble {
-	background: oklch(from var(--accent-color, var(--color-neutral)) var(--tint-bg));
-	color: oklch(from var(--accent-color, var(--color-neutral)) var(--tint-text));
-}
-
-/* Tint levels. Those of .speech-bubble are zero-specificity defaults,
-   so any .tinted-* class on the same element wins, regardless of source order. */
-.tinted-95,
-:where(.speech-bubble) {
 	--tint-bg: var(--tint-95);
 	--tint-text: var(--tint-10);
-}
 
-.speech-bubble {
+	background: oklch(from var(--accent-color, var(--color-neutral)) var(--tint-bg));
+	color: oklch(from var(--accent-color, var(--color-neutral)) var(--tint-text));
 	position: relative;
 	margin: 0;
 	padding: .5em .8em;
@@ -181,11 +211,15 @@
 		content: "";
 		position: absolute;
 		top: 100%;
-		left: 1.5em;
+		left: calc(var(--radius-l) + var(--pointer-offset-x, 10%));
 		width: 1.2em;
 		height: .8em;
 		background: inherit;
-		clip-path: polygon(0 0, 100% 0, 0 100%);
+		clip-path: polygon(0 0, 100% 0, var(--pointer-apex-x, 0) 100%);
+	}
+
+	&.right::after {
+		--pointer-apex-x: 100%;
 	}
 }
 
@@ -202,7 +236,7 @@
 	.supertitle {
 		content: var(--supertitle);
 		display: block;
-		width: fit-content;
+		width: max-content;
 		padding: .2em .5em;
 		margin: 0 auto;
 		--background-color: var(--supertitle-color, var(--accent-color));
@@ -253,50 +287,48 @@
 	}
 }
 
-/* Custom list markers in a shared column, so they line up no matter their width.
+/* Custom list markers that hang in the start margin, so item text lines up no matter the marker width.
    Works on ul, ol, or any element whose children are the items.
    Set --icon-marker on the parent for icon markers (rendered by icons.css), or --marker for a text one.
-   A child with class .marker replaces the generated marker for that item.
+   A child with class .marker replaces the generated marker for that item (it needs to come first).
    .check-list is the same, with check marks as the icon. */
 .custom-list,
 .check-list,
 .x-list {
-	display: grid;
-	grid-template-columns: max-content 1fr;
-	column-gap: .5em;
 	padding-inline-start: 0;
 	list-style: none;
 	counter-reset: item;
 	--marker: "•";
+	--marker-width: 1em;
+	--marker-gap: .5em;
 
 	&:where(ol) {
 		--marker: counter(item) ".";
 	}
 
 	> * {
-		display: grid;
-		grid-template-columns: subgrid;
-		grid-column: span 2;
-		align-items: baseline;
+		/* flow-root keeps the floated marker from leaking into the next item */
+		display: flow-root;
 		counter-increment: item;
+		padding-inline-start: calc(var(--marker-width) + var(--marker-gap));
 		--icon-start: var(--icon-marker);
 
-		/* NOTE: bare text runs next to inline elements become separate grid items
-		   and auto-place into the marker column. Wrap such content in an element. */
-		> * {
-			grid-column: 2;
-		}
-
-		> .marker {
-			grid-column: 1;
-		}
-
+		/* Float + negative margin hangs the marker in the padding, so wrapped lines stay aligned.
+		   Markers wider than --marker-width just eat into the gap. */
+		> .marker,
 		&::before {
-			grid-column: 1;
+			float: inline-start;
+			min-width: var(--marker-width);
+			margin-inline: calc(-1 * (var(--marker-width) + var(--marker-gap))) var(--marker-gap);
 		}
 
 		&:has(> .marker)::before {
 			content: none;
+		}
+
+		/* Keep block content (e.g. a <p> from a loose markdown list) on the marker's line */
+		> :first-child:not(.marker) {
+			margin-block-start: 0;
 		}
 	}
 
@@ -306,21 +338,26 @@
 		}
 	}
 
-	/* Center the icon on the first line; the inline vertical-align from icons.css is moot in a grid */
+	/* Center the icon on the first line; the inline vertical-align from icons.css is moot on a float */
 	@container style(--icon-marker) {
 		> *::before {
-			align-self: start;
-			margin: calc((1lh - 1em) / 2) 0 0;
+			margin-block-start: calc((1lh - 1em) / 2);
 		}
 	}
 }
 
-.check-list {
+.check-list,
+li.check {
 	--icon-marker: var(--icon-check);
+	--accent-color: var(--color-green);
+	color: var(--accent-color);
 }
 
-.x-list {
+.x-list,
+li.x {
 	--icon-marker: var(--icon-x);
+	--accent-color: var(--color-red);
+	color: var(--accent-color);
 }
 
 .best {
@@ -357,7 +394,7 @@
 			content: var(--icon);
 			position: absolute;
 			top: -.5em;
-			right: -.5em;
+			right: -.6em;
 			width: 1em;
 			height: 1em;
 			padding: .3em;
@@ -365,5 +402,11 @@
 			filter: invert();
 			background: color(from var(--accent-color) display-p3 calc(1 - r) calc(1 - g) calc(1 - b));
 		}
+	}
+
+	li&,
+	ul& {
+		--icon-marker: var(--icon);
+		color: var(--accent-color);
 	}
 }
