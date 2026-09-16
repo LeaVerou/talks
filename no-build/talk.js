@@ -1,7 +1,5 @@
 import "./prism.js";
 import Inspire from "inspirejs.org";
-import { registry } from "@inspirejs/core";
-import "./components/file-tree.js";
 import "./components/marquee.js";
 import "./components/yo-dawg.js";
 import "./components/window.js";
@@ -18,10 +16,9 @@ Prism.hooks.add("before-highlightall", () => {
 	}
 });
 
-registry.markdown = {
-	test: "[data-markdown-elements]",
-	base: new URL("../", import.meta.resolve("@inspirejs/markdown")),
-};
+await Inspire.importsLoaded;
+await import("@inspirejs/markdown");
+await import("./components/file-tree.js");
 
 // Text on a path needs SVG, so turn data-around into a textPath around the element.
 // Runs after plugins so the markdown renderer doesn't touch the generated markup.

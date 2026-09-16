@@ -1,8 +1,3 @@
-import Inspire from "inspirejs.org";
-
-await Inspire.importsLoaded;
-await Inspire.plugins.loaded.markdown.loaded;
-
 for (let li of document.querySelectorAll("ul.file-tree li")) {
 	let content = li.firstChild.textContent.trim();
 
