@@ -4,7 +4,7 @@ import { registry } from "@inspirejs/core";
 import "./components/file-tree.js";
 import "./components/yo-dawg.js";
 import "./components/window.js";
-
+import "baseline-status";
 
 registry.markdown = {
 	test: "[data-markdown-elements]",

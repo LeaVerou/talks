@@ -86,6 +86,11 @@
 		grid-column-end: span var(--_columns);
 	}
 
+	/* Mainly to override span all in headings */
+	.span-1 {
+		grid-column-end: span 1;
+	}
+
 	.span-2 {
 		grid-column-end: span 2;
 	}
@@ -133,6 +138,8 @@
 
 .abs,
 .abs-top,
+.abs-top-left,
+.abs-top-right,
 .abs-bottom,
 .abs-bottom-left,
 .abs-bottom-right {
@@ -151,7 +158,9 @@
 	bottom: var(--slide-padding);
 }
 
-.abs-top {
+.abs-top,
+.abs-top-left,
+.abs-top-right {
 	top: var(--slide-padding);
 }
 
@@ -161,6 +170,14 @@
 
 .abs-bottom-right {
 	inset-inline-end: var(--slide-padding);
+}
+
+.abs-top-right {
+	inset-inline-end: var(--slide-padding);
+}
+
+.abs-top-left {
+	inset-inline-start: var(--slide-padding);
 }
 
 .frame-by-frame {
@@ -218,7 +235,11 @@
 		clip-path: polygon(0 0, 100% 0, var(--pointer-apex-x, 0) 100%);
 	}
 
-	&.right::after {
+	&.left {
+		--pointer-apex-x: 0;
+	}
+
+	&.right {
 		--pointer-apex-x: 100%;
 	}
 }
@@ -247,6 +268,12 @@
 		text-transform: uppercase;
 		font-size: 50%;
 		text-shadow: none;
+	}
+
+	.slide :nth-child(1 of h1, h2, h3, h4, h5, h6).start::before,
+	.start .supertitle,
+	.supertitle.start {
+		margin-inline-start: 0;
 	}
 }
 
@@ -383,6 +410,18 @@ li.x {
 .worst {
 	--accent-color: oklch(from var(--color-red) var(--tint-darker));
 	--icon: var(--icon-exclamation-mark);
+}
+
+[class*="delayed"] {
+	&[class*=":best"],
+	&[class*=":good"],
+	&[class*=":ok"],
+	&[class*=":bad"],
+	&[class*=":worst"] {
+		pre:where(&) {
+			border: .2em solid transparent;
+		}
+	}
 }
 
 .best, .good, .ok, .bad,  .worst {

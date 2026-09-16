@@ -17,7 +17,7 @@
 	<h1>No-build:<br><em>pipe dream</em>, or near future?</h1>
 	<div class="by">
 		by <a href="http://lea.verou.me">Lea Verou</a>
-		<small>TC39, WHATWG, CSS WG, PrismJS, Color.js</small>
+		<small>TC39, WHATWG, CSS WG</small>
 		<small><a href="http://lea.verou.me"><strong>lea.verou.me</strong></a> &bull; <strong>lea＠verou.me</strong></small>
 	</div>
 </header>
@@ -57,76 +57,255 @@ But how many actually _like it_?
 
 </article>
 
+<article class="slide flex dont-resize">
+	<h2 class="span-1 start">
+		<div class="supertitle">State of JS</div>
+		“What aspects of JS do you struggle with most?”
+
+	</h2>
+	<img src="images/js-pain-points.png" alt="" style="height: stretch; justify-self: end; margin-inline-end: -40vw">
+</article>
+
 <article class="slide tinted-95 red">
-<h2>Why do we use bundlers?</h2>
+	<h2>Why do we use bundlers?</h2>
 
-<div class="flex">
-<div>
-<ol>
-	<li>
-		<strong>Transpilation</strong>
-		<small>TS, JSX, CSS preprocessors, templating, etc</small>
-	</li>
-	<li>
-		<strong>Performance</strong>
-		<small>bundling, minification, etc</small>
-	</li>
-	<li>
-		<strong class="delayed:red">Dependency resolution</strong>
-		<small class="md">Making `import "foo"` work in the browser</small>
-	</li>
-</ol>
+	<div class="flex">
+	<div>
+	<ol>
+		<li>
+			<strong>Transpilation</strong>
+			<small>TS, JSX, CSS preprocessors, templating, etc</small>
+		</li>
+		<li>
+			<strong>Performance</strong>
+			<small>bundling, minification, etc</small>
+		</li>
+		<li>
+			<strong>Dependency resolution</strong>
+			<small class="md">Making `import "foo"` work in the browser</small>
+		</li>
+	</ol>
 
-<p class="handwritten red">One of these is not like the others</p>
+	</div>
 
-</div>
+	<img src="images/reasons.png" alt="Reasons for using bundlers" class="shadow" style="max-width: 40%">
+	</div>
 
-<img src="images/reasons.png" alt="Reasons for using bundlers" class="shadow" style="max-width: 40%">
-</div>
+	<details class="notes">
 
-<details class="notes">
+	Do you notice that one of these is not like the others?
+	Performance and transpilation are generally _advanced concerns_.
+	You can get quite far without hitting them, especially in an SPA.
+	But using a dependency is not an advanced use case, it’s something you usually need very early on.
+	Even in a one-off experiment or a CodePen snippet you need dependencies!
 
-Do you notice that one of these is not like the others?
-Performance and transpilation are generally _advanced concerns_.
-You can get quite far without hitting them, especially in an SPA.
-But using a dependency is not an advanced use case, it’s something you usually need very early on.
-Even in a one-off experiment or a CodePen snippet you need dependencies!
+	</details>
+</article>
 
-</details>
+<article class="slide columns transpilation" style="grid-template-columns: 1fr auto">
+	<h2>TypeScript <span class="red delayed">in the browser?</span></h2>
 
+	<div class="pie abs-top-right" style="--value: .77; --color-1: var(--color-ts); --color-2: var(--color-js);"></div>
+
+	<iframe src="https://github.com/tc39/proposal-type-annotations/#readme" data-url="github.com/tc39/proposal-type-annotations" class="browser"></iframe>
+
+	<ul class="check-list">
+		<li>Stage 1</li>
+		<li>Already in NodeJS</li>
+	</ul>
+</article>
+
+<article class="slide columns web-features" style="gap: 0 .5em">
+	<h2>CSS preprocessing</h2>
+
+	<baseline-status featureId="custom-properties"></baseline-status>
+	<baseline-status featureId="nesting"></baseline-status>
+	<baseline-status featureId="function" class="delayed"></baseline-status>
+	<baseline-status featureId="if" class="delayed"></baseline-status>
+	<baseline-status featureId="mixin" class="delayed"></baseline-status>
+
+	<article class="card columns delayed" style="grid-template-columns: auto 1fr;">
+		<img src="images/autoprefixer.svg" alt="" class="rspan-2" style="width: 2.5lh;">
+		<h3 class="span-1 start">Vendor prefixes?</h3>
+		<p>Mostly gone!</p>
+	</article>
+</article>
+
+<article class="slide columns web-features">
+	<h2>Performance</h2>
+
+	<baseline-status featureId="http2"></baseline-status>
+	<baseline-status featureId="http3"></baseline-status>
+	<baseline-status featureId="modulepreload"></baseline-status>
+	<baseline-status featureId="link-rel-preload"></baseline-status>
+	<baseline-status featureId="fetch-priority"></baseline-status>
+
+	<div class="card md">
+		### [103 Early Hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/103) { .start }
+
+		```http
+		103 Early Hint
+		Link: &lt;https://cdn.example.com>; rel=preconnect,
+		&lt;https://cdn.example.com>; rel=preconnect; crossorigin
+		```
+	</div>
 </article>
 
 <article class="slide md">
-## Dependencies in JS
+	<h2>No, I’m not saying we can go bundler-free</h2>
 
-```js
+	- Bundlers still win on performance
+	- Many frameworks _require_ a bundler
+	- JSX, templating, etc still require build-time tooling
+
+	{ .x-list }
+</article>
+
+<article class="slide md black">
+	<h2>But here’s the thing…</h2>
+</article>
+
+<article class="slide tinted-95 red">
+	<h2>Why do we use bundlers?</h2>
+
+	<div class="flex">
+	<div>
+	<ol>
+		<li>
+			<strong>Transpilation</strong>
+			<small>TS, JSX, CSS preprocessors, templating, etc</small>
+		</li>
+		<li>
+			<strong>Performance</strong>
+			<small>bundling, discovery waterfall, minification, etc</small>
+		</li>
+		<li>
+			<strong class="delayed:red">Dependency resolution</strong>
+			<small class="md">Making `import "foo"` work in the browser</small>
+		</li>
+	</ol>
+
+	<p class="handwritten red">One of these is not like the others</p>
+
+	</div>
+
+	<img src="images/reasons.png" alt="Reasons for using bundlers" class="shadow" style="max-width: 40%">
+	</div>
+
+	<details class="notes">
+
+	Do you notice that one of these is not like the others?
+	Performance and transpilation are generally _advanced concerns_.
+	You can get quite far without hitting them, especially in an SPA.
+	But using a dependency is not an advanced use case, it’s something you usually need very early on.
+	Even in a one-off experiment or a CodePen snippet you need dependencies!
+
+	</details>
+</article>
+
+
+<article class="slide">
+	<header>
+		<h1>Delightful APIs</h1>
+		<p class="subtitle">Incremental user effort produces incremental value</p>
+	</header>
+
+	<object data="images/curve-delightful.svg"></object>
+
+	<details class="notes">
+		Good user interfaces make simple things easy, complex things possible,
+		and ensure a smooth transition from simple use cases to more complex ones.
+	</details>
+</article>
+
+<article class="slide black">
+	<h2>It is <span class="green">okay</span> to need advanced tools for advanced needs</h2>
+</article>
+
+<article class="slide">
+	<object data="images/curve-cliff.svg"></object>
+
+	<details class="notes">
+		When a small increase in use case complexity results in disproportionate increase in UI complexity,
+		this is called a _usability cliff_ and it is an **antipattern**.
+		The way dependencies work in the web platform is a textbook usability cliff.
+
+		There is nothing wrong with bundlers when used as a performance optimization to minimize waterfall effects and overhead from too many HTTP requests.
+		You know, what a bundler is named after!
+		Or to provide a different DX, possibly optimized for specific use cases.
+		**It is okay to require advanced tools for advanced needs**,
+		and performance optimization is generally an advanced use case. Same for most other things bundlers and build tools are used for, such as strong typing, linting, or transpiling. All of these are needs that come much later than dependency management, both in a programmer’s learning journey, as well as in a project’s development lifecycle.
+	</details>
+</article>
+
+<article class="slide black">
+	<h2>It is <span class="red">not okay</span> to need advanced tools for basic needs</h2>
+</article>
+
+<article class="slide md dark">
+<h2>The web platform has outsourced the most <span class="red">fundamental</span> ecosystem functionality to third-party tooling.</h2>
+
+<details class="notes">
+Abstraction is the cornerstone of modern software engineering.
+Reusing logic and building higher-level solutions from lower-level building blocks is what makes all the technological wonders around us possible.
+Imagine if every time anyone wrote a calculator they also had to reinvent floating-point arithmetic and string encoding!
+
+</details>
+</article>
+
+<article class="slide md">
+## Dependencies in Node.JS
+
+<div class="stack">
+
+```js { .delayed[2]:good }
 import { marked } from 'marked';
 const md = '# _Hello_ Markdown!';
 const html = marked.parse(md);
 console.log(html);
 ```
+
+```bash { .delayed }
+$ npm install marked
+```
+</div>
 <details class="notes">
 Suppose we want to include a library to do something nontrivial, e.g. parse Markdown.
 We find a library we like and want to use it in our project.
-How do we make it work?
+
+In Node.js and other JS runtimes, things are simple.
+We install the library with `npm install` and things Just Work™.
 
 </details>
 
 </article>
 
 <article class="slide md">
-## Dependencies in Node.js
+## Dependencies across ecosystems
 
-```bash
-$ npm install marked
-```
+| Ecosystem | How to use a dependency |
+|-----------|----------------------|
+| Node.js   | `npm install marked`          |
+| Rust      | `cargo add marked` |
+| Python    | `pip install marked` |
 
 <details class="notes">
+One of these is not like the others.
 
-In Node.js and other JS runtimes, things are simple.
-We install the library with `npm install` and things Just Work™.
+In NodeJS, you just npm install and reference specifiers straight away in your code.
+Same in Python, with pip install.
+Same in Rust with cargo add.
+In healthy ecosystems you don’t ponder how or whether to use dependencies.
+The ecosystem assumes dependencies are normal, cheap, and first-class.
+You just install them, use them, and move on. “Dependency-free” is not a badge of honor.
 
 </details>
+
+<article class="slide black">
+<h2>In healthy ecosystems dependencies are <span class="green">normal, cheap, and first-class</span>.</h2>
+<p class="delayed">“Dependency-free” is not a badge of honor.</p>
+</article>
+
 </article>
 
 <article class="slide md">
@@ -153,9 +332,12 @@ Suddenly, the workflow is 10x more complex.
 	<img src="images/why-1.png" alt="">
 </article>
 
-<article class="slide md">
+<article class="slide md black">
 
 ## Now you have multiple problems
+
+<details class="notes">
+Now you have multiple problems.
 
 - Which bundler?? Vite, Webpack, esbuild, Rollup, Parcel...
 - Configuration
@@ -163,8 +345,6 @@ Suddenly, the workflow is 10x more complex.
 - Compilation → Sourcemaps
 - Entry point
 
-<details class="notes">
-Now you have multiple problems.
 If you’re using a meta-framework like Next.js or Nuxt, they already encapsulate this choice for you,
 but otherwise you need to pick one.
 And then install it.
@@ -218,78 +398,13 @@ $ npm install marked
 
 
 
-<article class="slide md">
-## Dependencies across ecosystems
-
-|  | How to use a dependency |
-|-----------|----------------------|
-| Node.js   | `npm install marked`          |
-| Rust      | `cargo add marked` |
-| Python    | `pip install marked` |
-| Web       | `npm install marked` + 🤕🤕🫠 |
-
-<details class="notes">
-One of these is not like the others.
-
-In NodeJS, you just npm install and reference specifiers straight away in your code.
-Same in Python, with pip install.
-Same in Rust with cargo add.
-In healthy ecosystems you don’t ponder how or whether to use dependencies.
-The ecosystem assumes dependencies are normal, cheap, and first-class.
-You just install them, use them, and move on. “Dependency-free” is not a badge of honor.
-
-</details>
-
-</article>
-
-<article class="slide md">
-## In healthy ecosystems dependencies are normal, cheap, and first-class.
-“Dependency-free” is not a badge of honor.
-</article>
-
-<article class="slide md dark">
-## The web platform has outsourced the most fundamental ecosystem functionality to third-party tooling.
-
-<details class="notes">
-Abstraction is the cornerstone of modern software engineering.
-Reusing logic and building higher-level solutions from lower-level building blocks is what makes all the technological wonders around us possible.
-Imagine if every time anyone wrote a calculator they also had to reinvent floating-point arithmetic and string encoding!
-
-</details>
-</article>
 
 
 
 
-<article class="slide">
-	<header>
-		<h1>Delightful APIs</h1>
-		<p class="subtitle">Incremental user effort produces incremental value</p>
-	</header>
 
-	<object data="images/curve-delightful.svg"></object>
 
-	<details class="notes">
-		Good user interfaces make simple things easy, complex things possible,
-		and ensure a smooth transition from simple use cases to more complex ones.
-	</details>
-</article>
 
-<article class="slide">
-	<object data="images/curve-cliff.svg"></object>
-
-	<details class="notes">
-		When a small increase in use case complexity results in disproportionate increase in UI complexity,
-		this is called a _usability cliff_ and it is an **antipattern**.
-		The way dependencies work in the web platform is a textbook usability cliff.
-
-		There is nothing wrong with bundlers when used as a performance optimization to minimize waterfall effects and overhead from too many HTTP requests.
-		You know, what a bundler is named after!
-		Or to provide a different DX, possibly optimized for specific use cases.
-		**It is okay to require advanced tools for advanced needs**,
-		and performance optimization is generally an advanced use case. Same for most other things bundlers and build tools are used for, such as strong typing, linting, or transpiling. All of these are needs that come much later than dependency management, both in a programmer’s learning journey, as well as in a project’s development lifecycle.
-	</details>
-</article>
 
 <article class="slide">
 	<blockquote class="speech-bubble">
@@ -350,19 +465,10 @@ So much collective effort invested in fixing problems that would not exist if bu
 
 </article>
 
-<header class="slide md flex">
+<header class="slide flex">
+<h2 class="start">Dependencies <span class="red">sans</span> bundlers, today?</h2>
 <img src="images/no-build-today.png" alt="No-build today: Choose your own adventure!" style="border-radius: .2em; flex: none" class="shadow">
 
-<div>
-
-## Dependencies sans bundlers, today?
-</div>
-
-1. Rawdogging `node_modules/` imports
-2. Import from CDNs
-3. Import maps
-
-{ .delayed-children }
 </header>
 
 
@@ -409,26 +515,23 @@ but now you’re effectively building your own bundler.
 
 <div class="stack xdelayed-children">
 
-```js { .bad }
-import { marked } from
-'/node_modules/marked/lib/marked.esm.js';
+```js { .delayed:bad }
+import { marked } from '/node_modules/marked/lib/marked.esm.js';
 ```
 
-```js { .bad }
-import { marked } from
-'/lib/marked/lib/marked.esm.js';
+```js { .delayed:bad }
+import { marked } from '/lib/marked/lib/marked.esm.js';
 ```
 
-```js { .bad }
-import { marked } from
-'https://esm.sh/marked@18.0.13/lib/marked.esm.js';
+```js { .delayed:bad }
+import { marked } from 'https://esm.sh/marked@18.0.13/lib/marked.esm.js';
 ```
 
-```js { .good }
+```js { .delayed:good }
 import { marked } from 'https://esm.sh/marked';
 ```
 
-```js { .good }
+```js { .delayed:good }
 import { marked } from 'marked'
 ```
 
@@ -455,17 +558,17 @@ However, even that way, version management is still ad hoc.
 
 <div class="stack xdelayed-children">
 
-```js { .bad }
+```js { .delayed:bad }
 import { marked } from
 'https://esm.sh/marked@18.0.13/lib/marked.esm.js';
 ```
 
-```js { .bad }
+```js { .delayed:bad }
 // Automatically resolves to latest version
 import { marked } from 'https://esm.sh/marked';
 ```
 
-```js { .good }
+```js { .delayed:good }
 import { marked } from 'marked'
 ```
 
@@ -530,6 +633,8 @@ Maybe sacrifice a goat to the gods first.
 
 ## Local dependencies
 
+Because abstraction shouldn’t just be about using other people’s code
+
 <details class="notes">
 
 And what about your _own_ packages?
@@ -542,6 +647,9 @@ A good workflow should support local dependencies seamlessly.
 <article class="slide slap">
 	<blockquote class="speech-bubble">
 		But CDNs get you caching for free!
+	</blockquote>
+	<blockquote class="speech-bubble left abs-right">
+		No, they don’t!
 	</blockquote>
 
 	<details class="notes">

@@ -11,6 +11,11 @@
 @import url("components/error.css");
 @import url("components/pie.css");
 
+:root {
+	--color-ts: #3178c6;
+	--color-js: #f7df1e;
+}
+
 #intro {
 	color-scheme: dark;
 	background: linear-gradient(to bottom right var(--in-oklch), var(--color-indigo), var(--color-blue));
@@ -155,7 +160,7 @@ ol {
 	--dont-resize: 1;
 } */
 
-.slide.slap {
+:where(.slide).slap {
 	background: hsl(2 95% 68.5%) url("images/slap.avif") no-repeat bottom right;
 
 	.speech-bubble {
@@ -167,4 +172,37 @@ ol {
 .slide.imaps {
 	--supertitle: 'Import maps';
 	--accent-color: var(--color-orange);
+}
+
+.slide.transpilation {
+	--supertitle: 'Transpilation';
+	--accent-color: var(--color-green);
+}
+
+.slide.performance {
+	--supertitle: 'Performance';
+	--accent-color: var(--color-blue);
+}
+
+.slide.web-features {
+	.baseline-status {
+		zoom: 1.2;
+		font-family: inherit;
+	}
+
+	.card {
+		border: var(--ui-border);
+		padding: 1em;
+		font-size: 28%;
+		border-radius: .3em;
+
+		h3 {
+			font-weight: 400;
+			margin: 0;
+		}
+
+		p {
+			margin: 0;
+		}
+	}
 }

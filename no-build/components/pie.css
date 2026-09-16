@@ -36,14 +36,18 @@
 	--_color-2: var(--color-2, var(--color-accent-2));
 
 	&.pie {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		height: 10em;
-		padding: 1em;
-		box-sizing: border-box;
-		aspect-ratio: 1;
+		--size: 10em;
 		--pct: calc(var(--value, .2) * 100);
+		/* Mid-angle of each slice, clockwise from 12 o’clock (where conic-gradient starts) */
+		--angle-1: calc((360 - 1.8 * var(--pct)) * 1deg);
+		--angle-2: calc((180 - 1.8 * var(--pct)) * 1deg);
+		/* Labels sit a bit past the centroid: the further out, the wider the slice is */
+		--label-distance: calc(var(--size) * .28);
+
+		display: grid;
+		place-items: center;
+		height: var(--size);
+		aspect-ratio: 1;
 		background: conic-gradient(
 			var(--_color-2) calc(100% - var(--pct) * 1%),
 			var(--_color-1) 0) no-repeat;
@@ -52,16 +56,23 @@
 		&::before,
 		&::after {
 			content: counter(p) "%";
+			grid-area: 1 / 1;
+			translate: calc(var(--label-distance) * sin(var(--angle)))
+			           calc(var(--label-distance) * -1 * cos(var(--angle)));
 			font-weight: bold;
 			color: white;
 		}
 
 		&::before {
+			--angle: var(--angle-1);
 			counter-reset: p var(--pct);
+			color: oklch(from var(--_color-1) var(--tint-text));
 		}
 
 		&::after {
+			--angle: var(--angle-2);
 			counter-reset: p calc(100 - var(--pct));
+			color: oklch(from var(--_color-2) var(--tint-text));
 		}
 	}
 

@@ -41,6 +41,12 @@
 	&:where(:has(h4, h5):not(:has(h1, h2, h3))) h6 {
 		font-size: var(--font-size-l);
 	}
+
+	h1, h2, h3, h4, h5, h6 {
+		&.start {
+			text-align: start;
+		}
+	}
 }
 
 .slide {

@@ -7,6 +7,7 @@
 		"@inspirejs/markdown": "^0.0.1",
 		"@inspirejs/plugins": "^3.0.2",
 		"@nudeui/color": "^0.0.1",
+		"baseline-status": "^1.2.0",
 		"bootstrap-icons": "^1.13.1",
 		"inspirejs.org": "^3.0.1"
 	},
