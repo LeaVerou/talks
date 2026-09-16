@@ -61,6 +61,7 @@
 			           calc(var(--label-distance) * -1 * cos(var(--angle)));
 			font-weight: bold;
 			color: white;
+			font-size: min(1em, var(--size) * .2);
 		}
 
 		&::before {

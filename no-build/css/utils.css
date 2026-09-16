@@ -1,4 +1,5 @@
 @import url("utils/colors.css");
+@import url("utils/reveal.css");
 @import url("utils/zig-zag.css");
 
 /* A "delayed item" is any element whose reveal Inspire.js staggers:
@@ -328,12 +329,16 @@
 .custom-list,
 .check-list,
 .x-list {
+	margin: 0;
 	padding-inline-start: 0;
 	list-style: none;
 	counter-reset: item;
 	--marker: "•";
 	--marker-width: 1em;
 	--marker-gap: .5em;
+	font-weight: 400;
+	text-align: start;
+	font-size: 80%;
 
 	&:where(ol) {
 		--marker: counter(item) ".";

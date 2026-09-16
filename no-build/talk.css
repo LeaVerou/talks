@@ -223,15 +223,62 @@ ol {
 }
 
 .slide.ecosystems {
+	/* A quiet ticker: it illustrates the statement above it, it should not compete with it */
 	.marquee {
 		/* Bleed past the slide padding, so items slide in from the screen edges */
 		align-self: stretch;
 		margin-inline: calc(-1 * var(--slide-padding));
-		--marquee-gap: 3em;
-		font-size: var(--font-size-l);
+		/* Never shrink: the band clips its content, so shrinking would crop the logos */
+		flex: none;
+		margin-block: .8em;
+		--marquee-gap: 2.5em;
+		font-size: var(--font-size-s);
+		opacity: .75;
+	}
+
+	/* Bare commands read as a ticker; chips would be another set of boxes to look at */
+	code {
+		background: none;
+		padding: 0;
+		color: inherit;
 	}
 
 	img {
-		height: 2.5em;
+		height: 2em;
+
+		/* Black artwork (the Rust logo) needs inverting to read on this dark slide */
+		&.mono {
+			filter: invert(1);
+		}
+	}
+}
+
+blockquote {
+	margin-trim: block;
+
+	&:where(:not([class], .plain)) {
+		border-inline-start: .2em solid var(--accent-color);
+		padding-inline-start: .8em;
+		padding-block: .2em;
+	}
+
+	/* TODO remove these when margin-trim can be relied upon */
+	> :first-child {
+		margin-block-start: 0;
+	}
+
+	> :last-child {
+		margin-block-end: 0;
+	}
+
+	.cite {
+		display: list-item;
+		list-style: '—';
+		margin-inline-start: 1em;
+		padding-inline-start: .2em;
+	}
+
+	> p:not(.cite) {
+		font-style: italic;
 	}
 }

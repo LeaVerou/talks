@@ -1,0 +1,129 @@
+/* Reveal effects. The host carries the effect class; the subject is the host itself, or with
+   .per-child each of its children, revealed one after another over --stagger.
+   Effects say what the subject starts from via --starting-*, which children inherit,
+   so they stack: "slide-up fade-in" moves and fades, "per-child fade-in" fades each child.
+   Hidden means display: none, so revealing always renders the subject afresh and
+   @starting-style is the one place the "from" state lives. Going back is instant, like Inspire's own items.
+   NOTE inline subjects (e.g. Prism tokens) have no size or translate to animate; they get the fade and the stagger hold. */
+.fade-in,
+.grow-up,
+.grow-down,
+.grow-left,
+.grow-right,
+.slide-up,
+.slide-down,
+.slide-left,
+.slide-right,
+.per-child {
+	--starting-opacity: 1;
+	--starting-block-size: auto;
+	--starting-inline-size: auto;
+	--starting-translate: none;
+
+	interpolate-size: allow-keywords;
+	transition-property: var(--transition-properties), block-size, inline-size, translate, display;
+	transition-duration: var(--transition-duration);
+	transition-behavior: allow-discrete;
+
+	&:not(.per-child),
+	&.per-child > * {
+		@starting-style {
+			opacity: var(--starting-opacity);
+			block-size: var(--starting-block-size);
+			inline-size: var(--starting-inline-size);
+			translate: var(--starting-translate);
+		}
+	}
+
+	/* Each child waits its turn unrendered, then renders afresh and transitions in like any subject.
+	   Transitions can't express the wait: a display: none start means nothing to transition from,
+	   so the hold is a zero-length animation whose backwards fill keeps display: none through its delay. */
+	&.per-child > * {
+		transition: inherit;
+		animation: reveal-hold 0s calc((sibling-index() - 1) / sibling-count() * var(--stagger, 1s)) backwards;
+		overflow: inherit;
+		align-content: inherit;
+		justify-content: inherit;
+	}
+
+	/* Hidden until revealed: a delayed item waits for its turn, anything else for its slide.
+	   Screen only, since print shows every slide at once. */
+	@media screen {
+		&:where(.delayed, .delayed-children > *).future,
+		.slide:not(:target, .show-all *) &:not(.delayed, .delayed-children > *) {
+			&:not(.per-child),
+			&.per-child > * {
+				display: none;
+			}
+		}
+	}
+}
+
+@keyframes reveal-hold {
+	from {
+		display: none;
+	}
+}
+
+.fade-in {
+	--starting-opacity: 0;
+}
+
+/* Vertical effects open their block-size, so siblings make room gradually.
+   NOTE in a row .flex parent the slot is inline-size instead; add .flex > & if that ever comes up. */
+.grow-up,
+.grow-down,
+.slide-up,
+.slide-down,
+.slide-left,
+.slide-right {
+	--starting-block-size: 0;
+}
+
+/* grow-* unrolls in place: clipped, with the content pinned to the edge that moves the named way */
+.grow-up,
+.grow-down,
+.grow-left,
+.grow-right {
+	overflow: clip;
+}
+
+.grow-down {
+	align-content: end;
+}
+
+.grow-left,
+.grow-right {
+	--starting-inline-size: 0;
+
+	/* Flex keeps the children at their natural width instead of reflowing into the growing box.
+	   NOTE with .per-child the children themselves grow, and multi-word ones reflow while they do. */
+	:where(&) {
+		display: flex;
+	}
+
+	> * {
+		flex: none;
+	}
+}
+
+.grow-right {
+	justify-content: end;
+}
+
+/* slide-* flies in whole from --slide-distance away while its slot opens */
+.slide-up {
+	--starting-translate: 0 var(--slide-distance, 50vh);
+}
+
+.slide-down {
+	--starting-translate: 0 calc(-1 * var(--slide-distance, 50vh));
+}
+
+.slide-left {
+	--starting-translate: var(--slide-distance, 50vw) 0;
+}
+
+.slide-right {
+	--starting-translate: calc(-1 * var(--slide-distance, 50vw)) 0;
+}

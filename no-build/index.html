@@ -103,15 +103,19 @@ But how many actually _like it_?
 </article>
 
 <article class="slide columns transpilation" style="grid-template-columns: 1fr auto">
-	<h2>TypeScript <span class="red delayed">in the browser?</span></h2>
+	<header class="flex span">
 
-	<div class="pie abs-top-right" style="--value: .77; --color-1: var(--color-ts); --color-2: var(--color-js);"></div>
+
+		<div class="pie" style="--size: 5em; flex: none; --value: .77; --color-1: var(--color-ts); --color-2: var(--color-js);"></div>
+		<h2>TypeScript <span class="red delayed">in the browser?</span></h2>
+	</header>
 
 	<iframe src="https://github.com/tc39/proposal-type-annotations/#readme" data-url="github.com/tc39/proposal-type-annotations" class="browser"></iframe>
 
 	<ul class="check-list">
 		<li>Stage 1</li>
 		<li>Already in NodeJS</li>
+		<li class="x">Somewhat stalled :(</li>
 	</ul>
 </article>
 
@@ -139,6 +143,7 @@ But how many actually _like it_?
 	<baseline-status featureId="modulepreload"></baseline-status>
 	<baseline-status featureId="link-rel-preload"></baseline-status>
 	<baseline-status featureId="fetch-priority"></baseline-status>
+	<baseline-status featureId="compression-dictionary-transport"></baseline-status>
 
 	<div class="card md">
 		### [103 Early Hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/103) { .start }
@@ -280,16 +285,20 @@ We install the library with `npm install` and things Just Work™.
 
 </article>
 
-<article class="slide md ecosystems">
-## Dependencies across ecosystems
+<article class="slide md black ecosystems language-none">
+<h2>In healthy ecosystems dependencies are <span class="green">normal, cheap, and first-class</span>.</h2>
 
-<div class="marquee full-height">
+<div class="marquee">
 	<ul>
 		<li><img src="images/node.svg" alt="Node.js"> <code>npm install marked</code></li>
-		<li><img src="images/rust.svg" alt="Rust"> <code>cargo add marked</code></li>
+		<li><img src="images/rust.svg" alt="Rust" class="mono"> <code>cargo add marked</code></li>
 		<li><img src="images/python.svg" alt="Python"> <code>pip install marked</code></li>
+		<li><img src="images/ruby.svg" alt="Ruby"> <code>gem install marked</code></li>
+		<li><img src="images/dotnet.svg" alt=".NET"> <code>dotnet add package marked</code></li>
 	</ul>
 </div>
+
+<p class="delayed">“Dependency-free” is not a badge of honor.</p>
 
 <details class="notes">
 One of these is not like the others.
@@ -302,12 +311,6 @@ The ecosystem assumes dependencies are normal, cheap, and first-class.
 You just install them, use them, and move on. “Dependency-free” is not a badge of honor.
 
 </details>
-
-<article class="slide black">
-<h2>In healthy ecosystems dependencies are <span class="green">normal, cheap, and first-class</span>.</h2>
-<p class="delayed">“Dependency-free” is not a badge of honor.</p>
-</article>
-
 </article>
 
 <article class="slide md">
@@ -445,12 +448,13 @@ Web platform primitives that work fine in the browser, may or may not work in ce
 
 </article>
 
-<article class="slide md">
-	> Recently, the build of a project I was working on broke
-	because the use of a perfectly valid CSS selector (`::details-content::after`)
-	caused Lightning CSS to blow up (despite this selector being supported by all browsers)
-	> — Ollie Williams
-	> [olliewilliams.xyz/blog/no-build](https://olliewilliams.xyz/blog/no-build/)
+<article class="slide language-css">
+	<blockquote>
+		<p>“Recently, the build of a project I was working on broke
+	because the use of a perfectly valid CSS selector (<code>::details-content::after</code>)
+	caused Lightning CSS to blow up (despite this selector being supported by all browsers)”</p>
+		<p class="cite">Ollie Williams<small><a href="https://olliewilliams.xyz/blog/no-build">olliewilliams.xyz/blog/no-build</a></small></p>
+	</blockquote>
 </article>
 
 <article class="slide">
@@ -654,7 +658,7 @@ A good workflow should support local dependencies seamlessly.
 </details>
 </article>
 
-<article class="slide slap">
+<article class="slap slide">
 	<blockquote class="speech-bubble">
 		But CDNs get you caching for free!
 	</blockquote>
@@ -684,7 +688,7 @@ A good workflow should support local dependencies seamlessly.
 </style>
 <div class="columns md">
 ```html
-&lt;script type="importmap"&gt;
+&lt;script type="importmap">
 {
 	"imports": {
 		"marked": "https://esm.sh/marked@18.0.13",
@@ -694,7 +698,7 @@ A good workflow should support local dependencies seamlessly.
 		"https://esm.sh/marked@18.0.13": "sha384-oqVu…8wC"
 	}
 }
-&lt;/script&gt;
+&lt;/script>
 ```
 ```js { .col-1 }
 import { marked } from 'marked';
@@ -705,8 +709,6 @@ import stuff from 'localpkg';
 - **Local dependencies!**
 - **Reliability?** If local! { .ok }
 - **Security?** With SRI! { .ok }
-- **Transitive dependencies?** If you include them too! { .ok }
-- **Centralized dependency management?** Up to you. { .ok }
 
 { .check-list .green .text .row-1 .col-2 .rspan-2 }
 
@@ -720,7 +722,7 @@ import stuff from 'localpkg';
 
 <article class="slide md columns imaps">
 
-## Um, centralized?
+## Centralized dep management?
 
 <yo-dawg>
 Yo dawg, I herd u like no-build
@@ -745,11 +747,73 @@ we'd need build tools to inject it on every page (yikes),
 
 </article>
 
+
+<article class="slide imaps">
+<h2 style="white-space: nowrap;">Transitive dependencies?</h2>
+
+<pre class="language-html" style="font-size: 50%"><code>
+&lt;script type="importmap">
+{
+	"imports": {
+		"lit": "/lib/lit/index.js"<span class="delayed per-child fade-in">,
+		"@lit/reactive-element": "/lib/@lit/reactive-element/reactive-element.js",
+		"lit-html": "/lib/lit-html/lit-html.js",
+		"lit-html/": "/lib/lit-html/",
+		"lit-element": "/lib/lit-element/index.js",
+		"lit-element/": "/lib/lit-element/"</span>
+	}
+}
+&lt;/script&gt;
+</code></pre>
+
+<yo-dawg class="abs-bottom-right delayed" style="width: 40vw">
+Yo dawg, I herd u like deps
+
+So I put the deps of ur deps in ur import maps
+so u can import while importing
+</yo-dawg>
+
+<details class="notes">
+So you can't really skip the build tool.
+But that’s okay, because lighter build tools are still an improvement!
+</details>
+
+</article>
+
+<article class="slide imaps">
+
+<header class="flex" style="align-items: end">
+<h2 class="start">Security?</h2>
+
+<ul class="check-list delayed" style="font-size: 65%" data-index="2">
+	<li>Yes if local or CDN with SRI</li>
+	<li>But SRI doubles the map :(</li>
+</ul>
+</header>
+
+
+<pre class="language-html" style="font-size: 45%; overflow-x: auto; max-width: stretch; width: 80vw;"><code>
+&lt;script type="importmap">
+{
+	"imports": {
+		"lodash": "https://esm.sh/lodash@4.18.1/lodash.js",
+		"marked": "https://esm.sh/marked@18.0.13/lib/marked.esm.js"
+	}<span class="delayed per-child fade-in" data-index="1">,
+	"integrity": {
+		"https://esm.sh/lodash@4.18.1/lodash.js": "sha384-adiFUJ8a04IwxpPFSxt9iGOYiC0NiJFsRpIwbgLD4OtgMHH1u9IOkWr9BH5Sa3nJ",
+		"https://esm.sh/marked@18.0.13/lib/marked.esm.js": "sha384-1fHa7MfpNXeaQLv6vkPB25T8rHynjBgGGMokZEv4XndbEt8BKPs3bqm/KvbxllYY"
+	}</span>
+}
+&lt;/script>
+</code></pre>
+
+</article>
+
 <article class="slide md imaps columns">
 
 ## Generating import maps
 
-<iframe src="https://jspm.org/" class="browser stretch" data-url="https://jspm.org/"
+<iframe src="https://jspm.org/" class="browser stretch" data-url
 style="min-width: 15em"></iframe>
 
 
@@ -760,38 +824,44 @@ style="min-width: 15em"></iframe>
 
 { .check-list }
 
+<details class="notes">
+JSPM was groundbreaking.
+It made import maps actually usable.
+</details>
 
 </article>
 
 <article class="slide md">
 ## Can we do lighter?
 
-- I didn’t want to depend on CDNs
-- I didn’t want to run a watcher
+- I don't want to depend on CDNs
+- I don't want to run a watcher
 </article>
 
 <article class="slide md columns">
-## So I wrote my own 😂
+## So I wrote my own …_unbundler_
 
-<iframe src="https://nudeps.dev/" class="browser stretch" data-url="https://nudeps.dev/"
+<iframe src="https://nudeps.dev/" class="browser stretch" data-url
 style="min-width: 15em"></iframe>
 
+- All-local
+- Same cache busting as CDNs
+- No watcher needed
 - Still uses JSPM under the hood ❤️
-- Local-first
-- No watcher to run
+- And you’re among the first to hear! 😉
 
 { .check-list }
 
 </article>
 
-<article class="slide slap">
+<article class="slap slide">
 	<blockquote class="speech-bubble">But won’t Claude get confused?</blockquote>
-	<blockquote class="speech-bubble">No, it won't!</blockquote>
+	<blockquote class="speech-bubble left">No, it won't!</blockquote>
 </article>
 
 <article class="slide md">
 
-## Give agents a little more credit yo
+## Give your agents a little more credit yo
 
 <details class="notes">
 Claude was able to figure things out pretty easily, with minor recoverable mistakes.
@@ -813,7 +883,6 @@ No, we are not doomed to repeat the same patterns forever because LLMs have been
 - What about **non-JS assets**? [(`specifier:` URLs?)](https://github.com/whatwg/html/issues/12163){.delayed}
 
 { .x-list }
-
 
 </article>
 

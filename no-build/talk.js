@@ -6,6 +6,17 @@ import "./components/yo-dawg.js";
 import "./components/window.js";
 import "baseline-status";
 
+// Newlines as tokens in these languages, so a .per-child code block reveals its line breaks
+// along with everything else. Done on every highlight pass, since Inspire loads languages lazily.
+// NOTE bare text between tokens can't be hidden; in practice that's only whitespace.
+Prism.hooks.add("before-highlightall", () => {
+	for (let id of ["markup", "javascript", "json"]) {
+		if (Prism.languages[id]) {
+			Prism.languages[id]["line-break"] = /\n/;
+		}
+	}
+});
+
 registry.markdown = {
 	test: "[data-markdown-elements]",
 	base: new URL("../", import.meta.resolve("@inspirejs/markdown")),

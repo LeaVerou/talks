@@ -13,7 +13,10 @@
 		justify-content: space-around;
 		gap: var(--marquee-gap, 2em);
 		margin: 0;
+		/* Trailing gap, so the last item does not touch the first item of the next copy.
+		   It is part of the group's width, which is what the animation translates by. */
 		padding: 0;
+		padding-inline-end: var(--marquee-gap, 2em);
 		list-style: none;
 		/* Each group is at least as wide as the marquee, so two of them always cover it */
 		flex: none;
