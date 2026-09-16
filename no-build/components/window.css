@@ -63,9 +63,9 @@
 	&:is(iframe) {
 		min-height: 50vh;
 		font-size: 50%;
-		--_zoom: var(--zoom, 1.5);
+		--_zoom: var(--zoom, .75);
 		zoom: var(--_zoom);
-		font-size: calc(1em / var(--_zoom));
+		font-size: calc(1em * var(--_zoom));
 	}
 
 	&.stretch {

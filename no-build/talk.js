@@ -22,3 +22,11 @@ for (let element of document.querySelectorAll("[data-around]")) {
 	element.querySelector(".around textPath").textContent = element.dataset.around;
 }
 
+// Marquees loop by repeating their content, so give each group of items a copy.
+for (let marquee of document.querySelectorAll(".marquee")) {
+	marquee.append(...[...marquee.children].map(group => {
+		let clone = group.cloneNode(true);
+		clone.ariaHidden = "true";
+		return clone;
+	}));
+}

@@ -1,0 +1,40 @@
+/* A row of items sliding sideways, forever.
+   Its children are groups of items; talk.js clones them so there is always a copy
+   covering the space the previous one vacates, which makes the loop seamless. */
+.marquee {
+	display: flex;
+	overflow: clip;
+	/* Fade the edges, so items slide in and out instead of being cut off */
+	mask: linear-gradient(to right, transparent, black 5% 95%, transparent);
+
+	> * {
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		gap: var(--marquee-gap, 2em);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		/* Each group is at least as wide as the marquee, so two of them always cover it */
+		flex: none;
+		min-width: 100%;
+		animation: marquee var(--marquee-duration, 20s) linear infinite;
+
+		@media (prefers-reduced-motion: reduce) {
+			animation-play-state: paused;
+		}
+	}
+
+	> * > * {
+		display: flex;
+		align-items: center;
+		gap: .5em;
+		flex: none;
+	}
+}
+
+@keyframes marquee {
+	to {
+		translate: -100%;
+	}
+}

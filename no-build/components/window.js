@@ -10,10 +10,24 @@ export function textToSvg (text, style = "font: 550 40px system-ui") {
 	return URL.createObjectURL(svg);
 }
 
+export function prettifyUrl (url) {
+	if (!url) {
+		return url;
+	}
+
+	url = new URL(url);
+	url.username = url.password = "";
+	url.hash = "";
+	url.search = "";
+
+	return url.href.replace(/\/$/, "").replace(/^https?:\/\//, "");
+}
+
 for (let el of document.querySelectorAll(".browser[data-url], .browser[src]")) {
 	let url = el.dataset.url || prettifyUrl(el.src);
 
 	if (url) {
-		el.style.setProperty("--img-url", `url(${textToSvg(url)})`);
+		let style = el.dataset.urlStyle;
+		el.style.setProperty("--img-url", `url(${textToSvg(url, style)})`);
 	}
 }

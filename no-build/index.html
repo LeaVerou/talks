@@ -280,14 +280,16 @@ We install the library with `npm install` and things Just Work™.
 
 </article>
 
-<article class="slide md">
+<article class="slide md ecosystems">
 ## Dependencies across ecosystems
 
-| Ecosystem | How to use a dependency |
-|-----------|----------------------|
-| Node.js   | `npm install marked`          |
-| Rust      | `cargo add marked` |
-| Python    | `pip install marked` |
+<div class="marquee full-height">
+	<ul>
+		<li><img src="images/node.svg" alt="Node.js"> <code>npm install marked</code></li>
+		<li><img src="images/rust.svg" alt="Rust"> <code>cargo add marked</code></li>
+		<li><img src="images/python.svg" alt="Python"> <code>pip install marked</code></li>
+	</ul>
+</div>
 
 <details class="notes">
 One of these is not like the others.
@@ -441,6 +443,14 @@ Web platform primitives that work fine in the browser, may or may not work in ce
 **Instead of the bundler serving our code, our code has to adapt to appease the bundler.**
 </details>
 
+</article>
+
+<article class="slide md">
+	> Recently, the build of a project I was working on broke
+	because the use of a perfectly valid CSS selector (`::details-content::after`)
+	caused Lightning CSS to blow up (despite this selector being supported by all browsers)
+	> — Ollie Williams
+	> [olliewilliams.xyz/blog/no-build](https://olliewilliams.xyz/blog/no-build/)
 </article>
 
 <article class="slide">
@@ -648,7 +658,7 @@ A good workflow should support local dependencies seamlessly.
 	<blockquote class="speech-bubble">
 		But CDNs get you caching for free!
 	</blockquote>
-	<blockquote class="speech-bubble left abs-right">
+	<blockquote class="speech-bubble left">
 		No, they don’t!
 	</blockquote>
 
@@ -776,6 +786,7 @@ style="min-width: 15em"></iframe>
 
 <article class="slide slap">
 	<blockquote class="speech-bubble">But won’t Claude get confused?</blockquote>
+	<blockquote class="speech-bubble">No, it won't!</blockquote>
 </article>
 
 <article class="slide md">
@@ -787,6 +798,10 @@ Claude was able to figure things out pretty easily, with minor recoverable mista
 Once I added a `SKILL.md`, even the minor mistakes were gone.
 No, we are not doomed to repeat the same patterns forever because LLMs have been trained on them.
 </details>
+</article>
+
+<article class="slide">
+	<iframe src="https://developer.chrome.com/docs/modern-web-guidance" data-url class="browser"></iframe>
 </article>
 
 <article class="slide md imaps">

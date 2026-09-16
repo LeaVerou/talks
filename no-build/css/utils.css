@@ -138,9 +138,11 @@
 
 .abs,
 .abs-top,
+.abs-right,
+.abs-bottom,
+.abs-left,
 .abs-top-left,
 .abs-top-right,
-.abs-bottom,
 .abs-bottom-left,
 .abs-bottom-right {
 	position: absolute;
@@ -164,20 +166,16 @@
 	top: var(--slide-padding);
 }
 
+.abs-left,
+.abs-top-left,
 .abs-bottom-left {
-	inset-inline-start: var(--slide-padding);
+	left: var(--slide-padding);
 }
 
-.abs-bottom-right {
-	inset-inline-end: var(--slide-padding);
-}
-
+.abs-right,
+.abs-bottom-right,
 .abs-top-right {
-	inset-inline-end: var(--slide-padding);
-}
-
-.abs-top-left {
-	inset-inline-start: var(--slide-padding);
+	right: var(--slide-padding);
 }
 
 .frame-by-frame {
@@ -227,12 +225,20 @@
 	&::after {
 		content: "";
 		position: absolute;
-		top: 100%;
+		top: calc(100% - 1px - var(--border-width, 0));
 		left: calc(var(--radius-l) + var(--pointer-offset-x, 10%));
 		width: 1.2em;
 		height: .8em;
 		background: inherit;
-		clip-path: polygon(0 0, 100% 0, var(--pointer-apex-x, 0) 100%);
+		--pointer-shape: polygon(0 0, 100% 0, var(--pointer-apex-x, 0) 100%);
+		border-shape: var(--pointer-shape);
+		border: inherit;
+		border-top: 0;
+		clip-path: inset(var(--border-width, 0) 0 0 0);
+
+		@supports not (border-shape: inset(0)) {
+			clip-path: var(--pointer-shape);
+		}
 	}
 
 	&.left {

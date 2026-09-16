@@ -8,6 +8,7 @@
 @import url("components/file-tree.css");
 @import url("components/editor.css");
 @import url("components/icon.css");
+@import url("components/marquee.css");
 @import url("components/error.css");
 @import url("components/pie.css");
 
@@ -161,11 +162,25 @@ ol {
 } */
 
 :where(.slide).slap {
-	background: hsl(2 95% 68.5%) url("images/slap.avif") no-repeat bottom right;
+	--slide-padding: 2rem;
+	background: hsl(2 95% 68.5%) url("images/slap.avif") no-repeat bottom;
+	--pointer-apex-x: 100%;
+
+	justify-content: start;
+	gap: 1em;
 
 	.speech-bubble {
-		margin: 1em auto auto 1em;
-		--pointer-apex-x: 100%;
+		--border-width: 2px;
+		border: var(--border-width) solid black;
+		font-family: var(--font-handwritten);
+	}
+
+	:nth-child(1 of .speech-bubble) {
+		align-self: start;
+	}
+
+	:nth-child(2 of .speech-bubble) {
+		align-self: end;
 	}
 }
 
@@ -204,5 +219,19 @@ ol {
 		p {
 			margin: 0;
 		}
+	}
+}
+
+.slide.ecosystems {
+	.marquee {
+		/* Bleed past the slide padding, so items slide in from the screen edges */
+		align-self: stretch;
+		margin-inline: calc(-1 * var(--slide-padding));
+		--marquee-gap: 3em;
+		font-size: var(--font-size-l);
+	}
+
+	img {
+		height: 2.5em;
 	}
 }
