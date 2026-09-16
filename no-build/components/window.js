@@ -1,5 +1,5 @@
 /* Render text in an SVG and return a data URL of the resulting image. */
-export function textToSvg (text, style = "font: 550 40px system-ui") {
+export function textToSvg (text, style = "font: 500 40px system-ui") {
 	// Estimate text width liberally (longer is better than shorter)
 	let width = text.length * 40;
 	const svg = new Blob([`

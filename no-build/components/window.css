@@ -54,7 +54,7 @@
 		--_bar: 1.2em;
 		--img-address-bar: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" ry="50vh" fill="white" fill-opacity="0.7"/></svg>');
 		--_bar-x: calc(2 * var(--frame) + 3 * var(--_step));
-		--_url-layer: var(--img-url) calc(var(--_bar-x) + .5em) var(--frame) / auto var(--_bar);
+		--_url-layer: var(--img-url) calc(var(--_bar-x) + .5em) calc(var(--frame) - .05em) / auto var(--_bar);
 		--_title-layers:
 			var(--_url-layer, none),
 			var(--img-address-bar) var(--_bar-x) var(--frame) / calc(100% - var(--_bar-x) - var(--frame)) var(--_bar);
