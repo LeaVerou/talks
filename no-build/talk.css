@@ -283,3 +283,7 @@ blockquote {
 		font-style: italic;
 	}
 }
+
+.black.slide {
+	--text-decoration-color: var(--color-green);
+}

@@ -58,6 +58,82 @@ a {
 	}
 }
 
+/* Hand-drawn underline and strike-through.
+   border-shape (Chrome 147+) fills between two shapes and clips the text to the inner one,
+   so it works per line fragment with no pseudo-elements. Older browsers get a plain colored line.
+   The stroke is a polyline through 5 points, like a quick pen stroke: --x2 to --x4 are where the
+   kinks are, --dy1 to --dy5 how far each point sits from --y, the stroke center. The thickness --t
+   swells slightly towards the middle. Every other one uses a different set of points, so pairs differ.
+   The inner shape is everything above the stroke, everything below it, and the cover of the undrawn part. */
+@property --drawn {
+	syntax: "<number>";
+	inherits: false;
+	initial-value: 1;
+}
+
+u, s {
+	--t: var(--text-decoration-thickness, .1em);
+	text-decoration-color: var(--text-decoration-color, var(--accent-color));
+	text-decoration-thickness: var(--t);
+	border-color: var(--text-decoration-color, var(--accent-color));
+	border-shape:
+		inset(-1em -.12em)
+		shape(
+			from -.12em -1em, hline to calc(100% + .12em),
+			vline to calc(var(--y) + var(--dy5) - .4 * var(--t)),
+			line to var(--x4) calc(var(--y) + var(--dy4) - .5 * var(--t)),
+			line to var(--x3) calc(var(--y) + var(--dy3) - .55 * var(--t)),
+			line to var(--x2) calc(var(--y) + var(--dy2) - .5 * var(--t)),
+			line to -.12em calc(var(--y) + var(--dy1) - .4 * var(--t)), close,
+			move to -.12em calc(var(--y) + var(--dy1) + .4 * var(--t)),
+			line to var(--x2) calc(var(--y) + var(--dy2) + .5 * var(--t)),
+			line to var(--x3) calc(var(--y) + var(--dy3) + .55 * var(--t)),
+			line to var(--x4) calc(var(--y) + var(--dy4) + .5 * var(--t)),
+			line to calc(100% + .12em) calc(var(--y) + var(--dy5) + .4 * var(--t)),
+			vline to calc(100% + 1em), hline to -.12em, close,
+			var(--cover)
+		);
+	/* Hides the part of the stroke past --drawn, so the .draw effect can draw it in */
+	--cover: move to calc(var(--drawn) * (100% + .24em) - .12em) -1em, hline to calc(100% + .12em),
+		vline to calc(100% + 1em), hline to calc(var(--drawn) * (100% + .24em) - .12em), close;
+
+	/* Rises to the right */
+	--x2: 17%;
+	--x3: 41%;
+	--x4: 63%;
+	--dy1: .04em;
+	--dy2: 0em;
+	--dy3: .025em;
+	--dy4: -.02em;
+	--dy5: -.05em;
+
+	/* Sags early, then flicks up at the end */
+	&:nth-child(even of u, s) {
+		--x2: 30%;
+		--x3: 70%;
+		--x4: 88%;
+		--dy1: -.02em;
+		--dy2: .06em;
+		--dy3: .03em;
+		--dy4: .045em;
+		--dy5: -.035em;
+	}
+
+	@supports (border-shape: none) {
+		text-decoration: none;
+	}
+}
+
+u {
+	/* Just under the baseline, crossing descenders like a pen would */
+	--y: calc(100% - .1em);
+}
+
+s {
+	/* Through the middle of the x-height */
+	--y: 56%;
+}
+
 :focus:not(:focus-visible) {
 	outline: none;
 }

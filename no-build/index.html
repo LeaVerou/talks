@@ -23,7 +23,6 @@
 </header>
 
 <article class="slide columns" style="--color-1: black; align-items: start;">
-
 	<style>
 		@scope {
 			.pie {
@@ -79,7 +78,6 @@
 	<h2 class="span-1 start">
 		<div class="supertitle">State of JS</div>
 		“What aspects of JS do you struggle with most?”
-
 	</h2>
 	<img src="images/js-pain-points.png" alt="" style="height: stretch; justify-self: end; margin-inline-end: -40vw">
 </article>
@@ -124,7 +122,7 @@
 	</details>
 </article>
 
-<article class="slide black dont-resize">
+<article class="slide black">
 <h2 style="white-space: nowrap">
 	<span class="supertitle">API Design principle</span>
 	Consumers <span class="red">></span> Producers
@@ -200,15 +198,23 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 </article>
 
 <article class="slide">
-	<h2></h2>
+	<object data="images/chart-frequency-complexity.svg"></object>
 	<details class="notes">
 		There is a common misconception.
 		The goal is not to get rid of bundlers.
 		It’s not a binary.
 		Complex use cases and large apps will _always_ need bundlers.
 		Bundlers will _always_ win on certain things.
-		The goal is to make them less essential, and lighter then they _are_ needed.
+		The goal is to make them less essential, and lighter when they _are_ needed.
+
+		Meaning, we are currently here.
+		We are probably never going to reach the bottom right.
+		But any movement towards it is a win.
 	</details>
+</article>
+
+<article class="slide black">
+	<h2 class="draw per-child">It doesn’t have to be <u>perfect</u> to be <u>worth it</u>.</h2>
 </article>
 
 <article class="slide tinted-95 red">
@@ -269,15 +275,25 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 
 	<baseline-status featureId="custom-properties"></baseline-status>
 	<baseline-status featureId="nesting"></baseline-status>
-	<baseline-status featureId="function" class="delayed"></baseline-status>
-	<baseline-status featureId="if" class="delayed"></baseline-status>
-	<baseline-status featureId="mixin" class="delayed"></baseline-status>
 
 	<article class="card columns delayed" style="grid-template-columns: auto 1fr;">
 		<img src="images/autoprefixer.svg" alt="" class="rspan-2" style="width: 2.5lh;">
 		<h3 class="span-1 start">Vendor prefixes?</h3>
 		<p>Mostly gone!</p>
 	</article>
+
+	<baseline-status featureId="function" class="delayed"></baseline-status>
+	<baseline-status featureId="if" class="delayed"></baseline-status>
+	<baseline-status featureId="mixin" class="delayed"></baseline-status>
+
+	<details class="notes">
+		Variables and nesting alleviated a good chunk of the need for CSS preprocessors.
+		Vendor prefixes are practically gone, people just use Autoprefixer out of habit at this point, and because they already have a CSS preprocessing pipeline in place.
+		Abstraction is still a pain point: variables only afford very limited logic reuse.
+		But mixins, functions, and inline conditionals are on the way, and will simplify things quite a lot.
+		In fact, Interop 2027 is now open, and you should upvote their Interop proposals if you care about getting these features supported in all browsers.
+
+	</details>
 </article>
 
 <article class="slide columns web-features">
@@ -289,6 +305,8 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 	<baseline-status featureId="link-rel-preload"></baseline-status>
 	<baseline-status featureId="fetch-priority"></baseline-status>
 	<baseline-status featureId="compression-dictionary-transport"></baseline-status>
+	<baseline-status featureId="brotli"></baseline-status>
+	<baseline-status featureId="zstd"></baseline-status>
 
 	<div class="card md">
 		### [103 Early Hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/103) { .start }
@@ -299,20 +317,24 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 		&lt;https://cdn.example.com>; rel=preconnect; crossorigin
 		```
 	</div>
+
+	<details class="notes">
+		There are a bunch of new performance-related features in modern browsers.
+		HTTP/2 and HTTP/3 make loading many little resources a lot more efficient.
+		Preloading, fetch priority hints, 103 early hints help the browser load important resources sooner.
+		And compression dictionary transport and improved compression algorithms like Brotli and Zstandard helps reduce the size of transferred resources.
+	</details>
 </article>
 
-<article class="slide md">
-	<h2>No, I’m not saying we can go bundler-free</h2>
+<article class="slide black">
+	<h2>A bundler will <span class="red">always</span> win on performance</h2>
+	<details class="notes">
+		It's important to note however that no matter how much the ecosystem improves,
+		a bundler will *always* be ahead on performance, at least for the first load.
 
-	- Bundlers still win on performance
-	- Many frameworks _require_ a bundler
-	- JSX, templating, etc still require build-time tooling
-
-	{ .x-list }
-</article>
-
-<article class="slide md black">
-	<h2>But here’s the thing…</h2>
+		However, these features close the gap, for many apps to the point of diminishing returns.
+		And nothing prevents bundlers from utilizing them as well, for even _better_ results!
+	</details>
 </article>
 
 <article class="slide tinted-95 red">
@@ -387,7 +409,8 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 </article>
 
 <article class="slide black">
-	<h2>It is <span class="red">not okay</span> to need <u>advanced</u> tools for <u>advanced</u> needs</h2>
+	<h2>It is <span class="red">not okay</span> to need
+		<u>advanced</u> tools for <u>basic</u> needs</h2>
 </article>
 
 <article class="slide md dark">
@@ -954,6 +977,9 @@ No, we are not doomed to repeat the same patterns forever because LLMs have been
 
 </article>
 
+<article class="slide">
+	<iframe src="https://www.w3.org/community/nobuild/" data-url class="browser"></iframe>
+</article>
 
 <footer class="dark slide" id="end">
 	<h2>Thank you!</h2>

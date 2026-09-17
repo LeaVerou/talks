@@ -50,7 +50,7 @@
 	   Screen only, since print shows every slide at once. */
 	@media screen {
 		&:where(.delayed, .delayed-children > *).future,
-		.slide:not(:target, .show-all *) &:not(.delayed, .delayed-children > *) {
+		:where(.slide:not(:target, .show-all *)) &:not(.delayed, .delayed-children > *) {
 			&:not(.per-child),
 			&.per-child > * {
 				display: none;
@@ -126,4 +126,45 @@
 
 .slide-right {
 	--starting-translate: calc(-1 * var(--slide-distance, 50vw)) 0;
+}
+
+/* draw draws in the subject's hand-drawn line (a <u> or <s>, see base.css) from start to end.
+   Unlike the effects above, the subject stays visible while it waits; only its line is missing.
+   So a delayed subject waits at --drawn: 0, and the per-child stagger is a plain transition delay. */
+.draw {
+	&:not(.per-child),
+	&.per-child > * {
+		transition: --drawn var(--transition-duration);
+
+		@starting-style {
+			--drawn: 0;
+		}
+	}
+
+	/* The wait is the delay itself, not the hold of the effects above */
+	&.per-child > * {
+		transition-delay: calc((sibling-index() - 1) / sibling-count() * var(--stagger, 1s));
+		animation: revert-layer;
+	}
+
+	@media screen {
+		&:where(.delayed, .delayed-children > *).future {
+			opacity: 1;
+
+			&:not(.per-child),
+			&.per-child > * {
+				--drawn: 0;
+				display: revert-layer;
+				/* Going back is instant, like the effects above */
+				transition: none;
+			}
+		}
+
+		:where(.slide:not(:target, .show-all *)) &:not(.delayed, .delayed-children > *) {
+			&:not(.per-child),
+			&.per-child > * {
+				display: none;
+			}
+		}
+	}
 }
