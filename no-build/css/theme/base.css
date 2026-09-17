@@ -107,16 +107,16 @@ u, s {
 	--dy4: -.02em;
 	--dy5: -.05em;
 
-	/* Sags early, then flicks up at the end */
+	/* A gentle arch, highest past the middle */
 	&:nth-child(even of u, s) {
-		--x2: 30%;
-		--x3: 70%;
-		--x4: 88%;
-		--dy1: -.02em;
-		--dy2: .06em;
-		--dy3: .03em;
-		--dy4: .045em;
-		--dy5: -.035em;
+		--x2: 28%;
+		--x3: 55%;
+		--x4: 78%;
+		--dy1: .03em;
+		--dy2: -.02em;
+		--dy3: -.045em;
+		--dy4: -.04em;
+		--dy5: .015em;
 	}
 
 	@supports (border-shape: none) {
@@ -132,6 +132,13 @@ u {
 s {
 	/* Through the middle of the x-height */
 	--y: 56%;
+
+	/* Paint the text as a background so the stroke, a border, always lands on top of it */
+	@supports (border-shape: none) {
+		background: currentColor;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
 }
 
 :focus:not(:focus-visible) {

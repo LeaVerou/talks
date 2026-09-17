@@ -17,6 +17,27 @@
 	--color-js: #f7df1e;
 }
 
+/* Dot position on the frequency/complexity chart, 0% at the origin and 100% at the arrow tips.
+   The chart is embedded via <use>, and @property is ignored inside its shadow tree,
+   so the registration in the SVG only serves standalone use and must be repeated here. */
+@property --dot-x {
+	syntax: "<percentage>";
+	inherits: true;
+	initial-value: 78%;
+}
+
+@property --dot-y {
+	syntax: "<percentage>";
+	inherits: true;
+	initial-value: 77%;
+}
+
+/* A <use> wrapper has no intrinsic size, so give it the slide's */
+.chart {
+	width: 100%;
+	height: 100%;
+}
+
 #intro {
 	color-scheme: dark;
 	background: linear-gradient(to bottom right var(--in-oklch), var(--color-indigo), var(--color-blue));
@@ -245,7 +266,7 @@ ol {
 	}
 
 	img {
-		height: 2em;
+		height: 1lh;
 
 		/* Black artwork (the Rust logo) needs inverting to read on this dark slide */
 		&.mono {
@@ -285,5 +306,11 @@ blockquote {
 }
 
 .black.slide {
-	--text-decoration-color: var(--color-green);
+	u {
+		--accent-color: var(--color-green);
+	}
+
+	s {
+		--accent-color: var(--color-red);
+	}
 }

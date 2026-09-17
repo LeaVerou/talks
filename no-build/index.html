@@ -197,8 +197,29 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 
 </article>
 
-<article class="slide">
-	<object data="images/chart-frequency-complexity.svg"></object>
+<article class="slide" data-steps="6" id="chart-frequency-complexity">
+	<style>
+		@scope {
+			 .chart:is(.slide[data-step="1"] *) {
+				--dot-x: 0%;
+				--dot-y: 0%;
+			}
+
+			.chart:is(.slide[data-step="3"] *) {
+				--dot-x: 40%;
+			}
+
+			.chart:is(.slide[data-step="2"] *),
+			.chart:is(.slide[data-step="4"] *) {
+				--dot-transition: 0s;
+			}
+
+			.chart:is(.slide[data-step="5"] *) {
+				--dot-y: 40%;
+			}
+		}
+	</style>
+	<svg class="chart"><use href="images/chart-frequency-complexity.svg#chart"></use></svg>
 	<details class="notes">
 		There is a common misconception.
 		The goal is not to get rid of bundlers.
@@ -215,6 +236,15 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 
 <article class="slide black">
 	<h2 class="draw per-child">It doesn’t have to be <u>perfect</u> to be <u>worth it</u>.</h2>
+
+	<small class="abs-bottom delayed">(a metaphor for life?)</small>
+</article>
+
+<article class="slide black">
+	<h2>
+		Goal: <s>Get rid of build tools</s><br>
+		Goal: Make build tools lighter and less essential
+	</h2>
 </article>
 
 <article class="slide tinted-95 red">
@@ -229,7 +259,7 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 		</li>
 		<li>
 			<strong>Performance</strong>
-			<small>bundling, minification, etc</small>
+			<small>tree-shaking, bundling, minification, etc</small>
 		</li>
 		<li>
 			<strong>Dependency resolution</strong>
@@ -255,19 +285,27 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 
 <article class="slide columns transpilation" style="grid-template-columns: 1fr auto">
 	<header class="flex span">
-
-
 		<div class="pie" style="--size: 5em; flex: none; --value: .77; --color-1: var(--color-ts); --color-2: var(--color-js);"></div>
 		<h2>TypeScript <span class="red delayed">in the browser?</span></h2>
 	</header>
 
 	<iframe src="https://github.com/tc39/proposal-type-annotations/#readme" data-url="github.com/tc39/proposal-type-annotations" class="browser"></iframe>
 
-	<ul class="check-list">
+	<ul class="check-list delayed per-child slide-left">
 		<li>Stage 1</li>
 		<li>Already in NodeJS</li>
-		<li class="x">Somewhat stalled :(</li>
+		<li class="x">Stalled :(</li>
 	</ul>
+
+	<details class="notes">
+		TS compilation is one of the most common reasons for using build tools.
+		According to State of JS, more than 3/4 of deployed JS code is written in TypeScript.
+		This TC39 proposal for type annotations would let browsers natively parse a superset of TypeScript
+		and simply ignore types, treating them as comments.
+		Unfortunately, there has been resistance so the proposal has been stuck in Stage 1 for quite some time.
+		NodeJS shipped it however, which makes things a lot easier.
+		As with most standards proposals, if you want it implemented, make noise and ask for it!
+	</details>
 </article>
 
 <article class="slide columns web-features" style="gap: 0 .5em">
@@ -357,7 +395,7 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 		</li>
 	</ol>
 
-	<p class="handwritten red">One of these is not like the others</p>
+	<p class="handwritten red">^ One of these is not like the others</p>
 
 	</div>
 
@@ -389,7 +427,8 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 </article>
 
 <article class="slide black">
-	<h2>It is <span class="green">okay</span> to need <u>advanced</u> tools for <u>advanced</u> needs</h2>
+	<h2 class="draw per-child">
+		It is <span class="green">okay</span> to need <u>complex</u> tools for <u>complex</u> needs</h2>
 </article>
 
 <article class="slide">
@@ -409,19 +448,58 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 </article>
 
 <article class="slide black">
-	<h2>It is <span class="red">not okay</span> to need
-		<u>advanced</u> tools for <u>basic</u> needs</h2>
+	<h2 class="draw per-child">
+		It is <span class="red">not okay</span> to need
+		<u>complex</u> tools for <u class="red">basic</u> needs
+	</h2>
 </article>
 
-<article class="slide md dark">
-<h2>The web platform has outsourced the most <span class="red">fundamental</span> ecosystem functionality to third-party tooling.</h2>
+<article class="slide dark">
+<h2>
+	<span class="red">Abstraction</span> is too
+	<u class="red draw">fundamental</u> to be outsourced.
+</h2>
 
 <details class="notes">
 Abstraction is the cornerstone of software engineering.
 Reusing logic and building higher-level solutions from lower-level building blocks is what makes all the technological wonders around us possible.
 Imagine if every time anyone wrote a calculator they also had to reinvent floating-point arithmetic and string encoding!
 
+And yet, the web platform has outsourced the most fundamental ecosystem functionality to third party tooling!
+
 </details>
+</article>
+
+
+<article class="slide md black ecosystems language-none">
+	<h2 class="per-child draw">
+		In healthy ecosystems dependencies are
+		<u>normal</u>,
+		<u>cheap</u>, and
+		<u>first-class</u>.
+	</h2>
+
+	<ul class="marquee">
+		<li><img src="images/node.svg" alt="Node.js"> <code>npm install marked</code></li>
+		<li><img src="images/rust.svg" alt="Rust" class="mono"> <code>cargo add marked</code></li>
+		<li><img src="images/python.svg" alt="Python"> <code>pip install marked</code></li>
+		<li><img src="images/ruby.svg" alt="Ruby"> <code>gem install marked</code></li>
+		<li><img src="images/dotnet.svg" alt=".NET"> <code>dotnet add package marked</code></li>
+	</ul>
+
+	<p class="delayed">“Dependency-free” is not a badge of honor.</p>
+
+	<details class="notes">
+	One of these is not like the others.
+
+	In NodeJS, you just npm install and reference specifiers straight away in your code.
+	Same in Python, with pip install.
+	Same in Rust with cargo add.
+	In healthy ecosystems you don’t ponder how or whether to use dependencies.
+	The ecosystem assumes dependencies are normal, cheap, and first-class.
+	You just install them, use them, and move on. “Dependency-free” is not a badge of honor.
+
+	</details>
 </article>
 
 <article class="slide md">
@@ -441,136 +519,42 @@ $ npm install marked
 ```
 </div>
 <details class="notes">
-Suppose we want to include a library to do something nontrivial, e.g. parse Markdown.
-We find a library we like and want to use it in our project.
-
-In Node.js and other JS runtimes, things are simple.
-We install the library with `npm install` and things Just Work™.
+Take Node.js as an example.
+You `npm install` your dependencies and they are ready to use.
+That’s it.
+Things Just Work™.
 
 </details>
 
 </article>
 
-<article class="slide md black ecosystems language-none">
-<h2>In healthy ecosystems dependencies are <span class="green">normal, cheap, and first-class</span>.</h2>
-
-<ul class="marquee">
-	<li><img src="images/node.svg" alt="Node.js"> <code>npm install marked</code></li>
-	<li><img src="images/rust.svg" alt="Rust" class="mono"> <code>cargo add marked</code></li>
-	<li><img src="images/python.svg" alt="Python"> <code>pip install marked</code></li>
-	<li><img src="images/ruby.svg" alt="Ruby"> <code>gem install marked</code></li>
-	<li><img src="images/dotnet.svg" alt=".NET"> <code>dotnet add package marked</code></li>
-</ul>
-
-<p class="delayed">“Dependency-free” is not a badge of honor.</p>
-
-<details class="notes">
-One of these is not like the others.
-
-In NodeJS, you just npm install and reference specifiers straight away in your code.
-Same in Python, with pip install.
-Same in Rust with cargo add.
-In healthy ecosystems you don’t ponder how or whether to use dependencies.
-The ecosystem assumes dependencies are normal, cheap, and first-class.
-You just install them, use them, and move on. “Dependency-free” is not a badge of honor.
-
-</details>
-</article>
 
 <article class="slide md">
-## Dependencies in the browser
+	## Dependencies in the browser
 
-```error
-Uncaught TypeError: Failed to resolve module specifier "marked".
-Relative references must start with either "/", "./", or "../".
-```
+	```error
+	Uncaught TypeError: Failed to resolve module specifier "marked".
+	Relative references must start with either "/", "./", or "../".
+	```
 
-
-<details class="notes">
-Now suppose we need to use a library client-side.
-
-We try to `npm install` again, but nope, that doesn’t work.
-You need to use a bundler!
-Suddenly, the workflow is 10x more complex.
-
-</details>
-
+	<details class="notes">
+	But if we try to run the same JS file in the browser?
+	It has no clue where `marked` is supposed to come from.
+	</details>
 </article>
 
 <article class="slide">
 	<img src="images/why-1.png" alt="">
+	<details class="notes">
+		Suddenly, everything becomes 10x more complex.
+		Picking the right tool, configuring it, understanding the new file structure.
+		What runs is no longer what you wrote or where you wrote it, so now you need additional abstractions to debug.
+	</details>
 </article>
 
-<article class="slide md black">
-
-## Now you have multiple problems
-
-<details class="notes">
-Now you have multiple problems.
-
-- Which bundler?? Vite, Webpack, esbuild, Rollup, Parcel...
-- Configuration
-- Source != Distribution
-- Compilation → Sourcemaps
-- Entry point
-
-If you’re using a meta-framework like Next.js or Nuxt, they already encapsulate this choice for you,
-but otherwise you need to pick one.
-And then install it.
-And then configure it.
-And then run it.
-And remember to run it whenever you want to change anything.
-Now you need to have a lot more:
-- a source directory separate from a served directory
-- an entry point concept
-- a compile step between saving and reloading
-- an artifact that isn't the file you wrote
-- sourcemaps, to undo the previous line
-
-This introduces more complexity to solve problems the bundler introduced:
-- Sourcemaps
-- Hot reloading
-- Code splitting / chunking
-</details>
-</article>
-
-<!-- <article class="slide md">
-
-
-<div class="editor window">
-
-- marked-demo/
-  - package.json
-  - node_modules/ { .gitignored .delayed .show }
-    - marked/
-  - .gitignore
-  - main.js { .selected }
-
-{ .file-tree }
-
-```js
-import { marked } from 'marked';
-const md = '# _Hello_ Markdown!';
-const html = marked.parse(md);
-console.log(html);
-```
-
-```bash { .delayed-children }
-$ npm install marked
-```
-
-<i class="icon pop check delayed show" data-anchored="--code"></i>
-
-</div>
-
-</article> -->
-
-
-
-
-<header class="slide flex">
-<h2 class="start">Dependencies <span class="red">sans</span> bundlers, today?</h2>
-<img src="images/no-build-today.png" alt="No-build today: Choose your own adventure!" style="border-radius: .2em; flex: none" class="shadow">
+<header class="slide flex dont-resize">
+<h2 class="start" style="font-size: 13vh">Dependencies <span class="red">sans</span> bundlers, today?</h2>
+<img class="slide-left shadow" src="images/no-build-today.png" alt="No-build today: Choose your own adventure!" style="border-radius: .2em; flex: none">
 
 </header>
 

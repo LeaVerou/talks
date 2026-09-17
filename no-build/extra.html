@@ -210,5 +210,71 @@ import stuff from 'localpkg';
 </article>
 
 
+<!-- <article class="slide md black">
+
+## Now you have multiple problems
+
+<details class="notes">
+Now you have multiple problems.
+
+- Which bundler?? Vite, Webpack, esbuild, Rollup, Parcel...
+- Configuration
+- Source != Distribution
+- Compilation → Sourcemaps
+- Entry point
+
+If you’re using a meta-framework like Next.js or Nuxt, they already encapsulate this choice for you,
+but otherwise you need to pick one.
+And then install it.
+And then configure it.
+And then run it.
+And remember to run it whenever you want to change anything.
+Now you need to have a lot more:
+- a source directory separate from a served directory
+- an entry point concept
+- a compile step between saving and reloading
+- an artifact that isn't the file you wrote
+- sourcemaps, to undo the previous line
+
+This introduces more complexity to solve problems the bundler introduced:
+- Sourcemaps
+- Hot reloading
+- Code splitting / chunking
+</details>
+</article> -->
+
+<!-- <article class="slide md">
+
+
+<div class="editor window">
+
+- marked-demo/
+  - package.json
+  - node_modules/ { .gitignored .delayed .show }
+    - marked/
+  - .gitignore
+  - main.js { .selected }
+
+{ .file-tree }
+
+```js
+import { marked } from 'marked';
+const md = '# _Hello_ Markdown!';
+const html = marked.parse(md);
+console.log(html);
+```
+
+```bash { .delayed-children }
+$ npm install marked
+```
+
+<i class="icon pop check delayed show" data-anchored="--code"></i>
+
+</div>
+
+</article> -->
+
+
+
 </body>
 </html>

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-183.6 -612.5 1006.4 666.1">
+<svg id="chart" xmlns="http://www.w3.org/2000/svg" viewBox="-183.6 -612.5 1006.4 666.1">
 	<!-- svg-source:excalidraw -->
 	<defs>
 		<style>
@@ -9,13 +9,13 @@
 
 			/* Position of the dot along each axis, 0% at the origin and 100% at the arrow tip.
 			   Registered so that changes animate. */
-			@property --x {
+			@property --dot-x {
 				syntax: "&lt;percentage&gt;"; /* escaped so inlining in HTML does not parse it as a tag */
 				inherits: true;
 				initial-value: 78%;
 			}
 
-			@property --y {
+			@property --dot-y {
 				syntax: "&lt;percentage&gt;"; /* escaped so inlining in HTML does not parse it as a tag */
 				inherits: true;
 				initial-value: 77%;
@@ -40,8 +40,8 @@
 
 			.point {
 				fill: #e03131;
-				transition: --x 1s, --y 1s;
-				translate: var(--x) calc(100% - var(--y));
+				transition: var(--dot-transition, --dot-x .4s, --dot-y .3s ease-in);
+				translate: var(--dot-x) calc(100% - var(--dot-y));
 			}
 		</style>
 	</defs>
