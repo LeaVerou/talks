@@ -17,43 +17,61 @@
 	<h1>No-build:<br><em>pipe dream</em>, or near future?</h1>
 	<div class="by">
 		by <a href="http://lea.verou.me">Lea Verou</a>
-		<small>TC39, WHATWG, CSS WG</small>
+		<small>TC39, WHATWG, CSS WG, OpenJS Foundation</small>
 		<small><a href="http://lea.verou.me"><strong>lea.verou.me</strong></a> &bull; <strong>lea＠verou.me</strong></small>
 	</div>
 </header>
 
 <article class="slide columns" style="--color-1: black; align-items: start;">
 
-<style>
-	@scope {
-		.pie {
-			align-self: center;
-			justify-self: center;
+	<style>
+		@scope {
+			.pie {
+				align-self: center;
+				justify-self: center;
+				--size: 30vh;
 
-			font-size: 70%;
+				font-size: 70%;
+			}
+
+			.delayed.collapse.past {
+				display: none;
+			}
 		}
-	}
-</style>
+	</style>
 
-<img src="images/x-poll.png" alt="" class="shadow">
-<img src="images/mastodon-poll.png" alt="" class="shadow">
+	<img src="images/x-poll.png" alt="" class="shadow">
+	<img src="images/mastodon-poll.png" alt="" class="shadow">
 
-<div class="pie delayed abs-bottom-left" data-index="1" style="--value: calc(25.2 / (55.9 + 25.2));"></div>
-<div class="pie delayed abs-bottom-right" data-index="2" style="--value: .5;"></div>
+	<div class="flex space-between abs-bottom stretch delayed collapse">
+		<div class="pie" style="--value: calc((55.9 + 25.2) / (55.9 + 25.2 + 11.3));"></div>
+		<div class="legend y-end" data-index="1">
+			<span>Uses a bundler</span>
+			<span>Doesn't</span>
+		</div>
+		<div class="pie" style="--value: calc((33 + 33) / (33 + 33 + 26));"></div>
+	</div>
 
-<div class="legend abs-bottom delayed" data-index="1">
-	<span>Wish didn’t</span>
-	<span>OK</span>
-</div>
+	<div class="flex space-between abs-bottom stretch delayed collapse">
+		<div class="pie" style="--value: calc(25.2 / (55.9 + 25.2));"></div>
+		<div class="legend y-end" data-index="1">
+			<span>Wish didn’t</span>
+			<span>OK</span>
+		</div>
+		<div class="pie" style="--value: .5;"></div>
+	</div>
 
-<details class="notes">
-Raise your hand if you use a bundler.
-This includes Vite, Webpack, esbuild, Rollup, Parcel, and more.
-But it also includes bundlers that are built into frameworks, like Next.js or Nuxt.
+	<details class="notes">
+	Raise your hand if you use a bundler.
+	This includes Vite, Webpack, esbuild, Rollup, Parcel, and more.
+	But it also includes bundlers that are built into frameworks, like Next.js or Nuxt.
 
-Nearly all of us do, right?
-But how many actually _like it_?
-</details>
+	Nearly all of us do, right?
+	But how many actually _like it_?
+
+	When I asked folks on Twitter and Mastodon, a pretty large percentage also didn’t.
+
+	</details>
 
 </article>
 
@@ -64,6 +82,133 @@ But how many actually _like it_?
 
 	</h2>
 	<img src="images/js-pain-points.png" alt="" style="height: stretch; justify-self: end; margin-inline-end: -40vw">
+</article>
+
+<article class="slap slide">
+	<blockquote class="speech-bubble" style="max-width: 11em">
+		Many languages are compiled, what's the problem?
+	</blockquote>
+	<blockquote class="speech-bubble delayed" style="max-width: 5.5em">
+		<strong class="red">Fragmentation</strong> is the problem!
+	</blockquote>
+
+	<details class="notes">
+		Oftentimes when discussing these issues, I get the question “but other languages are completely compiled, why is it a problem here?”.
+
+		Yes, but their compiler is **official** and always there.
+		You literally can’t use the language without it.
+		You don’t get a broken experience, you get _no experience_.
+
+		The problem is not compilation, it’s fragmentation.
+
+		<!-- It’s the experience of linking to a package via a browser import only to see errors about specifiers.
+		It’s the visible complexity and indirection just to use a utility function.-->
+	</details>
+</article>
+
+<article class="slide black">
+	<h2>The problem is not compilation, it’s <span class="red">fragmentation</span>.</h2>
+
+</article>
+
+<article class="slide language-css">
+	<blockquote>
+		<p>“Recently, the build of a project I was working on broke
+	because the use of a perfectly valid CSS selector (<code>::details-content::after</code>)
+	caused Lightning CSS to blow up (despite this selector being supported by all browsers)”</p>
+		<p class="cite">Ollie Williams<small><a href="https://olliewilliams.xyz/blog/no-build">olliewilliams.xyz/blog/no-build</a></small></p>
+	</blockquote>
+	<details class="notes">
+		The more complex bundlers become, the harder it is to maintain proper integration with the web platform.
+		Features that work fine in the browser, fail in bundlers.
+	</details>
+</article>
+
+<article class="slide black dont-resize">
+<h2 style="white-space: nowrap">
+	<span class="supertitle">API Design principle</span>
+	Consumers <span class="red">></span> Producers
+</h2>
+<p class="abs-bottom stretch marquee" style="font-size: var(--font-size-s)">
+	<span>End-users > developers</span>
+	<span>Web developers > browser developers</span>
+	<span>Browser developers > standards authors</span>
+	<span>Plugin devs > Library devs</span>
+	<span>Instance > Class</span>
+	<strong class="red">Web devs > Bundlers</strong>
+</p>
+
+<details class="notes">
+A general API design principle is to prioritize the needs of consumers over the needs of producers.
+
+The web platform itself has this as a design principle, called "Priority of constitutencies",
+which says the needs of end-users should come before the needs of web developers,
+which come before the needs of browser developers,
+which come before the needs of standards authors.
+
+Similar hierarchies exist in any project.
+E.g. for an extensible library, the needs of plugin devs come before the needs of the library devs.
+For a class, the needs of instances come before the needs of the class itself.
+And so on.
+
+The groups involved in defining, implementing, and using an API vary, but the core idea is to prioritize users over implementors at every level.
+This both minimizes collective pain, and assigns the responsibility of dealing with complexity to the most technical group.
+which is why another formulation of this principle is "put the pain on those who can bear it".
+
+Why am I mentioning this right now?
+Because when it comes to bundlers,
+web developers are the consumers, and their needs should come before the needs of the bundler.
+
+</details>
+</article>
+
+<article class="slide">
+	<iframe src="https://github.com/color-js/elements/commit/e685c86297a580c52caae4bcc8f1e25ea3d830e3" class="window"></iframe>
+	<details class="notes">
+		But the ubiquity and total dependence on bundlers has reversed the natural order:
+		now web developers must cater to bundlers, rather than the other way around.
+
+		This is a real commit from a library of web components.
+		We had to rewrite fetched URLs to a much more noisy syntax, so that bundlers would pick them up.
+		Once more, code that works perfectly fine in the browser had to be modified to satisfy the bundler.
+	</details>
+</article>
+
+<article class="slide">
+
+<pre style="overflow: auto"><code>
+import style from "./style.css" with { type: "css" }
+
+class MyElement extends HTMLElement {
+	constructor () {
+		super();
+		this.attachShadow({ mode: "open" });
+		this.shadowRoot.adoptedStyleSheets.push(style)
+	}
+}
+</code></pre>
+
+<baseline-status class="abs-bottom-right" featureId="css-modules"
+style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / .8); backdrop-filter: blur(5px)"></baseline-status>
+
+<details class="notes">
+	In some cases, it gets to the extrme, with the web platform _itself_ adding features primarily to appease bundlers.
+	Now, CSS modules are great, don't get me wrong.
+	But they solve a problem we wouldn't have at all if bundlers weren't so crucial.
+</details>
+
+</article>
+
+<article class="slide">
+	<h2></h2>
+	<details class="notes">
+		There is a common misconception.
+		The goal is not to get rid of bundlers.
+		It’s not a binary.
+		Complex use cases and large apps will _always_ need bundlers.
+		Bundlers will _always_ win on certain things.
+		The goal is to make them less essential, and lighter then they _are_ needed.
+	</details>
 </article>
 
 <article class="slide tinted-95 red">
@@ -198,13 +343,11 @@ But how many actually _like it_?
 	</div>
 
 	<details class="notes">
-
-	Do you notice that one of these is not like the others?
-	Performance and transpilation are generally _advanced concerns_.
-	You can get quite far without hitting them, especially in an SPA.
-	But using a dependency is not an advanced use case, it’s something you usually need very early on.
-	Even in a one-off experiment or a CodePen snippet you need dependencies!
-
+		Do you notice that one of these is not like the others?
+		Performance and transpilation are generally _advanced concerns_.
+		You can get quite far without hitting them, especially in an SPA.
+		But using a dependency is not an advanced use case, it’s something you usually need very early on.
+		Even in a one-off experiment or a CodePen snippet you need dependencies!
 	</details>
 </article>
 
@@ -224,7 +367,7 @@ But how many actually _like it_?
 </article>
 
 <article class="slide black">
-	<h2>It is <span class="green">okay</span> to need advanced tools for advanced needs</h2>
+	<h2>It is <span class="green">okay</span> to need <u>advanced</u> tools for <u>advanced</u> needs</h2>
 </article>
 
 <article class="slide">
@@ -244,14 +387,14 @@ But how many actually _like it_?
 </article>
 
 <article class="slide black">
-	<h2>It is <span class="red">not okay</span> to need advanced tools for basic needs</h2>
+	<h2>It is <span class="red">not okay</span> to need <u>advanced</u> tools for <u>advanced</u> needs</h2>
 </article>
 
 <article class="slide md dark">
 <h2>The web platform has outsourced the most <span class="red">fundamental</span> ecosystem functionality to third-party tooling.</h2>
 
 <details class="notes">
-Abstraction is the cornerstone of modern software engineering.
+Abstraction is the cornerstone of software engineering.
 Reusing logic and building higher-level solutions from lower-level building blocks is what makes all the technological wonders around us possible.
 Imagine if every time anyone wrote a calculator they also had to reinvent floating-point arithmetic and string encoding!
 
@@ -288,15 +431,13 @@ We install the library with `npm install` and things Just Work™.
 <article class="slide md black ecosystems language-none">
 <h2>In healthy ecosystems dependencies are <span class="green">normal, cheap, and first-class</span>.</h2>
 
-<div class="marquee">
-	<ul>
-		<li><img src="images/node.svg" alt="Node.js"> <code>npm install marked</code></li>
-		<li><img src="images/rust.svg" alt="Rust" class="mono"> <code>cargo add marked</code></li>
-		<li><img src="images/python.svg" alt="Python"> <code>pip install marked</code></li>
-		<li><img src="images/ruby.svg" alt="Ruby"> <code>gem install marked</code></li>
-		<li><img src="images/dotnet.svg" alt=".NET"> <code>dotnet add package marked</code></li>
-	</ul>
-</div>
+<ul class="marquee">
+	<li><img src="images/node.svg" alt="Node.js"> <code>npm install marked</code></li>
+	<li><img src="images/rust.svg" alt="Rust" class="mono"> <code>cargo add marked</code></li>
+	<li><img src="images/python.svg" alt="Python"> <code>pip install marked</code></li>
+	<li><img src="images/ruby.svg" alt="Ruby"> <code>gem install marked</code></li>
+	<li><img src="images/dotnet.svg" alt=".NET"> <code>dotnet add package marked</code></li>
+</ul>
 
 <p class="delayed">“Dependency-free” is not a badge of honor.</p>
 
@@ -403,81 +544,6 @@ $ npm install marked
 
 
 
-
-
-
-
-
-
-
-
-<article class="slide">
-	<blockquote class="speech-bubble">
-		Tons of languages are compiled, what's the problem?
-	</blockquote>
-
-	<details class="notes">
-		Oftentimes when discussing these issues, I get the question “but other languages are completely compiled, why is it a problem here?”.
-		Yes, but their compiler is official and always there.
-		You literally can’t use the language without it.
-		You don’t get a broken experience, you get _no experience at all_.
-	</details>
-</article>
-
-<article class="slide dark">
-	<h2><span class="red">Fragmentation</span> is the problem</h2>
-
-	<details class="notes">
-		The problem is not compilation, it’s fragmentation.
-		It’s the experience of linking to a package via a browser import only to see errors about specifiers.
-		It’s the visible complexity and indirection just to use a utility function.
-	</details>
-</article>
-
-<article class="slide">
-
-<iframe src="https://github.com/color-js/elements/commit/e685c86297a580c52caae4bcc8f1e25ea3d830e3" class="window"></iframe>
-
-
-<details class="notes">
-There is no coherent story.
-Web platform primitives that work fine in the browser, may or may not work in certain bundlers and you can’t know until you test in all of them.
-
-**Instead of the bundler serving our code, our code has to adapt to appease the bundler.**
-</details>
-
-</article>
-
-<article class="slide language-css">
-	<blockquote>
-		<p>“Recently, the build of a project I was working on broke
-	because the use of a perfectly valid CSS selector (<code>::details-content::after</code>)
-	caused Lightning CSS to blow up (despite this selector being supported by all browsers)”</p>
-		<p class="cite">Ollie Williams<small><a href="https://olliewilliams.xyz/blog/no-build">olliewilliams.xyz/blog/no-build</a></small></p>
-	</blockquote>
-</article>
-
-<article class="slide">
-
-<pre class="language-js"><code>
-import { BaseElement } from "./base.js";
-import style from "./style.css" with { type: "css" }
-
-class MyElement extends BaseElement {
-	static const style = style;
-	// ...
-}
-</code></pre>
-
-<details class="notes">
-
-It gets worse.
-In some cases the web platform _itself_ must adapt to appease bundlers.
-So much collective effort invested in fixing problems that would not exist if bundlers weren't so necessary.
-
-</details>
-
-</article>
 
 <header class="slide flex">
 <h2 class="start">Dependencies <span class="red">sans</span> bundlers, today?</h2>
@@ -862,6 +928,8 @@ style="min-width: 15em"></iframe>
 <article class="slide md">
 
 ## Give your agents a little more credit yo
+
+<img src="images/agents-annoyed.jpeg" alt="">
 
 <details class="notes">
 Claude was able to figure things out pretty easily, with minor recoverable mistakes.

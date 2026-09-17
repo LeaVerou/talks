@@ -48,6 +48,7 @@
 		place-items: center;
 		height: var(--size);
 		aspect-ratio: 1;
+		flex: none;
 		background: conic-gradient(
 			var(--_color-2) calc(100% - var(--pct) * 1%),
 			var(--_color-1) 0) no-repeat;

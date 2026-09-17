@@ -54,7 +54,7 @@
 		flex: 2;
 	}
 
-	> .space-between {
+	&.space-between {
 		justify-content: space-between;
 	}
 }
@@ -66,6 +66,22 @@
 		align-items: start;
 	}
 
+	&.x-end {
+		justify-content: end;
+	}
+
+	> .x-end {
+		justify-self: end;
+	}
+
+	&.y-end {
+		align-items: end;
+	}
+
+	> .y-end {
+		align-self: end;
+	}
+
 	&:not(.space-between) > * {
 		flex: 1;
 	}
@@ -73,6 +89,14 @@
 
 .stack {
 	flex-flow: column;
+
+	&.x-end {
+		align-items: end;
+	}
+
+	&.y-end {
+		justify-content: end;
+	}
 }
 
 .columns {
@@ -147,36 +171,46 @@
 .abs-bottom-left,
 .abs-bottom-right {
 	position: absolute;
+
+	/* zoom scales every length the element uses, its own insets included,
+	   so elements that zoom declare --zoom and we divide it back out.
+	   NOTE --zoom inherits, so an abs element nested inside a zoomed one would over-divide. */
+	--_pad: calc(var(--slide-padding) / var(--zoom, 1));
 }
 
 .abs-top,
 .abs-bottom {
 	inset-inline-start: 50%;
 	translate: -50% 0;
+
+	&.stretch {
+		inset-inline: var(--_pad);
+		translate: initial;
+	}
 }
 
 .abs-bottom,
 .abs-bottom-left,
 .abs-bottom-right {
-	bottom: var(--slide-padding);
+	bottom: var(--_pad);
 }
 
 .abs-top,
 .abs-top-left,
 .abs-top-right {
-	top: var(--slide-padding);
+	top: var(--_pad);
 }
 
 .abs-left,
 .abs-top-left,
 .abs-bottom-left {
-	left: var(--slide-padding);
+	left: var(--_pad);
 }
 
 .abs-right,
 .abs-bottom-right,
 .abs-top-right {
-	right: var(--slide-padding);
+	right: var(--_pad);
 }
 
 .frame-by-frame {
@@ -221,12 +255,13 @@
 	margin: 0;
 	padding: .5em .8em;
 	border-radius: var(--radius-l);
+	corner-shape: squircle;
 
 	/* Tail. Inherits the bubble's background, so any override follows along. */
 	&::after {
 		content: "";
 		position: absolute;
-		top: calc(100% - 1px - var(--border-width, 0));
+		top: calc(100% - 1px - var(--border-width, 0px));
 		left: calc(var(--radius-l) + var(--pointer-offset-x, 10%));
 		width: 1.2em;
 		height: .8em;
@@ -248,6 +283,13 @@
 
 	&.right {
 		--pointer-apex-x: 100%;
+	}
+
+	/* Flipping the tail also inverts its shape, border, and clip. */
+	&.top::after {
+		top: auto;
+		bottom: calc(100% - 1px - var(--border-width, 0px));
+		scale: 1 -1;
 	}
 }
 

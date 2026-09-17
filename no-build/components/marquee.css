@@ -1,43 +1,80 @@
-/* A row of items sliding sideways, forever.
-   Its children are groups of items; talk.js clones them so there is always a copy
-   covering the space the previous one vacates, which makes the loop seamless. */
+/* A row of items sliding sideways, forever. Each child is one item, at its own natural width.
+
+   Every item runs the same linear translate across the row's whole length, so the row moves as
+   one, at one constant speed, whatever the items measure. An item that reaches the left edge
+   wraps round to the far right by itself, because that is where its animation starts again.
+   Nothing is duplicated and nothing in the layout ever moves, so there is nothing to cancel out.
+
+   That needs two things CSS cannot work out on its own, since it cannot measure and cannot turn
+   a length into a duration: how long the row is (--marquee-length) and how far along it each
+   item ends, as a fraction of it (--marquee-end). marquee.js measures both.
+   Without it, the values below stand in, on the assumption that every item is the same width —
+   which is why the items are given equal widths to match, until marquee.js says otherwise.
+
+   The row is longer than the marquee by one item, so an item lands back at the end off-screen.
+
+   --marquee-gap: space between items
+   --marquee-duration: how long an item takes to travel the whole row */
+
+@property --marquee-end {
+	syntax: "<number>";
+	inherits: false;
+	initial-value: 0;
+}
+
+@property --marquee-length {
+	syntax: "<length>";
+	inherits: true;
+	initial-value: 0px;
+}
+
 .marquee {
+	--marquee-gap: 2em;
+	--marquee-duration: 20s;
+
+	container-type: inline-size;
 	display: flex;
+	gap: var(--marquee-gap);
 	overflow: clip;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	/* A ticker is supporting material: a touch quieter than the text around it */
+	color: alpha(from currentColor / 70%);
 	/* Fade the edges, so items slide in and out instead of being cut off */
 	mask: linear-gradient(to right, transparent, black 5% 95%, transparent);
 
 	> * {
+		--_slots: calc(sibling-count() - 1);
+		--marquee-length: calc(100cqw * sibling-count() / var(--_slots));
+		--marquee-end: calc(sibling-index() / sibling-count());
+
+		flex: none;
+		inline-size: var(--marquee-item-size, calc(100cqw / var(--_slots) - var(--marquee-gap)));
 		display: flex;
 		align-items: center;
-		justify-content: space-around;
-		gap: var(--marquee-gap, 2em);
-		margin: 0;
-		/* Trailing gap, so the last item does not touch the first item of the next copy.
-		   It is part of the group's width, which is what the animation translates by. */
-		padding: 0;
-		padding-inline-end: var(--marquee-gap, 2em);
-		list-style: none;
-		/* Each group is at least as wide as the marquee, so two of them always cover it */
-		flex: none;
-		min-width: 100%;
-		animation: marquee var(--marquee-duration, 20s) linear infinite;
+		justify-content: center;
+		gap: .5em;
+		white-space: nowrap;
+
+		animation: marquee var(--marquee-duration) linear infinite;
+		/* Start each item where it already sits, i.e. as far into the travel as it is into the row */
+		animation-delay: calc(var(--marquee-duration) * (var(--marquee-end) - 1));
 
 		@media (prefers-reduced-motion: reduce) {
 			animation-play-state: paused;
 		}
 	}
-
-	> * > * {
-		display: flex;
-		align-items: center;
-		gap: .5em;
-		flex: none;
-	}
 }
 
+/* Subtracting the item's own distance cancels out where layout put it, so every item makes the
+   same journey: in at the far right, out just past the left edge */
 @keyframes marquee {
+	from {
+		translate: calc(var(--marquee-length) * (1 - var(--marquee-end)));
+	}
+
 	to {
-		translate: -100%;
+		translate: calc(-1 * var(--marquee-length) * var(--marquee-end));
 	}
 }
