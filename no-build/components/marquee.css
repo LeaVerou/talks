@@ -5,9 +5,9 @@
    wraps round to the far right by itself, because that is where its animation starts again.
    Nothing is duplicated and nothing in the layout ever moves, so there is nothing to cancel out.
 
-   That needs two things CSS cannot work out on its own, since it cannot measure and cannot turn
-   a length into a duration: how long the row is (--marquee-length) and how far along it each
-   item ends, as a fraction of it (--marquee-end). marquee.js measures both.
+   That needs two distances CSS cannot work out on its own, since it cannot measure: how long
+   the row is (--marquee-length) and how far along it each item ends (--marquee-end).
+   marquee.js measures both.
    Without it, the values below stand in, on the assumption that every item is the same width —
    which is why the items are given equal widths to match, until marquee.js says otherwise.
 
@@ -17,14 +17,14 @@
    --marquee-duration: how long an item takes to travel the whole row */
 
 @property --marquee-end {
-	syntax: "<number>";
+	syntax: "<length>";
 	inherits: false;
-	initial-value: 0;
+	initial-value: 0px;
 }
 
 @property --marquee-length {
 	syntax: "<length>";
-	inherits: true;
+	inherits: false;
 	initial-value: 0px;
 }
 
@@ -47,7 +47,7 @@
 	> * {
 		--_slots: calc(sibling-count() - 1);
 		--marquee-length: calc(100cqw * sibling-count() / var(--_slots));
-		--marquee-end: calc(sibling-index() / sibling-count());
+		--marquee-end: calc(100cqw * sibling-index() / var(--_slots));
 
 		flex: none;
 		inline-size: var(--marquee-item-size, calc(100cqw / var(--_slots) - var(--marquee-gap)));
@@ -59,7 +59,8 @@
 
 		animation: marquee var(--marquee-duration) linear infinite;
 		/* Start each item where it already sits, i.e. as far into the travel as it is into the row */
-		animation-delay: calc(var(--marquee-duration) * (var(--marquee-end) - 1));
+		animation-delay: calc(var(--marquee-duration)
+			* (var(--marquee-end) - var(--marquee-length)) / var(--marquee-length));
 
 		@media (prefers-reduced-motion: reduce) {
 			animation-play-state: paused;
@@ -71,10 +72,10 @@
    same journey: in at the far right, out just past the left edge */
 @keyframes marquee {
 	from {
-		translate: calc(var(--marquee-length) * (1 - var(--marquee-end)));
+		translate: calc(var(--marquee-length) - var(--marquee-end));
 	}
 
 	to {
-		translate: calc(-1 * var(--marquee-length) * var(--marquee-end));
+		translate: calc(-1 * var(--marquee-end));
 	}
 }

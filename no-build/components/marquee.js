@@ -1,8 +1,7 @@
 /**
- * Marquees need to know how far each item has to travel, which CSS can neither measure nor turn
- * into a duration. This measures it: --marquee-length is the row's length, and --marquee-end is
- * how far along it each item ends, as a fraction. Without this, marquee.css falls back to
- * assuming every item is the same width.
+ * Marquees need to know how far each item has to travel, and CSS cannot measure. This writes
+ * those distances out: --marquee-length is the row's length, --marquee-end is how far along it
+ * each item ends. Without this, marquee.css falls back to assuming every item is the same width.
  * @see marquee.css
  */
 
@@ -31,7 +30,7 @@ export function measure (marquee) {
 	}
 
 	for (let [i, item] of [...marquee.children].entries()) {
-		item.style.setProperty("--marquee-end", ends[i] / length);
+		item.style.setProperty("--marquee-end", ends[i] + "px");
 		item.style.setProperty("--marquee-length", length + "px");
 	}
 }
