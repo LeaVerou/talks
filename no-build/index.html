@@ -11,12 +11,28 @@
 	<script src="importmap.js"></script>
 	<script src="talk.js" type="module"></script>
 </head>
-<body class="language-js" data-markdown-elements="details.notes, .md, .md-children > :not(.no-md)" data-markdown-plugins="markdown-it-attrs">
+<body class="language-js" data-markdown-elements="details.notes:not(.md *), .md, .md-children > :not(.no-md)" data-markdown-plugins="markdown-it-attrs">
 
 <header class="slide" id="intro">
-	<h1>No-build:<br><em>pipe dream</em>, or near future?</h1>
+	<!-- Bundler logos in staggered rows, drifting upwards forever -->
+	<svg class="polka" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+		<pattern id="bundlers" width="1300" height="450" patternUnits="userSpaceOnUse">
+			<image href="images/webpack.svg" x="75" y="58" width="110" height="110"/>
+			<image href="images/rollup.svg" x="335" y="58" width="110" height="110"/>
+			<image href="images/esbuild.svg" x="595" y="58" width="110" height="110"/>
+			<image href="images/parcel.svg" x="855" y="58" width="110" height="110"/>
+			<image href="images/vite-classic.svg" x="1115" y="58" width="110" height="110"/>
+			<image href="images/turbopack.svg" x="205" y="283" width="110" height="110"/>
+			<image href="images/rspack.svg" x="465" y="283" width="110" height="110"/>
+			<image href="images/rolldown.svg" x="725" y="283" width="110" height="110"/>
+			<image href="images/snowpack.svg" x="985" y="283" width="110" height="110"/>
+			<image href="images/bun.svg" x="1245" y="283" width="110" height="110"/>
+		</pattern>
+		<rect width="100%" height="200%" y="-450" fill="url(#bundlers)"/>
+	</svg>
+	<h1>No-build: pipe dream, or near future?</h1>
 	<div class="by">
-		by <a href="http://lea.verou.me">Lea Verou</a>
+		by <a href="http://lea.verou.me">Lea Verou</a><br>
 		<small>TC39, WHATWG, CSS WG, OpenJS Foundation</small>
 		<small><a href="http://lea.verou.me"><strong>lea.verou.me</strong></a> &bull; <strong>lea＠verou.me</strong></small>
 	</div>
@@ -104,10 +120,10 @@
 	</details>
 </article>
 
-<article class="slide black">
+<!-- <article class="slide black">
 	<h2>The problem is not compilation, it’s <span class="red">fragmentation</span>.</h2>
 
-</article>
+</article> -->
 
 <article class="slide language-css">
 	<blockquote>
@@ -197,7 +213,7 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 
 </article>
 
-<article class="slide" data-steps="6" id="chart-frequency-complexity">
+<article class="slide" data-steps="5" id="chart-frequency-complexity">
 	<style>
 		@scope {
 			 .chart:is(.slide[data-step="1"] *) {
@@ -234,7 +250,7 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 	</details>
 </article>
 
-<article class="slide black">
+<article class="slide black" id="perfect">
 	<h2 class="draw per-child">It doesn’t have to be <u>perfect</u> to be <u>worth it</u>.</h2>
 
 	<small class="abs-bottom" data-visit="2">(a metaphor for life?)</small>
@@ -272,7 +288,7 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 		</li>
 		<li>
 			<strong>Performance</strong>
-			<small>tree-shaking, bundling, minification, etc</small>
+			<small>tree-shaking, bundling, discovery waterfall, minification, etc</small>
 		</li>
 		<li>
 			<strong>Dependency resolution</strong>
@@ -433,7 +449,7 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 		</li>
 		<li>
 			<strong>Performance</strong>
-			<small>bundling, discovery waterfall, minification, etc</small>
+			<small>tree-shaking, bundling, discovery waterfall, minification, etc</small>
 		</li>
 		<li>
 			<strong class="delayed:red">Dependency resolution</strong>
@@ -459,12 +475,12 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 
 
 <article class="slide">
-	<header>
-		<h1>Delightful APIs</h1>
-		<p class="subtitle">Incremental user effort produces incremental value</p>
-	</header>
+	<h2>
+		<span class="supertitle">API Design Principle</span>
+		Incremental UI complexity for incremental use case complexity
+	</h2>
 
-	<object data="images/curve-delightful.svg"></object>
+	<object data="images/curve-delightful.svg" style="min-height: 45vh"></object>
 
 	<details class="notes">
 		Good user interfaces make simple things easy, complex things possible,
@@ -695,8 +711,8 @@ import { marked } from 'marked'
 
 <details class="notes">
 
-The first requirement is specifiers.
-Specifiers are essential for transitive dependencies to work,
+Another requirement is specifiers.
+First, specifiers are essential for transitive dependencies to work,
 since they are the only agreed-upon convention.
 
 But even beside that, specifiers are an _abstraction_.
@@ -759,6 +775,8 @@ However, even that way, version management is still ad hoc.
 
 ## Security & Reliability
 
+<p class="abs-bottom nowrap handwritten red">Who remembers polyfill.io?</p>
+
 <details class="notes">
 
 At first, it seems like CDNs could be a great solution.
@@ -804,11 +822,11 @@ Maybe sacrifice a goat to the gods first.
 	</details>
 </article>
 
-<article class="slide md req">
+<article class="slide req">
 
-## Local dependencies
+<h2>Local dependencies</h2>
 
-Because abstraction shouldn’t just be about using other people’s code
+<p style="max-width: 13em">Abstraction isn’t just about using other people’s code</p>
 
 <details class="notes">
 
@@ -855,7 +873,6 @@ import stuff from 'localpkg';
 - **Specifiers!**
 - **Local dependencies!**
 - **Reliability?** If local! { .ok }
-- **Security?** With SRI! { .ok }
 
 { .check-list .green .text .row-1 .col-2 .rspan-2 }
 
@@ -996,6 +1013,7 @@ style="min-width: 15em"></iframe>
 - No watcher needed
 - Still uses JSPM under the hood ❤️
 - And you’re the first to hear! 😉
+- Still something to install :( { .bad }
 
 { .check-list }
 
@@ -1039,6 +1057,8 @@ No, we are not doomed to repeat the same patterns forever because LLMs have been
 <article class="slide">
 	<iframe loading="lazy" src="https://www.w3.org/community/nobuild/" loading="lazy" data-url class="browser"></iframe>
 </article>
+
+<article class="slide" data-insert="#perfect"></article>
 
 <footer class="dark slide" id="end">
 	<h2>Thank you!</h2>

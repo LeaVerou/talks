@@ -56,30 +56,46 @@
 	background: linear-gradient(to bottom right var(--in-oklch), var(--color-indigo), var(--color-blue));
 	gap: 3rem;
 
+	/* Behind the text, not in the way of it */
+	.polka {
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		width: 100%;
+		height: 100%;
+		opacity: .25;
+
+		/* One tile's height per cycle, so the loop is seamless */
+		rect {
+			animation: polka-scroll 20s linear infinite;
+
+			@media (prefers-reduced-motion: reduce) {
+				animation-play-state: paused;
+			}
+		}
+	}
+
 	h1 {
-		font-size: 9vmin;
+		font-size: 15vh;
 		line-height: 1;
 		letter-spacing: -.02em;
 		text-wrap: balance;
-
-		em {
-			font-style: normal;
-			font-family: var(--font-handwritten);
-		}
+		text-shadow: .05em .05em black;
 	}
 
 	.by {
 		text-align: center;
 		color-scheme: light;
 		color: canvastext;
-		font-size: 150%;
+		/* font-size: 150%; */
 		background: white;
 		align-self: center;
 		padding-inline: 3rem;
-		padding-block: .5rem 1.5rem;
+		padding-block: .5rem;
 		box-shadow: .5rem .5rem black;
 		corner-shape: bevel;
 		border-radius: 3rem / 100% 0 100% 0;
+		white-space: nowrap;
 
 		> a {
 			font-weight: bold;
@@ -90,7 +106,17 @@
 			display: block;
 			font-size: 50%;
 			font-weight: 500;
+
+			+ small {
+				font-size: 80%
+			}
 		}
+	}
+}
+
+@keyframes polka-scroll {
+	to {
+		translate: 0 -450px;
 	}
 }
 
@@ -376,7 +402,7 @@ blockquote {
 	}
 }
 
-[data-visit="2"]:not(.slide[data-visit="2"]) {
+[data-visit="2"]:not(.slide[data-visit="2"] *) {
 	opacity: 0;
 	pointer-events: none;
 }
@@ -388,3 +414,5 @@ blockquote {
 		color: oklch(from var(--color-neutral) var(--tint-70));
 	}
 }
+
+
