@@ -92,8 +92,12 @@
 
 #intro {
 	color-scheme: dark;
-	background: linear-gradient(to bottom right var(--in-oklch), var(--color-indigo), var(--color-blue));
+	background: var(--color-indigo);
 	gap: 3rem;
+
+	.presenter & {
+		background: var(--color-yellow);
+	}
 
 	/* Behind the text, not in the way of it */
 	.polka {
