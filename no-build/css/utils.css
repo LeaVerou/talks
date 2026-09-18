@@ -106,9 +106,13 @@
 	gap: 1em;
 	grid-template-columns: repeat(var(--_columns), minmax(auto, 1fr));
 
-	> :where(h1, h2, h3, h4, h5, h6),
+	> :where(h1, h2, h3, h4, h5, h6, header),
 	.span {
 		grid-column-end: span var(--_columns);
+	}
+
+	> header {
+		margin-bottom: 0;
 	}
 
 	/* Mainly to override span all in headings */
@@ -211,6 +215,16 @@
 .abs-bottom-right,
 .abs-top-right {
 	right: var(--_pad);
+}
+
+/* Anchor positioning declared in markup: [data-anchor-name="--foo"] names an anchor,
+   [data-anchored="--foo"] points at it. Positioning itself is up to the anchored element. */
+[data-anchor-name] {
+	anchor-name: attr(data-anchor-name type(<custom-ident>));
+}
+
+[data-anchored] {
+	position-anchor: attr(data-anchored type(<custom-ident>));
 }
 
 .frame-by-frame {
@@ -501,4 +515,8 @@ li.x {
 		--icon-marker: var(--icon);
 		color: var(--accent-color);
 	}
+}
+
+.nowrap {
+	text-wrap-mode: nowrap;
 }

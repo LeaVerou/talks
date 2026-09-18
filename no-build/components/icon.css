@@ -10,10 +10,9 @@
 		margin-inline-end: 0;
 	}
 
-	/* data-anchored="--foo" centers the badge on the top right corner of that anchor */
+	/* Centers the badge on the top right corner of its anchor */
 	&[data-anchored] {
 		position: absolute;
-		position-anchor: attr(data-anchored type(<custom-ident>));
 		left: anchor(right);
 		top: anchor(top);
 		translate: -50% -50%;
@@ -25,7 +24,7 @@
 	padding: .3em;
 	border-radius: 50%;
 	transition:
-		scale var(--pop-duration) cubic-bezier(.34, 1.56, .64, 1),
+		scale var(--pop-duration) var(--ease-spring),
 		--icon-start 0s var(--pop-duration) allow-discrete;
 
 	/* Swapping in the self-animating icon is what starts it drawing */

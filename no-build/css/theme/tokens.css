@@ -52,6 +52,9 @@
 
 	--font-weight: 300;
 
+	/* Overshoots, for things that pop into place */
+	--ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+
 	--lh-body: 1.5;
 	--lh-heading: 1.1;
 
@@ -95,7 +98,7 @@
 	--font-size-xl: 1.5em;
 	--font-size-2xl: 2em;
 	--font-size-3xl: 2.5em;
-	--font-size-4xl: 5em;
+	--font-size-4xl: 4em;
 
 	--radius-s: .2em;
 	--radius-m: .5em;

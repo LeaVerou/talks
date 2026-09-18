@@ -134,7 +134,7 @@
 .draw {
 	&:not(.per-child),
 	&.per-child > * {
-		transition: --drawn var(--transition-duration);
+		transition: --drawn var(--transition-duration) var(--draw-delay, 0s);
 
 		@starting-style {
 			--drawn: 0;

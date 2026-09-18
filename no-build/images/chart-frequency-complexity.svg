@@ -21,6 +21,20 @@
 				initial-value: 77%;
 			}
 
+			/* Where the dot started. A faded dot and two arrows show the way from there to the current position,
+			   so with the defaults, which match the position, nothing extra is drawn. */
+			@property --dot-x0 {
+				syntax: "&lt;percentage&gt;";
+				inherits: true;
+				initial-value: 78%;
+			}
+
+			@property --dot-y0 {
+				syntax: "&lt;percentage&gt;";
+				inherits: true;
+				initial-value: 77%;
+			}
+
 			text {
 				font: 28px Excalifont, "Segoe UI Emoji";
 				fill: #1e1e1e;
@@ -31,19 +45,96 @@
 				fill: #868e96;
 			}
 
-			.axis {
+			.axis,
+			.arrow {
 				fill: none;
 				stroke: #1e1e1e;
 				stroke-width: 2;
 				stroke-linecap: round;
 			}
 
-			.point {
-				fill: #e03131;
+			/* Nothing below relies on registering internal properties: when embedded with a use element only the
+			   page's registrations count. Every transition runs on the public --dot-x/--dot-y, on whichever
+			   element needs its own timing, and the derived values are plain substitutions. */
+
+			/* Untransitioned, so it always sees the target position */
+			.plot {
+				--x-end: var(--dot-x);
+				--y-end: var(--dot-y);
+			}
+
+			/* Follows the dot: its --dot-x/--dot-y are the animating position, re-exported for the dot below */
+			.moving {
 				transition: var(--dot-transition, --dot-x .4s, --dot-y .3s ease-in);
-				translate: var(--dot-x) calc(100% - var(--dot-y));
+				--x-now: var(--dot-x);
+				--y-now: var(--dot-y);
+			}
+
+			.dot {
+				fill: #e03131;
+			}
+
+			/* The dot's own --dot-x/--dot-y hold the previous position: a step-end transition restarts on every
+			   frame the inherited value changes, so it only jumps once the move has been over for a second.
+			   NOTE: that second must outlast the longest --dot-transition.
+			   --t is the progress of the move, 0 to 1, per axis between the held start and the target.
+			   progress() returns 1 when start equals end, so an axis that does not move reads as done,
+			   and the minimum of both is the progress of the slower axis. It is 1 at rest. */
+			.point {
+				transition: --dot-x 1s step-end, --dot-y 1s step-end;
+				translate: var(--x-now) calc(100% - var(--y-now));
+				--t: min(
+					progress(var(--x-now), var(--dot-x), var(--x-end)),
+					progress(var(--y-now), var(--dot-y), var(--y-end))
+				);
+				/* Swells towards the end of a move and settles on arrival */
+				scale: calc(1 + .3 * sin(pow(var(--t), 3) * 180deg));
+			}
+
+			/* Where the dot started. Follows the dot's own transition unless --arrows-transition says otherwise. */
+			.origin {
+				translate: var(--dot-x0) calc(100% - var(--dot-y0));
+				transition: var(--arrows-transition, var(--dot-transition, --dot-x .4s, --dot-y .3s ease-in));
+				/* Distance travelled in plot units (the plot is 813 by 601), --dy positive downwards.
+				   sign() and progress() are what turns a percentage into a plain number without a registration.
+				   NOTE: progress() is clamped to 0..1 in Chrome, hence the abs() and the separate sign(). */
+				--travel-x: calc(var(--dot-x) - var(--dot-x0));
+				--travel-y: calc(var(--dot-y0) - var(--dot-y));
+				--dx: calc(813 * sign(var(--travel-x)) * progress(abs(var(--travel-x)), 0%, 100%));
+				--dy: calc(601 * sign(var(--travel-y)) * progress(abs(var(--travel-y)), 0%, 100%));
+				--len: hypot(var(--dx), var(--dy));
+			}
+
+			.origin .dot {
+				opacity: .3;
+			}
+
+			/* One arrow from the start dot to the current one. The shaft is drawn one unit long along x,
+			   and the matrix maps that unit onto the travel: rotation and length in one, and with no
+			   travel the arrow collapses to nothing. The stroke and the head undo the scaling. */
+			.arrow {
+				stroke: #e03131;
+				opacity: .6;
+				transform: matrix(var(--dx), var(--dy), calc(-1 * var(--dy)), var(--dx), 0, 0);
+			}
+
+			.shaft {
+				vector-effect: non-scaling-stroke;
+			}
+
+			.head {
+				translate: 1px 0;
+				scale: calc(1 / max(var(--len), 1));
 			}
 		</style>
+
+		<!-- Hand-drawn dot, centered on its own origin so a translate positions its center -->
+		<path id="dot" transform="translate(-6.2 -6.2)" d="M6.81 0.3 C8.01 0.53, 9.61 1.36, 10.57 2.4 C11.52 3.43, 12.43 5.3, 12.54 6.51 C12.65 7.72, 12.2 8.7, 11.25 9.65 C10.3 10.61, 8.17 11.9, 6.85 12.24 C5.53 12.58, 4.35 12.37, 3.32 11.69 C2.29 11, 1.13 9.42, 0.67 8.14 C0.21 6.87, 0.23 5.29, 0.57 4.04 C0.92 2.79, 1.58 1.35, 2.75 0.66 C3.92 -0.03, 6.77 0.04, 7.61 -0.09 C8.44 -0.22, 7.87 -0.26, 7.75 -0.13 M6.66 0.73 C7.96 1.02, 10.21 1.64, 11.16 2.48 C12.1 3.33, 12.46 4.54, 12.32 5.82 C12.18 7.1, 11.26 9.14, 10.3 10.15 C9.33 11.16, 7.87 11.56, 6.54 11.87 C5.21 12.19, 3.33 12.71, 2.33 12.03 C1.33 11.34, 0.82 9.19, 0.54 7.76 C0.25 6.33, 0.11 4.58, 0.62 3.44 C1.12 2.3, 2.37 1.6, 3.58 0.94 C4.78 0.29, 7.22 -0.42, 7.85 -0.49 C8.47 -0.55, 7.42 0.32, 7.34 0.53"></path>
+		<!-- Arrowhead pointing right, tip at the origin -->
+		<g id="head">
+			<path d="M-23.49 8.56 C-16.28 3.83, -6.58 0.22, 0 0 M-23.49 8.56 C-17.92 6.22, -10.91 3.29, 0 0"></path>
+			<path d="M-23.49 -8.54 C-16.25 -6.81, -6.55 -3.94, 0 0 M-23.49 -8.54 C-17.91 -6.41, -10.9 -4.86, 0 0"></path>
+		</g>
 	</defs>
 
 	<!-- Vertical axis, arrow at the top -->
@@ -72,10 +163,19 @@
 
 	<!-- The dot lives in a viewport spanning exactly the two axes,
 	     so the percentages in its translate resolve against the axis lengths -->
-	<svg x="0" y="-601" width="813" height="601" overflow="visible">
-		<!-- Hand-drawn dot, centered on its own origin so the translate positions its center -->
-		<g class="point">
-			<path transform="translate(-6.2 -6.2)" d="M6.81 0.3 C8.01 0.53, 9.61 1.36, 10.57 2.4 C11.52 3.43, 12.43 5.3, 12.54 6.51 C12.65 7.72, 12.2 8.7, 11.25 9.65 C10.3 10.61, 8.17 11.9, 6.85 12.24 C5.53 12.58, 4.35 12.37, 3.32 11.69 C2.29 11, 1.13 9.42, 0.67 8.14 C0.21 6.87, 0.23 5.29, 0.57 4.04 C0.92 2.79, 1.58 1.35, 2.75 0.66 C3.92 -0.03, 6.77 0.04, 7.61 -0.09 C8.44 -0.22, 7.87 -0.26, 7.75 -0.13 M6.66 0.73 C7.96 1.02, 10.21 1.64, 11.16 2.48 C12.1 3.33, 12.46 4.54, 12.32 5.82 C12.18 7.1, 11.26 9.14, 10.3 10.15 C9.33 11.16, 7.87 11.56, 6.54 11.87 C5.21 12.19, 3.33 12.71, 2.33 12.03 C1.33 11.34, 0.82 9.19, 0.54 7.76 C0.25 6.33, 0.11 4.58, 0.62 3.44 C1.12 2.3, 2.37 1.6, 3.58 0.94 C4.78 0.29, 7.22 -0.42, 7.85 -0.49 C8.47 -0.55, 7.42 0.32, 7.34 0.53"></path>
+	<svg class="plot" x="0" y="-601" width="813" height="601" overflow="visible">
+		<g class="origin">
+			<use class="dot" href="#dot"></use>
+			<g class="arrow">
+				<path class="shaft" d="M0 -0.0012 C0.166 -0.0014, 0.83 -0.0007, 1 -0.0006"></path>
+				<path class="shaft" d="M-0.001 0.0013 C0.165 0.0013, 0.833 0.001, 1 0.0009"></path>
+				<use class="head" href="#head"></use>
+			</g>
+		</g>
+		<g class="moving">
+			<g class="point">
+				<use class="dot" href="#dot"></use>
+			</g>
 		</g>
 	</svg>
 </svg>
