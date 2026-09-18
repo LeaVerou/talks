@@ -57,6 +57,9 @@
 	&.space-between {
 		justify-content: space-between;
 	}
+	&.wrap {
+		flex-wrap: wrap;
+	}
 }
 
 .flex {
@@ -99,7 +102,8 @@
 	}
 }
 
-.columns {
+.columns,
+.columns-3 {
 	--_columns: 2;
 
 	display: grid;
@@ -143,6 +147,10 @@
 	.rspan-2 {
 		grid-row-end: span 2;
 	}
+}
+
+.columns-3 {
+	--columns: 3;
 }
 
 .big {

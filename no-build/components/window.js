@@ -23,7 +23,7 @@ export function prettifyUrl (url) {
 	return url.href.replace(/\/$/, "").replace(/^https?:\/\//, "");
 }
 
-for (let el of document.querySelectorAll(".browser[data-url], .browser[src]")) {
+for (let el of document.querySelectorAll(".browser[data-url], iframe.browser[src^='http']")) {
 	let url = el.dataset.url || prettifyUrl(el.src);
 
 	if (url) {

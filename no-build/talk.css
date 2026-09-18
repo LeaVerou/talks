@@ -51,6 +51,45 @@
 	height: 100%;
 }
 
+/* Sticker slapped onto another element, anchored to it via data-anchored.
+   Placement (position-area / insets) is up to each sticker. */
+.sticker {
+	position: absolute;
+	display: grid;
+	justify-items: center;
+	font-size: 28%;
+	line-height: 1;
+	text-decoration: none;
+	--accent-color: var(--color-orange);
+	background: var(--accent-color);
+	color: oklch(from var(--accent-color) var(--tint-text));
+
+	/* Pops into place with a slight overshoot */
+	--transition-properties: opacity, scale;
+	--transition-duration: .4s;
+	transition-timing-function: var(--ease-spring);
+
+	&:not(.current, .past) {
+		scale: .5;
+	}
+
+	b {
+		font-size: 2em;
+		font-weight: 500;
+	}
+
+	&.round {
+		aspect-ratio: 1;
+		padding: 1em;
+		font-size: 36%;
+		rotate: 8deg;
+		border-radius: 50%;
+		place-content: center;
+		text-align: center;
+		text-wrap: balance;
+	}
+}
+
 #intro {
 	color-scheme: dark;
 	background: linear-gradient(to bottom right var(--in-oklch), var(--color-indigo), var(--color-blue));
@@ -125,8 +164,6 @@ footer.slide#end {
 
 	h2 {
 		margin-bottom: 0;
-		font-family: var(--font-handwritten);
-		color: var(--color-cyan);
 	}
 
 	.slides {
@@ -208,7 +245,8 @@ ol {
 	}
 
 	&.req {
-		--supertitle: "Requirement";
+		--supertitle: "Non-negotiable";
+		--accent-color: var(--color-red);
 	}
 }
 
@@ -267,23 +305,15 @@ ol {
 		font-family: inherit;
 	}
 
-	/* Ticket stuck on a feature, linking to the Interop proposal that would get it everywhere */
+	/* Ticket linking to the Interop proposal that would get a feature everywhere */
 	.interop {
-		position: absolute;
 		position-area: center;
 		/* baseline-status sizes itself in px, so its browser icons sit in a fixed band at the right */
 		right: 310px;
-		display: grid;
-		justify-items: center;
 		gap: .1em;
 		padding: .4em 1.2em;
-		font-size: 28%;
-		line-height: 1;
-		text-decoration: none;
 		rotate: -3deg;
 		--accent-color: var(--color-green);
-		background: var(--accent-color);
-		color: oklch(from var(--accent-color) var(--tint-text));
 
 		/* Notches on the sides make it a ticket; border-radius is the fallback shape */
 		--notch: .5em;
@@ -299,20 +329,6 @@ ol {
 			arc to 0 calc(50% - var(--notch)) of var(--notch) ccw,
 			close
 		);
-
-		/* Slapped on: pops into place with a slight overshoot */
-		--transition-properties: opacity, scale;
-		--transition-duration: .4s;
-		transition-timing-function: var(--ease-spring);
-
-		&:not(.current, .past) {
-			scale: .5;
-		}
-
-		b {
-			font-size: 2em;
-			font-weight: 500;
-		}
 	}
 
 	.card {

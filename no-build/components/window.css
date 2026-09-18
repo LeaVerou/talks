@@ -74,4 +74,29 @@
 	}
 }
 
+/* Fan of overlapping .window/.browser screenshots, bounded to the available space.
+   Grid stacks every child into the same cell (an explicit 1fr track, so percentages
+   on children resolve against it) instead of flowing them, which is what let them
+   overflow at native image size before. sibling-index()/-count() fan any number of
+   children out symmetrically, so the layout isn't hardcoded to 3. */
+.windows {
+	display: grid;
+	grid-template: 1fr / 1fr;
+	place-items: center;
+	flex: 1;
+	min-height: 0;
+	align-self: stretch;
+
+	> .window,
+	> .browser {
+		grid-area: 1 / 1;
+		max-width: 55%;
+		max-height: 80%;
+
+		--_fan-i: calc(sibling-index() - (sibling-count() + 1) / 2);
+		rotate: calc(var(--_fan-i) * 6deg);
+		translate: calc(var(--_fan-i) * 18%) calc(var(--_fan-i) * var(--_fan-i) * 4%);
+	}
+}
+
 
