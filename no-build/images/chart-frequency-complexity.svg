@@ -57,15 +57,17 @@
 			   page's registrations count. Every transition runs on the public --dot-x/--dot-y, on whichever
 			   element needs its own timing, and the derived values are plain substitutions. */
 
-			/* Untransitioned, so it always sees the target position */
+			/* Untransitioned, so it always sees the target position.
+			   --move is how the dot travels: --dot-transition overrides it, --dot-duration scales it. */
 			.plot {
 				--x-end: var(--dot-x);
 				--y-end: var(--dot-y);
+				--move: var(--dot-transition, --dot-x calc(var(--dot-duration, .3s) * 1.5), --dot-y var(--dot-duration, .3s) ease-in);
 			}
 
 			/* Follows the dot: its --dot-x/--dot-y are the animating position, re-exported for the dot below */
 			.moving {
-				transition: var(--dot-transition, --dot-x .4s, --dot-y .3s ease-in);
+				transition: var(--move);
 				--x-now: var(--dot-x);
 				--y-now: var(--dot-y);
 			}
@@ -77,15 +79,16 @@
 			/* The dot's own --dot-x/--dot-y hold the previous position: a step-end transition restarts on every
 			   frame the inherited value changes, so it only jumps once the move has been over for a second.
 			   NOTE: that second must outlast the longest --dot-transition.
-			   --t is the progress of the move, 0 to 1, per axis between the held start and the target.
-			   progress() returns 1 when start equals end, so an axis that does not move reads as done,
-			   and the minimum of both is the progress of the slower axis. It is 1 at rest. */
+			   --t is the progress of the move, 0 to 1, per axis between the held start and the target,
+			   and the minimum of both is the progress of the slower axis.
+			   An axis that does not move would be 0/0 (NaN, which collapses the scale below),
+			   so the position and target are nudged by a hair to make it 1: the axis reads as done. */
 			.point {
 				transition: --dot-x 1s step-end, --dot-y 1s step-end;
 				translate: var(--x-now) calc(100% - var(--y-now));
 				--t: min(
-					progress(var(--x-now), var(--dot-x), var(--x-end)),
-					progress(var(--y-now), var(--dot-y), var(--y-end))
+					progress(var(--x-now) + .001%, var(--dot-x), var(--x-end) + .001%),
+					progress(var(--y-now) + .001%, var(--dot-y), var(--y-end) + .001%)
 				);
 				/* Swells towards the end of a move and settles on arrival */
 				scale: calc(1 + .3 * sin(pow(var(--t), 3) * 180deg));
@@ -94,7 +97,7 @@
 			/* Where the dot started. Follows the dot's own transition unless --arrows-transition says otherwise. */
 			.origin {
 				translate: var(--dot-x0) calc(100% - var(--dot-y0));
-				transition: var(--arrows-transition, var(--dot-transition, --dot-x .4s, --dot-y .3s ease-in));
+				transition: var(--arrows-transition, var(--move));
 				/* Distance travelled in plot units (the plot is 813 by 601), --dy positive downwards.
 				   sign() and progress() are what turns a percentage into a plain number without a registration.
 				   NOTE: progress() is clamped to 0..1 in Chrome, hence the abs() and the separate sign(). */

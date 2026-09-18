@@ -60,9 +60,8 @@
 			var(--img-address-bar) var(--_bar-x) var(--frame) / calc(100% - var(--_bar-x) - var(--frame)) var(--_bar);
 	}
 
-	&:is(iframe) {
+	&:is(iframe, .browser) {
 		min-height: 50vh;
-		font-size: 50%;
 		--_zoom: var(--zoom, .75);
 		zoom: var(--_zoom);
 		font-size: calc(1em * var(--_zoom));
@@ -71,6 +70,15 @@
 	&.stretch {
 		height: stretch;
 		flex: 1;
+	}
+}
+
+img.browser {
+	object-fit: cover;
+	object-position: top;
+
+	&.stretch {
+		width: stretch;
 	}
 }
 

@@ -431,4 +431,6 @@ blockquote {
 	}
 }
 
-
+.baseline-overlay {
+	--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / .8); backdrop-filter: blur(5px);
+}

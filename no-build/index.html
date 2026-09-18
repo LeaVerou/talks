@@ -177,7 +177,7 @@ web developers are the consumers, and their needs should come before the needs o
 </article>
 
 <article class="slide">
-	<iframe loading="lazy" loading="lazy" src="https://github.com/color-js/elements/commit/e685c86297a580c52caae4bcc8f1e25ea3d830e3" class="window"></iframe>
+	<img src="images/commit.png" loading="lazy" data-url="github.com/color-js/elements/commit/e685c86297a580c52caae4bcc8f1e25ea3d830e3" class="window"></iframe>
 	<details class="notes">
 		But the ubiquity and total dependence on bundlers has reversed the natural order:
 		now web developers must cater to bundlers, rather than the other way around.
@@ -202,8 +202,7 @@ class MyElement extends HTMLElement {
 }
 </code></pre>
 
-<baseline-status class="abs-bottom-right" featureId="css-modules"
-style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / .8); backdrop-filter: blur(5px)"></baseline-status>
+<baseline-status class="abs-bottom-right baseline-overlay" featureId="css-modules"></baseline-status>
 
 <details class="notes">
 	In some cases, it gets to the extrme, with the web platform _itself_ adding features primarily to appease bundlers.
@@ -240,6 +239,7 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 		There is a common misconception.
 		The goal is not to get rid of bundlers.
 		It’s not a binary.
+
 		Complex use cases and large apps will _always_ need bundlers.
 		Bundlers will _always_ win on certain things.
 		The goal is to make them less essential, and lighter when they _are_ needed.
@@ -272,6 +272,21 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 		</div>
 
 	</h2>
+	<details class="notes">
+		The goal
+	</details>
+</article>
+
+<article class="slide">
+	<img src="images/nobuild-cg.png" loading="lazy" data-url="w3.org/community/nobuild" class="browser stretch"></iframe>
+	<blockquote class="speech-bubble abs shadow delayed grow" style="width: 20em">
+		"A group for those interested in exploring a future of the web that requires
+		<strong>fewer</strong>/no dependencies and <strong>fewer</strong>/no build steps."
+	</blockquote>
+
+	<details class="notes">
+		Even the CG called "no-build" clarifies that simpler build tools are totally part of the goal!
+	</details>
 </article>
 
 <article class="slide tinted-95 red">
@@ -382,6 +397,15 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 	</details>
 </article>
 
+<article class="slide">
+	<h2>HTML includes?! 🤩</h2>
+	<img src="images/declarative-fragments.png" data-url="groups.google.com/a/chromium.org/g/blink-dev/c/rjBSVWAGoHo/m/FhEGrTIkAwAJ" alt="" class="browser stretch">
+	<details class="notes">
+		Chrome is even prototyping client-side HTML includes,
+		a very common reason for defaulting to build tools very early on.
+	</details>
+</article>
+
 <article class="black slide">
 	<h2>Build tools will <span class="red">always</span> make sense for transpilation</h2>
 	<p class="abs-bottom nowrap">The goal is to make transpilation <u class="draw">less necessary</u></p>
@@ -481,37 +505,53 @@ style="--zoom: 3; zoom: var(--zoom); max-width: 24em; background: hsl(0 0 100 / 
 	<object data="images/curve-delightful.svg" style="min-height: 45vh"></object>
 
 	<details class="notes">
-		Good user interfaces make simple things easy, complex things possible,
+		As a general principle, good UIs (and that includes languages, APIs, ecosystems)
+		make simple things easy, complex things possible,
 		and ensure a smooth transition from simple use cases to more complex ones.
-	</details>
-</article>
 
-<article class="slide black">
-	<h2 class="draw per-child">
-		It is <span class="green">okay</span> to need <u>complex</u> tools for <u>complex</u> needs</h2>
+	</details>
 </article>
 
 <article class="slide">
 	<object data="images/curve-cliff.svg"></object>
 
 	<details class="notes">
-		When a small increase in use case complexity results in disproportionate increase in UI complexity,
-		this is called a _usability cliff_ and it is an **antipattern**.
-		The way dependencies work in the web platform is a textbook usability cliff.
+		It's an antipattern when a small increase in use case complexity results in disproportionate increase in UI complexity,
+		that’s called a _usability cliff_.
 
-		There is nothing wrong with bundlers when used as a performance optimization to minimize waterfall effects and overhead from too many HTTP requests.
-		You know, what a bundler is named after!
-		Or to provide a different DX, possibly optimized for specific use cases.
-		**It is okay to require advanced tools for advanced needs**,
-		and performance optimization is generally an advanced use case. Same for most other things bundlers and build tools are used for, such as strong typing, linting, or transpiling. All of these are needs that come much later than dependency management, both in a programmer’s learning journey, as well as in a project’s development lifecycle.
+		The way dependencies work in the web platform is a textbook usability cliff.
 	</details>
 </article>
+
+<article class="slide black">
+	<h2 class="draw per-child">
+		It is <span class="green">okay</span> to need <u>complex</u> tools for <u>complex</u> needs</h2>
+
+	<details class="notes">
+		There is nothing wrong with bundlers when used as a performance optimization to minimize waterfall effects and overhead from too many HTTP requests.
+		Or to provide a different syntax, possibly optimized for specific use cases.
+		Or for certain debugging affordances, like strong typing or linting.
+		All of these improve the baseline, but if need be, you can get by without them.
+
+		**It is okay to require advanced tools for advanced needs**.
+	</details>
+</article>
+
+
 
 <article class="slide black">
 	<h2 class="draw per-child">
 		It is <span class="red">not okay</span> to need
 		<u>complex</u> tools for <u class="red">basic</u> needs
 	</h2>
+
+	<details class="notes">
+		The problem is when basic needs demand complex tools.
+
+		Using dependencies is one such basic need.
+		You can't really get by without using dependencies.
+		Or rather, it would be extremely unwise.
+	</details>
 </article>
 
 <article class="slide dark">
@@ -550,15 +590,12 @@ And yet, the web platform has outsourced the most fundamental ecosystem function
 	<p class="delayed">“Dependency-free” is not a badge of honor.</p>
 
 	<details class="notes">
-	One of these is not like the others.
-
-	In NodeJS, you just npm install and reference specifiers straight away in your code.
-	Same in Python, with pip install.
-	Same in Rust with cargo add.
-	In healthy ecosystems you don’t ponder how or whether to use dependencies.
-	The ecosystem assumes dependencies are normal, cheap, and first-class.
-	You just install them, use them, and move on. “Dependency-free” is not a badge of honor.
-
+		In healthy ecosystems you don’t ponder how or whether to use dependencies.
+		There is no increase in the complexity of your architecture the moment you install a library.
+		You don't need to install a third-party dependency to be able to use dependencies.
+		The ecosystem assumes dependencies are normal, cheap, and first-class.
+		You just install them, use them, and move on.
+		“Dependency-free” is not a badge of honor.
 	</details>
 </article>
 
@@ -770,10 +807,8 @@ the ability to decouple the package being requested from details like its versio
 Specifiers are an abstraction over URLs.
 
 Packages export specifiers and map them to actual file paths.
-Consumers import dependencies via their specifiers, and the specifics are encapsulated.
-
-The specifics of where a specifier points to can change, but consumer code doesn't need to.
-That also meant packages could use dependencies without having to hardcode a specific file path for them that consumers must follow.
+Consumers import dependencies via their specifiers, and the specifics are encapsulated
+and can easily change from version to version, or even based on import conditions.
 
 Specifiers should be non-negotiable.
 Any dependency management system that forces you to write out paths manually,
@@ -871,7 +906,7 @@ Or, that time when I had to change demos that depended on JSDelivr to use Unpkg 
 
 <article class="slide req">
 
-<h2>Local dependencies</h2>
+<h2>What about <em>your own</em> dependencies?</h2>
 
 <p style="max-width: 13em">Abstraction isn’t just about using other people’s code</p>
 
@@ -879,7 +914,10 @@ Or, that time when I had to change demos that depended on JSDelivr to use Unpkg 
 
 Modularizing your _own_ code is an essential part of good architecture.
 Whatever workflow we pick must support local dependencies seamlessly.
-This is another problem with CDN-based workflows.
+This is also problematic with CDN-based workflows.
+
+All of these are solvable problems,
+but every solution is yet another increase in complexity.
 
 </details>
 </article>
@@ -950,45 +988,9 @@ local, remote, whatever.
 
 From there on, as with many things in life, the specific pros and cons depend on how you use them.
 
-But wait a second, look at this code.
-It’s a JSON island ...in HTML!
-Now we need build tools to include this code on every HTML page??
-
 </details>
 
 </article>
-
-<article class="slide md columns">
-
-## External import maps
-
-<yo-dawg>
-Yo dawg, I herd u like no-build
-
-So I put a build step in ur no-build
-so u can build while you don't build
-</yo-dawg>
-
-- Future: `&lt;script type="importmap" src="importmap.js"&gt;`
-- `&lt;script src="importmap.js"&gt;` injection script { .ok }
-- Speculative: `Link`-like HTTP header? { .best }
-
-{ .check-list .delayed-children }
-
-<details class="notes">
-
-That's kind of a non-starter, isn't it?
-
-And no, you can't just use a `src` attribute, yet.
-But thankfully, injecting them through a script works, so disaster averted.
-
-In the future we may not need HTML at all.
-There are discussions around potentially using HTTP headers to deliver either the import map content or a URL to it.
-
-</details>
-
-</article>
-
 
 <article class="slide imaps">
 <h2 style="white-space: nowrap;">Transitive dependencies?</h2>
@@ -1056,6 +1058,55 @@ But that’s okay, because lighter build tools are still an improvement!
 <article class="slide md columns">
 
 <header>
+	<h2>External import maps?</h2>
+	<p class="subtitle">
+		<span class="delayed">❌</span>
+		<code class="language-html">&lt;script type="importmap" src="importmap.js"&gt;</code>
+		<strong class="delayed">soon? 🥹🤞🏼</strong>
+	</p>
+</header>
+
+<yo-dawg>
+Yo dawg, I herd u like no-build
+
+So I put a build step in ur no-build
+so u can build while you don't build
+</yo-dawg>
+
+- `&lt;script src="importmap.js"&gt;` injection script { .ok }
+- Speculative: `Link`-like HTTP header? { .best }
+
+{ .check-list .delayed-children }
+
+<details class="notes">
+
+Wait a second, so far we've seen import maps as a JSON island embedded directly in HTML.
+Ew?
+Now we need build tools to include _this_ code on every HTML page??
+That's kind of a non-starter, isn't it?
+
+Can we use an `src` attribute?
+Nope! Not yet at least.
+But there is a workaround: injecting them through a script using DOM methods.
+It’s clunky, but it works.
+
+In the future we may not need HTML at all.
+There are discussions around potentially using HTTP headers to deliver either the import map content or a URL to it.
+
+</details>
+
+</article>
+
+<article class="slide">
+	<img src="images/resilient.png" alt="" class="browser stretch" data-url="shopify.engineering/resilient-import-maps">
+	<!-- <baseline-status featureId="import-maps-multiple" class="abs-bottom-right baseline-overlay"></baseline-status> -->
+	 <img src="images/import-maps-multiple.png" class="abs-bottom-right shadow delayed slide-up slide-left" style="width: 70vw">
+
+</article>
+
+<article class="slide md columns">
+
+<header>
 	<h2>Generating import maps</h2>
 	<div class="subtitle nowrap"><strong>JSPM</strong>: Watch source → generate `importmap.js` with CDN links to deps used</div>
 </header>
@@ -1073,9 +1124,13 @@ style="min-width: 15em"></iframe>
 { .check-list }
 
 <details class="notes">
-JSPM was groundbreaking.
+So it's very clear that the import map itself must be a build artifact.
+It's not reasonable to author it by hand.
+Yes, you _could_, but just because you could doesn't mean you should.
+
+JSPM was groundbreaking in that respect.
 It made import maps actually usable.
-The idea is it watches your source files and generates an import map injector script with only the dependencies you actually use.
+It watches your source files and generates an import map injector script with only the dependencies you actually use.
 As to where the dependencies live, its philosophy is you link to `node_modules` locally and use CDNs for production,
 which it makes as safe as possible via SRI.
 
@@ -1114,21 +1169,31 @@ style="min-width: 40vw;"></iframe>
 
 </article>
 
-<article class="slide md">
+<article class="slide md imaps">
 
 ## Are we there yet?
 
-- Big gap around **non-JS assets** (CSS, icons, fonts, etc) [(`specifier:` URLs?)](https://github.com/whatwg/html/issues/12163){.delayed}
-- No **multiple import maps** in Firefox [(Interop 2027 proposal #1399)](https://github.com/web-platform-tests/interop/issues/1399){.delayed}
-- No import maps in **workers** [(whatwg/html#10858)](https://github.com/whatwg/html/pull/10858){.delayed}
-- Some packages still written assuming NodeJS internals
+- **Architecture**: No plan for non-JS assets (CSS, icons, fonts, etc) [(`specifier:` URLs?)](https://github.com/whatwg/html/issues/12163){.delayed}
+- **Specs**: No import maps in workers [(whatwg/html#10858)](https://github.com/whatwg/html/pull/10858){.delayed}
+- **Interop**: No multiple import maps in Firefox [(Interop 2027 proposal #1399)](https://github.com/web-platform-tests/interop/issues/1399){.delayed}
+- **Ecosystem**: Some packages still written assuming NodeJS internals like `process.env`
 
-{ .x-list }
+{ .x-list .delayed-children }
 
-</article>
+<details class="notes">
+	Does the web platform have answers to every question bundlers are currently asking?
+	No. There are still gaps in every step of the way.
+	- Architectural gaps: there is no way to use specifiers for non-JS assets like CSS, icons, and fonts.
+	For those, we must still use URLs. Worse, we don't really know how we will fix that.
+	One proposal is for a new URL protocol, others are around ad hoc syntax for each place.
+	- Spec gaps: The PR to add specifier support in workers has stalled due to lack of time.
+	- Interop gaps: Firefox still hasn't implemented the recent improvements
+	- And even if we fix everything, the ecosystem will tke some time to catch up, since many packages are written assuming a bundler is used.
 
-<article class="slide black" id="perfect">
-	<h2 class="draw per-child">It doesn’t have to be <u>perfect</u> to be <u>worth it</u>.</h2>
+	So no, we're not fully there yet.
+	But we're at a point where the warts are small enough that it's doable.
+</details>
+
 </article>
 
 <article class="slap slide">
@@ -1150,20 +1215,19 @@ No, we are not doomed to repeat the same patterns forever because LLMs have been
 </article>
 
 <article class="slide">
-	<iframe src="https://developer.chrome.com/docs/modern-web-guidance" data-url class="browser"></iframe>
-</article>
-
-
-<article class="slide">
-	<iframe loading="lazy" src="https://www.w3.org/community/nobuild/" loading="lazy" data-url class="browser"></iframe>
+	<img src="images/mwg.png" class="browser stretch" data-url="https://developer.chrome.com/docs/modern-web-guidance">
 </article>
 
 <article class="slide">
 	<style>
 		@scope {
 			.chart {
-				--dot-x: 50%;
-				--dot-y: 50%;
+				--dot-duration: 30s;
+			}
+
+			.chart:is(:target *) {
+				--dot-x: 20%;
+				--dot-y: 20%;
 			}
 		}
 	</style>
@@ -1179,24 +1243,21 @@ No, we are not doomed to repeat the same patterns forever because LLMs have been
 <article class="black slide">
 	<style>
 		@scope {
-			s, u {
-				display: block;
-			}
 			u.future {
 				opacity: 0;
 			}
 		}
 	</style>
 	<h2>
-		<s class="delayed draw">No-build</s>
-		<u class="delayed draw">light-build</u>
+		<s class="delayed draw">No-build</s><br>
+		<u class="delayed draw" style="--draw-delay: .2s">light-build</u>
 	</h2>
 </article>
 
 <article class="slide black" id="perfect">
 	<h2 class="draw per-child">It doesn’t have to be <u>perfect</u> to be <u>worth it</u>.</h2>
 
-	<small class="abs-bottom">(a good mantra for life in general)</small>
+	<p class="abs-bottom">(a mantra for life)</p>
 </article>
 
 <footer class="dark slide" id="end">

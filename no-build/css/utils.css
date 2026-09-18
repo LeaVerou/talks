@@ -279,6 +279,11 @@
 	border-radius: var(--radius-l);
 	corner-shape: squircle;
 
+	&.abs,
+	&[class*="abs-"] {
+		position: absolute;
+	}
+
 	/* Tail. Inherits the bubble's background, so any override follows along. */
 	&::after {
 		content: "";
